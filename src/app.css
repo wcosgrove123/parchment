@@ -105,7 +105,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 #toolbar .popover button { text-align: left; white-space: nowrap; }
 #toolbar .popover label { display: flex; align-items: center; gap: 5px; font-size: 12px; padding: 4px 7px 2px; border-top: 1px solid var(--gold-hair); margin-top: 3px; cursor: pointer; }
 #toolbar button[disabled] { opacity: 0.6; cursor: wait; }
-body:not(.mode-diff) #scope { display: none; }
+body:not(.mode-diff) #toolbar #scope { display: none; }
 body:not(.mode-diff) #years-a { display: none; }
 body:not(.mode-diff) #years label { display: none; }
 #year-readout { display: none; }
