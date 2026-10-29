@@ -2,6 +2,7 @@
 import * as d3 from 'd3';
 import { loadJSON } from './data/loader.js';
 import { createStage } from './render/base.js';
+import { renderPNG, renderSVG, download, exportName } from './export/export.js';
 import stageEqualEarth from './stages/afro-eurasia.json';
 import stageLambert from './stages/afro-eurasia-lambert.json';
 import extent from './trackers/extent.json';
@@ -110,6 +111,50 @@ async function main() {
   tb.append('span').attr('class', 'sep');
   tb.append('button').attr('id', 'play').attr('title', 'Play (space)').text('▶').on('click', togglePlay);
 
+  // Export: PNG at 1920×1080 or 3840×2160, or SVG, of exactly what is on the sheet. Transparent background is off by default.
+  tb.append('span').attr('class', 'sep');
+  const exportMenu = tb.append('span').attr('class', 'menu');
+  const exportBtn = exportMenu.append('button').attr('id', 'export').attr('title', 'Export the current view (E)').text('Export ▾')
+    .on('click', () => exportMenu.classed('open', !exportMenu.classed('open')));
+  const pop = exportMenu.append('span').attr('class', 'popover');
+  const exportOpts = { transparent: false };
+  const describe = () => ({ stage: stage.id, year: state.year, from: state.mode === 'diff' ? state.from : null });
+  let exporting = false;
+  async function doExport(kind) {
+    if (exporting) return;
+    exporting = true;
+    exportMenu.classed('open', false);
+    exportBtn.text('Exporting…').attr('disabled', true);
+    try {
+      const svgNode = svg.node();
+      const info = describe();
+      if (kind === 'svg') download(await renderSVG(svgNode, exportOpts), exportName({ ...info, ext: 'svg' }));
+      else if (kind === '4k') download(await renderPNG(svgNode, { width: 3840, height: 2160, ...exportOpts }), exportName({ ...info, size: '4k', ext: 'png' }));
+      else download(await renderPNG(svgNode, { width: 1920, height: 1080, ...exportOpts }), exportName({ ...info, ext: 'png' }));
+    } catch (err) {
+      console.error(err);
+      d3.select('#problems').classed('hidden', false).text(`Export failed: ${err.message}`);
+    } finally {
+      exporting = false;
+      exportBtn.text('Export ▾').attr('disabled', null);
+    }
+  }
+  pop.append('button').text('PNG · 1920 × 1080').on('click', () => doExport('png'));
+  pop.append('button').text('PNG · 3840 × 2160').on('click', () => doExport('4k'));
+  pop.append('button').text('SVG').on('click', () => doExport('svg'));
+  const tr = pop.append('label');
+  tr.append('input').attr('type', 'checkbox').on('change', function () { exportOpts.transparent = this.checked; });
+  tr.append('span').text('transparent background');
+  document.addEventListener('click', (e) => { if (!exportMenu.node().contains(e.target)) exportMenu.classed('open', false); });
+
+  // For scripts and checks: window.parchment.render{PNG,SVG}() return blobs of the current view.
+  window.parchment = {
+    renderPNG: (opts) => renderPNG(svg.node(), opts),
+    renderSVG: (opts) => renderSVG(svg.node(), opts),
+    exportName: (opts) => exportName({ ...describe(), ...opts }),
+    get state() { return { ...state }; },
+  };
+
   // Keyboard: ← → step through the calendar; space plays; D toggles the Diff view.
   window.addEventListener('keydown', (e) => {
     if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
@@ -117,6 +162,7 @@ async function main() {
     else if (e.key === 'ArrowLeft') step(-1);
     else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
     else if (e.key === 'd' || e.key === 'D') setMode(state.mode === 'diff' ? 'snapshot' : 'diff');
+    else if (e.key === 'e' || e.key === 'E') doExport(e.shiftKey ? '4k' : 'png');
   });
 
   if (START_FROM) state.mode = 'diff';

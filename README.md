@@ -9,7 +9,8 @@ Parchment is designed and directed by Wil Cosgrove.
 
 - Online: open the GitHub Pages site for this repository.
 - Offline: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
-- Keys: `←` `→` step through the snapshot years.
+- Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
+- Export: the toolbar's Export menu saves the current view as PNG (1920×1080 or 3840×2160) or SVG, with legend, cartouche and timeline baked in.
 
 ## Work on it
 
