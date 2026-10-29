@@ -131,3 +131,6 @@ body.shot #toolbar, body.shot #problems { display: none; }
 #data-problems .note { margin: 6px 0 0; font-style: italic; opacity: 0.8; }
 #toolbar select { font: inherit; font-size: 12px; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
 body.shot #data-problems { display: none; }
+#toolbar .popover.about { min-width: 300px; max-width: 360px; white-space: normal; font-size: 12px; line-height: 1.45; padding: 8px 10px; }
+#toolbar .popover.about p { margin: 0 0 7px; } #toolbar .popover.about p:last-child { margin: 0; }
+#toolbar .popover.about a { color: var(--steel); }

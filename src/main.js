@@ -169,7 +169,18 @@ async function main() {
   const tr = pop.append('label');
   tr.append('input').attr('type', 'checkbox').on('change', function () { exportOpts.transparent = this.checked; });
   tr.append('span').text('transparent background');
-  document.addEventListener('click', (e) => { if (!exportMenu.node().contains(e.target)) exportMenu.classed('open', false); });
+  // Credits: who made the atlas and where the data comes from, with the licence file. Site chrome only.
+  const about = tb.append('span').attr('class', 'menu');
+  about.append('button').attr('id', 'about').attr('title', 'About Parchment').text('ⓘ')
+    .on('click', () => about.classed('open', !about.classed('open')));
+  const ap = about.append('span').attr('class', 'popover about');
+  ap.append('p').html('<b>Parchment</b> — a historical timeline atlas for the classroom.<br>Atlas, design and ideas: Wil Cosgrove.');
+  ap.append('p').html('Borders: <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener">historical-basemaps</a> (GPL-3). Coast, rivers, relief: <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a> (public domain). Place coordinates: Wikidata (CC0). Type: Libre Baskerville (OFL).');
+  ap.append('p').html('<a href="https://github.com/wcosgrove123/parchment/blob/main/docs/DATA-LICENSES.md" target="_blank" rel="noopener">Data licences and attribution</a> · <a href="https://github.com/wcosgrove123/parchment" target="_blank" rel="noopener">Source</a> (MIT)');
+  document.addEventListener('click', (e) => {
+    if (!exportMenu.node().contains(e.target)) exportMenu.classed('open', false);
+    if (!about.node().contains(e.target)) about.classed('open', false);
+  });
 
   // For scripts and checks: window.parchment.render{PNG,SVG}() return blobs of the current view.
   window.parchment = {

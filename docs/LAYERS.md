@@ -96,3 +96,7 @@ anchors fall outside its focus or window is reported, not drawn.
 4. Compare view (already v2 in the brief).
 
 Nothing in this list starts before the owner says so (brief §12).
+
+## Where record content comes from (owner direction, 2026-10-29)
+
+The textbook is transcribed and chunked in Loom, and the AP World CED is the alignment source. Content rows for `records.csv` should start there, not from Wikidata: a v1 helper can read Loom's chunks for a unit, propose candidate rows (label, years, grade, source = textbook chapter and page, CED topic and key concept) and write them to a review sheet for the teachers to accept, edit or reject. Only after a row is accepted does the geocode step add a coordinate for a point, from whichever gazetteer the teachers trust (Wikidata or OpenHistoricalMap). Wikidata never decides what a row says or how the table is shaped.

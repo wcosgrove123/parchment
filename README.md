@@ -7,7 +7,8 @@ Parchment is designed and directed by Wil Cosgrove.
 
 ## Run it
 
-- Online: open the GitHub Pages site for this repository.
+- Online: https://wcosgrove123.github.io/parchment/
+- On this computer: the Desktop shortcut **Parchment** (`scripts/start-parchment.cmd`) starts it at http://127.0.0.1:8321.
 - Offline: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
 - Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
 - Export: the toolbar's Export menu saves the current view as PNG (1920×1080 or 3840×2160) or SVG, with legend, cartouche and timeline baked in.
@@ -33,6 +34,8 @@ Content lives in `data/records.csv`, one row per claim. Allowed values for each 
 Rows that fail validation are skipped and listed, in the app's data-problems panel and by `npm run check`; nothing you
 type can break the map. Rows whose `id` starts with `example-` are templates and never render.
 
+Content comes from the course materials and the people who teach it: what happened, when, what to call it and the
+`source` column are the editor's. The only thing looked up automatically is a dot's position on the map.
 For a `point` row, put the place's Wikidata id in `where` (for example `Q605321`, the 1526 Battle of Panipat) and leave
 `lon`,`lat` blank: `npm run geocode` fills them from Wikidata and prints the name it found, so a wrong id shows up at once.
 A one-year event appears on the first snapshot at or after its year (a 1526 battle shows on the 1600 map), read as
