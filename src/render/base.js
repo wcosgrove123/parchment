@@ -13,6 +13,7 @@ import { createStrip } from './strip.js';
 import { createLegend } from './legend.js';
 import { createDiffList } from './difflist.js';
 import { computeDiff } from '../views/diff.js';
+import { drawMarks } from './marks.js';
 
 export const CROSSFADE_MS = 300;
 
@@ -127,6 +128,8 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Stage labels along their parallels. Polity labels are drawn per snapshot, above the water lines.
   drawStageLabels(map.append('g').attr('class', 'stage-labels'), defs, stage, path);
   const labelLayers = map.append('g').attr('class', 'polity-labels');
+  // Point marks from records.csv sit above every label.
+  const marksLayer = map.append('g').attr('class', 'marks');
 
   // Grain and vignette over the sheet, then the apparatus on top.
   drawPaperOverlay(root, W, H);
@@ -135,6 +138,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}`);
 
   const legend = createLegend(root, frame);
+  let currentTracker = tracker;
   if (tracker) legend.set(tracker);
   const diffList = createDiffList(root, frame);
   const cartouche = createCartouche(root, frame, stage, projection);
@@ -181,10 +185,17 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
       g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(topo)));
       drawPolityLabels(lg, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), path));
     });
-    if (tracker) legend.set(tracker);
+    if (currentTracker) legend.set(currentTracker);
     diffList.hide();
     currentYear = year;
   }
+
+  // Marks: validated point records (already filtered to the year and tracker). Pass [] to clear.
+  function showMarks(records) {
+    return drawMarks(marksLayer, records, projection);
+  }
+
+  function setTracker(t) { currentTracker = t; }
 
   // Diff: B is the ground (muted, its borders); appeared = B features in the focus colour;
   // vanished = A features hatched and outlined in rust; persisted = muted.
@@ -223,5 +234,5 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setRange(a.year, b.year);
   }
 
-  return { projection, path, d, frame, showSnapshot, showDiff, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
+  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, setTracker, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
 }

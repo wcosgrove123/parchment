@@ -1,6 +1,6 @@
 id,course,unit,topic,kc,theme,tracker,kind,where,lon,lat,start,end,grade,value,certainty,label,source,qc_status,qc_by,qc_note
 example-region-fill,apworld,3,3.2,KC-4.3.I.A,GOV,legitimation,region,ottoman-empire@1600,,,1517,1750,circa,religious,legal,Ottoman caliphal claim,CED 3.2 illustrative examples,,,
-example-point-battle,apworld,3,3.1,KC-4.3.II,GOV,expansion,point,Q193334,,,1526,1526,exact,battle,legal,Panipat,Baburnama; CED 3.1 sample activity,,,
-example-point-monument,apworld,3,3.2,KC-4.3.I.A,GOV,legitimation,point,Q9141,,,1632,1653,exact,monument,legal,Taj Mahal,CED 3.2 illustrative examples,,,
-example-sphere,apworld,3,3.1,KC-4.3.II.B,GOV,extent,region,songhai-empire@1500,,,1464,1591,circa,highlight,sphere,Songhai (sphere),CED 3.1 state rivalries,,,
-example-value,apush,4,4.3,KC-4.1.I,PCE,electoral,value,new-york@1828,,,1828,1828,exact,36,legal,NY electoral votes 1828,NARA electoral college results,,,
+example-point-battle,apworld,3,3.1,KC-4.3.II,GOV,expansion,point,Q605321,76.9728,29.4017,1526,1526,exact,battle,legal,Panipat,Baburnama; CED 3.1 sample activity,,,
+example-point-monument,apworld,3,3.2,KC-4.3.I.A,GOV,legitimation,point,Q9141,78.0419,27.175,1632,1653,exact,monument,legal,Taj Mahal,CED 3.2 illustrative examples,,,
+example-sphere,apworld,3,3.1,KC-4.3.II.B,GOV,extent,region,songhai@1500,,,1464,1591,circa,highlight,sphere,Songhai (sphere),CED 3.1 state rivalries,,,
+example-value,apush,4,4.3,KC-4.1.I,PCE,electoral,value,Q1384,-75,43,1828,1828,exact,36,legal,NY electoral votes 1828,NARA electoral college results,,,

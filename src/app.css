@@ -112,3 +112,22 @@ body:not(.mode-diff) #years label { display: none; }
 #problems { position: fixed; left: 12px; top: 10px; max-width: 40vw; background: var(--cream); border: 1px solid var(--rust); color: var(--rust); padding: 8px 10px; font-size: 13px; }
 .hidden { display: none; }
 body.shot #toolbar, body.shot #problems { display: none; }
+
+/* ---------- point marks (grammar §5): shape = event type ---------- */
+.marks .mark { stroke: var(--cream); stroke-width: 1.5; stroke-linejoin: round; }
+.marks .mark.rust-diamond { fill: var(--rust); }
+.marks .mark.moss-circle { fill: var(--moss); }
+.marks .mark.navy-square, .marks .mark.navy-triangle { fill: var(--navy); }
+.marks .mark-label { font-size: 13px; font-weight: 700; fill: var(--ink); paint-order: stroke fill; stroke: var(--cream); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.marks .mark-label .when { font-weight: 400; font-style: italic; }
+
+/* ---------- data problems panel (chrome; never exported) ---------- */
+#data-problems { position: fixed; left: 12px; top: 10px; max-width: 46vw; max-height: 60vh; overflow: auto; background: var(--cream); border: 1px solid var(--rust); color: var(--ink); padding: 8px 12px 10px; font-size: 13px; box-shadow: 0 2px 8px rgba(31, 42, 68, 0.15); }
+#data-problems h2 { margin: 0 0 6px; font-size: 13px; font-variant: small-caps; letter-spacing: 0.16em; color: var(--rust); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+#data-problems h2 button { font: inherit; background: none; border: 0; color: var(--ink); cursor: pointer; letter-spacing: 0; font-variant: normal; }
+#data-problems ol { margin: 0; padding-left: 22px; }
+#data-problems li { margin: 3px 0; }
+#data-problems li b { font-weight: 700; }
+#data-problems .note { margin: 6px 0 0; font-style: italic; opacity: 0.8; }
+#toolbar select { font: inherit; font-size: 12px; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
+body.shot #data-problems { display: none; }

@@ -23,13 +23,20 @@ npm run dev          # http://localhost:8321/  (rebuilds on save)
 npm run build        # app.js for GitHub Pages
 npm run shot         # docs/progress/<date>-<year>.png
 npm run offline      # dist/parchment-offline.html, one file that needs no network
+npm run check        # list rows in data/records.csv that would be skipped, and why
+npm run geocode      # fill blank lon/lat from Wikidata for rows whose `where` is a QID
 ```
 
 ## Add a row
 
 Content lives in `data/records.csv`, one row per claim. Allowed values for each column are in `data/vocab.json`.
-Rows that fail validation are skipped and listed; nothing you type can break the map. Rows whose `id` starts with
-`example-` are templates and never render.
+Rows that fail validation are skipped and listed, in the app's data-problems panel and by `npm run check`; nothing you
+type can break the map. Rows whose `id` starts with `example-` are templates and never render.
+
+For a `point` row, put the place's Wikidata id in `where` (for example `Q605321`, the 1526 Battle of Panipat) and leave
+`lon`,`lat` blank: `npm run geocode` fills them from Wikidata and prints the name it found, so a wrong id shows up at once.
+A one-year event appears on the first snapshot at or after its year (a 1526 battle shows on the 1600 map), read as
+"since the last snapshot"; a span (`start` to `end`) appears on every snapshot inside it.
 
 ## Credits
 

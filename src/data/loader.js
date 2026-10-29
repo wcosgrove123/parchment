@@ -4,10 +4,12 @@
 
 const cache = new Map();
 
+// JSON files are inlined as they are; other text (records.csv) is inlined as a JSON string so that nothing an
+// editor types, not even "</script>", can end the block early.
 function inlined(path) {
-  const sel = `script[type="application/json"][data-path="${CSS.escape(path)}"]`;
-  const el = document.querySelector(sel);
-  return el ? el.textContent : null;
+  const el = document.querySelector(`script[data-path="${CSS.escape(path)}"]`);
+  if (!el) return null;
+  return el.dataset.encoding === 'json-string' ? JSON.parse(el.textContent) : el.textContent;
 }
 
 export async function loadText(path) {

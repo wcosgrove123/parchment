@@ -1,11 +1,16 @@
 // Parchment — entry point
 import * as d3 from 'd3';
-import { loadJSON } from './data/loader.js';
+import { loadJSON, loadText } from './data/loader.js';
 import { createStage } from './render/base.js';
 import { renderPNG, renderSVG, download, exportName } from './export/export.js';
+import { validateRecords, recordsFor } from './data/records.js';
 import stageEqualEarth from './stages/afro-eurasia.json';
 import stageLambert from './stages/afro-eurasia-lambert.json';
 import extent from './trackers/extent.json';
+import expansion from './trackers/expansion.json';
+
+// v0 trackers. Extent highlights base polygons; expansion draws point records by shape.
+const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion };
 
 const params = new URLSearchParams(location.search);
 const START_YEAR = Number(params.get('year')) || 1450;
@@ -39,19 +44,30 @@ function identifyFor(scope) {
 
 async function main() {
   const t0 = performance.now();
-  const [calendar, ne, bathy] = await Promise.all([
+  const [calendar, ne, bathy, vocab, recordsText] = await Promise.all([
     loadJSON('data/calendar.json'),
     loadJSON('data/base/derived/ne.topojson'),
     loadJSON('data/base/derived/bathymetry.topojson'),
+    loadJSON('data/vocab.json'),
+    loadText('data/records.csv').catch((err) => { console.error(err); return null; }),
   ]);
+
+  // Records: validated against vocab.json; bad rows are skipped and listed, never fatal.
+  const checked = recordsText == null
+    ? { records: [], problems: [{ line: 0, id: '', message: 'data/records.csv could not be loaded' }], examples: 0, total: 0 }
+    : validateRecords(recordsText, vocab);
+  const records = checked.records;
+  const noCoords = records.filter((r) => r.kind === 'point' && (r.lon == null || r.lat == null));
+  console.log(`records.csv: ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped`);
+  showDataProblems(checked, noCoords);
   const years = calendar.snapshots.map((s) => s.year);
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
 
-  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', year: START_YEAR, from: START_FROM ?? years[Math.max(0, years.indexOf(START_YEAR) - 1)], playing: null };
+  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'extent', year: START_YEAR, from: START_FROM ?? years[Math.max(0, years.indexOf(START_YEAR) - 1)], playing: null };
 
   const svg = d3.select('#map');
-  const atlas = createStage(svg, stage, { ne, bathy }, { tracker: extent, years, onYear: (y) => setYear(y) });
+  const atlas = createStage(svg, stage, { ne, bathy }, { tracker: TRACKERS[state.tracker], years, onYear: (y) => setYear(y) });
   console.log(`stage built in ${(performance.now() - t0).toFixed(0)} ms`);
 
   async function render() {
@@ -64,11 +80,15 @@ async function main() {
       console.log(`diff ${state.from} → ${state.year}: ${(performance.now() - t).toFixed(1)} ms; appeared ${diff.appeared.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
     } else {
       const topo = await snapshot(state.year);
-      atlas.showSnapshot(state.year, topo, classifyExtent);
+      atlas.setTracker(TRACKERS[state.tracker]);
+      // Extent highlights the tracked states; expansion shows every polity muted and the point records on top.
+      atlas.showSnapshot(state.year, topo, state.tracker === 'extent' ? classifyExtent : () => ({ status: 'muted' }));
+      const n = atlas.showMarks(state.tracker === 'expansion' ? recordsFor(records, 'expansion', state.year, years) : []);
       atlas.setYear(state.year, bySnapshot.get(state.year).source_year);
       document.title = `Parchment · ${state.year}`;
-      console.log(`snapshot ${state.year}: ${(performance.now() - t).toFixed(1)} ms`);
+      console.log(`snapshot ${state.year} (${state.tracker}): ${(performance.now() - t).toFixed(1)} ms${n ? `, ${n} marks` : ''}`);
     }
+    if (state.mode === 'diff') atlas.showMarks([]);
     document.body.classList.toggle('mode-diff', state.mode === 'diff');
     d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
     d3.selectAll('#years button').classed('active', function () { return Number(this.dataset.year) === state.year; });
@@ -95,6 +115,10 @@ async function main() {
 
   // Toolbar.
   const tb = d3.select('#toolbar').html('');
+  const trackerSel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
+    .on('change', function () { state.tracker = this.value; render(); });
+  trackerSel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
+  tb.append('span').attr('class', 'sep');
   const seg = tb.append('span').attr('class', 'seg');
   seg.append('button').attr('data-mode', 'snapshot').text('Snapshot').on('click', () => setMode('snapshot'));
   seg.append('button').attr('data-mode', 'diff').text('Diff').on('click', () => setMode('diff'));
@@ -171,6 +195,22 @@ async function main() {
   // Prefetch the rest so switching is instant.
   for (const y of years) snapshot(y);
 }
+
+// The data-problems panel: every skipped row with its line number and reason, plus point rows still waiting
+// for coordinates. Chrome only; hidden in shots and never part of an export.
+function showDataProblems({ problems, examples, total }, noCoords) {
+  const panel = d3.select('#data-problems');
+  if (!problems.length && !noCoords.length) { panel.classed('hidden', true); return; }
+  panel.classed('hidden', false).html('');
+  const h = panel.append('h2');
+  h.append('span').text(`Data problems · ${problems.length} row${problems.length === 1 ? '' : 's'} skipped`);
+  h.append('button').attr('title', 'Hide').text('×').on('click', () => panel.classed('hidden', true));
+  const ol = panel.append('ol');
+  ol.selectAll('li').data(problems).join('li').html((p) => `<b>line ${p.line}</b>${p.id ? ` (${p.id})` : ''}: ${escapeHTML(p.message)}`);
+  if (noCoords.length) panel.append('p').attr('class', 'note').text(`${noCoords.length} point row${noCoords.length === 1 ? '' : 's'} waiting for coordinates (run node scripts/geocode.mjs): ${noCoords.map((r) => r.id).join(', ')}`);
+  panel.append('p').attr('class', 'note').text(`records.csv: ${total} rows, ${total - problems.length - examples} drawn, ${examples} examples not drawn.`);
+}
+const escapeHTML = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 main().catch((err) => {
   console.error(err);

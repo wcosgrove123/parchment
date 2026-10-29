@@ -1,0 +1,12 @@
+{
+  "_comment": "Expansion tracker (v0). Point records from data/records.csv rendered by shape (grammar §5). Empty until content rows exist; the example-* rows never render.",
+  "id": "expansion",
+  "title": "Expansion and conflict",
+  "legend": [
+    { "swatch": "shape", "shape": "rust-diamond", "label": "Battle or siege" },
+    { "swatch": "shape", "shape": "moss-circle", "label": "Founding or capital" },
+    { "swatch": "shape", "shape": "navy-triangle", "label": "Treaty" },
+    { "swatch": "line", "style": "solid", "label": "Documented border" },
+    { "swatch": "line", "style": "dashed", "label": "Approximate border" }
+  ]
+}
