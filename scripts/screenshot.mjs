@@ -42,7 +42,7 @@ try {
     `--window-size=${size.replace('x', ',')}`, '--force-device-scale-factor=1',
     '--virtual-time-budget=15000', '--timeout=30000',
     `--screenshot=${out}`,
-    `http://127.0.0.1:${port}/?shot=1&year=${year}`,
+    `http://127.0.0.1:${port}/?shot=1&year=${year}${arg('stage','') ? '&stage=' + arg('stage','') : ''}`,
   ], { stdio: 'ignore', timeout: 60000 });
   console.log(`wrote ${out}`);
 } finally {

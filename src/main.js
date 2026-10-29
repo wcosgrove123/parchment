@@ -2,11 +2,15 @@
 import * as d3 from 'd3';
 import { loadJSON } from './data/loader.js';
 import { createStage } from './render/base.js';
-import stage from './stages/afro-eurasia.json';
+import stageEqualEarth from './stages/afro-eurasia.json';
+import stageLambert from './stages/afro-eurasia-lambert.json';
 import extent from './trackers/extent.json';
 
 const params = new URLSearchParams(location.search);
 const START_YEAR = Number(params.get('year')) || 1450;
+// ?stage=afro-eurasia-lambert shows the alternative projection for comparison.
+const STAGES = { [stageEqualEarth.id]: stageEqualEarth, [stageLambert.id]: stageLambert };
+const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
 
 // Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year.
 const byName = new Map();

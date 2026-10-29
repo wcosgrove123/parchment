@@ -188,6 +188,8 @@ Order of work: get a plain Equal-Earth map of the 1450 snapshot on screen on day
 - v1: fill trackers (legitimation, administration, belief) with diverging and sequential palettes; grayscale fallbacks; GIF export; Google Sheet → `records.csv` import (sheet uses `vocab.json` for dropdowns; "published to web" CSV, no OAuth); review-packet generator (PNG + rows + three questions).
 - v2: `world` and `north-america` stages; Compare view; Newberry data; Native Land; OHM tiles where coverage is better; Diffusion Atlas (religion diffusion, Africa 1200–1450) as a tracker.
 
+Owner direction from 2026-10-29 on nested focuses (stage → region → polity), projection per focus, and teacher-written reasoning-skill readings is in `docs/LAYERS.md`. Questions awaiting the co-teachers are in `docs/CO-TEACHERS.md`.
+
 ## 13. Working agreements
 
 - Decide small things; log them. Ask about: projection choice per stage, any change to §5 or §6, anything that would show course or teacher names, anything that deletes data.
