@@ -89,7 +89,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 .strip .range { stroke: var(--navy); stroke-width: 4; stroke-opacity: 0.8; }
 
 /* ---------- chrome (never exported) ---------- */
-#toolbar { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 5px 8px; font-size: 13px; }
+#toolbar { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); width: max-content; white-space: nowrap; display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 5px 8px; font-size: 13px; }
 #toolbar button { font: inherit; background: none; border: 1px solid transparent; color: var(--ink); padding: 2px 7px; border-radius: 3px; cursor: pointer; }
 #toolbar button:hover { border-color: var(--gold); }
 #toolbar button.active { background: var(--navy); color: var(--cream); }

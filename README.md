@@ -22,6 +22,7 @@ node scripts/relief.mjs   # pre-render shaded relief per stage (assets/relief/)
 npm run dev          # http://localhost:8321/  (rebuilds on save)
 npm run build        # app.js for GitHub Pages
 npm run shot         # docs/progress/<date>-<year>.png
+npm run offline      # dist/parchment-offline.html, one file that needs no network
 ```
 
 ## Add a row
