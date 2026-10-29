@@ -1,10 +1,16 @@
 // Parchment — base renderer
-// Builds the stage: projection, paper, ocean, bathymetry, relief, land, polities, water lines, coast, graticule, frame.
-// All geometry comes from the downloaded layers; this file only projects and styles it.
+// Builds the stage: projection, paper, ocean, bathymetry, relief, land, polities, water lines, coast, graticule,
+// labels, legend, cartouche, timeline strip. All geometry comes from the downloaded layers; this file only
+// projects and styles it.
 
 import * as d3 from 'd3';
 import { feature, mesh } from 'topojson-client';
 import { assetURL } from '../data/loader.js';
+import { paperDefs, drawPaper, drawPaperOverlay } from './paper.js';
+import { drawStageLabels, polityLabelData, drawPolityLabels } from './labels.js';
+import { createCartouche } from './cartouche.js';
+import { createStrip } from './strip.js';
+import { createLegend } from './legend.js';
 
 export const W = 1920;
 export const H = 1080;
@@ -39,9 +45,10 @@ export function makeProjection(stage, inner) {
   return proj;
 }
 
-export function createStage(svg, stage, layers) {
+export function createStage(svg, stage, layers, { tracker, years = [], onYear } = {}) {
   const inner = [[FRAME.left, FRAME.top], [W - FRAME.right, H - FRAME.bottom]];
   const [[x0, y0], [x1, y1]] = inner;
+  const frame = { x0, y0, x1, y1 };
   const projection = makeProjection(stage, inner);
   const path = d3.geoPath(projection);
 
@@ -57,11 +64,12 @@ export function createStage(svg, stage, layers) {
   svg.selectAll('*').remove();
 
   const defs = svg.append('defs');
+  paperDefs(defs);
   defs.append('clipPath').attr('id', 'frame-clip').append('rect')
     .attr('x', x0).attr('y', y0).attr('width', x1 - x0).attr('height', y1 - y0);
 
   const root = svg.append('g').attr('class', 'stage');
-  root.append('rect').attr('class', 'paper').attr('width', W).attr('height', H);
+  drawPaper(root, W, H);
 
   const map = root.append('g').attr('class', 'map').attr('clip-path', 'url(#frame-clip)');
   // The ocean is the globe itself; anything beyond its edge stays paper.
@@ -72,12 +80,11 @@ export function createStage(svg, stage, layers) {
   map.append('g').attr('class', 'bathymetry')
     .selectAll('path').data(bathy.features).join('path').attr('d', d);
 
-  // Land at rest (cream), then relief (pre-rendered for this stage, when present).
+  // Land at rest (cream), then relief (pre-rendered for this stage, when present), masked to land.
   const ne = layers.ne;
   const land = feature(ne, ne.objects.land);
   map.append('path').attr('class', 'land').attr('d', d(land));
   if (stage.relief) {
-    // The relief raster covers the whole frame; mask it to land so the ocean stays flat paper.
     defs.append('clipPath').attr('id', 'land-clip').append('path').attr('d', d(land));
     map.append('image').attr('class', 'relief')
       .attr('clip-path', 'url(#land-clip)')
@@ -101,9 +108,20 @@ export function createStage(svg, stage, layers) {
   // Graticule: hairline gold, every 10°.
   map.append('path').attr('class', 'graticule').attr('d', d(d3.geoGraticule10()));
 
-  // Frame ring.
-  root.append('rect').attr('class', 'frame')
-    .attr('x', x0).attr('y', y0).attr('width', x1 - x0).attr('height', y1 - y0);
+  // Labels: stage labels along their parallels, polity labels per snapshot.
+  drawStageLabels(map.append('g').attr('class', 'stage-labels'), defs, stage, path);
+  const polityLabels = map.append('g').attr('class', 'polity-labels');
+
+  // Grain and vignette over the sheet, then the apparatus on top.
+  drawPaperOverlay(root, W, H);
+
+  // Frame: gold on three sides; the bottom edge is the timeline strip's baseline.
+  root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}`);
+
+  const legend = createLegend(root, frame);
+  if (tracker) legend.set(tracker);
+  const cartouche = createCartouche(root, frame, stage, projection);
+  const strip = createStrip(root, frame, stage, years, onYear);
 
   let currentYear = null;
 
@@ -123,8 +141,14 @@ export function createStage(svg, stage, layers) {
     borders.selectAll('path').data([interior]).join('path')
       .attr('class', `border ${certainty}`)
       .attr('d', d);
+    drawPolityLabels(polityLabels, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), path));
     currentYear = year;
   }
 
-  return { projection, path, d, showSnapshot, inner, get year() { return currentYear; } };
+  function setYear(year, sourceYear) {
+    cartouche.setYear(year, sourceYear);
+    strip.setYear(year);
+  }
+
+  return { projection, path, d, frame, showSnapshot, setYear, legend, cartouche, get year() { return currentYear; } };
 }

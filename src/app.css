@@ -6,32 +6,79 @@
 
 html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchment-deep); font-family: var(--font); color: var(--ink); }
 #app { position: fixed; inset: 0; display: grid; place-items: center; }
-#map { width: 100vw; height: 100vh; display: block; }
+#map { width: 100vw; height: 100vh; display: block; font-family: var(--font); }
 
-/* ---------- map layers ---------- */
+/* ---------- ground ---------- */
 .paper { fill: var(--parchment); }
+.paper-overlay { fill: #fff; mix-blend-mode: multiply; opacity: 0.45; pointer-events: none; }
+.paper-vignette { mix-blend-mode: multiply; pointer-events: none; }
 .ocean { fill: var(--ocean); }
 .bathymetry path { fill: none; stroke: var(--bathy); stroke-width: 0.5; stroke-opacity: 0.7; }
 .land { fill: var(--cream); }
-.relief { opacity: 0.55; mix-blend-mode: multiply; }
-/* Extent tracker: highlighted polities take the tracker's fill at 65% so relief stays legible; the rest stay at rest. */
+.relief { opacity: 0.6; mix-blend-mode: multiply; }
+
+/* ---------- fills and borders (grammar §5) ---------- */
 .polity { stroke: none; fill: var(--cream); fill-opacity: 0; }
 .polity.highlight { fill: var(--fill-P); fill-opacity: 0.65; }
 .border { fill: none; stroke: var(--navy); stroke-width: 0.8; stroke-linejoin: round; }
 .border.approximate { stroke-dasharray: 3 2.5; stroke-opacity: 0.55; }
 .border.legal { stroke-opacity: 0.75; }
+
+/* ---------- water lines ---------- */
 .rivers path { fill: none; stroke: var(--water-line); stroke-opacity: var(--water-line-opacity); stroke-width: 0.6; }
 .lakes { fill: var(--ocean); stroke: var(--water-line); stroke-opacity: var(--water-line-opacity); stroke-width: 0.6; }
 .coastline { fill: none; stroke: var(--steel); stroke-width: 0.7; stroke-opacity: 0.8; }
 .graticule { fill: none; stroke: var(--gold-hair); stroke-width: 0.6; stroke-opacity: 0.9; }
+
+/* ---------- labels: navy ink, thin cream halo ---------- */
+.label { fill: var(--ink); paint-order: stroke fill; stroke: var(--cream); stroke-width: 3px; stroke-linejoin: round; stroke-opacity: 0.85; pointer-events: none; }
+.label.region { font-size: 24px; font-variant: small-caps; letter-spacing: 0.42em; fill-opacity: 0.6; }
+.label.water { font-size: 16px; font-style: italic; letter-spacing: 0.1em; fill: var(--steel); fill-opacity: 0.9; }
+.label.polity { font-variant: small-caps; letter-spacing: 0.12em; font-weight: 700; fill-opacity: 0.92; }
+
+/* ---------- apparatus ---------- */
 .frame { fill: none; stroke: var(--gold); stroke-width: 3; }
 
+.legend-box, .cartouche-box { fill: var(--cream); fill-opacity: 0.92; stroke: var(--navy); stroke-width: 0.8; }
+.legend text, .cartouche text { fill: var(--ink); }
+.legend-title { font-size: 13px; font-variant: small-caps; letter-spacing: 0.2em; }
+.legend .row text { font-size: 13px; }
+.legend .swatch { stroke: var(--navy); stroke-width: 0.6; fill-opacity: 0.65; }
+.legend .swatch.fill-P { fill: var(--fill-P); }
+.legend .swatch.fill-In { fill: var(--fill-In); }
+.legend .swatch.fill-S { fill: var(--fill-S); }
+.legend .swatch.fill-E { fill: var(--fill-E); }
+.legend .swatch.fill-C { fill: var(--fill-C); }
+.legend .swatch.fill-T { fill: var(--fill-T); }
+.legend .swatch-line { stroke: var(--navy); stroke-width: 1.2; }
+.legend .swatch-line.dashed { stroke-dasharray: 4 3; }
+.mark.rust-diamond { fill: var(--rust); } .mark.moss-circle { fill: var(--moss); } .mark.navy-square, .mark.navy-triangle { fill: var(--navy); }
+
+.cartouche .bracket { fill: none; stroke: var(--gold); stroke-width: 2.5; }
+.cartouche .wordmark { font-size: 13px; letter-spacing: 0.45em; font-weight: 700; }
+.cartouche .rule { stroke: var(--gold); stroke-width: 1.2; }
+.cartouche .map-title { font-size: 21px; font-variant: small-caps; letter-spacing: 0.14em; }
+.cartouche .year { font-size: 30px; font-weight: 700; }
+.cartouche .base-note { font-size: 12px; font-style: italic; fill-opacity: 0.8; }
+.scalebar line { stroke: var(--navy); stroke-width: 1; }
+.scalebar rect { fill: var(--navy); }
+.scalebar text { font-size: 12px; }
+
+.strip .baseline { stroke: var(--navy); stroke-width: 1.5; }
+.strip .tick { stroke: var(--navy); stroke-width: 1; }
+.strip .tick.minor { stroke-opacity: 0.6; }
+.strip .tick-label { font-size: 12px; fill: var(--ink); }
+.strip .snapshot { fill: var(--gold); stroke: var(--navy); stroke-width: 1; cursor: pointer; }
+.strip .snapshot:hover { fill: var(--focus); }
+.strip .marker path { fill: var(--focus); stroke: var(--navy); stroke-width: 1.2; }
+.strip .marker text { font-size: 13px; font-weight: 700; fill: var(--ink); }
+
 /* ---------- chrome (never exported) ---------- */
-#toolbar { position: fixed; top: 10px; right: 12px; display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 6px 8px; font-size: 13px; }
+#toolbar { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 5px 8px; font-size: 13px; }
 #toolbar button { font: inherit; background: none; border: 1px solid transparent; color: var(--ink); padding: 2px 7px; border-radius: 3px; cursor: pointer; }
 #toolbar button:hover { border-color: var(--gold); }
 #toolbar button.active { background: var(--navy); color: var(--cream); }
-#year-readout { margin-left: 10px; font-style: italic; }
+#year-readout { display: none; }
 #problems { position: fixed; left: 12px; top: 10px; max-width: 40vw; background: var(--cream); border: 1px solid var(--rust); color: var(--rust); padding: 8px 10px; font-size: 13px; }
 .hidden { display: none; }
 body.shot #toolbar, body.shot #problems { display: none; }

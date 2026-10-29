@@ -32,7 +32,7 @@ async function main() {
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
 
   const svg = d3.select('#map');
-  const atlas = createStage(svg, stage, { ne, bathy });
+  const atlas = createStage(svg, stage, { ne, bathy }, { tracker: extent, years, onYear: (y) => show(y) });
   console.log(`stage built in ${(performance.now() - t0).toFixed(0)} ms`);
 
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
@@ -46,7 +46,7 @@ async function main() {
     current = year;
     const meta = bySnapshot.get(year);
     document.title = `Parchment · ${year}`;
-    d3.select('#year-readout').text(meta.source_year !== year ? `${year} · base map ${meta.source_year}` : `${year}`);
+    atlas.setYear(year, meta.source_year);
     d3.selectAll('#years button').classed('active', function () { return Number(this.dataset.year) === year; });
     console.log(`snapshot ${year}: ${(performance.now() - t).toFixed(1)} ms`);
   }

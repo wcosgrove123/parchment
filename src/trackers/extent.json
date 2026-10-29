@@ -1,15 +1,119 @@
 {
   "_comment": "Extent tracker (v0). Which downloaded base polygons are highlighted, by the NAME the base map gives them in each era, bounded by start/end years. The polygons themselves are never edited. Rows in data/records.csv with tracker=extent can add to or override this list.",
+  "title": "Extent of states",
   "fill_key": "P",
+  "legend": [
+    {
+      "swatch": "fill",
+      "key": "P",
+      "label": "Highlighted state"
+    },
+    {
+      "swatch": "line",
+      "style": "solid",
+      "label": "Documented border"
+    },
+    {
+      "swatch": "line",
+      "style": "dashed",
+      "label": "Approximate border"
+    }
+  ],
   "highlights": [
-    { "id": "ottoman", "label": "Ottoman Empire", "start": 1299, "end": 1922, "names": ["Ottoman Empire"] },
-    { "id": "safavid", "label": "Safavid Empire", "start": 1501, "end": 1736, "names": ["Safavid Empire"] },
-    { "id": "mughal", "label": "Mughal Empire", "start": 1526, "end": 1857, "names": ["Mughal Empire"] },
-    { "id": "ming", "label": "Ming China", "start": 1368, "end": 1644, "names": ["Ming Empire", "Ming Chinese Empire"] },
-    { "id": "qing", "label": "Qing China", "start": 1644, "end": 1912, "names": ["Manchu Empire", "Qing Empire", "Qing Dynasty"] },
-    { "id": "songhai", "label": "Songhai Empire", "start": 1464, "end": 1591, "names": ["Songhai", "Songhai Empire"] },
-    { "id": "morocco", "label": "Morocco", "start": 1450, "end": 2000, "names": ["Morocco", "Wattasid Caliphate", "Watassid Morocco", "Saadi Morocco", "Saadi Sultanate", "Alaouite Morocco"] },
-    { "id": "russia", "label": "Russia", "start": 1450, "end": 2000, "names": ["Grand Duchy of Moscow", "Tsardom of Muscovy", "Tsardom of Russia", "Russian Empire", "Russia"] },
-    { "id": "tokugawa", "label": "Tokugawa Japan", "start": 1603, "end": 1868, "names": ["Tokugawa shogunate", "Tokugawa Shogunate"] }
+    {
+      "id": "ottoman",
+      "label": "Ottoman Empire",
+      "start": 1299,
+      "end": 1922,
+      "names": [
+        "Ottoman Empire"
+      ]
+    },
+    {
+      "id": "safavid",
+      "label": "Safavid Empire",
+      "start": 1501,
+      "end": 1736,
+      "names": [
+        "Safavid Empire"
+      ]
+    },
+    {
+      "id": "mughal",
+      "label": "Mughal Empire",
+      "start": 1526,
+      "end": 1857,
+      "names": [
+        "Mughal Empire"
+      ]
+    },
+    {
+      "id": "ming",
+      "label": "Ming China",
+      "start": 1368,
+      "end": 1644,
+      "names": [
+        "Ming Empire",
+        "Ming Chinese Empire"
+      ]
+    },
+    {
+      "id": "qing",
+      "label": "Qing China",
+      "start": 1644,
+      "end": 1912,
+      "names": [
+        "Manchu Empire",
+        "Qing Empire",
+        "Qing Dynasty"
+      ]
+    },
+    {
+      "id": "songhai",
+      "label": "Songhai Empire",
+      "start": 1464,
+      "end": 1591,
+      "names": [
+        "Songhai",
+        "Songhai Empire"
+      ]
+    },
+    {
+      "id": "morocco",
+      "label": "Morocco",
+      "start": 1450,
+      "end": 2000,
+      "names": [
+        "Morocco",
+        "Wattasid Caliphate",
+        "Watassid Morocco",
+        "Saadi Morocco",
+        "Saadi Sultanate",
+        "Alaouite Morocco"
+      ]
+    },
+    {
+      "id": "russia",
+      "label": "Russia",
+      "start": 1450,
+      "end": 2000,
+      "names": [
+        "Grand Duchy of Moscow",
+        "Tsardom of Muscovy",
+        "Tsardom of Russia",
+        "Russian Empire",
+        "Russia"
+      ]
+    },
+    {
+      "id": "tokugawa",
+      "label": "Tokugawa Japan",
+      "start": 1603,
+      "end": 1868,
+      "names": [
+        "Tokugawa shogunate",
+        "Tokugawa Shogunate"
+      ]
+    }
   ]
 }
