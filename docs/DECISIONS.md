@@ -1,0 +1,31 @@
+# Decisions
+
+One line each, dated. Owner decisions are marked (W). Agent decisions are marked (A) and are reversible unless noted.
+
+- 2026-10-29 (W) Name: Parchment. Standalone atlas; CED alignment lives in data tags only, never in chrome or exports.
+- 2026-10-29 (W) No teacher name, no course name anywhere a student or reviewer sees.
+- 2026-10-29 (W) Never author geometry; download polygons and coordinates, author attributes only.
+- 2026-10-29 (W) Two color sets: InSPECT fills (siblings) and apparatus marks (siblings); the two sets are cousins. Fills never draw lines; marks never fill regions.
+- 2026-10-29 (W) Water is never a saturated blue. Ocean at paper lightness; lakes and rivers in muted steel blue.
+- 2026-10-29 (W) Look: antique-atlas parchment register over shaded relief. Emulate the genre, copy no vendor's border or cartouche.
+- 2026-10-29 (W) Stepped snapshots with crossfade, no polygon morphing.
+- 2026-10-29 (W) Live map runs from GitHub Pages and from a single offline HTML file on the classroom Dell.
+- 2026-10-29 (W) Public repo `parchment` on Wil's GitHub account; MIT code; data under its own licenses.
+- 2026-10-29 (W) Content rows are drafted by Wil and co-teachers, not by the agent. v0 ships the template with example rows only.
+- 2026-10-29 (W) Google Sheet import comes in v1, after 2026-11-06. v0 reads data/records.csv from the repo.
+- 2026-10-29 (W) First use: AP World Unit 3 review day, placeholder Fri 2026-11-06.
+- 2026-10-29 (A) Projection for `afro-eurasia`: Equal Earth rotated to 60°E, frame from 20°W to 150°E and 6°N to 76°N. The brief allowed Equal Earth or Lambert azimuthal; Equal Earth keeps the Sahel-to-Arctic span readable without the azimuthal "bowl". Owner to confirm (projection is on the ask list).
+- 2026-10-29 (A) Base-year rule `nearest-not-after`: a snapshot uses the latest base map not later than its year, so no border appears before it existed. Gives 1750 → 1715 (as the brief's example). Switchable to `nearest` in `data/calendar.json`.
+- 2026-10-29 (A) 1450 pinned to the 1492 base map (`source_override`). The rule's pick, 1400, still shows the Mongol Great Khanate over China and has no Moscow; 1492 shows the Ming Empire and the Grand Duchy of Moscow. Cost: 1492 already shows Constantinople as Ottoman (fell 1453). Reversible by deleting one line in `calendar.json`.
+- 2026-10-29 (A) Certainty default for base polygons: `approximate` (dashed) before 1648, `legal` (solid) from 1648. The basemaps' `BORDERPRECISION` field is 1 for every polygon, so it carries no information. Records can override per polity.
+- 2026-10-29 (A) Base-unit id = kebab-case(NAME) + `@` + calendar year (e.g. `ottoman-empire@1600`). Generated into `data/vocab.json` by `derive.mjs`; 2,563 ids across the eight snapshots.
+- 2026-10-29 (A) Extent-tracker highlight list lives in `src/trackers/extent.json`: the brief's Unit 3 polities, matched by the base map's NAME per era and bounded by start/end years (Ottoman 1299–1922, Safavid 1501–1736, Mughal 1526–1857, Ming 1368–1644, Qing 1644–1912, Songhai 1464–1591, Morocco and Russia whole span, Tokugawa 1603–1868). Records rows can extend it later.
+- 2026-10-29 (A) Data gaps left open, not filled: Safavids absent from the 1500 base map (founded 1501); no Mughal polygon in 1500 (founded 1526); the base maps keep a small "Songhai" after 1591 (not highlighted, by the time bound).
+- 2026-10-29 (A) Natural Earth vectors are downloaded as GeoJSON from the Natural Earth maintainers' repository (nvkelso/natural-earth-vector) and rasters from Natural Earth's CDN (naciscdn.org), because naturalearthdata.com returned server errors on 2026-10-29. Same data, same public-domain license.
+- 2026-10-29 (A) Graticule is computed (d3.geoGraticule10), not downloaded: it is arithmetic, not drawn geometry.
+- 2026-10-29 (A) Bathymetry: Natural Earth ships it only at 1:10m; seven depth levels (200–6000 m) simplified hard to hairlines.
+- 2026-10-29 (A) Snapshot years 1200, 1900 and 2000 are downloaded and derived alongside the Unit 3 years: cheap now, needed later.
+- 2026-10-29 (A) Build: esbuild bundles `src/` into one `app.js` committed at the repo root, so GitHub Pages serves the folder as-is with no CI. Dev server on port 8321.
+- 2026-10-29 (A) Tokens: Set A tempered to OKLCH L 0.72 C 0.09; moss derived at rust's lightness and chroma, hue 140; focus slate-gold OKLCH(0.66, 0.10, 80°); ocean OKLCH(paper L, 0.022, 235°). All hexes recorded in `src/tokens.css` by `scripts/tokens.mjs`.
+- 2026-10-29 (A) Relief pre-rendered per stage from Natural Earth SR_50M at 2× frame size, grayscale PNG, masked to land and multiplied under fills in the browser.
+- 2026-10-29 (A) Land polygons, lakes and rivers at 1:50m are the ground for every stage; rivers filtered to Natural Earth scalerank ≤ 7.

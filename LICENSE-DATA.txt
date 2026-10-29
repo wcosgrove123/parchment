@@ -1,0 +1,1 @@
+This code is MIT (see LICENSE). The map data under data/ and assets/ stays under its own licenses; see docs/DATA-LICENSES.md.

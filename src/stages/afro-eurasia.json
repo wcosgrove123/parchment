@@ -1,0 +1,29 @@
+{
+  "id": "afro-eurasia",
+  "title": "Afro-Eurasia",
+  "projection": "equalEarth",
+  "rotate": [-60, 0],
+  "extent": { "west": -20, "south": 6, "east": 150, "north": 76 },
+  "span": [1200, 2000],
+  "relief": "relief/afro-eurasia.png",
+  "labels": [
+    { "text": "Europe", "lon": 15, "lat": 50, "kind": "region" },
+    { "text": "North Africa", "lon": 10, "lat": 27, "kind": "region" },
+    { "text": "West Africa", "lon": -2, "lat": 13, "kind": "region" },
+    { "text": "Middle East", "lon": 44, "lat": 29, "kind": "region" },
+    { "text": "Central Asia", "lon": 66, "lat": 44, "kind": "region" },
+    { "text": "South Asia", "lon": 78, "lat": 22, "kind": "region" },
+    { "text": "East Asia", "lon": 112, "lat": 36, "kind": "region" },
+    { "text": "Southeast Asia", "lon": 104, "lat": 12, "kind": "region" },
+    { "text": "Siberia", "lon": 100, "lat": 64, "kind": "region" },
+    { "text": "Mediterranean Sea", "lon": 17, "lat": 35.5, "kind": "water" },
+    { "text": "Indian Ocean", "lon": 75, "lat": 5, "kind": "water" },
+    { "text": "Arabian Sea", "lon": 63, "lat": 15, "kind": "water" },
+    { "text": "Bay of Bengal", "lon": 88, "lat": 13, "kind": "water" },
+    { "text": "South China Sea", "lon": 114, "lat": 15, "kind": "water" },
+    { "text": "Black Sea", "lon": 34, "lat": 43.5, "kind": "water" },
+    { "text": "Caspian Sea", "lon": 50.5, "lat": 41.5, "kind": "water" },
+    { "text": "Red Sea", "lon": 38, "lat": 20, "kind": "water" },
+    { "text": "Atlantic Ocean", "lon": -14, "lat": 38, "kind": "water" }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "_comment": "Course-wide snapshot years shared by every stage. fetch-base.mjs fills source_year and gap from historical-basemaps index.json using `rule` (nearest-not-after: latest base map not later than the calendar year; or nearest). A snapshot may pin a base year with source_override. The cartouche shows calendar year · base map source_year when they differ.",
+  "course": [
+    1200,
+    1450,
+    1750,
+    1900,
+    2000
+  ],
+  "units": {
+    "apworld-3": [
+      1450,
+      1500,
+      1600,
+      1700,
+      1750
+    ]
+  },
+  "snapshots": [
+    {
+      "year": 1200,
+      "source_year": 1200,
+      "gap": 0,
+      "source_file": "world_1200.geojson"
+    },
+    {
+      "year": 1450,
+      "source_year": 1492,
+      "gap": -42,
+      "source_file": "world_1492.geojson",
+      "source_override": 1492,
+      "override_reason": "The 1400 map still shows the Mongol Great Khanate over China and has no Moscow; 1492 shows the Ming Empire and the Grand Duchy of Moscow. Trade-off: 1492 already shows Constantinople as Ottoman (fell 1453)."
+    },
+    {
+      "year": 1500,
+      "source_year": 1500,
+      "gap": 0,
+      "source_file": "world_1500.geojson"
+    },
+    {
+      "year": 1600,
+      "source_year": 1600,
+      "gap": 0,
+      "source_file": "world_1600.geojson"
+    },
+    {
+      "year": 1700,
+      "source_year": 1700,
+      "gap": 0,
+      "source_file": "world_1700.geojson"
+    },
+    {
+      "year": 1750,
+      "source_year": 1715,
+      "gap": 35,
+      "source_file": "world_1715.geojson"
+    },
+    {
+      "year": 1900,
+      "source_year": 1900,
+      "gap": 0,
+      "source_file": "world_1900.geojson"
+    },
+    {
+      "year": 2000,
+      "source_year": 2000,
+      "gap": 0,
+      "source_file": "world_2000.geojson"
+    }
+  ],
+  "rule": "nearest-not-after"
+}

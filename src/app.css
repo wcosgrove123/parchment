@@ -1,0 +1,37 @@
+/* Parchment — page and map styles. Color tokens live in tokens.css. */
+@font-face { font-family: 'Libre Baskerville'; font-style: normal; font-weight: 400; font-display: block; src: url('../assets/fonts/libre-baskerville-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Libre Baskerville'; font-style: italic; font-weight: 400; font-display: block; src: url('../assets/fonts/libre-baskerville-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Libre Baskerville'; font-style: normal; font-weight: 700; font-display: block; src: url('../assets/fonts/libre-baskerville-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Libre Baskerville'; font-style: italic; font-weight: 700; font-display: block; src: url('../assets/fonts/libre-baskerville-latin-700-italic.woff2') format('woff2'); }
+
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchment-deep); font-family: var(--font); color: var(--ink); }
+#app { position: fixed; inset: 0; display: grid; place-items: center; }
+#map { width: 100vw; height: 100vh; display: block; }
+
+/* ---------- map layers ---------- */
+.paper { fill: var(--parchment); }
+.ocean { fill: var(--ocean); }
+.bathymetry path { fill: none; stroke: var(--bathy); stroke-width: 0.5; stroke-opacity: 0.7; }
+.land { fill: var(--cream); }
+.relief { opacity: 0.55; mix-blend-mode: multiply; }
+/* Extent tracker: highlighted polities take the tracker's fill at 65% so relief stays legible; the rest stay at rest. */
+.polity { stroke: none; fill: var(--cream); fill-opacity: 0; }
+.polity.highlight { fill: var(--fill-P); fill-opacity: 0.65; }
+.border { fill: none; stroke: var(--navy); stroke-width: 0.8; stroke-linejoin: round; }
+.border.approximate { stroke-dasharray: 3 2.5; stroke-opacity: 0.55; }
+.border.legal { stroke-opacity: 0.75; }
+.rivers path { fill: none; stroke: var(--water-line); stroke-opacity: var(--water-line-opacity); stroke-width: 0.6; }
+.lakes { fill: var(--ocean); stroke: var(--water-line); stroke-opacity: var(--water-line-opacity); stroke-width: 0.6; }
+.coastline { fill: none; stroke: var(--steel); stroke-width: 0.7; stroke-opacity: 0.8; }
+.graticule { fill: none; stroke: var(--gold-hair); stroke-width: 0.6; stroke-opacity: 0.9; }
+.frame { fill: none; stroke: var(--gold); stroke-width: 3; }
+
+/* ---------- chrome (never exported) ---------- */
+#toolbar { position: fixed; top: 10px; right: 12px; display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 6px 8px; font-size: 13px; }
+#toolbar button { font: inherit; background: none; border: 1px solid transparent; color: var(--ink); padding: 2px 7px; border-radius: 3px; cursor: pointer; }
+#toolbar button:hover { border-color: var(--gold); }
+#toolbar button.active { background: var(--navy); color: var(--cream); }
+#year-readout { margin-left: 10px; font-style: italic; }
+#problems { position: fixed; left: 12px; top: 10px; max-width: 40vw; background: var(--cream); border: 1px solid var(--rust); color: var(--rust); padding: 8px 10px; font-size: 13px; }
+.hidden { display: none; }
+body.shot #toolbar, body.shot #problems { display: none; }

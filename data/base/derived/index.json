@@ -1,0 +1,109 @@
+{
+  "generated": "2026-10-29T12:37:25.880Z",
+  "settings": {
+    "polities": {
+      "minWeight": 0.0001,
+      "quantization": 100000
+    },
+    "ne": {
+      "minWeight": 0.0001,
+      "quantization": 100000
+    },
+    "bathymetry": {
+      "minWeight": 0.02,
+      "quantization": 10000
+    }
+  },
+  "certainty_legal_from": 1648,
+  "snapshots": [
+    {
+      "year": 1200,
+      "source_year": 1200,
+      "file": "world_1200.topojson",
+      "bytes": 273043,
+      "features": 286,
+      "named": 136
+    },
+    {
+      "year": 1450,
+      "source_year": 1492,
+      "file": "world_1450.topojson",
+      "bytes": 1197462,
+      "features": 1946,
+      "named": 1317
+    },
+    {
+      "year": 1500,
+      "source_year": 1500,
+      "file": "world_1500.topojson",
+      "bytes": 286760,
+      "features": 291,
+      "named": 143
+    },
+    {
+      "year": 1600,
+      "source_year": 1600,
+      "file": "world_1600.topojson",
+      "bytes": 539044,
+      "features": 866,
+      "named": 661
+    },
+    {
+      "year": 1700,
+      "source_year": 1700,
+      "file": "world_1700.topojson",
+      "bytes": 509759,
+      "features": 782,
+      "named": 591
+    },
+    {
+      "year": 1750,
+      "source_year": 1715,
+      "file": "world_1750.topojson",
+      "bytes": 517062,
+      "features": 758,
+      "named": 606
+    },
+    {
+      "year": 1900,
+      "source_year": 1900,
+      "file": "world_1900.topojson",
+      "bytes": 306259,
+      "features": 270,
+      "named": 222
+    },
+    {
+      "year": 2000,
+      "source_year": 2000,
+      "file": "world_2000.topojson",
+      "bytes": 351400,
+      "features": 240,
+      "named": 198
+    }
+  ],
+  "layers": {
+    "ne": {
+      "file": "ne.topojson",
+      "bytes": 1474599,
+      "objects": [
+        "land",
+        "coastline",
+        "lakes",
+        "rivers"
+      ]
+    },
+    "bathymetry": {
+      "file": "bathymetry.topojson",
+      "bytes": 2678746,
+      "depths": [
+        200,
+        1000,
+        2000,
+        3000,
+        4000,
+        5000,
+        6000
+      ]
+    }
+  }
+}

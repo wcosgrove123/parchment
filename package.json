@@ -1,0 +1,30 @@
+{
+  "name": "parchment",
+  "version": "0.0.1",
+  "description": "Parchment: a historical timeline atlas for the classroom. Live map, fixed stages, snapshot years, trackers, diff view, slide-ready exports.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Wil Cosgrove",
+  "scripts": {
+    "fetch": "node scripts/fetch-base.mjs",
+    "derive": "node scripts/derive.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --serve",
+    "shot": "node scripts/screenshot.mjs",
+    "offline": "node scripts/build-offline.mjs"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@fontsource/libre-baskerville": "^5.3.0",
+    "esbuild": "^0.28.2",
+    "fflate": "^0.8.2",
+    "geotiff": "^3.0.5",
+    "pngjs": "^7.0.0",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3"
+  }
+}
