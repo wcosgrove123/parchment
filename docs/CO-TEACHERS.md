@@ -38,3 +38,5 @@ and move the answer to `DECISIONS.md`.
 9. **Review-day routine.** The reading-routine panel has four prompts (two observations, one context, one cause,
    one thing the map cannot support). Right prompts? Right order?
 10. **Chromebook reality.** Fits 1366×768 without horizontal scroll. Does anyone's class use a smaller screen?
+
+11. **Borders of the pre-1648 African states.** The free base maps trace Mali, Songhai, Kanem-Bornu and the Hausa and Mossi states as crisp shapes copied unchanged between 1450 and 1500, over a blanket labelled "West African cereal farmers". Parchment shows them dashed (approximate) and does not redraw them. Do we keep them as drawn, with a note where the textbook disagrees, or should these states be shown as soft spheres around the places they actually controlled (capitals, trade towns, tribute towns), with the Sahara, Sahel and Niger shown as context? If spheres: which anchor places define each state in 1450 and 1600, and from which textbook pages? Discrepancies go in a running list for later versions either way.
