@@ -1,6 +1,7 @@
 // Parchment — entry point
 import * as d3 from 'd3';
-import { loadJSON, loadText } from './data/loader.js';
+import { loadJSON } from './data/loader.js';
+import { loadRecordsText } from './data/source.js';
 import { createStage } from './render/base.js';
 import { renderPNG, renderSVG, download, exportName } from './export/export.js';
 import { validateRecords, recordsFor } from './data/records.js';
@@ -44,22 +45,22 @@ function identifyFor(scope) {
 
 async function main() {
   const t0 = performance.now();
-  const [calendar, ne, bathy, vocab, recordsText] = await Promise.all([
+  const [calendar, ne, bathy, vocab, source] = await Promise.all([
     loadJSON('data/calendar.json'),
     loadJSON('data/base/derived/ne.topojson'),
     loadJSON('data/base/derived/bathymetry.topojson'),
     loadJSON('data/vocab.json'),
-    loadText('data/records.csv').catch((err) => { console.error(err); return null; }),
+    loadRecordsText(),
   ]);
 
   // Records: validated against vocab.json; bad rows are skipped and listed, never fatal.
-  const checked = recordsText == null
+  const checked = source.text == null
     ? { records: [], problems: [{ line: 0, id: '', message: 'data/records.csv could not be loaded' }], examples: 0, total: 0 }
-    : validateRecords(recordsText, vocab);
+    : validateRecords(source.text, vocab);
   const records = checked.records;
   const noCoords = records.filter((r) => r.kind === 'point' && (r.lon == null || r.lat == null));
-  console.log(`records.csv: ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped`);
-  showDataProblems(checked, noCoords);
+  console.log(`records (${source.from}): ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped`);
+  showDataProblems(checked, noCoords, source);
   const years = calendar.snapshots.map((s) => s.year);
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
@@ -169,6 +170,8 @@ async function main() {
   const tr = pop.append('label');
   tr.append('input').attr('type', 'checkbox').on('change', function () { exportOpts.transparent = this.checked; });
   tr.append('span').text('transparent background');
+  // Teacher side: the admin page (table, problems, coverage, place finder). Chrome only, never exported.
+  tb.append('a').attr('class', 'admin-link').attr('href', 'admin.html').attr('title', 'The record table, problems and coverage').text('Admin');
   // Credits: who made the atlas and where the data comes from, with the licence file. Site chrome only.
   const about = tb.append('span').attr('class', 'menu');
   about.append('button').attr('id', 'about').attr('title', 'About Parchment').text('ⓘ')
@@ -209,9 +212,9 @@ async function main() {
 
 // The data-problems panel: every skipped row with its line number and reason, plus point rows still waiting
 // for coordinates. Chrome only; hidden in shots and never part of an export.
-function showDataProblems({ problems, examples, total }, noCoords) {
+function showDataProblems({ problems, examples, total }, noCoords, source = {}) {
   const panel = d3.select('#data-problems');
-  if (!problems.length && !noCoords.length) { panel.classed('hidden', true); return; }
+  if (!problems.length && !noCoords.length && source.from !== 'fallback') { panel.classed('hidden', true); return; }
   panel.classed('hidden', false).html('');
   const h = panel.append('h2');
   h.append('span').text(`Data problems · ${problems.length} row${problems.length === 1 ? '' : 's'} skipped`);
@@ -219,7 +222,9 @@ function showDataProblems({ problems, examples, total }, noCoords) {
   const ol = panel.append('ol');
   ol.selectAll('li').data(problems).join('li').html((p) => `<b>line ${p.line}</b>${p.id ? ` (${p.id})` : ''}: ${escapeHTML(p.message)}`);
   if (noCoords.length) panel.append('p').attr('class', 'note').text(`${noCoords.length} point row${noCoords.length === 1 ? '' : 's'} waiting for coordinates (run node scripts/geocode.mjs): ${noCoords.map((r) => r.id).join(', ')}`);
-  panel.append('p').attr('class', 'note').text(`records.csv: ${total} rows, ${total - problems.length - examples} drawn, ${examples} examples not drawn.`);
+  if (source.from === 'fallback') panel.append('p').attr('class', 'note').text(`The Google Sheet could not be reached (${source.error}); showing the saved copy of the table instead.`);
+  const where = source.from === 'sheet' ? 'the Google Sheet' : 'records.csv';
+  panel.append('p').attr('class', 'note').text(`${where}: ${total} rows, ${total - problems.length - examples} drawn, ${examples} examples not drawn.`);
 }
 const escapeHTML = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 

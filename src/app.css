@@ -134,3 +134,5 @@ body.shot #data-problems { display: none; }
 #toolbar .popover.about { min-width: 300px; max-width: 360px; white-space: normal; font-size: 12px; line-height: 1.45; padding: 8px 10px; }
 #toolbar .popover.about p { margin: 0 0 7px; } #toolbar .popover.about p:last-child { margin: 0; }
 #toolbar .popover.about a { color: var(--steel); }
+#toolbar a.admin-link { font-size: 12px; color: var(--ink); text-decoration: none; border: 1px solid transparent; padding: 2px 7px; border-radius: 3px; }
+#toolbar a.admin-link:hover { border-color: var(--gold); }

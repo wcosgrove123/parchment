@@ -39,14 +39,15 @@ export function validateRecords(text, vocab) {
   const rows = parseCSV(text);
   const problems = [];
   const records = [];
+  const templates = []; // valid example-* rows, kept for the admin page, never drawn
   let examples = 0;
-  if (!rows.length) return { records, problems: [{ line: 1, id: '', message: 'records.csv is empty' }], examples, total: 0 };
+  if (!rows.length) return { records, problems: [{ line: 1, id: '', message: 'records.csv is empty' }], examples, templates, total: 0 };
 
   const header = rows[0].map((h) => h.trim());
   const missing = COLUMNS.filter((c) => !header.includes(c));
   if (missing.length) {
     problems.push({ line: 1, id: '', message: `header is missing column${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}` });
-    return { records, problems, examples, total: rows.length - 1 };
+    return { records, problems, examples, templates, total: rows.length - 1 };
   }
   const col = Object.fromEntries(header.map((h, i) => [h, i]));
   const baseUnits = new Set((vocab.base_units ?? []).map((u) => u.id));
@@ -96,9 +97,8 @@ export function validateRecords(text, vocab) {
     if (!rec.label) bad('label is blank');
     if (!vocab.qc_status.includes(rec.qc_status)) bad(`qc_status "${rec.qc_status}" is not one of ok, wrong, unsure or blank`);
 
-    if (errs.length) { problems.push({ line, id: rec.id, message: errs.join('; ') }); continue; }
-    if (rec.id.startsWith('example-')) { examples++; continue; }
-    records.push({
+    if (errs.length) { problems.push({ line, id: rec.id, message: errs.join('; '), raw: rec }); continue; }
+    const parsed = {
       ...rec,
       unit: rec.unit === '' ? null : Number(rec.unit),
       lon: rec.lon === '' ? null : Number(rec.lon),
@@ -108,9 +108,11 @@ export function validateRecords(text, vocab) {
       value: rec.kind === 'value' ? Number(rec.value) : rec.value,
       shape: tracker?.shapes?.[rec.value] ?? null,
       line,
-    });
+    };
+    if (rec.id.startsWith('example-')) { examples++; templates.push(parsed); continue; }
+    records.push(parsed);
   }
-  return { records, problems, examples, total: rows.length - 1 };
+  return { records, problems, examples, templates, total: rows.length - 1 };
 }
 
 // The year label a record shows, by grade: 1526 · ~1526 · 1526?

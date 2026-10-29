@@ -1,0 +1,25 @@
+{
+  "_comment": "Course framework index for the teacher side only: unit and topic numbers and titles, key-concept codes, theme codes. Codes and short titles, never the framework's text. The admin page uses it to pick and to show coverage; the student-facing map and every export never show these tags. Fill a course from its CED: the AP World (Fall 2026) index is still empty because the CED text was not in Loom on 2026-10-29; the APUSH split in Loom (.data/terms-work/ced-split/CED 2026) can fill apush when the APUSH stage comes (v2).",
+  "apworld": {
+    "title": "AP World History: Modern",
+    "themes": { "ENV": "Humans and the Environment", "CDI": "Cultural Developments and Interactions", "GOV": "Governance", "ECN": "Economic Systems", "SIO": "Social Interactions and Organization", "TEC": "Technology and Innovation" },
+    "units": {
+      "3": {
+        "title": "Land-Based Empires, c. 1450 to c. 1750",
+        "_source": "Learning objectives as written in the owner's Unit 3 calendar (Loom, unit-calendars/APWH/unit-3.md, 2026-10-29). Topic numbers and titles still to be filled from the CED itself.",
+        "objectives": {
+          "3.A": "Explain how and why various land-based empires developed and expanded from 1450 - 1750.",
+          "3.B": "Explain how rulers used a variety of methods to legitimize their power in land-based empires from 1450 - 1750.",
+          "3.C": "Explain continuity and change within the various belief systems during the period from 1450 - 1750.",
+          "3.D": "Compare the methods by which various empires increased their influence from 1450 - 1750."
+        },
+        "topics": {}
+      }
+    }
+  },
+  "apush": {
+    "title": "AP U.S. History",
+    "themes": { "NAT": "American and National Identity", "WXT": "Work, Exchange, and Technology", "GEO": "Geography and the Environment", "MIG": "Migration and Settlement", "PCE": "Politics and Power", "WOR": "America in the World", "ARC": "American and Regional Culture", "SOC": "Social Structures" },
+    "units": {}
+  }
+}

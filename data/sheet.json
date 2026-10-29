@@ -1,0 +1,6 @@
+{
+  "_comment": "The Google Sheet that holds the record table (route A, docs/ADMIN.md). When csv_url is set, the map and the admin page read the Sheet live and fall back to data/records.csv if it cannot be reached; `npm run pull` copies the Sheet into data/records.csv for the offline build and the repository. edit_url opens the Sheet; gid is the records tab, used to open a row directly.",
+  "csv_url": "",
+  "edit_url": "",
+  "gid": 0
+}

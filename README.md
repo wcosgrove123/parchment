@@ -26,9 +26,15 @@ npm run shot         # docs/progress/<date>-<year>.png
 npm run offline      # dist/parchment-offline.html, one file that needs no network
 npm run check        # list rows in data/records.csv that would be skipped, and why
 npm run geocode      # fill blank lon/lat from Wikidata for rows whose `where` is a QID
+npm run sheet        # dist/parchment-records.xlsx: the table with dropdowns, to upload as the Google Sheet
+npm run pull         # copy the Google Sheet (data/sheet.json) into data/records.csv
 ```
 
 ## Add a row
+
+Teachers: read `docs/TEACHER-GUIDE.md` (one page) and use the **Admin** link in the map's toolbar. The table lives in a
+Google Sheet with dropdowns; the map reads it live. The Admin page shows every row beside the map, the rows that were
+skipped and why, coverage by unit and topic, and a place finder that shows a place on the map before you copy its id.
 
 Content lives in `data/records.csv`, one row per claim. Allowed values for each column are in `data/vocab.json`.
 Rows that fail validation are skipped and listed, in the app's data-problems panel and by `npm run check`; nothing you

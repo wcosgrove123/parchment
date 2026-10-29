@@ -1,0 +1,55 @@
+/* Parchment — admin page (teacher side). Same tokens and type as the map; the map itself is a preview here. */
+body.admin { overflow: auto; height: auto; min-height: 100%; background: var(--parchment-deep); }
+body.admin #map { width: 100%; height: auto; display: block; border: 1px solid var(--gold); background: var(--parchment); }
+#admin-head { display: flex; align-items: center; gap: 14px; padding: 10px 18px; border-bottom: 1px solid var(--gold); background: var(--cream); }
+#admin-head .wordmark { font-size: 13px; letter-spacing: 0.45em; font-weight: 700; }
+#admin-head .sub { font-size: 13px; font-variant: small-caps; letter-spacing: 0.14em; opacity: 0.8; }
+#admin-head nav { margin-left: auto; display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 13px; background: none; border: 1px solid var(--navy); color: var(--ink); padding: 4px 10px; border-radius: 3px; cursor: pointer; text-decoration: none; }
+.btn:hover { border-color: var(--gold); }
+.btn.primary { background: var(--navy); color: var(--cream); }
+#admin { display: grid; grid-template-columns: minmax(440px, 40%) 1fr; gap: 16px; padding: 14px 18px 24px; align-items: start; }
+#left { background: var(--cream); border: 1px solid var(--gold); border-radius: 4px; padding: 10px 12px; font-size: 13px; }
+#right { position: sticky; top: 12px; }
+#filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+#filters label { font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; opacity: 0.8; }
+#filters select { font: inherit; font-size: 12px; background: #fff; color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
+#coverage { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 10px; }
+#coverage .chip { border: 1px solid var(--gold); border-radius: 12px; padding: 1px 9px; font-size: 12px; background: var(--parchment); cursor: pointer; }
+#coverage .chip.empty { opacity: 0.55; border-style: dashed; }
+#coverage .chip b { font-weight: 700; }
+#coverage .chip.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+#tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--gold); margin-bottom: 8px; }
+#tabs button { font: inherit; font-size: 12px; font-variant: small-caps; letter-spacing: 0.12em; background: none; border: 0; border-bottom: 2px solid transparent; padding: 5px 10px; cursor: pointer; color: var(--ink); }
+#tabs button.active { border-bottom-color: var(--navy); font-weight: 700; }
+table.rows { width: 100%; border-collapse: collapse; }
+table.rows th { text-align: left; font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; font-weight: 400; opacity: 0.75; padding: 2px 6px; border-bottom: 1px solid var(--gold-hair); }
+table.rows td { padding: 4px 6px; border-bottom: 1px solid var(--gold-hair); vertical-align: top; cursor: pointer; }
+table.rows tr:hover td { background: var(--parchment); }
+table.rows tr.selected td { background: var(--parchment); box-shadow: inset 3px 0 0 var(--navy); }
+table.rows .muted { opacity: 0.6; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; border: 1px solid var(--navy); background: var(--cream); }
+.dot.ok { background: var(--moss); } .dot.problem { background: var(--rust); } .dot.unreviewed { background: var(--gold); }
+.dot.template { background: var(--steel); } .dot.wrong { background: var(--rust); } .dot.unsure { background: var(--gold); } .dot.nocoords { background: var(--cream); border-style: dashed; }
+.group { font-size: 11px; font-variant: small-caps; letter-spacing: 0.14em; opacity: 0.8; padding: 8px 6px 2px; }
+#problems-tab li { margin: 4px 0; cursor: pointer; } #problems-tab li b { color: var(--rust); }
+#places input { font: inherit; font-size: 13px; width: 100%; box-sizing: border-box; border: 1px solid var(--navy); border-radius: 3px; padding: 4px 8px; background: #fff; color: var(--ink); margin: 4px 0 6px; }
+#places h3 { font-size: 12px; font-variant: small-caps; letter-spacing: 0.14em; margin: 10px 0 2px; font-weight: 700; }
+#places .hit { display: flex; gap: 8px; align-items: baseline; padding: 3px 4px; border-bottom: 1px solid var(--gold-hair); cursor: pointer; }
+#places .hit:hover { background: var(--parchment); }
+#places .hit code, #detail code { font-family: Consolas, Menlo, monospace; font-size: 12px; background: var(--parchment); padding: 0 4px; border-radius: 2px; }
+#places .hit .desc { opacity: 0.7; font-size: 12px; }
+#places .note { font-size: 12px; font-style: italic; opacity: 0.8; margin: 2px 0 6px; }
+#detail { background: var(--cream); border: 1px solid var(--gold); border-top: 0; padding: 10px 14px; font-size: 13px; }
+#detail h2 { margin: 0 0 6px; font-size: 15px; font-variant: small-caps; letter-spacing: 0.1em; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+#detail h2 .when { font-weight: 400; font-style: italic; opacity: 0.8; }
+#detail dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; margin: 0; }
+#detail dt { font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; opacity: 0.75; }
+#detail dd { margin: 0; }
+#detail .ced { color: var(--steel); }
+#detail .warn { color: var(--rust); }
+#detail .actions { margin-top: 8px; display: flex; gap: 8px; }
+.copy { font: inherit; font-size: 11px; border: 1px solid var(--navy); background: none; border-radius: 3px; padding: 0 6px; cursor: pointer; color: var(--ink); }
+.copy:hover { border-color: var(--gold); }
+#problems { position: fixed; left: 12px; bottom: 12px; top: auto; }
+@media (max-width: 1100px) { #admin { grid-template-columns: 1fr; } #right { position: static; } }
