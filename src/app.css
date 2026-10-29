@@ -20,6 +20,11 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 /* ---------- fills and borders (grammar §5) ---------- */
 .polity { stroke: none; fill: var(--cream); fill-opacity: 0; }
 .polity.highlight { fill: var(--fill-P); fill-opacity: 0.65; }
+/* Diff: appeared = focus fill; vanished = rust outline + rust hatch; persisted = muted. */
+.polity.appeared { fill: var(--focus); fill-opacity: 0.62; }
+.polity.vanished { fill: url(#hatch-rust); fill-opacity: 1; stroke: var(--rust); stroke-width: 1.1; stroke-linejoin: round; }
+.hatch-line { stroke: var(--rust); stroke-width: 1; stroke-opacity: 0.6; }
+.label.polity.vanished { fill: var(--rust); font-style: italic; font-weight: 400; }
 .border { fill: none; stroke: var(--navy); stroke-width: 0.8; stroke-linejoin: round; }
 .border.approximate { stroke-dasharray: 3 2.5; stroke-opacity: 0.55; }
 .border.legal { stroke-opacity: 0.75; }
@@ -50,7 +55,14 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 .legend .swatch.fill-E { fill: var(--fill-E); }
 .legend .swatch.fill-C { fill: var(--fill-C); }
 .legend .swatch.fill-T { fill: var(--fill-T); }
+.legend .swatch.fill-focus { fill: var(--focus); }
+.legend .swatch.hatch { fill: url(#hatch-rust); fill-opacity: 1; stroke: var(--rust); }
 .legend .swatch-line { stroke: var(--navy); stroke-width: 1.2; }
+.difflist-box { fill: var(--cream); fill-opacity: 0.92; stroke: var(--navy); stroke-width: 0.8; }
+.difflist text { fill: var(--ink); font-size: 12px; }
+.difflist-head { font-variant: small-caps; letter-spacing: 0.16em; font-size: 13px; }
+.difflist-head.appeared { fill: var(--focus); } .difflist-head.vanished { fill: var(--rust); }
+.difflist-more { font-style: italic; fill-opacity: 0.7; }
 .legend .swatch-line.dashed { stroke-dasharray: 4 3; }
 .mark.rust-diamond { fill: var(--rust); } .mark.moss-circle { fill: var(--moss); } .mark.navy-square, .mark.navy-triangle { fill: var(--navy); }
 
@@ -59,6 +71,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 .cartouche .rule { stroke: var(--gold); stroke-width: 1.2; }
 .cartouche .map-title { font-size: 21px; font-variant: small-caps; letter-spacing: 0.14em; }
 .cartouche .year { font-size: 30px; font-weight: 700; }
+.cartouche .year.range { font-size: 20px; }
 .cartouche .base-note { font-size: 12px; font-style: italic; fill-opacity: 0.8; }
 .scalebar line { stroke: var(--navy); stroke-width: 1; }
 .scalebar rect { fill: var(--navy); }
@@ -72,12 +85,23 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--parchm
 .strip .snapshot:hover { fill: var(--focus); }
 .strip .marker path { fill: var(--focus); stroke: var(--navy); stroke-width: 1.2; }
 .strip .marker text { font-size: 13px; font-weight: 700; fill: var(--ink); }
+.strip .marker.start path { fill: var(--cream); }
+.strip .range { stroke: var(--navy); stroke-width: 4; stroke-opacity: 0.8; }
 
 /* ---------- chrome (never exported) ---------- */
 #toolbar { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; align-items: center; background: rgba(247, 245, 239, 0.9); border: 1px solid var(--gold); border-radius: 4px; padding: 5px 8px; font-size: 13px; }
 #toolbar button { font: inherit; background: none; border: 1px solid transparent; color: var(--ink); padding: 2px 7px; border-radius: 3px; cursor: pointer; }
 #toolbar button:hover { border-color: var(--gold); }
 #toolbar button.active { background: var(--navy); color: var(--cream); }
+#toolbar .seg { display: inline-flex; border: 1px solid var(--navy); border-radius: 3px; overflow: hidden; margin-right: 6px; }
+#toolbar .seg button { border-radius: 0; padding: 2px 9px; }
+#toolbar .years { display: inline-flex; gap: 2px; align-items: center; }
+#toolbar .years label { font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; margin: 0 4px 0 6px; opacity: 0.8; }
+#toolbar .sep { width: 1px; height: 18px; background: var(--gold); margin: 0 6px; }
+#toolbar #scope { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; font-size: 12px; cursor: pointer; }
+body:not(.mode-diff) #scope { display: none; }
+body:not(.mode-diff) #years-a { display: none; }
+body:not(.mode-diff) #years label { display: none; }
 #year-readout { display: none; }
 #problems { position: fixed; left: 12px; top: 10px; max-width: 40vw; background: var(--cream); border: 1px solid var(--rust); color: var(--rust); padding: 8px 10px; font-size: 13px; }
 .hidden { display: none; }

@@ -11,6 +11,19 @@ import { drawStageLabels, polityLabelData, drawPolityLabels } from './labels.js'
 import { createCartouche } from './cartouche.js';
 import { createStrip } from './strip.js';
 import { createLegend } from './legend.js';
+import { createDiffList } from './difflist.js';
+import { computeDiff } from '../views/diff.js';
+
+export const CROSSFADE_MS = 300;
+
+export const DIFF_LEGEND = {
+  title: 'Continuity and change',
+  legend: [
+    { swatch: 'fill', key: 'focus', label: 'Appeared' },
+    { swatch: 'hatch', label: 'Vanished' },
+    { swatch: 'line', style: 'solid', label: 'Persisted (border)' },
+  ],
+};
 
 export const W = 1920;
 export const H = 1080;
@@ -93,9 +106,12 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
       .attr('href', assetURL(`assets/${stage.relief}`));
   }
 
-  // Polities (filled per snapshot) and their interior borders.
-  const polities = map.append('g').attr('class', 'polities');
-  const borders = map.append('g').attr('class', 'borders');
+  // Hatch for vanished / disputed (grammar §5): rust diagonals.
+  defs.append('pattern').attr('id', 'hatch-rust').attr('patternUnits', 'userSpaceOnUse').attr('width', 9).attr('height', 9).attr('patternTransform', 'rotate(45)')
+    .append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 9).attr('class', 'hatch-line');
+
+  // Snapshot layers (polities, borders, labels) live here; each show() creates a new group and crossfades.
+  const snapshots = map.append('g').attr('class', 'snapshots');
 
   // Water lines and coast.
   const rivers = feature(ne, ne.objects.rivers);
@@ -108,9 +124,9 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Graticule: hairline gold, every 10°.
   map.append('path').attr('class', 'graticule').attr('d', d(d3.geoGraticule10()));
 
-  // Labels: stage labels along their parallels, polity labels per snapshot.
+  // Stage labels along their parallels. Polity labels are drawn per snapshot, above the water lines.
   drawStageLabels(map.append('g').attr('class', 'stage-labels'), defs, stage, path);
-  const polityLabels = map.append('g').attr('class', 'polity-labels');
+  const labelLayers = map.append('g').attr('class', 'polity-labels');
 
   // Grain and vignette over the sheet, then the apparatus on top.
   drawPaperOverlay(root, W, H);
@@ -120,29 +136,81 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
 
   const legend = createLegend(root, frame);
   if (tracker) legend.set(tracker);
+  const diffList = createDiffList(root, frame);
   const cartouche = createCartouche(root, frame, stage, projection);
   const strip = createStrip(root, frame, stage, years, onYear);
 
   let currentYear = null;
 
+  // Crossfade: build the new layer at opacity 0, fade it in while every older layer fades out and is removed.
+  function crossfade(build) {
+    const g = snapshots.append('g').attr('class', 'snap').style('opacity', 0);
+    const lg = labelLayers.append('g').attr('class', 'snap-labels').style('opacity', 0);
+    build(g, lg);
+    snapshots.selectAll('g.snap').filter(function () { return this !== g.node(); })
+      .transition().duration(CROSSFADE_MS).style('opacity', 0).remove();
+    labelLayers.selectAll('g.snap-labels').filter(function () { return this !== lg.node(); })
+      .transition().duration(CROSSFADE_MS).style('opacity', 0).remove();
+    g.transition().duration(CROSSFADE_MS).style('opacity', 1);
+    lg.transition().duration(CROSSFADE_MS).style('opacity', 1);
+  }
+
+  // Features and meshes are decoded once per snapshot topology, so the projected-path cache hits on every later show.
+  const namedCache = new WeakMap(), interiorCache = new WeakMap();
+  const namedOf = (topo) => {
+    let v = namedCache.get(topo);
+    if (!v) { v = feature(topo, topo.objects.polities).features.filter((f) => f.properties.id); namedCache.set(topo, v); }
+    return v;
+  };
+  const interiorOf = (topo) => {
+    let v = interiorCache.get(topo);
+    if (!v) { v = mesh(topo, topo.objects.polities, (a, b) => a !== b); interiorCache.set(topo, v); }
+    return v;
+  };
+
   // classify(feature, year) → { status: 'highlight' | 'muted', key?, label? }
   function showSnapshot(year, topo, classify = () => ({ status: 'muted' })) {
-    const fc = feature(topo, topo.objects.polities);
-    const named = fc.features.filter((f) => f.properties.id);
+    const named = namedOf(topo);
     for (const f of named) f.properties.cls = classify(f, year);
-    polities.selectAll('path')
-      .data(named, (f) => f.properties.id)
-      .join('path')
-      .attr('class', (f) => `polity ${f.properties.certainty} ${f.properties.cls.status}`)
-      .attr('d', d)
-      .append('title').text((f) => f.properties.cls.label ?? f.properties.name);
-    const interior = mesh(topo, topo.objects.polities, (a, b) => a !== b);
     const certainty = named[0]?.properties.certainty ?? 'approximate';
-    borders.selectAll('path').data([interior]).join('path')
-      .attr('class', `border ${certainty}`)
-      .attr('d', d);
-    drawPolityLabels(polityLabels, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), path));
+    crossfade((g, lg) => {
+      g.append('g').attr('class', 'polities').selectAll('path').data(named).join('path')
+        .attr('class', (f) => `polity ${f.properties.certainty} ${f.properties.cls.status}`)
+        .attr('d', d)
+        .append('title').text((f) => f.properties.cls.label ?? f.properties.name);
+      g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(topo)));
+      drawPolityLabels(lg, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), path));
+    });
+    if (tracker) legend.set(tracker);
+    diffList.hide();
     currentYear = year;
+  }
+
+  // Diff: B is the ground (muted, its borders); appeared = B features in the focus colour;
+  // vanished = A features hatched and outlined in rust; persisted = muted.
+  function showDiff(a, b, identify) {
+    const aNamed = namedOf(a.topo), bNamed = namedOf(b.topo);
+    const diff = computeDiff({ aFeatures: aNamed, aYear: a.year, bFeatures: bNamed, bYear: b.year, identify, path, frame, minKm2: stage.diff_min_km2 ?? 120000 });
+    const appeared = diff.appeared.flatMap((it) => it.b.map((f) => ({ f, label: it.label, key: it.key })));
+    const vanished = diff.vanished.flatMap((it) => it.a.map((f) => ({ f, label: it.label, key: it.key })));
+    const certainty = bNamed[0]?.properties.certainty ?? 'approximate';
+    crossfade((g, lg) => {
+      g.append('g').attr('class', 'polities').selectAll('path').data(bNamed).join('path')
+        .attr('class', (f) => `polity ${f.properties.certainty} muted`).attr('d', d)
+        .append('title').text((f) => f.properties.name);
+      g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(b.topo)));
+      g.append('g').attr('class', 'appeared').selectAll('path').data(appeared).join('path')
+        .attr('class', 'polity appeared').attr('d', (x) => d(x.f)).append('title').text((x) => `${x.label} — appeared by ${b.year}`);
+      g.append('g').attr('class', 'vanished').selectAll('path').data(vanished).join('path')
+        .attr('class', 'polity vanished').attr('d', (x) => d(x.f)).append('title').text((x) => `${x.label} — gone by ${b.year}`);
+      const labelled = (items, cls) => polityLabelData(items.map((x) => { x.f.properties.cls = { label: x.label }; return x.f; }), path).map((l) => ({ ...l, cls }));
+      drawPolityLabels(lg, [...labelled(appeared, 'appeared'), ...labelled(vanished, 'vanished')]);
+      lg.selectAll('text').attr('class', (l) => `label polity ${l.cls ?? ''}`);
+    });
+    legend.set({ ...DIFF_LEGEND, title: `Change ${a.year} → ${b.year}` });
+    diffList.set(diff, y0 + 22 + legend.height() + 14);
+    currentYear = b.year;
+    return diff;
   }
 
   function setYear(year, sourceYear) {
@@ -150,5 +218,10 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setYear(year);
   }
 
-  return { projection, path, d, frame, showSnapshot, setYear, legend, cartouche, get year() { return currentYear; } };
+  function setRange(a, b) {
+    cartouche.setRange(a, b);
+    strip.setRange(a.year, b.year);
+  }
+
+  return { projection, path, d, frame, showSnapshot, showDiff, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
 }

@@ -126,5 +126,6 @@
       "lat": 36,
       "kind": "water"
     }
-  ]
+  ],
+  "diff_min_km2": 120000
 }

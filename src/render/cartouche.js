@@ -14,7 +14,7 @@ function scaleBar(projection, center, targetPx = 170) {
 }
 
 export function createCartouche(root, { x0, y1 }, stage, projection) {
-  const W = 330, H = 128, PAD = 16;
+  const W = 380, H = 128, PAD = 16;
   const x = x0 + 22, y = y1 - 22 - H;
   const g = root.append('g').attr('class', 'cartouche').attr('transform', `translate(${x},${y})`);
   g.append('rect').attr('class', 'cartouche-box').attr('width', W).attr('height', H);
@@ -43,8 +43,16 @@ export function createCartouche(root, { x0, y1 }, stage, projection) {
   return {
     setTitle(text) { title.text(text); },
     setYear(y, sourceYear) {
-      year.text(y < 0 ? `${-y} BCE` : y);
+      year.classed('range', false).text(y < 0 ? `${-y} BCE` : y);
       baseNote.text(sourceYear != null && sourceYear !== y ? `base map ${sourceYear}` : '');
+    },
+    // Diff: "1450 → 1750" with the base maps that stood in for either year.
+    setRange(a, b) {
+      year.classed('range', true).text(`${a.year} → ${b.year}`);
+      const notes = [];
+      if (a.sourceYear != null && a.sourceYear !== a.year) notes.push(`${a.year} from ${a.sourceYear}`);
+      if (b.sourceYear != null && b.sourceYear !== b.year) notes.push(`${b.year} from ${b.sourceYear}`);
+      baseNote.text(notes.length ? `base maps: ${notes.join(' · ')}` : '');
     },
   };
 }

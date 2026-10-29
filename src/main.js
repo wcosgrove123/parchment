@@ -8,6 +8,9 @@ import extent from './trackers/extent.json';
 
 const params = new URLSearchParams(location.search);
 const START_YEAR = Number(params.get('year')) || 1450;
+const START_FROM = Number(params.get('from')) || null; // ?from=1450&year=1750 opens the Diff view
+const PLAY_HOLD_MS = 1500;
+
 // ?stage=afro-eurasia-lambert shows the alternative projection for comparison.
 const STAGES = { [stageEqualEarth.id]: stageEqualEarth, [stageLambert.id]: stageLambert };
 const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
@@ -15,10 +18,22 @@ const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
 // Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year.
 const byName = new Map();
 for (const h of extent.highlights) for (const n of h.names) byName.set(n, h);
-function classifyExtent(f, year) {
+function matchHighlight(f, year) {
   const h = byName.get(f.properties.name);
-  if (h && year >= h.start && year <= h.end) return { status: 'highlight', key: h.id, label: h.label };
-  return { status: 'muted' };
+  return h && year >= h.start && year <= h.end ? h : null;
+}
+function classifyExtent(f, year) {
+  const h = matchHighlight(f, year);
+  return h ? { status: 'highlight', key: h.id, label: h.label } : { status: 'muted' };
+}
+// Diff identity: a tracked state keeps its identity across renames (Muscovy → Russia). With scope 'tracked'
+// (the default) only tracked states take part; with scope 'all' every named polygon does, by its name.
+function identifyFor(scope) {
+  return (f, year) => {
+    const h = matchHighlight(f, year);
+    if (h) return { key: `h:${h.id}`, label: h.label };
+    return scope === 'all' ? { key: `n:${f.properties.name}`, label: f.properties.name } : null;
+  };
 }
 
 async function main() {
@@ -30,40 +45,82 @@ async function main() {
   ]);
   const years = calendar.snapshots.map((s) => s.year);
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
-
-  const svg = d3.select('#map');
-  const atlas = createStage(svg, stage, { ne, bathy }, { tracker: extent, years, onYear: (y) => show(y) });
-  console.log(`stage built in ${(performance.now() - t0).toFixed(0)} ms`);
-
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
 
-  let current = null;
-  async function show(year) {
-    if (!years.includes(year)) return;
-    const topo = await snapshot(year);
+  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', year: START_YEAR, from: START_FROM ?? years[Math.max(0, years.indexOf(START_YEAR) - 1)], playing: null };
+
+  const svg = d3.select('#map');
+  const atlas = createStage(svg, stage, { ne, bathy }, { tracker: extent, years, onYear: (y) => setYear(y) });
+  console.log(`stage built in ${(performance.now() - t0).toFixed(0)} ms`);
+
+  async function render() {
     const t = performance.now();
-    atlas.showSnapshot(year, topo, classifyExtent);
-    current = year;
-    const meta = bySnapshot.get(year);
-    document.title = `Parchment · ${year}`;
-    atlas.setYear(year, meta.source_year);
-    d3.selectAll('#years button').classed('active', function () { return Number(this.dataset.year) === year; });
-    console.log(`snapshot ${year}: ${(performance.now() - t).toFixed(1)} ms`);
+    if (state.mode === 'diff') {
+      const [a, b] = await Promise.all([snapshot(state.from), snapshot(state.year)]);
+      const diff = atlas.showDiff({ year: state.from, topo: a }, { year: state.year, topo: b }, identifyFor(state.scope));
+      atlas.setRange({ year: state.from, sourceYear: bySnapshot.get(state.from).source_year }, { year: state.year, sourceYear: bySnapshot.get(state.year).source_year });
+      document.title = `Parchment · ${state.from} → ${state.year}`;
+      console.log(`diff ${state.from} → ${state.year}: ${(performance.now() - t).toFixed(1)} ms; appeared ${diff.appeared.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
+    } else {
+      const topo = await snapshot(state.year);
+      atlas.showSnapshot(state.year, topo, classifyExtent);
+      atlas.setYear(state.year, bySnapshot.get(state.year).source_year);
+      document.title = `Parchment · ${state.year}`;
+      console.log(`snapshot ${state.year}: ${(performance.now() - t).toFixed(1)} ms`);
+    }
+    document.body.classList.toggle('mode-diff', state.mode === 'diff');
+    d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
+    d3.selectAll('#years button').classed('active', function () { return Number(this.dataset.year) === state.year; });
+    d3.selectAll('#years-a button').classed('active', function () { return Number(this.dataset.year) === state.from; });
   }
 
-  // Year buttons.
-  d3.select('#years').selectAll('button').data(years).join('button')
-    .attr('data-year', (y) => y).text((y) => y)
-    .on('click', (_, y) => show(y));
+  function setYear(y) { if (years.includes(y)) { state.year = y; render(); } }
+  function setFrom(y) { if (years.includes(y)) { state.from = y; render(); } }
+  function setMode(m) { state.mode = m; if (m === 'diff' && state.from === state.year) state.from = years[Math.max(0, years.indexOf(state.year) - 1)]; render(); }
+  function step(delta) {
+    const i = years.indexOf(state.year);
+    const j = Math.max(0, Math.min(years.length - 1, i + delta));
+    if (j !== i) setYear(years[j]);
+    return j !== i;
+  }
+  function togglePlay() {
+    if (state.playing) { clearInterval(state.playing); state.playing = null; }
+    else {
+      if (years.indexOf(state.year) === years.length - 1) setYear(years[0]);
+      state.playing = setInterval(() => { if (!step(1)) togglePlay(); }, PLAY_HOLD_MS);
+    }
+    d3.select('#play').classed('active', !!state.playing).text(state.playing ? '❚❚' : '▶');
+  }
 
-  // Keyboard: ← → step through the calendar.
+  // Toolbar.
+  const tb = d3.select('#toolbar').html('');
+  const seg = tb.append('span').attr('class', 'seg');
+  seg.append('button').attr('data-mode', 'snapshot').text('Snapshot').on('click', () => setMode('snapshot'));
+  seg.append('button').attr('data-mode', 'diff').text('Diff').on('click', () => setMode('diff'));
+  const ya = tb.append('span').attr('id', 'years-a').attr('class', 'years');
+  ya.append('label').text('from');
+  ya.selectAll('button').data(years).join('button').attr('data-year', (y) => y).text((y) => y).on('click', (_, y) => setFrom(y));
+  const yb = tb.append('span').attr('id', 'years').attr('class', 'years');
+  yb.append('label').text('to');
+  yb.selectAll('button').data(years).join('button').attr('data-year', (y) => y).text((y) => y).on('click', (_, y) => setYear(y));
+  const scopeLabel = tb.append('label').attr('id', 'scope').attr('title', 'Compare every named polygon, not just the tracked states');
+  scopeLabel.append('input').attr('type', 'checkbox').property('checked', state.scope === 'all')
+    .on('change', function () { state.scope = this.checked ? 'all' : 'tracked'; render(); });
+  scopeLabel.append('span').text('all states');
+  tb.append('span').attr('class', 'sep');
+  tb.append('button').attr('id', 'play').attr('title', 'Play (space)').text('▶').on('click', togglePlay);
+
+  // Keyboard: ← → step through the calendar; space plays; D toggles the Diff view.
   window.addEventListener('keydown', (e) => {
-    const i = years.indexOf(current);
-    if (e.key === 'ArrowRight') show(years[Math.min(i + 1, years.length - 1)]);
-    if (e.key === 'ArrowLeft') show(years[Math.max(i - 1, 0)]);
+    if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight') step(1);
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    else if (e.key === 'd' || e.key === 'D') setMode(state.mode === 'diff' ? 'snapshot' : 'diff');
   });
 
-  await show(START_YEAR);
+  if (START_FROM) state.mode = 'diff';
+  await render();
   document.body.classList.add('ready');
   // Prefetch the rest so switching is instant.
   for (const y of years) snapshot(y);
