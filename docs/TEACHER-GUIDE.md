@@ -51,8 +51,9 @@ or after it, read as "since the last snapshot": a battle in 1526 appears on the 
 
 ### For whoever keeps the site (not the teachers)
 
-- `npm run sheet` writes `dist/parchment-records.xlsx` with the dropdowns. Upload it to Google Drive; it opens as a
-  Google Sheet and keeps the dropdowns. Share it with the teachers as editors and with "Anyone with the link" as viewer.
+- The live Sheet is "Parchment records" in the owner's Google Drive (its id is in `data/sheet.json`). To start over,
+  `npm run sheet` writes `dist/parchment-records.xlsx` with the dropdowns; upload it to Google Drive and it opens as a
+  Google Sheet and keeps the dropdowns (`-- --lite` makes a small version whose places tab imports `data/places.csv` from the site). Share it with the teachers as editors and with "Anyone with the link" as viewer.
 - Put the Sheet's id into `data/sheet.json`: `csv_url` is
   `https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv&sheet=records`, `edit_url` is the Sheet's normal
   link, `gid` is the records tab's gid (0 for the first tab). Commit and push; the site now reads the Sheet live.
