@@ -25,9 +25,12 @@ const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
 // Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year.
 const byName = new Map();
 for (const h of extent.highlights) for (const n of h.names) byName.set(n, h);
+// ?focus=ottoman,safavid,mughal,qing limits the highlights to those tracked states (ids from extent.json): a lesson map.
+const FOCUS = new Set((params.get('focus') || '').split(',').map((s) => s.trim()).filter(Boolean));
 function matchHighlight(f, year) {
   const h = byName.get(f.properties.name);
-  return h && year >= h.start && year <= h.end ? h : null;
+  if (!h || year < h.start || year > h.end) return null;
+  return FOCUS.size && !FOCUS.has(h.id) ? null : h;
 }
 function classifyExtent(f, year) {
   const h = matchHighlight(f, year);

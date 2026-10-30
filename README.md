@@ -11,6 +11,7 @@ Parchment is designed and directed by Wil Cosgrove.
 - On this computer: the Desktop shortcut **Parchment** (`scripts/start-parchment.cmd`) starts it at http://127.0.0.1:8321.
 - Offline: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
 - Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
+- Lesson maps: add `?focus=ottoman,safavid,mughal,qing` to the address to light only those states (ids in `src/trackers/extent.json`).
 - Export: the toolbar's Export menu saves the current view as PNG (1920×1080 or 3840×2160) or SVG, with legend, cartouche and timeline baked in.
 
 ## Work on it
@@ -22,11 +23,11 @@ npm run derive       # simplify it for the browser (data/base/derived/)
 node scripts/relief.mjs   # pre-render shaded relief per stage (assets/relief/)
 npm run dev          # http://localhost:8321/  (rebuilds on save)
 npm run build        # app.js for GitHub Pages
-npm run shot         # docs/progress/<date>-<year>.png
+npm run shot         # docs/progress/<date>-<year>.png  (-- --year 1700 --focus ottoman,safavid,mughal,qing for a lesson map)
 npm run offline      # dist/parchment-offline.html, one file that needs no network
 npm run check        # list rows in data/records.csv that would be skipped, and why
 npm run geocode      # fill blank lon/lat from Wikidata for rows whose `where` is a QID
-npm run sheet        # dist/parchment-records.xlsx: the table with dropdowns, to upload as the Google Sheet
+npm run sheet        # dist/parchment-records.xlsx + data/places.csv; -- --lite makes the 12 KB version whose places tab imports itself
 npm run pull         # copy the Google Sheet (data/sheet.json) into data/records.csv
 ```
 
