@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><rect x="8" y="8" width="52" height="52" rx="10" fill="#F6F5F0" stroke="#1C1F26" stroke-width="2"/><rect x="4" y="4" width="52" height="52" rx="10" fill="#1C1F26"/>
+    <g transform="translate(4.22, 0) skewX(-8)" stroke="#F6F5F0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M 45 18 H 15 V 42"/>
+      <path d="M 45 18 V 42 H 15" stroke-dasharray="4.5 4"/>
+      <polygon points="30,25 35,30 30,35 25,30" fill="#F6F5F0" stroke="none"/>
+    </g></svg>
