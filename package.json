@@ -16,7 +16,9 @@
     "check": "node scripts/check-records.mjs",
     "geocode": "node scripts/geocode.mjs",
     "sheet": "node scripts/make-sheet.mjs",
-    "pull": "node scripts/pull-sheet.mjs"
+    "pull": "node scripts/pull-sheet.mjs",
+    "app": "electron .",
+    "app:build": "electron-builder --win portable"
   },
   "dependencies": {
     "d3": "^7.9.0",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "@fontsource/libre-baskerville": "^5.3.0",
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0",
     "esbuild": "^0.28.2",
     "exceljs": "^4.4.0",
     "fflate": "^0.8.2",
@@ -31,5 +35,44 @@
     "pngjs": "^7.0.0",
     "topojson-server": "^3.0.1",
     "topojson-simplify": "^3.0.3"
+  },
+  "allowScripts": {
+    "electron@45.2.1": true,
+    "electron-winstaller@5.4.0": true
+  },
+  "main": "desktop/main.cjs",
+  "build": {
+    "appId": "com.parchment.atlas",
+    "productName": "Parchment",
+    "copyright": "Wil Cosgrove",
+    "directories": {
+      "output": "dist/desktop",
+      "buildResources": "desktop"
+    },
+    "files": [
+      "desktop/**",
+      "index.html",
+      "admin.html",
+      "app.js",
+      "admin.js",
+      "src/**/*.css",
+      "assets/**",
+      "data/**",
+      "!data/base/raw/**",
+      "LICENSE",
+      "LICENSE-DATA.txt",
+      "docs/DATA-LICENSES.md"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "assets/brand/parchment.ico"
+    },
+    "portable": {
+      "artifactName": "Parchment.exe"
+    },
+    "npmRebuild": false
   }
 }

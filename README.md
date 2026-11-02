@@ -8,8 +8,11 @@ Parchment is designed and directed by Wil Cosgrove.
 ## Run it
 
 - Online: https://wcosgrove123.github.io/parchment/
-- On this computer: the Desktop shortcut **Parchment** (`scripts/start-parchment.cmd`) starts it at http://127.0.0.1:8321.
-- Offline: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
+- As a Windows app: `Parchment.exe` (built by `npm run app:build` into `dist/desktop/`), one file to copy to any Windows
+  computer. Its own window and icon, no browser, works offline; reads the Google Sheet when there is a network. The
+  Desktop shortcut **Parchment** opens it. `F11` is full screen.
+- Offline in a browser: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
+- For working on it: `scripts/start-parchment.cmd` starts the dev server at http://127.0.0.1:8321 and opens a browser.
 - Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
 - Lesson maps: add `?focus=ottoman,safavid,mughal,qing` to the address to light only those states (ids in `src/trackers/extent.json`).
 - Trying rows: `?records=data/some-file.csv` reads a file from the site instead of the Sheet.
@@ -26,6 +29,8 @@ npm run dev          # http://localhost:8321/  (rebuilds on save)
 npm run build        # app.js for GitHub Pages
 npm run shot         # docs/progress/<date>-<year>.png  (-- --year 1700 --focus ottoman,safavid,mughal,qing for a lesson map)
 npm run offline      # dist/parchment-offline.html, one file that needs no network
+npm run app          # open the desktop window from this folder (-- --shot out.png saves a picture and quits)
+npm run app:build    # dist/desktop/Parchment.exe, the Windows app as one file
 npm run check        # list rows in data/records.csv that would be skipped, and why
 npm run geocode      # fill blank lon/lat from Wikidata for rows whose `where` is a QID
 npm run sheet        # dist/parchment-records.xlsx + data/places.csv; -- --lite makes the 12 KB version whose places tab imports itself

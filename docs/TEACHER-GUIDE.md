@@ -44,6 +44,12 @@ Rows marked `wrong` stay in the table but stop drawing.
 
 A row with a mistake is skipped and listed. The rest of the map draws as before.
 
+## Opening it in class
+
+The site works in any browser. For the classroom computer there is also `Parchment.exe`, a Windows app with its own
+window and icon that needs no browser and works without a network. Copy the one file anywhere and double-click it;
+`F11` fills the screen. It reads the Sheet live when the computer is online and shows the saved copy when it is not.
+
 ## When a point appears
 
 A span (start to end) shows on every snapshot year inside it. A one-year event shows on the first snapshot year at
