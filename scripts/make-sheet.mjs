@@ -83,7 +83,9 @@ const rangeValidation = (key, ref, note) => {
 for (const key of ['course', 'theme', 'tracker', 'kind', 'grade', 'certainty', 'qc_status']) rangeValidation(key, listRef(key), `Pick a ${key} from the list (data/vocab.json).`);
 rangeValidation('value', listRef('value'), 'Pick the value for this tracker (see the vocab tab), or type a number for a value row.');
 rangeValidation('where', `places!$A$2:$A$${placesLast}`, 'For a state or region pick an id from the places tab. For a point, type the Wikidata id (Q…) instead.');
-for (const key of ['unit', 'start', 'end']) ws.dataValidations.add(`${colLetter(key)}2:${colLetter(key)}${ROWS}`, { type: 'whole', allowBlank: true, operator: 'between', formulae: [-5000, 2100], showErrorMessage: true, errorStyle: 'warning', errorTitle: 'Parchment', error: `${key} is a whole number (a year; negative for BCE).` });
+ws.dataValidations.add(`${colLetter('unit')}2:${colLetter('unit')}${ROWS}`, { type: 'whole', allowBlank: true, operator: 'between', formulae: [0, 99], showErrorMessage: true, errorStyle: 'warning', errorTitle: 'Parchment', error: 'unit is a whole number.' });
+// start and end are plain text (a year, 1526-04 or 1526-04-21) so the Sheet never turns them into its own dates.
+for (const key of ['start', 'end']) ws.getColumn(key).numFmt = '@';
 
 // --- help --------------------------------------------------------------------------------------------------
 const hs = wb.addWorksheet('help');
@@ -93,7 +95,7 @@ const hs = wb.addWorksheet('help');
   ['2. id: short, lowercase, words joined by hyphens, unique (panipat-1526). Rows whose id starts with example- are templates and never draw.'],
   ['3. Pick from the dropdowns wherever there is one. Free text goes in label, source, qc_by and qc_note.'],
   ['4. where: for a state or region, an id from the places tab (ottoman-empire@1600). For a point (battle, founding, treaty), the Wikidata id (Q605321). The Admin page on the map has a Find a place tab that searches both and shows the place on the map first. Leave lon/lat blank; they are filled from the id.'],
-  ['5. start and end are years (the same year for a single event). grade says how sure the date is: exact, circa (~1526) or uncertain (1526?).'],
+  ['5. start and end: a year (1526), a month (1526-04) or a day (1526-04-21); the same value twice for a single moment; negative years for BCE. Type them as text (the columns are set to plain text; do not let the Sheet turn them into dates). grade says how sure the date is: exact, circa (~1526) or uncertain (1526?).'],
   ['6. certainty says how firm the territory is: legal (solid line), approximate (dashed), sphere (soft, no line).'],
   ['7. source: the textbook page or framework line the claim rests on. Every row needs one.'],
   ['8. The map reads this sheet live. A row with a mistake is skipped and listed on the admin page with the reason; nothing you type can break the map.'],

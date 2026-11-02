@@ -16,7 +16,9 @@ itself. The map reads the Sheet live, so a saved row appears the next time anyon
 4. **where**: for a state or region, pick an id from the `places` tab of the Sheet (the base map's own names, such as
    `ottoman-empire@1600`). For a point, type the Wikidata id of the place, such as `Q605321`. The Admin page's
    **Find a place** tab lets you search either kind and shows it on the map before you copy the id.
-5. **start, end**: years. The same year for a single event. Negative for BCE.
+5. **start, end**: a year (`1526`), a month (`1526-04`) or a day (`1526-04-21`), as precise as the source is. The same
+   value twice for a single moment. Negative years for BCE. Type them as text: if the Sheet turns `1526-04-21` into a
+   date of its own, set the column's format to Plain text (Format → Number → Plain text) and the row will be read again.
 6. **grade** is how sure the date is: `exact` shows `1526`, `circa` shows `~1526`, `uncertain` shows `1526?`.
 7. **certainty** is how firm the territory is: `legal` draws a solid line, `approximate` a dashed line, `sphere` a soft
    edge with no line. Before 1648 most states are `approximate` or `sphere`.
@@ -45,7 +47,9 @@ A row with a mistake is skipped and listed. The rest of the map draws as before.
 ## When a point appears
 
 A span (start to end) shows on every snapshot year inside it. A one-year event shows on the first snapshot year at
-or after it, read as "since the last snapshot": a battle in 1526 appears on the 1600 map.
+or after it, read as "since the last snapshot": a battle in 1526 appears on the 1600 map. The map prints the date as
+given: `21 Apr 1526`, `Apr 1526` or `1526`. Days and months do not move a point between snapshot years yet; they are
+kept so that finer-stepped maps can use them later.
 
 ---
 

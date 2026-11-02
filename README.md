@@ -12,6 +12,7 @@ Parchment is designed and directed by Wil Cosgrove.
 - Offline: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
 - Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
 - Lesson maps: add `?focus=ottoman,safavid,mughal,qing` to the address to light only those states (ids in `src/trackers/extent.json`).
+- Trying rows: `?records=data/some-file.csv` reads a file from the site instead of the Sheet.
 - Export: the toolbar's Export menu saves the current view as PNG (1920×1080 or 3840×2160) or SVG, with legend, cartouche and timeline baked in.
 
 ## Work on it

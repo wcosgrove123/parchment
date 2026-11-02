@@ -18,6 +18,7 @@ const stage = arg('stage', '');
 const scope = arg('scope', '');
 const tracker = arg('tracker', '');
 const focus = arg('focus', ''); // --focus ottoman,safavid,mughal,qing: only these tracked states
+const records = arg('records', ''); // --records data/test.csv: a records file served from the repo instead of the Sheet
 const size = arg('size', '1920x1080');
 const date = new Date().toISOString().slice(0, 10);
 const defaultName = from ? `${date}-diff-${from}-${year}.png` : `${date}-${year}.png`;
@@ -49,6 +50,7 @@ if (stage) query.set('stage', stage);
 if (scope) query.set('scope', scope);
 if (tracker) query.set('tracker', tracker);
 if (focus) query.set('focus', focus);
+if (records) query.set('records', records);
 
 try {
   execFileSync(browser, [

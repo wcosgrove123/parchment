@@ -80,7 +80,7 @@ One row per record. Columns, in order:
 | `kind` | enum | `region`, `point`, `arrow`, `path`, `value` |
 | `where` | string | a base-unit id (from `vocab.json`, generated from the base layer's `NAME`+year) **or** a Wikidata QID for points |
 | `lon`, `lat` | number | filled by `geocode.mjs`, never by hand |
-| `start`, `end` | year | integers; negative for BCE |
+| `start`, `end` | when | a year (`1526`), a month (`1526-04`) or a day (`1526-04-21`); negative years for BCE; as precise as the source |
 | `grade` | enum | `exact`, `circa`, `uncertain` (renders as `1526`, `~1526`, `1526?`) |
 | `value` | string/number | category from that tracker's list in `vocab.json`, or a number for `value` kinds |
 | `certainty` | enum | `legal`, `approximate`, `sphere` |

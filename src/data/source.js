@@ -6,6 +6,12 @@ import { loadJSON, loadText } from './loader.js';
 
 // → { text, from: 'sheet' | 'fallback' | 'file', sheet, error? }
 export async function loadRecordsText() {
+  // ?records=data/some.csv reads a file from the site instead of the Sheet: for trying rows before they go live.
+  const override = new URLSearchParams(location.search).get('records');
+  if (override && /^[\w./-]+\.csv$/.test(override) && !override.includes('..')) {
+    const text = await loadText(override).catch((err) => { console.error(err); return null; });
+    return { text, from: 'file', sheet: {} };
+  }
   const sheet = await loadJSON('data/sheet.json').catch(() => ({}));
   if (sheet.csv_url) {
     try {

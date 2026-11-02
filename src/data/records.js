@@ -31,6 +31,32 @@ export function parseCSV(text) {
 }
 
 const isInt = (s) => /^-?\d+$/.test(s);
+
+// When: a year (1526, -500 for 500 BCE), a month (1526-04) or a day (1526-04-21). The number is what the row says;
+// nothing is converted between calendars, so a day before 1582 is the date as the source gives it.
+// → { year, month, day, t } or null. t orders any two whens (a decimal year) and never shows.
+const DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+export function parseWhen(s) {
+  const m = /^(-?\d{1,4})(?:-(\d{1,2})(?:-(\d{1,2}))?)?$/.exec(s);
+  if (!m) return null;
+  const year = Number(m[1]);
+  const month = m[2] === undefined ? null : Number(m[2]);
+  const day = m[3] === undefined ? null : Number(m[3]);
+  if (month !== null && (month < 1 || month > 12)) return null;
+  if (day !== null && (day < 1 || day > DAYS[month - 1])) return null;
+  const t = year + ((month ?? 1) - 1) / 12 + ((day ?? 1) - 1) / 372;
+  return { year, month, day, t };
+}
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// 1526 · Apr 1526 · 21 Apr 1526 · 500 BCE (a BCE date prints the year the way a historian writes it)
+export function formatWhen(w) {
+  if (!w) return '';
+  const y = w.year < 0 ? `${-w.year} BCE` : `${w.year}`;
+  if (w.month === null) return y;
+  if (w.day === null) return `${MONTHS[w.month - 1]} ${y}`;
+  return `${w.day} ${MONTHS[w.month - 1]} ${y}`;
+}
+const WHEN_HINT = 'a year (1526), a month (1526-04) or a day (1526-04-21); negative years for BCE';
 const isNum = (s) => s !== '' && Number.isFinite(Number(s));
 const isQID = (s) => /^Q\d+$/.test(s);
 
@@ -85,9 +111,10 @@ export function validateRecords(text, vocab) {
       if (!isNum(rec.lon) || !isNum(rec.lat)) bad('lon/lat must both be numbers (or both blank until geocode.mjs fills them)');
       else if (Math.abs(Number(rec.lon)) > 180 || Math.abs(Number(rec.lat)) > 90) bad(`lon/lat ${rec.lon},${rec.lat} is off the globe`);
     }
-    if (!isInt(rec.start)) bad(`start "${rec.start}" is not a year`);
-    if (!isInt(rec.end)) bad(`end "${rec.end}" is not a year`);
-    if (isInt(rec.start) && isInt(rec.end) && Number(rec.end) < Number(rec.start)) bad(`end ${rec.end} is before start ${rec.start}`);
+    const startW = parseWhen(rec.start), endW = parseWhen(rec.end);
+    if (!startW) bad(`start "${rec.start}" is not ${WHEN_HINT}`);
+    if (!endW) bad(`end "${rec.end}" is not ${WHEN_HINT}`);
+    if (startW && endW && endW.t < startW.t) bad(`end ${rec.end} is before start ${rec.start}`);
     if (!vocab.grade.includes(rec.grade)) bad(`grade "${rec.grade}" is not one of ${vocab.grade.join(', ')}`);
     if (tracker) {
       if (rec.kind === 'value') { if (!isNum(rec.value)) bad(`value "${rec.value}" is not a number`); }
@@ -103,8 +130,10 @@ export function validateRecords(text, vocab) {
       unit: rec.unit === '' ? null : Number(rec.unit),
       lon: rec.lon === '' ? null : Number(rec.lon),
       lat: rec.lat === '' ? null : Number(rec.lat),
-      start: Number(rec.start),
-      end: Number(rec.end),
+      start: startW.year, // the years keep every snapshot comparison simple
+      end: endW.year,
+      startWhen: startW, // the full when, for labels and ordering
+      endWhen: endW,
       value: rec.kind === 'value' ? Number(rec.value) : rec.value,
       shape: tracker?.shapes?.[rec.value] ?? null,
       line,
@@ -115,9 +144,11 @@ export function validateRecords(text, vocab) {
   return { records, problems, examples, templates, total: rows.length - 1 };
 }
 
-// The year label a record shows, by grade: 1526 · ~1526 · 1526?
+// The when a record shows, by grade: 1526 · ~1526 · 1526? · 21 Apr 1526 · Apr 1526 – Jul 1526
 export function yearLabel(rec) {
-  const y = rec.start === rec.end ? `${rec.start}` : `${rec.start}–${rec.end}`;
+  const a = formatWhen(rec.startWhen ?? parseWhen(String(rec.start)));
+  const b = formatWhen(rec.endWhen ?? parseWhen(String(rec.end)));
+  const y = a === b ? a : `${a}–${b}`;
   return rec.grade === 'circa' ? `~${y}` : rec.grade === 'uncertain' ? `${y}?` : y;
 }
 
