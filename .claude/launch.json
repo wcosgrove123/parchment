@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "parchment",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["scripts/build.mjs", "--serve"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "port": 8321
     }
   ]

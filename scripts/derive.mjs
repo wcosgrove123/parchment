@@ -95,8 +95,10 @@ for (const snap of calendar.snapshots) {
 
 // base-unit ids into vocab.json (the dropdown source for records.csv `where`)
 vocab.base_units = [...baseUnits.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([id, u]) => ({ id, name: u.name, years: u.years.sort((a, b) => a - b) }));
+const { buildStates } = await import('./states.mjs');
+vocab.states = buildStates(vocab, JSON.parse(await readFile(join(ROOT, 'src', 'trackers', 'extent.json'), 'utf8')));
 await writeFile(vocabPath, JSON.stringify(vocab, null, 2) + '\n');
-console.log(`  vocab.json: ${vocab.base_units.length} base units`);
+console.log(`  vocab.json: ${vocab.base_units.length} base units, ${vocab.states.length} states`);
 
 // ---------------------------------------------------------------- Natural Earth vectors
 const ne = {};

@@ -77,6 +77,7 @@ export function validateRecords(text, vocab) {
   }
   const col = Object.fromEntries(header.map((h, i) => [h, i]));
   const baseUnits = new Set((vocab.base_units ?? []).map((u) => u.id));
+  const states = new Set((vocab.states ?? []).map((s) => s.id));
   const seen = new Set();
 
   for (let r = 1; r < rows.length; r++) {
@@ -105,7 +106,7 @@ export function validateRecords(text, vocab) {
 
     if (!rec.where) bad('where is blank');
     else if (rec.kind === 'point') { if (!isQID(rec.where)) bad(`where "${rec.where}" should be a Wikidata QID (like Q193334) for a point`); }
-    else if (!baseUnits.has(rec.where) && !isQID(rec.where)) bad(`where "${rec.where}" is not a base-unit id in vocab.json`);
+    else if (!states.has(rec.where) && !baseUnits.has(rec.where) && !isQID(rec.where)) bad(`where "${rec.where}" is not a state id from the places list (like ottoman) or a Wikidata QID`);
 
     if (rec.lon !== '' || rec.lat !== '') {
       if (!isNum(rec.lon) || !isNum(rec.lat)) bad('lon/lat must both be numbers (or both blank until geocode.mjs fills them)');

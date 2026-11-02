@@ -78,7 +78,7 @@ One row per record. Columns, in order:
 | `theme` | enum | AP World: `ENV`,`CDI`,`GOV`,`ECN`,`SIO`,`TEC`; APUSH: `NAT`,`WXT`,`GEO`,`MIG`,`PCE`,`WOR`,`ARC`,`SOC` |
 | `tracker` | enum | from `vocab.json` (v0: `extent`, `expansion`; v1: `legitimation`, `administration`, `belief`) |
 | `kind` | enum | `region`, `point`, `arrow`, `path`, `value` |
-| `where` | string | a base-unit id (from `vocab.json`, generated from the base layer's `NAME`+year) **or** a Wikidata QID for points |
+| `where` | string | a state id (from `vocab.json` `states`: one stable id per state, no year, generated from the base layer's names) **or** a Wikidata QID for points; the older base-unit ids (`name@year`) are still read |
 | `lon`, `lat` | number | filled by `geocode.mjs`, never by hand |
 | `start`, `end` | when | a year (`1526`), a month (`1526-04`) or a day (`1526-04-21`); negative years for BCE; as precise as the source |
 | `grade` | enum | `exact`, `circa`, `uncertain` (renders as `1526`, `~1526`, `1526?`) |

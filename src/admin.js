@@ -7,6 +7,7 @@ import * as d3 from 'd3';
 import { loadJSON } from './data/loader.js';
 import { loadRecordsText, sheetRowURL } from './data/source.js';
 import { validateRecords, yearLabel } from './data/records.js';
+import { indexStates, featureMatcher, yearFor, resolveWhere } from './data/states.js';
 import { createStage } from './render/base.js';
 import stage from './stages/afro-eurasia.json';
 import extent from './trackers/extent.json';
@@ -19,6 +20,7 @@ async function main() {
     loadJSON('data/vocab.json'), loadJSON('data/ced.json').catch(() => ({})),
   ]);
   const years = calendar.snapshots.map((s) => s.year);
+  const placeIndex = indexStates(vocab); // state ids (and the older name@year ids) → polygons per year
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
   const homeYear = (start) => years.find((y) => y >= start) ?? years[years.length - 1];
@@ -28,7 +30,8 @@ async function main() {
   async function showYear(year, { highlight = highlightId, mark = marks } = {}) {
     highlightId = highlight; marks = mark;
     const topo = await snapshot(year);
-    atlas.showSnapshot(year, topo, (f) => (highlight && f.properties.id === highlight ? { status: 'highlight', label: f.properties.name } : { status: 'muted' }));
+    const hit = highlight ? featureMatcher(placeIndex, highlight, year) : () => false;
+    atlas.showSnapshot(year, topo, (f) => (hit(f) ? { status: 'highlight', label: f.properties.name } : { status: 'muted' }));
     atlas.showMarks(marks);
     atlas.setYear(year, bySnapshot.get(year).source_year);
     shownYear = year;
@@ -128,9 +131,9 @@ async function main() {
     renderRows(); renderDetail();
     if (!x) return;
     const r = x.r;
-    const whereYear = /@(-?\d+)$/.exec(r.where || '')?.[1];
-    const year = whereYear && years.includes(Number(whereYear)) ? Number(whereYear) : homeYear(Number(r.start) || years[0]);
-    const isRegion = r.kind !== 'point' && /@-?\d+$/.test(r.where || '');
+    const place = resolveWhere(placeIndex, r.where);
+    const isRegion = r.kind !== 'point' && place && place.kind !== 'point';
+    const year = isRegion ? yearFor(placeIndex, r.where, Number(r.start) || years[0], years) : homeYear(Number(r.start) || years[0]);
     const mark = r.kind === 'point' && r.lon != null && r.lat != null ? [{ ...r, shape: r.shape ?? 'rust-diamond' }] : [];
     await showYear(year, { highlight: isRegion ? r.where : null, mark });
   }
@@ -164,18 +167,18 @@ async function main() {
   function renderPlaces() {
     const host = d3.select('#places').html('');
     host.append('h3').text('A state or region (for where)');
-    host.append('p').attr('class', 'note').text('Type part of a name as the base map spells it. Click a hit to see it, then copy the id into the Sheet.');
+    host.append('p').attr('class', 'note').text('Type part of a name. The id has no year in it: the map finds the state in whichever year is shown. Click a hit to see it, then copy the id into the Sheet.');
     const q1 = host.append('input').attr('placeholder', 'e.g. Ottoman, Songhai, Mughal');
     const hits1 = host.append('div');
-    const units = vocab.base_units ?? [];
+    const states = vocab.states ?? [];
     q1.on('input', () => {
       const q = q1.property('value').trim().toLowerCase();
       hits1.html('');
       if (q.length < 2) return;
-      const found = units.filter((u) => u.name.toLowerCase().includes(q) || u.id.includes(q)).slice(0, 40);
+      const found = states.filter((s) => s.label.toLowerCase().includes(q) || s.id.includes(q) || s.names.some((n) => n.toLowerCase().includes(q))).slice(0, 40);
       hits1.selectAll('div.hit').data(found).join('div').attr('class', 'hit')
-        .html((u) => `<span>${esc(u.name)}</span><code>${esc(u.id)}</code><span class="desc">${u.years.join(', ')}</span>`)
-        .on('click', (e, u) => { copy(u.id, e.currentTarget); showYear(u.years[0], { highlight: u.id, mark: [] }); });
+        .html((s) => `<span>${esc(s.label)}</span><code>${esc(s.id)}</code><span class="desc">${s.years.join(', ')}${s.names.length > 1 ? ` · also ${esc(s.names.filter((n) => n !== s.label).join(', '))}` : ''}</span>`)
+        .on('click', (e, s) => { copy(s.id, e.currentTarget); showYear(s.years.find((y) => years.includes(y)) ?? years[0], { highlight: s.id, mark: [] }); });
     });
     host.append('h3').text('A point (for a battle, founding, treaty)');
     host.append('p').attr('class', 'note').text('Searches Wikidata by name, only to put the dot in the right place. Check the dot on the map before copying the id; the claim itself comes from your sources.');

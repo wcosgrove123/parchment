@@ -13,8 +13,9 @@ itself. The map reads the Sheet live, so a saved row appears the next time anyon
 1. **One row per claim.** Never edit the header row.
 2. **id**: short, lowercase, words joined by hyphens, unique. `panipat-1526`, `safavid-isfahan-capital`.
 3. **Pick from the dropdowns** wherever there is one: course, theme, tracker, kind, grade, certainty, value, review status.
-4. **where**: for a state or region, pick an id from the `places` tab of the Sheet (the base map's own names, such as
-   `ottoman-empire@1600`). For a point, type the Wikidata id of the place, such as `Q605321`. The Admin page's
+4. **where**: for a state or region, pick an id from the `places` tab of the Sheet, such as `ottoman`, `songhai` or
+   `mali`. The id has no year in it: the map finds that state in whichever year is shown, and it keeps working when the
+   base maps change. For a point, type the Wikidata id of the place, such as `Q605321`. The Admin page's
    **Find a place** tab lets you search either kind and shows it on the map before you copy the id.
 5. **start, end**: a year (`1526`), a month (`1526-04`) or a day (`1526-04-21`), as precise as the source is. The same
    value twice for a single moment. Negative years for BCE. Type them as text: if the Sheet turns `1526-04-21` into a

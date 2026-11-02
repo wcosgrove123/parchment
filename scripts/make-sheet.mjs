@@ -21,11 +21,11 @@ const vocab = JSON.parse(readFileSync(join(ROOT, 'data', 'vocab.json'), 'utf8'))
 const rows = parseCSV(readFileSync(join(ROOT, 'data', 'records.csv'), 'utf8'));
 const header = rows[0].map((h) => h.trim());
 const ROWS = 600; // rows with dropdowns ready
-const units = vocab.base_units ?? [];
+const units = vocab.states ?? []; // one id per state, no year (scripts/states.mjs)
 
 // --- data/places.csv: the places list the site serves (the lite sheet imports it) ------------------------------
 const csvCell = (s) => (/[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
-writeFileSync(join(ROOT, 'data', 'places.csv'), ['id,name,years', ...units.map((u) => [u.id, u.name, u.years.join(' ')].map(csvCell).join(','))].join('\n') + '\n');
+writeFileSync(join(ROOT, 'data', 'places.csv'), ['id,name,years', ...units.map((u) => [u.id, u.label, u.years.join(' ')].map(csvCell).join(','))].join('\n') + '\n');
 
 const wb = new ExcelJS.Workbook();
 wb.creator = 'Parchment';
@@ -64,12 +64,12 @@ const ps = wb.addWorksheet('places');
 let placesLast;
 if (LITE) {
   ps.getCell('A1').value = { formula: `IMPORTDATA("${SITE}/data/places.csv")` };
-  ps.getCell('E1').value = 'This tab fills itself from the Parchment site: id (paste into where), name as the base map spells it, years it appears.';
+  ps.getCell('E1').value = 'This tab fills itself from the Parchment site: id (paste into where), name, years it appears on the map.';
   placesLast = 4000;
 } else {
-  ps.addRow(['id (paste into where)', 'name as the base map spells it', 'years it appears']);
+  ps.addRow(['id (paste into where)', 'name', 'years it appears on the map']);
   ps.getRow(1).font = { bold: true };
-  for (const u of units) ps.addRow([u.id, u.name, u.years.join(', ')]);
+  for (const u of units) ps.addRow([u.id, u.label, u.years.join(', ')]);
   placesLast = units.length + 1;
 }
 ps.columns = [{ width: 36 }, { width: 40 }, { width: 28 }];
@@ -82,7 +82,7 @@ const rangeValidation = (key, ref, note) => {
 };
 for (const key of ['course', 'theme', 'tracker', 'kind', 'grade', 'certainty', 'qc_status']) rangeValidation(key, listRef(key), `Pick a ${key} from the list (data/vocab.json).`);
 rangeValidation('value', listRef('value'), 'Pick the value for this tracker (see the vocab tab), or type a number for a value row.');
-rangeValidation('where', `places!$A$2:$A$${placesLast}`, 'For a state or region pick an id from the places tab. For a point, type the Wikidata id (Q…) instead.');
+rangeValidation('where', `places!$A$2:$A$${placesLast}`, 'For a state or region pick an id from the places tab (like ottoman). For a point, type the Wikidata id (Q…) instead.');
 ws.dataValidations.add(`${colLetter('unit')}2:${colLetter('unit')}${ROWS}`, { type: 'whole', allowBlank: true, operator: 'between', formulae: [0, 99], showErrorMessage: true, errorStyle: 'warning', errorTitle: 'Parchment', error: 'unit is a whole number.' });
 // start and end are plain text (a year, 1526-04 or 1526-04-21) so the Sheet never turns them into its own dates.
 for (const key of ['start', 'end']) ws.getColumn(key).numFmt = '@';
@@ -94,7 +94,7 @@ const hs = wb.addWorksheet('help');
   ['1. One row per claim on the records tab. Never edit the header row.'],
   ['2. id: short, lowercase, words joined by hyphens, unique (panipat-1526). Rows whose id starts with example- are templates and never draw.'],
   ['3. Pick from the dropdowns wherever there is one. Free text goes in label, source, qc_by and qc_note.'],
-  ['4. where: for a state or region, an id from the places tab (ottoman-empire@1600). For a point (battle, founding, treaty), the Wikidata id (Q605321). The Admin page on the map has a Find a place tab that searches both and shows the place on the map first. Leave lon/lat blank; they are filled from the id.'],
+  ['4. where: for a state or region, an id from the places tab (ottoman, songhai, mali). The id has no year in it: the map finds that state in whichever year is shown. For a point (battle, founding, treaty), the Wikidata id (Q605321). The Admin page on the map has a Find a place tab that searches both and shows the place on the map first. Leave lon/lat blank; they are filled from the id.'],
   ['5. start and end: a year (1526), a month (1526-04) or a day (1526-04-21); the same value twice for a single moment; negative years for BCE. Type them as text (the columns are set to plain text; do not let the Sheet turn them into dates). grade says how sure the date is: exact, circa (~1526) or uncertain (1526?).'],
   ['6. certainty says how firm the territory is: legal (solid line), approximate (dashed), sphere (soft, no line).'],
   ['7. source: the textbook page or framework line the claim rests on. Every row needs one.'],
