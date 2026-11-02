@@ -61,4 +61,6 @@ try {
   console.log(`wrote ${out}`);
 } finally {
   server.kill();
+  // The dev server writes app.js and admin.js unminified; put the committed (minified) build back.
+  execFileSync(process.execPath, [join(ROOT, 'scripts', 'build.mjs')], { stdio: 'ignore' });
 }
