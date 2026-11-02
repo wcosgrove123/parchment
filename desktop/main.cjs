@@ -98,7 +98,7 @@ function createWindow() {
         require('node:fs').writeFileSync(shotPath, img.toPNG());
         console.log(`wrote ${shotPath}`);
         app.quit();
-      }, 6000);
+      }, Number(arg('wait')) || 10000); // after the first map's crossfade, even on a slow first start
     });
   }
 
