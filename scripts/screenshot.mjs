@@ -2,7 +2,7 @@
 // Parchment — screenshot.mjs
 // Renders the atlas in headless Chrome/Edge at 1920×1080 and saves a PNG to docs/progress/<date>-<year>.png.
 // Starts its own dev server on a spare port, so nothing else needs to be running.
-//   node scripts/screenshot.mjs [--year 1450] [--from 1450] [--stage id] [--scope all] [--tracker expansion] [--focus ottoman,safavid] [--out path.png] [--size 1920x1080]
+//   node scripts/screenshot.mjs [--year 1450] [--from 1450] [--stage id] [--scope all] [--tracker expansion] [--focus ottoman,safavid] [--records data/records.csv] [--labels naive] [--out path.png] [--size 1920x1080]
 // --from opens the Diff view (from → year); --scope all compares every named polygon, not just tracked states.
 
 import { spawn, execFileSync } from 'node:child_process';
@@ -19,6 +19,7 @@ const scope = arg('scope', '');
 const tracker = arg('tracker', '');
 const focus = arg('focus', ''); // --focus ottoman,safavid,mughal,qing: only these tracked states
 const records = arg('records', ''); // --records data/test.csv: a records file served from the repo instead of the Sheet
+const labels = arg('labels', ''); // --labels naive: every name east of its dot with no checks, for before/after pictures
 const size = arg('size', '1920x1080');
 const date = new Date().toISOString().slice(0, 10);
 const defaultName = from ? `${date}-diff-${from}-${year}.png` : `${date}-${year}.png`;
@@ -51,6 +52,7 @@ if (scope) query.set('scope', scope);
 if (tracker) query.set('tracker', tracker);
 if (focus) query.set('focus', focus);
 if (records) query.set('records', records);
+if (labels) query.set('labels', labels);
 
 try {
   execFileSync(browser, [

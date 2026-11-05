@@ -36,6 +36,38 @@ itself. The map reads the Sheet live, so a saved row appears the next time anyon
 - **Coverage**: for the chosen unit, how many rows each topic has. Empty chips are the gaps.
 - **Find a place**: search a state or region by name, or a point by name, see it on the map, copy the id.
 
+## Adding a route or a voyage
+
+A route is one row too. It can be a trade lane, a voyage, an army's advance or a migration. The map draws it as a
+smooth line through the places you list, in the colour of what moved: steel blue for the sea, umber for land trade,
+rust for armies and migrations.
+
+1. **kind**: `path` for a route with no direction (goods went both ways), `arrow` for one that had a direction
+   (a voyage, an army).
+2. **tracker**: `routes`. **value**: what moved, from the dropdown: `sea-trade`, `land-trade`, `voyage`,
+   `military`, `migration`.
+3. **where**: the places the route passed, in order, each as a Wikidata id, joined by `>`:
+   `Q16666>Q36081>Q61089>Q1142979` (Nanjing, Champa, Malacca, Calicut). Two places at least. To keep a sea route
+   at sea, add a strait or a cape as a waypoint; a strait is a place with an id too (Bab-el-Mandeb is `Q83318`).
+   To keep a caravan road on its corridor, add the caravan towns. Nothing is drawn by hand: the line is only the
+   places you name, joined.
+4. **certainty** is how firm the line is, drawn as for borders: `legal` solid (a documented lane or track),
+   `approximate` dashed (the ports joined, not the ships' tracks), `sphere` dotted and faint (conjectured).
+5. **start, end, grade, label, source** as for any row. The label is printed along the line, in its colour.
+6. Leave **lon** and **lat** blank. Whoever keeps the site runs `npm run geocode`, which looks every id up once and
+   keeps the answer in a list the map reads; a route with a place not yet looked up is listed on the Admin page's
+   Problems tab as waiting, and draws as soon as it is.
+
+**Places on a route** (ports of call, capitals, battles) are point rows with tracker `routes` and **value** `port`,
+`capital`, `battle`, `siege`, `founding` or `treaty`. A port with one date (`1418` to `1418`) prints that date
+beside its name; a port given the whole voyage's span prints its name alone, and the span stays in the hover.
+
+The map places every name itself, so that no name sits on another, no line runs through a name, and nothing lands
+on the legend or the cartouche. Capitals and the ends of routes are named first, then dated places, then the rest;
+a map prints ten place names at most, and a name that fits nowhere near its dot gets a short leader line. On a small
+screen the least important names are left off. If a name you expect is missing, the map had no room for it: fewer
+rows on that map, or a shorter label, is the fix.
+
 ## Review
 
 A second person sets **qc_status** to `ok`, `wrong` or `unsure`, signs **qc_by**, and may leave a **qc_note**.
