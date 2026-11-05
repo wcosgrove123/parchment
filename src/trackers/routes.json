@@ -1,0 +1,18 @@
+{
+  "_comment": "Routes tracker. path and arrow records from data/records.csv splined through gazetteer waypoints, with the points on them (ports, capitals, battles). The legend is built per map from whichever route classes, point types and certainties are drawn; these rows are the fallback when nothing is on the map.",
+  "id": "routes",
+  "title": "Routes and voyages",
+  "legend": [
+    { "swatch": "route", "color": "steel", "heads": "end", "label": "Voyage" },
+    { "swatch": "route", "color": "land", "heads": "both", "label": "Land trade" },
+    { "swatch": "route", "color": "rust", "heads": "barb", "label": "Army" }
+  ],
+  "point_legend": {
+    "port": { "swatch": "shape", "shape": "steel-circle", "label": "Port of call" },
+    "capital": { "swatch": "shape", "shape": "moss-circle", "label": "Capital" },
+    "founding": { "swatch": "shape", "shape": "moss-circle", "label": "Founding" },
+    "battle": { "swatch": "shape", "shape": "rust-diamond", "label": "Battle or siege" },
+    "siege": { "swatch": "shape", "shape": "rust-diamond", "label": "Battle or siege" },
+    "treaty": { "swatch": "shape", "shape": "navy-triangle", "label": "Treaty" }
+  }
+}

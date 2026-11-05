@@ -36,7 +36,7 @@ sizes.push(['styles + fonts', css]);
 //    parser from ending the <script> block early.
 const safe = (text) => text.replace(/<\//g, '<\\/').replace(/<!--/g, '\\u003c!--');
 const calendar = JSON.parse(read('data/calendar.json'));
-const dataFiles = ['data/calendar.json', 'data/vocab.json', 'data/base/derived/ne.topojson', 'data/base/derived/bathymetry.topojson',
+const dataFiles = ['data/calendar.json', 'data/vocab.json', 'data/gazetteer.json', 'data/base/derived/ne.topojson', 'data/base/derived/bathymetry.topojson',
   ...calendar.snapshots.map((s) => `data/base/derived/world_${s.year}.topojson`)];
 const jsonBlock = (p) => {
   const text = safe(read(p));

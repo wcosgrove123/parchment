@@ -4,14 +4,31 @@ import { loadJSON } from './data/loader.js';
 import { loadRecordsText } from './data/source.js';
 import { createStage } from './render/base.js';
 import { renderPNG, renderSVG, download, exportName } from './export/export.js';
-import { validateRecords, recordsFor } from './data/records.js';
+import { validateRecords, recordsFor, resolveRecords } from './data/records.js';
+import { routeLegend } from './render/routes.js';
 import stageEqualEarth from './stages/afro-eurasia.json';
 import stageLambert from './stages/afro-eurasia-lambert.json';
 import extent from './trackers/extent.json';
 import expansion from './trackers/expansion.json';
+import routes from './trackers/routes.json';
 
-// v0 trackers. Extent highlights base polygons; expansion draws point records by shape.
-const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion };
+// v0 trackers. Extent highlights base polygons; expansion draws point records by shape; routes draws path and
+// arrow records through gazetteer waypoints with the points on them.
+const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes };
+
+// The routes legend names only what is on the map: route classes, point types, certainties.
+function routesLegendFor(rows) {
+  const lines = rows.filter((r) => r.kind !== 'point');
+  const points = rows.filter((r) => r.kind === 'point');
+  const seen = new Set();
+  const pointRows = [];
+  for (const p of points) {
+    const e = routes.point_legend[p.value];
+    if (e && !seen.has(e.label)) { seen.add(e.label); pointRows.push(e); }
+  }
+  const legend = [...routeLegend(lines), ...pointRows];
+  return { ...routes, legend: legend.length ? legend : routes.legend };
+}
 
 const params = new URLSearchParams(location.search);
 const START_YEAR = Number(params.get('year')) || 1450;
@@ -48,21 +65,26 @@ function identifyFor(scope) {
 
 async function main() {
   const t0 = performance.now();
-  const [calendar, ne, bathy, vocab, source] = await Promise.all([
+  const [calendar, ne, bathy, vocab, gazetteer, source] = await Promise.all([
     loadJSON('data/calendar.json'),
     loadJSON('data/base/derived/ne.topojson'),
     loadJSON('data/base/derived/bathymetry.topojson'),
     loadJSON('data/vocab.json'),
+    loadJSON('data/gazetteer.json').catch(() => ({})),
     loadRecordsText(),
+    // The label pass measures text with the real font, so the four faces are loaded before the first render.
+    document.fonts?.load ? Promise.all(['400', '700', 'italic 400', 'italic 700'].map((f) => document.fonts.load(`${f} 13px "Libre Baskerville"`).catch(() => null))) : null,
   ]);
 
-  // Records: validated against vocab.json; bad rows are skipped and listed, never fatal.
+  // Records: validated against vocab.json; bad rows are skipped and listed, never fatal. Routes and points take
+  // their coordinates from the gazetteer (data/gazetteer.json, written by scripts/geocode.mjs).
   const checked = source.text == null
     ? { records: [], problems: [{ line: 0, id: '', message: 'data/records.csv could not be loaded' }], examples: 0, total: 0 }
     : validateRecords(source.text, vocab);
-  const records = checked.records;
-  const noCoords = records.filter((r) => r.kind === 'point' && (r.lon == null || r.lat == null));
-  console.log(`records (${source.from}): ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped`);
+  const resolved = resolveRecords(checked.records, gazetteer);
+  const records = resolved.records;
+  const noCoords = resolved.waiting;
+  console.log(`records (${source.from}): ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped · ${noCoords.length} waiting for coordinates`);
   showDataProblems(checked, noCoords, source);
   const years = calendar.snapshots.map((s) => s.year);
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
@@ -84,15 +106,17 @@ async function main() {
       console.log(`diff ${state.from} → ${state.year}: ${(performance.now() - t).toFixed(1)} ms; appeared ${diff.appeared.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
     } else {
       const topo = await snapshot(state.year);
-      atlas.setTracker(TRACKERS[state.tracker]);
-      // Extent highlights the tracked states; expansion shows every polity muted and the point records on top.
+      // Extent highlights the tracked states; expansion and routes show every polity muted with the records on top.
+      const rows = state.tracker === 'extent' ? [] : recordsFor(records, state.tracker, state.year, years);
+      atlas.setTracker(state.tracker === 'routes' ? routesLegendFor(rows) : TRACKERS[state.tracker]);
       atlas.showSnapshot(state.year, topo, state.tracker === 'extent' ? classifyExtent : () => ({ status: 'muted' }));
-      const n = atlas.showMarks(state.tracker === 'expansion' ? recordsFor(records, 'expansion', state.year, years) : []);
+      const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
       atlas.setYear(state.year, bySnapshot.get(state.year).source_year);
       document.title = `Parchment · ${state.year}`;
-      console.log(`snapshot ${state.year} (${state.tracker}): ${(performance.now() - t).toFixed(1)} ms${n ? `, ${n} marks` : ''}`);
+      const dropped = n.labels.filter((l) => l.dropped);
+      console.log(`snapshot ${state.year} (${state.tracker}): ${(performance.now() - t).toFixed(1)} ms${n.marks ? `, ${n.marks} marks` : ''}${n.routes ? `, ${n.routes} routes` : ''}${dropped.length ? `; labels not placed: ${dropped.map((l) => `${l.id} (${l.dropped})`).join(', ')}` : ''}`);
     }
-    if (state.mode === 'diff') atlas.showMarks([]);
+    if (state.mode === 'diff') atlas.showRecords();
     document.body.classList.toggle('mode-diff', state.mode === 'diff');
     d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
     d3.selectAll('#years button').classed('active', function () { return Number(this.dataset.year) === state.year; });
@@ -224,7 +248,7 @@ function showDataProblems({ problems, examples, total }, noCoords, source = {}) 
   h.append('button').attr('title', 'Hide').text('×').on('click', () => panel.classed('hidden', true));
   const ol = panel.append('ol');
   ol.selectAll('li').data(problems).join('li').html((p) => `<b>line ${p.line}</b>${p.id ? ` (${p.id})` : ''}: ${escapeHTML(p.message)}`);
-  if (noCoords.length) panel.append('p').attr('class', 'note').text(`${noCoords.length} point row${noCoords.length === 1 ? '' : 's'} waiting for coordinates (run node scripts/geocode.mjs): ${noCoords.map((r) => r.id).join(', ')}`);
+  if (noCoords.length) panel.append('p').attr('class', 'note').text(`${noCoords.length} row${noCoords.length === 1 ? '' : 's'} waiting for coordinates (run node scripts/geocode.mjs): ${noCoords.map((r) => `${r.id} (${r.missing.join(', ')})`).join(', ')}`);
   if (source.from === 'fallback') panel.append('p').attr('class', 'note').text(`The Google Sheet could not be reached (${source.error}); showing the saved copy of the table instead.`);
   const where = source.from === 'sheet' ? 'the Google Sheet' : 'records.csv';
   panel.append('p').attr('class', 'note').text(`${where}: ${total} rows, ${total - problems.length - examples} drawn, ${examples} examples not drawn.`);

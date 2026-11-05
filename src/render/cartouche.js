@@ -41,6 +41,8 @@ export function createCartouche(root, { x0, y1 }, stage, projection) {
   sb.append('text').attr('x', px + 8).attr('y', 1).text(`${km.toLocaleString('en-US')} km`);
 
   return {
+    // The cartouche's rectangle on the sheet, a reserved zone for the label pass.
+    box: () => ({ x, y, w: W, h: H }),
     setTitle(text) { title.text(text); },
     setYear(y, sourceYear) {
       year.classed('range', false).text(y < 0 ? `${-y} BCE` : y);

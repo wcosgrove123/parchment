@@ -1,8 +1,13 @@
 // Parchment — labels
 // Stage labels (regions in spaced small caps, water in italic) set along their parallel so they follow the
-// projection's curve; polity labels for highlighted states at the largest polygon's centre.
+// projection's curve; polity labels for highlighted states at the largest polygon's centre; and the label pass
+// for point marks and route names, which measures every label and lets placement.js decide where it goes so
+// that no text sits on text and no line runs through text.
 
 import * as d3 from 'd3';
+import { placeLabels, routeLabelCandidates, pointCandidates } from './placement.js';
+import { yearLabel } from '../data/records.js';
+import { pathFrom } from './routes.js';
 
 export function drawStageLabels(layer, defs, stage, path) {
   (stage.labels ?? []).forEach((l, i) => {
@@ -58,4 +63,90 @@ export function drawPolityLabels(layer, data) {
     .attr('font-size', (d) => d.size)
     .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
     .text((d) => d.text);
+}
+
+// ---------- the label pass for marks and routes ----------
+
+export const MARK_FONT = 13; // px at 1920, bold; the date beside it in italic
+export const ROUTE_FONT = 14; // px, italic, in the line's colour
+const FAMILY = '"Libre Baskerville", Baskerville, Georgia, serif';
+
+// Text width in px. In the browser a canvas measures the real font (loaded before the first render);
+// anywhere else (tests) a fixed advance per glyph stands in, so the pass stays deterministic.
+export function makeMeasure(doc = globalThis.document) {
+  const ctx = doc?.createElement?.('canvas')?.getContext?.('2d');
+  return (text, { size = MARK_FONT, bold = false, italic = false } = {}) => {
+    if (!ctx) return text.length * size * (bold ? 0.66 : 0.6);
+    ctx.font = `${italic ? 'italic ' : ''}${bold ? '700 ' : '400 '}${size}px ${FAMILY}`;
+    return ctx.measureText(text).width;
+  };
+}
+
+// Priority: capitals and route termini first, then dated places, then the rest (docs/ROUTES-STYLE.md §3).
+export function labelPriority(r, termini) {
+  if (r.value === 'capital' || termini.has(r.where)) return 1;
+  if (r.start === r.end) return 2;
+  return 3;
+}
+
+// Under the routes tracker a point prints its date only when it has one (start = end); a port called at across
+// a voyage's span prints its name alone, the span stays in the hover. Other trackers print the date as always.
+export function markWhen(r) {
+  return r.tracker === 'routes' && r.start !== r.end ? '' : yearLabel(r);
+}
+
+// marks: from drawMarks; routes: from drawRoutes; zones: reserved rects; frame: the map's inner box.
+// Draws every placed label into `layer` and returns the placement list.
+// naive: every label at the first position with no checks (the old behaviour), for before/after pictures only.
+export function layoutLabels(layer, defs, { marks, routes, zones, frame, width = 1920, measure = makeMeasure(), maxPlaces = 10, naive = false }) {
+  const termini = new Set(routes.flatMap((d) => [d.r.waypoints[0], d.r.waypoints[d.r.waypoints.length - 1]]));
+  const h = Math.round(MARK_FONT * 1.2);
+  const pointLabels = marks.map((m) => {
+    const when = markWhen(m.r);
+    const w = measure(m.r.label, { bold: true }) + (when ? 5 + measure(when, { italic: true }) : 0);
+    return { id: m.r.id, kind: 'point', priority: labelPriority(m.r, termini), x: m.x, y: m.y, radius: m.radius, w: Math.ceil(w), h, text: m.r.label, when };
+  });
+  const rh = Math.round(ROUTE_FONT * 1.1);
+  const routeLabels = routes.map((d) => {
+    const w = Math.ceil(measure(d.r.label, { size: ROUTE_FONT, italic: true }));
+    return { id: `route-label-${d.r.id}`, kind: 'route', priority: 2.5, route: d.r.id, w, h: rh, text: d.r.label, color: d.style.color, samples: d.samples, width: d.style.width,
+      candidates: routeLabelCandidates(d.samples, w, rh, { gap: d.style.width / 2 + 3 }) };
+  });
+  const byId = new Map([...pointLabels, ...routeLabels].map((l) => [l.id, l]));
+  const result = naive ? pointLabels.map((l) => ({ id: l.id, kind: 'point', box: pointCandidates(l)[0], pos: 'E' })) : placeLabels({
+    labels: [...pointLabels, ...routeLabels],
+    marks: marks.map((m) => ({ id: m.r.id, x: m.x, y: m.y, radius: m.radius })),
+    routes: routes.map((d) => ({ id: d.r.id, samples: d.samples })),
+    zones, frame, width, maxPlaces,
+  });
+
+  // Leaders under the text, then point labels, then route names along their (possibly reversed) line.
+  const placedPoints = result.filter((p) => p.kind === 'point' && p.box).map((p) => ({ ...p, l: byId.get(p.id) }));
+  const placedRoutes = result.filter((p) => p.kind === 'route' && p.box).map((p) => ({ ...p, l: byId.get(p.id) }));
+
+  layer.selectAll('line.leader').data(placedPoints.filter((p) => p.leader), (p) => p.id).join('line')
+    .attr('class', 'leader')
+    .attr('x1', (p) => p.leader[0][0]).attr('y1', (p) => p.leader[0][1]).attr('x2', (p) => p.leader[1][0]).attr('y2', (p) => p.leader[1][1]);
+
+  const t = layer.selectAll('text.mark-label').data(placedPoints, (p) => p.id).join((enter) => {
+    const e = enter.append('text').attr('class', 'mark-label');
+    e.append('tspan').attr('class', 'what');
+    e.append('tspan').attr('class', 'when').attr('dx', 5);
+    return e;
+  });
+  t.attr('x', (p) => p.box.x).attr('y', (p) => p.box.y + h * 0.78).attr('data-pos', (p) => p.pos);
+  t.select('tspan.what').text((p) => p.l.text);
+  t.select('tspan.when').text((p) => p.l.when);
+
+  defs.selectAll('path.route-label-guide').data(placedRoutes, (p) => p.id).join('path')
+    .attr('class', 'route-label-guide').attr('id', (p) => `${p.id}-guide`)
+    .attr('d', (p) => pathFrom(p.reverse ? [...p.l.samples].reverse() : p.l.samples));
+  const rt = layer.selectAll('text.route-label').data(placedRoutes, (p) => p.id).join((enter) => {
+    const e = enter.append('text');
+    e.append('textPath').attr('text-anchor', 'middle');
+    return e;
+  });
+  rt.attr('class', (p) => `route-label ${p.l.color}`).attr('dy', (p) => -(p.l.width / 2 + 3));
+  rt.select('textPath').attr('href', (p) => `#${p.id}-guide`).attr('startOffset', (p) => `${((p.reverse ? 1 - p.startOffset : p.startOffset) * 100).toFixed(1)}%`).text((p) => p.l.text);
+  return result;
 }

@@ -103,9 +103,14 @@ Rules:
 | outline style | certainty (solid / dashed / none+blur) |
 | fill opacity | 100% direct control, 40% influence or claim |
 | hatch | overlap or dispute |
-| point shape | event type: battle/siege = rust diamond; founding/capital = moss circle; monument = navy square; treaty = navy triangle |
-| arrow style | movement type (v1+; none in Unit 3): military = solid, migration = dashed. Arrow width never encodes volume unless the legend says so |
+| point shape | event type: battle/siege = rust diamond; founding/capital = moss circle; monument = navy square; treaty = navy triangle; port of call = small steel circle |
+| line style | certainty, for routes as for borders: solid = documented, dashed = approximate, dotted and faint = conjectured. **Dash never encodes type.** |
+| route colour | what moved: steel blue = sea trade and voyages; umber (`--route-land`) = land trade; rust = armies and migrations; ink = the carrier of a diffusion |
+| arrowhead | direction and kind: none (a `path`) or small heads at both ends (trade went both ways); one terminal head = a voyage; closed barb = an army; open chevron = a migration |
+| route width | three categorical widths (2 / 3 / 4.5 px at 1920), the middle by default. Width never encodes volume unless the legend says so |
 | number badge | quantity |
+
+Routes are `path` (no direction) or `arrow` (directed) records whose `where` is an ordered list of gazetteer ids (`Q16666>Q36081>…`), splined through the resolved coordinates; the full style, including label placement, is in `docs/ROUTES-STYLE.md`. Labels: every name carries a cream halo; a name is placed only where it overlaps no other name, no route line, no mark and none of the apparatus; at most ten labelled places per map.
 
 - Max **four** fills on any one map. A fifth category gets a hatch or a point shape.
 - Every fill has a grayscale fallback pattern (hatch or dots) selectable with a "print" toggle; P (blue) and T (teal) get the most distinct patterns.
@@ -125,7 +130,7 @@ Set A — theme fills (InSPECT / AP World themes). Tempered for parchment at bui
 | C | Cultural (CDI) | `#8e55d8` |
 | T | Technological (TEC) | `#2aa3b4` |
 
-Set B — marks (apparatus): navy `#1F2A44` (borders, labels, legend frame, timeline baseline) · rust `#C8601A` (conflict) · steel blue `#2E6F9E` (routes, coastlines, lakes, rivers; never ocean) · moss (founding/administration; derive at the same OKLCH L/C as navy and rust) · slate-gold (the single "focus" color) · cream `#F7F5EF` (paper, land at rest).
+Set B — marks (apparatus): navy `#1F2A44` (borders, labels, legend frame, timeline baseline) · rust `#C8601A` (conflict, armies, migrations) · steel blue `#2E6F9E` (sea routes and voyages, coastlines, lakes, rivers; never ocean) · umber `--route-land` (land trade routes; derived in `scripts/tokens.mjs` from navy's OKLCH lightness, lifted 0.18 so it reads beside navy at line width, toward hue 50) · moss (founding/administration; derive at the same OKLCH L/C as navy and rust) · slate-gold (the single "focus" color) · cream `#F7F5EF` (paper, land at rest).
 
 Water: ocean = gray-blue at paper lightness (start from `#D9D6CC` nudged toward blue), hairline bathymetry; lakes/rivers = steel blue at 60%.
 

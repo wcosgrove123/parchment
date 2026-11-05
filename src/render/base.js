@@ -7,13 +7,14 @@ import * as d3 from 'd3';
 import { feature, mesh } from 'topojson-client';
 import { assetURL } from '../data/loader.js';
 import { paperDefs, drawPaper, drawPaperOverlay } from './paper.js';
-import { drawStageLabels, polityLabelData, drawPolityLabels } from './labels.js';
+import { drawStageLabels, polityLabelData, drawPolityLabels, layoutLabels, makeMeasure } from './labels.js';
+import { routeDefs, drawRoutes } from './routes.js';
 import { createCartouche } from './cartouche.js';
 import { createStrip } from './strip.js';
 import { createLegend } from './legend.js';
 import { createDiffList } from './difflist.js';
 import { computeDiff } from '../views/diff.js';
-import { drawMarks } from './marks.js';
+import { drawMarks, MARK_RADIUS } from './marks.js';
 
 export const CROSSFADE_MS = 300;
 
@@ -79,6 +80,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
 
   const defs = svg.append('defs');
   paperDefs(defs);
+  routeDefs(defs);
   defs.append('clipPath').attr('id', 'frame-clip').append('rect')
     .attr('x', x0).attr('y', y0).attr('width', x1 - x0).attr('height', y1 - y0);
 
@@ -128,8 +130,10 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Stage labels along their parallels. Polity labels are drawn per snapshot, above the water lines.
   drawStageLabels(map.append('g').attr('class', 'stage-labels'), defs, stage, path);
   const labelLayers = map.append('g').attr('class', 'polity-labels');
-  // Point marks from records.csv sit above every label.
+  // Draw order for records (docs/ROUTES-STYLE.md §3): routes, then point marks, then their labels on top.
+  const routesLayer = map.append('g').attr('class', 'routes');
   const marksLayer = map.append('g').attr('class', 'marks');
+  const recordLabels = map.append('g').attr('class', 'record-labels');
 
   // Grain and vignette over the sheet, then the apparatus on top.
   drawPaperOverlay(root, W, H);
@@ -190,9 +194,33 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     currentYear = year;
   }
 
-  // Marks: validated point records (already filtered to the year and tracker). Pass [] to clear.
+  // Records on the map: routes (path/arrow rows with coordinates) under point marks, then the label pass, which
+  // keeps every name off every other name, line, mark and reserved zone. Pass nothing to clear.
+  const measure = makeMeasure();
+  // The stage's region and water names are text too: their boxes are reserved (measured once, after layout).
+  let stageLabelBoxes = null;
+  function stageLabelZones() {
+    if (stageLabelBoxes) return stageLabelBoxes;
+    stageLabelBoxes = [];
+    root.selectAll('g.stage-labels text').each(function () {
+      try { const b = this.getBBox(); if (b.width > 0) stageLabelBoxes.push({ x: b.x, y: b.y, w: b.width, h: b.height }); } catch { /* not rendered yet */ }
+    });
+    if (!stageLabelBoxes.length) stageLabelBoxes = null;
+    return stageLabelBoxes ?? [];
+  }
+  function showRecords({ points = [], routes = [] } = {}) {
+    const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones()];
+    const marksAt = new Map(points.filter((p) => p.shape).map((p) => [p.where, (MARK_RADIUS[p.shape] ?? 6) + 2]));
+    const drawnRoutes = drawRoutes(routesLayer, routes, projection, zones, (qid) => marksAt.get(qid) ?? 0);
+    const marks = drawMarks(marksLayer, points, projection);
+    // ?labels=naive puts every name at the first position with no checks: the old behaviour, for before/after pictures.
+    const naive = globalThis.location && new URLSearchParams(globalThis.location.search).get('labels') === 'naive';
+    const labels = layoutLabels(recordLabels, defs, { marks, routes: drawnRoutes, zones, frame, width: globalThis.innerWidth ?? W, measure, naive });
+    return { marks: marks.length, routes: drawnRoutes.length, labels };
+  }
+  // Marks only (the expansion tracker). Kept for callers that have no routes.
   function showMarks(records) {
-    return drawMarks(marksLayer, records, projection);
+    return showRecords({ points: records }).marks;
   }
 
   function setTracker(t) { currentTracker = t; }
@@ -234,5 +262,5 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setRange(a.year, b.year);
   }
 
-  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, setTracker, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
+  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, showRecords, setTracker, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
 }

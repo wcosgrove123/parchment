@@ -13,6 +13,7 @@
   --rust:  #C8601A;
   --steel: #2E6F9E;
   --moss:  #499737;   /* derived: rust's lightness and chroma, hue 140 */
+  --route-land: #824a28;   /* umber: land trade routes; derived at navy's lightness (+0.18) toward hue 50 */
   --focus: #b28b45;   /* slate-gold, the single focus color */
   --gold:  #c8a65d;   /* frame, cartouche, timeline strip */
   --gold-hair: #d3bb8a;   /* graticule hairlines */
