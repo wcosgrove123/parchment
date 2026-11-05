@@ -59,6 +59,13 @@ export function formatWhen(w) {
 const WHEN_HINT = 'a year (1526), a month (1526-04) or a day (1526-04-21); negative years for BCE';
 const isNum = (s) => s !== '' && Number.isFinite(Number(s));
 const isQID = (s) => /^Q\d+$/.test(s);
+const ROUTE_KINDS = ['path', 'arrow'];
+
+// A route's where: ordered Wikidata ids joined by ">" (Q16666>Q36081>Q61089). → the ids, or null when malformed.
+export function routeIds(where) {
+  const ids = String(where ?? '').split('>').map((s) => s.trim());
+  return ids.length >= 2 && ids.every(isQID) ? ids : null;
+}
 
 // → { records: [...valid, parsed rows], problems: [{ line, id, message }], examples: n, total: n }
 export function validateRecords(text, vocab) {
@@ -106,6 +113,11 @@ export function validateRecords(text, vocab) {
 
     if (!rec.where) bad('where is blank');
     else if (rec.kind === 'point') { if (!isQID(rec.where)) bad(`where "${rec.where}" should be a Wikidata QID (like Q193334) for a point`); }
+    else if (ROUTE_KINDS.includes(rec.kind)) {
+      const ids = routeIds(rec.where);
+      if (!ids) bad(`where "${rec.where}" should be two or more Wikidata QIDs in order, joined by > (like Q16666>Q36081>Q61089), for a ${rec.kind}`);
+      else if (new Set(ids).size !== ids.length) bad(`where repeats a place (${ids.find((id, i) => ids.indexOf(id) !== i)}); a route visits each waypoint once`);
+    }
     else if (!states.has(rec.where) && !baseUnits.has(rec.where) && !isQID(rec.where)) bad(`where "${rec.where}" is not a state id from the places list (like ottoman) or a Wikidata QID`);
 
     if (rec.lon !== '' || rec.lat !== '') {
@@ -119,6 +131,7 @@ export function validateRecords(text, vocab) {
     if (!vocab.grade.includes(rec.grade)) bad(`grade "${rec.grade}" is not one of ${vocab.grade.join(', ')}`);
     if (tracker) {
       if (rec.kind === 'value') { if (!isNum(rec.value)) bad(`value "${rec.value}" is not a number`); }
+      else if (rec.kind === 'point' && tracker.point_values) { if (!tracker.point_values.includes(rec.value)) bad(`value "${rec.value}" is not a ${rec.tracker} point value (${tracker.point_values.join(', ')})`); }
       else if (tracker.values && !tracker.values.includes(rec.value)) bad(`value "${rec.value}" is not a ${rec.tracker} value (${tracker.values.join(', ')})`);
     }
     if (!vocab.certainty.includes(rec.certainty)) bad(`certainty "${rec.certainty}" is not one of ${vocab.certainty.join(', ')}`);
@@ -136,7 +149,8 @@ export function validateRecords(text, vocab) {
       startWhen: startW, // the full when, for labels and ordering
       endWhen: endW,
       value: rec.kind === 'value' ? Number(rec.value) : rec.value,
-      shape: tracker?.shapes?.[rec.value] ?? null,
+      shape: (rec.kind === 'point' ? tracker?.point_shapes?.[rec.value] : null) ?? tracker?.shapes?.[rec.value] ?? null,
+      waypoints: ROUTE_KINDS.includes(rec.kind) ? routeIds(rec.where) : null, // ids only; coordinates come from the gazetteer
       line,
     };
     if (rec.id.startsWith('example-')) { examples++; templates.push(parsed); continue; }
@@ -160,4 +174,26 @@ export function recordsFor(records, tracker, year, years = []) {
   const sorted = [...years].sort((a, b) => a - b);
   const home = (r) => sorted.find((y) => y >= r.start);
   return records.filter((r) => r.tracker === tracker && ((r.start <= year && year <= r.end) || home(r) === year));
+}
+
+// Routes need a coordinate per waypoint. gazetteer: data/gazetteer.json ({ Q…: { lon, lat, label } }, written by
+// scripts/geocode.mjs). Route rows get `coords` (one [lon, lat] per waypoint); point rows with blank lon/lat take
+// the gazetteer's coordinate for their id, so a new point draws as soon as its id is in the cache.
+// → { records, waiting: [{ id, missing: [qids] }] } (a waiting row stays in the list without coordinates: not drawn).
+export function resolveRecords(records, gazetteer = {}) {
+  const waiting = [];
+  const out = records.map((r) => {
+    if (r.waypoints) {
+      const missing = r.waypoints.filter((q) => !gazetteer[q]);
+      if (missing.length) { waiting.push({ id: r.id, missing }); return { ...r, coords: null }; }
+      return { ...r, coords: r.waypoints.map((q) => [gazetteer[q].lon, gazetteer[q].lat]) };
+    }
+    if (r.kind === 'point' && (r.lon == null || r.lat == null)) {
+      const g = gazetteer[r.where];
+      if (g) return { ...r, lon: g.lon, lat: g.lat };
+      waiting.push({ id: r.id, missing: [r.where] });
+    }
+    return r;
+  });
+  return { records: out, waiting };
 }

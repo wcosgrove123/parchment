@@ -1,0 +1,140 @@
+{
+  "Q334": {
+    "lon": 103.8,
+    "lat": 1.3,
+    "label": "Singapore",
+    "fetched": "2026-11-05"
+  },
+  "Q956": {
+    "lon": 116.4075,
+    "lat": 39.904,
+    "label": "Beijing",
+    "fetched": "2026-11-05"
+  },
+  "Q1384": {
+    "lon": -75,
+    "lat": 43,
+    "label": "New York",
+    "fetched": "2026-11-05"
+  },
+  "Q2449": {
+    "lon": 45.3419,
+    "lat": 2.0392,
+    "label": "Mogadishu",
+    "fetched": "2026-11-05"
+  },
+  "Q5784": {
+    "lon": 97.1506,
+    "lat": 5.18,
+    "label": "Lhokseumawe",
+    "fetched": "2026-11-05"
+  },
+  "Q9141": {
+    "lon": 78.0419,
+    "lat": 27.175,
+    "label": "Taj Mahal",
+    "fetched": "2026-11-05"
+  },
+  "Q11720": {
+    "lon": 123.4281,
+    "lat": 41.8025,
+    "label": "Shenyang",
+    "fetched": "2026-11-05"
+  },
+  "Q16666": {
+    "lon": 118.7789,
+    "lat": 32.0608,
+    "label": "Nanjing",
+    "fetched": "2026-11-05"
+  },
+  "Q36081": {
+    "lon": 109.2314,
+    "lat": 13.7696,
+    "label": "Quy Nhon",
+    "fetched": "2026-11-05"
+  },
+  "Q61089": {
+    "lon": 102.2511,
+    "lat": 2.1889,
+    "label": "Malacca",
+    "fetched": "2026-11-05"
+  },
+  "Q75203": {
+    "lon": 123.1772,
+    "lat": 41.2643,
+    "label": "Liaoyang",
+    "fetched": "2026-11-05"
+  },
+  "Q83318": {
+    "lon": 43.3333,
+    "lat": 12.5833,
+    "label": "Bab-el-Mandeb",
+    "fetched": "2026-11-05"
+  },
+  "Q131694": {
+    "lon": 45.0333,
+    "lat": 12.8,
+    "label": "Aden",
+    "fetched": "2026-11-05"
+  },
+  "Q271411": {
+    "lon": 40.1167,
+    "lat": -3.2194,
+    "label": "Malindi",
+    "fetched": "2026-11-05"
+  },
+  "Q319366": {
+    "lon": 80.2156,
+    "lat": 6.0328,
+    "label": "Galle",
+    "fetched": "2026-11-05"
+  },
+  "Q374365": {
+    "lon": 39.1611,
+    "lat": 21.5292,
+    "label": "Jeddah",
+    "fetched": "2026-11-05"
+  },
+  "Q605321": {
+    "lon": 76.9728,
+    "lat": 29.4017,
+    "label": "Battle of Panipat",
+    "fetched": "2026-11-05"
+  },
+  "Q695265": {
+    "lon": 56.46,
+    "lat": 27.0675,
+    "label": "Hormuz Island",
+    "fetched": "2026-11-05"
+  },
+  "Q842950": {
+    "lon": 124.858,
+    "lat": 41.702,
+    "label": "Hetu Ala City",
+    "fetched": "2026-11-05"
+  },
+  "Q1048381": {
+    "lon": 119.7536,
+    "lat": 40.0092,
+    "label": "Shanhai Pass",
+    "fetched": "2026-11-05"
+  },
+  "Q1142979": {
+    "lon": 75.77,
+    "lat": 11.25,
+    "label": "Kozhikode district",
+    "fetched": "2026-11-05"
+  },
+  "Q1320260": {
+    "lon": 42.59,
+    "lat": 15.35,
+    "label": "Kamaran",
+    "fetched": "2026-11-05"
+  },
+  "Q1375638": {
+    "lon": 120.7205,
+    "lat": 40.6189,
+    "label": "Xingcheng",
+    "fetched": "2026-11-05"
+  }
+}

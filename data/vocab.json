@@ -89,6 +89,39 @@
         "treaty": "navy-triangle"
       }
     },
+    "routes": {
+      "version": "v0",
+      "_comment": "Routes and voyages. path = no direction, arrow = directed; where is an ordered list of Wikidata ids joined by > (ports, capes, straits, caravan cities), resolved by scripts/geocode.mjs into data/gazetteer.json. Points on a route map (a port of call, a capital, a battle) take point_values and are shaped by point_shapes (grammar section 5).",
+      "kinds": [
+        "path",
+        "arrow",
+        "point"
+      ],
+      "values": [
+        "sea-trade",
+        "land-trade",
+        "voyage",
+        "migration",
+        "military",
+        "carrier"
+      ],
+      "point_values": [
+        "port",
+        "capital",
+        "battle",
+        "siege",
+        "founding",
+        "treaty"
+      ],
+      "point_shapes": {
+        "port": "steel-circle",
+        "capital": "moss-circle",
+        "battle": "rust-diamond",
+        "siege": "rust-diamond",
+        "founding": "moss-circle",
+        "treaty": "navy-triangle"
+      }
+    },
     "legitimation": {
       "version": "v1",
       "kinds": [

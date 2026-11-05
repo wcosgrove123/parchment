@@ -46,7 +46,7 @@ const lists = {
   grade: vocab.grade,
   certainty: vocab.certainty,
   qc_status: vocab.qc_status.filter(Boolean),
-  value: [...new Set(Object.values(vocab.trackers).flatMap((t) => t.values ?? []))],
+  value: [...new Set(Object.values(vocab.trackers).flatMap((t) => [...(t.values ?? []), ...(t.point_values ?? [])]))],
 };
 const listCols = Object.keys(lists);
 vs.addRow(listCols);
@@ -56,7 +56,7 @@ for (let i = 0; i < maxLen; i++) vs.addRow(listCols.map((k) => lists[k][i] ?? ''
 // which values belong to which tracker, for people reading the sheet
 vs.getCell(1, listCols.length + 2).value = 'tracker → values';
 vs.getCell(1, listCols.length + 2).font = { bold: true };
-Object.entries(vocab.trackers).forEach(([k, t], i) => { vs.getCell(2 + i, listCols.length + 2).value = `${k}: ${(t.values ?? ['(number)']).join(', ')}`; });
+Object.entries(vocab.trackers).forEach(([k, t], i) => { vs.getCell(2 + i, listCols.length + 2).value = `${k}: ${(t.values ?? ['(number)']).join(', ')}${t.point_values ? ` · points: ${t.point_values.join(', ')}` : ''}`; });
 vs.columns.forEach((c) => { c.width = 18; });
 
 // --- places ------------------------------------------------------------------------------------------------
