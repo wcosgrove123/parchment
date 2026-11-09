@@ -64748,7 +64748,8 @@
             "north": 26.2
           },
           "label": "Blockade of the Gulf ports, from 14 May 1846",
-          "source": "K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 7: Commodore Conner proclaimed a blockade of Mexico's Gulf ports on 14 May 1846. The line is computed along Mexico's coast as OpenHistoricalMap draws it on the date shown; TEST, to check before it ships."
+          "source": "K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 7: Commodore Conner proclaimed a blockade of Mexico's Gulf ports on 14 May 1846. The line is computed along Mexico's coast as OpenHistoricalMap draws it on the date shown; TEST, to check before it ships.",
+          "tech": "paddle-steamer"
         },
         {
           "id": "pacific-blockade",
@@ -64764,7 +64765,8 @@
             "north": 32.6
           },
           "label": "Blockade of the Pacific ports, from Aug 1846",
-          "source": "Bauer (1974), ch. 9: Commodore Stockton proclaimed a blockade of Mexico's Pacific coast in August 1846 (19 August; the date and the reach of the proclamation to check). Computed along Mexico's coast as OpenHistoricalMap draws it; TEST."
+          "source": "Bauer (1974), ch. 9: Commodore Stockton proclaimed a blockade of Mexico's Pacific coast in August 1846 (19 August; the date and the reach of the proclamation to check). Computed along Mexico's coast as OpenHistoricalMap draws it; TEST.",
+          "tech": "paddle-steamer"
         },
         {
           "id": "guadalupe-hidalgo",
@@ -64787,7 +64789,148 @@
           "source": "Mexico's border with the United States as OpenHistoricalMap draws Mexico on 24 April 1846 (its polygon dated 1842 to 1846-08-22), the day before the Thornton Affair. TEST."
         }
       ],
-      "_lines_note": "Computed lines (brief P7): a blockade runs off the blockaded side's own coast on the date shown, inside the window given; a treaty line is the border between the two sides on the day the agreement took hold; a ghost is the border on an earlier date, at half strength. Nothing is traced: src/military/lines.js sorts the polygon's edge into coast and border on the sheet."
+      "_lines_note": "Computed lines (brief P7): a blockade runs off the blockaded side's own coast on the date shown, inside the window given; a treaty line is the border between the two sides on the day the agreement took hold; a ghost is the border on an earlier date, at half strength. Nothing is traced: src/military/lines.js sorts the polygon's edge into coast and border on the sheet.",
+      "forces": [
+        {
+          "id": "taylor",
+          "side": "us",
+          "label": "Taylor",
+          "commander": "Zachary Taylor",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈2,300 at Palo Alto; ≈6,000 before Monterrey",
+            "source": "Bauer (1974), chs. 3 and 5"
+          },
+          "source": "Army of Occupation, later the Army of the Rio Grande: K. Jack Bauer, The Mexican War, 1846–1848 (1974)."
+        },
+        {
+          "id": "wool",
+          "side": "us",
+          "label": "Wool",
+          "commander": "John E. Wool",
+          "type": "infantry",
+          "echelon": "X",
+          "tech": [
+            "musket"
+          ],
+          "strength": {
+            "text": "≈3,400 leaving San Antonio",
+            "source": "Bauer (1974), ch. 8"
+          },
+          "source": "The Centre Division: Bauer (1974), ch. 8."
+        },
+        {
+          "id": "kearny",
+          "side": "us",
+          "label": "Kearny",
+          "commander": "Stephen W. Kearny",
+          "type": "cavalry",
+          "echelon": "X",
+          "tech": [
+            "cavalry",
+            "musket"
+          ],
+          "strength": {
+            "text": "≈1,700 to Santa Fe; about 100 dragoons on to California",
+            "source": "Bauer (1974), chs. 8–9"
+          },
+          "source": "The Army of the West: Bauer (1974). Spelling: Kearny (brief, test 1)."
+        },
+        {
+          "id": "doniphan",
+          "side": "us",
+          "label": "Doniphan",
+          "commander": "Alexander W. Doniphan",
+          "type": "cavalry",
+          "echelon": "I",
+          "tech": [
+            "cavalry",
+            "rifle-breech"
+          ],
+          "strength": {
+            "text": "≈850 Missouri mounted volunteers",
+            "source": "Bauer (1974), ch. 8"
+          },
+          "source": "The 1st Missouri Mounted Volunteers: Bauer (1974), ch. 8.",
+          "_tech_note": "rifle-breech is a known misfit (the Missourians carried muzzle-loading rifles): kept to show the date check refusing it, 1841 being the catalog's starting point; to replace with a rifled-musket icon"
+        },
+        {
+          "id": "scott",
+          "side": "us",
+          "label": "Scott",
+          "commander": "Winfield Scott",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket",
+            "cannon",
+            "paddle-steamer"
+          ],
+          "strength": {
+            "text": "≈10,000 landed at Veracruz",
+            "source": "Bauer (1974), ch. 12"
+          },
+          "source": "Bauer (1974), chs. 12–15."
+        },
+        {
+          "id": "arista",
+          "side": "mexico",
+          "label": "Arista",
+          "commander": "Mariano Arista",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈3,200–3,700 at Palo Alto",
+            "source": "Bauer (1974), ch. 3"
+          },
+          "source": "The Army of the North: Bauer (1974), ch. 3."
+        },
+        {
+          "id": "ampudia",
+          "side": "mexico",
+          "label": "Ampudia",
+          "commander": "Pedro de Ampudia",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈7,000 at Monterrey",
+            "source": "Bauer (1974), ch. 5"
+          },
+          "source": "Bauer (1974), ch. 5."
+        },
+        {
+          "id": "santa-anna",
+          "side": "mexico",
+          "label": "Santa Anna",
+          "commander": "Antonio López de Santa Anna",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [
+            "musket",
+            "cannon",
+            "cavalry"
+          ],
+          "strength": {
+            "text": "≈15,000–20,000 at Buena Vista",
+            "source": "Bauer (1974), ch. 11"
+          },
+          "source": "Bauer (1974), chs. 10–15."
+        }
+      ],
+      "_forces_note": "Forces (brief §1, §3): each has a side, a type and size for its milsymbol frame (infantry, cavalry, artillery, armor, aviation, naval; I regiment, X brigade, XX division, XXX corps), the equipment keys it may carry from data/tech.json, and a strength with its source. Movement rows name the force by id; a row's own tech column overrides the force's list. TEST entries, for review."
     }
   ]
 }

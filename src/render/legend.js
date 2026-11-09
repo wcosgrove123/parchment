@@ -56,6 +56,18 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
         if (e.fill) p.style('fill', e.fill);
         if (e.outline) p.style('fill', 'var(--cream)').style('stroke', 'var(--rust)').style('stroke-width', 1.5);
         if (e.half) row.append('path').attr('class', 'swatch-half').attr('transform', 'translate(11,7)').attr('d', 'M0,-7L7,0L0,7Z').attr('fill', e.half);
+      } else if (e.swatch === 'icon' && e.d) {
+        // an equipment icon from the Military layer's catalog (path data passed with the row)
+        row.append('path').attr('class', 'swatch-icon').attr('d', e.d).attr('fill', e.color ?? 'var(--navy)').attr('transform', `translate(${11 - 8},${7 - 8}) scale(${16 / 512})`);
+      } else if (e.swatch === 'force') {
+        row.append('rect').attr('x', 1).attr('y', 1).attr('width', 20).attr('height', 12).attr('fill', 'none').attr('stroke', e.color ?? 'var(--navy)').attr('stroke-width', 1.2);
+        row.append('path').attr('d', 'M1,1L21,13M21,1L1,13').attr('stroke', e.color ?? 'var(--navy)').attr('stroke-width', 1).attr('fill', 'none');
+        row.append('text').attr('class', 'swatch-text').attr('x', 11).attr('y', -1).attr('text-anchor', 'middle').attr('font-size', 7).attr('font-weight', 700).text('XX');
+      } else if (e.swatch === 'fade') {
+        [0.8, 0.5, 0].forEach((t, j) => row.append('rect').attr('x', j * 8).attr('width', 6).attr('height', 14).attr('fill', e.color ?? 'var(--navy)').attr('fill-opacity', 1 - t * 0.75));
+      } else if (e.swatch === 'hq') {
+        row.append('line').attr('x1', 6).attr('x2', 6).attr('y1', -2).attr('y2', 15).attr('stroke', 'var(--navy)').attr('stroke-width', 1);
+        row.append('path').attr('d', 'M6,-2L20,2L6,6Z').attr('fill', e.color ?? 'var(--navy)');
       } else if (e.swatch === 'numeral') {
         row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 7.5).attr('fill', 'var(--cream)').attr('stroke', 'var(--navy)').attr('stroke-width', 1);
         row.append('text').attr('class', 'swatch-text').attr('x', 11).attr('y', 7).attr('text-anchor', 'middle').attr('dominant-baseline', 'central').attr('font-size', 9).attr('font-weight', 700).text('1');

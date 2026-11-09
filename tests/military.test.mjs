@@ -30,7 +30,9 @@ test('every icon in the catalog is on disk, stripped, and in the manifest with i
     assert.ok(m, `${ic.key} not in the manifest`);
     assert.match(m.license, /^CC BY 3\.0$|^CC0$/);
     assert.ok(m.author && m.source_url.startsWith('https://raw.githubusercontent.com/game-icons/icons/'));
-    assert.equal(m.owner_review, 'pending', 'nothing enters the catalog before the owner reviews it');
+    // the owner reviewed the catalog on 2026-11-09: every icon is accepted, kept as an alternate, or flagged (never used)
+    assert.match(m.owner_review, /^accepted by the owner, \d{4}-\d{2}-\d{2}$|^not chosen by the owner, .*alternate|^flagged by the brief; not for use$|^pending$/, `${ic.key}: the owner's verdict is recorded`);
+    if (ic.status === 'flagged') assert.match(m.owner_review, /^flagged/);
     assert.ok(['proposed', 'alternate', 'flagged'].includes(ic.status));
   }
   // four proposed icons per equipment class, and the single fort mark

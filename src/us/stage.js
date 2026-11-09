@@ -24,7 +24,8 @@ import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { eventLegend } from '../military/events.js';
-import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, lineColorOf } from '../military/draw.js';
+import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf } from '../military/draw.js';
+import { forceLegend } from '../military/events.js';
 import { linesOn, blockadeRuns, borderRuns, dedupeRuns, runsLength } from '../military/lines.js';
 import { toInt as warInt } from '../military/wars.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
@@ -178,7 +179,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const v = makeView(f.id, proj, f.at, { graticule: false, bathymetry: false });
     root.append('rect').attr('class', 'inset-frame').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
     root.append('text').attr('class', 'inset-title').attr('x', bx + 8).attr('y', by + bh - 8).text(f.title);
-    v.rec = { lines: v.g.append('g').attr('class', 'mil-lines'), routes: v.g.append('g').attr('class', 'routes'), marks: v.g.append('g').attr('class', 'marks') };
+    v.rec = { lines: v.g.append('g').attr('class', 'mil-lines'), routes: v.g.append('g').attr('class', 'routes'), marks: v.g.append('g').attr('class', 'marks'), forces: v.g.append('g').attr('class', 'mil-forces') };
     insets.push({ ...v, inset: f, lessonInset: true });
   }
   const views = [main, ...insets];
@@ -203,6 +204,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     lines: main.g.append('g').attr('class', 'mil-lines'), // the Military layer's computed lines, under the routes
     routes: main.g.append('g').attr('class', 'routes'),
     marks: main.g.append('g').attr('class', 'marks'),
+    forces: main.g.append('g').attr('class', 'mil-forces'), // the Military layer's force marks, above the events
     labels: main.g.append('g').attr('class', 'record-labels'),
   };
   let records = { points: [], routes: [] };
@@ -324,7 +326,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date }); else root.selectAll('g.war-strip').remove();
       // the computed lines of the war alive on the date (P7): blockades off the other side's coast, treaty lines, ghosts
       milNow.lines = (!milNow.show?.length || milNow.show.includes('lines')) ? computeLines(milNow, date, data) : [];
-      drawLines(recordLayers.lines, defs, milNow.lines);
+      drawLines(recordLayers.lines, defs, milNow.lines, milNow.icons ?? {});
     } else {
       root.classed('war-strip-on', false);
       root.selectAll('g.course-list, g.war-strip').remove();
@@ -826,7 +828,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const near = markPts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6);
       return near ? near.r : 0;
     };
-    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
+    // the forces where they stand (milestone 5) go first: route names and place names both keep clear of them
+    const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box }) : (recordLayers.forces.selectAll('*').remove(), []);
+    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, [...zones, ...forceBoxes], clearance);
     drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
     // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
     // the course list says "off this map" for them)
@@ -837,10 +841,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // The Military layer: battles colored by outcome, rings, and circled numerals (P5, P6, P8). A numbered event has
     // no name on the map (the list in the margin carries it), but its mark and numeral still keep names away.
     const markBoxes = marks.map((m) => ({ x: m.x - m.radius - 2, y: m.y - m.radius - 2, w: 2 * m.radius + 4, h: 2 * m.radius + 4 }));
-    const numeralBoxes = milNow?.war ? decorateMarks(recordLayers.marks, marks, milNow.war) : [];
+    const numeralBoxes = milNow?.war ? decorateMarks(recordLayers.marks, marks, milNow.war, milNow.icons ?? {}) : [];
     const named = marks.filter((m) => m.r.seq == null);
     const numberedBoxes = marks.filter((m) => m.r.seq != null).map((m, i) => markBoxes[marks.indexOf(m)]);
-    const placed = layoutLabels(recordLayers.labels, defs, { marks: named, routes: drawnRoutes, rivers, zones: [...zones, ...numeralBoxes, ...numberedBoxes], frame, width: Math.max(W, 1920), measure, maxPlaces: lesson?.maxPlaces ?? 10, apart: APART });
+    const placed = layoutLabels(recordLayers.labels, defs, { marks: named, routes: drawnRoutes, rivers, zones: [...zones, ...numeralBoxes, ...numberedBoxes, ...forceBoxes], frame, width: Math.max(W, 1920), measure, maxPlaces: lesson?.maxPlaces ?? 10, apart: APART });
     const boxes = placed.filter((p) => p.box).map((p) => p.box);
     // A lesson inset draws the same events and movements in its own projection, numerals included, names left to
     // the main map's list (the inset is small; its marks say which event is which through their numbers).
@@ -848,11 +852,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const [ix, iy, iw, ih] = v.box;
       const inInset = (p) => { if (p.lon == null) return false; const xy = v.proj([p.lon, p.lat]); return xy && xy[0] >= ix && xy[0] <= ix + iw && xy[1] >= iy && xy[1] <= iy + ih; };
       const im = drawMarks(v.rec.marks, records.points.filter(inInset), v.proj);
-      if (milNow?.war) decorateMarks(v.rec.marks, im, milNow.war);
+      if (milNow?.war) { decorateMarks(v.rec.marks, im, milNow.war, milNow.icons ?? {}); drawForceMarks(v.rec.forces, milNow.positions ?? [], v.proj, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: v.box }); }
       const pts = records.points.filter((p) => p.shape && p.lon != null).map((p) => ({ xy: v.proj([p.lon, p.lat]), r: (MARK_RADIUS[p.shape] ?? 6) + 2 })).filter((m) => m.xy && Number.isFinite(m.xy[0]));
       drawRoutes(v.rec.routes, records.routes, v.proj, [], (qid, coord) => { const xy = coord ? v.proj(coord) : null; const near = xy && pts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6); return near ? near.r : 0; });
     }
-    return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes, ...numeralBoxes], lines: drawnRoutes.map((d) => d.samples) };
+    return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes, ...numeralBoxes, ...forceBoxes], lines: drawnRoutes.map((d) => d.samples) };
   }
 
   // ---------- the Military layer's computed lines (src/military/lines.js) ----------
@@ -1234,7 +1238,10 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
   } else if (trackerId === 'military') {
     // the sides of the war shown, each with its members when there are several (src/military/wars.js)
     rows.push(...militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both'));
-    rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf));
+    const icons = tracker.mil?.icons ?? {};
+    const withIcon = (r) => (r.swatch === 'icon' ? { ...r, d: icons[r.icon]?.d ?? null } : r);
+    rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf).map(withIcon));
+    rows.push(...forceLegend(tracker.mil?.positions ?? [], tracker.mil?.checks ?? {}, tracker.mil?.tech).map(withIcon));
     for (const l of tracker.mil?.lines ?? []) {
       if (l.kind === 'blockade') rows.push({ swatch: 'line', style: `blockade side-${l.color ?? 'a'}`, label: l.label, role: 'line' });
       else rows.push({ swatch: 'line', style: l.kind === 'ghost' ? 'ghost' : 'treaty', label: l.label, role: 'line' });

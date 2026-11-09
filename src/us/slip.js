@@ -174,6 +174,9 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       // milestone 3: movements since `from` (else the war's start) begun by the date
       movements_since: military.since ? isoDate(military.since) : null, movements_on_sheet: (military.moves ?? []).map((r) => r.id), movements_in_war: (military.allMoves ?? []).length,
       forces_shown: military.forces?.length ? military.forces : 'all',
+      // milestone 5: where each force stands, its equipment and the catalog's verdict on it, and the icons drawn
+      forces: (military.positions ?? []).map((p) => { const c = military.checks?.[p.force.id] ?? {}; return { id: p.force.id, label: p.force.label, commander: p.force.commander ?? null, side: p.force.side, type: p.force.type, echelon: p.force.echelon ?? null, at: { lon: p.at[0], lat: p.at[1] }, since: isoDate(p.since), moving: p.moving, from_row: p.row?.id ?? null, earlier_stands: p.earlier.length, strength: p.force.strength ?? null, tech: c.key ?? null, tech_drawn: !!c.ok, tech_note: c.why ?? null, source: p.force.source ?? null }; }),
+      icons_used: [...new Set([...(military.positions ?? []).map((p) => military.checks?.[p.force.id]).filter((c) => c?.ok).map((c) => c.key), ...(military.lines ?? []).filter((l) => l.tech && military.icons?.[l.tech]).map((l) => l.tech), ...((military.shown ?? []).some((r) => r.value === 'fort') && military.icons?.fort ? ['fort'] : [])])].map((k) => { const it = military.tech?.items?.[k]; return { key: k, depicts: it?.depicts ?? null, in_use: it?.in_use ?? null, file: it?.icon?.file ?? null, author: it?.icon?.author ?? null, license: it?.icon?.license ?? null, reference: it?.reference ?? null }; }),
       // milestone 4: the computed lines, each with how it was made (nothing drawn by hand)
       lines: (military.lines ?? []).map((l) => ({ id: l.id, kind: l.kind, label: l.label, side: l.side ?? null, computed_from: l.kind === 'blockade' ? `the coast of ${l.coast_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}), inside the window given, moved 14 px offshore` : `the edge of ${l.border_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}) where it meets ${l.against}'s land`, on: isoDate(l.on_date), window: l.window ?? null, runs: l.runs.length, length_px: l.length_px, source: l.source ?? null })),
     } : null,
@@ -282,7 +285,10 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   const legend = legendAsDrawn(cur.legend);
   const layout = layoutCheck(atlas, info);
   for (const t of layout.clipped_text) warnings.push(`the name "${t.text}" runs past the edge of the map`);
-  const credit = creditLine(features, points, routesOut, rivers, state.tracker);
+  let credit = creditLine(features, points, routesOut, rivers, state.tracker);
+  // the Military layer: icons and the symbol frames carry their own credits (brief §6)
+  if (resolved.war?.icons_used?.length) credit += '; icons: game-icons.net contributors (CC BY 3.0)';
+  if (resolved.war?.forces?.length) credit += '; force frames: milsymbol (MIT)';
   const alt = altText({ resolved, legend, features, points, routes: routesOut, rivers, changes, frame, titleShown });
   return { parchment: SLIP_VERSION, order, resolved, legend, features, points, routes: routesOut, rivers, changes, layout, warnings: [...new Set(warnings)], alt_text: alt, credit };
 }
@@ -359,6 +365,12 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
     if (changes.united_states?.grew) s.push('The United States grew (gold).');
   }
   if (points.length) s.push(`Marked places: ${list(points.map((p) => `${p.label}${p.start ? ` (${p.start === p.end || !p.end ? p.start : `${p.start} to ${p.end}`})` : ''}`))}.`);
+  // the Military layer: the sides and the forces shown (brief §6)
+  if (resolved.war) {
+    s.push(`The war shown: ${resolved.title ?? resolved.war.id}, sides ${list(resolved.war.sides.map((x) => x.label))}.`);
+    if (resolved.war.forces?.length) s.push(`Forces on the map: ${list(resolved.war.forces.map((f) => `${f.label} (${f.side}${f.tech_drawn ? `, ${f.tech}` : ''})`))}.`);
+    if (resolved.war.lines?.length) s.push(`Lines: ${list(resolved.war.lines.map((l) => l.label))}.`);
+  }
   if (routes.length) s.push(`Routes: ${list(routes.map((r) => `${r.label}, ${r.class.toLowerCase()}${r.heads && r.heads !== 'none' ? ' with arrowheads' : ''}`))}.`);
   const rv = rivers.filter((r) => r.labeled).map((r) => r.name);
   if (rv.length) s.push(`Rivers named: ${list(rv)}.`);

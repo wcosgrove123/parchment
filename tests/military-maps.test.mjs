@@ -56,15 +56,16 @@ test('the war with Mexico, 13 May 1846, on the mexico-war frame: the war\'s own 
   assert.ok(mx.slip.legend.rows.some((r) => r.label === 'Mexico') && !mx.slip.legend.rows.some((r) => /intervención/.test(r.label)));
 });
 
-test('the theater, 2 February 1848 (milestone 2): eighteen events by outcome, numbered, with the list and the war strip', { skip, timeout: 180000 }, async () => {
+test('the theater, 2 February 1848 (milestone 2): nineteen events by outcome, numbered, with the list and the war strip', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/mexico-war-1848');
   assert.deepEqual(s.render.page_errors, []);
-  assert.equal(s.points.length, 18, 'every event of the war has begun by the treaty day');
-  assert.ok(s.points.every((p) => p.seq >= 1 && p.seq <= 18 && !p.labeled), 'numbered events carry no name on the map: the list has it');
-  assert.equal(s.resolved.war.course.length, 18);
-  assert.equal(s.resolved.war.course[0].label, 'Thornton Affair');
-  assert.equal(s.resolved.war.course[0].outcome, 'won by Mexico');
-  assert.equal(s.resolved.war.course[17].label, 'Treaty of Guadalupe Hidalgo');
+  assert.equal(s.points.length, 19, 'every event of the war has begun by the treaty day');
+  assert.ok(s.points.every((p) => p.seq >= 1 && p.seq <= 19 && !p.labeled), 'numbered events carry no name on the map: the list has it');
+  assert.equal(s.resolved.war.course.length, 19);
+  assert.equal(s.resolved.war.course[0].label, 'Fort Texas', 'the fort, begun 28 March 1846, heads the list');
+  assert.equal(s.resolved.war.course[1].label, 'Thornton Affair');
+  assert.equal(s.resolved.war.course[1].outcome, 'won by Mexico');
+  assert.equal(s.resolved.war.course[18].label, 'Treaty of Guadalupe Hidalgo');
   assert.equal(s.resolved.war.strip, 'war');
   const labels = s.legend.rows.map((r) => r.label);
   for (const l of ['Battle won by United States', 'Battle won by Mexico', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'The course of the war: see the list']) assert.ok(labels.includes(l), l);
@@ -77,7 +78,7 @@ test('the theater, 2 February 1848 (milestone 2): eighteen events by outcome, nu
   assert.match(s.alt_text, /Shaded: United States in blue \(side A\) and Mexico in plum \(side B\)/);
   // a date in the middle of the war shows only what has begun, numbered from one
   const mid = await render('military/mexico-war-1848', { date: '1846-09-25', out: undefined });
-  assert.equal(mid.slip.points.length, 8);
+  assert.equal(mid.slip.points.length, 9, 'eight events begun by 25 September 1846, and the fort');
   assert.equal(mid.slip.resolved.war.course.at(-1).label, 'Monterrey');
   // events off, strip of the stage: the fills alone
   const bare = await render('military/mexico-war-1848', { show: ['territory'], strip: 'stage' });
@@ -99,7 +100,7 @@ test('the war in the north, 24 February 1847 (milestone 3): forces as arrows by 
   const labels = s.legend.rows.map((r) => r.label);
   for (const l of ['United States: an armed force', 'Mexico: an armed force', 'Retreat or withdrawal', 'Landing from the sea']) assert.ok(labels.includes(l), l);
   assert.ok(s.resolved.war.course.some((c) => c.label === 'United States declares war' && c.off), 'the declaration in Washington is listed as off this map');
-  assert.equal(s.points.length, 10 - 3, 'the three events beyond the frame are not drawn');
+  assert.equal(s.points.length, 11 - 3, 'the three events beyond the frame are not drawn (the fort is on it)');
   assert.equal(s.resolved.war.movements_on_sheet.length, 13);
   // `from` on this layer: movements since, not a Diff
   const since = await render('military/texas-1847-movements', { from: '1847-01-01' });
@@ -121,7 +122,7 @@ test('the theater with its lines and inset (milestone 4): blockades off Mexico\'
   assert.equal(s.resolved.inset.id, 'inset-mexico-city');
   assert.equal(s.resolved.inset.title, 'The Valley of Mexico');
   assert.equal(s.resolved.inset.at.length, 4);
-  assert.equal(s.points.length, 18);
+  assert.equal(s.points.length, 19);
   // one campaign alone: Scott's two movements, and only the events that name his force (none do yet: all 18 stay)
   const scott = await render('military/mexico-war-1848-full', { forces: ['scott'], inset: undefined });
   assert.deepEqual(scott.slip.routes.map((r) => r.record).sort(), ['test-mx-mv-scott-land', 'test-mx-mv-scott-sea']);
@@ -130,6 +131,38 @@ test('the theater with its lines and inset (milestone 4): blockades off Mexico\'
   const bare = await render('military/mexico-war-1848-full', { show: ['territory', 'events', 'movements'], inset: undefined });
   assert.deepEqual(bare.slip.resolved.war.lines, []);
   assert.ok(!bare.slip.legend.rows.some((r) => /Blockade/.test(r.label)));
+});
+
+test('force marks (milestone 5): each force where its movements put it, its icon when the catalog allows, a tank refused in 1846', { skip, timeout: 240000 }, async () => {
+  const { slip: s } = await render('military/mexico-war-1848-full', { inset: undefined });
+  assert.deepEqual(s.render.page_errors, []);
+  const forces = s.resolved.war.forces;
+  assert.equal(forces.length, 8);
+  const by = (id) => forces.find((f) => f.id === id);
+  assert.deepEqual([by('taylor').since, by('taylor').tech, by('taylor').tech_drawn, by('taylor').earlier_stands], ['1847-02-22', 'musket', true, 2]);
+  assert.deepEqual([by('scott').since, by('scott').at.lat > 19 && by('scott').at.lat < 19.6], ['1847-09-14', true], 'Scott stands in Mexico City');
+  assert.equal(by('kearny').tech, 'cavalry');
+  assert.deepEqual(s.resolved.war.icons_used.map((i) => i.key).sort(), ['cavalry', 'fort', 'musket', 'paddle-steamer']);
+  assert.ok(s.resolved.war.icons_used.every((i) => i.author && i.license === 'CC BY 3.0' && i.reference));
+  assert.match(s.credit, /icons: game-icons\.net contributors \(CC BY 3\.0\); force frames: milsymbol \(MIT\)/);
+  assert.match(s.alt_text, /Forces on the map: Taylor \(us, musket\)/);
+  const labels = s.legend.rows.map((r) => r.label);
+  assert.ok(labels.includes('A force: its type and size (XX a division)') && labels.includes('Fort (one mark in every era)') && labels.some((l) => /^musket, 1500–1860$/.test(l)));
+  // the date check: a copy of the table with a tank on Taylor's march
+  const csv = readFileSync(new URL('./maps/military-records.csv', import.meta.url), 'utf8').replace(/(test-mx-mv-taylor-3,.*?,mexican-american-war,us,taylor,),,,$/m, '$1,,,tank-great-war');
+  assert.ok(/taylor,,,,tank-great-war/.test(csv), 'the test row carries the tank');
+  // the copy lives under the repository (the page fetches ?records= from the served folder) and is removed after
+  const { writeFileSync, unlinkSync, mkdirSync } = await import('node:fs');
+  const tankFile = new URL('../out/test-tank-records.csv', import.meta.url);
+  mkdirSync(new URL('../out/', import.meta.url), { recursive: true });
+  writeFileSync(tankFile, csv);
+  try {
+    const tank = await renderOrder({ ...order('military/mexico-war-1848-full'), inset: undefined, records: 'out/test-tank-records.csv' }, { out: join(OUT, 'tank'), base: OUT, browser });
+    const t = tank.slip.resolved.war.forces.find((f) => f.id === 'taylor');
+    assert.equal(t.tech_drawn, false, 'no tank in 1848');
+    assert.match(t.tech_note, /not in 1848/);
+    assert.ok(!tank.slip.resolved.war.icons_used.some((i) => i.key === 'tank-great-war'));
+  } finally { unlinkSync(tankFile); }
 });
 
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {

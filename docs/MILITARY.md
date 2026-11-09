@@ -14,8 +14,9 @@ order or map changes unless it asks for `layer: military`.
 | 2 | events: battles by victor, sieges, places taken, declarations and the treaty; the numbered course of the war; the war strip | done (`tests/maps/military/mexico-war-1848.json`) |
 | 3 | forces and movements: arrows by side, hollow retreats, landing ticks, side-by-side legs, tabs at the frame's edge, force bars on the strip | done (`tests/maps/military/texas-1847-movements.json`) |
 | 4 | lines computed from the polygons: blockades off a coast, treaty lines, ghost borders; the `mexico-city` inset; `forces` to follow one campaign | done (`tests/maps/military/mexico-war-1848-full.json`); fronts, fortified lines and parallels wait for the maps that need them |
-| 5 | icons and force marks with date checks | next |
-| 6–10 | the human cost; play and video; panels and accounts; battle frames; strength width | |
+| 5 | force marks: milsymbol frames by type and size, the equipment icon when the catalog allows it on the date, earlier stands faded; the star fort; ship icons on blockades | done (`data/tech.json`; the owner reviewed the icons 2026-11-09) |
+| 6 | the human cost | next |
+| 7–10 | play and video; panels and accounts; battle frames; strength width | |
 
 ## Turning it on
 
@@ -114,6 +115,17 @@ the navy triangle. Every event begun by the map's date is numbered in date order
 war**, a box in the corner the legend leaves free, with the date, the event and its outcome; a numbered event prints
 no name on the map. Under the map the **war strip** replaces the stage's: the war's span, month and year ticks, each
 member's bar in its side's color, every event as a small mark in the victor's color, and the shown date marked.
+
+## What it draws (milestone 5)
+
+Each force stands where its movements put it on the date: a milsymbol frame in the side's color showing its type
+and size, the equipment icon beside it when `data/tech.json` says that equipment was in use that year (else the
+plain frame, and a warning on the slip: no tank in 1846), the commander and strength below; its earlier stands fade
+behind it, earliest lightest. The forces themselves (type, size, equipment, strength, each with a source) live in
+the war's record in `vocab.json`; a movement row's own `tech` overrides the force's. The catalog's years are the
+brief's starting points, each marked to be sourced. Icons are the owner-reviewed game-icons.net silhouettes (CC BY
+3.0; `assets/icons/military/LICENSE.md`); the slip lists every one drawn with author, license and reference, and
+the credit line names them.
 
 ## The packing slip
 

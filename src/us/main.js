@@ -24,7 +24,7 @@ import focusTable from '../focuses.json';
 import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
 import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
-import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides } from '../military/events.js';
+import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
 const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
@@ -178,7 +178,16 @@ async function main() {
     const mv = resolveRecords(mil.filter((r) => r.kind === 'arrow' || r.kind === 'path'), gazetteer);
     for (const w of mv.waiting) problems.push(`movement ${w.id}: waypoints without coordinates (${w.missing.join(', ')}; run npm run geocode); not drawn`);
     const movements = mv.records.filter((r) => r.coords).map((r) => ({ ...r, placeNames: r.waypoints.map((q) => gazetteer[q]?.label ?? q) }));
-    milData = { vocab, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), movements, file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
+    // the tech catalog, the reviewed icons the wars' forces and lines may carry (their path data), and milsymbol for
+    // the force frames (vendored, MIT; a script, so the page's bundle stays light)
+    const tech = await loadJSON('data/tech.json').catch(() => ({ items: {} }));
+    const keys = new Set(['fort']);
+    for (const w of vocab.wars ?? []) { for (const f of w.forces ?? []) for (const k of f.tech ?? []) keys.add(k); for (const l of w.lines ?? []) if (l.tech) keys.add(l.tech); }
+    for (const r of mil) if (r.tech) keys.add(r.tech.trim());
+    const icons = {};
+    await Promise.all([...keys].map(async (k) => { const it = tech.items?.[k]; if (!it) return; const svg = await loadText(it.icon.file).catch(() => null); if (svg) icons[k] = svgPath(svg); }));
+    if (!globalThis.ms) await new Promise((ok) => { const s = document.createElement('script'); s.src = 'assets/vendor/milsymbol/milsymbol.js'; s.onload = () => ok(true); s.onerror = () => { problems.push('milsymbol did not load: force frames are drawn plain'); ok(false); }; document.head.appendChild(s); });
+    milData = { vocab, tech, icons, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), movements, file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
     if (!vocab.wars?.length) problems.push('vocab.json lists no wars yet; the Military layer has nothing to show');
     return milData;
   }
@@ -204,13 +213,18 @@ async function main() {
     // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
     const since = state.since ?? 0;
     const moves = !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !state.forces.length || state.forces.includes(r.force)) : [];
-    return { war, members, events, shown, moves, allMoves, since, forces: state.forces, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
+    // where each force stands on the date (from every movement of its own, filtered only by `forces`), and whether
+    // its equipment icon may draw: the row's tech, else the force's first, if the catalog's years cover the date
+    const forcesOf = (war.forces ?? []).filter((f) => !state.forces.length || state.forces.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
+    const positions = !state.show.length || state.show.includes('forces') ? forcePositions(forcesOf, allMoves, date) : [];
+    const checks = Object.fromEntries(positions.map((p) => [p.force.id, techFor(p.force, p.row, milData.tech, date)]));
+    return { war, members, events, shown, moves, allMoves, since, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
   }
   // The layer's events and movements join the order's places and routes on the sheet; set again only when they
   // change (a new date may add one).
   let recKey = null;
   function placeMilitaryRecords(mil) {
-    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}|${mil.moves.map((r) => r.id).join(',')}` : '';
+    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}|${mil.moves.map((r) => r.id).join(',')}|${mil.positions.map((p) => `${p.force.id}@${p.at.join(',')}:${p.earlier.length}`).join(';')}` : '';
     if (key === recKey) return;
     recKey = key;
     atlas.setRecords(mil ? { points: [...orderRecords.points, ...mil.shown], routes: [...orderRecords.routes, ...mil.moves] } : orderRecords);

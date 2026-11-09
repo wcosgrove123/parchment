@@ -1,0 +1,461 @@
+{
+  "_comment": "The tech catalog (brief §3): equipment a force mark may carry. Each entry: what the icon depicts, its domain and class, the years it was in use (STARTING POINTS from the brief, each to be sourced before the catalog ships), the icon file with author and license (assets/icons/military/MANIFEST.json), and the period reference to check it against. A force whose tech is not in use on its row's dates draws the plain glyph and the slip warns. Reviewed by the owner 2026-11-09 (docs/DECISIONS.md).",
+  "items": {
+    "galley": {
+      "depicts": "oared war galley (a trireme)",
+      "domain": "sea",
+      "class": "ship",
+      "in_use": {
+        "from": -800,
+        "to": 1571,
+        "note": "starting point from the brief of 2026-11-09 (antiquity to Lepanto, 1571); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/trireme.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/trireme.svg"
+      },
+      "reference": "Diderot, Encyclopédie, marine plates; Lepanto (1571) as the last great galley battle",
+      "reviewed": "2026-11-09"
+    },
+    "galleon": {
+      "depicts": "galleon",
+      "domain": "sea",
+      "class": "ship",
+      "in_use": {
+        "from": 1500,
+        "to": 1700,
+        "note": "starting point from the brief of 2026-11-09 (1500s–1600s (the Armada, 1588)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/galleon.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/galleon.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "paddle-steamer": {
+      "depicts": "side-wheel paddle steamer",
+      "domain": "sea",
+      "class": "ship",
+      "in_use": {
+        "from": 1815,
+        "to": 1870,
+        "note": "starting point from the brief of 2026-11-09 (1840s–1860s (USS Mississippi at Veracruz, 1847)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/paddle-steamer.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/paddle-steamer.svg"
+      },
+      "reference": "USS Mississippi at Veracruz, 1847; ONI recognition manuals for later steam warships",
+      "reviewed": "2026-11-09"
+    },
+    "ironclad": {
+      "depicts": "iron-hulled warship (ironclad)",
+      "domain": "sea",
+      "class": "ship",
+      "in_use": {
+        "from": 1859,
+        "to": 1905,
+        "note": "starting point from the brief of 2026-11-09 (1859 on (La Gloire; Monitor and Virginia, 1862)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/cathelineau/iron-hulled-warship.svg",
+        "author": "Cathelineau",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/cathelineau/iron-hulled-warship.svg"
+      },
+      "reference": "Official Records atlas (1891–95); La Gloire 1859, Monitor and Virginia 1862",
+      "reviewed": "2026-11-09"
+    },
+    "knight": {
+      "depicts": "mounted knight",
+      "domain": "land",
+      "class": "cavalry",
+      "in_use": {
+        "from": 1000,
+        "to": 1500,
+        "note": "starting point from the brief of 2026-11-09 (high and late Middle Ages (Crécy, 1346)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/skoll/mounted-knight.svg",
+        "author": "Skoll",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/mounted-knight.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "cavalry": {
+      "depicts": "horseman with saber: dragoons and light cavalry",
+      "domain": "land",
+      "class": "cavalry",
+      "in_use": {
+        "from": 1600,
+        "to": 1945,
+        "note": "starting point from the brief of 2026-11-09 (1600s–1900s (the U.S. Dragoons, 1846)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/cavalry.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/cavalry.svg"
+      },
+      "reference": "H. A. Ogden's plates for the Quartermaster General (U.S. Dragoons, 1846)",
+      "reviewed": "2026-11-09"
+    },
+    "camel-troops": {
+      "depicts": "camel (camel-mounted troops)",
+      "domain": "land",
+      "class": "cavalry",
+      "in_use": {
+        "from": -500,
+        "to": 1950,
+        "note": "starting point from the brief of 2026-11-09 (desert warfare; the Arab Revolt, 1916–18); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/camel.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/camel.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "tank-great-war": {
+      "depicts": "rhomboid tank of 1916–18",
+      "domain": "land",
+      "class": "armor",
+      "in_use": {
+        "from": 1916,
+        "to": 1930,
+        "note": "starting point from the brief of 2026-11-09 (from 15 September 1916 (Flers–Courcelette)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/cathelineau/great-war-tank.svg",
+        "author": "Cathelineau",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/cathelineau/great-war-tank.svg"
+      },
+      "reference": "FM 30-40 and FM 30-42 (1942–43) for later tanks; Flers–Courcelette, 15 Sept 1916",
+      "reviewed": "2026-11-09"
+    },
+    "trebuchet": {
+      "depicts": "counterweight trebuchet",
+      "domain": "land",
+      "class": "artillery",
+      "in_use": {
+        "from": 1100,
+        "to": 1500,
+        "note": "starting point from the brief of 2026-11-09 (1100s–1400s (Xiangyang, 1273)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/trebuchet.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/trebuchet.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "cannon": {
+      "depicts": "smoothbore gun on a carriage",
+      "domain": "land",
+      "class": "artillery",
+      "in_use": {
+        "from": 1400,
+        "to": 1860,
+        "note": "starting point from the brief of 2026-11-09 (1500s–1850s (field guns of 1846)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/cannon.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/cannon.svg"
+      },
+      "reference": "Carl Nebel, plates of the war of 1846–48 (1851)",
+      "reviewed": "2026-11-09"
+    },
+    "machine-gun": {
+      "depicts": "machine gun on a tripod",
+      "domain": "land",
+      "class": "artillery",
+      "in_use": {
+        "from": 1884,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (1880s on (Omdurman, 1898)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/skoll/machine-gun.svg",
+        "author": "Skoll",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/machine-gun.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "missile-launcher": {
+      "depicts": "mobile missile launcher",
+      "domain": "land",
+      "class": "artillery",
+      "in_use": {
+        "from": 1941,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (1941 on (rocket artillery; ballistic missiles)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/missile-launcher.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/missile-launcher.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "pikeman": {
+      "depicts": "pikeman",
+      "domain": "land",
+      "class": "infantry",
+      "in_use": {
+        "from": -500,
+        "to": 1700,
+        "note": "starting point from the brief of 2026-11-09 (spear and pike, to the 1600s); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/pikeman.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/pikeman.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "bowman": {
+      "depicts": "archer drawing a bow",
+      "domain": "land",
+      "class": "infantry",
+      "in_use": {
+        "from": -3000,
+        "to": 1600,
+        "note": "starting point from the brief of 2026-11-09 (bow and crossbow); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/bowman.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/bowman.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "musket": {
+      "depicts": "musket",
+      "domain": "land",
+      "class": "infantry",
+      "in_use": {
+        "from": 1500,
+        "to": 1860,
+        "note": "starting point from the brief of 2026-11-09 (matchlock and flintlock, 1570s–1840s); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/skoll/musket.svg",
+        "author": "Skoll",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/musket.svg"
+      },
+      "reference": "Nebel (1851); Ogden's plates",
+      "reviewed": "2026-11-09"
+    },
+    "rifle-breech": {
+      "depicts": "lever-action repeating rifle",
+      "domain": "land",
+      "class": "infantry",
+      "in_use": {
+        "from": 1841,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (breech-loading and repeating rifles, 1866 on); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/skoll/winchester-rifle.svg",
+        "author": "Skoll",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/winchester-rifle.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "airship": {
+      "depicts": "rigid airship",
+      "domain": "air",
+      "class": "aircraft",
+      "in_use": {
+        "from": 1900,
+        "to": 1940,
+        "note": "starting point from the brief of 2026-11-09 (1900–1930s (Zeppelin raids, 1915)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/skoll/zeppelin.svg",
+        "author": "Skoll",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/zeppelin.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "biplane": {
+      "depicts": "biplane",
+      "domain": "air",
+      "class": "aircraft",
+      "in_use": {
+        "from": 1909,
+        "to": 1940,
+        "note": "starting point from the brief of 2026-11-09 (1914–1918 and the 1920s); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/quoting/biplane.svg",
+        "author": "Quoting",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/quoting/biplane.svg"
+      },
+      "reference": "FM 30-30 aircraft recognition; 1914–18 photographs",
+      "reviewed": "2026-11-09"
+    },
+    "jet-fighter": {
+      "depicts": "jet fighter",
+      "domain": "air",
+      "class": "aircraft",
+      "in_use": {
+        "from": 1944,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (1944 on (Korea, 1950)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/jet-fighter.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/jet-fighter.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "helicopter": {
+      "depicts": "helicopter",
+      "domain": "air",
+      "class": "aircraft",
+      "in_use": {
+        "from": 1944,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (1950 on (Ia Drang, 1965)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/helicopter.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/helicopter.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "fort": {
+      "depicts": "star fort, from above",
+      "domain": "land",
+      "class": "fort",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (every era (owner, 2026-11-09: forts stay one mark)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/military-fort.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/military-fort.svg"
+      },
+      "reference": "Fort Brown / Fort Texas earthwork plans, 1846 (NPS)",
+      "reviewed": "2026-11-09"
+    },
+    "dead-skull": {
+      "depicts": "skull and crossed bones",
+      "domain": "people",
+      "class": "cost",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (the human cost (§4)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/skull-crossed-bones.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/skull-crossed-bones.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "dead-coffin": {
+      "depicts": "coffin",
+      "domain": "people",
+      "class": "cost",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (the human cost (§4)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/coffin.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/coffin.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    },
+    "person": {
+      "depicts": "standing figure (one figure = a fixed number of people, ISOTYPE)",
+      "domain": "people",
+      "class": "cost",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "starting point from the brief of 2026-11-09 (the human cost (§4)); to source",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/person.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/person.svg"
+      },
+      "reference": "to choose: a period plate or recognition manual (brief §3)",
+      "reviewed": "2026-11-09"
+    }
+  }
+}

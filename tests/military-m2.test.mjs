@@ -17,12 +17,13 @@ const colorOf = (k) => ({ line: `line-${k}` });
 
 test('the war\'s event rows validate, carry their outcomes, and are read in date order up to a date', () => {
   assert.deepEqual(checked.problems, [], JSON.stringify(checked.problems));
-  assert.equal(events.length, 18);
+  assert.equal(events.length, 19);
   assert.ok(events.every((r) => r.lon != null && r.lat != null && r.source && /Bauer/.test(r.source)), 'every event has a coordinate and cites its source');
   const upTo = eventsUpTo(events, 18460513);
-  assert.deepEqual(upTo.map((r) => r.id), ['test-mx-ev-thornton', 'test-mx-ev-fort-texas', 'test-mx-ev-palo-alto', 'test-mx-ev-resaca', 'test-mx-ev-us-declares'], 'the siege (from 3 May) comes before Palo Alto (8 May)');
-  assert.equal(eventsUpTo(events, 18460424).length, 0);
-  assert.equal(eventsUpTo(events, 18480202).length, 18);
+  assert.deepEqual(upTo.map((r) => r.id), ['test-mx-ev-fort-texas-fort', 'test-mx-ev-thornton', 'test-mx-ev-fort-texas', 'test-mx-ev-palo-alto', 'test-mx-ev-resaca', 'test-mx-ev-us-declares'], 'the fort (begun 28 March) first; the siege (from 3 May) comes before Palo Alto (8 May)');
+  assert.equal(eventsUpTo(events, 18460424).length, 1, 'before the Thornton Affair only the fort, begun 28 March');
+  assert.equal(eventsUpTo(events, 18460327).length, 0);
+  assert.equal(eventsUpTo(events, 18480202).length, 19);
 });
 
 test('outcomes: won:<side>, inconclusive, claimed:<a>;<b>; anything else, or a side the war lacks, is a row problem', () => {
@@ -64,7 +65,7 @@ test('each event\'s look follows P5 and P6: the victor fills the diamond, both c
 test('the sequence numbers events in date order, or as the order lists them, or not at all; the list follows it', () => {
   const all = sequenceFor(eventsUpTo(events, 18480202), true);
   assert.deepEqual(all.slice(0, 3).map((r) => r.seq), [1, 2, 3]);
-  assert.equal(all.at(-1).seq, 18);
+  assert.equal(all.at(-1).seq, 19);
   const ten = sequenceFor(eventsUpTo(events, 18480202), ['test-mx-ev-thornton', 'test-mx-ev-palo-alto', 'test-mx-ev-monterrey', 'test-mx-ev-treaty']);
   assert.deepEqual(ten.filter((r) => r.seq != null).map((r) => [r.id, r.seq]), [['test-mx-ev-thornton', 1], ['test-mx-ev-palo-alto', 2], ['test-mx-ev-monterrey', 3], ['test-mx-ev-treaty', 4]]);
   assert.ok(sequenceFor(events, false).every((r) => r.seq == null));
@@ -74,12 +75,12 @@ test('the sequence numbers events in date order, or as the order lists them, or 
 
 test('the legend rows name only what is on the sheet, in the grammar\'s shapes', () => {
   const rows = eventLegend(sequenceFor(eventsUpTo(events, 18480202), true), war, colorOf);
-  assert.deepEqual(rows.map((r) => r.label), ['Battle won by Mexico', 'Battle won by United States', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'The course of the war: see the list']);
-  assert.ok(rows.every((r) => r.swatch === 'numeral' || r.shape), 'every row is a point shape of §5 (or the numeral)');
+  assert.deepEqual(rows.map((r) => r.label), ['Battle won by Mexico', 'Battle won by United States', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'Fort (one mark in every era)', 'The course of the war: see the list']);
+  assert.ok(rows.every((r) => r.swatch === 'numeral' || r.swatch === 'icon' || r.shape), 'every row is a point shape of §5 (or the numeral, or the fort icon)');
   assert.deepEqual(rows[0], { swatch: 'shape', shape: 'rust-diamond', fill: 'line-b', label: 'Battle won by Mexico', role: 'event' });
   assert.equal(rows[2].half, 'line-b');
   const early = eventLegend(sequenceFor(eventsUpTo(events, 18460425), false), war, colorOf);
-  assert.deepEqual(early.map((r) => r.label), ['Battle won by Mexico']);
+  assert.deepEqual(early.map((r) => r.label), ['Battle won by Mexico', 'Fort (one mark in every era)'], 'on 25 April 1846: the Thornton skirmish and the fort begun a month before');
 });
 
 test('show, sequence and strip travel with the order and the address', () => {

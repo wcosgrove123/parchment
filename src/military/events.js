@@ -60,6 +60,40 @@ export function forceBars(moves) {
   return [...by.values()].sort((a, b) => a.first - b.first);
 }
 
+// Forces (milestone 5). Where a force stands on a date follows from its movements (stepped, not morphed; brief §5):
+// at the end of its latest movement that has ended by the date; while a movement is under way and none has ended,
+// at that movement's start (its last documented place); nowhere before its first movement begins. Its earlier
+// stands (the ends of earlier movements) are kept for P4, each with the date it was reached.
+export function forcePositions(forces, moves, date) {
+  const out = [];
+  for (const f of forces ?? []) {
+    const mine = moves.filter((m) => m.force === f.id && m.coords?.length).sort((a, b) => eventFirst(a) - eventFirst(b));
+    if (!mine.length) continue;
+    const done = mine.filter((m) => eventLast(m) <= date);
+    const going = mine.find((m) => eventFirst(m) <= date && eventLast(m) > date);
+    let at = null, since = null, moving = null;
+    if (done.length) { const last = done[done.length - 1]; at = last.coords[last.coords.length - 1]; since = eventLast(last); }
+    if (going) { if (!done.length) { at = going.coords[0]; since = eventFirst(going); } moving = going; }
+    if (!at) continue;
+    const earlier = done.slice(0, -1).map((m) => ({ at: m.coords[m.coords.length - 1], date: eventLast(m), label: m.label }));
+    const row = going ?? done[done.length - 1];
+    out.push({ force: f, side: f.side, at, since, moving: !!moving, row, earlier });
+  }
+  return out;
+}
+
+// The equipment a force shows on a date: the row's own `tech` if it has one, else the force's first key; refused,
+// with a reason, when the catalog's years do not cover the date (no tank in 1846). → { key, ok, why }
+export function techFor(force, row, tech, date) {
+  const key = (row?.tech || '').trim() || force?.tech?.[0] || null;
+  if (!key) return { key: null, ok: false, why: null };
+  const item = tech?.items?.[key];
+  if (!item) return { key, ok: false, why: `"${key}" is not in the tech catalog (data/tech.json)` };
+  const year = Math.floor(date / 10000);
+  if (item.in_use && (year < item.in_use.from || year > item.in_use.to)) return { key, ok: false, why: `${key} was in use ${item.in_use.from}–${item.in_use.to} by the catalog, not in ${year}: the plain glyph draws` };
+  return { key, ok: true, why: null, item };
+}
+
 const DIAMONDS = new Set(['battle', 'siege', 'naval-battle', 'raid']);
 const TRIANGLES = new Set(['declaration', 'treaty', 'armistice', 'surrender']);
 
@@ -80,6 +114,8 @@ export function eventLook(r, war) {
   } else if (TRIANGLES.has(r.value)) base.form = 'triangle';
   else if (r.value === 'capture') { base.form = 'capital'; base.ring = sideOf(r.side); }
   else if (r.value === 'landing') base.form = 'circle';
+  else if (r.value === 'fort') { base.form = 'fort'; base.ring = r.captor ? sideOf(r.captor) : null; } // P6: one navy mark; a ring in a captor's color
+  else if (r.value === 'headquarters') { base.form = 'hq'; base.ring = sideOf(r.side); }
   return base;
 }
 
@@ -128,6 +164,23 @@ export function courseList(events, war) {
     .map((r) => ({ n: r.seq, record: r.id, date: eventDate(r), label: r.label, outcome: outcomeText(r, war), value: r.value, off: !!r.offSheet }));
 }
 
+// The path data of a game-icons file as the catalog keeps it (the square already stripped): every path's d, joined.
+export function svgPath(svg) {
+  const ds = [...String(svg).matchAll(/<path[^>]*\sd="([^"]+)"/g)].map((m) => m[1]);
+  return { d: ds.join(' '), viewBox: /viewBox="([^"]+)"/.exec(svg)?.[1] ?? '0 0 512 512' };
+}
+
+// Legend rows for the forces on the sheet: the frame, each equipment icon in use (with its years), earlier stands.
+export function forceLegend(positions, checks, tech) {
+  if (!positions.length) return [];
+  const rows = [{ swatch: 'force', label: 'A force: its type and size (XX a division)', role: 'force' }];
+  const used = new Map();
+  for (const p of positions) { const c = checks[p.force.id]; if (c?.ok && !used.has(c.key)) used.set(c.key, c.item); }
+  for (const [key, item] of used) rows.push({ swatch: 'icon', icon: key, label: `${item.depicts}${item.in_use ? `, ${item.in_use.from < 0 ? '' : item.in_use.from}–${item.in_use.to > 2050 ? 'today' : item.in_use.to}` : ''}`, role: 'equipment' });
+  if (positions.some((p) => p.earlier.length)) rows.push({ swatch: 'fade', label: 'Earlier stands: lighter, earliest lightest', role: 'force' });
+  return rows;
+}
+
 // Legend rows for the events on the sheet (grammar §5 kept: the diamond stays; its fill is the victor's color).
 // sides: { id → { color } } from the war; colors: (colorKey) → { line } (src/military/sides.js or the tokens).
 export function eventLegend(events, war, colorOf) {
@@ -144,6 +197,8 @@ export function eventLegend(events, war, colorOf) {
   if (looks.some((l) => l.form === 'triangle')) rows.push({ swatch: 'shape', shape: 'navy-triangle', label: 'Declaration of war, treaty', role: 'event' });
   const cap = looks.find((l) => l.form === 'capital');
   if (cap) rows.push({ swatch: 'shape', shape: 'moss-circle', ring: cap.ring ? colorOf(cap.ring.color).line : '#1F2A44', label: 'Place taken (ring: the captor)', role: 'event' });
+  if (looks.some((l) => l.form === 'fort')) rows.push({ swatch: 'icon', icon: 'fort', label: 'Fort (one mark in every era)', role: 'event' });
+  if (looks.some((l) => l.form === 'hq')) rows.push({ swatch: 'hq', label: 'Headquarters, dated', role: 'event' });
   if (events.some((r) => r.seq != null)) rows.push({ swatch: 'numeral', label: 'The course of the war: see the list', role: 'event' });
   return rows;
 }

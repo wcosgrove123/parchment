@@ -185,3 +185,8 @@ body:not(.tracker-military) #war { display: none; }
 .legend .swatch-line.blockade.side-a { stroke: var(--side-a-line); } .legend .swatch-line.blockade.side-b { stroke: var(--side-b-line); }
 .legend .swatch-line.blockade.side-c { stroke: var(--side-c-line); } .legend .swatch-line.blockade.side-d { stroke: var(--side-d-line); }
 .mil-lines text { font-family: var(--font); }
+
+/* the Military layer's force marks (milestone 5): a milsymbol frame in the side's color, the equipment icon beside it */
+.mil-force .mil-frame svg { overflow: visible; }
+.mil-force-label { font-family: var(--font); }
+.mil-force.earlier { pointer-events: none; }

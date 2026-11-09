@@ -9,6 +9,7 @@ import * as d3 from 'd3';
 import { eventLook, courseList, eventDate, eventFirst, eventLast, fmtWhen, forceBars } from './events.js';
 import { toInt } from './wars.js';
 import { smoothRun, thinRun } from './lines.js';
+import { faded } from './sides.js';
 
 const NAVY = '#1F2A44', RUST = '#C8601A', CREAM = '#F7F5EF', GOLD = '#c8a65d';
 const HALF_L = (r) => `M0,${-r}L${-r},0L0,${r}Z`;
@@ -17,8 +18,17 @@ const HALF_R = (r) => `M0,${-r}L${r},0L0,${r}Z`;
 const cssColor = (k) => (typeof getComputedStyle === 'function' ? getComputedStyle(document.documentElement).getPropertyValue(`--side-${k}-line`).trim() : '') || NAVY;
 export const lineColorOf = (color) => ({ line: cssColor(color) });
 
+// An icon from the catalog (path data in a 512 box), `size` px tall, centered at (x, y). icons: { key → { d, viewBox } }.
+export function iconAt(g, icons, key, x, y, size, fill) {
+  const ic = icons?.[key];
+  if (!ic) return null;
+  const k = size / 512;
+  return g.append('path').attr('class', `mil-icon icon-${key}`).attr('d', ic.d).attr('fill', fill).attr('transform', `translate(${x - size / 2},${y - size / 2}) scale(${k})`);
+}
+
 // placed: [{ r, x, y, radius }] from drawMarks. Returns the boxes of the numerals, for the label pass to keep clear of.
-export function decorateMarks(layer, placed, war) {
+// icons: the catalog's path data, for the fort mark (P6: one navy mark in every era, the owner's star fort).
+export function decorateMarks(layer, placed, war, icons = {}) {
   const boxes = [];
   const taken = [];
   const groups = layer.selectAll('g.mark-group').nodes();
@@ -43,7 +53,18 @@ export function decorateMarks(layer, placed, war) {
       } else if (look.outcome?.kind === 'inconclusive') path.style('fill', CREAM).style('stroke', RUST).style('stroke-width', 1.6);
       // (no outcome recorded: the rust diamond as on every other layer)
     }
-    if (look.ring) g.insert('circle', ':first-child').attr('class', 'mil mil-ring').attr('r', rad + 5).attr('fill', 'none').attr('stroke', cssColor(look.ring.color)).attr('stroke-width', 2);
+    if (look.form === 'fort' && icons.fort) {
+      // the star fort in navy stands in for the square the other layers would draw
+      path.style('display', 'none');
+      iconAt(g, icons, 'fort', 0, 0, 20, NAVY).attr('class', 'mil mil-fort');
+    } else if (look.form === 'hq') {
+      path.style('display', 'none');
+      const h = 18;
+      g.append('line').attr('class', 'mil').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', -h).attr('stroke', NAVY).attr('stroke-width', 1.1);
+      g.append('path').attr('class', 'mil').attr('d', `M0,${-h}L14,${-h + 4}L0,${-h + 8}Z`).attr('fill', look.ring ? cssColor(look.ring.color) : NAVY);
+      g.append('circle').attr('class', 'mil').attr('r', 1.6).attr('fill', NAVY);
+    }
+    if (look.ring && look.form !== 'hq') g.insert('circle', ':first-child').attr('class', 'mil mil-ring').attr('r', rad + 5).attr('fill', 'none').attr('stroke', cssColor(look.ring.color)).attr('stroke-width', 2);
     if (r.seq != null) {
       // the numeral: an outlined circle beside the mark, at the first of eight places that is clear of other numerals
       const R = 8.5, d = rad + R + 1;
@@ -105,7 +126,7 @@ export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner =
 // The computed lines (P7; src/military/lines.js): a blockade just offshore in the blockading side's color with small
 // hull marks along it; a treaty or armistice line in navy; a ghost border in navy at half strength; each named along
 // its longest run. lines: [{ id, kind, color, label, runs }]. Drawn under the routes and marks.
-export function drawLines(layer, defs, lines) {
+export function drawLines(layer, defs, lines, icons = {}) {
   layer.selectAll('*').remove();
   defs.selectAll('path.mil-line-guide').remove();
   for (const l of lines) {
@@ -116,11 +137,16 @@ export function drawLines(layer, defs, lines) {
     for (const run of l.runs) {
       g.append('path').attr('d', pathOf(run)).attr('fill', 'none').attr('stroke', stroke).attr('stroke-width', width).attr('stroke-opacity', opacity).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
       if (l.kind === 'blockade') {
-        // hull marks every so often: a small half-disc on the seaward side (no icon until the owner has reviewed one)
+        // ship marks every so often: the reviewed ship icon of the line's `tech` (a paddle steamer in 1846), else a
+        // small half-disc hull on the line
         let acc = 40;
         for (let i = 1; i < run.length; i++) {
           acc += Math.hypot(run[i][0] - run[i - 1][0], run[i][1] - run[i - 1][1]);
-          if (acc >= 90) { g.append('path').attr('d', 'M-4,0A4,4 0 0 0 4,0Z').attr('transform', `translate(${run[i][0]},${run[i][1]})`).attr('fill', stroke).attr('fill-opacity', 0.9); acc = 0; }
+          if (acc >= 90) {
+            if (l.tech && icons[l.tech]) iconAt(g, icons, l.tech, run[i][0], run[i][1] - 6, 13, stroke);
+            else g.append('path').attr('d', 'M-4,0A4,4 0 0 0 4,0Z').attr('transform', `translate(${run[i][0]},${run[i][1]})`).attr('fill', stroke).attr('fill-opacity', 0.9);
+            acc = 0;
+          }
         }
       }
     }
@@ -139,6 +165,88 @@ export function drawLines(layer, defs, lines) {
 }
 const pathOf = (pts) => (pts.length ? `M${pts.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join('L')}` : '');
 const runLen = (r) => r.reduce((a, p, i) => (i ? a + Math.hypot(p[0] - r[i - 1][0], p[1] - r[i - 1][1]) : 0), 0);
+
+// ---------- force marks (brief §3; milestone 5) ----------
+// milsymbol (vendored, MIT; loaded by the page as a script, globalThis.ms): the frame, glyph and size mark of a
+// force in MIL-STD-2525C letter codes, the same friendly land frame for every side, in the side's color. Without
+// the library a plain rectangle with the four classic glyphs stands in, so the map never goes blank.
+const GLYPH = { infantry: 'SFG-UCI----', cavalry: 'SFG-UCR----', artillery: 'SFG-UCF----', armor: 'SFG-UCA----', aviation: 'SFG-UCVF---', naval: 'SFG-UCI----' };
+const ECHELON = { '': '-', I: 'G', X: 'H', XX: 'I', XXX: 'J', XXXX: 'K' };
+export function forceFrame(g, x, y, { glyph = 'infantry', echelon = 'XX', color = NAVY, size = 22 } = {}) {
+  const ms = globalThis.ms;
+  const sidc = `${GLYPH[glyph] ?? GLYPH.infantry}${ECHELON[echelon] ?? '-'}`;
+  if (ms?.Symbol) {
+    try {
+      const sym = new ms.Symbol(sidc, { size, monoColor: color, fill: false, frame: true, strokeWidth: 4, infoFields: false, outlineWidth: 0 });
+      const doc = new DOMParser().parseFromString(sym.asSVG(), 'image/svg+xml');
+      const node = document.importNode(doc.documentElement, true);
+      const a = sym.getAnchor(), s = sym.getSize();
+      g.append('g').attr('class', 'mil-frame').attr('transform', `translate(${x - a.x},${y - a.y})`).node().appendChild(node);
+      return { w: s.width, h: s.height, ok: true };
+    } catch { /* fall through to the plain frame */ }
+  }
+  const w = size * 1.5, h = size;
+  const grp = g.append('g').attr('class', 'mil-frame plain').attr('transform', `translate(${x - w / 2},${y - h / 2})`).attr('fill', 'none').attr('stroke', color).attr('stroke-width', 1.6);
+  grp.append('rect').attr('width', w).attr('height', h);
+  if (glyph === 'infantry') grp.append('path').attr('d', `M0,0L${w},${h}M${w},0L0,${h}`);
+  if (glyph === 'cavalry') grp.append('path').attr('d', `M0,${h}L${w},0`);
+  if (glyph === 'artillery') grp.append('circle').attr('cx', w / 2).attr('cy', h / 2).attr('r', 3).attr('fill', color);
+  if (glyph === 'armor') grp.append('ellipse').attr('cx', w / 2).attr('cy', h / 2).attr('rx', w * 0.32).attr('ry', h * 0.28);
+  if (echelon) grp.append('text').attr('x', w / 2).attr('y', -3).attr('text-anchor', 'middle').attr('font-size', 9).attr('font-weight', 700).attr('fill', color).attr('stroke', 'none').text(echelon);
+  return { w: w + 8, h: h + 12, ok: false };
+}
+
+// Force marks on the sheet (P4 included): each force at its stand on the date, a hairline back to the exact place,
+// the frame in the side's color with the equipment icon beside it when the catalog allows it on that date, the
+// label below; earlier stands as smaller frames in lighter steps, earliest lightest. positions: forcePositions;
+// checks: { forceId → techFor result }. Returns the boxes drawn, for the label pass to keep clear of.
+export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}, box = null } = {}) {
+  layer.selectAll('*').remove();
+  const boxes = [];
+  const inBox = (p) => !box || (p[0] >= box[0] && p[0] <= box[0] + box[2] && p[1] >= box[1] && p[1] <= box[1] + box[3]);
+  for (const pos of positions) {
+    const f = pos.force;
+    const color = cssColor(f.sideColor ?? 'a');
+    // earlier stands (P4): lighter the earlier
+    pos.earlier.forEach((e, i) => {
+      const xy = proj(e.at);
+      if (!xy || !inBox(xy)) return;
+      const t = 1 - (i + 1) / (pos.earlier.length + 1); // 1 = earliest
+      const g = layer.append('g').attr('class', 'mil-force earlier').attr('opacity', 0.95);
+      forceFrame(g, xy[0] + 12, xy[1] - 12, { glyph: f.type, echelon: f.echelon ?? '', color: faded(color, 0.35 + 0.5 * t), size: 15 });
+      g.append('title').text(`${f.label}: ${e.label}, to ${e.date}`);
+    });
+    const xy = proj(pos.at);
+    if (!xy || !inBox(xy)) continue;
+    const g = layer.append('g').attr('class', 'mil-force');
+    // several forces at one place (two armies met at a battle) stack: the first at the usual offset, the next
+    // below, then above, then farther, until the frame and label touch no earlier force's box
+    const strengthText = f.strength?.text ? f.strength.text.split(';')[0].replace(/ at .*$/, '') : '';
+    const labelW = (f.label.length + (strengthText ? strengthText.length + 3 : 0)) * 6.4;
+    const need = { w: Math.max(labelW, 60) + 4, h: 22 + 22 };
+    const free = (bx, by) => !boxes.some((b) => bx < b.x + b.w + 4 && bx + need.w > b.x - 4 && by < b.y + b.h + 4 && by + need.h > b.y - 4);
+    const fx = xy[0] + 16;
+    let fy = xy[1] - 18;
+    for (const dy of [0, 46, -46, 92, -92, 138, -138]) {
+      const ty = xy[1] - 18 + dy;
+      if (free(fx - need.w / 2, ty - 13)) { fy = ty; break; }
+    }
+    g.append('line').attr('x1', xy[0]).attr('y1', xy[1]).attr('x2', fx - 6).attr('y2', fy + 6).attr('stroke', color).attr('stroke-width', 0.8).attr('stroke-opacity', 0.8);
+    g.append('circle').attr('cx', xy[0]).attr('cy', xy[1]).attr('r', 2).attr('fill', color);
+    const fr = forceFrame(g, fx, fy, { glyph: f.type, echelon: f.echelon ?? '', color, size: 22 });
+    let right = fx + fr.w / 2;
+    const check = checks[f.id];
+    if (check?.ok && icons[check.key]) { iconAt(g, icons, check.key, right + 12, fy, 20, color); right += 24; }
+    const label = g.append('text').attr('class', 'mil-force-label').attr('x', fx).attr('y', fy + fr.h / 2 + 12).attr('text-anchor', 'middle').attr('font-size', 11).attr('font-weight', 700).attr('fill', color)
+      .attr('paint-order', 'stroke fill').attr('stroke', CREAM).attr('stroke-width', 3).attr('stroke-linejoin', 'round');
+    label.append('tspan').text(f.label);
+    if (strengthText) label.append('tspan').attr('font-weight', 400).attr('font-style', 'italic').attr('font-size', 10).text(` · ${strengthText}`);
+    g.append('title').text(`${f.commander ?? f.label}${f.strength?.text ? ` · ${f.strength.text}` : ''}${check?.key ? ` · ${check.key}${check.ok ? '' : ` (${check.why})`}` : ''}`);
+    const w = Math.max(right - (fx - fr.w / 2), labelW, 60);
+    boxes.push({ x: fx - Math.max(labelW, fr.w) / 2 - 2, y: fy - fr.h / 2 - 2, w: w + 4, h: fr.h + 18 });
+  }
+  return boxes;
+}
 
 // A route that leaves the frame stops at its edge with a tab saying where it went (P3). drawn: from drawRoutes;
 // box: the main view's [x, y, w, h]. Tabs go in the labels layer, above everything.
