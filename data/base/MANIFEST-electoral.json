@@ -1,0 +1,427 @@
+{
+  "source": "U.S. National Archives and Records Administration, Electoral College box scores",
+  "licence": "Public domain (a work of the U.S. federal government)",
+  "note": "Written by scripts/fetch-electoral.mjs. Raw pages live in data/base/raw/electoral/ (not committed).",
+  "files": [
+    {
+      "year": 1789,
+      "url": "https://www.archives.gov/electoral-college/1789",
+      "retrieved": "2026-11-06T13:31:44.691Z",
+      "bytes": 38959,
+      "sha256": "2561aedbccc6f6dd69ab69d9dc521353527316d4234bea6953ead01c0df7ab53"
+    },
+    {
+      "year": 1792,
+      "url": "https://www.archives.gov/electoral-college/1792",
+      "retrieved": "2026-11-06T13:31:44.695Z",
+      "bytes": 42474,
+      "sha256": "db5de367a928dd93c669a7c7f0650ef3c33f737135ffccb43da9063871947a73"
+    },
+    {
+      "year": 1796,
+      "url": "https://www.archives.gov/electoral-college/1796",
+      "retrieved": "2026-11-06T13:31:44.696Z",
+      "bytes": 45109,
+      "sha256": "fddb1ff64b12df0320c4db2ca576fbb043b989e19a73c4edf8b86f5f856045fb"
+    },
+    {
+      "year": 1800,
+      "url": "https://www.archives.gov/electoral-college/1800",
+      "retrieved": "2026-11-06T13:31:44.696Z",
+      "bytes": 43595,
+      "sha256": "fb7e6dc1e3feb8a3dba332c2ff5597f2b15a0290b112e7e871ef1e833d825c97"
+    },
+    {
+      "year": 1804,
+      "url": "https://www.archives.gov/electoral-college/1804",
+      "retrieved": "2026-11-06T13:31:44.696Z",
+      "bytes": 41817,
+      "sha256": "0da692d52bbb33b6a5519fa1622eac738a22c1e66fcd922b8fd42133d39dbd4f"
+    },
+    {
+      "year": 1808,
+      "url": "https://www.archives.gov/electoral-college/1808",
+      "retrieved": "2026-11-06T13:31:44.697Z",
+      "bytes": 44732,
+      "sha256": "a0fbc028f7c176fcad0193541e638a84a7ea0d3fb08b8e5ad9e55e2c10f52895"
+    },
+    {
+      "year": 1812,
+      "url": "https://www.archives.gov/electoral-college/1812",
+      "retrieved": "2026-11-06T13:31:44.697Z",
+      "bytes": 41712,
+      "sha256": "243faef95410460a8355e4b2740b39c91e8af27dc0b7d54d61af91486cfa4923"
+    },
+    {
+      "year": 1816,
+      "url": "https://www.archives.gov/electoral-college/1816",
+      "retrieved": "2026-11-06T13:31:44.697Z",
+      "bytes": 44775,
+      "sha256": "93e44ae470ca93cf60f70df9cc08ccb642f2ced1a1233b74767d3c17e0a8f5cc"
+    },
+    {
+      "year": 1820,
+      "url": "https://www.archives.gov/electoral-college/1820",
+      "retrieved": "2026-11-06T13:31:44.698Z",
+      "bytes": 46330,
+      "sha256": "604bb7feb4c1351c5e3d824428e6d5bd7d759f7d42183b9a1f8716dd0c77fa43"
+    },
+    {
+      "year": 1824,
+      "url": "https://www.archives.gov/electoral-college/1824",
+      "retrieved": "2026-11-06T13:31:44.698Z",
+      "bytes": 47516,
+      "sha256": "263c4fd52be6268df51f3fd3271a13e230e812144fbdd5a07d0ee0122dad7faf"
+    },
+    {
+      "year": 1828,
+      "url": "https://www.archives.gov/electoral-college/1828",
+      "retrieved": "2026-11-06T13:31:44.698Z",
+      "bytes": 44145,
+      "sha256": "e2939e0409182ff9d85ee2e96d4f76f03b534c0174667f342a900bbac9db294c"
+    },
+    {
+      "year": 1832,
+      "url": "https://www.archives.gov/electoral-college/1832",
+      "retrieved": "2026-11-06T13:31:44.699Z",
+      "bytes": 46352,
+      "sha256": "5fcc51647dbb0cd36dc0a25fecd5feb68b0472125fc8db9f91b8f07ba64f5047"
+    },
+    {
+      "year": 1836,
+      "url": "https://www.archives.gov/electoral-college/1836",
+      "retrieved": "2026-11-06T13:31:44.699Z",
+      "bytes": 47472,
+      "sha256": "5c30b2ba478c9442dce84e80ee571102d8bfd3d55499f18e8bf7386d2b4f0a66"
+    },
+    {
+      "year": 1840,
+      "url": "https://www.archives.gov/electoral-college/1840",
+      "retrieved": "2026-11-06T13:31:44.699Z",
+      "bytes": 45879,
+      "sha256": "4804cc49333369321d54cd37c11663cf0265dda3bbded4a671d6eed18a9ad253"
+    },
+    {
+      "year": 1844,
+      "url": "https://www.archives.gov/electoral-college/1844",
+      "retrieved": "2026-11-06T13:31:44.701Z",
+      "bytes": 43589,
+      "sha256": "580d3133036ff71f9be3c6fa9b5ea5ed23a29e14f3d5c01965863c2c9f488b4e"
+    },
+    {
+      "year": 1848,
+      "url": "https://www.archives.gov/electoral-college/1848",
+      "retrieved": "2026-11-06T13:31:44.702Z",
+      "bytes": 44659,
+      "sha256": "9de803b72102f5389015c53921389cd89030d51ab395d0bba72482ee46629db2"
+    },
+    {
+      "year": 1852,
+      "url": "https://www.archives.gov/electoral-college/1852",
+      "retrieved": "2026-11-06T13:31:44.702Z",
+      "bytes": 44634,
+      "sha256": "0a016eca989013fa8608be965a3058574cb7b416c5001964e15fc72731cab41d"
+    },
+    {
+      "year": 1856,
+      "url": "https://www.archives.gov/electoral-college/1856",
+      "retrieved": "2026-11-06T13:31:44.703Z",
+      "bytes": 47005,
+      "sha256": "97a15153d10df9a996e8533eecec4fc22996c6f82eade5593990fa08eb206548"
+    },
+    {
+      "year": 1860,
+      "url": "https://www.archives.gov/electoral-college/1860",
+      "retrieved": "2026-11-06T13:31:44.703Z",
+      "bytes": 50017,
+      "sha256": "850eb9c07de88634820a9c32a9aedf63b757d8627e8cf662f8d7ab3229f0c86a"
+    },
+    {
+      "year": 1864,
+      "url": "https://www.archives.gov/electoral-college/1864",
+      "retrieved": "2026-11-06T13:31:44.703Z",
+      "bytes": 46350,
+      "sha256": "8284e65da33207add1921888bae8579aae5c655ec90920a6bf4f21a918393edc"
+    },
+    {
+      "year": 1868,
+      "url": "https://www.archives.gov/electoral-college/1868",
+      "retrieved": "2026-11-06T13:31:44.704Z",
+      "bytes": 46982,
+      "sha256": "2f819fa775e4fc16cd3d1342f5b2a15f680588782b46a7ac4f967ff03be1483a"
+    },
+    {
+      "year": 1872,
+      "url": "https://www.archives.gov/electoral-college/1872",
+      "retrieved": "2026-11-06T13:31:44.704Z",
+      "bytes": 52372,
+      "sha256": "3e3ac7100c02aa436bbddb4e403afc266f63f487ef223893a7a2620ac18a6bc6"
+    },
+    {
+      "year": 1876,
+      "url": "https://www.archives.gov/electoral-college/1876",
+      "retrieved": "2026-11-06T13:31:44.705Z",
+      "bytes": 46833,
+      "sha256": "123c3d2d50721a2e4c2f4255e37cb453be7bcc9d02abfd5e37ff68a155fe7bda"
+    },
+    {
+      "year": 1880,
+      "url": "https://www.archives.gov/electoral-college/1880",
+      "retrieved": "2026-11-06T13:31:44.705Z",
+      "bytes": 47112,
+      "sha256": "525f03552738764b092c0a9923ad8abcaf8ce2050bb025d5169c87ec9fe7ee5c"
+    },
+    {
+      "year": 1884,
+      "url": "https://www.archives.gov/electoral-college/1884",
+      "retrieved": "2026-11-06T13:31:44.705Z",
+      "bytes": 46005,
+      "sha256": "c214c95b98f08fbf2d3b6cd32329de8d919f66d950af94354ad5de1de3549e52"
+    },
+    {
+      "year": 1888,
+      "url": "https://www.archives.gov/electoral-college/1888",
+      "retrieved": "2026-11-06T13:31:44.706Z",
+      "bytes": 46032,
+      "sha256": "695238ce577e7624acdc9b222e3abe808194d74b44d1918378c117afdfb8d010"
+    },
+    {
+      "year": 1892,
+      "url": "https://www.archives.gov/electoral-college/1892",
+      "retrieved": "2026-11-06T13:31:44.706Z",
+      "bytes": 50349,
+      "sha256": "ec7c5623ccf5db3696fe98881cf981abb78d0b0f3977eb25967928da7ba24e97"
+    },
+    {
+      "year": 1896,
+      "url": "https://www.archives.gov/electoral-college/1896",
+      "retrieved": "2026-11-06T13:31:44.707Z",
+      "bytes": 49111,
+      "sha256": "f95f33f05b5e4f1cdb27e0f9bf035db3427a1c32c771c99abc3641922b3c3260"
+    },
+    {
+      "year": 1900,
+      "url": "https://www.archives.gov/electoral-college/1900",
+      "retrieved": "2026-11-06T13:31:44.707Z",
+      "bytes": 47705,
+      "sha256": "8264b978f9b48ccdffd8eab7ed40f8fedfd8dfcfe50d85d1aaae49ddeb45de3d"
+    },
+    {
+      "year": 1904,
+      "url": "https://www.archives.gov/electoral-college/1904",
+      "retrieved": "2026-11-06T13:31:44.707Z",
+      "bytes": 47425,
+      "sha256": "5466facba39cd4a816dbe0c87bf03fbd09f4521c30683894b7ead0bf2df1d81c"
+    },
+    {
+      "year": 1908,
+      "url": "https://www.archives.gov/electoral-college/1908",
+      "retrieved": "2026-11-06T13:31:44.708Z",
+      "bytes": 47745,
+      "sha256": "6381d401b2369498cc662be04ed53887a498c8c444e97529babe78dc0b6aa186"
+    },
+    {
+      "year": 1912,
+      "url": "https://www.archives.gov/electoral-college/1912",
+      "retrieved": "2026-11-06T13:31:44.708Z",
+      "bytes": 51723,
+      "sha256": "02b5027de079518cfb1118e6a3494426ed74a135e59f3331983f2ea69224e997"
+    },
+    {
+      "year": 1916,
+      "url": "https://www.archives.gov/electoral-college/1916",
+      "retrieved": "2026-11-06T13:31:44.709Z",
+      "bytes": 48026,
+      "sha256": "c5e8b89d2c4e544254a49c4316b4aa00504b1e3ceb1724c3bdd61680cadd69ef"
+    },
+    {
+      "year": 1920,
+      "url": "https://www.archives.gov/electoral-college/1920",
+      "retrieved": "2026-11-06T13:31:44.710Z",
+      "bytes": 48229,
+      "sha256": "278709a52ae6bea4869c641713a4a163fa32e9bb2d2b57d4b34d1e76803077d2"
+    },
+    {
+      "year": 1924,
+      "url": "https://www.archives.gov/electoral-college/1924",
+      "retrieved": "2026-11-06T13:31:44.711Z",
+      "bytes": 51538,
+      "sha256": "274ee5d17459ce46f0453a35a64b601003bb7010a663fdbbee5b4b745e350067"
+    },
+    {
+      "year": 1928,
+      "url": "https://www.archives.gov/electoral-college/1928",
+      "retrieved": "2026-11-06T13:31:44.711Z",
+      "bytes": 48005,
+      "sha256": "4ff0e7c011ff0a1eddace07a4611ebd67e19ca053481c3cca7c980a81f1df097"
+    },
+    {
+      "year": 1932,
+      "url": "https://www.archives.gov/electoral-college/1932",
+      "retrieved": "2026-11-06T13:31:44.712Z",
+      "bytes": 48264,
+      "sha256": "ff307676f41fb4d2498b9648be1853acd304f2ddae70d9675a70d32481beac11"
+    },
+    {
+      "year": 1936,
+      "url": "https://www.archives.gov/electoral-college/1936",
+      "retrieved": "2026-11-06T13:31:44.712Z",
+      "bytes": 47953,
+      "sha256": "07f39a369cc1c0112d3853478616df28459778d2f91df8ad4a3035e83bea496b"
+    },
+    {
+      "year": 1940,
+      "url": "https://www.archives.gov/electoral-college/1940",
+      "retrieved": "2026-11-06T13:31:44.712Z",
+      "bytes": 48026,
+      "sha256": "62e907370e7dd6839d13d81bd9fcfd965f652424127c1e77a57ac174e84acbd9"
+    },
+    {
+      "year": 1944,
+      "url": "https://www.archives.gov/electoral-college/1944",
+      "retrieved": "2026-11-06T13:31:44.713Z",
+      "bytes": 48499,
+      "sha256": "8ee16df469898ea0826f3086b1d58d8ecc1f468d260228bf8188e2e9cc0f1396"
+    },
+    {
+      "year": 1948,
+      "url": "https://www.archives.gov/electoral-college/1948",
+      "retrieved": "2026-11-06T13:31:44.713Z",
+      "bytes": 51422,
+      "sha256": "30bf88742139f72f9449187a3b0605792bfc0a57760539f565aad8567385998b"
+    },
+    {
+      "year": 1952,
+      "url": "https://www.archives.gov/electoral-college/1952",
+      "retrieved": "2026-11-06T13:31:44.713Z",
+      "bytes": 47972,
+      "sha256": "642506eb7d4df5b08ac75983e2320b7b19c57e85b58e8b50a00b5245813f3511"
+    },
+    {
+      "year": 1956,
+      "url": "https://www.archives.gov/electoral-college/1956",
+      "retrieved": "2026-11-06T13:31:44.713Z",
+      "bytes": 51517,
+      "sha256": "5b049201f30ad1094c4e2b72eac06678b5e99e2c6864e49bcd6a2e5825af3c30"
+    },
+    {
+      "year": 1960,
+      "url": "https://www.archives.gov/electoral-college/1960",
+      "retrieved": "2026-11-06T13:31:44.714Z",
+      "bytes": 54497,
+      "sha256": "41eb8f7951de603375faf3cc33484784e2b642896eb3337cffa2a63fd58caa1b"
+    },
+    {
+      "year": 1964,
+      "url": "https://www.archives.gov/electoral-college/1964",
+      "retrieved": "2026-11-06T13:31:44.714Z",
+      "bytes": 48662,
+      "sha256": "88c71c883df9890928831e394eca3927e781e2c7c0cd28a619d07e39755fecc3"
+    },
+    {
+      "year": 1968,
+      "url": "https://www.archives.gov/electoral-college/1968",
+      "retrieved": "2026-11-06T13:31:44.714Z",
+      "bytes": 52448,
+      "sha256": "c88383fe6b8c07054f237e5711a6d6f44fea2d197e84f52a33b21149d8ec77c1"
+    },
+    {
+      "year": 1972,
+      "url": "https://www.archives.gov/electoral-college/1972",
+      "retrieved": "2026-11-06T13:31:44.715Z",
+      "bytes": 52905,
+      "sha256": "530dc1eda5136c4872aab35d8b5a672c022375850f149adcff68cddaa780c647"
+    },
+    {
+      "year": 1976,
+      "url": "https://www.archives.gov/electoral-college/1976",
+      "retrieved": "2026-11-06T13:31:44.715Z",
+      "bytes": 50777,
+      "sha256": "3a3e2290d315c4e57db7b6eb096f79cf6ac2011756d923758a1ff22ca2981f6c"
+    },
+    {
+      "year": 1980,
+      "url": "https://www.archives.gov/electoral-college/1980",
+      "retrieved": "2026-11-06T13:31:44.716Z",
+      "bytes": 49035,
+      "sha256": "623722483c2fbf33ab2a45c30b6b3025a77f293c62fe8e4840385075004c526b"
+    },
+    {
+      "year": 1984,
+      "url": "https://www.archives.gov/electoral-college/1984",
+      "retrieved": "2026-11-06T13:31:44.716Z",
+      "bytes": 48773,
+      "sha256": "0adf6f0ed8fb3d3097a806022df552a1cd67e09bf1bfa8b97bfc0a1305b93ad1"
+    },
+    {
+      "year": 1988,
+      "url": "https://www.archives.gov/electoral-college/1988",
+      "retrieved": "2026-11-06T13:31:44.716Z",
+      "bytes": 52490,
+      "sha256": "649d8e423cb3fb9f0d37696150773f485f3bbc5b29e778b2995f18ab28195608"
+    },
+    {
+      "year": 1992,
+      "url": "https://www.archives.gov/electoral-college/1992",
+      "retrieved": "2026-11-06T13:31:44.717Z",
+      "bytes": 48724,
+      "sha256": "dc31178c886b681ca718e9da8c831991979ad7efbfa81c1517070223ffec4621"
+    },
+    {
+      "year": 1996,
+      "url": "https://www.archives.gov/electoral-college/1996",
+      "retrieved": "2026-11-06T13:31:44.717Z",
+      "bytes": 48688,
+      "sha256": "54bae9ddd9f546d7a5fa13d30603bbbb3181e6ffc877a484014b665a6677d9ac"
+    },
+    {
+      "year": 2000,
+      "url": "https://www.archives.gov/electoral-college/2000",
+      "retrieved": "2026-11-06T13:31:44.718Z",
+      "bytes": 49025,
+      "sha256": "03824ebb9451bb9702ccd3cc38bc37dcce2007ab23f4cfeb42b0630644d05167"
+    },
+    {
+      "year": 2004,
+      "url": "https://www.archives.gov/electoral-college/2004",
+      "retrieved": "2026-11-06T13:31:44.718Z",
+      "bytes": 50888,
+      "sha256": "b5c1c066cc13f36a257a6ecdb6c7c31ef31d1d840d772f5174e1153200157459"
+    },
+    {
+      "year": 2008,
+      "url": "https://www.archives.gov/electoral-college/2008",
+      "retrieved": "2026-11-06T13:31:44.718Z",
+      "bytes": 50108,
+      "sha256": "112aa6925ab2a6226eae8403e665871b3a7f1306e0d1270aedeb7ca0da48effa"
+    },
+    {
+      "year": 2012,
+      "url": "https://www.archives.gov/electoral-college/2012",
+      "retrieved": "2026-11-06T13:31:44.719Z",
+      "bytes": 65981,
+      "sha256": "25789aae7711c25f752fcc2a3eb43b4510776c2ea8db61cd293b49b11af3fb04"
+    },
+    {
+      "year": 2016,
+      "url": "https://www.archives.gov/electoral-college/2016",
+      "retrieved": "2026-11-06T13:31:44.719Z",
+      "bytes": 64016,
+      "sha256": "75fa42f743efc769dfc03d1d2cbb92fb3a046566f32d7513c563ff5f6c568db0"
+    },
+    {
+      "year": 2020,
+      "url": "https://www.archives.gov/electoral-college/2020",
+      "retrieved": "2026-11-06T13:31:44.719Z",
+      "bytes": 57517,
+      "sha256": "bbcb50298d00027470b3955fcca41d4112d8128ab058491ffd546ce26b252023"
+    },
+    {
+      "year": 2024,
+      "url": "https://www.archives.gov/electoral-college/2024",
+      "retrieved": "2026-11-06T13:31:44.720Z",
+      "bytes": 57762,
+      "sha256": "2c7aeacafc95ff2fe96091f2e0f39bcf6051e336742b728850c6e68fce4d0b34"
+    }
+  ]
+}

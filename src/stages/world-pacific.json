@@ -1,0 +1,100 @@
+{
+  "id": "world-pacific",
+  "title": "The World",
+  "_comment": "The Pacific view. Equal Earth centered on 150°E: the cut runs down the open Atlantic at 30°W (through Greenland and west of the Azores). The owner asked for this view beside the Atlantic one (2026-11-06).",
+  "projection": "equalEarth",
+  "rotate": [
+    -150,
+    0
+  ],
+  "fit": "sphere",
+  "extent": {
+    "west": -30,
+    "south": -90,
+    "east": 330,
+    "north": 90
+  },
+  "span": [
+    1200,
+    2000
+  ],
+  "relief": "relief/world-pacific.png",
+  "legend": {
+    "anchor": "bottom-right",
+    "lift": 22
+  },
+  "labels": [
+    {
+      "text": "North America",
+      "lon": -100,
+      "lat": 47,
+      "kind": "region"
+    },
+    {
+      "text": "South America",
+      "lon": -66,
+      "lat": -10,
+      "kind": "region"
+    },
+    {
+      "text": "Europe",
+      "lon": 15,
+      "lat": 53,
+      "kind": "region"
+    },
+    {
+      "text": "Africa",
+      "lon": 20,
+      "lat": 5,
+      "kind": "region"
+    },
+    {
+      "text": "Asia",
+      "lon": 95,
+      "lat": 50,
+      "kind": "region",
+      "span": 50
+    },
+    {
+      "text": "Oceania",
+      "lon": 135,
+      "lat": -25,
+      "kind": "region",
+      "span": 30
+    },
+    {
+      "text": "Atlantic Ocean",
+      "lon": -50,
+      "lat": 28,
+      "kind": "water",
+      "span": 30
+    },
+    {
+      "text": "Atlantic Ocean",
+      "lon": 0,
+      "lat": -30,
+      "kind": "water",
+      "span": 40
+    },
+    {
+      "text": "Indian Ocean",
+      "lon": 80,
+      "lat": -15,
+      "kind": "water"
+    },
+    {
+      "text": "Pacific Ocean",
+      "lon": -150,
+      "lat": -12,
+      "kind": "water"
+    },
+    {
+      "text": "Pacific Ocean",
+      "lon": 170,
+      "lat": 30,
+      "kind": "water",
+      "span": 40
+    }
+  ],
+  "diff_min_km2": 250000
+}

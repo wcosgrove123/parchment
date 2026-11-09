@@ -8,15 +8,17 @@ Trade routes, exploration voyages, migrations, campaigns and the carriers of dif
 
 | channel | meaning (unchanged) | for routes |
 |---|---|---|
-| outline / line style | certainty | solid = documented lane or track; dashed = approximate; dotted, faint = conjectured. **Dash never encodes type.** (This retires "migration = dashed" from §5.) |
+| outline / line style | certainty | solid = documented (a voyage whose stops are documented is solid, though the line between them is schematic: owner, 2026-11-06); dashed = approximate; dotted, faint = conjectured (Cabot's disputed landfall). **Dash never encodes type.** (This retires "migration = dashed" from §5.) |
 | color | belonging / apparatus | steel blue: sea trade and voyages · **umber** (new token, `--route-land`, derived at navy's lightness toward hue 50): land trade · rust: armies and migrations · the carrier of a diffusion takes the route's own color, never a theme fill |
-| arrowhead | direction matters | none, or small heads at both ends: trade (goods went both ways) · one terminal head: a voyage · closed barb: an army · open chevron: a migration |
+| arrowhead | direction matters | none, or small heads at both ends: trade (goods went both ways) · one terminal head: a voyage · closed barb: an army · open chevron: a migration. A one-way route also carries its head at each marked stop on the way, never partway along (owner, 2026-11-06) |
 | width | quantity only with a legend | three categorical widths at most (2 / 3 / 4.5 px at 1920); default is the middle one |
 | ticks | dates | a voyage carries a small tick and year at each dated port |
 
 Diffusion of ideas and beliefs stays as §5 says: stepped shading by period (sequential palette), never an arrow. A map may show the carrier route beside the shading.
 
 Max three route classes on one map. A fourth becomes a caption sentence.
+
+**Explorers layer** (owner, 2026-11-06): its own tracker. A typed range of years shows every expedition whose dates touch it, and there color means the **state that sent it** (Spain, Portugal, England, France, the Dutch: `--sponsor-*` tokens, dark line colors, never a theme fill), with one head at the end and at each marked stop. Cultural diffusion is not state exploration: a missionary is a carrier under Routes. Routes that share a leg run side by side, 5 px apart, on every layer.
 
 ## 2. Records
 

@@ -168,3 +168,38 @@ body.shot #data-problems { display: none; }
 .record-labels .route-label.rust { fill: var(--rust); }
 .record-labels .route-label.ink { fill: var(--navy); }
 .record-labels .leader { stroke: var(--navy); stroke-width: 0.8; stroke-opacity: 0.7; }
+
+/* ---------- heads at stops: a short solid stub under the route's own end marker ---------- */
+.routes .route.route-stop { stroke-linecap: butt; stroke-dasharray: none; }
+
+/* ---------- Explorers layer (owner, 2026-11-06): color is the state that sent the expedition ---------- */
+.routes .route.spain { stroke: var(--sponsor-spain); }
+.routes .route.portugal { stroke: var(--sponsor-portugal); }
+.routes .route.england { stroke: var(--sponsor-england); }
+.routes .route.france { stroke: var(--sponsor-france); }
+.routes .route.netherlands { stroke: var(--sponsor-netherlands); }
+.route-head.spain path { fill: var(--sponsor-spain); stroke: var(--sponsor-spain); }
+.route-head.portugal path { fill: var(--sponsor-portugal); stroke: var(--sponsor-portugal); }
+.route-head.england path { fill: var(--sponsor-england); stroke: var(--sponsor-england); }
+.route-head.france path { fill: var(--sponsor-france); stroke: var(--sponsor-france); }
+.route-head.netherlands path { fill: var(--sponsor-netherlands); stroke: var(--sponsor-netherlands); }
+.legend .swatch-route.spain { stroke: var(--sponsor-spain); }
+.legend .swatch-route.portugal { stroke: var(--sponsor-portugal); }
+.legend .swatch-route.england { stroke: var(--sponsor-england); }
+.legend .swatch-route.france { stroke: var(--sponsor-france); }
+.legend .swatch-route.netherlands { stroke: var(--sponsor-netherlands); }
+.record-labels .route-label.spain { fill: var(--sponsor-spain); }
+.record-labels .route-label.portugal { fill: var(--sponsor-portugal); }
+.record-labels .route-label.england { fill: var(--sponsor-england); }
+.record-labels .route-label.france { fill: var(--sponsor-france); }
+.record-labels .route-label.netherlands { fill: var(--sponsor-netherlands); }
+
+/* Route layers (routes, explorers): the ground steps back so the lines lead. Borders and relief fainter. */
+body.tracker-routes .border, body.tracker-explorers .border { stroke-opacity: 0.3; }
+body.tracker-routes .relief, body.tracker-explorers .relief { opacity: 0.38; }
+
+/* Explorers: a typed range of years replaces the snapshot buttons and the Diff switch. */
+#toolbar #span { display: none; align-items: center; gap: 5px; font-size: 12px; }
+#toolbar #span input { font: inherit; width: 4.2em; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
+body.tracker-explorers #toolbar #span { display: inline-flex; }
+body.tracker-explorers #toolbar .seg, body.tracker-explorers #years, body.tracker-explorers #years-a, body.tracker-explorers #scope, body.tracker-explorers #play { display: none; }

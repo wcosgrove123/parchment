@@ -7,7 +7,9 @@
 //                      keeps only the ids (the map reads the coordinates from the gazetteer).
 // Wikidata's rate limit is respected: one request at a time, a pause between requests, retry with a longer wait
 // on 429 or a network error, and the gazetteer is written after every answer so a stopped run resumes where it was.
-//   node scripts/geocode.mjs [--force]      (--force refreshes every id, cached or not)
+//   node scripts/geocode.mjs [--force] [--file data/drafts/x.csv]
+//   --force refreshes every id, cached or not; --file reads (and fills) another table, such as a draft that is not
+//   in the Sheet yet. Every table shares the one gazetteer.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -15,7 +17,8 @@ import { fileURLToPath } from 'node:url';
 import { parseCSV, routeIds } from '../src/data/records.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const FILE = join(ROOT, 'data', 'records.csv');
+const fileArg = process.argv.indexOf('--file');
+const FILE = fileArg > -1 ? resolve(ROOT, process.argv[fileArg + 1]) : join(ROOT, 'data', 'records.csv');
 const GAZ = join(ROOT, 'data', 'gazetteer.json');
 const force = process.argv.includes('--force');
 const PAUSE_MS = 600; // between requests

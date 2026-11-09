@@ -8,7 +8,7 @@ import { feature, mesh } from 'topojson-client';
 import { assetURL } from '../data/loader.js';
 import { paperDefs, drawPaper, drawPaperOverlay } from './paper.js';
 import { drawStageLabels, polityLabelData, drawPolityLabels, layoutLabels, makeMeasure } from './labels.js';
-import { routeDefs, drawRoutes } from './routes.js';
+import { routeDefs, drawRoutes, makeSeam } from './routes.js';
 import { createCartouche } from './cartouche.js';
 import { createStrip } from './strip.js';
 import { createLegend } from './legend.js';
@@ -36,7 +36,11 @@ const PROJECTIONS = {
   equalEarth: () => d3.geoEqualEarth(),
   lambertAzimuthalEqualArea: () => d3.geoAzimuthalEqualArea(),
   albersUsa: () => d3.geoAlbersUsa(),
+  // Albers equal-area conic with the USGS standard parallels 29.5° and 45.5°, centred on 96°W (North America stage).
+  albers: () => d3.geoAlbers(),
 };
+// The projections' own formulas, which carry on past the edge of the sheet: what the seam needs (routes.js).
+const RAW_PROJECTIONS = { equalEarth: d3.geoEqualEarthRaw };
 
 // A lon/lat box with its edges densified so fitExtent sees the box's curved outline in the projection.
 // d3-geo treats spherical polygons by winding order: the exterior ring must run clockwise
@@ -56,7 +60,10 @@ export function makeProjection(stage, inner) {
   if (!make) throw new Error(`Unknown projection ${stage.projection}`);
   const proj = make();
   if (stage.rotate && proj.rotate) proj.rotate(stage.rotate);
-  proj.fitExtent(inner, extentPolygon(stage.extent));
+  // A whole-world stage (`"fit": "sphere"`) fits the globe itself: a lon/lat box cannot wrap the seam.
+  proj.fitExtent(inner, stage.fit === 'sphere' ? { type: 'Sphere' } : extentPolygon(stage.extent));
+  // A stage may slide its map sideways inside the frame (px at 1920), to leave a margin for insets or the apparatus.
+  if (stage.shift) { const [tx, ty] = proj.translate(); proj.translate([tx + stage.shift[0], ty + stage.shift[1]]); }
   return proj;
 }
 
@@ -66,6 +73,8 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   const frame = { x0, y0, x1, y1 };
   const projection = makeProjection(stage, inner);
   const path = d3.geoPath(projection);
+  // The seam, for routes that cross the meridian opposite the stage's center (routes.js, makeSeam).
+  const seam = RAW_PROJECTIONS[stage.projection] ? makeSeam(projection, RAW_PROJECTIONS[stage.projection], d3.geoRotation(projection.rotate())) : null;
 
   // Projected path strings are cached per feature object: a snapshot switch only re-binds cached strings.
   const cache = new WeakMap();
@@ -141,7 +150,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Frame: gold on three sides; the bottom edge is the timeline strip's baseline.
   root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}`);
 
-  const legend = createLegend(root, frame);
+  const legend = createLegend(root, frame, stage.legend);
   let currentTracker = tracker;
   if (tracker) legend.set(tracker);
   const diffList = createDiffList(root, frame);
@@ -203,7 +212,13 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     if (stageLabelBoxes) return stageLabelBoxes;
     stageLabelBoxes = [];
     root.selectAll('g.stage-labels text').each(function () {
-      try { const b = this.getBBox(); if (b.width > 0) stageLabelBoxes.push({ x: b.x, y: b.y, w: b.width, h: b.height }); } catch { /* not rendered yet */ }
+      try {
+        const b = this.getBBox();
+        // A name longer than its guide line reports a box over half the sheet, which would keep every route and
+        // label out of it: leave it out and say so (lengthen the label's `span` in the stage file).
+        if (b.height > 80) console.warn(`stage label "${this.textContent}" outruns its guide line; give it a longer span`);
+        else if (b.width > 0) stageLabelBoxes.push({ x: b.x, y: b.y, w: b.width, h: b.height });
+      } catch { /* not rendered yet */ }
     });
     if (!stageLabelBoxes.length) stageLabelBoxes = null;
     return stageLabelBoxes ?? [];
@@ -211,7 +226,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   function showRecords({ points = [], routes = [] } = {}) {
     const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones()];
     const marksAt = new Map(points.filter((p) => p.shape).map((p) => [p.where, (MARK_RADIUS[p.shape] ?? 6) + 2]));
-    const drawnRoutes = drawRoutes(routesLayer, routes, projection, zones, (qid) => marksAt.get(qid) ?? 0);
+    const drawnRoutes = drawRoutes(routesLayer, routes, projection, zones, (qid) => marksAt.get(qid) ?? 0, { seam });
     const marks = drawMarks(marksLayer, points, projection);
     // ?labels=naive puts every name at the first position with no checks: the old behaviour, for before/after pictures.
     const naive = globalThis.location && new URLSearchParams(globalThis.location.search).get('labels') === 'naive';
@@ -262,5 +277,11 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setRange(a.year, b.year);
   }
 
-  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, showRecords, setTracker, setYear, setRange, legend, cartouche, get year() { return currentYear; } };
+  // A typed range of years (the Explorers layer): the cartouche reads "1492–1522" and the strip marks the span.
+  function setSpan(from, to, sourceYear) {
+    cartouche.setSpan(from, to, sourceYear);
+    strip.setRange(from, to);
+  }
+
+  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, showRecords, setTracker, setYear, setRange, setSpan, legend, cartouche, get year() { return currentYear; } };
 }

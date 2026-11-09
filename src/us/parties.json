@@ -1,0 +1,53 @@
+{
+  "_comment": "Electoral College tracker: the fill for each candidate who carried a state. Authored attributes only; the votes come from data/us/electoral.json (U.S. National Archives). A candidate's party is the Archives' own label (`party_nara`, mapped by `codes`) where the Archives gives one (the winner and the main opponent); `candidates` names the rest, and overrides the Archives where it labels a man with no party. Fills: a party keeps its color from election to election (Democratic P, Republican S, as readers of today's maps expect); when two candidates of one party carry states in the same election, or a fifth carries one, the next free fill in `free` is taken, and a fifth carrier gets the hatch (brief §5: at most four fills).",
+  "parties": {
+    "democratic": { "label": "Democratic", "fill": "P" },
+    "republican": { "label": "Republican", "fill": "S" },
+    "federalist": { "label": "Federalist", "fill": "E" },
+    "democratic-republican": { "label": "Democratic-Republican", "short": "Dem.-Rep.", "fill": "In" },
+    "national-republican": { "label": "National Republican", "short": "Natl. Rep.", "fill": "E" },
+    "whig": { "label": "Whig", "fill": "E" },
+    "anti-masonic": { "label": "Anti-Masonic", "fill": "T" },
+    "nullifier": { "label": "Nullifier", "fill": "C" },
+    "american": { "label": "American (Know Nothing)", "short": "American", "fill": "T" },
+    "southern-democratic": { "label": "Southern Democratic", "short": "S. Dem.", "fill": "C" },
+    "constitutional-union": { "label": "Constitutional Union", "short": "Const. Union", "fill": "T" },
+    "liberal-republican": { "label": "Liberal Republican", "short": "Lib. Rep.", "fill": "C" },
+    "populist": { "label": "Populist", "fill": "In" },
+    "progressive": { "label": "Progressive", "fill": "In" },
+    "states-rights": { "label": "States' Rights Democratic", "short": "States' Rights", "fill": "C" },
+    "american-independent": { "label": "American Independent", "short": "Am. Indep.", "fill": "C" },
+    "unpledged": { "label": "Unpledged electors", "short": "Unpledged", "fill": "T" },
+    "none": { "label": "No party", "fill": "T" }
+  },
+  "free": ["C", "T", "In", "E", "P", "S"],
+  "codes": {
+    "D": "democratic", "D-P": "democratic", "R": "republican", "F": "federalist", "Federalist": "federalist",
+    "Federalist/Independent D-R": "federalist", "Democratic-Republican": "democratic-republican", "D-R": "democratic-republican",
+    "Independent D-R": "democratic-republican", "National Republican": "national-republican", "Whig": "whig", "P": "progressive"
+  },
+  "candidates": [
+    { "name": "George Washington", "party": "none", "why": "Washington belonged to no party; the Archives labels him Federalist in 1789 and Independent in 1792." },
+    { "name": "John Adams", "year": 1800, "party": "federalist" },
+    { "name": "Aaron Burr", "year": 1800, "party": "democratic-republican" },
+    { "name": "Charles C. Pinckney", "year": 1800, "party": "federalist" },
+    { "name": "William H. Crawford", "year": 1824, "party": "democratic-republican" },
+    { "name": "Henry Clay", "year": 1824, "party": "democratic-republican" },
+    { "name": "John Floyd", "year": 1832, "party": "nullifier" },
+    { "name": "William Wirt", "year": 1832, "party": "anti-masonic" },
+    { "name": "Hugh L. White", "year": 1836, "party": "whig" },
+    { "name": "Daniel Webster", "year": 1836, "party": "whig" },
+    { "name": "Willie P. Mangum", "year": 1836, "party": "whig" },
+    { "name": "Millard Fillmore", "year": 1856, "party": "american" },
+    { "name": "John C. Breckinridge", "year": 1860, "party": "southern-democratic" },
+    { "name": "John Bell", "year": 1860, "party": "constitutional-union" },
+    { "name": "Thomas A. Hendricks", "year": 1872, "party": "democratic", "why": "Electors pledged to Greeley, who died before they met, voted for others; Hendricks was a Democrat." },
+    { "name": "Benjamin Gratz Brown", "year": 1872, "party": "liberal-republican", "why": "Greeley's running mate on the Liberal Republican ticket." },
+    { "name": "James B. Weaver", "year": 1892, "party": "populist" },
+    { "name": "William H. Taft", "year": 1912, "party": "republican" },
+    { "name": "Robert M. La Follette", "year": 1924, "party": "progressive" },
+    { "name": "J. Strom Thurmond", "year": 1948, "party": "states-rights" },
+    { "name": "Harry F. Byrd", "year": 1960, "party": "unpledged", "why": "Unpledged Democratic electors in Mississippi and Alabama, and one Oklahoma elector, voted for Byrd, who was not a candidate." },
+    { "name": "George C. Wallace", "year": 1968, "party": "american-independent" }
+  ]
+}

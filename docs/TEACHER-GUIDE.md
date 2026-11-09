@@ -98,7 +98,63 @@ kept so that finer-stepped maps can use them later.
   `npm run sheet` writes `dist/parchment-records.xlsx` with the dropdowns; upload it to Google Drive and it opens as a
   Google Sheet and keeps the dropdowns (`-- --lite` makes a small version whose places tab imports `data/places.csv` from the site). Share it with the teachers as editors and with "Anyone with the link" as viewer.
 - Put the Sheet's id into `data/sheet.json`: `csv_url` is
-  `https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv&sheet=records`, `edit_url` is the Sheet's normal
+  `https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv&sheet=records&headers=1` (`headers=1` tells
+  Google the first row is the only header row; without it Google guesses, and it can guess wrong), `edit_url` is the Sheet's normal
   link, `gid` is the records tab's gid (0 for the first tab). Commit and push; the site now reads the Sheet live.
 - `npm run pull` copies the Sheet into `data/records.csv` (for the offline file and the repository), `npm run geocode`
   fills coordinates from the ids, `npm run check` lists problems. Then `npm run offline` and commit.
+
+## The North America map (1492 to today)
+
+The **North America** link in the toolbar opens the United States stage. It has no table to fill: every border on
+it comes from a dated source, and clicking any area opens a card with that source.
+
+- **Moving through time.** Type a year (`1803`) or a day (`1803-12-20`) in the box and press Enter. `←` `→` move a
+  year, `Shift` ten. `[` `]` jump to the previous or next day the record changed (a treaty, an admission, a new
+  territory). Click or drag the timeline at the bottom. A year is shown as of its last day, 31 December.
+- **Several maps in one.** *Nations and empires*: who held the land. *States and territories*: the United States as
+  states, organized territories and unorganized land. *Indian land cessions*: the lands ceded by treaty up to the
+  date shown, darker for later cessions (more on this map below).
+- **The land a nation held (Indian land cessions).** From 1785 to Removal, green with a solid edge is the land the
+  United States recognized by treaty as Cherokee, Creek, Choctaw, Chickasaw or Seminole on the date shown: what that
+  nation had still to cede. It shrinks at each treaty; step through `us.html?year=1791&tracker=cessions`, 1819 and
+  `?date=1835-12-28` to watch the Cherokee Nation shrink before New Echota. Rust hatching is land two nations held at once
+  (the United States bought it from both). Thin lines from 1784 to 1978 are each nation's original territory as
+  the Indian Claims Commission later found it. From 2020, green is the land Native nations hold today
+  (reservations, trust land, rancherias, pueblos; Hawaiian home lands lighter).
+- **Native population.** Choose *Native population* in the tracker menu. From 1890, the first census to count every
+  Native person, each state is shaded by Native people per 1,000 km², on the same five steps every year, with the
+  largest counts in badges. The counts of 1860–1880 left most Native people out, so they are not shaded. Before
+  1890 a badge appears only where scholars give a figure for a place (California in 1769, 1846 and 1873, with its
+  range), and the legend gives the national estimate. A card gives the count, the share of the national total, and
+  what the census counted that year. Since 2000 the count is of people who gave only one race.
+- **Reading the marks.** A solid line is a documented border; a dashed line an approximate one (all colonial
+  borders before 1783). Rust hatching is land two powers claimed at once, or a joint or disputed area (Oregon
+  Country, the Republic of Texas), or a strip two states or territories both claimed (the Toledo Strip between
+  Ohio and Michigan, Greer County between Texas and Oklahoma), edged in rust so even a thin strip shows. Rust
+  cross-hatching is the Confederacy. Fine dots with a soft edge are Native
+  homelands, approximate by nature and never drawn as a border.
+- **What changed between two dates (Diff).** Press `D`, or click **Diff**, and type the earlier date in the
+  **from** box; the date box is the later one. Gold is what appeared by the later date (and, under *Nations and
+  empires*, land that changed hands, such as the land that joined the United States); rust hatching is what had
+  vanished; everything else is unchanged and left plain. The list beside the legend names them: under *States and
+  territories*, the states admitted and territories created, each with its year. A link like
+  `us.html?from=1783&year=1853` opens straight to it.
+- **The Electoral College.** Choose *Electoral College* in the tracker menu. The map shows the latest presidential
+  election held by the date, on the map of its own day: each state in the color of the candidate its electors
+  chose, with a badge for its electoral votes ("OH 23"; "NJ 4+3" when its electors divided). The small eastern
+  states are listed in the Atlantic with a line to each. `←` `→` step from election to election. A state left
+  unshaded cast no vote (the Confederacy in 1864); territories had no electors. Click a state for how its electors voted, from
+  the National Archives. Before 1804 each elector cast two votes, so the legend counts votes, not electors. A link
+  like `us.html?year=1860&tracker=electoral` opens straight to an election.
+  Press `D` (or **Diff**) to compare two elections: gold marks each state that voted for a different party (or
+  voted for the first time), rust hatching a state that stopped voting, and the list groups the changes by
+  direction ("Democratic → Republican"). The **from** box takes the earlier election; `←` `→` move the later one.
+  `us.html?from=1856&year=1860&tracker=electoral` opens straight to a comparison.
+- **What a card tells you.** For a U.S. state or territory: the dates it was in force, what changed and the law or
+  treaty behind it (from the Newberry Library's atlas). For a cession: the nation that ceded it as Royce named it,
+  the tribes today, the treaty date and links to the treaty text and Royce's map. For a nation's treaty land: the
+  treaty that set the boundary, where it was held, the next treaty, the size in acres and the Royce areas it is
+  made of. For a colony or country: its dates and its OpenHistoricalMap record.
+- **Something looks wrong?** Note the year and the area and tell the person who keeps the site. Borders are not
+  redrawn here; a wrong one is fixed in its source or set aside with a written reason.

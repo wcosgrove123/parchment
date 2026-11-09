@@ -1,5 +1,5 @@
 {
-  "_comment": "Course-wide snapshot years shared by every stage. fetch-base.mjs fills source_year and gap from historical-basemaps index.json using `rule` (nearest-not-after: latest base map not later than the calendar year; or nearest). A snapshot may pin a base year with source_override. The cartouche shows calendar year · base map source_year when they differ.",
+  "_comment": "Course-wide snapshot years shared by every stage. fetch-base.mjs fills source_year and gap from historical-basemaps index.json using `rule` (nearest-not-after: latest base map not later than the calendar year; or nearest). A snapshot may pin a base year with source_override. The cartouche shows calendar year · base map source_year when they differ. A snapshot with \"stages\" belongs only to those stages and their variants (\"world\" also covers world-atlantic, world-americas); the rest are shared by every stage.",
   "course": [
     1200,
     1450,
@@ -12,6 +12,15 @@
       1450,
       1500,
       1600,
+      1700,
+      1750
+    ],
+    "apworld-4": [
+      1450,
+      1500,
+      1530,
+      1600,
+      1650,
       1700,
       1750
     ]
@@ -38,10 +47,30 @@
       "source_file": "world_1500.geojson"
     },
     {
+      "year": 1530,
+      "source_year": 1530,
+      "gap": 0,
+      "source_file": "world_1530.geojson",
+      "stages": [
+        "world"
+      ],
+      "stages_reason": "Added 2026-11-06 for the world stage (Unit 4 voyages: 1530 for Magellan-Elcano, 1650 for the mid-century galleon and Atlantic maps). Not on the Afro-Eurasia stage until the owner decides."
+    },
+    {
       "year": 1600,
       "source_year": 1600,
       "gap": 0,
       "source_file": "world_1600.geojson"
+    },
+    {
+      "year": 1650,
+      "source_year": 1650,
+      "gap": 0,
+      "source_file": "world_1650.geojson",
+      "stages": [
+        "world"
+      ],
+      "stages_reason": "Added 2026-11-06 for the world stage (Unit 4 voyages: 1530 for Magellan-Elcano, 1650 for the mid-century galleon and Atlantic maps). Not on the Afro-Eurasia stage until the owner decides."
     },
     {
       "year": 1700,

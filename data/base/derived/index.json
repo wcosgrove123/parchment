@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T12:37:25.880Z",
+  "generated": "2026-11-06T13:10:02.615Z",
   "settings": {
     "polities": {
       "minWeight": 0.0001,
@@ -41,12 +41,28 @@
       "named": 143
     },
     {
+      "year": 1530,
+      "source_year": 1530,
+      "file": "world_1530.topojson",
+      "bytes": 377270,
+      "features": 494,
+      "named": 278
+    },
+    {
       "year": 1600,
       "source_year": 1600,
       "file": "world_1600.topojson",
       "bytes": 539044,
       "features": 866,
       "named": 661
+    },
+    {
+      "year": 1650,
+      "source_year": 1650,
+      "file": "world_1650.topojson",
+      "bytes": 516846,
+      "features": 778,
+      "named": 598
     },
     {
       "year": 1700,

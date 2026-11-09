@@ -1,0 +1,91 @@
+{
+  "id": "world",
+  "title": "The World",
+  "_comment": "The Atlantic view. Equal Earth centered on 11°E: the cut runs down the Pacific at 169°W, through the Bering Strait. The owner asked for this view and a Pacific view (2026-11-06).",
+  "projection": "equalEarth",
+  "rotate": [
+    -11,
+    0
+  ],
+  "fit": "sphere",
+  "extent": {
+    "west": -169,
+    "south": -90,
+    "east": 191,
+    "north": 90
+  },
+  "span": [
+    1200,
+    2000
+  ],
+  "relief": "relief/world.png",
+  "legend": {
+    "anchor": "bottom-right",
+    "lift": 22
+  },
+  "labels": [
+    {
+      "text": "North America",
+      "lon": -100,
+      "lat": 47,
+      "kind": "region"
+    },
+    {
+      "text": "South America",
+      "lon": -60,
+      "lat": -10,
+      "kind": "region"
+    },
+    {
+      "text": "Europe",
+      "lon": 15,
+      "lat": 53,
+      "kind": "region"
+    },
+    {
+      "text": "Africa",
+      "lon": 20,
+      "lat": 5,
+      "kind": "region"
+    },
+    {
+      "text": "Asia",
+      "lon": 95,
+      "lat": 50,
+      "kind": "region",
+      "span": 50
+    },
+    {
+      "text": "Oceania",
+      "lon": 135,
+      "lat": -25,
+      "kind": "region",
+      "span": 30
+    },
+    {
+      "text": "Atlantic Ocean",
+      "lon": -32,
+      "lat": 33,
+      "kind": "water"
+    },
+    {
+      "text": "Atlantic Ocean",
+      "lon": -15,
+      "lat": -25,
+      "kind": "water"
+    },
+    {
+      "text": "Indian Ocean",
+      "lon": 80,
+      "lat": -15,
+      "kind": "water"
+    },
+    {
+      "text": "Pacific Ocean",
+      "lon": -130,
+      "lat": -12,
+      "kind": "water"
+    }
+  ],
+  "diff_min_km2": 250000
+}

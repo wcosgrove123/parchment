@@ -4,30 +4,35 @@ import { loadJSON } from './data/loader.js';
 import { loadRecordsText } from './data/source.js';
 import { createStage } from './render/base.js';
 import { renderPNG, renderSVG, download, exportName } from './export/export.js';
-import { validateRecords, recordsFor, resolveRecords } from './data/records.js';
+import { validateRecords, recordsFor, recordsInRange, resolveRecords } from './data/records.js';
 import { routeLegend } from './render/routes.js';
 import stageEqualEarth from './stages/afro-eurasia.json';
 import stageLambert from './stages/afro-eurasia-lambert.json';
+import stageWorld from './stages/world.json';
+import stageWorldPacific from './stages/world-pacific.json';
+import { stageYears, snapYear } from './data/calendar.js';
 import extent from './trackers/extent.json';
 import expansion from './trackers/expansion.json';
 import routes from './trackers/routes.json';
+import explorers from './trackers/explorers.json';
 
-// v0 trackers. Extent highlights base polygons; expansion draws point records by shape; routes draws path and
-// arrow records through gazetteer waypoints with the points on them.
-const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes };
+// Trackers. Extent highlights base polygons; expansion draws point records by shape; routes draws path and arrow
+// records through gazetteer waypoints with the points on them; explorers (owner, 2026-11-06) draws every expedition
+// whose dates touch a typed range of years, colored by the state that sent it.
+const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes, explorers };
 
-// The routes legend names only what is on the map: route classes, point types, certainties.
-function routesLegendFor(rows) {
+// A route layer's legend names only what is on the map: route classes (or sending states), point types, certainties.
+function legendFor(tracker, rows) {
   const lines = rows.filter((r) => r.kind !== 'point');
   const points = rows.filter((r) => r.kind === 'point');
   const seen = new Set();
   const pointRows = [];
   for (const p of points) {
-    const e = routes.point_legend[p.value];
+    const e = tracker.point_legend[p.value];
     if (e && !seen.has(e.label)) { seen.add(e.label); pointRows.push(e); }
   }
   const legend = [...routeLegend(lines), ...pointRows];
-  return { ...routes, legend: legend.length ? legend : routes.legend };
+  return { ...tracker, legend: legend.length ? legend : tracker.legend };
 }
 
 const params = new URLSearchParams(location.search);
@@ -35,8 +40,9 @@ const START_YEAR = Number(params.get('year')) || 1450;
 const START_FROM = Number(params.get('from')) || null; // ?from=1450&year=1750 opens the Diff view
 const PLAY_HOLD_MS = 1500;
 
-// ?stage=afro-eurasia-lambert shows the alternative projection for comparison.
-const STAGES = { [stageEqualEarth.id]: stageEqualEarth, [stageLambert.id]: stageLambert };
+// ?stage=afro-eurasia-lambert shows the alternative projection for comparison. ?stage=world is the whole globe with the
+// Atlantic in view (Unit 4 voyages); ?stage=world-pacific is the same globe centered on the Pacific (the owner asked for both).
+const STAGES = Object.fromEntries([stageEqualEarth, stageLambert, stageWorld, stageWorldPacific].map((s) => [s.id, s]));
 const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
 
 // Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year.
@@ -86,11 +92,22 @@ async function main() {
   const noCoords = resolved.waiting;
   console.log(`records (${source.from}): ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped · ${noCoords.length} waiting for coordinates`);
   showDataProblems(checked, noCoords, source);
-  const years = calendar.snapshots.map((s) => s.year);
+  // The stage's snapshot years: the shared ones plus any the calendar keeps for this stage (1530 and 1650 for the world).
+  const years = stageYears(calendar, stage);
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
 
-  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'extent', year: START_YEAR, from: START_FROM ?? years[Math.max(0, years.indexOf(START_YEAR) - 1)], playing: null };
+  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'extent', year: snapYear(years, START_YEAR, 1450), from: null, playing: null };
+  // A year that is not a snapshot (?year=1522) opens the first snapshot at or after it, as a record's home snapshot does.
+  state.from = START_FROM ? snapYear(years, START_FROM) : years[Math.max(0, years.indexOf(state.year) - 1)];
+  if (state.year !== START_YEAR) console.log(`year ${START_YEAR} is not a snapshot on this stage; showing ${state.year}`);
+  // Explorers: a typed range of years, any years (?tracker=explorers&from=1492&year=1522). The base map under it is the
+  // latest snapshot not after the range's end, so no border is drawn before it existed.
+  const [spanMin, spanMax] = stage.span;
+  const clampYear = (y) => Math.max(spanMin, Math.min(spanMax, Math.round(y)));
+  state.span = { from: clampYear(START_FROM ?? 1492), to: clampYear(Number(params.get('year')) || 1522) };
+  if (state.span.from > state.span.to) state.span = { from: state.span.to, to: state.span.from };
+  const baseYearFor = (to) => [...years].reverse().find((y) => y <= to) ?? years[0];
 
   const svg = d3.select('#map');
   const atlas = createStage(svg, stage, { ne, bathy }, { tracker: TRACKERS[state.tracker], years, onYear: (y) => setYear(y) });
@@ -98,6 +115,22 @@ async function main() {
 
   async function render() {
     const t = performance.now();
+    for (const id of Object.keys(TRACKERS)) document.body.classList.toggle(`tracker-${id}`, id === state.tracker);
+    if (state.tracker === 'explorers') {
+      const { from, to } = state.span;
+      const base = baseYearFor(to);
+      const topo = await snapshot(base);
+      const rows = recordsInRange(records, 'explorers', from, to);
+      atlas.setTracker(legendFor(explorers, rows));
+      atlas.showSnapshot(base, topo, () => ({ status: 'muted' }));
+      const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
+      atlas.setSpan(from, to, bySnapshot.get(base).source_year);
+      document.title = `Parchment · ${from}–${to}`;
+      document.body.classList.remove('mode-diff');
+      const dropped = n.labels.filter((l) => l.dropped);
+      console.log(`explorers ${from}–${to} on the ${base} base map: ${(performance.now() - t).toFixed(1)} ms, ${n.routes} lines, ${n.marks} marks${dropped.length ? `; labels not placed: ${dropped.map((l) => `${l.id} (${l.dropped})`).join(', ')}` : ''}`);
+      return;
+    }
     if (state.mode === 'diff') {
       const [a, b] = await Promise.all([snapshot(state.from), snapshot(state.year)]);
       const diff = atlas.showDiff({ year: state.from, topo: a }, { year: state.year, topo: b }, identifyFor(state.scope));
@@ -108,7 +141,7 @@ async function main() {
       const topo = await snapshot(state.year);
       // Extent highlights the tracked states; expansion and routes show every polity muted with the records on top.
       const rows = state.tracker === 'extent' ? [] : recordsFor(records, state.tracker, state.year, years);
-      atlas.setTracker(state.tracker === 'routes' ? routesLegendFor(rows) : TRACKERS[state.tracker]);
+      atlas.setTracker(state.tracker === 'routes' ? legendFor(routes, rows) : TRACKERS[state.tracker]);
       atlas.showSnapshot(state.year, topo, state.tracker === 'extent' ? classifyExtent : () => ({ status: 'muted' }));
       const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
       atlas.setYear(state.year, bySnapshot.get(state.year).source_year);
@@ -146,6 +179,32 @@ async function main() {
   const trackerSel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
     .on('change', function () { state.tracker = this.value; render(); });
   trackerSel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
+  // Explorers: a range of years typed in (owner, 2026-11-06); Enter or leaving the box redraws. Shown only under Explorers.
+  const spanBox = tb.append('span').attr('id', 'span').attr('title', 'Every expedition whose dates touch these years');
+  spanBox.append('label').attr('for', 'span-from').text('from');
+  const fromIn = spanBox.append('input').attr('id', 'span-from').attr('type', 'number').attr('step', 1).attr('min', spanMin).attr('max', spanMax);
+  spanBox.append('label').attr('for', 'span-to').text('to');
+  const toIn = spanBox.append('input').attr('id', 'span-to').attr('type', 'number').attr('step', 1).attr('min', spanMin).attr('max', spanMax);
+  // The lesson ranges (src/trackers/explorers.json → ranges, owner 2026-11-06): one click each, for the Windows app,
+  // which has no address bar. The one that matches the typed range is lit.
+  const presets = spanBox.selectAll('button.span-preset').data(explorers.ranges ?? []).join('button').attr('class', 'span-preset')
+    .attr('title', (r) => r.title ?? null).text((r) => `${r.from}–${r.to}`)
+    .on('click', (_, r) => { const changed = r.from !== state.span.from || r.to !== state.span.to; state.span = { from: clampYear(r.from), to: clampYear(r.to) }; showSpan(); if (changed) render(); });
+  const showSpan = () => {
+    fromIn.property('value', state.span.from); toIn.property('value', state.span.to);
+    presets.classed('active', (r) => r.from === state.span.from && r.to === state.span.to);
+  };
+  function setSpan() {
+    const a = Number(fromIn.property('value')), b = Number(toIn.property('value'));
+    if (!Number.isFinite(a) || !Number.isFinite(b) || fromIn.property('value') === '' || toIn.property('value') === '') { showSpan(); return; }
+    const [from, to] = [clampYear(Math.min(a, b)), clampYear(Math.max(a, b))];
+    const changed = from !== state.span.from || to !== state.span.to;
+    state.span = { from, to };
+    showSpan(); // shows the years as used: swapped if typed backwards, kept inside the stage's span
+    if (changed) render();
+  }
+  for (const input of [fromIn, toIn]) input.on('change', setSpan).on('keydown', (e) => { if (e.key === 'Enter') setSpan(); });
+  showSpan();
   tb.append('span').attr('class', 'sep');
   const seg = tb.append('span').attr('class', 'seg');
   seg.append('button').attr('data-mode', 'snapshot').text('Snapshot').on('click', () => setMode('snapshot'));
@@ -170,7 +229,10 @@ async function main() {
     .on('click', () => exportMenu.classed('open', !exportMenu.classed('open')));
   const pop = exportMenu.append('span').attr('class', 'popover');
   const exportOpts = { transparent: false };
-  const describe = () => ({ stage: stage.id, year: state.year, from: state.mode === 'diff' ? state.from : null });
+  // Export names: a year, a Diff's two years, or the Explorers layer's typed range (parchment-world-1492-1522.png).
+  const describe = () => (state.tracker === 'explorers'
+    ? { stage: stage.id, year: state.span.to, from: state.span.from }
+    : { stage: stage.id, year: state.year, from: state.mode === 'diff' ? state.from : null });
   let exporting = false;
   async function doExport(kind) {
     if (exporting) return;
@@ -199,6 +261,14 @@ async function main() {
   tr.append('span').text('transparent background');
   // Teacher side: the admin page (table, problems, coverage, place finder). Chrome only, never exported.
   tb.append('a').attr('class', 'admin-link').attr('href', 'admin.html').attr('title', 'The record table, problems and coverage').text('Admin');
+  tb.append('a').attr('class', 'admin-link').attr('href', 'us.html').attr('title', 'The North America stage: 1492 to the present').text('North America');
+  // The world stage and Afro-Eurasia link to each other (the same page, another ?stage=).
+  // On the world stage, a switch between its Atlantic and Pacific views keeps the year, tracker and records file.
+  const keep = (id) => { const q = new URLSearchParams(location.search); q.set('stage', id); q.set('year', state.year); q.set('tracker', state.tracker); return `?${q}`; };
+  if (stage.id === 'world') tb.append('a').attr('class', 'admin-link').attr('href', keep('world-pacific')).attr('title', 'The same world centered on the Pacific').text('Pacific view').on('click', function () { this.href = keep('world-pacific'); });
+  if (stage.id === 'world-pacific') tb.append('a').attr('class', 'admin-link').attr('href', keep('world')).attr('title', 'The same world with the Atlantic in view').text('Atlantic view').on('click', function () { this.href = keep('world'); });
+  if (stage.id.startsWith('world')) tb.append('a').attr('class', 'admin-link').attr('href', '?').attr('title', 'The Afro-Eurasia stage').text('Afro-Eurasia');
+  else tb.append('a').attr('class', 'admin-link').attr('href', '?stage=world').attr('title', 'The whole world: transoceanic voyages and exchanges').text('World');
   // Credits: who made the atlas and where the data comes from, with the licence file. Site chrome only.
   const about = tb.append('span').attr('class', 'menu');
   about.append('button').attr('id', 'about').attr('title', 'About Parchment').text('ⓘ')
@@ -223,6 +293,8 @@ async function main() {
   // Keyboard: ← → step through the calendar; space plays; D toggles the Diff view.
   window.addEventListener('keydown', (e) => {
     if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === 'e' || e.key === 'E') return doExport(e.shiftKey ? '4k' : 'png');
+    if (state.tracker === 'explorers') return; // the Explorers layer is a typed range: no stepping, playing or Diff
     if (e.key === 'ArrowRight') step(1);
     else if (e.key === 'ArrowLeft') step(-1);
     else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
@@ -230,7 +302,7 @@ async function main() {
     else if (e.key === 'e' || e.key === 'E') doExport(e.shiftKey ? '4k' : 'png');
   });
 
-  if (START_FROM) state.mode = 'diff';
+  if (START_FROM && state.tracker !== 'explorers') state.mode = 'diff'; // under Explorers, from is the range's start
   await render();
   document.body.classList.add('ready');
   // Prefetch the rest so switching is instant.

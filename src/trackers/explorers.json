@@ -1,0 +1,75 @@
+{
+  "_comment": "Explorers layer (owner, 2026-11-06). Every expedition of exploration or conquest whose dates touch the typed range of years, colored by the state that sent it (tokens.css --sponsor-*), tipped at its end and at each marked stop. The legend is built per map from the states on it; these rows are the fallback when nothing is on the map.",
+  "id": "explorers",
+  "title": "Explorers",
+  "ranges": [
+    {
+      "from": 1492,
+      "to": 1522,
+      "title": "Lesson range (owner, 2026-11-06): Columbus to the return of Magellan and Elcano"
+    },
+    {
+      "from": 1492,
+      "to": 1600,
+      "title": "Lesson range (owner, 2026-11-06): every expedition of the 1500s"
+    }
+  ],
+  "legend": [
+    {
+      "swatch": "route",
+      "color": "spain",
+      "heads": "end",
+      "label": "Sent by Spain"
+    },
+    {
+      "swatch": "route",
+      "color": "portugal",
+      "heads": "end",
+      "label": "Sent by Portugal"
+    },
+    {
+      "swatch": "route",
+      "color": "england",
+      "heads": "end",
+      "label": "Sent by England"
+    },
+    {
+      "swatch": "route",
+      "color": "france",
+      "heads": "end",
+      "label": "Sent by France"
+    }
+  ],
+  "point_legend": {
+    "port": {
+      "swatch": "shape",
+      "shape": "steel-circle",
+      "label": "Stop or landfall"
+    },
+    "capital": {
+      "swatch": "shape",
+      "shape": "moss-circle",
+      "label": "Capital"
+    },
+    "founding": {
+      "swatch": "shape",
+      "shape": "moss-circle",
+      "label": "Founding"
+    },
+    "battle": {
+      "swatch": "shape",
+      "shape": "rust-diamond",
+      "label": "Battle or siege"
+    },
+    "siege": {
+      "swatch": "shape",
+      "shape": "rust-diamond",
+      "label": "Battle or siege"
+    },
+    "treaty": {
+      "swatch": "shape",
+      "shape": "navy-triangle",
+      "label": "Treaty"
+    }
+  }
+}

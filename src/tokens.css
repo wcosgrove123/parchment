@@ -20,6 +20,13 @@
   --cream: #F7F5EF;   /* paper, land at rest */
   --ink:   #1F2A44;
 
+  /* Explorers layer: the state that sent the expedition (OKLCH L 0.50, C 0.13) */
+  --sponsor-spain: #a03f3c;
+  --sponsor-portugal: #137738;
+  --sponsor-england: #754d9e;
+  --sponsor-france: #3860ac;
+  --sponsor-netherlands: #007780;
+
   /* Ground and water */
   --parchment: #EFE7D2;
   --parchment-deep: #dbd3bf;

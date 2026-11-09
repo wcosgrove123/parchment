@@ -5,6 +5,24 @@
     "label": "Singapore",
     "fetched": "2026-11-05"
   },
+  "Q340": {
+    "lon": -73.5868,
+    "lat": 45.5033,
+    "label": "Montreal",
+    "fetched": "2026-11-06"
+  },
+  "Q597": {
+    "lon": -9.139,
+    "lat": 38.708,
+    "label": "Lisbon",
+    "fetched": "2026-11-06"
+  },
+  "Q766": {
+    "lon": -77.4,
+    "lat": 18.18,
+    "label": "Jamaica",
+    "fetched": "2026-11-06"
+  },
   "Q956": {
     "lon": 116.4075,
     "lat": 39.904,
@@ -17,11 +35,65 @@
     "label": "New York",
     "fetched": "2026-11-05"
   },
+  "Q1461": {
+    "lon": 120.9772,
+    "lat": 14.5958,
+    "label": "Manila",
+    "fetched": "2026-11-06"
+  },
+  "Q1467": {
+    "lon": 123.902,
+    "lat": 10.293,
+    "label": "Cebu City",
+    "fetched": "2026-11-06"
+  },
+  "Q1489": {
+    "lon": -99.1359,
+    "lat": 19.3538,
+    "label": "Mexico City",
+    "fetched": "2026-11-06"
+  },
+  "Q1563": {
+    "lon": -82.3589,
+    "lat": 23.1367,
+    "label": "Havana",
+    "fetched": "2026-11-06"
+  },
+  "Q2145": {
+    "lon": -71.2242,
+    "lat": 46.8161,
+    "label": "Quebec City",
+    "fetched": "2026-11-06"
+  },
+  "Q2203": {
+    "lon": -70.3212,
+    "lat": -18.4784,
+    "label": "Arica",
+    "fetched": "2026-11-06"
+  },
   "Q2449": {
     "lon": 45.3419,
     "lat": 2.0392,
     "label": "Mogadishu",
     "fetched": "2026-11-05"
+  },
+  "Q3897": {
+    "lon": 13.2344,
+    "lat": -8.8383,
+    "label": "Luanda",
+    "fetched": "2026-11-06"
+  },
+  "Q4092": {
+    "lon": 18.4719,
+    "lat": -34.3581,
+    "label": "Cape of Good Hope",
+    "fetched": "2026-11-06"
+  },
+  "Q5468": {
+    "lon": 31.025,
+    "lat": -29.8583,
+    "label": "Durban",
+    "fetched": "2026-11-06"
   },
   "Q5784": {
     "lon": 97.1506,
@@ -29,11 +101,23 @@
     "label": "Lhokseumawe",
     "fetched": "2026-11-05"
   },
+  "Q8717": {
+    "lon": -5.995,
+    "lat": 37.3886,
+    "label": "Seville",
+    "fetched": "2026-11-06"
+  },
   "Q9141": {
     "lon": 78.0419,
     "lat": 27.175,
     "label": "Taj Mahal",
     "fetched": "2026-11-05"
+  },
+  "Q9279": {
+    "lon": 114.9167,
+    "lat": 4.9167,
+    "label": "Bandar Seri Begawan",
+    "fetched": "2026-11-06"
   },
   "Q11720": {
     "lon": 123.4281,
@@ -41,11 +125,65 @@
     "label": "Shenyang",
     "fetched": "2026-11-05"
   },
+  "Q13695": {
+    "lon": -99.1314,
+    "lat": 19.435,
+    "label": "Tenochtitlan",
+    "fetched": "2026-11-06"
+  },
+  "Q14328": {
+    "lon": -16.25,
+    "lat": 28.4667,
+    "label": "Santa Cruz de Tenerife",
+    "fetched": "2026-11-06"
+  },
+  "Q15674": {
+    "lon": 130.5571,
+    "lat": 31.5968,
+    "label": "Kagoshima",
+    "fetched": "2026-11-06"
+  },
+  "Q16635": {
+    "lon": 144.8,
+    "lat": 13.5,
+    "label": "Guam",
+    "fetched": "2026-11-06"
+  },
   "Q16666": {
     "lon": 118.7789,
     "lat": 32.0608,
     "label": "Nanjing",
     "fetched": "2026-11-05"
+  },
+  "Q18970": {
+    "lon": 128.1783,
+    "lat": -3.6967,
+    "label": "Ambon",
+    "fetched": "2026-11-06"
+  },
+  "Q23154": {
+    "lon": -2.5975,
+    "lat": 51.4536,
+    "label": "Bristol",
+    "fetched": "2026-11-06"
+  },
+  "Q24826": {
+    "lon": -2.9917,
+    "lat": 53.4072,
+    "label": "Liverpool",
+    "fetched": "2026-11-06"
+  },
+  "Q35045": {
+    "lon": -65.7533,
+    "lat": -19.5892,
+    "label": "Potosí",
+    "fetched": "2026-11-06"
+  },
+  "Q35827": {
+    "lon": -56.7136,
+    "lat": -34.8831,
+    "label": "Río de la Plata",
+    "fetched": "2026-11-06"
   },
   "Q36081": {
     "lon": 109.2314,
@@ -53,11 +191,29 @@
     "label": "Quy Nhon",
     "fetched": "2026-11-05"
   },
+  "Q36947": {
+    "lon": -38.4928,
+    "lat": -12.9831,
+    "label": "Salvador",
+    "fetched": "2026-11-06"
+  },
+  "Q48365": {
+    "lon": -71,
+    "lat": -54,
+    "label": "Strait of Magellan",
+    "fetched": "2026-11-06"
+  },
   "Q61089": {
     "lon": 102.2511,
     "lat": 2.1889,
     "label": "Malacca",
     "fetched": "2026-11-05"
+  },
+  "Q68814": {
+    "lon": 117.6612,
+    "lat": 24.5093,
+    "label": "Zhangzhou",
+    "fetched": "2026-11-06"
   },
   "Q75203": {
     "lon": 123.1772,
@@ -65,11 +221,35 @@
     "label": "Liaoyang",
     "fetched": "2026-11-05"
   },
+  "Q81398": {
+    "lon": -99.887,
+    "lat": 16.8629,
+    "label": "Acapulco de Juárez",
+    "fetched": "2026-11-06"
+  },
+  "Q83067": {
+    "lon": 125.0833,
+    "lat": -9.0833,
+    "label": "Timor",
+    "fetched": "2026-11-06"
+  },
   "Q83318": {
     "lon": 43.3333,
     "lat": 12.5833,
     "label": "Bab-el-Mandeb",
     "fetched": "2026-11-05"
+  },
+  "Q105037": {
+    "lon": -77.1392,
+    "lat": -12.0522,
+    "label": "Callao",
+    "fetched": "2026-11-06"
+  },
+  "Q108448": {
+    "lon": -23.6247,
+    "lat": 15.0778,
+    "label": "Santiago",
+    "fetched": "2026-11-06"
   },
   "Q131694": {
     "lon": 45.0333,
@@ -77,11 +257,83 @@
     "label": "Aden",
     "fetched": "2026-11-05"
   },
+  "Q139242": {
+    "lon": -102.5753,
+    "lat": 22.7717,
+    "label": "Zacatecas",
+    "fetched": "2026-11-06"
+  },
+  "Q141903": {
+    "lon": -64.4844,
+    "lat": 48.831,
+    "label": "Gaspé",
+    "fetched": "2026-11-06"
+  },
+  "Q163108": {
+    "lon": -2.0261,
+    "lat": 48.6494,
+    "label": "Saint-Malo",
+    "fetched": "2026-11-06"
+  },
+  "Q173270": {
+    "lon": -96.1533,
+    "lat": 19.1903,
+    "label": "Veracruz",
+    "fetched": "2026-11-06"
+  },
+  "Q205119": {
+    "lon": -78.5175,
+    "lat": -7.1575,
+    "label": "Cajamarca",
+    "fetched": "2026-11-06"
+  },
+  "Q209688": {
+    "lon": -6,
+    "lat": 52,
+    "label": "St George's Channel",
+    "fetched": "2026-11-06"
+  },
+  "Q210887": {
+    "lon": -6.3539,
+    "lat": 36.7789,
+    "label": "Sanlúcar de Barrameda",
+    "fetched": "2026-11-06"
+  },
+  "Q216889": {
+    "lon": -17.5203,
+    "lat": 14.7447,
+    "label": "Cap-Vert",
+    "fetched": "2026-11-06"
+  },
+  "Q217262": {
+    "lon": -25.0945,
+    "lat": 36.9732,
+    "label": "Santa Maria Island",
+    "fetched": "2026-11-06"
+  },
+  "Q224101": {
+    "lon": -43.1557,
+    "lat": -22.7904,
+    "label": "Guanabara Bay",
+    "fetched": "2026-11-06"
+  },
+  "Q225641": {
+    "lon": 39.6667,
+    "lat": -4.05,
+    "label": "Mombasa",
+    "fetched": "2026-11-06"
+  },
   "Q271411": {
     "lon": 40.1167,
     "lat": -3.2194,
     "label": "Malindi",
     "fetched": "2026-11-05"
+  },
+  "Q318306": {
+    "lon": 36.8872,
+    "lat": -17.8764,
+    "label": "Quelimane",
+    "fetched": "2026-11-06"
   },
   "Q319366": {
     "lon": 80.2156,
@@ -89,11 +341,53 @@
     "label": "Galle",
     "fetched": "2026-11-05"
   },
+  "Q331099": {
+    "lon": 40.7328,
+    "lat": -15.0367,
+    "label": "Island of Mozambique",
+    "fetched": "2026-11-06"
+  },
+  "Q331529": {
+    "lon": -38.7003,
+    "lat": -17.9712,
+    "label": "Abrolhos Archipelago",
+    "fetched": "2026-11-06"
+  },
   "Q374365": {
     "lon": 39.1611,
     "lat": 21.5292,
     "label": "Jeddah",
     "fetched": "2026-11-05"
+  },
+  "Q492509": {
+    "lon": -24.2711,
+    "lat": 16.6153,
+    "label": "São Nicolau",
+    "fetched": "2026-11-06"
+  },
+  "Q499922": {
+    "lon": -39.065,
+    "lat": -16.45,
+    "label": "Porto Seguro",
+    "fetched": "2026-11-06"
+  },
+  "Q512009": {
+    "lon": -17.11,
+    "lat": 28.0922,
+    "label": "San Sebastián de La Gomera",
+    "fetched": "2026-11-06"
+  },
+  "Q553907": {
+    "lon": 73.9117,
+    "lat": 15.5024,
+    "label": "Old Goa",
+    "fetched": "2026-11-06"
+  },
+  "Q575033": {
+    "lon": -63,
+    "lat": 49.5,
+    "label": "Anticosti Island",
+    "fetched": "2026-11-06"
   },
   "Q605321": {
     "lon": 76.9728,
@@ -101,11 +395,65 @@
     "label": "Battle of Panipat",
     "fetched": "2026-11-05"
   },
+  "Q622030": {
+    "lon": -6.8932,
+    "lat": 37.2278,
+    "label": "Palos de la Frontera",
+    "fetched": "2026-11-06"
+  },
+  "Q657461": {
+    "lon": -75.5253,
+    "lat": 10.4236,
+    "label": "Cartagena",
+    "fetched": "2026-11-06"
+  },
+  "Q685318": {
+    "lon": 123.9667,
+    "lat": 10.3,
+    "label": "Mactan",
+    "fetched": "2026-11-06"
+  },
+  "Q689987": {
+    "lon": -98.2362,
+    "lat": 19.3151,
+    "label": "Tlaxcala de Xicoténcatl",
+    "fetched": "2026-11-06"
+  },
   "Q695265": {
     "lon": 56.46,
     "lat": 27.0675,
     "label": "Hormuz Island",
     "fetched": "2026-11-05"
+  },
+  "Q712335": {
+    "lon": -79.4851,
+    "lat": 9.0068,
+    "label": "Panamá Viejo",
+    "fetched": "2026-11-06"
+  },
+  "Q780339": {
+    "lon": -124.4094,
+    "lat": 40.44,
+    "label": "Cape Mendocino",
+    "fetched": "2026-11-06"
+  },
+  "Q797147": {
+    "lon": -79.655,
+    "lat": 9.5544,
+    "label": "Portobelo",
+    "fetched": "2026-11-06"
+  },
+  "Q815831": {
+    "lon": -56.5,
+    "lat": 51.5,
+    "label": "Strait of Belle Isle",
+    "fetched": "2026-11-06"
+  },
+  "Q827640": {
+    "lon": -80.4597,
+    "lat": -3.5708,
+    "label": "Tumbes",
+    "fetched": "2026-11-06"
   },
   "Q842950": {
     "lon": 124.858,
@@ -113,11 +461,71 @@
     "label": "Hetu Ala City",
     "fetched": "2026-11-05"
   },
+  "Q845540": {
+    "lon": -74.4975,
+    "lat": 24.035,
+    "label": "San Salvador Island",
+    "fetched": "2026-11-06"
+  },
+  "Q955668": {
+    "lon": -67.7298,
+    "lat": -49.307,
+    "label": "Puerto San Julián",
+    "fetched": "2026-11-06"
+  },
+  "Q995615": {
+    "lon": 22.1333,
+    "lat": -34.1833,
+    "label": "Mossel Bay",
+    "fetched": "2026-11-06"
+  },
+  "Q1007232": {
+    "lon": -98.3075,
+    "lat": 19.0625,
+    "label": "Cholula de Rivadavia",
+    "fetched": "2026-11-06"
+  },
+  "Q1020776": {
+    "lon": -109.9153,
+    "lat": 22.8947,
+    "label": "Cabo San Lucas",
+    "fetched": "2026-11-06"
+  },
+  "Q1024884": {
+    "lon": -87.1033,
+    "lat": 21.6058,
+    "label": "Cabo Catoche",
+    "fetched": "2026-11-06"
+  },
+  "Q1034489": {
+    "lon": -7.7169,
+    "lat": 4.3761,
+    "label": "Cape Palmas",
+    "fetched": "2026-11-06"
+  },
   "Q1048381": {
     "lon": 119.7536,
     "lat": 40.0092,
     "label": "Shanhai Pass",
     "fetched": "2026-11-05"
+  },
+  "Q1053364": {
+    "lon": -96.4041,
+    "lat": 19.4471,
+    "label": "Cempoala",
+    "fetched": "2026-11-06"
+  },
+  "Q1130009": {
+    "lon": 27.1311,
+    "lat": -33.4928,
+    "label": "Great Fish River",
+    "fetched": "2026-11-06"
+  },
+  "Q1136198": {
+    "lon": -9.2722,
+    "lat": 42.8825,
+    "label": "Cape Finisterre",
+    "fetched": "2026-11-06"
   },
   "Q1142979": {
     "lon": 75.77,
@@ -125,16 +533,214 @@
     "label": "Kozhikode district",
     "fetched": "2026-11-05"
   },
+  "Q1156217": {
+    "lon": -104.6806,
+    "lat": 19.2081,
+    "label": "Barra de Navidad",
+    "fetched": "2026-11-06"
+  },
+  "Q1254826": {
+    "lon": -1.2412,
+    "lat": 5.1036,
+    "label": "Cape Coast Castle",
+    "fetched": "2026-11-06"
+  },
   "Q1320260": {
     "lon": 42.59,
     "lat": 15.35,
     "label": "Kamaran",
     "fetched": "2026-11-05"
   },
+  "Q1348353": {
+    "lon": -120.3833,
+    "lat": 34.0333,
+    "label": "San Miguel Island",
+    "fetched": "2026-11-06"
+  },
   "Q1375638": {
     "lon": 120.7205,
     "lat": 40.6189,
     "label": "Xingcheng",
     "fetched": "2026-11-05"
+  },
+  "Q1495331": {
+    "lon": -81.3264,
+    "lat": -4.6792,
+    "label": "Punta Pariñas",
+    "fetched": "2026-11-06"
+  },
+  "Q1576377": {
+    "lon": 124.1967,
+    "lat": 12.5875,
+    "label": "San Bernardino Strait",
+    "fetched": "2026-11-06"
+  },
+  "Q1626237": {
+    "lon": 125.7167,
+    "lat": 10.7333,
+    "label": "Homonhon",
+    "fetched": "2026-11-06"
+  },
+  "Q1741475": {
+    "lon": 39.5172,
+    "lat": -8.9817,
+    "label": "Kilwa Kisiwani",
+    "fetched": "2026-11-06"
+  },
+  "Q1798978": {
+    "lon": -72.0158,
+    "lat": 19.6906,
+    "label": "La Navidad",
+    "fetched": "2026-11-06"
+  },
+  "Q1857392": {
+    "lon": -69.7167,
+    "lat": 48.15,
+    "label": "Tadoussac",
+    "fetched": "2026-11-06"
+  },
+  "Q2117213": {
+    "lon": -80.1333,
+    "lat": -2.8333,
+    "label": "Puná Island",
+    "fetched": "2026-11-06"
+  },
+  "Q2219470": {
+    "lon": -117.1912,
+    "lat": 32.648,
+    "label": "San Diego Bay",
+    "fetched": "2026-11-06"
+  },
+  "Q2334445": {
+    "lon": -78.3086,
+    "lat": 8.3194,
+    "label": "Bay of San Miguel",
+    "fetched": "2026-11-06"
+  },
+  "Q2573380": {
+    "lon": -77.0214,
+    "lat": 8.2149,
+    "label": "Santa María la Antigua del Darién",
+    "fetched": "2026-11-06"
+  },
+  "Q2604557": {
+    "lon": 29.5369,
+    "lat": -31.6288,
+    "label": "Port St Johns",
+    "fetched": "2026-11-06"
+  },
+  "Q2735703": {
+    "lon": -76.3289,
+    "lat": -13.8589,
+    "label": "Paracas Peninsula",
+    "fetched": "2026-11-06"
+  },
+  "Q2932434": {
+    "lon": -105.6943,
+    "lat": 20.4092,
+    "label": "Cabo Corrientes",
+    "fetched": "2026-11-06"
+  },
+  "Q2937107": {
+    "lon": -84.9204,
+    "lat": 21.864,
+    "label": "Cape San Antonio",
+    "fetched": "2026-11-06"
+  },
+  "Q3142013": {
+    "lon": -123.02,
+    "lat": 37.9968,
+    "label": "Point Reyes",
+    "fetched": "2026-11-06"
+  },
+  "Q3307973": {
+    "lon": -120.4714,
+    "lat": 34.4481,
+    "label": "Point Conception",
+    "fetched": "2026-11-06"
+  },
+  "Q5034593": {
+    "lon": -53.0875,
+    "lat": 48.7,
+    "label": "Cape Bonavista",
+    "fetched": "2026-11-06"
+  },
+  "Q5035032": {
+    "lon": -56.777,
+    "lat": -36.2931,
+    "label": "Cape San Antonio, Argentina",
+    "fetched": "2026-11-06"
+  },
+  "Q5582862": {
+    "lon": -71.9786,
+    "lat": -13.5169,
+    "label": "Cusco",
+    "fetched": "2026-11-06"
+  },
+  "Q5642769": {
+    "lon": -57.5333,
+    "lat": -38.0167,
+    "label": "Cabo Corrientes, Mar del Plata",
+    "fetched": "2026-11-06"
+  },
+  "Q6033690": {
+    "lon": 35.0303,
+    "lat": -24.4769,
+    "label": "Inharrime",
+    "fetched": "2026-11-06"
+  },
+  "Q8254538": {
+    "lon": -40.9283,
+    "lat": -21.9917,
+    "label": "Cabo de São Tomé",
+    "fetched": "2026-11-06"
+  },
+  "Q12506955": {
+    "lon": 127.4108,
+    "lat": 0.6864,
+    "label": "Tidore Island",
+    "fetched": "2026-11-06"
+  },
+  "Q20119933": {
+    "lon": -86.9167,
+    "lat": 20.4167,
+    "label": "Cozumel Island",
+    "fetched": "2026-11-06"
+  },
+  "Q22016425": {
+    "lon": -34.9406,
+    "lat": -8.3515,
+    "label": "Cabo de Santo Agostinho",
+    "fetched": "2026-11-06"
+  },
+  "Q22034773": {
+    "lon": -48.8126,
+    "lat": -28.6039,
+    "label": "Cabo de Santa Marta Grande",
+    "fetched": "2026-11-06"
+  },
+  "Q22064934": {
+    "lon": -42.0007,
+    "lat": -23.0166,
+    "label": "Cabo Frio",
+    "fetched": "2026-11-06"
+  },
+  "Q23804625": {
+    "lon": -76.0114,
+    "lat": 21.0756,
+    "label": "Bariay Bay",
+    "fetched": "2026-11-06"
+  },
+  "Q23871337": {
+    "lon": -80.9333,
+    "lat": -1.0667,
+    "label": "Cabo San Lorenzo",
+    "fetched": "2026-11-06"
+  },
+  "Q32000438": {
+    "lon": -54.9519,
+    "lat": -34.9733,
+    "label": "Punta del Este",
+    "fetched": "2026-11-06"
   }
 }

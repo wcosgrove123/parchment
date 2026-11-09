@@ -48,6 +48,11 @@ export function createCartouche(root, { x0, y1 }, stage, projection) {
       year.classed('range', false).text(y < 0 ? `${-y} BCE` : y);
       baseNote.text(sourceYear != null && sourceYear !== y ? `base map ${sourceYear}` : '');
     },
+    // A typed range of years (the Explorers layer): "1492–1522", and the base map drawn under it.
+    setSpan(a, b, sourceYear) {
+      year.classed('range', true).text(`${a}–${b}`);
+      baseNote.text(sourceYear != null ? `base map ${sourceYear}` : '');
+    },
     // Diff: "1450 → 1750" with the base maps that stood in for either year.
     setRange(a, b) {
       year.classed('range', true).text(`${a.year} → ${b.year}`);

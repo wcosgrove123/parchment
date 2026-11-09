@@ -9,6 +9,7 @@ import { loadRecordsText, sheetRowURL } from './data/source.js';
 import { validateRecords, yearLabel } from './data/records.js';
 import { indexStates, featureMatcher, yearFor, resolveWhere } from './data/states.js';
 import { createStage } from './render/base.js';
+import { stageYears } from './data/calendar.js';
 import stage from './stages/afro-eurasia.json';
 import extent from './trackers/extent.json';
 
@@ -19,7 +20,7 @@ async function main() {
     loadJSON('data/calendar.json'), loadJSON('data/base/derived/ne.topojson'), loadJSON('data/base/derived/bathymetry.topojson'),
     loadJSON('data/vocab.json'), loadJSON('data/ced.json').catch(() => ({})),
   ]);
-  const years = calendar.snapshots.map((s) => s.year);
+  const years = stageYears(calendar, stage); // the Afro-Eurasia years (snapshots kept for another stage are left out)
   const placeIndex = indexStates(vocab); // state ids (and the older name@year ids) → polygons per year
   const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
   const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);

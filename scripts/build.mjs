@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Parchment — build.mjs
-// Bundles src/main.js into app.js and src/admin.js into admin.js (no runtime CDN) for GitHub Pages and local use.
+// Bundles src/main.js into app.js, src/admin.js into admin.js and src/us/main.js into us.js (North America stage) (no runtime CDN) for GitHub Pages and local use.
 //   node scripts/build.mjs           production bundles → app.js, admin.js
 //   node scripts/build.mjs --serve   rebuild on change and serve the folder at http://localhost:8321/
 
@@ -14,7 +14,7 @@ const port = Number(process.env.PORT ?? 8321);
 
 const options = {
   absWorkingDir: ROOT,
-  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }],
+  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }, { in: join(ROOT, 'src', 'us', 'main.js'), out: 'us' }],
   outdir: ROOT,
   bundle: true,
   format: 'iife',

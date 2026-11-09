@@ -55,7 +55,7 @@ parchment/
 | layer | source | license | notes |
 |---|---|---|---|
 | world polities by year | https://github.com/aourednik/historical-basemaps (`geojson/world_<year>.geojson`, `index.json`) | GPL-3 | Read `index.json` to list available years; pick nearest to each calendar year. Keep `NAME`, `PARTOF`, `SUBJECTO`. Treat pre-1648 borders as `approximate` or `sphere` by default. |
-| US states/territories 1783–2000 | Newberry Library, Atlas of Historical County Boundaries, "U.S. Historical States and Territories" (https://digital.newberry.org/ahcb/) | CC BY-NC-SA | v2 (APUSH stage). Day-level `START_DATE`/`END_DATE`. |
+| US states/territories 1783–2000 | Newberry Library, Atlas of Historical County Boundaries, "U.S. Historical States and Territories" (https://digital.newberry.org/ahcb/) | any lawful use, no fees (the Library's current terms; files still carry CC BY-NC-SA) | North America stage (`us.html`, 2026-11-05). Day-level `START_DATE`/`END_DATE`. Fetched by `scripts/fetch-us.mjs` with OpenHistoricalMap, the Forest Service's Royce cessions and historical-basemaps' Native homelands; see DECISIONS 2026-11-05. |
 | relief, bathymetry, land cover | Natural Earth rasters (https://www.naturalearthdata.com) — shaded relief, ocean bottom, land cover | public domain | Use 1:50m for stages, 1:110m for `world`. Pre-render per stage to PNG tiles sized to the stage viewport. |
 | coastlines, lakes, rivers, graticule | Natural Earth vectors (1:50m) | public domain | |
 | supplementary boundaries (v1+) | OpenHistoricalMap vector tiles + Overpass API (https://wiki.openstreetmap.org/wiki/OpenHistoricalMap/Reuse) | public domain / CC0 | Date-filter with start/end decimal dates. Use only where coverage beats historical-basemaps. |
@@ -105,8 +105,8 @@ Rules:
 | hatch | overlap or dispute |
 | point shape | event type: battle/siege = rust diamond; founding/capital = moss circle; monument = navy square; treaty = navy triangle; port of call = small steel circle |
 | line style | certainty, for routes as for borders: solid = documented, dashed = approximate, dotted and faint = conjectured. **Dash never encodes type.** |
-| route colour | what moved: steel blue = sea trade and voyages; umber (`--route-land`) = land trade; rust = armies and migrations; ink = the carrier of a diffusion |
-| arrowhead | direction and kind: none (a `path`) or small heads at both ends (trade went both ways); one terminal head = a voyage; closed barb = an army; open chevron = a migration |
+| route colour | what moved: steel blue = sea trade and voyages; umber (`--route-land`) = land trade; rust = armies and migrations; ink = the carrier of a diffusion. In the Explorers layer only: the state that sent the expedition (`--sponsor-*`, owner 2026-11-06) |
+| arrowhead | direction and kind: none (a `path`) or small heads at both ends (trade went both ways); one terminal head = a voyage; closed barb = an army; open chevron = a migration. A one-way route is also tipped at each marked stop on the way, never partway along |
 | route width | three categorical widths (2 / 3 / 4.5 px at 1920), the middle by default. Width never encodes volume unless the legend says so |
 | number badge | quantity |
 
@@ -150,8 +150,8 @@ Antique-atlas register (parchment ground, muted fills, ink labels, gold border, 
 
 Stages (each a JSON: projection, center, scale, extent, label list):
 - `afro-eurasia` (v0): equal-area (Equal Earth or Lambert azimuthal equal-area centered ~45°N 60°E), extent from Morocco to Japan, from the Sahel to the Arctic coast.
-- `world` (v2): Equal Earth.
-- `north-america` (v2): Albers USA.
+- `world` (v2, started 2026-11-06 as `?stage=world`): Equal Earth fitted to the whole globe, in two views (owner, 2026-11-06): the Atlantic view centred 11°E and the Pacific view (`?stage=world-pacific`) centred 150°E. Routes that cross the cut run off one edge and on from the other.
+- `north-america` (v2, started 2026-11-05 as `us.html`): Albers equal-area conic (USGS parallels) from Hudson Bay to central Mexico, with Alaska and Hawaii insets; continuous dates 1492–present. Owner to confirm the projection (the brief first said Albers USA, which cannot show New Spain or New France).
 - Later: `atlantic-world`, `indian-ocean`, `mediterranean`, `west-africa`.
 - Region labels use the AP World framework's region names (its "World Regions" maps).
 

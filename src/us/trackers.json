@@ -1,0 +1,36 @@
+{
+  "_comment": "North America stage trackers. 'nations' fills every polygon by the power that holds it (src/us/powers.json). 'states' fills Newberry's U.S. polygons by their TERR_TYPE, as Newberry classifies them; everything else is muted. 'cessions' shades the Royce land cessions made up to the date shown, stepped by period (a sequential key: darker is later); everything else is muted.",
+  "nations": { "id": "nations", "title": "Nations and empires" },
+  "states": {
+    "id": "states",
+    "title": "States and territories",
+    "types": {
+      "State": { "fill": "P", "label": "State" },
+      "District of Columbia": { "fill": "P", "label": "State" },
+      "Territory": { "fill": "In", "label": "Organized territory" },
+      "Unorganized Territory": { "fill": "E", "label": "Unorganized territory" },
+      "Other": { "pattern": "hatch", "label": "Republic, joint or disputed area" }
+    }
+  },
+  "cessions": {
+    "id": "cessions",
+    "title": "Indian land cessions",
+    "periods": [
+      [17840101, 18091231, "1784–1809"],
+      [18100101, 18291231, "1810–1829"],
+      [18300101, 18491231, "1830–1849"],
+      [18500101, 18691231, "1850–1869"],
+      [18700101, 18941231, "1870–1894"]
+    ]
+  },
+  "population": {
+    "id": "population",
+    "title": "Native population",
+    "_comment": "From the first full census (1890) the states and territories are shaded by American Indians counted per 1,000 km² (src/us/native.js DENSITY_BREAKS, the same steps every year), with the largest counts as number badges. Before 1890 the census left most Native people out, so nothing is shaded: the scholarly estimates of data/us/native-estimates.csv speak instead, as badges with their ranges, and the national figure as a line of the legend."
+  },
+  "electoral": {
+    "id": "electoral",
+    "title": "Electoral College",
+    "_comment": "The latest presidential election held by the date shown, drawn on the map of its own day: each state filled by the candidate its electors voted for most (src/us/parties.json gives each party's fill), with its electoral votes as a number badge. Votes from the U.S. National Archives (data/us/electoral.json, scripts/fetch-electoral.mjs). Territories, and the District of Columbia before 1964, had no electors and stay muted."
+  }
+}

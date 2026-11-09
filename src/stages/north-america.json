@@ -1,0 +1,44 @@
+{
+  "id": "north-america",
+  "title": "North America",
+  "title_us": "The United States",
+  "projection": "albers",
+  "extent": {
+    "west": -127,
+    "south": 18.5,
+    "east": -63,
+    "north": 51
+  },
+  "shift": [110, 0],
+  "legend": { "anchor": "bottom-right", "lift": 148 },
+  "span": [1492, 2026],
+  "relief": "relief/north-america.png",
+  "insets": [
+    {
+      "id": "alaska",
+      "title": "Alaska",
+      "parallels": [55, 65],
+      "rotate": [154, 0],
+      "extent": { "west": -170, "south": 51.5, "east": -129.5, "north": 71.5 },
+      "box": [54, 318, 384, 290]
+    },
+    {
+      "id": "hawaii",
+      "title": "Hawaiian Islands",
+      "parallels": [8, 18],
+      "rotate": [157, 0],
+      "extent": { "west": -160.4, "south": 18.85, "east": -154.75, "north": 22.3 },
+      "box": [54, 624, 300, 176]
+    }
+  ],
+  "labels": [
+    { "text": "Pacific Ocean", "lon": -120, "lat": 23.5, "kind": "water", "span": 22 },
+    { "text": "Atlantic Ocean", "lon": -75, "lat": 30.5, "kind": "water", "span": 22 },
+    { "text": "Gulf of Mexico", "lon": -90.5, "lat": 25.6, "kind": "water", "span": 18,
+      "names": [{ "from": 20250207, "text": "Gulf of America", "source": "Executive Order 14172 (20 January 2025); Secretary of the Interior Order 3423 (7 February 2025), entered in the federal Geographic Names Information System" }] },
+    { "text": "Caribbean Sea", "lon": -78.5, "lat": 17.3, "kind": "water", "span": 18 },
+    { "text": "Hudson Bay", "lon": -85.5, "lat": 57.5, "kind": "water", "span": 14 },
+    { "text": "Gulf of California", "lon": -111.5, "lat": 27.6, "kind": "water", "span": 12 }
+  ],
+  "diff_min_km2": 20000
+}

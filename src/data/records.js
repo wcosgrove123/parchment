@@ -176,6 +176,12 @@ export function recordsFor(records, tracker, year, years = []) {
   return records.filter((r) => r.tracker === tracker && ((r.start <= year && year <= r.end) || home(r) === year));
 }
 
+// A typed range of years (the Explorers layer): every record of the tracker whose dates touch from…to, inclusive.
+export function recordsInRange(records, tracker, from, to) {
+  const [a, b] = from <= to ? [from, to] : [to, from];
+  return records.filter((r) => r.tracker === tracker && r.start <= b && r.end >= a);
+}
+
 // Routes need a coordinate per waypoint. gazetteer: data/gazetteer.json ({ Q…: { lon, lat, label } }, written by
 // scripts/geocode.mjs). Route rows get `coords` (one [lon, lat] per waypoint); point rows with blank lon/lat take
 // the gazetteer's coordinate for their id, so a new point draws as soon as its id is in the cache.
