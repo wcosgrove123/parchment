@@ -5,8 +5,8 @@ the polygons the lesson is about lit and the rest dropped to paper, and the rive
 at. You (or a co-teacher, or Claude in a cloud session) fill in an **order form**; Parchment returns the picture and a
 **packing slip**, a JSON file that says what is on the map, with dates and sources.
 
-Built 2026-11-06 from the owner's brief "Parchment: lesson maps on order". Decisions and open questions:
-`docs/DECISIONS.md`, 2026-11-06. Test orders: `tests/maps/`.
+Built 2026-11-06 from the owner's brief "Parchment: lesson maps on order"; the owner's answers of 2026-11-09 are in.
+Decisions: `docs/DECISIONS.md`, 2026-11-06 and 2026-11-09. Test orders: `tests/maps/`.
 
 ## The order form
 
@@ -65,6 +65,12 @@ less land; water names are set where their water shows; Alaska and Hawaii are dr
 `joint-mexico-texas-claim`), or by its id (`ohm:2841297`, `nb:tx_republic`, `Q949898`). A hatched dispute stays when
 the order lights either side of it. Names of what is not lit stay on the map, paler, as context. `npm run search`
 finds ids.
+
+**Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the
+Republic of Texas has a color of its own and the land Mexico still claimed inside it keeps the hatch; the whole
+continent already shows five fills, so there the Republic stays hatched. From annexation to the Mexican Cession the
+hatch south of Texas is the land between the Nueces and the Rio Grande, edged by Natural Earth's Nueces; past the
+river's head it follows OpenHistoricalMap's Chihuahua and Nuevo México (the upper Rio Grande claim).
 
 **Places and routes** are records, as everywhere in Parchment: a `point` row with a Wikidata id in `where` and a
 `source`; an `arrow` or `path` row through gazetteer ids. A Wikidata id with no record is not drawn (the slip says

@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { geoArea, geoBounds, geoDistance } from 'd3';
+import { geoArea, geoBounds, geoContains, geoDistance } from 'd3';
 import { feature } from 'topojson-client';
 import polygonClipping from 'polygon-clipping';
 
@@ -112,9 +112,15 @@ console.log(`nb-disputes: ${pieces.length} pieces, ${disputes.size} disputes →
   const prevDay = (d) => { const t = new Date(Date.UTC(Math.trunc(d / 10000), (Math.trunc(d / 100) % 100) - 1, (d % 100) - 1)); return t.getUTCFullYear() * 10000 + (t.getUTCMonth() + 1) * 100 + t.getUTCDate(); };
   const mexico = 'Mexico';
   const xbox = new Map([...usNB, ...mx].map((f) => [f, geoBounds(f)]));
+  // Overlaps the owner set aside (2026-11-09, DECISIONS): the two sources placing one treaty line differently, not
+  // land anyone claimed. A strip along Sonora (the Mexican Cession, then New Mexico Territory, 1848–1854) and the
+  // Gadsden Purchase between its signing and its taking effect (1853–1854). Miller County (Arkansas Territory against
+  // Coahuila y Tejas, 1824–1835) stays: a real dispute.
+  const SET_ASIDE = new Set(['mx_cession~2841240', 'nm_terr~2841240', 'gd_purchase~2841240', 'gd_purchase~2951780']);
   const found = [];
   for (const a of usNB) for (const b of mx) {
     const pa = a.properties, pb = b.properties;
+    if (SET_ASIDE.has(`${pa.id}~${pb.rid}`)) continue;
     const s = Math.max(pa.s, pb.s), e = Math.min(pa.e, prevDay(pb.e));
     if (s > e) continue;
     const [[ax0, ay0], [ax1, ay1]] = xbox.get(a), [[bx0, by0], [bx1, by1]] = xbox.get(b);
@@ -132,6 +138,104 @@ console.log(`nb-disputes: ${pieces.length} pieces, ${disputes.size} disputes →
     const geometry = { type: 'MultiPolygon', coordinates: round(kept) };
     found.push({ a, b, s, e, km2: Math.round(geoArea(geometry) * KM2), geometry });
   }
+
+  // The Nueces Strip ends at the Nueces (owner, 2026-11-09). OpenHistoricalMap's Tamaulipas runs near the lower river
+  // (a median 1.4 km off) and its Coahuila reaches up to 56 km past the middle river, so where a Tamaulipas or Coahuila
+  // piece meets the Nueces (Natural Earth 1:10m, data/base/derived/rivers-na.topojson) the river is its edge: the part
+  // across the river is cut away, and Texas between the piece and the river on the Rio Grande side joins it. The upper
+  // Rio Grande pieces (Chihuahua, Nuevo México) keep the sources' lines: the river is followed up to where it enters
+  // them, and north of its head there is no river to cut along. Computed from downloaded lines; nothing drawn.
+  const NUECES_STATES = new Set(['Tamaulipas', 'Coahuila']);
+  const KM_LAT = 110.57, kmLon = (lat) => 111.32 * Math.cos((lat * Math.PI) / 180);
+  const toPC = (geometry) => geometry.coordinates.map((poly) => poly.map((r) => [...r].reverse()));
+  // The river from its mouth (the easternmost end of its pieces) to its head, as one line: the longest path through
+  // its pieces, so a short piece at a confluence (Natural Earth names a stub at Three Rivers "Nueces") is passed by.
+  const nueces = (() => {
+    const rt = JSON.parse(readFileSync(join(ROOT, 'data', 'base', 'derived', 'rivers-na.topojson'), 'utf8'));
+    const lines = feature(rt, rt.objects[Object.keys(rt.objects)[0]]).features
+      .filter((f) => /^nueces$/i.test(f.properties.name ?? ''))
+      .flatMap((f) => (f.geometry.type === 'LineString' ? [f.geometry.coordinates] : f.geometry.coordinates));
+    const near = (p, q) => Math.abs(p[0] - q[0]) < 1e-3 && Math.abs(p[1] - q[1]) < 1e-3;
+    const km = (path) => path.reduce((L, p, i) => (i ? L + geoDistance(path[i - 1], p) * 6371 : 0), 0);
+    const longest = (cur, used) => {
+      let best = [cur];
+      lines.forEach((l, i) => {
+        if (used.has(i)) return;
+        const seg = near(l[0], cur) ? l : near(l[l.length - 1], cur) ? [...l].reverse() : null;
+        if (!seg) return;
+        const path = [...seg, ...longest(seg[seg.length - 1], new Set([...used, i])).slice(1)];
+        if (km(path) > km(best)) best = path;
+      });
+      return best;
+    };
+    const chain = longest(lines.flatMap((l) => [l[0], l[l.length - 1]]).reduce((m, p) => (p[0] > m[0] ? p : m)), new Set());
+    console.log(`  the Nueces: ${Math.round(km(chain))} km from its mouth to its head, ${chain.length} points`);
+    return chain;
+  })();
+  // A band of half-width `km` along a line: one quad per segment and one square per vertex, joined.
+  const band = (line, km) => {
+    const parts = [];
+    line.forEach(([x, y], i) => {
+      const dx = km / kmLon(y), dy = km / KM_LAT;
+      parts.push([[[x - dx, y - dy], [x + dx, y - dy], [x + dx, y + dy], [x - dx, y + dy], [x - dx, y - dy]]]);
+      if (!i) return;
+      const [x0, y0] = line[i - 1], kx = kmLon((y + y0) / 2);
+      const ux = (x - x0) * kx, uy = (y - y0) * KM_LAT, len = Math.hypot(ux, uy) || 1;
+      const ox = ((-uy / len) * km) / kx, oy = ((ux / len) * km) / KM_LAT;
+      parts.push([[[x0 + ox, y0 + oy], [x + ox, y + oy], [x - ox, y - oy], [x0 - ox, y0 - oy], [x0 + ox, y0 + oy]]]);
+    });
+    return polygonClipping.union(...parts);
+  };
+  // Which side of the river (mouth → head) a polygon lies on; the Rio Grande's side is the left. Its vertex farthest
+  // from the river decides, so a vertex beside the cut at a bend cannot mislead it.
+  const nearestOn = (p, line) => {
+    let out = null;
+    const kx = kmLon(p[1]);
+    for (let i = 1; i < line.length; i++) {
+      const a = line[i - 1], b = line[i];
+      const ax = (b[0] - a[0]) * kx, ay = (b[1] - a[1]) * KM_LAT, px = (p[0] - a[0]) * kx, py = (p[1] - a[1]) * KM_LAT;
+      const t = Math.max(0, Math.min(1, (px * ax + py * ay) / (ax * ax + ay * ay || 1)));
+      const q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+      const d = Math.hypot((p[0] - q[0]) * kx, (p[1] - q[1]) * KM_LAT);
+      if (!out || d < out.d) out = { d, a, b, q };
+    }
+    return out;
+  };
+  const onRioGrandeSide = (poly, line) => {
+    let far = null;
+    for (const p of poly[0]) { const n = nearestOn(p, line); if (!far || n.d > far.n.d) far = { p, n }; }
+    const { p, n } = far, kx = kmLon(p[1]);
+    const sx = (n.b[0] - n.a[0]) * kx, sy = (n.b[1] - n.a[1]) * KM_LAT, vx = (p[0] - n.q[0]) * kx, vy = (p[1] - n.q[1]) * KM_LAT;
+    return sx * vy - sy * vx > 0;
+  };
+  const groups = new Map();
+  for (const x of found) {
+    if (!NUECES_STATES.has(x.b.properties.name)) continue;
+    const k = `${x.a.properties.id}.${x.a.properties.v}|${x.s}|${x.e}`;
+    groups.set(k, [...(groups.get(k) ?? []), x]);
+  }
+  for (const pieces of groups.values()) {
+    const { a, s, e } = pieces[0];
+    const upper = found.filter((y) => y.a === a && !NUECES_STATES.has(y.b.properties.name) && y.s <= e && y.e >= s);
+    // up to where the river enters an upper Rio Grande piece, that vertex included, so the cut crosses into it
+    const k = nueces.findIndex((p) => upper.some((y) => geoContains(y.geometry, p)));
+    const river = k < 0 ? nueces : nueces.slice(0, k + 1);
+    const cut = band(river, 0.05);
+    const rioGrandeSide = (mp) => mp.filter((poly) => onRioGrandeSide(poly, river));
+    const kept = pieces.map((x) => rioGrandeSide(polygonClipping.difference(toPC(x.geometry), cut)));
+    // Texas between the pieces and the river, on the Rio Grande side (within 15 km of the river): to Tamaulipas
+    const gap = rioGrandeSide(polygonClipping.difference(polygonClipping.intersection(rings(a), band(river, 15)), cut, ...[...pieces, ...upper].map((x) => toPC(x.geometry))));
+    const home = Math.max(0, pieces.findIndex((x) => x.b.properties.name === 'Tamaulipas'));
+    pieces.forEach((x, i) => {
+      const all = i === home ? [...kept[i], ...gap] : kept[i];
+      const before = x.km2;
+      x.geometry = { type: 'MultiPolygon', coordinates: round(forD3(all.length ? polygonClipping.union(all) : [])) };
+      x.km2 = Math.round(geoArea(x.geometry) * KM2);
+      x.edge = { river: 'Nueces', source: 'Natural Earth 1:10m rivers and lake centerlines, North American supplement (public domain)', rule: 'owner, 2026-11-09: the strip is the land between the Nueces and the Rio Grande' };
+      console.log(`  cut at the Nueces: ${x.a.properties.full || x.a.properties.name} × ${x.b.properties.name}  ${before.toLocaleString('en-US')} → ${x.km2.toLocaleString('en-US')} km²`);
+    });
+  }
+
   // How each piece ended, from both sides' records.
   const nbByName = (name) => allNB.filter((f) => (f.properties.full || f.properties.name) === name).sort((x, y) => x.properties.s - y.properties.s)[0];
   const endings = (x) => {
@@ -172,14 +276,14 @@ console.log(`nb-disputes: ${pieces.length} pieces, ${disputes.size} disputes →
   const party = (p) => (p.type === 'Unorganized Territory' ? 'United States' : (p.full || p.name));
   const usmx = {
     type: 'FeatureCollection',
-    _source: 'Computed by scripts/derive-us-disputes.mjs: the intersections of U.S. states and territories (The Newberry Library, Atlas of Historical County Boundaries; data/us/newberry.topojson) with Mexican states and territories (OpenHistoricalMap, CC0; data/us/ohm.topojson) alive on the same days, pieces over 3,000 km² and 12 km thick. Nothing drawn.',
+    _source: 'Computed by scripts/derive-us-disputes.mjs: the intersections of U.S. states and territories (The Newberry Library, Atlas of Historical County Boundaries; data/us/newberry.topojson) with Mexican states and territories (OpenHistoricalMap, CC0; data/us/ohm.topojson) alive on the same days, pieces over 3,000 km² and 12 km thick. The pieces against Tamaulipas and Coahuila end at the Nueces (Natural Earth 1:10m; owner, 2026-11-09); the Sonora strip and the Gadsden Purchase interval are set aside (owner, 2026-11-09). Nothing drawn.',
     features: found.map((x) => {
       const pa = x.a.properties, pb = x.b.properties, d = span.get(key(x));
       return {
         type: 'Feature',
         properties: {
           id: `${pa.id}.${pa.v}~${pb.rid}`, a: pa.id, av: pa.v, an: pa.full || pa.name, atype: pa.type, b: pb.rid, bn: pb.name, bwd: pb.wd ?? null, bpower: 'mexico',
-          parties: [party(pa), mexico], s: x.s, e: x.e, ds: d.s, de: d.e, km2: x.km2, ended: d.ended,
+          parties: [party(pa), mexico], s: x.s, e: x.e, ds: d.s, de: d.e, km2: x.km2, ended: d.ended, ...(x.edge ? { edge: x.edge } : {}),
         },
         geometry: x.geometry,
       };

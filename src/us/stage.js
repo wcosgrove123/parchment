@@ -264,6 +264,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // An order's highlight (lesson maps): the polygons it names keep their looks; everything else drops to paper.
     const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states') ? applyHighlight(items) : null;
     if (!hl) for (const it of items) { it.lit = null; it.litBy = null; }
+    // A Newberry "Other" area the owner gave a fill of its own (the Republic of Texas, 2026-11-09) takes it where the
+    // map has room once the highlight has dropped the rest to paper: at most four fills with it, and no other power on
+    // the map in its colour; elsewhere it keeps the hatch (grammar §5). The whole continent in 1836–1845 has five already.
+    if (trackerId === 'nations') ownFills(items);
 
     // A fingerprint of what this date draws. Most years change nothing: then nothing is redrawn. A sheet drawn
     // a moment ago (scrubbing back and forth) comes back from the cache instead of being built again.
@@ -648,6 +652,25 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   // ------------------------------------------------------------ lesson maps (src/us/frames.js)
   // The highlight: a polygon is lit when one of its names is in the order (its power, its own name, its source id);
   // a dispute or overlap stays when the order names it or lights either of its sides. Everything else drops to paper.
+  // (show) Newberry "Other" areas with a fill of their own (powers.json newberry_own), where the map has room.
+  function ownFills(items) {
+    const rules = powers.newberry_own ?? [];
+    if (!rules.length) return;
+    const shown = (it) => views.some((v) => v.shows(it.f));
+    const fills = new Map();
+    for (const it of items) if (it.look?.fill && shown(it)) fills.set(it.look.fill, it.look.cat ?? it.look.label);
+    for (const it of items) {
+      if (it.src !== 'newberry' || it.p.power !== powers.newberry_other || it.look?.pattern !== 'hatch' || !shown(it)) continue;
+      const rule = rules.find((r) => new RegExp(r.match, 'i').test(it.p.full || it.p.name || ''));
+      const look = rule ? categoryLook(powers, rule.power) : null;
+      if (!look?.fill) continue;
+      if ((fills.has(look.fill) && fills.get(look.fill) !== rule.power) || new Set([...fills.keys(), look.fill]).size > 4) continue;
+      it.look = look;
+      it.cat = rule.power;
+      fills.set(look.fill, rule.power);
+    }
+  }
+
   function applyHighlight(items) {
     const hl = lesson.highlight;
     hl.reset();

@@ -39,8 +39,9 @@ function sourceOf(it, tags) {
   }
   if (it.src === 'usmx') {
     return {
-      dataset: 'Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of a Newberry U.S. polygon and an OpenHistoricalMap Mexican polygon alive on the same days; nothing drawn',
+      dataset: `Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of a Newberry U.S. polygon and an OpenHistoricalMap Mexican polygon alive on the same days${p.edge ? `, ending at the ${p.edge.river} (${p.edge.source}; ${p.edge.rule})` : ''}; nothing drawn`,
       from: [{ newberry: p.a, version: p.av, name: p.an }, { ohm: p.b, name: p.bn, url: `https://www.openhistoricalmap.org/relation/${p.b}` }], ended: p.ended ?? [],
+      ...(p.edge ? { cut_at: p.edge } : {}),
     };
   }
   if (it.src === 'hb') return { dataset: `historical-basemaps, world_${p.y}`, url: 'https://github.com/aourednik/historical-basemaps', license: 'GPL-3.0', note: p.y === 1492 ? 'its North American names follow Native Land Digital' : null };
@@ -186,7 +187,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     return { ohm: rid, url: `https://www.openhistoricalmap.org/relation/${rid}`, name: o?.p.name ?? null, start: o ? iso(o.p.s) : null, end: o ? iso(o.p.e) : null, note: "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)" };
   });
   const features = shown.map((it) => {
-    const pw = it.src === 'ohm' ? powerAt(it.p, date) : it.src === 'newberry' ? it.p.power : it.cat ?? null;
+    // (a Newberry polygon's category as drawn: the Republic of Texas takes its own where the map has room, stage.js ownFills)
+    const pw = it.src === 'ohm' ? powerAt(it.p, date) : it.src === 'newberry' ? it.cat ?? it.p.power : it.cat ?? null;
     const c = pw ? powers.categories[pw] : null;
     let pl = c?.label ?? null;
     for (const [from, t] of c?.labels ?? []) if (date >= from) pl = t;
@@ -303,7 +305,7 @@ function creditLine(features, points, routes, rivers, trackerId) {
   if (has('land-cession') || has('treaty-land')) parts.push('land cessions: U.S. Forest Service (Royce 1899)');
   if (trackerId === 'electoral') parts.push('votes: National Archives');
   if (trackerId === 'population') parts.push('counts: U.S. Census Bureau');
-  if (rivers.some((r) => r.found)) parts.push('rivers: Natural Earth');
+  if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at)) parts.push('rivers: Natural Earth');
   if (points.length || routes.length) parts.push('places: the Parchment record table, coordinates from Wikidata');
   return parts.join('; ');
 }

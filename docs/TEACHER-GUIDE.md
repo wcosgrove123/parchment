@@ -160,7 +160,8 @@ it comes from a dated source, and clicking any area opens a card with that sourc
   `us.html?frame=texas&date=1836-06-01&highlight=texas-republic,mexico&size=1600x1550`. Frames: `texas`,
   `southwest`, `oregon-country`, `east`, `plains`, `border-states`. What is not lit drops to paper, its name kept
   pale. `rivers=Nueces,Rio Grande` names rivers; `places=` points at rows of the table by their Wikidata id;
-  `title=` titles the map. Export gives the picture at that size. Whoever keeps the site can make the same map from
-  an order form, with a list of everything on it and its sources (docs/LESSON-MAPS.md).
+  `title=` titles the map. On a Texas slide the Republic of Texas (1836–1845) has a color of its own, so the land
+  Mexico still claimed inside it shows as a hatch. Export gives the picture at that size. Whoever keeps the site can
+  make the same map from an order form, with a list of everything on it and its sources (docs/LESSON-MAPS.md).
 - **Something looks wrong?** Note the year and the area and tell the person who keeps the site. Borders are not
   redrawn here; a wrong one is fixed in its source or set aside with a written reason.

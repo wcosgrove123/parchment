@@ -106,6 +106,17 @@ test('the two eras join without a gap or a second hatch: the joint claim to 27 D
   assert.ok(computed(18451229));
 });
 
+test('the 1846 strip ends at the Nueces, and the overlaps the owner set aside are gone (owner, 2026-11-09)', () => {
+  const at = (d, pt) => aliveUSMX(data, d).filter((it) => geoContains(it.f, pt)).map((it) => it.p.bn);
+  assert.deepEqual(at(18460425, [-99.786, 29.209]), [], "Uvalde, east of the Nueces: OpenHistoricalMap's Coahuila reached it, the strip does not");
+  assert.deepEqual(at(18460425, [-99.861, 28.522]), ['Coahuila'], 'Carrizo Springs, between the Nueces and the Rio Grande');
+  assert.deepEqual(at(18460425, [-99.507, 27.531]), ['Tamaulipas'], 'Laredo');
+  assert.equal(data.usmx.find((it) => it.p.bn === 'Coahuila').p.edge.river, 'Nueces');
+  assert.deepEqual(aliveUSMX(data, 18520601), [], 'no strip along Sonora: the sources disagreeing, not a claim');
+  assert.deepEqual(aliveUSMX(data, 18540301), [], 'no Gadsden Purchase interval');
+  assert.ok(aliveUSMX(data, 18300601).some((it) => it.p.a === 'ar_terr' && it.p.bn === 'Coahuila y Tejas'), 'Miller County stays: a real dispute');
+});
+
 // ---------------------------------------------------------------- rivers count among the ten places
 test('a river name takes one of the ten labelled places; a route name does not', () => {
   const pts = [0, 1].map((i) => ({ id: `p${i}`, kind: 'point', priority: 1, x: 200 + i * 300, y: 200, radius: 6, w: 60, h: 16 }));

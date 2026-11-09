@@ -58,6 +58,7 @@ for (const size of SIZES) {
     assert.deepEqual([copy.start, copy.end], ['1836-03-02', '1845-12-28'], 'OHM 2692792, the copy of the Republic, with its dates');
     const hatch = s.legend.rows.filter((r) => r.key === 'hatch');
     assert.deepEqual(hatch.map((r) => r.label), ['Claimed by Texas and Mexico'], 'the hatch reads as a dispute between Texas and Mexico');
+    assert.deepEqual([rep.look.kind, rep.power_label], ['fill', 'Republic of Texas'], 'the Republic has its own fill, so the joint claim stands apart (owner, 2026-11-09)');
     assert.equal(s.points.length, 6);
   });
 
@@ -66,6 +67,7 @@ for (const size of SIZES) {
     const strip = feature(s, (f) => f.layer === 'us-mexico-dispute' && f.ids.ohm === 2841303);
     assert.ok(strip, 'the computed piece between the Nueces and the Rio Grande');
     assert.deepEqual(strip.source.from.map((x) => x.newberry ?? x.ohm), ['tx_state', 2841303], 'named with the two polygons it came from');
+    assert.equal(strip.source.cut_at?.river, 'Nueces', 'and ending at the Nueces (owner, 2026-11-09)');
     assert.match(strip.source.ended[0].record.text, /Guadalupe-Hidalgo/);
     assert.ok(s.legend.rows.some((r) => r.label === 'Claimed by Texas and Mexico'));
     const march = s.routes.find((r) => r.record === 'test-tx-taylor-march');
@@ -83,3 +85,12 @@ for (const size of SIZES) {
     assert.equal(s.changes.united_states.grew, true, 'annexation shows as the United States gaining land');
   });
 }
+
+test('the whole continent, 1 June 1840: five fills already, so the Republic of Texas keeps the hatch (grammar §5)', { skip, timeout: 120000 }, async () => {
+  const s = (await renderOrder({ date: '1840-06-01', tracker: 'nations', size: '1920x1080' }, { out: join(OUT, 'continent-1840'), base: OUT, browser })).slip;
+  assert.deepEqual(s.render.page_errors, []);
+  const rep = s.features.find((f) => f.ids.newberry === 'tx_republic');
+  assert.equal(rep.look.kind, 'pattern', 'no room for a sixth fill');
+  assert.ok(!s.legend.rows.some((r) => r.label === 'Republic of Texas'));
+  assert.ok(s.legend.rows.some((r) => r.label === 'Claimed by Texas and Mexico'));
+});

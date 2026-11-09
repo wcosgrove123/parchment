@@ -6,6 +6,7 @@
     "france": { "label": "France", "fill": "P" },
     "spain": { "label": "Spain", "fill": "E" },
     "mexico": { "label": "Mexico", "fill": "T" },
+    "texas-republic": { "label": "Republic of Texas", "fill": "P", "_why": "Owner, 2026-11-09: the Republic gets its own fill so the joint Mexico-Texas claim inside it can be told apart. P (France's token) because France holds nothing on this page in 1836–1845, and every other token belongs to a power alive then (United States In, Britain S, Spain E, Mexico T, Russia C). Taken only where the map has room (newberry_own)." },
     "sweden": { "label": "Sweden", "fill": "T" },
     "netherlands": { "label": "Netherlands", "fill": "C" },
     "russia": { "label": "Russia", "fill": "C" },
@@ -29,6 +30,9 @@
     { "power": "britain", "match": "English|England|British|Britain|Plantations|Plymouth|Massachusetts|Connecticut|New Haven|Saybrook|Rhode Island|New Hampshire|Province of Maine|Carolana|Carolina|Georgia|Maryland|Virginia|Virgineola|Somers Isles|Bermuda|Jamaica|Newfoundland|Nova Scotia|New Brunswick|Cape Breton|Prince Edward|St\\. John's Island|Quebec|Upper Canada|Lower Canada|Province of Canada|Dominion of Canada|^Canada$|Rupert's Land|North-West Territories|Red River Colony|Columbia District|New Caledonia|Vancouver Island|Queen Charlotte|Stickeen|East Florida|West Florida|Dominion of New England|Lower Counties|Jersey|Pennsylvania|Province of New York|Colony of New York|Roanoke|Cuper's Cove|Renews|Bristol's Hope|Avalon|Cayman|Turks and Caicos|Colony of the Bahamas|Bay of Honduras|Settlement of British Honduras|British Honduras" }
   ],
   "newberry_other": "disputed",
+  "newberry_own": [
+    { "match": "^Texas Republic$", "power": "texas-republic", "_why": "Owner, 2026-11-09. Under the nations tracker, where the map has room for its fill: at most four fills with it, and no other power on the map in the same colour (grammar §5: a fifth category gets a hatch). The whole continent in 1836–1845 already has five (United States, Britain, Spain, Mexico, Russia), so there it stays hatched." }
+  ],
   "nolabel": [
     { "match": "^Viceroyalty of New Spain$", "from": 18210928, "_why": "OpenHistoricalMap keeps this name on Spain's Caribbean remainder until 1899; the viceroyalty ended with Mexican independence. The Captaincy General's own name is shown instead." }
   ],
