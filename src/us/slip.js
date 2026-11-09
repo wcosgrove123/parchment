@@ -156,6 +156,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     size: { width: sheet.px.width, height: sheet.px.height, sheet_units: [sheet.w, sheet.h], scale: sheet.scale },
     title: titleShown,
     highlight: lesson?.highlight ? { ids: lesson.highlight.ids, unmatched: lesson.highlight.unmatched() } : null,
+    inset: lesson?.inset ? { id: lesson.inset.id, title: lesson.inset.title, box: lesson.inset.box, at: lesson.inset.at, projection: lesson.inset.projection?.projection ?? null } : null,
     legend_corner: info.legend?.anchor ?? null,
     water_names: info.waterLabels,
     records_file: records?.file ?? null,
@@ -172,6 +173,9 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       course: courseList(military.shown ?? [], military.war), strip: military.strip ?? 'war', show: military.show?.length ? military.show : 'everything built',
       // milestone 3: movements since `from` (else the war's start) begun by the date
       movements_since: military.since ? isoDate(military.since) : null, movements_on_sheet: (military.moves ?? []).map((r) => r.id), movements_in_war: (military.allMoves ?? []).length,
+      forces_shown: military.forces?.length ? military.forces : 'all',
+      // milestone 4: the computed lines, each with how it was made (nothing drawn by hand)
+      lines: (military.lines ?? []).map((l) => ({ id: l.id, kind: l.kind, label: l.label, side: l.side ?? null, computed_from: l.kind === 'blockade' ? `the coast of ${l.coast_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}), inside the window given, moved 14 px offshore` : `the edge of ${l.border_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}) where it meets ${l.against}'s land`, on: isoDate(l.on_date), window: l.window ?? null, runs: l.runs.length, length_px: l.length_px, source: l.source ?? null })),
     } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);

@@ -13,8 +13,8 @@ order or map changes unless it asks for `layer: military`.
 | 1 | wars, sides and members; the Military toggle and the side fills | done on the North America page (below); the world page's toggle and the 1914–18 test wait for the Europe-stage work there |
 | 2 | events: battles by victor, sieges, places taken, declarations and the treaty; the numbered course of the war; the war strip | done (`tests/maps/military/mexico-war-1848.json`) |
 | 3 | forces and movements: arrows by side, hollow retreats, landing ticks, side-by-side legs, tabs at the frame's edge, force bars on the strip | done (`tests/maps/military/texas-1847-movements.json`) |
-| 4 | lines: fronts, blockades, treaty lines, ghost borders; the `mexico-city` inset | next |
-| 5 | icons and force marks with date checks | |
+| 4 | lines computed from the polygons: blockades off a coast, treaty lines, ghost borders; the `mexico-city` inset; `forces` to follow one campaign | done (`tests/maps/military/mexico-war-1848-full.json`); fronts, fortified lines and parallels wait for the maps that need them |
+| 5 | icons and force marks with date checks | next |
 | 6–10 | the human cost; play and video; panels and accounts; battle frames; strength width | |
 
 ## Turning it on
@@ -45,6 +45,9 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 | `show` | `show=` | what of the layer to draw: `territory`, `events`, `sequence` (default: everything built); `movements`, `lines`, `forts`, `losses` follow with their milestones |
 | `sequence` | `sequence=` | `true` (every event begun by the date is numbered in date order, default), `false`, or a list of record ids to number in that order |
 | `strip` | `strip=` | `war` (default: the war's own timeline under the map) or `stage` (the page's usual strip) |
+| `inset` | `inset=` | a focus id (`mexico-city`) drawn as an inset above the cartouche, with the same fills, events and movements in its own projection |
+| `forces` | `forces=` | force ids (`scott`, `taylor`): only those forces' movements, and the events that name a force, to follow one campaign |
+| `highlight` | `highlight=` | as on a lesson map: light these polygons (a dispute, a state) and drop the rest to paper |
 
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
@@ -81,7 +84,17 @@ side's name for the war.
   `retreat`, `flank-march`, `envelopment`, `feint`, `pursuit`, `raid`, `landing`, `breakthrough`, `naval-passage`,
   `air-route`, `supply-line`), dates, a label that is the commander and the year ("Taylor 1846"), and a source.
   Waypoints are the places the source names; `npm run geocode -- --file <table>` fills the gazetteer for them.
-- Lines (`path`) follow in milestone 4.
+- **Lines** are not rows but entries in the war's record (`vocab.json`, `lines`), each computed on the page from the
+  polygons alive on a date: `{ kind: blockade, side, coast_of, from, to, window, label, source }` runs off the
+  blockaded side's own coast inside the window; `{ kind: treaty | armistice | ghost, border_of, against, on, from,
+  label, source }` is one side's edge where it meets the other's land on the date `on`. Nothing is traced.
+
+## What it draws (milestone 4)
+
+A blockade is a line 14 px off the coast in the blockading side's color with small hull marks; a treaty line is
+navy; a ghost border is navy at half strength, named with its date. Each is named along its longest run. The
+packing slip says how each was computed (whose polygons, on what date, how many, which window). With `inset`, a
+second small map of a focus sits above the cartouche; with `forces`, one campaign shows alone.
 
 ## What it draws (milestone 3)
 

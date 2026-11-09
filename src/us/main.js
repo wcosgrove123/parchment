@@ -96,10 +96,21 @@ async function main() {
       }
     }
     const frame = frameFound ? { ...frameFound, projection: frameProjection(frameFound, projectionMode), legend: frameFound.focus?.legend ?? null, water: frameFound.focus?.water ?? [] } : null;
+    // An inset (the Military layer's test 1: Scott's campaign): a focus drawn in a box above the cartouche.
+    let inset = null;
+    if (params.get('inset')) {
+      const f = resolveFrame(params.get('inset'), focusTable);
+      if (!f) problems.push(`inset "${params.get('inset')}" is neither a focus in src/focuses.json nor a box W,S,E,N; no inset is drawn`);
+      else {
+        const w = Math.min(360, Math.round(SHEET.w * 0.2)), h = Math.round(w * 0.9);
+        inset = { id: `inset-${f.id ?? 'box'}`, title: f.title ?? params.get('inset'), box: f.box, projection: frameProjection(f, 'auto'), at: [32 + 22, SHEET.h - 64 - 22 - 128 - 22 - h, w, h] };
+      }
+    }
     lesson = {
       key: `${frameParam ?? 'continent'}-${projectionMode}-${SHEET.w}x${SHEET.h}`,
       sheet: { w: SHEET.w, h: SHEET.h },
       frame,
+      inset,
       title: params.get('title') || null,
       highlight: params.get('highlight') ? makeHighlight(params.get('highlight')) : null,
       twins,
@@ -146,6 +157,7 @@ async function main() {
     names: params.get('names') || 'both',
     // what of the layer to draw (empty: everything built), which events carry numerals, and the strip under the map
     show: parseList(params.get('show')),
+    forces: parseList(params.get('forces')), // only these forces' movements (and events that name a force), to follow one campaign
     sequence: params.get('sequence') === 'false' ? false : params.get('sequence') && params.get('sequence') !== 'true' ? parseList(params.get('sequence')) : true,
     strip: params.get('strip') || 'war',
   };
@@ -185,13 +197,14 @@ async function main() {
     const events = eventsOf(milData.events, war.id);
     const showEvents = !state.show.length || state.show.includes('events');
     const seqSpec = state.show.length && !state.show.includes('sequence') ? false : state.sequence;
-    const shown = showEvents ? sequenceFor(eventsUpTo(events, date), seqSpec) : [];
+    const byForce = (r) => !state.forces.length || !r.force || state.forces.includes(r.force);
+    const shown = showEvents ? sequenceFor(eventsUpTo(events, date).filter(byForce), seqSpec) : [];
     // movements since `from` (else the war's start) that have begun by the date, in their sides' colors
     const allMoves = withSides(movementsOf(milData.movements, war.id), war);
     // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
     const since = state.since ?? 0;
-    const moves = !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date) : [];
-    return { war, members, events, shown, moves, allMoves, since, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
+    const moves = !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !state.forces.length || state.forces.includes(r.force)) : [];
+    return { war, members, events, shown, moves, allMoves, since, forces: state.forces, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
   }
   // The layer's events and movements join the order's places and routes on the sheet; set again only when they
   // change (a new date may add one).
@@ -278,7 +291,7 @@ async function main() {
       if (state.tracker === 'military') {
         if (state.war) q.set('war', state.war);
         if (state.names !== 'both') q.set('names', state.names);
-        for (const k of ['show', 'sequence', 'strip']) if (params.has(k)) q.set(k, params.get(k));
+        for (const k of ['show', 'sequence', 'strip', 'forces']) if (params.has(k)) q.set(k, params.get(k));
       }
       // (a lesson map's own fields stay in the address, so it can be copied and opened again)
       for (const k of ORDER_PARAMS) if (!['date', 'year', 'from', 'tracker'].includes(k) && params.has(k)) q.set(k, params.get(k));

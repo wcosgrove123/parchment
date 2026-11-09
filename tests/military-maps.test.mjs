@@ -108,6 +108,30 @@ test('the war in the north, 24 February 1847 (milestone 3): forces as arrows by 
   assert.deepEqual(since.slip.routes.map((r) => r.record).sort(), ['test-mx-mv-doniphan', 'test-mx-mv-santa-anna-adv', 'test-mx-mv-santa-anna-ret', 'test-mx-mv-scott-sea', 'test-mx-mv-taylor-3']);
 });
 
+test('the theater with its lines and inset (milestone 4): blockades off Mexico\'s coasts, the treaty line, a ghost border, Scott\'s campaign inset', { skip, timeout: 240000 }, async () => {
+  const { slip: s } = await render('military/mexico-war-1848-full');
+  assert.deepEqual(s.render.page_errors, []);
+  const lines = s.resolved.war.lines;
+  assert.deepEqual(lines.map((l) => l.id).sort(), ['guadalupe-hidalgo', 'gulf-blockade', 'mexico-1846', 'pacific-blockade']);
+  for (const l of lines) { assert.ok(l.runs >= 1 && l.length_px > 100, `${l.id} was computed and drawn`); assert.match(l.computed_from, /polygon/); assert.ok(l.source); }
+  assert.ok(lines.find((l) => l.id === 'guadalupe-hidalgo').computed_from.startsWith('the edge of mexico'));
+  assert.ok(lines.find((l) => l.id === 'gulf-blockade').computed_from.includes('offshore'));
+  const labels = s.legend.rows.map((r) => r.label);
+  for (const l of ['Blockade of the Gulf ports, from 14 May 1846', 'Treaty of Guadalupe Hidalgo, 1848', 'Mexico, 24 April 1846']) assert.ok(labels.includes(l), l);
+  assert.equal(s.resolved.inset.id, 'inset-mexico-city');
+  assert.equal(s.resolved.inset.title, 'The Valley of Mexico');
+  assert.equal(s.resolved.inset.at.length, 4);
+  assert.equal(s.points.length, 18);
+  // one campaign alone: Scott's two movements, and only the events that name his force (none do yet: all 18 stay)
+  const scott = await render('military/mexico-war-1848-full', { forces: ['scott'], inset: undefined });
+  assert.deepEqual(scott.slip.routes.map((r) => r.record).sort(), ['test-mx-mv-scott-land', 'test-mx-mv-scott-sea']);
+  assert.deepEqual(scott.slip.resolved.war.forces_shown, ['scott']);
+  // lines off, the stage's strip: the fills, events and movements alone
+  const bare = await render('military/mexico-war-1848-full', { show: ['territory', 'events', 'movements'], inset: undefined });
+  assert.deepEqual(bare.slip.resolved.war.lines, []);
+  assert.ok(!bare.slip.legend.rows.some((r) => /Blockade/.test(r.label)));
+});
+
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/texas-1846-sides', { layer: undefined, war: undefined, names: undefined, records: 'tests/maps/texas-records.csv', annotate: { rivers: ['Nueces', 'Rio Grande'], places: ['Q49242', 'Q738353', 'Q2613729', 'Q16868'], routes: ['test-tx-taylor-march'] } });
   assert.equal(s.resolved.tracker.id, 'nations');

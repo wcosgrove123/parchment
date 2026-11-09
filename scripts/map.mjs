@@ -20,7 +20,7 @@ import { serve, bundle } from './serve.mjs';
 import { orderToQuery, parseSize, sheetFor } from '../src/us/frames.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'war', 'names', 'show', 'sequence', 'strip', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'out', 'svg', '_comment', 'notes']);
+const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'out', 'svg', '_comment', 'notes']);
 
 // Renders one order. → { png, json, svg, slip, address }. Used by this command and by the MCP server (mcp/server.mjs).
 export async function renderOrder(order, { out = null, svg = false, base = process.cwd(), log = () => {}, browser = null } = {}) {

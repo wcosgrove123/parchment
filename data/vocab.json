@@ -64732,7 +64732,62 @@
         }
       ],
       "source": "Dates: the Thornton Affair, 25 April 1846, opened the fighting; the Treaty of Guadalupe Hidalgo was signed 2 February 1848 (ratifications exchanged 30 May 1848). K. Jack Bauer, The Mexican War, 1846–1848 (New York: Macmillan, 1974). The Spanish name is the one used by Mexican historiography (Instituto Nacional de Estudios Históricos de las Revoluciones de México).",
-      "_comment": "TEST WAR for milestone 1: the owner and the teachers review it before it ships with real rows."
+      "_comment": "TEST WAR for milestone 1: the owner and the teachers review it before it ships with real rows.",
+      "lines": [
+        {
+          "id": "gulf-blockade",
+          "kind": "blockade",
+          "side": "us",
+          "coast_of": "mexico",
+          "from": "1846-05-14",
+          "to": "1848-02-02",
+          "window": {
+            "west": -98.5,
+            "south": 17.5,
+            "east": -86,
+            "north": 26.2
+          },
+          "label": "Blockade of the Gulf ports, from 14 May 1846",
+          "source": "K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 7: Commodore Conner proclaimed a blockade of Mexico's Gulf ports on 14 May 1846. The line is computed along Mexico's coast as OpenHistoricalMap draws it on the date shown; TEST, to check before it ships."
+        },
+        {
+          "id": "pacific-blockade",
+          "kind": "blockade",
+          "side": "us",
+          "coast_of": "mexico",
+          "from": "1846-08-19",
+          "to": "1848-02-02",
+          "window": {
+            "west": -118,
+            "south": 14,
+            "east": -104,
+            "north": 32.6
+          },
+          "label": "Blockade of the Pacific ports, from Aug 1846",
+          "source": "Bauer (1974), ch. 9: Commodore Stockton proclaimed a blockade of Mexico's Pacific coast in August 1846 (19 August; the date and the reach of the proclamation to check). Computed along Mexico's coast as OpenHistoricalMap draws it; TEST."
+        },
+        {
+          "id": "guadalupe-hidalgo",
+          "kind": "treaty",
+          "border_of": "mexico",
+          "against": "us",
+          "on": "1848-02-02",
+          "from": "1848-02-02",
+          "label": "Treaty of Guadalupe Hidalgo, 1848",
+          "source": "The border between Mexico and the United States as OpenHistoricalMap draws Mexico from 2 February 1848 (its polygon dated 1848-02-02 to 1848-07-14); the treaty was signed 2 February and ratifications exchanged 30 May 1848 (Bauer 1974, ch. 17). TEST."
+        },
+        {
+          "id": "mexico-1846",
+          "kind": "ghost",
+          "border_of": "mexico",
+          "against": "us",
+          "on": "1846-04-24",
+          "from": "1846-04-25",
+          "label": "Mexico, 24 April 1846",
+          "source": "Mexico's border with the United States as OpenHistoricalMap draws Mexico on 24 April 1846 (its polygon dated 1842 to 1846-08-22), the day before the Thornton Affair. TEST."
+        }
+      ],
+      "_lines_note": "Computed lines (brief P7): a blockade runs off the blockaded side's own coast on the date shown, inside the window given; a treaty line is the border between the two sides on the day the agreement took hold; a ghost is the border on an earlier date, at half strength. Nothing is traced: src/military/lines.js sorts the polygon's edge into coast and border on the sheet."
     }
   ]
 }

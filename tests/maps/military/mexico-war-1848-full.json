@@ -1,0 +1,15 @@
+{
+  "_comment": "Military layer, milestone 4: the brief's test case 1 as far as built: territory by side, battles by victor, movements by side, the blockades computed along Mexico's Gulf and Pacific coasts, the Guadalupe Hidalgo line computed from the border Mexico's polygon takes from 2 February 1848, a ghost of Mexico's border of 24 April 1846, and an inset of Scott's campaign in the Valley of Mexico.",
+  "page": "us",
+  "layer": "military",
+  "war": "mexican-american-war",
+  "names": "both",
+  "date": "1848-02-02",
+  "frame": "mexico-war",
+  "inset": { "frame": "mexico-city" },
+  "sequence": true,
+  "title": "The War with Mexico, 1846–1848",
+  "size": "1920x1080",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/mexico-war-1848-full"
+}

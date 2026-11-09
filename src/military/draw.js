@@ -8,6 +8,7 @@
 import * as d3 from 'd3';
 import { eventLook, courseList, eventDate, eventFirst, eventLast, fmtWhen, forceBars } from './events.js';
 import { toInt } from './wars.js';
+import { smoothRun, thinRun } from './lines.js';
 
 const NAVY = '#1F2A44', RUST = '#C8601A', CREAM = '#F7F5EF', GOLD = '#c8a65d';
 const HALF_L = (r) => `M0,${-r}L${-r},0L0,${r}Z`;
@@ -100,6 +101,44 @@ export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner =
   } catch { /* not laid out */ }
   return { x, y, w: W, h: H };
 }
+
+// The computed lines (P7; src/military/lines.js): a blockade just offshore in the blockading side's color with small
+// hull marks along it; a treaty or armistice line in navy; a ghost border in navy at half strength; each named along
+// its longest run. lines: [{ id, kind, color, label, runs }]. Drawn under the routes and marks.
+export function drawLines(layer, defs, lines) {
+  layer.selectAll('*').remove();
+  defs.selectAll('path.mil-line-guide').remove();
+  for (const l of lines) {
+    const g = layer.append('g').attr('class', `mil-line ${l.kind}`);
+    const stroke = l.kind === 'blockade' ? cssColor(l.color) : NAVY;
+    const width = l.kind === 'treaty' || l.kind === 'armistice' ? 2.2 : l.kind === 'ghost' ? 1.4 : 1.8;
+    const opacity = l.kind === 'ghost' ? 0.5 : 0.95;
+    for (const run of l.runs) {
+      g.append('path').attr('d', pathOf(run)).attr('fill', 'none').attr('stroke', stroke).attr('stroke-width', width).attr('stroke-opacity', opacity).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+      if (l.kind === 'blockade') {
+        // hull marks every so often: a small half-disc on the seaward side (no icon until the owner has reviewed one)
+        let acc = 40;
+        for (let i = 1; i < run.length; i++) {
+          acc += Math.hypot(run[i][0] - run[i - 1][0], run[i][1] - run[i - 1][1]);
+          if (acc >= 90) { g.append('path').attr('d', 'M-4,0A4,4 0 0 0 4,0Z').attr('transform', `translate(${run[i][0]},${run[i][1]})`).attr('fill', stroke).attr('fill-opacity', 0.9); acc = 0; }
+        }
+      }
+    }
+    if (l.label && l.runs.length) {
+      // the name follows a smoothed copy of the longest run (a border along a river bends at every meander)
+      const longest = l.runs.reduce((a, b) => (runLen(b) > runLen(a) ? b : a));
+      const guideId = `mil-line-${l.id}`;
+      const ordered = longest[0][0] > longest[longest.length - 1][0] ? longest.slice().reverse() : longest;
+      const pts = smoothRun(thinRun(ordered, 6), 8);
+      defs.append('path').attr('class', 'mil-line-guide').attr('id', guideId).attr('d', pathOf(pts));
+      g.append('text').attr('class', `mil-line-label ${l.kind}`).attr('dy', -6).attr('font-size', 12).attr('font-style', 'italic').attr('fill', stroke).attr('fill-opacity', l.kind === 'ghost' ? 0.75 : 1)
+        .attr('paint-order', 'stroke fill').attr('stroke', CREAM).attr('stroke-width', 3.5).attr('stroke-linejoin', 'round')
+        .append('textPath').attr('href', `#${guideId}`).attr('startOffset', '50%').attr('text-anchor', 'middle').text(l.label);
+    }
+  }
+}
+const pathOf = (pts) => (pts.length ? `M${pts.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join('L')}` : '');
+const runLen = (r) => r.reduce((a, p, i) => (i ? a + Math.hypot(p[0] - r[i - 1][0], p[1] - r[i - 1][1]) : 0), 0);
 
 // A route that leaves the frame stops at its edge with a tab saying where it went (P3). drawn: from drawRoutes;
 // box: the main view's [x, y, w, h]. Tabs go in the labels layer, above everything.

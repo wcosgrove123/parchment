@@ -177,3 +177,11 @@ body:not(.tracker-military) #war { display: none; }
 .record-labels .route-label.side-d { fill: var(--side-d-line); } .record-labels .route-label.side-gray { fill: var(--side-gray-line); } .record-labels .route-label.side-red { fill: var(--side-red-line); }
 .record-labels .edge-tab rect { fill: var(--cream); fill-opacity: 0.95; stroke-width: 0.9; }
 .record-labels .edge-tab text { font-size: 11px; font-style: italic; }
+
+/* the Military layer's computed lines (milestone 4): blockade in the side's color, treaty in navy, ghost at half strength */
+.legend .swatch-line.treaty { stroke: var(--navy); stroke-width: 2.2; }
+.legend .swatch-line.ghost { stroke: var(--navy); stroke-width: 1.4; stroke-opacity: 0.5; }
+.legend .swatch-line.blockade { stroke-width: 1.8; }
+.legend .swatch-line.blockade.side-a { stroke: var(--side-a-line); } .legend .swatch-line.blockade.side-b { stroke: var(--side-b-line); }
+.legend .swatch-line.blockade.side-c { stroke: var(--side-c-line); } .legend .swatch-line.blockade.side-d { stroke: var(--side-d-line); }
+.mil-lines text { font-family: var(--font); }

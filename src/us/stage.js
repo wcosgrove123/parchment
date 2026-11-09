@@ -24,7 +24,9 @@ import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { eventLegend } from '../military/events.js';
-import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, lineColorOf } from '../military/draw.js';
+import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, lineColorOf } from '../military/draw.js';
+import { linesOn, blockadeRuns, borderRuns, dedupeRuns, runsLength } from '../military/lines.js';
+import { toInt as warInt } from '../military/wars.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
 import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTreatyX, aliveLands, aliveICC, nbName, cleanLabel } from './model.js';
 import { diffUS, byKind } from './diff.js';
@@ -166,6 +168,19 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     root.append('text').attr('class', 'inset-title').attr('x', bx + 8).attr('y', by + bh - 8).text(s.title);
     return { ...v, inset: s };
   });
+  // A lesson map's own inset (the Military layer's test 1: Scott's campaign in the Valley of Mexico): a focus from
+  // src/focuses.json fitted into a box on the sheet, drawn with the same fills, events and movements as the main map.
+  if (lesson?.inset) {
+    const f = lesson.inset;
+    const [bx, by, bw, bh] = f.at;
+    const proj = buildProjection(f.projection);
+    proj.fitExtent([[bx + 8, by + 8], [bx + bw - 8, by + bh - 8]], extentPolygon(f.box, 0.1));
+    const v = makeView(f.id, proj, f.at, { graticule: false, bathymetry: false });
+    root.append('rect').attr('class', 'inset-frame').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
+    root.append('text').attr('class', 'inset-title').attr('x', bx + 8).attr('y', by + bh - 8).text(f.title);
+    v.rec = { lines: v.g.append('g').attr('class', 'mil-lines'), routes: v.g.append('g').attr('class', 'routes'), marks: v.g.append('g').attr('class', 'marks') };
+    insets.push({ ...v, inset: f, lessonInset: true });
+  }
   const views = [main, ...insets];
 
   drawPaperOverlay(root, W, H);
@@ -185,6 +200,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   // (always made, since 2026-11-09: the Military layer draws its events through them on the live page too; empty
   // groups otherwise, so every other map is what it was)
   const recordLayers = {
+    lines: main.g.append('g').attr('class', 'mil-lines'), // the Military layer's computed lines, under the routes
     routes: main.g.append('g').attr('class', 'routes'),
     marks: main.g.append('g').attr('class', 'marks'),
     labels: main.g.append('g').attr('class', 'record-labels'),
@@ -278,7 +294,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const natAlive = trackerId === 'cessions' ? [] : aliveNative(data, date);
     for (const it of natAlive) { it.cat = 'native'; it.look = categoryLook(powers, 'native'); items.push(it); }
     // An order's highlight (lesson maps): the polygons it names keep their looks; everything else drops to paper.
-    const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states') ? applyHighlight(items) : null;
+    const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states' || trackerId === 'military') ? applyHighlight(items) : null;
     if (!hl) for (const it of items) { it.lit = null; it.litBy = null; }
     // A Newberry "Other" area the owner gave a fill of its own (the Republic of Texas, 2026-11-09) takes it where the
     // map has room once the highlight has dropped the rest to paper: at most four fills with it, and no other power on
@@ -306,9 +322,13 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner });
       root.classed('war-strip-on', milNow.strip !== 'stage');
       if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date }); else root.selectAll('g.war-strip').remove();
+      // the computed lines of the war alive on the date (P7): blockades off the other side's coast, treaty lines, ghosts
+      milNow.lines = (!milNow.show?.length || milNow.show.includes('lines')) ? computeLines(milNow, date, data) : [];
+      drawLines(recordLayers.lines, defs, milNow.lines);
     } else {
       root.classed('war-strip-on', false);
       root.selectAll('g.course-list, g.war-strip').remove();
+      recordLayers.lines.selectAll('*').remove();
     }
     const milZones = milListBox ? [milListBox] : [];
     if (key === currentKey) { current = { ...before, date, trackerId }; return { ...counts, redrawn: false }; }
@@ -822,7 +842,67 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const numberedBoxes = marks.filter((m) => m.r.seq != null).map((m, i) => markBoxes[marks.indexOf(m)]);
     const placed = layoutLabels(recordLayers.labels, defs, { marks: named, routes: drawnRoutes, rivers, zones: [...zones, ...numeralBoxes, ...numberedBoxes], frame, width: Math.max(W, 1920), measure, maxPlaces: lesson?.maxPlaces ?? 10, apart: APART });
     const boxes = placed.filter((p) => p.box).map((p) => p.box);
+    // A lesson inset draws the same events and movements in its own projection, numerals included, names left to
+    // the main map's list (the inset is small; its marks say which event is which through their numbers).
+    for (const v of insets.filter((i) => i.rec)) {
+      const [ix, iy, iw, ih] = v.box;
+      const inInset = (p) => { if (p.lon == null) return false; const xy = v.proj([p.lon, p.lat]); return xy && xy[0] >= ix && xy[0] <= ix + iw && xy[1] >= iy && xy[1] <= iy + ih; };
+      const im = drawMarks(v.rec.marks, records.points.filter(inInset), v.proj);
+      if (milNow?.war) decorateMarks(v.rec.marks, im, milNow.war);
+      const pts = records.points.filter((p) => p.shape && p.lon != null).map((p) => ({ xy: v.proj([p.lon, p.lat]), r: (MARK_RADIUS[p.shape] ?? 6) + 2 })).filter((m) => m.xy && Number.isFinite(m.xy[0]));
+      drawRoutes(v.rec.routes, records.routes, v.proj, [], (qid, coord) => { const xy = coord ? v.proj(coord) : null; const near = xy && pts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6); return near ? near.r : 0; });
+    }
     return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes, ...numeralBoxes], lines: drawnRoutes.map((d) => d.samples) };
+  }
+
+  // ---------- the Military layer's computed lines (src/military/lines.js) ----------
+  // A side's land on a date: the alive polygons whose keys match any of its members' states (membership dates are
+  // not asked here: a ghost border wants the border before the war began). Level-2 polygons where there are any,
+  // so a country's own edge is sorted once, not once per province.
+  let landMask = null;
+  const maskCache = new Map(), linesCache = new Map();
+  function sideFeatures(mil, sideId, on, dataRef) {
+    const wheres = new Set(mil.members.filter((m) => m.side === sideId).map((m) => slug(m.where)));
+    const alive = [...aliveNB(dataRef, on), ...aliveOHM(dataRef, on)];
+    const mine = alive.filter((it) => { const pw = it.src === 'ohm' ? powerAt(it.p, on) : it.p.power; const keys = itemKeys(it, { power: pw, powers, twins: lesson?.twins }); return [...keys].some((k) => wheres.has(k)); });
+    const top = mine.filter((it) => it.src === 'ohm' && it.p.lvl === 2);
+    return { all: mine.map((it) => it.f), top: (top.length ? top : mine).map((it) => it.f) };
+  }
+  function maskOf(mil, sideId, on, dataRef) {
+    const key = `${sideId}|${on}`;
+    if (!maskCache.has(key)) maskCache.set(key, rasterLand(projection, { type: 'FeatureCollection', features: sideFeatures(mil, sideId, on, dataRef).all }, W, H, 3));
+    return maskCache.get(key);
+  }
+  // every state's land on a date (any polygon alive), so a lagoon no polygon covers reads as sea
+  function anyMask(on, dataRef) {
+    const key = `any|${on}`;
+    if (!maskCache.has(key)) maskCache.set(key, rasterLand(projection, { type: 'FeatureCollection', features: [...aliveNB(dataRef, on), ...aliveOHM(dataRef, on)].map((it) => it.f) }, W, H, 3));
+    return maskCache.get(key);
+  }
+  function computeLines(mil, date, dataRef) {
+    const specs = linesOn(mil.war, date);
+    if (!specs.length) return [];
+    landMask ??= land1 ?? rasterLand(projection, land, W, H, 3);
+    const out = [];
+    for (const spec of specs) {
+      const on = spec.on ? warInt(spec.on) : date;
+      const key = `${spec.id}|${on}|${mil.war.id}`;
+      if (!linesCache.has(key)) {
+        const holder = spec.coast_of ?? spec.border_of;
+        // a blockade follows every polygon of the side (a province may reach the barrier islands its country's
+        // polygon stops short of), and runs that retrace one another are dropped; a border takes the country's own edge
+        const sf = sideFeatures(mil, holder, on, dataRef);
+        const feats = spec.kind === 'blockade' ? sf.all : sf.top;
+        const masks = { land: landMask.isLand, other: spec.against ? maskOf(mil, spec.against, on, dataRef).isLand : null, any: spec.kind === 'blockade' ? anyMask(on, dataRef).isLand : null };
+        let runs = [];
+        for (const f of feats) runs.push(...(spec.kind === 'blockade' ? blockadeRuns(f, projection, masks, { window: spec.window ?? null, box: main.box }) : borderRuns(f, projection, masks, { box: main.box })));
+        linesCache.set(key, dedupeRuns(runs));
+      }
+      const runs = linesCache.get(key);
+      const side = mil.war.sides.find((s) => s.id === spec.side);
+      out.push({ ...spec, color: side?.color ?? null, runs, length_px: runsLength(runs), on_date: on, polygons: sideFeatures(mil, spec.coast_of ?? spec.border_of, on, dataRef).top.length });
+    }
+    return out.filter((l) => l.runs.length);
   }
 
   // Each named river as one line on the sheet: its Natural Earth pieces joined end to end, projected, cut to the
@@ -1155,6 +1235,10 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     // the sides of the war shown, each with its members when there are several (src/military/wars.js)
     rows.push(...militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both'));
     rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf));
+    for (const l of tracker.mil?.lines ?? []) {
+      if (l.kind === 'blockade') rows.push({ swatch: 'line', style: `blockade side-${l.color ?? 'a'}`, label: l.label, role: 'line' });
+      else rows.push({ swatch: 'line', style: l.kind === 'ghost' ? 'ghost' : 'treaty', label: l.label, role: 'line' });
+    }
   }
   for (const [key, c] of Object.entries(powers.categories)) {
     if (c.pattern && present.has(`pat:${c.pattern}`)) rows.push({ swatch: 'fill', key: c.pattern, label: c.label });
