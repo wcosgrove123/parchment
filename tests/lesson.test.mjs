@@ -11,7 +11,7 @@ import { geoContains } from 'd3';
 import { parseSize, sheetFor, resolveFrame, frameProjection, orderToQuery, queryToOrder, makeHighlight, itemKeys, claimLabel, slug } from '../src/us/frames.js';
 import { prepareData, aliveOHM, aliveNB } from '../src/us/model.js';
 import { prepareUSMX, aliveUSMX } from '../src/us/disputes.js';
-import { placeLabels } from '../src/render/placement.js';
+import { placeLabels, APART } from '../src/render/placement.js';
 import { findBrowser, playwrightBrowsers } from '../scripts/browser.mjs';
 import { describe as describeFrame, changes, search } from '../scripts/lookup.mjs';
 
@@ -115,6 +115,22 @@ test('a river name takes one of the ten labelled places; a route name does not',
   assert.equal(r.find((x) => x.id === 'river').dropped, 'ceiling');
   const r2 = placeLabels({ labels: [...pts, along('route', { route: 'x' })], routes: [{ id: 'x', samples: line }], frame: { x0: 0, y0: 0, x1: 1600, y1: 1000 }, maxPlaces: 2 });
   assert.ok(r2.find((x) => x.id === 'route').box, 'a route name is not a place');
+});
+
+test('two marks that print as one dot are named on opposite sides on a lesson map: Fort Texas above, Matamoros below', () => {
+  const pt = (id, x, y, extra) => ({ id, kind: 'point', priority: 2, x, y, radius: 6, w: 90, h: 16, ...extra });
+  // The fort on the north bank, the town 4 px to the south; Taylor's march comes down into the fort from the north.
+  const labels = [pt('fort', 801, 500, { priority: 1 }), pt('town', 800, 504.4)];
+  const marks = labels.map(({ id, x, y, radius }) => ({ id, x, y, radius }));
+  const routes = [{ id: 'march', samples: [[801, 300], [801, 492]] }];
+  const frame = { x0: 0, y0: 0, x1: 1600, y1: 1000 };
+  assert.deepEqual(placeLabels({ labels, marks, routes, frame }).map((p) => p.pos), ['E', 'W'], 'the fixed order: both names on one line');
+  const pos = Object.fromEntries(placeLabels({ labels, marks, routes, frame, apart: APART }).map((p) => [p.id, p.pos]));
+  assert.equal(pos.fort, 'NE', 'north of the town: above the dot, clear of the march coming down into it');
+  assert.equal(pos.town, 'S', 'south of the fort: below the dot');
+  const far = [pt('a', 100, 100), pt('b', 400, 100)];
+  const farMarks = far.map(({ id, x, y, radius }) => ({ id, x, y, radius }));
+  assert.deepEqual(placeLabels({ labels: far, marks: farMarks, frame, apart: APART }).map((p) => p.pos), ['E', 'E'], 'marks apart keep the fixed order');
 });
 
 // ---------------------------------------------------------------- the browser for renders

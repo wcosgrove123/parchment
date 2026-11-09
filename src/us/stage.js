@@ -20,7 +20,7 @@ import { buildProjection } from '../render/focus.js';
 import { reliefFor } from '../render/relief-reproject.js';
 import { routeDefs, drawRoutes } from '../render/routes.js';
 import { drawMarks, MARK_RADIUS } from '../render/marks.js';
-import { polylineHitsRect } from '../render/placement.js';
+import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
 import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTreatyX, aliveLands, aliveICC, nbName, cleanLabel } from './model.js';
@@ -731,7 +731,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
 
   // The order's places and routes (records), and the rivers it names, with their names placed by the label pass
   // (src/render/labels.js): no name on a name, a line, a mark or the apparatus; at most ten labelled places, rivers
-  // counted among them. → what was drawn, what was dropped, and the boxes the polity names must keep clear of.
+  // counted among them; two marks that print as one dot name themselves on opposite sides (APART). → what was drawn,
+  // what was dropped, and the boxes the polity names must keep clear of.
   function layoutRecords(extra = []) {
     if (!recordLayers) return null;
     const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...extra];
@@ -739,7 +740,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, (qid) => marksAt.get(qid) ?? 0);
     const marks = drawMarks(recordLayers.marks, records.points, projection);
     const rivers = namedRiverLines();
-    const placed = layoutLabels(recordLayers.labels, defs, { marks, routes: drawnRoutes, rivers, zones, frame, width: Math.max(W, 1920), measure, maxPlaces: lesson.maxPlaces ?? 10 });
+    const placed = layoutLabels(recordLayers.labels, defs, { marks, routes: drawnRoutes, rivers, zones, frame, width: Math.max(W, 1920), measure, maxPlaces: lesson.maxPlaces ?? 10, apart: APART });
     const boxes = placed.filter((p) => p.box).map((p) => p.box);
     const markBoxes = marks.map((m) => ({ x: m.x - m.radius - 2, y: m.y - m.radius - 2, w: 2 * m.radius + 4, h: 2 * m.radius + 4 }));
     return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes], lines: drawnRoutes.map((d) => d.samples) };

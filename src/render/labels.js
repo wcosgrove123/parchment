@@ -100,7 +100,8 @@ export function markWhen(r) {
 // naive: every label at the first position with no checks (the old behaviour), for before/after pictures only.
 // rivers (lesson maps on the North America page): [{ id, name, samples }], named along their line in italic water
 // style like a route's name, and counted among the ten labelled places (owner question, 2026-11-06; DECISIONS).
-export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, frame, width = 1920, measure = makeMeasure(), maxPlaces = 10, naive = false }) {
+// apart (lesson maps): marks closer than this many px label away from each other (placement.js, APART).
+export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, frame, width = 1920, measure = makeMeasure(), maxPlaces = 10, naive = false, apart = 0 }) {
   const termini = new Set(routes.flatMap((d) => [d.r.waypoints[0], d.r.waypoints[d.r.waypoints.length - 1]]));
   const h = Math.round(MARK_FONT * 1.2);
   const pointLabels = marks.map((m) => {
@@ -125,7 +126,7 @@ export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, f
     labels: [...pointLabels, ...routeLabels, ...riverLabels],
     marks: marks.map((m) => ({ id: m.r.id, x: m.x, y: m.y, radius: m.radius })),
     routes: routes.map((d) => ({ id: d.r.id, samples: d.samples })),
-    zones, frame, width, maxPlaces,
+    zones, frame, width, maxPlaces, apart,
   });
 
   // Leaders under the text, then point labels, then route names along their (possibly reversed) line.

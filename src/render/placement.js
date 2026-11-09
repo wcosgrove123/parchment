@@ -4,9 +4,11 @@
 // placed label, no route line, no mark and no reserved zone. A point label tries eight positions in a fixed order;
 // if none fits it gets a leader line to the nearest free spot; the lowest-priority labels are dropped on a narrow
 // screen; at most `maxPlaces` places are labelled. The same input always gives the same output, so exports are stable.
+// On a lesson map (`apart`), two marks that print as one dot try first the sides facing away from each other.
 
 export const POSITIONS = ['E', 'W', 'NE', 'NW', 'SE', 'SW', 'N', 'S'];
 export const NARROW = 1366;
+export const APART = 16; // px: marks closer than this print as one dot (two mark radii and a hairline)
 
 const PAD = 2;
 export function rectsOverlap(a, b, pad = PAD) {
@@ -111,11 +113,29 @@ export function routeLabelCandidates(samples, w, h, { gap = 5, fractions = FRACT
   return out;
 }
 
+// Marks closer than `apart` px print as one dot, and labels on one line beside it read as one name ("Matamoros ●
+// Fort Texas"). Each such label tries first the positions facing away from its neighbors, so the fort on the north
+// bank is named above the dot and the town on the south bank below it; the fixed order breaks ties. A mark with no
+// neighbor that close keeps the fixed order.
+const DIRECTION = { E: [1, 0], W: [-1, 0], NE: [Math.SQRT1_2, -Math.SQRT1_2], NW: [-Math.SQRT1_2, -Math.SQRT1_2], SE: [Math.SQRT1_2, Math.SQRT1_2], SW: [-Math.SQRT1_2, Math.SQRT1_2], N: [0, -1], S: [0, 1] };
+function awayFirst(candidates, l, marks, apart) {
+  let vx = 0, vy = 0;
+  for (const m of marks) {
+    if (m.id === l.id) continue;
+    const dx = l.x - m.x, dy = l.y - m.y, d = Math.hypot(dx, dy);
+    if (d > 0 && d < apart) { vx += dx / d; vy += dy / d; }
+  }
+  if (Math.hypot(vx, vy) < 1e-9) return candidates;
+  const toward = (c) => DIRECTION[c.pos][0] * vx + DIRECTION[c.pos][1] * vy;
+  return candidates.map((c, i) => ({ c, i, s: toward(c) })).sort((a, b) => b.s - a.s || a.i - b.i).map((x) => x.c);
+}
+
 // labels: [{ id, kind: 'point' | 'route', priority, w, h, x, y, radius, route?: id, candidates? }]
 //   point labels name their mark (x, y, radius); route labels bring their own candidates (routeLabelCandidates).
 // marks: [{ id, x, y, radius }]; routes: [{ id, samples }]; zones: [{ x, y, w, h }]; frame: { x0, y0, x1, y1 }.
+// apart: 0 (the default) keeps the fixed order everywhere; lesson maps pass APART.
 // → [{ id, kind, box, pos, leader?: [[mx,my],[ex,ey]], dropped?: 'narrow' | 'ceiling' | 'no-room' }]
-export function placeLabels({ labels, marks = [], routes = [], zones = [], frame, width = 1920, maxPlaces = 10 }) {
+export function placeLabels({ labels, marks = [], routes = [], zones = [], frame, width = 1920, maxPlaces = 10, apart = 0 }) {
   const placed = [];
   const out = [];
   const inFrame = (b) => !frame || (b.x >= frame.x0 + 4 && b.y >= frame.y0 + 4 && b.x + b.w <= frame.x1 - 4 && b.y + b.h <= frame.y1 - 4);
@@ -136,7 +156,7 @@ export function placeLabels({ labels, marks = [], routes = [], zones = [], frame
       if (frame && !(l.x >= frame.x0 && l.x <= frame.x1 && l.y >= frame.y0 && l.y <= frame.y1)) { out.push({ id: l.id, kind: l.kind, dropped: 'off-map' }); continue; }
       if (width < NARROW && l.priority === lowest && lowest > 1) { out.push({ id: l.id, kind: l.kind, dropped: 'narrow' }); continue; }
       if (places >= maxPlaces) { out.push({ id: l.id, kind: l.kind, dropped: 'ceiling' }); continue; }
-      const direct = pointCandidates(l).find((c) => free(c, l));
+      const direct = (apart > 0 ? awayFirst(pointCandidates(l), l, marks, apart) : pointCandidates(l)).find((c) => free(c, l));
       if (direct) { placed.push({ id: l.id, box: direct }); out.push({ id: l.id, kind: l.kind, box: direct, pos: direct.pos }); places++; continue; }
       const far = leaderCandidates(l).find((c) => free(c, l));
       if (far) {
