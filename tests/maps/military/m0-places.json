@@ -1,0 +1,24 @@
+{
+  "_comment": "Places the milestone-0 picture sheet marks on the Texas 1846 map (brief of 2026-11-09, order of work, step 0). Coordinates are Wikidata's (P625, CC0), read from the API on 2026-11-09 by hand-checked id; nothing is typed from a map. These are NOT records: the sheet is a mock-up of proposals P1–P10, and every mark on it is an illustration of a form, dated and named from the sources in 'note'. Real rows go through the owner and the teachers (tests/maps/military-records.csv, milestone 1 on).",
+  "retrieved": "2026-11-09",
+  "source": "Wikidata, property P625 (coordinate location), CC0",
+  "places": {
+    "corpus-christi": { "qid": "Q49242", "label": "Corpus Christi", "lon": -97.4019, "lat": 27.7428 },
+    "matamoros": { "qid": "Q738353", "label": "Matamoros", "lon": -97.5042, "lat": 25.85 },
+    "fort-texas": { "qid": "Q2613729", "label": "Fort Texas", "lon": -97.4941, "lat": 25.8862, "note": "Wikidata: Fort Brown; named Fort Texas until 17 May 1846" },
+    "laredo": { "qid": "Q16868", "label": "Laredo", "lon": -99.5072, "lat": 27.5061 },
+    "port-isabel": { "qid": "Q982504", "label": "Point Isabel", "lon": -97.2133, "lat": 26.0736, "note": "Taylor's supply depot from 24 March 1846 (Bauer 1974); Wikidata: Port Isabel, Texas" },
+    "brazos-santiago": { "qid": "Q32845816", "label": "Brazos Santiago", "lon": -97.1586, "lat": 26.0656, "note": "the pass into the Laguna Madre, the landing for Point Isabel" },
+    "reynosa": { "qid": "Q738303", "label": "Reynosa", "lon": -98.2778, "lat": 26.0922 },
+    "monterrey": { "qid": "Q81033", "label": "Monterrey", "lon": -100.3181, "lat": 25.6844, "note": "capital of Nuevo León; taken 24 September 1846" },
+    "saltillo": { "qid": "Q53077", "label": "Saltillo", "lon": -100.9919, "lat": 25.4231 },
+    "santa-fe": { "qid": "Q38555", "label": "Santa Fe", "lon": -105.9667, "lat": 35.6667, "note": "capital of New Mexico; entered by Kearny 18 August 1846" },
+    "veracruz": { "qid": "Q173270", "label": "Veracruz", "lon": -96.1533, "lat": 19.1903, "note": "outside the Texas frame: used only for a 'to Veracruz' tab" },
+    "thornton-affair": { "qid": "Q7796515", "label": "Thornton Affair", "lon": -97.7842, "lat": 26.0619, "date": "1846-04-25", "note": "Wikidata's point for the skirmish at Rancho de Carricitos" },
+    "palo-alto": { "qid": "Q2736004", "label": "Palo Alto", "lon": -97.4654, "lat": 26.0201, "date": "1846-05-08" },
+    "resaca-de-la-palma": { "qid": "Q2890818", "label": "Resaca de la Palma", "lon": -97.4862, "lat": 25.9374, "date": "1846-05-09" },
+    "siege-of-fort-texas": { "qid": "Q815139", "label": "Siege of Fort Texas", "lon": -97.4922, "lat": 25.8983, "date": "1846-05-03/1846-05-09" },
+    "battle-of-monterrey": { "qid": "Q1628057", "label": "Monterrey", "lon": -100.3111, "lat": 25.6822, "date": "1846-09-21/1846-09-24" },
+    "buena-vista": { "qid": "Q1808450", "label": "Buena Vista", "lon": -101.0464, "lat": 25.337, "date": "1847-02-22/1847-02-23", "note": "La Angostura in Mexican sources; both sides claimed the victory" }
+  }
+}

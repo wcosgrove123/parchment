@@ -50,3 +50,18 @@ Which party each candidate belongs to, where the Archives does not say, is autho
 | Electoral College, 1789–2024, state by state | U.S. National Archives and Records Administration, [Electoral College box scores](https://www.archives.gov/electoral-college), one page per election | Public domain (U.S. Government work) | U.S. National Archives and Records Administration |
 
 <!-- fetch-electoral:end -->
+
+<!-- military:start -->
+
+### Military layer (proposal of 2026-11-09): equipment icons and force frames
+
+Fetched by `scripts/military-icons.mjs` (URLs, authors and dates in `assets/icons/military/MANIFEST.json`; the
+license text in `assets/icons/military/LICENSE.md`). Nothing is drawn on a map by these until the owner has
+reviewed the icons; the picture sheet of 2026-11-09 shows them for that review.
+
+| layer | source | license | attribution |
+|---|---|---|---|
+| Equipment icons (ships, cavalry, artillery, infantry, aircraft, forts, the human cost) | [game-icons.net](https://game-icons.net), from <https://github.com/game-icons/icons>; each icon's black square removed and white fill dropped, shapes unchanged | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) (that project's `license.txt`; two authors there are CC0, none used yet) | Lorc, Delapouite, Skoll, Cathelineau, Quoting, Lord Berandas, HeavenlyDog, Sbed, via game-icons.net |
+| Force frames, glyphs and size marks (MIL-STD-2525 / APP-6) | [milsymbol](https://github.com/spatialillusions/milsymbol) 3.0.5, vendored at `assets/vendor/milsymbol/` | MIT | Måns Beckman, Spatial Illusions |
+
+<!-- military:end -->

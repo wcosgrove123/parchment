@@ -1,0 +1,61 @@
+{
+  "_comment": "The equipment icons proposed for the Military layer (brief of 2026-11-09, §3): milestone 0's picture sheet shows four per class on the Texas 1846 map. Every icon here is a game-icons.net silhouette (CC BY 3.0 unless the author is listed as CC0 in that project's license.txt), fetched and stripped of its black square by scripts/military-icons.mjs into assets/icons/military/, with the license recorded in MANIFEST.json there. Nothing here is in the tech catalog yet: every icon needs the owner's review first (brief §3). 'era' is the brief's starting point for the dates the equipment was in use; the catalog (M5) must source each one. 'status': proposed (shown for review), alternate (another choice for the same slot), flagged (the brief's visual check found the name misleading; shown so the owner sees why it was passed over).",
+  "license_file": "https://raw.githubusercontent.com/game-icons/icons/master/license.txt",
+  "authors": {
+    "lorc": { "name": "Lorc", "url": "http://lorcblog.blogspot.com", "license": "CC BY 3.0" },
+    "delapouite": { "name": "Delapouite", "url": "http://delapouite.com", "license": "CC BY 3.0" },
+    "skoll": { "name": "Skoll", "url": null, "license": "CC BY 3.0" },
+    "cathelineau": { "name": "Cathelineau", "url": null, "license": "CC BY 3.0" },
+    "quoting": { "name": "Quoting", "url": null, "license": "CC BY 3.0" },
+    "lord-berandas": { "name": "Lord Berandas", "url": "http://berandas.deviantart.com", "license": "CC BY 3.0" },
+    "heavenly-dog": { "name": "HeavenlyDog", "url": "http://www.gnomosygoblins.blogspot.com", "license": "CC BY 3.0" },
+    "sbed": { "name": "Sbed", "url": "http://opengameart.org/content/95-game-icons", "license": "CC BY 3.0" }
+  },
+  "icons": [
+    { "key": "galley", "file": "delapouite/trireme", "class": "ship", "domain": "sea", "depicts": "oared war galley (a trireme)", "era": "antiquity to Lepanto, 1571", "status": "proposed" },
+    { "key": "galleon", "file": "lorc/galleon", "class": "ship", "domain": "sea", "depicts": "galleon", "era": "1500s–1600s (the Armada, 1588)", "status": "proposed" },
+    { "key": "paddle-steamer", "file": "delapouite/paddle-steamer", "class": "ship", "domain": "sea", "depicts": "side-wheel paddle steamer", "era": "1840s–1860s (USS Mississippi at Veracruz, 1847)", "status": "proposed" },
+    { "key": "ironclad", "file": "cathelineau/iron-hulled-warship", "class": "ship", "domain": "sea", "depicts": "iron-hulled warship (ironclad)", "era": "1859 on (La Gloire; Monitor and Virginia, 1862)", "status": "proposed" },
+
+    { "key": "knight", "file": "skoll/mounted-knight", "class": "cavalry", "domain": "land", "depicts": "mounted knight", "era": "high and late Middle Ages (Crécy, 1346)", "status": "proposed" },
+    { "key": "cavalry", "file": "delapouite/cavalry", "class": "cavalry", "domain": "land", "depicts": "horseman with saber: dragoons and light cavalry", "era": "1600s–1900s (the U.S. Dragoons, 1846)", "status": "proposed" },
+    { "key": "camel-troops", "file": "delapouite/camel", "class": "cavalry", "domain": "land", "depicts": "camel (camel-mounted troops)", "era": "desert warfare; the Arab Revolt, 1916–18", "status": "proposed", "note": "an unmounted camel; right in kind, not in detail" },
+    { "key": "tank-great-war", "file": "cathelineau/great-war-tank", "class": "armor", "domain": "land", "depicts": "rhomboid tank of 1916–18", "era": "from 15 September 1916 (Flers–Courcelette)", "status": "proposed" },
+
+    { "key": "trebuchet", "file": "delapouite/trebuchet", "class": "artillery", "domain": "land", "depicts": "counterweight trebuchet", "era": "1100s–1400s (Xiangyang, 1273)", "status": "proposed" },
+    { "key": "cannon", "file": "lorc/cannon", "class": "artillery", "domain": "land", "depicts": "smoothbore gun on a carriage", "era": "1500s–1850s (field guns of 1846)", "status": "proposed" },
+    { "key": "machine-gun", "file": "skoll/machine-gun", "class": "artillery", "domain": "land", "depicts": "machine gun on a tripod", "era": "1880s on (Omdurman, 1898)", "status": "proposed" },
+    { "key": "missile-launcher", "file": "delapouite/missile-launcher", "class": "artillery", "domain": "land", "depicts": "mobile missile launcher", "era": "1941 on (rocket artillery; ballistic missiles)", "status": "proposed" },
+
+    { "key": "pikeman", "file": "delapouite/pikeman", "class": "infantry", "domain": "land", "depicts": "pikeman", "era": "spear and pike, to the 1600s", "status": "proposed" },
+    { "key": "bowman", "file": "lorc/bowman", "class": "infantry", "domain": "land", "depicts": "archer drawing a bow", "era": "bow and crossbow", "status": "proposed" },
+    { "key": "musket", "file": "skoll/musket", "class": "infantry", "domain": "land", "depicts": "musket", "era": "matchlock and flintlock, 1570s–1840s", "status": "proposed" },
+    { "key": "rifle-breech", "file": "skoll/winchester-rifle", "class": "infantry", "domain": "land", "depicts": "lever-action repeating rifle", "era": "breech-loading and repeating rifles, 1866 on", "status": "proposed" },
+
+    { "key": "airship", "file": "skoll/zeppelin", "class": "aircraft", "domain": "air", "depicts": "rigid airship", "era": "1900–1930s (Zeppelin raids, 1915)", "status": "proposed" },
+    { "key": "biplane", "file": "quoting/biplane", "class": "aircraft", "domain": "air", "depicts": "biplane", "era": "1914–1918 and the 1920s", "status": "proposed" },
+    { "key": "jet-fighter", "file": "delapouite/jet-fighter", "class": "aircraft", "domain": "air", "depicts": "jet fighter", "era": "1944 on (Korea, 1950)", "status": "proposed" },
+    { "key": "helicopter", "file": "delapouite/helicopter", "class": "aircraft", "domain": "air", "depicts": "helicopter", "era": "1950 on (Ia Drang, 1965)", "status": "proposed" },
+
+    { "key": "fort", "file": "delapouite/military-fort", "class": "fort", "domain": "land", "depicts": "star fort, from above", "era": "every era (owner, 2026-11-09: forts stay one mark)", "status": "proposed" },
+    { "key": "fort-hill", "file": "delapouite/hill-fort", "class": "fort", "domain": "land", "depicts": "hill fort", "era": "every era", "status": "alternate" },
+    { "key": "fort-castle", "file": "lorc/castle", "class": "fort", "domain": "land", "depicts": "castle with towers", "era": "every era", "status": "alternate" },
+    { "key": "fortified-wall", "file": "heavenly-dog/defensive-wall", "class": "fort", "domain": "land", "depicts": "crenellated wall", "era": "fortified lines (the Great Wall, trench systems, the Maginot Line)", "status": "alternate" },
+
+    { "key": "dead-skull", "file": "lorc/skull-crossed-bones", "class": "cost", "domain": "people", "depicts": "skull and crossed bones", "era": "the human cost (§4)", "status": "proposed" },
+    { "key": "dead-coffin", "file": "lorc/coffin", "class": "cost", "domain": "people", "depicts": "coffin", "era": "the human cost (§4)", "status": "proposed" },
+    { "key": "dead-grave", "file": "lorc/tombstone", "class": "cost", "domain": "people", "depicts": "gravestone", "era": "the human cost (§4)", "status": "proposed" },
+    { "key": "person", "file": "delapouite/person", "class": "cost", "domain": "people", "depicts": "standing figure (one figure = a fixed number of people, ISOTYPE)", "era": "the human cost (§4)", "status": "proposed" },
+
+    { "key": "x-rifle", "file": "sbed/rifle", "class": "infantry", "domain": "land", "depicts": "named 'rifle'; draws a cartridge", "era": "", "status": "flagged" },
+    { "key": "x-bomber", "file": "lord-berandas/bomber", "class": "aircraft", "domain": "air", "depicts": "named 'bomber'; draws a falling bomb", "era": "", "status": "flagged" },
+    { "key": "x-drone", "file": "delapouite/delivery-drone", "class": "drone", "domain": "air", "depicts": "named 'delivery drone'; a civilian quadcopter", "era": "", "status": "flagged" },
+    { "key": "x-elephant", "file": "delapouite/elephant", "class": "cavalry", "domain": "land", "depicts": "named 'elephant'; unarmored, no howdah", "era": "", "status": "flagged" },
+    { "key": "x-balloon", "file": "delapouite/air-balloon", "class": "aircraft", "domain": "air", "depicts": "named 'air balloon'; a modern striped hot-air balloon", "era": "", "status": "flagged" }
+  ],
+  "gaps": [
+    "Chinese war junk and Zheng He's treasure ships", "the Korean turtle ship", "the dhow", "the war canoe",
+    "the ship of the line and the frigate", "casemate and turret ironclads", "horse archers", "airships of 1914–18 beyond the Zeppelin",
+    "landing craft", "naval drones", "the observation balloon", "an armed (military) drone"
+  ]
+}
