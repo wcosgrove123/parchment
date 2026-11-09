@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "parchment": {
+      "command": "node",
+      "args": ["mcp/server.mjs"]
+    }
+  }
+}

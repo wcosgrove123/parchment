@@ -22,7 +22,15 @@
     "derive:native": "node scripts/derive-native.mjs",
     "app": "electron .",
     "app:build": "electron-builder --win portable",
-    "test": "node --test \"tests/**/*.test.mjs\""
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "map": "node scripts/map.mjs",
+    "describe": "node scripts/lookup.mjs describe",
+    "changes": "node scripts/lookup.mjs changes",
+    "search": "node scripts/lookup.mjs search",
+    "derive:sources": "node scripts/derive-ohm-sources.mjs",
+    "derive:disputes": "node scripts/derive-us-disputes.mjs",
+    "mcp": "node mcp/server.mjs",
+    "mcp:smoke": "node mcp/smoke.mjs"
   },
   "dependencies": {
     "d3": "^7.9.0",

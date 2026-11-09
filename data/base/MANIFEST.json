@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T12:37:23.916Z",
+  "generated": "2026-11-06T22:07:30.828Z",
   "note": "Written by scripts/fetch-base.mjs. Raw downloads live in data/base/raw/ (not committed). Derived simplifications are written by scripts/derive.mjs to data/base/derived/.",
   "entries": [
     {
@@ -36,8 +36,8 @@
       "file": "data/base/raw/historical-basemaps/world_1492.geojson",
       "bytes": 3468360,
       "sha256": "b0e6b0f299fc7b191fd427547c83dec9808087d390304a37a32bc0357e97c1b8",
-      "retrieved": "2026-10-29T12:37:24.771Z",
-      "cached": false
+      "retrieved": "2026-10-29T12:37:24.766Z",
+      "cached": true
     },
     {
       "source": "historical-basemaps",
@@ -56,6 +56,19 @@
       "source": "historical-basemaps",
       "license": "GPL-3.0",
       "attribution": "Historical Basemaps, Andrej Ourednik and contributors, https://github.com/aourednik/historical-basemaps",
+      "calendar_year": 1530,
+      "base_year": 1530,
+      "url": "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1530.geojson",
+      "file": "data/base/raw/historical-basemaps/world_1530.geojson",
+      "bytes": 1401257,
+      "sha256": "984005809f085285a48318600e3a198274eb4679f5360ebfaead29da496e9f5b",
+      "retrieved": "2026-11-05T23:59:00.040Z",
+      "cached": true
+    },
+    {
+      "source": "historical-basemaps",
+      "license": "GPL-3.0",
+      "attribution": "Historical Basemaps, Andrej Ourednik and contributors, https://github.com/aourednik/historical-basemaps",
       "calendar_year": 1600,
       "base_year": 1600,
       "url": "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1600.geojson",
@@ -63,6 +76,19 @@
       "bytes": 1680222,
       "sha256": "7285c07eeedfda9048de5354ea1744d327b07614085e9696c5802bb54c86849c",
       "retrieved": "2026-10-29T12:28:28.779Z",
+      "cached": true
+    },
+    {
+      "source": "historical-basemaps",
+      "license": "GPL-3.0",
+      "attribution": "Historical Basemaps, Andrej Ourednik and contributors, https://github.com/aourednik/historical-basemaps",
+      "calendar_year": 1650,
+      "base_year": 1650,
+      "url": "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1650.geojson",
+      "file": "data/base/raw/historical-basemaps/world_1650.geojson",
+      "bytes": 1650748,
+      "sha256": "e691a3b5bab4ca7a0629daffaf8cd31731ee76ad390b19dffc1c267b139de4e2",
+      "retrieved": "2026-11-05T23:59:00.095Z",
       "cached": true
     },
     {
@@ -169,6 +195,30 @@
       "source": "Natural Earth",
       "license": "Public domain",
       "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com",
+      "layer": "ne_10m_rivers_lake_centerlines",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "file": "data/base/raw/natural-earth/ne_10m_rivers_lake_centerlines.geojson",
+      "bytes": 7307743,
+      "sha256": "bb854a900ecbd3b408df46d5e16e3e0f974ba55993f9d8b5c26e855273c0905a",
+      "retrieved": "2026-11-06T22:07:32.895Z",
+      "cached": false
+    },
+    {
+      "source": "Natural Earth",
+      "license": "Public domain",
+      "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com",
+      "layer": "ne_10m_rivers_north_america",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_north_america.geojson",
+      "file": "data/base/raw/natural-earth/ne_10m_rivers_north_america.geojson",
+      "bytes": 8734704,
+      "sha256": "dcd2348655a5f3d0ea7be35024073ab24f09115d2e4efb77e7bc0a33567db682",
+      "retrieved": "2026-11-06T22:07:33.630Z",
+      "cached": false
+    },
+    {
+      "source": "Natural Earth",
+      "license": "Public domain",
+      "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com",
       "layer": "ne_10m_bathymetry_K_200",
       "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_bathymetry_K_200.geojson",
       "file": "data/base/raw/natural-earth/ne_10m_bathymetry_K_200.geojson",
@@ -270,7 +320,7 @@
       "file": "assets/fonts/libre-baskerville-latin-400-normal.woff2",
       "bytes": 20108,
       "sha256": "3eb80fbca70498126925ce16ff5c20b2fa35e67ae7123ddb46302d2778dfbf0e",
-      "retrieved": "2026-10-29T12:37:25.451Z"
+      "retrieved": "2026-11-06T22:07:33.885Z"
     },
     {
       "source": "Libre Baskerville",
@@ -280,7 +330,7 @@
       "file": "assets/fonts/libre-baskerville-latin-400-italic.woff2",
       "bytes": 21564,
       "sha256": "efb7e5f4376a557314f5bb9f5197ef837d86c0ab38e1a50a0ff5c60c3400c629",
-      "retrieved": "2026-10-29T12:37:25.460Z"
+      "retrieved": "2026-11-06T22:07:33.893Z"
     },
     {
       "source": "Libre Baskerville",
@@ -290,7 +340,7 @@
       "file": "assets/fonts/libre-baskerville-latin-700-normal.woff2",
       "bytes": 20436,
       "sha256": "96fa63376eed93029fa2514a02f5cb80276b016e239426858787de6e794d8619",
-      "retrieved": "2026-10-29T12:37:25.468Z"
+      "retrieved": "2026-11-06T22:07:33.901Z"
     },
     {
       "source": "Libre Baskerville",
@@ -300,15 +350,15 @@
       "file": "assets/fonts/libre-baskerville-latin-700-italic.woff2",
       "bytes": 21840,
       "sha256": "41cee933f4b0f98abfdcee0f5188f96e885f40fff88c7fe771ba95c0e1309579",
-      "retrieved": "2026-10-29T12:37:25.477Z"
+      "retrieved": "2026-11-06T22:07:33.909Z"
     }
   ],
   "historical_basemaps": {
     "repo": "https://github.com/aourednik/historical-basemaps",
     "branch": "master",
     "commit": {
-      "sha": "da7a4b735ecef70aebdc9c73e409d8a2500d50f3",
-      "date": "2026-09-15T12:38:00Z"
+      "sha": "4b5039e50d8d2464b065bd76ad6086cd4597108d",
+      "date": "2026-11-02T22:38:51Z"
     },
     "rule": "nearest-not-after",
     "picks": [
@@ -331,10 +381,22 @@
         "file": "world_1500.geojson"
       },
       {
+        "year": 1530,
+        "source_year": 1530,
+        "gap": 0,
+        "file": "world_1530.geojson"
+      },
+      {
         "year": 1600,
         "source_year": 1600,
         "gap": 0,
         "file": "world_1600.geojson"
+      },
+      {
+        "year": 1650,
+        "source_year": 1650,
+        "gap": 0,
+        "file": "world_1650.geojson"
       },
       {
         "year": 1700,

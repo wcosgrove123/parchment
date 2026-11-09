@@ -1,0 +1,46 @@
+{
+  "_comment": "North America stage: which power holds each downloaded polygon. Authored attributes only; no geometry. Categories are the legend's fill keys (Set A tokens) or patterns. OpenHistoricalMap country- and colony-level polygons (admin level 2, and aboriginal lands) take the first rule whose pattern matches their English or local name inside the rule's dates; provinces (levels 3 and 4) take the power of the level-2 polygon that contains them at each date, and fall back to the rules. A name no rule names is 'other': drawn muted, with its border and its name, never guessed. Newberry polygons are 'us', except TERR_TYPE 'Other' (Vermont Republic, Oregon Country, Uncertain Boundary Area, Republic of Texas, Deseret), which is 'disputed'. Dates are YYYYMMDD.",
+  "categories": {
+    "us": { "label": "United States", "fill": "In" },
+    "britain": { "label": "British Empire", "fill": "S", "labels": [[0, "England"], [17070501, "Great Britain"], [18010101, "British Empire"], [18670701, "Canada and British colonies"]] },
+    "france": { "label": "France", "fill": "P" },
+    "spain": { "label": "Spain", "fill": "E" },
+    "mexico": { "label": "Mexico", "fill": "T" },
+    "sweden": { "label": "Sweden", "fill": "T" },
+    "netherlands": { "label": "Netherlands", "fill": "C" },
+    "russia": { "label": "Russia", "fill": "C" },
+    "native": { "label": "Native nations (approximate)", "pattern": "stipple" },
+    "disputed": { "label": "Disputed or overlapping claims", "pattern": "hatch" },
+    "rebellion": { "label": "In rebellion (Confederacy)", "pattern": "crosshatch" },
+    "other": { "label": null }
+  },
+  "rules": [
+    { "power": "rebellion", "match": "Confederate States" },
+    { "power": "disputed", "match": "disput|neutral ground|joint .*claim|Indian Stream|uncertain boundary|Transylvania Colony" },
+    { "power": "native", "match": "Aztec|Tenochtitlan|Tlatelolco|Tlacopan|Tetzcoco|Tlaxcal|Colhuacan|Chalco|Purépecha|Itza Kingdom|Manche Chʼol|Chactemal|Dzuluinicob|Tavasco|Tamactun|Ekab|Ah Kin Chel|Chikinchel|Ceh Pech|Sotuta|Kock Wah|Tutul-Xiu|Kupul|Chakan|Kaan Peech|Uaymil|Calotmul|Ah Canul|Hocabá|Tases|Chakán|Catawba|Wendat|Tionontati|Beothuk|Shoshone|Comancheria|Apsáalooke|Miwok|Me-Wuk|Miwkoʔ|Ohlone|Chan Santa Cruz" },
+    { "power": "us", "match": "^United States( of America)?$" },
+    { "power": "spain", "match": "Colony of Santiago|^Santiago$|Spanish|Spain|Imperio español|Virreinato|Viceroyalty of the Indies|Viceroyalty of New Spain|New Spain|Kingdom of Mexico|Kingdom of New Galicia|Captaincy General|Santo Domingo|Puerto Rico|La Florida|Nueva |Nuevo |New Navarre|New Philippines|New Santander|New Kingdom of León|Intendancy|Provincia|Alcaldía|Gobernación|The Californias|Guadalupe$|Province$", "to": 18210928 },
+    { "power": "spain", "match": "Captaincy General of (Cuba|Puerto Rico)" },
+    { "power": "mexico", "match": "^Mexico$|Mexican Empire|Provisional Government of Mexico", "from": 18210928 },
+    { "power": "france", "match": "France|French|français|Nouvelle-France|Colonie d|Colony of Canada|Acadia|Acadie|Louisiane|Upper Louisiana|Illinois Country|Pays des Illinois|Isle Saint-Jean|Saint-Domingue|Fort St\\. Louis|Company of the American Islands|Company of Saint Christopher|Colony of Guadelupe|Colony of Louisiana" },
+    { "power": "netherlands", "match": "New Netherland|Nieuw Nederland|Netherlands|Dutch|Curaçao|Sint Maarten" },
+    { "power": "sweden", "match": "New Sweden|Nya Sverige" },
+    { "power": "russia", "match": "Russia|Russian|Soviet" },
+    { "power": "britain", "match": "English|England|British|Britain|Plantations|Plymouth|Massachusetts|Connecticut|New Haven|Saybrook|Rhode Island|New Hampshire|Province of Maine|Carolana|Carolina|Georgia|Maryland|Virginia|Virgineola|Somers Isles|Bermuda|Jamaica|Newfoundland|Nova Scotia|New Brunswick|Cape Breton|Prince Edward|St\\. John's Island|Quebec|Upper Canada|Lower Canada|Province of Canada|Dominion of Canada|^Canada$|Rupert's Land|North-West Territories|Red River Colony|Columbia District|New Caledonia|Vancouver Island|Queen Charlotte|Stickeen|East Florida|West Florida|Dominion of New England|Lower Counties|Jersey|Pennsylvania|Province of New York|Colony of New York|Roanoke|Cuper's Cove|Renews|Bristol's Hope|Avalon|Cayman|Turks and Caicos|Colony of the Bahamas|Bay of Honduras|Settlement of British Honduras|British Honduras" }
+  ],
+  "newberry_other": "disputed",
+  "nolabel": [
+    { "match": "^Viceroyalty of New Spain$", "from": 18210928, "_why": "OpenHistoricalMap keeps this name on Spain's Caribbean remainder until 1899; the viceroyalty ended with Mexican independence. The Captaincy General's own name is shown instead." }
+  ],
+  "native_exclude": [
+    { "match": "Métis|Michif", "before": 1700, "_why": "historical-basemaps' 1492 map takes its North American homelands from Native Land Digital, which maps present-day territories; the Métis nation formed in the 1700s and cannot stand on a 1492 or 1530 map." }
+  ],
+  "_claims": "Lesson maps (src/us/frames.js) name a hatch by its sides: 'Claimed by Texas and Mexico'. A computed overlap knows its two polygons; an area that OpenHistoricalMap or Newberry draws whole as disputed takes its sides from the first rule here whose pattern matches its name. Authored attributes, each with its reason; owner to review (docs/DECISIONS.md, 2026-11-06). A disputed area no rule names keeps the general label.",
+  "claims": [
+    { "match": "^(Texas Republic|Republic of Texas)$", "parties": ["Texas", "Mexico"], "_why": "Newberry's own record: 'Texas declared its independence from Mexico' (New Handbook of Texas, 5:537-538). Mexico did not recognize that independence before annexation; its claim ended with the Treaty of Guadalupe Hidalgo (1848), which fixed the Rio Grande line." },
+    { "match": "^Joint Mexico-Texas Claim$", "parties": ["Texas", "Mexico"], "_why": "OpenHistoricalMap's own name for the land both claimed, 2 March 1836 – 28 December 1845 (relation 2693046)." },
+    { "match": "^Uncertain Boundary Area$", "parties": ["the United States", "Britain"], "_why": "Newberry's own record: 'The boundary from Lake of the Woods to the Rocky Mtns. between the United States and the British possessions was unsettled' (to the Convention of 1818)." },
+    { "match": "^Oregon Country$", "parties": ["the United States", "Britain"], "_why": "Newberry's records: the United States claimed the Oregon Country from 1804, and 'The Oregon Boundary Treaty between the United States and Great Britain ended joint occupancy of the Oregon Country' (its record of 15 June 1846)." },
+    { "match": "^Vermont Republic$", "parties": ["Vermont", "New York"], "_why": "Newberry's own record: 'Vermont declared its independence from New York in 1777. Although not recognized as a separate state by the Continental Congress, Vermont functioned as an independent republic until statehood in 1791.'" }
+  ]
+}

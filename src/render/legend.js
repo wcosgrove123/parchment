@@ -3,8 +3,15 @@
 
 import { select as d3Select } from 'd3';
 
-export function createLegend(root, { x1, y0 }) {
+// Placement: top-right by default; a stage may anchor it bottom-right instead, its bottom edge `lift` px above the
+// frame's bottom (the North America stage keeps the top right for New England and the Diff list).
+// fit (lesson maps on the North America page): the box widens, up to 340 px, to its longest line ("Claimed by
+// Indian Territory and Texas"), instead of letting a long line run past its edge. Off by default: every other map
+// keeps its 236 px legend.
+export function createLegend(root, { x1, y0, y1 }, { anchor = 'top-right', lift = 22, fit = false } = {}) {
   const W = 236, PAD = 14, ROW = 22;
+  let w = W;
+  const topY = (h) => (anchor === 'bottom-right' ? y1 - lift - h : y0 + 22);
   const g = root.append('g').attr('class', 'legend');
   const box = g.append('rect').attr('class', 'legend-box').attr('width', W);
   const title = g.append('text').attr('class', 'legend-title').attr('x', PAD).attr('y', PAD + 10);
@@ -17,7 +24,7 @@ export function createLegend(root, { x1, y0 }) {
     const H = PAD * 2 + 26 + entries.length * ROW;
     height = H;
     box.attr('height', H);
-    g.attr('transform', `translate(${x1 - 22 - W},${y0 + 22})`);
+    g.attr('transform', `translate(${x1 - 22 - W},${topY(H)})`);
     const r = rows.selectAll('g.row').data(entries).join('g').attr('class', 'row').attr('transform', (_, i) => `translate(0,${i * ROW})`);
     r.selectAll('*').remove();
     r.each(function (e) {
@@ -41,10 +48,20 @@ export function createLegend(root, { x1, y0 }) {
       }
       row.append('text').attr('x', 32).attr('y', 11).text(e.label);
     });
+    if (fit) {
+      let widest = 0;
+      try {
+        widest = title.node().getComputedTextLength() + PAD * 2;
+        rows.selectAll('g.row text').each(function () { widest = Math.max(widest, this.getComputedTextLength() + 32 + PAD * 2); });
+      } catch { /* not laid out */ }
+      w = Math.max(W, Math.min(340, Math.ceil(widest + 6)));
+      box.attr('width', w);
+      g.attr('transform', `translate(${x1 - 22 - w},${topY(H)})`);
+    }
   }
   // The legend's rectangle on the sheet, a reserved zone for the label pass.
-  const rect = () => ({ x: x1 - 22 - W, y: y0 + 22, w: W, h: height });
-  return { set, height: () => height, box: rect };
+  const rect = () => ({ x: x1 - 22 - w, y: topY(height), w, h: height });
+  return { set, height: () => height, box: rect, anchor };
 }
 
 // Point marks (brief §5): battle/siege = rust diamond; founding/capital = moss circle; monument = navy square;

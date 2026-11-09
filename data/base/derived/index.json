@@ -120,6 +120,16 @@
         5000,
         6000
       ]
+    },
+    "rivers-na": {
+      "file": "rivers-na.topojson",
+      "bytes": 2525633,
+      "features": 5139,
+      "settings": {
+        "minWeight": 0.000002,
+        "quantization": 200000
+      },
+      "written_by": "scripts/derive-rivers.mjs"
     }
   }
 }

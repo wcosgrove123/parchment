@@ -1,0 +1,12 @@
+{
+  "_source": "Natural Earth SR_50M (public domain), cropped by scripts/relief-region.mjs",
+  "image": "relief/north-america-plate-carree.png",
+  "width": 2400,
+  "height": 1440,
+  "box": {
+    "west": -135.00000000000446,
+    "south": 12.000000000007802,
+    "east": -55.00000000001246,
+    "north": 60.000000000003
+  }
+}

@@ -56,13 +56,20 @@ async function collectCSS() {
   return out.join('\n');
 }
 
+// The sheet's size in its own units: its viewBox (a lesson map may be sized for a slide), else 1920×1080.
+function sheetSize(svgNode) {
+  const vb = svgNode.viewBox?.baseVal;
+  return vb && vb.width > 0 && vb.height > 0 ? [vb.width, vb.height] : [W, H];
+}
+
 // A self-contained copy of the map as SVG text.
 export async function snapshotSVG(svgNode, { transparent = false } = {}) {
   const clone = svgNode.cloneNode(true);
+  const [sw, sh] = sheetSize(svgNode);
   clone.setAttribute('xmlns', SVG_NS);
   clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
-  clone.setAttribute('width', W);
-  clone.setAttribute('height', H);
+  clone.setAttribute('width', sw);
+  clone.setAttribute('height', sh);
   clone.removeAttribute('style');
 
   // A crossfade may be mid-flight: keep only the newest snapshot layer, fully opaque.
@@ -104,8 +111,9 @@ export async function renderPNG(svgNode, { width = 1920, height = 1080, transpar
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext('2d');
-    const s = Math.min(width / W, height / H);
-    const dw = W * s, dh = H * s;
+    const [sw, sh] = sheetSize(svgNode);
+    const s = Math.min(width / sw, height / sh);
+    const dw = sw * s, dh = sh * s;
     ctx.drawImage(img, (width - dw) / 2, (height - dh) / 2, dw, dh);
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     if (!blob) throw new Error('The browser could not encode the PNG.');

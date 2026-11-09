@@ -114,6 +114,10 @@ const NE_VECTORS = [
   'ne_50m_coastline',
   'ne_50m_lakes',
   'ne_50m_rivers_lake_centerlines',
+  // Rivers at 1:10m, with Natural Earth's North American supplement: a framed lesson map (us.html?frame=texas) names
+  // rivers the 1:50m set lacks, the Nueces and the Sabine among them. scripts/derive-rivers.mjs keeps North America.
+  'ne_10m_rivers_lake_centerlines',
+  'ne_10m_rivers_north_america',
   // Bathymetry ships only at 1:10m; derive.mjs simplifies it to hairline contours.
   'ne_10m_bathymetry_K_200',
   'ne_10m_bathymetry_J_1000',
@@ -201,17 +205,26 @@ const licenses = [
   '| layer | source | license | attribution |',
   '|---|---|---|---|',
   `| World polities by year | [historical-basemaps](https://github.com/aourednik/historical-basemaps)${commitNote} | GPL-3.0 | Historical Basemaps, Andrej Ourednik and contributors. Borders are approximate by nature; see that project's README. |`,
-  '| Land, coastlines, lakes, rivers, bathymetry | [Natural Earth](https://www.naturalearthdata.com) vectors (1:50m; bathymetry 1:10m) | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |',
+  '| Land, coastlines, lakes, rivers, bathymetry | [Natural Earth](https://www.naturalearthdata.com) vectors (1:50m; bathymetry 1:10m; rivers of North America also 1:10m, with the North American supplement, for framed lesson maps) | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |',
   '| Shaded relief | [Natural Earth](https://www.naturalearthdata.com) raster SR_50M | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |',
+  '| U.S. states and territories, 1783–2000, dated to the day (North America stage) | [Atlas of Historical County Boundaries](https://digital.newberry.org/ahcb/), The Newberry Library: U.S. Historical States and Territories, generalized 0.001° (2011) | Newberry terms: any lawful purpose, no fees ([rights and reproductions](https://www.newberry.org/rights-and-reproductions)); the files still carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored | Atlas of Historical County Boundaries, ed. John H. Long; U.S. Historical States and Territories compiled by Peter Siczewicz and Emily Kelley. Chicago: The Newberry Library, 2011. |',
+  '| Colonies, provinces, neighboring countries, some Native nations, 1492 → (North America stage) | [OpenHistoricalMap](https://www.openhistoricalmap.org) via its Overpass API | CC0 1.0 | OpenHistoricalMap contributors |',
+  '| Indian land cessions, 1784–1894 (North America stage) | U.S. Forest Service, Office of Tribal Relations: [Indian Land Cessions in the United States](https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalCessionLands_01/MapServer/0), digitized from the 67 maps of Charles C. Royce, comp., *Indian Land Cessions in the United States*, 18th Annual Report of the Bureau of American Ethnology, part 2 (1899) | U.S. Government work; catalog.data.gov lists CC BY 4.0 | U.S. Forest Service; Charles C. Royce (1899). |',
   '| Typeface | [Libre Baskerville](https://github.com/impallari/Libre-Baskerville) via @fontsource | SIL Open Font License 1.1 | Pablo Impallari and Rodrigo Fuenzalida |',
   '',
-  'Planned for later versions (not yet downloaded): Newberry Library Atlas of Historical County Boundaries (CC BY-NC-SA),',
-  'OpenHistoricalMap (CC0 / public domain), Native Land Digital (per site terms), Wikidata coordinates (CC0).',
+  "The North America stage's sources are downloaded by `scripts/fetch-us.mjs`, which records URLs, queries, dates and",
+  'checksums in `data/base/MANIFEST-north-america.json`. Point coordinates come from Wikidata (CC0) through',
+  '`scripts/geocode.mjs`. Planned, not yet downloaded: Native Land Digital (per site terms).',
   '',
   `Last run of fetch-base.mjs: ${manifest.generated.slice(0, 10)}.`,
   '',
 ].join('\n');
-await writeFile(join(ROOT, 'docs', 'DATA-LICENSES.md'), licenses);
+// Other scripts write their sources as marked blocks (<!-- name:start --> … <!-- name:end -->): the North America
+// stage's Native sources (scripts/licenses-native.mjs), the Electoral College (scripts/fetch-electoral.mjs). Every
+// such block is carried over whole, in the order it stood.
+const blocks = [...(await readFile(join(ROOT, 'docs', 'DATA-LICENSES.md'), 'utf8').catch(() => ''))
+  .matchAll(/<!-- ([\w:-]+):start -->[\s\S]*?<!-- \1:end -->/g)].map((m) => m[0]);
+await writeFile(join(ROOT, 'docs', 'DATA-LICENSES.md'), blocks.length ? `${licenses.trimEnd()}\n\n${blocks.join('\n\n')}\n` : licenses);
 console.log('  wrote    docs/DATA-LICENSES.md');
 
 if (failures.length) {

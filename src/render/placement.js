@@ -76,7 +76,12 @@ function leaderEnd(box, mark) {
 // Where a route's name may sit: boxes centred at a few fractions of its length, above the line.
 // samples: the drawn polyline; w, h: the name's size; gap: distance from the line to the baseline.
 // → [{ startOffset (0..1), reverse, box }], or [] when the route is too short for its name.
-export function routeLabelCandidates(samples, w, h, { gap = 5, fractions = [0.5, 0.42, 0.58, 0.34, 0.66, 0.26, 0.74, 0.18, 0.82] } = {}) {
+// Stretches tried, from the middle outwards in 4 % steps (2026-11-06: nine stretches left long, crowded world-map
+// voyages unnamed; the middle still comes first, so a short route is named where it was before).
+const FRACTIONS = [0.5, ...Array.from({ length: 10 }, (_, i) => [0.5 - 0.04 * (i + 1), 0.5 + 0.04 * (i + 1)]).flat()].map((f) => Math.round(f * 100) / 100);
+// minStraightness (0–1, a river's name on a lesson map): a stretch whose chord is shorter than this share of its
+// length bends too much to carry letters, and is skipped. 0, the default, takes every stretch as before.
+export function routeLabelCandidates(samples, w, h, { gap = 5, fractions = FRACTIONS, minStraightness = 0 } = {}) {
   if (samples.length < 2) return [];
   const cum = [0];
   for (let i = 1; i < samples.length; i++) cum.push(cum[i - 1] + Math.hypot(samples[i][0] - samples[i - 1][0], samples[i][1] - samples[i - 1][1]));
@@ -93,6 +98,10 @@ export function routeLabelCandidates(samples, w, h, { gap = 5, fractions = [0.5,
     const s0 = f * total - w / 2, s1 = f * total + w / 2;
     if (s0 < 0 || s1 > total) continue;
     const span = [at(s0), ...samples.filter((_, i) => cum[i] > s0 && cum[i] < s1), at(s1)];
+    if (minStraightness > 0) {
+      const chord = Math.hypot(span[span.length - 1][0] - span[0][0], span[span.length - 1][1] - span[0][1]);
+      if (chord < minStraightness * (s1 - s0)) continue;
+    }
     let bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity;
     for (const p of span) { if (p[0] < bx0) bx0 = p[0]; if (p[0] > bx1) bx1 = p[0]; if (p[1] < by0) by0 = p[1]; if (p[1] > by1) by1 = p[1]; }
     const reverse = span[span.length - 1][0] < span[0][0];
@@ -138,9 +147,14 @@ export function placeLabels({ labels, marks = [], routes = [], zones = [], frame
       }
       out.push({ id: l.id, kind: l.kind, dropped: 'no-room' });
     } else {
+      // A name along a line that counts as a place (a river on a lesson map) takes one of the ten places.
+      if (l.place && places >= maxPlaces) { out.push({ id: l.id, kind: l.kind, dropped: 'ceiling' }); continue; }
       const c = (l.candidates ?? []).find((c) => free(c.box, l));
-      if (c) { placed.push({ id: l.id, box: c.box }); out.push({ id: l.id, kind: l.kind, box: c.box, pos: 'along', startOffset: c.startOffset, reverse: c.reverse }); }
-      else out.push({ id: l.id, kind: l.kind, dropped: 'no-room' });
+      if (c) {
+        placed.push({ id: l.id, box: c.box });
+        out.push({ id: l.id, kind: l.kind, box: c.box, pos: 'along', startOffset: c.startOffset, reverse: c.reverse });
+        if (l.place) places++;
+      } else out.push({ id: l.id, kind: l.kind, dropped: 'no-room' });
     }
   }
   return out;

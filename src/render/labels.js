@@ -98,7 +98,9 @@ export function markWhen(r) {
 // marks: from drawMarks; routes: from drawRoutes; zones: reserved rects; frame: the map's inner box.
 // Draws every placed label into `layer` and returns the placement list.
 // naive: every label at the first position with no checks (the old behaviour), for before/after pictures only.
-export function layoutLabels(layer, defs, { marks, routes, zones, frame, width = 1920, measure = makeMeasure(), maxPlaces = 10, naive = false }) {
+// rivers (lesson maps on the North America page): [{ id, name, samples }], named along their line in italic water
+// style like a route's name, and counted among the ten labelled places (owner question, 2026-11-06; DECISIONS).
+export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, frame, width = 1920, measure = makeMeasure(), maxPlaces = 10, naive = false }) {
   const termini = new Set(routes.flatMap((d) => [d.r.waypoints[0], d.r.waypoints[d.r.waypoints.length - 1]]));
   const h = Math.round(MARK_FONT * 1.2);
   const pointLabels = marks.map((m) => {
@@ -107,14 +109,20 @@ export function layoutLabels(layer, defs, { marks, routes, zones, frame, width =
     return { id: m.r.id, kind: 'point', priority: labelPriority(m.r, termini), x: m.x, y: m.y, radius: m.radius, w: Math.ceil(w), h, text: m.r.label, when };
   });
   const rh = Math.round(ROUTE_FONT * 1.1);
-  const routeLabels = routes.map((d) => {
+  // A route cut at the seam is several pieces: each is a line to keep labels off, only the longest carries the name.
+  const routeLabels = routes.filter((d) => d.named !== false).map((d) => {
     const w = Math.ceil(measure(d.r.label, { size: ROUTE_FONT, italic: true }));
     return { id: `route-label-${d.r.id}`, kind: 'route', priority: 2.5, route: d.r.id, w, h: rh, text: d.r.label, color: d.style.color, samples: d.samples, width: d.style.width,
       candidates: routeLabelCandidates(d.samples, w, rh, { gap: d.style.width / 2 + 3 }) };
   });
-  const byId = new Map([...pointLabels, ...routeLabels].map((l) => [l.id, l]));
+  const riverLabels = rivers.filter((r) => r.samples?.length > 1).map((r) => {
+    const w = Math.ceil(measure(r.name, { size: ROUTE_FONT, italic: true }) + r.name.length * ROUTE_FONT * 0.08);
+    return { id: `river-label-${r.id}`, kind: 'route', priority: 2.7, place: true, w, h: rh, text: r.name, color: 'water', samples: r.samples, width: 1.2,
+      candidates: routeLabelCandidates(r.samples, w, rh, { gap: 3, minStraightness: 0.9 }) };
+  });
+  const byId = new Map([...pointLabels, ...routeLabels, ...riverLabels].map((l) => [l.id, l]));
   const result = naive ? pointLabels.map((l) => ({ id: l.id, kind: 'point', box: pointCandidates(l)[0], pos: 'E' })) : placeLabels({
-    labels: [...pointLabels, ...routeLabels],
+    labels: [...pointLabels, ...routeLabels, ...riverLabels],
     marks: marks.map((m) => ({ id: m.r.id, x: m.x, y: m.y, radius: m.radius })),
     routes: routes.map((d) => ({ id: d.r.id, samples: d.samples })),
     zones, frame, width, maxPlaces,

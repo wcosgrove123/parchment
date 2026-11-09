@@ -1,0 +1,126 @@
+/* Parchment — North America stage. Shares tokens.css and app.css; only what this stage adds. */
+
+/* ---------- fills (grammar §5): one translucent group per category, so overlaps never darken ---------- */
+.na-fill path { stroke: none; }
+.na-fill.k-In path { fill: var(--fill-In); }
+.na-fill.k-S path { fill: var(--fill-S); }
+.na-fill.k-P path { fill: var(--fill-P); }
+.na-fill.k-E path { fill: var(--fill-E); }
+.na-fill.k-C path { fill: var(--fill-C); }
+.na-fill.k-T path { fill: var(--fill-T); }
+
+/* patterns: hatch = dispute or joint holding; cross-hatch = rebellion; stipple with a soft edge = Native nations ("sphere") */
+.na-pattern { stroke: none; }
+.na-pattern.p-hatch { fill: url(#hatch-rust); }
+.na-pattern.p-crosshatch { fill: url(#crosshatch-rust); }
+.na-stipple { fill: url(#stipple-ink); pointer-events: none; }
+.hatch-line.strong { stroke: var(--rust); stroke-width: 1.1; stroke-opacity: 0.7; }
+.stipple-dot { fill: var(--navy); fill-opacity: 0.38; }
+
+/* land cessions: a sequential key by period, light (early) to dark (late), umber toward rust */
+.cession { stroke: var(--cream); stroke-width: 0.5; stroke-opacity: 0.8; }
+.cession.seq-1 { fill: #e7cfae; } .cession.seq-2 { fill: #d9b083; } .cession.seq-3 { fill: #c78f5c; }
+.cession.seq-4 { fill: #ad6f3f; } .cession.seq-5 { fill: #8a532c; }
+
+/* Native population: people counted per 1,000 km², a sequential key (pale to dark green), the same steps every year */
+.pop { stroke: var(--cream); stroke-width: 0.5; stroke-opacity: 0.8; }
+.pop.pop-1 { fill: #e4ecd5; } .pop.pop-2 { fill: #c3d8a8; } .pop.pop-3 { fill: #93bb7b; }
+.pop.pop-4 { fill: #5e9653; } .pop.pop-5 { fill: #356b39; }
+/* a number is a badge (grammar §5) */
+.badge rect { fill: var(--cream); fill-opacity: 0.95; stroke: var(--navy); stroke-width: 0.9; }
+.badge .badge-n { font-size: 13px; font-weight: 700; fill: var(--ink); }
+.badge .badge-sub { font-size: 11px; font-style: italic; fill: var(--ink); paint-order: stroke fill; stroke: var(--cream); stroke-width: 3px; stroke-linejoin: round; }
+
+/* Native lands: today's held land (reservations, trust land, rancherias, pueblos); original territories as hairlines */
+.land-today { fill: #2f6e52; fill-opacity: 0.88; stroke: var(--cream); stroke-width: 0.4; }
+.land-today.hawaiian { fill: #5f9c80; }
+.icc-line { fill: none; stroke: var(--navy); stroke-width: 0.6; stroke-opacity: 0.5; }
+
+/* borders: navy; solid = documented, dashed = approximate */
+.na-border { fill: none; stroke: var(--navy); stroke-linejoin: round; stroke-linecap: round; }
+.na-border.ohm { stroke-width: 0.8; stroke-opacity: 0.6; }
+.na-border.ohm.approximate { stroke-dasharray: 3 2.5; stroke-opacity: 0.55; }
+.na-border.nb-inner { stroke-width: 0.85; stroke-opacity: 0.78; }
+.na-border.nb-outer { stroke-width: 1.5; stroke-opacity: 0.85; }
+.na-border.nb-other { stroke: var(--rust); stroke-width: 0.9; stroke-opacity: 0.75; }
+
+.na-hits path { fill: #000; fill-opacity: 0; stroke: none; cursor: pointer; }
+.na-hits path:hover { fill: var(--focus); fill-opacity: 0.12; }
+body.shot .na-hits path:hover { fill-opacity: 0; }
+
+/* labels */
+.label.polity.native { font-variant: normal; font-style: italic; font-weight: 400; letter-spacing: 0.04em; fill-opacity: 0.85; }
+.view-bg { fill: var(--parchment); }
+
+/* insets */
+.inset-frame { fill: none; stroke: var(--navy); stroke-width: 0.9; }
+.inset-title { font-size: 12px; font-variant: small-caps; letter-spacing: 0.16em; fill: var(--ink); paint-order: stroke fill; stroke: var(--cream); stroke-width: 3px; stroke-linejoin: round; }
+
+/* legend swatches for this stage's patterns and sequence */
+.legend .swatch.fill-hatch { fill: url(#hatch-rust); fill-opacity: 1; stroke: var(--rust); }
+.legend .swatch.fill-crosshatch { fill: url(#crosshatch-rust); fill-opacity: 1; stroke: var(--rust); }
+.legend .swatch.fill-stipple { fill: url(#stipple-ink); fill-opacity: 1; }
+.legend .swatch.fill-seq-1 { fill: #e7cfae; fill-opacity: 1; } .legend .swatch.fill-seq-2 { fill: #d9b083; fill-opacity: 1; }
+.legend .swatch.fill-seq-3 { fill: #c78f5c; fill-opacity: 1; } .legend .swatch.fill-seq-4 { fill: #ad6f3f; fill-opacity: 1; }
+.legend .swatch.fill-seq-5 { fill: #8a532c; fill-opacity: 1; }
+.legend .swatch.fill-pop-1 { fill: #e4ecd5; fill-opacity: 1; } .legend .swatch.fill-pop-2 { fill: #c3d8a8; fill-opacity: 1; }
+.legend .swatch.fill-pop-3 { fill: #93bb7b; fill-opacity: 1; } .legend .swatch.fill-pop-4 { fill: #5e9653; fill-opacity: 1; }
+.legend .swatch.fill-pop-5 { fill: #356b39; fill-opacity: 1; }
+.legend .swatch.fill-land { fill: #2f6e52; fill-opacity: 0.88; }
+.legend .swatch.fill-land-hawaiian { fill: #5f9c80; fill-opacity: 0.88; }
+.legend .swatch-line.icc { stroke-width: 0.8; stroke-opacity: 0.6; }
+
+/* timeline: continuous; a rug of change years above the baseline; click or drag */
+.na-strip .changes line { stroke: var(--gold); stroke-width: 1; stroke-opacity: 0.9; }
+.na-strip .tick.major { stroke-opacity: 1; }
+.strip-hit { fill: #000; fill-opacity: 0; cursor: ew-resize; }
+
+/* ---------- chrome (never exported) ---------- */
+#toolbar #year-input { width: 92px; font: inherit; font-size: 13px; font-weight: 700; text-align: center; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 2px 4px; }
+#info { position: fixed; right: 14px; bottom: 74px; width: min(380px, 34vw); max-height: 58vh; overflow: auto; background: var(--cream); border: 1px solid var(--gold); border-radius: 4px; padding: 10px 12px 12px; font-size: 12.5px; line-height: 1.45; box-shadow: 0 2px 10px rgba(31, 42, 68, 0.18); color: var(--ink); }
+#info .info-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; border-bottom: 1px solid var(--gold-hair); margin-bottom: 6px; }
+#info h3 { margin: 0 0 6px; font-size: 15px; font-variant: small-caps; letter-spacing: 0.08em; }
+#info .info-head button { font: inherit; font-size: 16px; background: none; border: 0; color: var(--ink); cursor: pointer; line-height: 1; }
+#info .info-row { display: grid; grid-template-columns: 92px 1fr; gap: 8px; margin: 4px 0; }
+#info .k { font-variant: small-caps; letter-spacing: 0.08em; opacity: 0.75; }
+#info a { color: var(--steel); }
+body.shot #info { display: none; }
+
+/* ---------- the Diff view: appeared (and changed hands) = focus fill; vanished = rust hatch, rust outline ---------- */
+.na-fill.k-focus path { fill: var(--focus); }
+.na-soft-focus { fill: var(--focus); opacity: 0.62; pointer-events: none; }
+.na-vanished path { fill: url(#hatch-rust); stroke: none; }
+.na-soft-vanished { fill: url(#hatch-rust); pointer-events: none; }
+.na-vanished-edge { fill: none; stroke: var(--rust); stroke-width: 1.1; stroke-linejoin: round; stroke-opacity: 0.9; }
+.na-vanished-edge.approximate { stroke-dasharray: 3 2.5; }
+.difflist-year, .difflist-note { font-style: italic; fill-opacity: 0.72; }
+.difflist-sep { fill-opacity: 0.5; }
+#toolbar #from-input { width: 92px; font: inherit; font-size: 13px; font-weight: 700; text-align: center; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 2px 4px; }
+#toolbar .range-label { font-size: 12px; font-style: italic; opacity: 0.75; margin: 0 2px; }
+body:not(.mode-diff) #toolbar .diff-only { display: none; }
+.stage.na .label.polity.appeared { fill: var(--ink); fill-opacity: 0.92; }
+.difflist-head .difflist-note { font-variant: normal; letter-spacing: 0; font-size: 11px; }
+/* in a Diff, rust means "vanished": the later date's disputed and joint areas keep a thin navy outline instead */
+.snap.diff .na-border.nb-other { stroke: var(--navy); stroke-opacity: 0.6; }
+
+/* ---------- Electoral College: a badge per voting state ("OH 23"), small states called out in the Atlantic ---------- */
+.ec-badge .ec-abbr { font-size: 10px; font-weight: 400; letter-spacing: 0.06em; fill: var(--ink); }
+.ec-badge .badge-n { font-size: 12.5px; }
+.ec-leader { fill: none; stroke: var(--navy); stroke-width: 0.7; stroke-opacity: 0.7; }
+.ec-leader-dot { fill: var(--navy); fill-opacity: 0.8; }
+.legend .swatch.fill-novote { fill: var(--cream); fill-opacity: 1; stroke: var(--navy); stroke-width: 0.6; stroke-dasharray: 2 1.5; }
+
+/* Land held under U.S. treaty before Removal: the green of held land, a solid navy edge (a treaty fixed the line) */
+.land-today.treaty { fill: #2f6e52; fill-opacity: 1; stroke: var(--navy); stroke-width: 2; stroke-opacity: 1; stroke-linejoin: round; }
+.na-treaty-x path { stroke: var(--rust); stroke-width: 1; stroke-opacity: 0.9; stroke-linejoin: round; }
+.legend .swatch.fill-land-treaty { fill: #2f6e52; fill-opacity: 0.55; stroke: var(--navy); stroke-width: 1; }
+
+/* land two U.S. polygons claimed at once (the Toledo Strip...): rust hatch with a rust edge, over the borders */
+.na-pattern.nb-dispute { stroke: var(--rust); stroke-width: 1; stroke-opacity: 0.85; stroke-linejoin: round; }
+
+/* ---------- lesson maps (src/us/frames.js): a frame, a highlight, things to point at ---------- */
+/* rivers an order names: a little stronger than the rest, and named along their line in italic water style */
+.rivers path.named { stroke-width: 1.5; stroke-opacity: 0.95; }
+.record-labels .route-label.water { fill: var(--steel); letter-spacing: 0.08em; }
+/* names the highlight did not light stay as context, paler */
+.label.polity.unlit { fill-opacity: 0.55; }
