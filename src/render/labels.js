@@ -83,6 +83,26 @@ export function makeMeasure(doc = globalThis.document) {
   };
 }
 
+// The longest stretch of a sampled line inside the frame, with the length of line before it and the whole length,
+// so a name placed on the visible part can be set along the whole path at the right offset.
+export function visibleRun(samples, { x0, y0, x1, y1 }) {
+  const inside = (p) => p[0] >= x0 && p[0] <= x1 && p[1] >= y0 && p[1] <= y1;
+  const seg = (a, b) => Math.hypot(b[0] - a[0], b[1] - a[1]);
+  let total = 0, best = null, cur = null, pos = 0;
+  for (let i = 0; i < samples.length; i++) {
+    if (i) { total += seg(samples[i - 1], samples[i]); pos = total; }
+    if (inside(samples[i])) {
+      if (!cur) cur = { start: i, prefix: pos, run: [] };
+      cur.run.push(samples[i]);
+    } else if (cur) { if (!best || cur.run.length > best.run.length) best = cur; cur = null; }
+  }
+  if (cur && (!best || cur.run.length > best.run.length)) best = cur;
+  if (!best) return { run: [], prefix: 0, length: 0, total };
+  let length = 0;
+  for (let i = 1; i < best.run.length; i++) length += seg(best.run[i - 1], best.run[i]);
+  return { run: best.run, prefix: best.prefix, length, total };
+}
+
 // Priority: capitals and route termini first, then dated places, then the rest (docs/ROUTES-STYLE.md §3).
 export function labelPriority(r, termini) {
   if (r.value === 'capital' || termini.has(r.where)) return 1;
@@ -114,8 +134,13 @@ export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, f
   // A route cut at the seam is several pieces: each is a line to keep labels off, only the longest carries the name.
   const routeLabels = routes.filter((d) => d.named !== false).map((d) => {
     const w = Math.ceil(measure(d.r.label, { size: ROUTE_FONT, italic: true }));
-    return { id: `route-label-${d.r.id}`, kind: 'route', priority: 2.5, route: d.r.id, w, h: rh, text: d.r.label, color: d.style.color, samples: d.samples, width: d.style.width,
-      candidates: routeLabelCandidates(d.samples, w, rh, { gap: d.style.width / 2 + 3 }) };
+    // A route that runs off the map is named on the part that shows (2026-11-09: a column leaving a frame for San
+    // Luis Potosí had every stretch tried outside it). The offsets are mapped back onto the whole line.
+    const vis = frame ? visibleRun(d.samples, frame) : null;
+    const cands = vis && vis.run.length > 1 && vis.run.length < d.samples.length
+      ? routeLabelCandidates(vis.run, w, rh, { gap: d.style.width / 2 + 3 }).map((c) => ({ ...c, startOffset: (c.startOffset * vis.length + vis.prefix) / vis.total }))
+      : routeLabelCandidates(d.samples, w, rh, { gap: d.style.width / 2 + 3 });
+    return { id: `route-label-${d.r.id}`, kind: 'route', priority: 2.5, route: d.r.id, w, h: rh, text: d.r.label, color: d.style.color, samples: d.samples, width: d.style.width, candidates: cands };
   });
   const riverLabels = rivers.filter((r) => r.samples?.length > 1).map((r) => {
     const w = Math.ceil(measure(r.name, { size: ROUTE_FONT, italic: true }) + r.name.length * ROUTE_FONT * 0.08);
@@ -156,7 +181,7 @@ export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, f
     e.append('textPath').attr('text-anchor', 'middle');
     return e;
   });
-  rt.attr('class', (p) => `route-label ${p.l.color}`).attr('dy', (p) => -(p.l.width / 2 + 3));
+  rt.attr('class', (p) => `route-label ${p.l.color}`).attr('dy', (p) => (p.side === 'below' ? p.l.width / 2 + 3 + ROUTE_FONT * 0.8 : -(p.l.width / 2 + 3)));
   rt.select('textPath').attr('href', (p) => `#${p.id}-guide`).attr('startOffset', (p) => `${((p.reverse ? 1 - p.startOffset : p.startOffset) * 100).toFixed(1)}%`).text((p) => p.l.text);
   return result;
 }

@@ -1,0 +1,14 @@
+{
+  "_comment": "Military layer, milestone 3: the Texas frame on the day after Buena Vista, with every movement since the war's start: Taylor's three advances in blue (Corpus Christi to the Rio Grande; up the river to Monterrey; on to Saltillo and Buena Vista), Wool from San Antonio, Arista's advance to Palo Alto and his hollow retreat, Ampudia's and Santa Anna's columns leaving the frame for San Luis Potosí with tabs at the edge. Events to the date, numbered.",
+  "page": "us",
+  "layer": "military",
+  "war": "mexican-american-war",
+  "names": "both",
+  "date": "1847-02-24",
+  "frame": "texas",
+  "annotate": { "rivers": ["Nueces", "Rio Grande"] },
+  "title": "The War in the North, 1846–1847",
+  "size": "1600x1550",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/texas-1847-movements"
+}

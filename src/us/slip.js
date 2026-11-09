@@ -170,6 +170,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       // milestone 2: the events on the sheet and the course of the war as the margin list prints it; the strip
       events_on_sheet: (military.shown ?? []).map((r) => r.id), events_in_war: (military.events ?? []).length,
       course: courseList(military.shown ?? [], military.war), strip: military.strip ?? 'war', show: military.show?.length ? military.show : 'everything built',
+      // milestone 3: movements since `from` (else the war's start) begun by the date
+      movements_since: military.since ? isoDate(military.since) : null, movements_on_sheet: (military.moves ?? []).map((r) => r.id), movements_in_war: (military.allMoves ?? []).length,
     } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
@@ -239,9 +241,12 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       ...(r.tracker === 'military' ? { war: r.war, side: r.side || null, outcome: r.outcome || null, outcome_text: outcomeText(r, military?.war) || null, seq: r.seq ?? null } : {}) };
   });
   for (const p of points) if (p.dropped) warnings.push(`place ${p.label} (${p.record}): name dropped (${p.dropped === 'ceiling' ? 'the ten-name limit' : p.dropped === 'no-room' ? 'no room' : p.dropped})`);
+  // (the Military layer: an event of the course beyond the frame is listed but not drawn)
+  if (resolved.war) for (const c of resolved.war.course) c.off = !points.some((p) => p.record === c.record);
   const routesOut = [...new Map((rec?.routes ?? []).map((d) => [d.r.id, d])).values()].map((d) => {
     const r = d.r, pl = placedById.get(`route-label-${r.id}`);
-    return { record: r.id, label: r.label, kind: r.kind, value: r.value, class: d.style.classLabel, dash: d.style.dash, heads: d.style.heads, waypoints: r.waypoints, start: r.startWhen && formatWhenIso(r.startWhen), end: r.endWhen && formatWhenIso(r.endWhen), certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null };
+    return { record: r.id, label: r.label, kind: r.kind, value: r.value, class: d.style.classLabel, dash: d.style.dash, heads: d.style.heads, waypoints: r.waypoints, start: r.startWhen && formatWhenIso(r.startWhen), end: r.endWhen && formatWhenIso(r.endWhen), certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null,
+      ...(r.tracker === 'military' ? { war: r.war, side: r.side || null, force: r.force || null, color: d.style.color, hollow: !!d.style.hollow, landing: !!d.style.landing, places: r.placeNames ?? null } : {}) };
   });
   for (const r of routesOut) if (r.dropped) warnings.push(`route ${r.label} (${r.record}): name dropped (${r.dropped})`);
   const fine = !!frame;

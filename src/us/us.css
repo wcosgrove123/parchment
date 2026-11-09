@@ -160,3 +160,20 @@ body:not(.tracker-military) #war { display: none; }
 .stage.na.war-strip-on .na-strip { display: none; }
 .war-strip text { font-family: var(--font); }
 .marks .mark-group .mil-seq text { font-family: var(--font); }
+
+/* the Military layer's movements (milestone 3): a force's arrow in its side's line color; a retreat hollow; a landing's tick */
+.routes .route.side-a { stroke: var(--side-a-line); } .routes .route.side-b { stroke: var(--side-b-line); } .routes .route.side-c { stroke: var(--side-c-line); }
+.routes .route.side-d { stroke: var(--side-d-line); } .routes .route.side-gray { stroke: var(--side-gray-line); } .routes .route.side-red { stroke: var(--side-red-line); }
+.route-head.side-a path { fill: var(--side-a-line); stroke: var(--side-a-line); } .route-head.side-b path { fill: var(--side-b-line); stroke: var(--side-b-line); }
+.route-head.side-c path { fill: var(--side-c-line); stroke: var(--side-c-line); } .route-head.side-d path { fill: var(--side-d-line); stroke: var(--side-d-line); }
+.route-head.side-gray path { fill: var(--side-gray-line); stroke: var(--side-gray-line); } .route-head.side-red path { fill: var(--side-red-line); stroke: var(--side-red-line); }
+.route-head path.hollow { fill: var(--cream); stroke-width: 0.7; stroke-linejoin: round; }
+.routes .route.route-inner { stroke: var(--cream); stroke-opacity: 1; stroke-linecap: butt; }
+.routes .route.route-landing { stroke-linecap: round; }
+.legend .swatch-route.side-a { stroke: var(--side-a-line); } .legend .swatch-route.side-b { stroke: var(--side-b-line); } .legend .swatch-route.side-c { stroke: var(--side-c-line); }
+.legend .swatch-route.side-d { stroke: var(--side-d-line); } .legend .swatch-route.side-gray { stroke: var(--side-gray-line); } .legend .swatch-route.side-red { stroke: var(--side-red-line); }
+.legend .swatch-route-inner { stroke: var(--cream); stroke-width: 2.2; }
+.record-labels .route-label.side-a { fill: var(--side-a-line); } .record-labels .route-label.side-b { fill: var(--side-b-line); } .record-labels .route-label.side-c { fill: var(--side-c-line); }
+.record-labels .route-label.side-d { fill: var(--side-d-line); } .record-labels .route-label.side-gray { fill: var(--side-gray-line); } .record-labels .route-label.side-red { fill: var(--side-red-line); }
+.record-labels .edge-tab rect { fill: var(--cream); fill-opacity: 0.95; stroke-width: 0.9; }
+.record-labels .edge-tab text { font-size: 11px; font-style: italic; }

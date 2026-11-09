@@ -12,8 +12,8 @@ order or map changes unless it asks for `layer: military`.
 | 0 | the picture sheet of proposals P1–P10 and the icons for review (`docs/progress/2026-11-09-military-sheet.png`) | done; the owner took the defaults for P1, P3, P5 and P8 |
 | 1 | wars, sides and members; the Military toggle and the side fills | done on the North America page (below); the world page's toggle and the 1914–18 test wait for the Europe-stage work there |
 | 2 | events: battles by victor, sieges, places taken, declarations and the treaty; the numbered course of the war; the war strip | done (`tests/maps/military/mexico-war-1848.json`) |
-| 3 | forces and movements | next |
-| 4 | lines: fronts, blockades, treaty lines, ghost borders | |
+| 3 | forces and movements: arrows by side, hollow retreats, landing ticks, side-by-side legs, tabs at the frame's edge, force bars on the strip | done (`tests/maps/military/texas-1847-movements.json`) |
+| 4 | lines: fronts, blockades, treaty lines, ghost borders; the `mexico-city` inset | next |
 | 5 | icons and force marks with date checks | |
 | 6–10 | the human cost; play and video; panels and accounts; battle frames; strength width | |
 
@@ -76,7 +76,21 @@ side's name for the war.
   `declaration`, `treaty`, `armistice`, `massacre`, `fort`, `headquarters`), `war`, `side` where one side owns the
   event (a siege's besieger, a place's captor, the side that declared), `outcome` as `won:<side>`, `inconclusive` or
   `claimed:<side>;<side>`, dates, label and source. Who won is the row's claim, never inferred.
-- Movements (`arrow`) and lines (`path`) follow in milestones 3 and 4.
+- **Movements** are `arrow` rows through gazetteer places (`where` as for any route: `Q49242>Q982504>Q2613729`), with
+  `war`, `side`, `force` (one id for all of a force's rows: `taylor`, `santa-anna`), `value` the kind (`advance`,
+  `retreat`, `flank-march`, `envelopment`, `feint`, `pursuit`, `raid`, `landing`, `breakthrough`, `naval-passage`,
+  `air-route`, `supply-line`), dates, a label that is the commander and the year ("Taylor 1846"), and a source.
+  Waypoints are the places the source names; `npm run geocode -- --file <table>` fills the gazetteer for them.
+- Lines (`path`) follow in milestone 4.
+
+## What it draws (milestone 3)
+
+A force's movement is an arrow in its side's line color with the closed barb that already means an armed force; a
+retreat is hollow (outline only, never dashed); a landing ends at the coast with a short tick. The commander and
+year run along the line as route names do. Forces that share a leg run side by side. A route that leaves the frame
+stops at its edge with a tab saying where it went ("to San Diego"). Without `from`, every movement begun by the
+date shows; with `from`, only those not over before it ("situation at `date`, movements since `from`"). On the
+strip each force gets a hairline bar spanning its movements, in lanes by side.
 
 ## What it draws (milestone 2)
 

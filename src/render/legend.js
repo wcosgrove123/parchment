@@ -40,10 +40,14 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
         // A route class: its colour and its heads (none, both ends, one end, barb, chevron), solid.
         const heads = e.heads ?? 'none';
         const start = heads === 'both' ? 'arrow' : null;
-        const end = heads === 'both' || heads === 'end' ? 'arrow' : heads === 'barb' ? 'barb' : heads === 'chevron' ? 'chevron' : null;
+        const end = heads === 'both' || heads === 'end' ? 'arrow' : heads === 'barb' ? 'barb' : heads === 'chevron' ? 'chevron' : heads === 'hollow' ? 'hollow' : null;
         row.append('line').attr('class', `swatch-route ${e.color}`).attr('x1', start ? 4 : 0).attr('x2', end ? 18 : 22).attr('y1', 7).attr('y2', 7)
+          .attr('stroke-width', e.hollow ? 4.4 : null)
           .attr('marker-start', start ? `url(#route-head-${start}-${e.color})` : null)
           .attr('marker-end', end ? `url(#route-head-${end}-${e.color})` : null);
+        // (the Military layer: a retreat shows its paper core; a landing its tick at the coast)
+        if (e.hollow) row.append('line').attr('class', 'swatch-route-inner').attr('x1', 0).attr('x2', 13).attr('y1', 7).attr('y2', 7);
+        if (e.landing) row.append('line').attr('class', `swatch-route ${e.color}`).attr('x1', 21).attr('x2', 21).attr('y1', 1).attr('y2', 13).attr('stroke-width', 2.5);
       } else if (e.swatch === 'shape') {
         // A point shape; the Military layer (2026-11-09) may give it a fill (the victor's color), a second half
         // (both sides claimed), an outline on paper (inconclusive) or a ring (a siege's besieger, a place's captor).

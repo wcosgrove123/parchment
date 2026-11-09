@@ -24,7 +24,7 @@ import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { eventLegend } from '../military/events.js';
-import { decorateMarks, drawCourseList, drawWarStrip, lineColorOf } from '../military/draw.js';
+import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, lineColorOf } from '../military/draw.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
 import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTreatyX, aliveLands, aliveICC, nbName, cleanLabel } from './model.js';
 import { diffUS, byKind } from './diff.js';
@@ -301,9 +301,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     milListBox = null;
     if (milNow?.war) {
       const corner = legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right';
-      milListBox = drawCourseList(root, frame, milNow.shown ?? [], milNow.war, { corner });
+      const [vx, vy, vw, vh] = main.box;
+      const flagged = (milNow.shown ?? []).map((r) => { const xy = r.lon != null ? projection([r.lon, r.lat]) : null; return { ...r, offSheet: !(xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh) }; });
+      milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner });
       root.classed('war-strip-on', milNow.strip !== 'stage');
-      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], date }); else root.selectAll('g.war-strip').remove();
+      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date }); else root.selectAll('g.war-strip').remove();
     } else {
       root.classed('war-strip-on', false);
       root.selectAll('g.course-list, g.war-strip').remove();
@@ -795,8 +797,22 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     if (!recordLayers) return null;
     const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...extra];
     const marksAt = new Map(records.points.filter((p) => p.shape).map((p) => [p.where, (MARK_RADIUS[p.shape] ?? 6) + 2]));
-    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, (qid) => marksAt.get(qid) ?? 0);
-    const marks = drawMarks(recordLayers.marks, records.points, projection);
+    // a mark at the same place under another id (a battle at a city) also keeps an arrowhead clear
+    const markPts = records.points.filter((p) => p.shape && p.lon != null).map((p) => ({ xy: projection([p.lon, p.lat]), r: (MARK_RADIUS[p.shape] ?? 6) + 2 })).filter((m) => m.xy && Number.isFinite(m.xy[0]));
+    const clearance = (qid, coord) => {
+      if (marksAt.has(qid)) return marksAt.get(qid);
+      const xy = coord ? projection(coord) : null;
+      if (!xy) return 0;
+      const near = markPts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6);
+      return near ? near.r : 0;
+    };
+    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
+    drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
+    // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
+    // the course list says "off this map" for them)
+    const [vx, vy, vw, vh] = main.box;
+    const onSheet = (p) => { if (p.tracker !== 'military' || p.lon == null) return true; const xy = projection([p.lon, p.lat]); return xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh; };
+    const marks = drawMarks(recordLayers.marks, records.points.filter(onSheet), projection);
     const rivers = namedRiverLines();
     // The Military layer: battles colored by outcome, rings, and circled numerals (P5, P6, P8). A numbered event has
     // no name on the map (the list in the margin carries it), but its mark and numeral still keep names away.

@@ -107,8 +107,10 @@ export function routeLabelCandidates(samples, w, h, { gap = 5, fractions = FRACT
     let bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity;
     for (const p of span) { if (p[0] < bx0) bx0 = p[0]; if (p[0] > bx1) bx1 = p[0]; if (p[1] < by0) by0 = p[1]; if (p[1] > by1) by1 = p[1]; }
     const reverse = span[span.length - 1][0] < span[0][0];
-    // The name sits above the line: the box covers the text band and the stretch of line beneath it.
-    out.push({ startOffset: f, reverse, box: { x: bx0, y: by0 - gap - h, w: bx1 - bx0, h: by1 - by0 + gap + h } });
+    // The name sits above the line: the box covers the text band and the stretch of line beneath it. Failing that,
+    // below it (2026-11-09: two forces side by side on one leg leave no room above the lower one).
+    out.push({ startOffset: f, reverse, side: 'above', box: { x: bx0, y: by0 - gap - h, w: bx1 - bx0, h: by1 - by0 + gap + h } });
+    out.push({ startOffset: f, reverse, side: 'below', box: { x: bx0, y: by0, w: bx1 - bx0, h: by1 - by0 + gap + h } });
   }
   return out;
 }
@@ -172,7 +174,7 @@ export function placeLabels({ labels, marks = [], routes = [], zones = [], frame
       const c = (l.candidates ?? []).find((c) => free(c.box, l));
       if (c) {
         placed.push({ id: l.id, box: c.box });
-        out.push({ id: l.id, kind: l.kind, box: c.box, pos: 'along', startOffset: c.startOffset, reverse: c.reverse });
+        out.push({ id: l.id, kind: l.kind, box: c.box, pos: 'along', startOffset: c.startOffset, reverse: c.reverse, side: c.side ?? 'above' });
         if (l.place) places++;
       } else out.push({ id: l.id, kind: l.kind, dropped: 'no-room' });
     }

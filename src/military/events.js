@@ -37,6 +37,29 @@ export function outcomeProblem(s, war) {
   return null;
 }
 
+// Movements (milestone 3): `arrow` rows under the tracker. On a date the map shows the movements that have begun by
+// it and had not ended before `since` (the order's `from`, else the war's start): "situation at date, movements
+// since from" (the West Point convention, brief §6). Each is marked with its side's color key and label for the
+// route renderer (src/render/routes.js routeStyle), and with its force id for the strip's bars.
+export const movementsOf = (records, warId) => (records ?? []).filter((r) => r.tracker === 'military' && (r.kind === 'arrow' || r.kind === 'path') && r.war === warId);
+export function movementsSince(moves, since, date) {
+  return moves.filter((r) => eventFirst(r) <= date && eventLast(r) >= since).sort((a, b) => eventFirst(a) - eventFirst(b) || a.id.localeCompare(b.id));
+}
+export function withSides(rows, war) {
+  return rows.map((r) => { const s = (war?.sides ?? []).find((x) => x.id === r.side); return s ? { ...r, sideColor: s.color, sideLabel: s.label } : { ...r }; });
+}
+// The forces on the strip: one bar per `force` id (else per label), spanning its movements, in its side's color.
+export function forceBars(moves) {
+  const by = new Map();
+  for (const r of moves) {
+    const k = r.force || r.label;
+    const b = by.get(k) ?? { force: k, label: r.label, side: r.side, sideColor: r.sideColor, first: eventFirst(r), last: eventLast(r) };
+    b.first = Math.min(b.first, eventFirst(r)); b.last = Math.max(b.last, eventLast(r));
+    by.set(k, b);
+  }
+  return [...by.values()].sort((a, b) => a.first - b.first);
+}
+
 const DIAMONDS = new Set(['battle', 'siege', 'naval-battle', 'raid']);
 const TRIANGLES = new Set(['declaration', 'treaty', 'armistice', 'surrender']);
 
@@ -102,7 +125,7 @@ export function outcomeText(r, war) {
 // The course of the war, as the margin list prints it: numbered events only, in sequence order.
 export function courseList(events, war) {
   return events.filter((r) => r.seq != null).sort((a, b) => a.seq - b.seq)
-    .map((r) => ({ n: r.seq, record: r.id, date: eventDate(r), label: r.label, outcome: outcomeText(r, war), value: r.value }));
+    .map((r) => ({ n: r.seq, record: r.id, date: eventDate(r), label: r.label, outcome: outcomeText(r, war), value: r.value, off: !!r.offSheet }));
 }
 
 // Legend rows for the events on the sheet (grammar §5 kept: the diamond stays; its fill is the victor's color).

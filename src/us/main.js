@@ -24,7 +24,7 @@ import focusTable from '../focuses.json';
 import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
 import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
-import { eventsOf, eventsUpTo, sequenceFor } from '../military/events.js';
+import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
 const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
@@ -130,12 +130,15 @@ async function main() {
   const startDate = parseDate(params.get('date')) ?? (params.get('year') ? endOfYear(Number(params.get('year'))) : endOfYear(1803));
   // ?from=1783&year=1853 (or from=1783-09-03) opens the Diff view: what changed between the two dates.
   const startFrom = parseDate(params.get('from'));
+  // (on the Military layer `from` is not a Diff: it means "movements since", the West Point convention; brief §6)
+  const militaryStart = TRACKERS[params.get('tracker')] && params.get('tracker') === 'military';
   const state = {
     date: clampDate(startDate),
     exact: !!params.get('date'),
     tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'nations',
-    mode: startFrom ? 'diff' : 'snapshot',
+    mode: startFrom && !militaryStart ? 'diff' : 'snapshot',
     from: startFrom ? clampDate(startFrom) : null,
+    since: startFrom && militaryStart ? clampDate(startFrom) : null,
     fromExact: /-/.test(params.get('from') ?? ''),
     playing: null,
     // the Military layer: which war (else the longest one alive on the date), and whose names print (a side's key, or both)
@@ -159,7 +162,11 @@ async function main() {
     // events need a coordinate: the row's own (filled by geocode.mjs) or the gazetteer's for its Wikidata id
     const { records: pts, waiting } = resolveRecords(mil.filter((r) => r.kind === 'point'), gazetteer);
     for (const w of waiting) problems.push(`event ${w.id}: no coordinate for ${w.missing.join(', ')} (run npm run geocode); not drawn`);
-    milData = { vocab, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
+    // movements: arrows through gazetteer places, as routes are; each keeps its places' names for a tab at the frame's edge
+    const mv = resolveRecords(mil.filter((r) => r.kind === 'arrow' || r.kind === 'path'), gazetteer);
+    for (const w of mv.waiting) problems.push(`movement ${w.id}: waypoints without coordinates (${w.missing.join(', ')}; run npm run geocode); not drawn`);
+    const movements = mv.records.filter((r) => r.coords).map((r) => ({ ...r, placeNames: r.waypoints.map((q) => gazetteer[q]?.label ?? q) }));
+    milData = { vocab, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), movements, file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
     if (!vocab.wars?.length) problems.push('vocab.json lists no wars yet; the Military layer has nothing to show');
     return milData;
   }
@@ -179,15 +186,21 @@ async function main() {
     const showEvents = !state.show.length || state.show.includes('events');
     const seqSpec = state.show.length && !state.show.includes('sequence') ? false : state.sequence;
     const shown = showEvents ? sequenceFor(eventsUpTo(events, date), seqSpec) : [];
-    return { war, members, events, shown, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
+    // movements since `from` (else the war's start) that have begun by the date, in their sides' colors
+    const allMoves = withSides(movementsOf(milData.movements, war.id), war);
+    // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
+    const since = state.since ?? 0;
+    const moves = !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date) : [];
+    return { war, members, events, shown, moves, allMoves, since, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
   }
-  // The layer's events join the order's places on the sheet; set again only when they change (a new date may add one).
+  // The layer's events and movements join the order's places and routes on the sheet; set again only when they
+  // change (a new date may add one).
   let recKey = null;
   function placeMilitaryRecords(mil) {
-    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}` : '';
+    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}|${mil.moves.map((r) => r.id).join(',')}` : '';
     if (key === recKey) return;
     recKey = key;
-    atlas.setRecords(mil ? { points: [...orderRecords.points, ...mil.shown], routes: orderRecords.routes } : orderRecords);
+    atlas.setRecords(mil ? { points: [...orderRecords.points, ...mil.shown], routes: [...orderRecords.routes, ...mil.moves] } : orderRecords);
   }
   if (state.tracker === 'military') await ensureMilitary();
   let milShown = null;

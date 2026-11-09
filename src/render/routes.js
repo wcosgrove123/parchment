@@ -26,7 +26,9 @@ export const SPONSORS = {
   france: { label: 'France' },
   netherlands: { label: 'The Dutch' },
 };
-export const COLORS = ['steel', 'land', 'rust', 'ink', ...Object.keys(SPONSORS)];
+// The Military layer (owner's defaults, 2026-11-09): a force's arrow takes its side's line color (src/tokens.css --side-*-line).
+export const SIDE_COLORS = ['a', 'b', 'c', 'd', 'gray', 'red'].map((k) => `side-${k}`);
+export const COLORS = ['steel', 'land', 'rust', 'ink', ...Object.keys(SPONSORS), ...SIDE_COLORS];
 
 // Certainty → line style, the same reading as for borders: documented, approximate, conjectured.
 export const DASH = { legal: 'solid', approximate: 'dashed', sphere: 'dotted' };
@@ -40,10 +42,22 @@ const HEADS = {
   arrow: { d: 'M0,1.5L9,5L0,8.5Z', w: 3.2, h: 3.2, ref: 7.5, open: false },
   barb: { d: 'M0,0L10,5L0,10L3,5Z', w: 4, h: 4, ref: 8.5, open: false },
   chevron: { d: 'M1,1L8,5L1,9', w: 4, h: 4, ref: 7.5, open: true },
+  // the Military layer's retreat (proposal P3, owner's default 2026-11-09): the barb outlined, never dashed
+  hollow: { d: 'M0.5,0.8L9.4,5L0.5,9.2L3.2,5Z', w: 4, h: 4, ref: 8.5, open: 'hollow' },
 };
+const MIL_LABELS = { advance: 'Advance', retreat: 'Retreat or withdrawal', 'flank-march': 'Flank march', envelopment: 'Envelopment', feint: 'Feint', pursuit: 'Pursuit', raid: 'Raid', landing: 'Landing from the sea', breakthrough: 'Breakthrough', 'naval-passage': 'Fleet', 'air-route': 'Air route', 'supply-line': 'Supply line' };
 
 // Style for one record: what the renderer and the legend both read.
 export function routeStyle(rec) {
+  // The Military layer: the closed barb means an armed force, as now, in its side's color (rec.sideColor, set by the
+  // page from the war's sides); a retreat is hollow (outline only); a landing ends at the coast with a tick.
+  if (rec.tracker === 'military') {
+    const color = rec.sideColor ? `side-${rec.sideColor}` : 'rust';
+    const retreat = rec.value === 'retreat';
+    const landing = rec.value === 'landing';
+    return { color, width: retreat ? WIDTHS.regular + 1.4 : WIDTHS.regular, tier: 'regular', dash: DASH[rec.certainty] ?? 'solid', heads: 'barb',
+      markerStart: null, markerEnd: retreat ? 'hollow' : 'barb', hollow: retreat, landing, military: true, classLabel: MIL_LABELS[rec.value] ?? 'Movement' };
+  }
   if (rec.tracker === 'explorers') {
     const color = SPONSORS[rec.value] ? rec.value : 'ink';
     const directed = rec.kind === 'arrow';
@@ -293,7 +307,7 @@ export function routeDefs(defs) {
       const m = defs.append('marker').attr('id', `route-head-${name}-${color}`).attr('class', `route-head ${name} ${color}`)
         .attr('viewBox', '0 0 10 10').attr('refX', h.ref).attr('refY', 5)
         .attr('markerWidth', h.w).attr('markerHeight', h.h).attr('orient', 'auto-start-reverse');
-      m.append('path').attr('d', h.d).attr('class', h.open ? 'open' : 'closed');
+      m.append('path').attr('d', h.d).attr('class', h.open === 'hollow' ? 'hollow' : h.open ? 'open' : 'closed');
     }
   }
 }
@@ -311,15 +325,16 @@ export function drawRoutes(layer, records, projection, zones = [], clearance = (
     if (!r.coords) continue;
     const style = routeStyle(r);
     const ids = r.waypoints ?? [];
-    // Only a tipped end keeps back from its mark; a plain end runs into it.
-    const a = style.markerStart ? clearance(ids[0]) : 0;
-    const b = style.markerEnd ? clearance(ids[ids.length - 1]) : 0;
+    // Only a tipped end keeps back from its mark; a plain end runs into it. (The coordinate goes along too: a mark at
+    // the same place under another id, a battle at a city, still keeps the head clear.)
+    const a = style.markerStart ? clearance(ids[0], r.coords[0]) : 0;
+    const b = style.markerEnd ? clearance(ids[ids.length - 1], r.coords[r.coords.length - 1]) : 0;
     const whole = routePieces(r.coords, projection, { seam, clearStart: a, clearEnd: b, offsets: lanes.get(r.id) });
     // A one-way route (a voyage, an army, a migration) is also tipped at each marked stop on the way.
     if (style.markerEnd && style.heads !== 'both') {
       const stops = [];
       for (let i = 1; i < ids.length - 1; i++) {
-        const clear = clearance(ids[i]);
+        const clear = clearance(ids[i], r.coords[i]);
         const p = clear ? projection(r.coords[i]) : null;
         if (p && Number.isFinite(p[0])) stops.push({ x: p[0], y: p[1], clear });
       }
@@ -353,12 +368,40 @@ export function drawRoutes(layer, records, projection, zones = [], clearance = (
     .attr('marker-end', (d) => (d.style.markerEnd && d.end ? `url(#route-head-${d.style.markerEnd}-${d.style.color})` : null));
   g.selectAll('title').remove();
   g.append('title').text((d) => `${d.r.label} · ${d.style.classLabel.toLowerCase()}${d.r.source ? `\n${d.r.source}` : ''}`);
+  // The Military layer: a retreat is hollow (a paper core inside the side's color, stopping short of the head), and a
+  // landing ends with a short tick across the line where it meets the coast.
+  layer.selectAll('path.route-inner').data(drawn.filter((d) => d.style.hollow), (d) => d.pathId).join('path')
+    .attr('class', 'route route-inner').attr('d', (d) => pathFrom(trimEnds(d.samples, 0, d.end ? 7 : 0)))
+    .attr('stroke-width', (d) => Math.max(1, d.style.width - 2));
+  layer.selectAll('path.route-landing').data(drawn.filter((d) => d.style.landing && d.end && d.samples.length > 3), (d) => d.pathId).join('path')
+    .attr('class', (d) => `route route-landing ${d.style.color}`).attr('stroke-width', 2.5)
+    .attr('d', (d) => {
+      const s = d.samples, e = s[s.length - 1], f = s[s.length - 4];
+      const dx = e[0] - f[0], dy = e[1] - f[1], len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+      return pathFrom([[e[0] - nx * 7, e[1] - ny * 7], [e[0] + nx * 7, e[1] + ny * 7]]);
+    });
   stopLayer.raise(); // the heads at stops sit on top of the lines
   return drawn;
 }
 
 // Legend rows for whatever is on the map: one per route class, then one per certainty seen.
 export function routeLegend(records) {
+  // The Military layer: one row per side with a force on the map (its barb in its color), then the forms seen
+  // (retreat, landing, fleet), then the certainties. Other rows on the same map (an old rust Army route) follow.
+  const mil = records.filter((r) => r.tracker === 'military');
+  if (mil.length) {
+    const rows = [];
+    const sides = [...new Map(mil.filter((r) => r.sideColor).map((r) => [r.sideColor, r])).values()];
+    for (const r of sides) rows.push({ swatch: 'route', color: `side-${r.sideColor}`, heads: 'barb', label: `${r.sideLabel ?? r.sideColor}: an armed force` });
+    const first = sides[0]?.sideColor ? `side-${sides[0].sideColor}` : 'rust';
+    if (mil.some((r) => r.value === 'retreat')) rows.push({ swatch: 'route', color: first, heads: 'hollow', hollow: true, label: 'Retreat or withdrawal' });
+    if (mil.some((r) => r.value === 'landing')) rows.push({ swatch: 'route', color: first, heads: 'barb', landing: true, label: 'Landing from the sea' });
+    if (mil.some((r) => r.value === 'naval-passage')) rows.push({ swatch: 'route', color: first, heads: 'barb', label: 'Fleet, over water' });
+    const seen = [...new Set(mil.map((r) => DASH[r.certainty]))];
+    for (const d of ['solid', 'dashed', 'dotted']) if (seen.includes(d)) rows.push({ swatch: 'line', style: d, label: DASH_LABEL[Object.keys(DASH).find((k) => DASH[k] === d)] });
+    const rest = records.filter((r) => r.tracker !== 'military');
+    return rest.length ? [...rows, ...routeLegend(rest)] : rows;
+  }
   // The Explorers layer: one row per state that sent an expedition on the map, then the certainties.
   if (records.some((r) => r.tracker === 'explorers')) {
     const sent = new Set(records.map((r) => r.value));

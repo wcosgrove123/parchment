@@ -1,4 +1,10 @@
 {
+  "Q61": {
+    "lon": -77.0367,
+    "lat": 38.895,
+    "label": "Washington, D.C.",
+    "fetched": "2026-11-09"
+  },
   "Q334": {
     "lon": 103.8,
     "lat": 1.3,
@@ -149,6 +155,12 @@
     "label": "Kagoshima",
     "fetched": "2026-11-06"
   },
+  "Q16552": {
+    "lon": -117.1625,
+    "lat": 32.715,
+    "label": "San Diego",
+    "fetched": "2026-11-09"
+  },
   "Q16635": {
     "lon": 144.8,
     "lat": 13.5,
@@ -185,6 +197,12 @@
     "label": "Liverpool",
     "fetched": "2026-11-06"
   },
+  "Q26590": {
+    "lon": -106.42,
+    "lat": 31.6685,
+    "label": "Ciudad Juárez",
+    "fetched": "2026-11-09"
+  },
   "Q35045": {
     "lon": -65.7533,
     "lat": -19.5892,
@@ -209,6 +227,12 @@
     "label": "Salvador",
     "fetched": "2026-11-06"
   },
+  "Q38555": {
+    "lon": -105.9667,
+    "lat": 35.6667,
+    "label": "Santa Fe",
+    "fetched": "2026-11-09"
+  },
   "Q48365": {
     "lon": -71,
     "lat": -54,
@@ -221,11 +245,23 @@
     "label": "Corpus Christi",
     "fetched": "2026-11-06"
   },
+  "Q53077": {
+    "lon": -100.9919,
+    "lat": 25.4231,
+    "label": "Saltillo",
+    "fetched": "2026-11-09"
+  },
   "Q61089": {
     "lon": 102.2511,
     "lat": 2.1889,
     "label": "Malacca",
     "fetched": "2026-11-05"
+  },
+  "Q61302": {
+    "lon": -106.0769,
+    "lat": 28.6369,
+    "label": "Chihuahua City",
+    "fetched": "2026-11-09"
   },
   "Q68814": {
     "lon": 117.6612,
@@ -238,6 +274,12 @@
     "lat": 41.2643,
     "label": "Liaoyang",
     "fetched": "2026-11-05"
+  },
+  "Q81033": {
+    "lon": -100.3181,
+    "lat": 25.6844,
+    "label": "Monterrey",
+    "fetched": "2026-11-09"
   },
   "Q81398": {
     "lon": -99.887,
@@ -269,6 +311,18 @@
     "label": "Santiago",
     "fetched": "2026-11-06"
   },
+  "Q120405": {
+    "lon": -103.4292,
+    "lat": 38.0428,
+    "label": "Bent's Old Fort National Historic Site",
+    "fetched": "2026-11-09"
+  },
+  "Q125293": {
+    "lon": -98.2178,
+    "lat": 19.0514,
+    "label": "Heroica Puebla de Zaragoza",
+    "fetched": "2026-11-09"
+  },
   "Q131694": {
     "lon": 45.0333,
     "lat": 12.8,
@@ -298,6 +352,12 @@
     "lat": 19.1903,
     "label": "Veracruz",
     "fetched": "2026-11-06"
+  },
+  "Q204271": {
+    "lon": -100.975,
+    "lat": 22.1497,
+    "label": "San Luis Potosí",
+    "fetched": "2026-11-09"
   },
   "Q205119": {
     "lon": -78.5175,
@@ -419,6 +479,12 @@
     "label": "Anticosti Island",
     "fetched": "2026-11-06"
   },
+  "Q590879": {
+    "lon": -94.9211,
+    "lat": 39.355,
+    "label": "Fort Leavenworth",
+    "fetched": "2026-11-09"
+  },
   "Q605321": {
     "lon": 76.9728,
     "lat": 29.4017,
@@ -461,6 +527,12 @@
     "label": "Panamá Viejo",
     "fetched": "2026-11-06"
   },
+  "Q726749": {
+    "lon": -99.1172,
+    "lat": 19.4844,
+    "label": "Villa de Guadalupe Hidalgo",
+    "fetched": "2026-11-09"
+  },
   "Q738353": {
     "lon": -97.5042,
     "lat": 25.85,
@@ -478,6 +550,12 @@
     "lat": 9.5544,
     "label": "Portobelo",
     "fetched": "2026-11-06"
+  },
+  "Q815139": {
+    "lon": -97.4922,
+    "lat": 25.8983,
+    "label": "Siege of Fort Texas",
+    "fetched": "2026-11-09"
   },
   "Q815831": {
     "lon": -56.5,
@@ -532,6 +610,18 @@
     "lat": 28.6689,
     "label": "Goliad",
     "fetched": "2026-11-06"
+  },
+  "Q982504": {
+    "lon": -97.2133,
+    "lat": 26.0736,
+    "label": "Port Isabel",
+    "fetched": "2026-11-09"
+  },
+  "Q990007": {
+    "lon": -101.4172,
+    "lat": 26.9011,
+    "label": "Monclova",
+    "fetched": "2026-11-09"
   },
   "Q995615": {
     "lon": 22.1333,
@@ -635,6 +725,12 @@
     "label": "Punta Pariñas",
     "fetched": "2026-11-06"
   },
+  "Q1536618": {
+    "lon": -99.182,
+    "lat": 19.421,
+    "label": "Battle of Chapultepec",
+    "fetched": "2026-11-09"
+  },
   "Q1576377": {
     "lon": 124.1967,
     "lat": 12.5875,
@@ -647,6 +743,12 @@
     "label": "Homonhon",
     "fetched": "2026-11-06"
   },
+  "Q1628057": {
+    "lon": -100.3111,
+    "lat": 25.6822,
+    "label": "Battle of Monterrey",
+    "fetched": "2026-11-09"
+  },
   "Q1741475": {
     "lon": 39.5172,
     "lat": -8.9817,
@@ -658,6 +760,12 @@
     "lat": 19.6906,
     "label": "La Navidad",
     "fetched": "2026-11-06"
+  },
+  "Q1808450": {
+    "lon": -101.0464,
+    "lat": 25.337,
+    "label": "Battle of Buena Vista",
+    "fetched": "2026-11-09"
   },
   "Q1857392": {
     "lon": -69.7167,
@@ -676,6 +784,12 @@
     "lat": 32.648,
     "label": "San Diego Bay",
     "fetched": "2026-11-06"
+  },
+  "Q2333407": {
+    "lon": -99.149,
+    "lat": 19.356,
+    "label": "Battle of Churubusco",
+    "fetched": "2026-11-09"
   },
   "Q2334445": {
     "lon": -78.3086,
@@ -701,11 +815,41 @@
     "label": "Fort Brown",
     "fetched": "2026-11-06"
   },
+  "Q2689975": {
+    "lon": -99.191,
+    "lat": 19.419,
+    "label": "Battle of Molino del Rey",
+    "fetched": "2026-11-09"
+  },
   "Q2735703": {
     "lon": -76.3289,
     "lat": -13.8589,
     "label": "Paracas Peninsula",
     "fetched": "2026-11-06"
+  },
+  "Q2736004": {
+    "lon": -97.4654,
+    "lat": 26.0201,
+    "label": "Battle of Palo Alto",
+    "fetched": "2026-11-09"
+  },
+  "Q2745368": {
+    "lon": -96.1533,
+    "lat": 19.1903,
+    "label": "Siege of Veracruz",
+    "fetched": "2026-11-09"
+  },
+  "Q2888281": {
+    "lon": -96.91,
+    "lat": 19.53,
+    "label": "Battle of Cerro Gordo",
+    "fetched": "2026-11-09"
+  },
+  "Q2890818": {
+    "lon": -97.4862,
+    "lat": 25.9374,
+    "label": "Battle of Resaca de la Palma",
+    "fetched": "2026-11-09"
   },
   "Q2932434": {
     "lon": -105.6943,
@@ -730,6 +874,24 @@
     "lat": 34.4481,
     "label": "Point Conception",
     "fetched": "2026-11-06"
+  },
+  "Q3845876": {
+    "lon": -98.85,
+    "lat": 26.1833,
+    "label": "Camargo Municipality",
+    "fetched": "2026-11-09"
+  },
+  "Q4872288": {
+    "lon": -116.99,
+    "lat": 33.0861,
+    "label": "Battle of San Pasqual",
+    "fetched": "2026-11-09"
+  },
+  "Q4873005": {
+    "lon": -106.1864,
+    "lat": 28.8717,
+    "label": "Battle of the Sacramento River",
+    "fetched": "2026-11-09"
   },
   "Q5034593": {
     "lon": -53.0875,
@@ -767,6 +929,12 @@
     "label": "San Felipe de Austin State Historic Site",
     "fetched": "2026-11-06"
   },
+  "Q7796515": {
+    "lon": -97.7842,
+    "lat": 26.0619,
+    "label": "Thornton Affair",
+    "fetched": "2026-11-09"
+  },
   "Q8254538": {
     "lon": -40.9283,
     "lat": -21.9917,
@@ -790,6 +958,12 @@
     "lat": 20.4167,
     "label": "Cozumel Island",
     "fetched": "2026-11-06"
+  },
+  "Q20234960": {
+    "lon": -99.5684,
+    "lat": 24.8588,
+    "label": "Linares Municipality",
+    "fetched": "2026-11-09"
   },
   "Q22016425": {
     "lon": -34.9406,
@@ -826,5 +1000,17 @@
     "lat": -34.9733,
     "label": "Punta del Este",
     "fetched": "2026-11-06"
+  },
+  "Q32845816": {
+    "lon": -97.1586,
+    "lat": 26.0656,
+    "label": "Brazos Santiago Pass",
+    "fetched": "2026-11-09"
+  },
+  "Q61127668": {
+    "lon": -99.6147,
+    "lat": 26.0899,
+    "label": "Cerralvo",
+    "fetched": "2026-11-09"
   }
 }

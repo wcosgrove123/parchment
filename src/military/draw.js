@@ -6,7 +6,7 @@
 // Colors come from the side tokens (src/tokens.css); nothing here invents a color or a shape beyond the brief's.
 
 import * as d3 from 'd3';
-import { eventLook, courseList, eventDate, eventFirst, eventLast, fmtWhen } from './events.js';
+import { eventLook, courseList, eventDate, eventFirst, eventLast, fmtWhen, forceBars } from './events.js';
 import { toInt } from './wars.js';
 
 const NAVY = '#1F2A44', RUST = '#C8601A', CREAM = '#F7F5EF', GOLD = '#c8a65d';
@@ -85,6 +85,7 @@ export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner =
     t.append('tspan').attr('class', 'course-date').text(row.date);
     t.append('tspan').attr('class', 'course-what').attr('dx', 5).text(row.label);
     if (row.outcome) t.append('tspan').attr('class', 'course-outcome').attr('dx', 4).text(`· ${row.outcome}`);
+    if (row.off) t.append('tspan').attr('class', 'course-outcome').attr('dx', 4).text('· off this map');
   });
   // widen to the longest line
   try {
@@ -100,10 +101,40 @@ export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner =
   return { x, y, w: W, h: H };
 }
 
+// A route that leaves the frame stops at its edge with a tab saying where it went (P3). drawn: from drawRoutes;
+// box: the main view's [x, y, w, h]. Tabs go in the labels layer, above everything.
+export function drawEdgeTabs(layer, drawn, box) {
+  layer.selectAll('g.edge-tab').remove();
+  const [bx, by, bw, bh] = box;
+  const inside = (p) => p[0] > bx + 1 && p[0] < bx + bw - 1 && p[1] > by + 1 && p[1] < by + bh - 1;
+  const seen = new Set();
+  for (const d of drawn) {
+    const r = d.r;
+    if (r.tracker !== 'military' || !d.end || seen.has(r.id)) continue;
+    const s = d.samples;
+    if (!s.length || inside(s[s.length - 1])) continue;
+    // the last sample inside the frame before the line leaves it
+    let i = s.length - 1;
+    while (i > 0 && !inside(s[i])) i--;
+    if (i === 0) continue;
+    seen.add(r.id);
+    const p = s[i];
+    const to = r.placeNames?.[r.placeNames.length - 1] ?? r.waypoints?.[r.waypoints.length - 1] ?? '';
+    const text = `to ${to}`;
+    const w = text.length * 6.2 + 14, h = 18;
+    const tx = Math.min(bx + bw - w - 4, Math.max(bx + 4, p[0] - w / 2));
+    const ty = p[1] >= by + bh - 12 ? p[1] - h - 6 : p[1] <= by + 12 ? p[1] + 6 : p[1] - h / 2;
+    const g = layer.append('g').attr('class', `edge-tab ${d.style.color}`);
+    g.append('rect').attr('x', tx).attr('y', Math.min(by + bh - h - 2, Math.max(by + 2, ty))).attr('width', w).attr('height', h).attr('stroke', cssColor(r.sideColor ?? 'a'));
+    g.append('text').attr('x', tx + w / 2).attr('y', Math.min(by + bh - h - 2, Math.max(by + 2, ty)) + 13).attr('text-anchor', 'middle').attr('fill', cssColor(r.sideColor ?? 'a')).text(text);
+  }
+}
+
 // The war strip (P10) in the band under the frame where the stage's strip sits: the war's span with year and month
-// ticks, members' bars above the line, events as small marks in the victor's color (treaties as navy triangles),
-// and the shown date marked. events: every event of the war (the strip shows the whole war, the map the date).
-export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, date }) {
+// ticks, members' bars above the line, each force's campaign as a thinner bar below them, events as small marks in
+// the victor's color (treaties as navy triangles), and the shown date marked. events, moves: every one of the war's
+// (the strip shows the whole war, the map the date).
+export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, moves = [], date }) {
   root.selectAll('g.war-strip').remove();
   if (!war) return;
   const g = root.append('g').attr('class', 'war-strip');
@@ -116,7 +147,23 @@ export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, date 
   mem.forEach((m, i) => {
     const side = war.sides.find((s) => s.id === m.side);
     const a = Math.max(days(eventFirst(m)), days(t0)), b = Math.min(days(eventLast(m)), days(t1));
-    g.append('rect').attr('x', x(a)).attr('y', base - 12 - i * 5).attr('width', Math.max(2, x(b) - x(a))).attr('height', 3).attr('rx', 1).attr('fill', cssColor(side.color)).append('title').text(`${m.label}: ${eventDate(m)}`);
+    g.append('rect').attr('x', x(a)).attr('y', base - 21 - i * 5).attr('width', Math.max(2, x(b) - x(a))).attr('height', 3).attr('rx', 1).attr('fill', cssColor(side.color)).append('title').text(`${m.label}: ${eventDate(m)}`);
+  });
+  // forces: one hairline bar each, in lanes by side, between the members' bars and the line
+  const bars = forceBars(moves);
+  const lanes = new Map();
+  bars.forEach((b) => {
+    const key = b.sideColor ?? 'x';
+    const lane = lanes.get(key) ?? [];
+    let row = lane.findIndex((end) => end < days(b.first));
+    if (row < 0) { row = lane.length; lane.push(0); }
+    lane[row] = days(b.last) + 10;
+    lanes.set(key, lane);
+    const sideIndex = Math.max(0, war.sides.findIndex((s) => s.color === b.sideColor));
+    const y = base - 10 + sideIndex * 3.5 + row * 1.6;
+    const a = Math.max(days(b.first), days(t0)), e = Math.min(days(b.last), days(t1));
+    g.append('rect').attr('x', x(a)).attr('y', y).attr('width', Math.max(3, x(e) - x(a))).attr('height', 1.4).attr('fill', cssColor(b.sideColor ?? 'a')).attr('fill-opacity', 0.9)
+      .append('title').text(`${b.label}: ${fmtWhen({ year: Math.floor(b.first / 10000), month: Math.floor((b.first % 10000) / 100), day: b.first % 100 })} – ${fmtWhen({ year: Math.floor(b.last / 10000), month: Math.floor((b.last % 10000) / 100), day: b.last % 100 })}`);
   });
   g.append('line').attr('class', 'baseline').attr('x1', x0).attr('x2', x1).attr('y1', base).attr('y2', base).attr('stroke', NAVY).attr('stroke-width', 1.2);
   // ticks: a month every month, a year named
@@ -145,13 +192,12 @@ export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, date 
     } else e.append('circle').attr('r', 3).attr('fill', NAVY);
     e.append('title').text(`${r.label} · ${eventDate(r)}`);
   }
-  // the shown date
+  // the shown date (its label kept inside the sheet at either end of the war)
   const sd = Math.max(days(t0), Math.min(days(t1), days(date)));
   const mk = g.append('g').attr('class', 'marker').attr('transform', `translate(${x(sd)},${base})`);
   mk.append('path').attr('d', 'M0,-9L8,0L0,9L-8,0Z').attr('fill', GOLD).attr('stroke', NAVY).attr('stroke-width', 1);
   const label = fmtWhen({ year: Math.floor(date / 10000), month: Math.floor((date % 10000) / 100), day: date % 100 });
-  mk.append('text').attr('y', 34).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 700).attr('fill', NAVY).text(label);
-  // the war's span, named at the ends
-  g.append('text').attr('x', x0 + 10).attr('y', base - 18).attr('font-size', 10).attr('font-style', 'italic').attr('fill', NAVY).attr('fill-opacity', 0.8).text(fmtWhen({ year: Math.floor(t0 / 10000), month: Math.floor((t0 % 10000) / 100), day: t0 % 100 }));
-  g.append('text').attr('x', x1 - 10).attr('y', base - 18).attr('text-anchor', 'end').attr('font-size', 10).attr('font-style', 'italic').attr('fill', NAVY).attr('fill-opacity', 0.8).text(fmtWhen({ year: Math.floor(t1 / 10000), month: Math.floor((t1 % 10000) / 100), day: t1 % 100 }));
+  const lx = x(sd), half = label.length * 3.6;
+  mk.append('text').attr('x', Math.max(x0 + half + 2, Math.min(x1 - half - 2, lx)) - lx).attr('y', 34).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 700).attr('fill', NAVY).text(label);
+  // (the war's span is the strip's own: its first and last days are the ends of the line; the cartouche and the list carry the dates)
 }

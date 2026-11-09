@@ -86,6 +86,28 @@ test('the theater, 2 February 1848 (milestone 2): eighteen events by outcome, nu
   assert.equal(bare.slip.resolved.war.strip, 'stage');
 });
 
+test('the war in the north, 24 February 1847 (milestone 3): forces as arrows by side, hollow retreats, a landing, routes leaving the frame', { skip, timeout: 180000 }, async () => {
+  const { slip: s } = await render('military/texas-1847-movements');
+  assert.deepEqual(s.render.page_errors, []);
+  assert.equal(s.routes.length, 13, 'every movement begun by the date: Taylor\'s approach march too, Scott\'s landing and the Mexican retreats');
+  const by = (id) => s.routes.find((r) => r.record === id);
+  assert.deepEqual([by('test-mx-mv-taylor-1').color, by('test-mx-mv-taylor-1').class], ['side-a', 'Advance']);
+  assert.deepEqual([by('test-mx-mv-arista-ret').color, by('test-mx-mv-arista-ret').hollow, by('test-mx-mv-arista-ret').class], ['side-b', true, 'Retreat or withdrawal']);
+  assert.ok(by('test-mx-mv-scott-sea').landing);
+  assert.deepEqual(by('test-mx-mv-kearny-2').places, ['Santa Fe', 'Battle of San Pasqual', 'San Diego'], 'waypoint names from the gazetteer, for the tab at the edge');
+  assert.ok(!s.routes.some((r) => r.record === 'test-mx-mv-scott-land'), 'Scott\'s march inland begins in April: not yet');
+  const labels = s.legend.rows.map((r) => r.label);
+  for (const l of ['United States: an armed force', 'Mexico: an armed force', 'Retreat or withdrawal', 'Landing from the sea']) assert.ok(labels.includes(l), l);
+  assert.ok(s.resolved.war.course.some((c) => c.label === 'United States declares war' && c.off), 'the declaration in Washington is listed as off this map');
+  assert.equal(s.points.length, 10 - 3, 'the three events beyond the frame are not drawn');
+  assert.equal(s.resolved.war.movements_on_sheet.length, 13);
+  // `from` on this layer: movements since, not a Diff
+  const since = await render('military/texas-1847-movements', { from: '1847-01-01' });
+  assert.equal(since.slip.resolved.mode, 'snapshot');
+  assert.equal(since.slip.resolved.war.movements_since, '1847-01-01');
+  assert.deepEqual(since.slip.routes.map((r) => r.record).sort(), ['test-mx-mv-doniphan', 'test-mx-mv-santa-anna-adv', 'test-mx-mv-santa-anna-ret', 'test-mx-mv-scott-sea', 'test-mx-mv-taylor-3']);
+});
+
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/texas-1846-sides', { layer: undefined, war: undefined, names: undefined, records: 'tests/maps/texas-records.csv', annotate: { rivers: ['Nueces', 'Rio Grande'], places: ['Q49242', 'Q738353', 'Q2613729', 'Q16868'], routes: ['test-tx-taylor-march'] } });
   assert.equal(s.resolved.tracker.id, 'nations');
