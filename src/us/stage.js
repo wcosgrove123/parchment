@@ -23,6 +23,8 @@ import { drawMarks, MARK_RADIUS } from '../render/marks.js';
 import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
+import { eventLegend } from '../military/events.js';
+import { decorateMarks, drawCourseList, drawWarStrip, lineColorOf } from '../military/draw.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
 import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTreatyX, aliveLands, aliveICC, nbName, cleanLabel } from './model.js';
 import { diffUS, byKind } from './diff.js';
@@ -180,13 +182,16 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
 
   // Records an order points at (places, routes) and the rivers it names, in layers above the polity names; laid
   // out before the names on every redraw, so a polity's name moves out of their way, never the other way round.
-  const recordLayers = lesson ? {
+  // (always made, since 2026-11-09: the Military layer draws its events through them on the live page too; empty
+  // groups otherwise, so every other map is what it was)
+  const recordLayers = {
     routes: main.g.append('g').attr('class', 'routes'),
     marks: main.g.append('g').attr('class', 'marks'),
     labels: main.g.append('g').attr('class', 'record-labels'),
-  } : null;
+  };
   let records = { points: [], routes: [] };
   let recordLayout = null;
+  let milNow = null, milListBox = null; // the Military layer as shown: its war and events, and the course list's box
 
   const measure = makeMeasure();
   let current = null;
@@ -291,6 +296,19 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     current = { date, trackerId };
     diffList.hide();
     cartouche.setTitle(trackerId === 'military' && military?.war && !lesson?.title ? military.title : titleOn(date));
+    // The Military layer's margin and strip (P8, P10): drawn on every date, before the layers (names keep clear of them).
+    milNow = trackerId === 'military' ? military : null;
+    milListBox = null;
+    if (milNow?.war) {
+      const corner = legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right';
+      milListBox = drawCourseList(root, frame, milNow.shown ?? [], milNow.war, { corner });
+      root.classed('war-strip-on', milNow.strip !== 'stage');
+      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], date }); else root.selectAll('g.war-strip').remove();
+    } else {
+      root.classed('war-strip-on', false);
+      root.selectAll('g.course-list, g.war-strip').remove();
+    }
+    const milZones = milListBox ? [milListBox] : [];
     if (key === currentKey) { current = { ...before, date, trackerId }; return { ...counts, redrawn: false }; }
 
     // A lesson map is one picture: the legend first (only what is lit; a dispute by its sides), then the places,
@@ -307,7 +325,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         : legendFor(powers, tracker, trackerId, present, date, ohmAlive.length > 0, pop);
       const shownLegend = lessonLegend(base, items, trackerId, hl);
       legend.set(shownLegend);
-      recordLayout = layoutRecords();
+      recordLayout = layoutRecords(milZones);
       const layers = views.map((v) => drawView(v, data, date, { items, nbAlive, ohmAlive, cesAlive, trackerId, pop, lands, icc, electoral, treaty, treatyX,
         extraZones: v.id === 'main' ? recordLayout.zones : [], lines: v.id === 'main' ? recordLayout.lines : [] }));
       views.forEach((v, i) => swapIn(v, layers[i], fade));
@@ -337,6 +355,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     while (cache.size > CACHE_MAX) cache.delete(cache.keys().next().value);
     views.forEach((v, i) => swapIn(v, entry.layers[i], fade));
     legend.set(entry.legend);
+    // (the live page: the Military layer's events, or the clearing of them when the layer goes off)
+    if (milNow?.war || records.points.length || records.routes.length || recordLayout) recordLayout = layoutRecords(milZones);
     currentKey = key;
     // (what is on the sheet, for the packing slip: src/us/slip.js)
     current = { date, trackerId, mode: 'snapshot', items: [...items, ...cesAlive, ...lands, ...treaty, ...treatyX], polityLabels: entry.layers.flatMap((l) => l.labels ?? []), legend: entry.legend };
@@ -778,10 +798,15 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, (qid) => marksAt.get(qid) ?? 0);
     const marks = drawMarks(recordLayers.marks, records.points, projection);
     const rivers = namedRiverLines();
-    const placed = layoutLabels(recordLayers.labels, defs, { marks, routes: drawnRoutes, rivers, zones, frame, width: Math.max(W, 1920), measure, maxPlaces: lesson.maxPlaces ?? 10, apart: APART });
-    const boxes = placed.filter((p) => p.box).map((p) => p.box);
+    // The Military layer: battles colored by outcome, rings, and circled numerals (P5, P6, P8). A numbered event has
+    // no name on the map (the list in the margin carries it), but its mark and numeral still keep names away.
     const markBoxes = marks.map((m) => ({ x: m.x - m.radius - 2, y: m.y - m.radius - 2, w: 2 * m.radius + 4, h: 2 * m.radius + 4 }));
-    return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes], lines: drawnRoutes.map((d) => d.samples) };
+    const numeralBoxes = milNow?.war ? decorateMarks(recordLayers.marks, marks, milNow.war) : [];
+    const named = marks.filter((m) => m.r.seq == null);
+    const numberedBoxes = marks.filter((m) => m.r.seq != null).map((m, i) => markBoxes[marks.indexOf(m)]);
+    const placed = layoutLabels(recordLayers.labels, defs, { marks: named, routes: drawnRoutes, rivers, zones: [...zones, ...numeralBoxes, ...numberedBoxes], frame, width: Math.max(W, 1920), measure, maxPlaces: lesson?.maxPlaces ?? 10, apart: APART });
+    const boxes = placed.filter((p) => p.box).map((p) => p.box);
+    return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes, ...numeralBoxes], lines: drawnRoutes.map((d) => d.samples) };
   }
 
   // Each named river as one line on the sheet: its Natural Earth pieces joined end to end, projected, cut to the
@@ -884,7 +909,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
 
   function reservedZones(v) {
     if (v.id !== 'main') return [];
-    const z = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones()];
+    const z = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...(milListBox ? [milListBox] : [])];
     for (const i of insets) { const [bx, by, bw, bh] = i.box; z.push({ x: bx - 4, y: by - 4, w: bw + 8, h: bh + 8 }); }
     return z;
   }
@@ -1113,6 +1138,7 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
   } else if (trackerId === 'military') {
     // the sides of the war shown, each with its members when there are several (src/military/wars.js)
     rows.push(...militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both'));
+    rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf));
   }
   for (const [key, c] of Object.entries(powers.categories)) {
     if (c.pattern && present.has(`pat:${c.pattern}`)) rows.push({ swatch: 'fill', key: c.pattern, label: c.label });

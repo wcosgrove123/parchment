@@ -45,7 +45,16 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
           .attr('marker-start', start ? `url(#route-head-${start}-${e.color})` : null)
           .attr('marker-end', end ? `url(#route-head-${end}-${e.color})` : null);
       } else if (e.swatch === 'shape') {
-        row.append('path').attr('class', `mark ${e.shape}`).attr('transform', 'translate(11,7)').attr('d', SHAPES[e.shape] ?? SHAPES.circle);
+        // A point shape; the Military layer (2026-11-09) may give it a fill (the victor's color), a second half
+        // (both sides claimed), an outline on paper (inconclusive) or a ring (a siege's besieger, a place's captor).
+        if (e.ring) row.append('circle').attr('class', 'swatch-ring').attr('cx', 11).attr('cy', 7).attr('r', 10).attr('fill', 'none').attr('stroke', e.ring).attr('stroke-width', 1.8);
+        const p = row.append('path').attr('class', `mark ${e.shape}`).attr('transform', 'translate(11,7)').attr('d', SHAPES[e.shape] ?? SHAPES.circle);
+        if (e.fill) p.style('fill', e.fill);
+        if (e.outline) p.style('fill', 'var(--cream)').style('stroke', 'var(--rust)').style('stroke-width', 1.5);
+        if (e.half) row.append('path').attr('class', 'swatch-half').attr('transform', 'translate(11,7)').attr('d', 'M0,-7L7,0L0,7Z').attr('fill', e.half);
+      } else if (e.swatch === 'numeral') {
+        row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 7.5).attr('fill', 'var(--cream)').attr('stroke', 'var(--navy)').attr('stroke-width', 1);
+        row.append('text').attr('class', 'swatch-text').attr('x', 11).attr('y', 7).attr('text-anchor', 'middle').attr('dominant-baseline', 'central').attr('font-size', 9).attr('font-weight', 700).text('1');
       }
       row.append('text').attr('x', 32).attr('y', 11).text(e.label);
     });
@@ -55,7 +64,7 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
         widest = title.node().getComputedTextLength() + PAD * 2;
         rows.selectAll('g.row text').each(function () { widest = Math.max(widest, this.getComputedTextLength() + 32 + PAD * 2); });
       } catch { /* not laid out */ }
-      w = Math.max(W, Math.min(340, Math.ceil(widest + 6)));
+      w = Math.max(W, Math.min(400, Math.ceil(widest + 6)));
       box.attr('width', w);
       g.attr('transform', `translate(${leftX(w)},${topY(H)})`);
     }

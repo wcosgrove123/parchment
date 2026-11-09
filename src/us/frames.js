@@ -120,7 +120,7 @@ export function claimLabel(parties) {
 }
 
 // An order (the JSON spec of scripts/map.mjs) as an address on us.html, and back. Every field has a parameter.
-export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'war', 'names', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records'];
+export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'war', 'names', 'show', 'sequence', 'strip', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records'];
 export function orderToQuery(order) {
   const q = new URLSearchParams();
   const a = order.annotate ?? {};
@@ -131,6 +131,9 @@ export function orderToQuery(order) {
   put('tracker', order.layer === 'military' ? 'military' : order.tracker);
   put('war', order.war);
   put('names', order.names);
+  put('show', order.show);
+  put('sequence', Array.isArray(order.sequence) ? order.sequence : order.sequence === false ? 'false' : order.sequence === true ? 'true' : order.sequence);
+  put('strip', order.strip);
   put('frame', Array.isArray(order.frame) ? order.frame.join(',') : order.frame);
   put('highlight', order.highlight);
   put('rivers', a.rivers ?? order.rivers);
@@ -149,7 +152,9 @@ export function queryToOrder(q) {
   if (get('date') ?? get('year')) order.date = get('date') ?? get('year');
   for (const k of ['from', 'tracker', 'title', 'size', 'projection', 'records']) if (get(k)) order[k] = get(k);
   if (order.tracker === 'military') { delete order.tracker; order.layer = 'military'; }
-  for (const k of ['war', 'names']) if (get(k)) order[k] = get(k);
+  for (const k of ['war', 'names', 'strip']) if (get(k)) order[k] = get(k);
+  if (get('show')) order.show = parseList(get('show'));
+  if (get('sequence')) order.sequence = get('sequence') === 'true' ? true : get('sequence') === 'false' ? false : parseList(get('sequence'));
   if (get('scale')) order.scale = Number(get('scale'));
   if (get('frame')) order.frame = get('frame');
   if (get('highlight')) order.highlight = parseList(get('highlight'));

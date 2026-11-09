@@ -56,6 +56,36 @@ test('the war with Mexico, 13 May 1846, on the mexico-war frame: the war\'s own 
   assert.ok(mx.slip.legend.rows.some((r) => r.label === 'Mexico') && !mx.slip.legend.rows.some((r) => /intervención/.test(r.label)));
 });
 
+test('the theater, 2 February 1848 (milestone 2): eighteen events by outcome, numbered, with the list and the war strip', { skip, timeout: 180000 }, async () => {
+  const { slip: s } = await render('military/mexico-war-1848');
+  assert.deepEqual(s.render.page_errors, []);
+  assert.equal(s.points.length, 18, 'every event of the war has begun by the treaty day');
+  assert.ok(s.points.every((p) => p.seq >= 1 && p.seq <= 18 && !p.labeled), 'numbered events carry no name on the map: the list has it');
+  assert.equal(s.resolved.war.course.length, 18);
+  assert.equal(s.resolved.war.course[0].label, 'Thornton Affair');
+  assert.equal(s.resolved.war.course[0].outcome, 'won by Mexico');
+  assert.equal(s.resolved.war.course[17].label, 'Treaty of Guadalupe Hidalgo');
+  assert.equal(s.resolved.war.strip, 'war');
+  const labels = s.legend.rows.map((r) => r.label);
+  for (const l of ['Battle won by United States', 'Battle won by Mexico', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'The course of the war: see the list']) assert.ok(labels.includes(l), l);
+  assert.ok(!labels.includes('Battle or siege') && !labels.includes('Treaty'), 'the routes layer\'s point legend does not repeat the events');
+  const won = s.legend.rows.find((r) => r.label === 'Battle won by United States');
+  assert.equal(won.fill, '#3057a3', 'the diamond\'s fill is the victor\'s line color');
+  const palo = s.points.find((p) => p.record === 'test-mx-ev-palo-alto');
+  assert.deepEqual([palo.outcome, palo.outcome_text], ['won:us', 'won by United States']);
+  assert.ok(s.layout.legend.inside && s.layout.cartouche.inside && s.layout.clipped_text.length === 0);
+  assert.match(s.alt_text, /Shaded: United States in blue \(side A\) and Mexico in plum \(side B\)/);
+  // a date in the middle of the war shows only what has begun, numbered from one
+  const mid = await render('military/mexico-war-1848', { date: '1846-09-25', out: undefined });
+  assert.equal(mid.slip.points.length, 8);
+  assert.equal(mid.slip.resolved.war.course.at(-1).label, 'Monterrey');
+  // events off, strip of the stage: the fills alone
+  const bare = await render('military/mexico-war-1848', { show: ['territory'], strip: 'stage' });
+  assert.equal(bare.slip.points.length, 0);
+  assert.equal(bare.slip.resolved.war.course.length, 0);
+  assert.equal(bare.slip.resolved.war.strip, 'stage');
+});
+
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/texas-1846-sides', { layer: undefined, war: undefined, names: undefined, records: 'tests/maps/texas-records.csv', annotate: { rivers: ['Nueces', 'Rio Grande'], places: ['Q49242', 'Q738353', 'Q2613729', 'Q16868'], routes: ['test-tx-taylor-march'] } });
   assert.equal(s.resolved.tracker.id, 'nations');

@@ -10,6 +10,7 @@ import { geoArea } from 'd3';
 import { isoDate, longDate, yearOf, OPEN } from './dates.js';
 import { US_FROM, nbName, cleanLabel, powerAt } from './model.js';
 import { queryToOrder } from './frames.js';
+import { courseList, outcomeText } from '../military/events.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
 const KM2 = 6371 * 6371;
@@ -111,7 +112,7 @@ function legendAsDrawn(spec) {
     const pattern = fill && /url\(/.test(fill) ? fill.replace(/^url\(["']?#?|["']?\)$/g, '').replace(/.*#/, '') : null;
     const role = r.role ?? (r.swatch === 'route' ? 'route' : r.swatch === 'shape' ? 'point type' : r.swatch === 'line' ? (/route/i.test(r.label ?? '') ? 'route certainty' : 'border certainty') : r.key === 'hatch' ? 'dispute or overlap' : r.key === 'stipple' ? 'native homeland' : r.swatch === 'none' ? 'note' : 'category');
     out.push({
-      label: row.querySelector('text')?.textContent ?? r.label ?? '', swatch: r.swatch ?? null, key: r.key ?? null,
+      label: row.querySelector('text:not(.swatch-text)')?.textContent ?? r.label ?? '', swatch: r.swatch ?? null, key: r.key ?? null,
       fill: pattern || r.swatch === 'line' || r.swatch === 'route' || r.swatch === 'none' ? null : toHex(fill), pattern, stroke: r.swatch === 'line' || r.swatch === 'route' ? toHex(cs?.stroke) : null,
       dash: r.style ?? null, shape: r.shape ?? null, heads: r.heads ?? null, role,
     });
@@ -166,6 +167,9 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
         members: military.members.filter((m) => m.side === s.id).map((m) => ({ record: m.id, where: m.where, label: m.label, role: m.value, start: m.startWhen ? String(m.start_raw ?? '') || null : null, end: null, dates: `${m.startWhen?.year ?? ''}${m.startWhen?.month ? `-${String(m.startWhen.month).padStart(2, '0')}` : ''}${m.startWhen?.day ? `-${String(m.startWhen.day).padStart(2, '0')}` : ''} – ${m.endWhen?.year ?? ''}${m.endWhen?.month ? `-${String(m.endWhen.month).padStart(2, '0')}` : ''}${m.endWhen?.day ? `-${String(m.endWhen.day).padStart(2, '0')}` : ''}`, grade: m.grade, source: m.source, qc_status: m.qc_status || null })),
       })),
       members_file: records?.file ?? military.file ?? null,
+      // milestone 2: the events on the sheet and the course of the war as the margin list prints it; the strip
+      events_on_sheet: (military.shown ?? []).map((r) => r.id), events_in_war: (military.events ?? []).length,
+      course: courseList(military.shown ?? [], military.war), strip: military.strip ?? 'war', show: military.show?.length ? military.show : 'everything built',
     } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
@@ -231,7 +235,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   const placedById = new Map((rec?.placed ?? []).map((p) => [p.id, p]));
   const points = (rec?.marks ?? []).map((m) => {
     const r = m.r, pl = placedById.get(r.id);
-    return { record: r.id, asked: r.asked ?? null, label: r.label, value: r.value, where: r.where, lon: r.lon, lat: r.lat, start: formatWhenIso(r.startWhen), end: formatWhenIso(r.endWhen), grade: r.grade, certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null };
+    return { record: r.id, asked: r.asked ?? null, label: r.label, value: r.value, where: r.where, lon: r.lon, lat: r.lat, start: formatWhenIso(r.startWhen), end: formatWhenIso(r.endWhen), grade: r.grade, certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null,
+      ...(r.tracker === 'military' ? { war: r.war, side: r.side || null, outcome: r.outcome || null, outcome_text: outcomeText(r, military?.war) || null, seq: r.seq ?? null } : {}) };
   });
   for (const p of points) if (p.dropped) warnings.push(`place ${p.label} (${p.record}): name dropped (${p.dropped === 'ceiling' ? 'the ten-name limit' : p.dropped === 'no-room' ? 'no room' : p.dropped})`);
   const routesOut = [...new Map((rec?.routes ?? []).map((d) => [d.r.id, d])).values()].map((d) => {

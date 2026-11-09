@@ -11,8 +11,8 @@ order or map changes unless it asks for `layer: military`.
 |---|---|---|
 | 0 | the picture sheet of proposals P1–P10 and the icons for review (`docs/progress/2026-11-09-military-sheet.png`) | done; the owner took the defaults for P1, P3, P5 and P8 |
 | 1 | wars, sides and members; the Military toggle and the side fills | done on the North America page (below); the world page's toggle and the 1914–18 test wait for the Europe-stage work there |
-| 2 | events (battles by victor) and the war strip | next |
-| 3 | forces and movements | |
+| 2 | events: battles by victor, sieges, places taken, declarations and the treaty; the numbered course of the war; the war strip | done (`tests/maps/military/mexico-war-1848.json`) |
+| 3 | forces and movements | next |
 | 4 | lines: fronts, blockades, treaty lines, ghost borders | |
 | 5 | icons and force marks with date checks | |
 | 6–10 | the human cost; play and video; panels and accounts; battle frames; strength width | |
@@ -42,6 +42,9 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 | `layer` | `tracker=military` | turns the layer on |
 | `war` | `war=` | which war (an id from `data/vocab.json`'s `wars`); without it, the longest war alive on the date |
 | `names` | `names=` | whose name for the war prints in the cartouche: a side's id (`us`, `mexico`) or `both`, which prints the first side's name and lists the other side's name in the legend; the slip always carries every name |
+| `show` | `show=` | what of the layer to draw: `territory`, `events`, `sequence` (default: everything built); `movements`, `lines`, `forts`, `losses` follow with their milestones |
+| `sequence` | `sequence=` | `true` (every event begun by the date is numbered in date order, default), `false`, or a list of record ids to number in that order |
+| `strip` | `strip=` | `war` (default: the war's own timeline under the map) or `stage` (the page's usual strip) |
 
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
@@ -68,8 +71,22 @@ side's name for the war.
   table and are read only when the header has them; a table without them is read exactly as before. Whether they
   live in `data/records.csv` or in a table of their own is the owner's call (brief, question 5); the test rows are in
   `tests/maps/military-records.csv`.
-- Events, movements and lines are `point`, `arrow` and `path` rows under the same tracker (values in `vocab.json`);
-  they draw from milestone 2.
+- **Events** are `point` rows under the same tracker: `where` a Wikidata id (the coordinate from the gazetteer or
+  `npm run geocode`), `value` the kind (`battle`, `siege`, `naval-battle`, `raid`, `landing`, `surrender`, `capture`,
+  `declaration`, `treaty`, `armistice`, `massacre`, `fort`, `headquarters`), `war`, `side` where one side owns the
+  event (a siege's besieger, a place's captor, the side that declared), `outcome` as `won:<side>`, `inconclusive` or
+  `claimed:<side>;<side>`, dates, label and source. Who won is the row's claim, never inferred.
+- Movements (`arrow`) and lines (`path`) follow in milestones 3 and 4.
+
+## What it draws (milestone 2)
+
+Battles keep the grammar's diamond; its fill is the victor's line color, a rust outline on paper when the row says
+inconclusive, split in the two colors when both sides claimed victory. A siege's diamond sits in a ring in the
+besieger's color; a place taken is the moss circle in the captor's ring; declarations, treaties and armistices are
+the navy triangle. Every event begun by the map's date is numbered in date order and keyed to **The course of the
+war**, a box in the corner the legend leaves free, with the date, the event and its outcome; a numbered event prints
+no name on the map. Under the map the **war strip** replaces the stage's: the war's span, month and year ticks, each
+member's bar in its side's color, every event as a small mark in the victor's color, and the shown date marked.
 
 ## The packing slip
 

@@ -1,0 +1,14 @@
+{
+  "_comment": "Military layer, milestone 2: test case 1 of the brief (the war with Mexico, theater) as far as it is built. On the day the treaty was signed every event of the war has begun: battles by victor (the diamond stays; its fill is the victor's line color), sieges ringed in the besieger's color, places taken as moss circles with the captor's ring, declarations and the treaty as navy triangles, each numbered in date order and keyed to the course-of-the-war list; the war strip under the map. Movements (milestone 3) and lines (milestone 4) follow.",
+  "page": "us",
+  "layer": "military",
+  "war": "mexican-american-war",
+  "names": "both",
+  "date": "1848-02-02",
+  "frame": "mexico-war",
+  "sequence": true,
+  "title": "The War with Mexico, 1846–1848",
+  "size": "1920x1080",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/mexico-war-1848"
+}

@@ -3,6 +3,8 @@
 // Rows that fail are skipped and listed, never fatal: nothing a content editor types can break the map.
 // Rows whose id starts with "example-" are templates and are never rendered.
 
+import { outcomeProblem } from '../military/events.js';
+
 export const COLUMNS = ['id', 'course', 'unit', 'topic', 'kc', 'theme', 'tracker', 'kind', 'where', 'lon', 'lat',
   'start', 'end', 'grade', 'value', 'certainty', 'label', 'source', 'qc_status', 'qc_by', 'qc_note'];
 // Optional columns at the end of the table (the Military layer, brief of 2026-11-09 §1): read when the header has
@@ -147,6 +149,8 @@ export function validateRecords(text, vocab) {
       else if (!war) bad(`war "${rec.war}" is not in vocab.json's wars (${wars.map((w) => w.id).join(', ') || 'none yet'})`);
       if (rec.kind === 'region' && !rec.side) bad('side is blank (a membership row names its side)');
       if (rec.side && war && !war.sides.some((s) => s.id === rec.side)) bad(`side "${rec.side}" is not a side of ${rec.war} (${war.sides.map((s) => s.id).join(', ')})`);
+      const op = rec.outcome ? outcomeProblem(rec.outcome, war) : null;
+      if (op) bad(op);
     }
     if (!vocab.certainty.includes(rec.certainty)) bad(`certainty "${rec.certainty}" is not one of ${vocab.certainty.join(', ')}`);
     if (!rec.label) bad('label is blank');

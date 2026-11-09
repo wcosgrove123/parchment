@@ -24,6 +24,7 @@ import focusTable from '../focuses.json';
 import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
 import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
+import { eventsOf, eventsUpTo, sequenceFor } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
 const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
@@ -140,6 +141,10 @@ async function main() {
     // the Military layer: which war (else the longest one alive on the date), and whose names print (a side's key, or both)
     war: params.get('war') || null,
     names: params.get('names') || 'both',
+    // what of the layer to draw (empty: everything built), which events carry numerals, and the strip under the map
+    show: parseList(params.get('show')),
+    sequence: params.get('sequence') === 'false' ? false : params.get('sequence') && params.get('sequence') !== 'true' ? parseList(params.get('sequence')) : true,
+    strip: params.get('strip') || 'war',
   };
 
   // The Military layer's data, read once when the layer is first shown: the wars of vocab.json and the membership
@@ -147,10 +152,14 @@ async function main() {
   let milData = null;
   async function ensureMilitary() {
     if (milData) return milData;
-    const [vocab, source] = await Promise.all([loadJSON('data/vocab.json'), loadRecordsText()]);
+    const [vocab, source, gazetteer] = await Promise.all([loadJSON('data/vocab.json'), loadRecordsText(), loadJSON('data/gazetteer.json').catch(() => ({}))]);
     const checked = source.text ? validateRecords(source.text, vocab) : { records: [], problems: [] };
-    for (const p of checked.problems) if (/military|war|side/.test(p.message)) problems.push(`record table line ${p.line}${p.id ? ` (${p.id})` : ''}: ${p.message}`);
-    milData = { vocab, members: checked.records.filter((r) => r.tracker === 'military' && r.kind === 'region'), file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
+    for (const p of checked.problems) if (/military|war|side|outcome/.test(p.message)) problems.push(`record table line ${p.line}${p.id ? ` (${p.id})` : ''}: ${p.message}`);
+    const mil = checked.records.filter((r) => r.tracker === 'military');
+    // events need a coordinate: the row's own (filled by geocode.mjs) or the gazetteer's for its Wikidata id
+    const { records: pts, waiting } = resolveRecords(mil.filter((r) => r.kind === 'point'), gazetteer);
+    for (const w of waiting) problems.push(`event ${w.id}: no coordinate for ${w.missing.join(', ')} (run npm run geocode); not drawn`);
+    milData = { vocab, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
     if (!vocab.wars?.length) problems.push('vocab.json lists no wars yet; the Military layer has nothing to show');
     return milData;
   }
@@ -165,7 +174,20 @@ async function main() {
     }
     const members = membersOf(milData.members, war.id);
     if (!members.length && !milWarned) { problems.push(`no membership rows for ${war.id} in ${milData.file}: every state is drawn as a non-member (paper)`); milWarned = true; }
-    return { war, members, names: state.names, title: warTitle(war, state.names), file: milData.file };
+    // the war's events: all of them for the strip; those begun by the date for the map, numbered as the order says
+    const events = eventsOf(milData.events, war.id);
+    const showEvents = !state.show.length || state.show.includes('events');
+    const seqSpec = state.show.length && !state.show.includes('sequence') ? false : state.sequence;
+    const shown = showEvents ? sequenceFor(eventsUpTo(events, date), seqSpec) : [];
+    return { war, members, events, shown, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
+  }
+  // The layer's events join the order's places on the sheet; set again only when they change (a new date may add one).
+  let recKey = null;
+  function placeMilitaryRecords(mil) {
+    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}` : '';
+    if (key === recKey) return;
+    recKey = key;
+    atlas.setRecords(mil ? { points: [...orderRecords.points, ...mil.shown], routes: orderRecords.routes } : orderRecords);
   }
   if (state.tracker === 'military') await ensureMilitary();
   let milShown = null;
@@ -192,6 +214,7 @@ async function main() {
   const orderRecords = LESSON && (params.get('places') || params.get('routes')) ? await recordsForOrder(state.date) : { points: [], routes: [], warnings: [], file: null };
   problems.push(...orderRecords.warnings);
   if (lesson) atlas.setRecords(orderRecords);
+  // (the Military layer adds the war's events to these in render(), placeMilitaryRecords)
   atlas.strip.setChanges([...new Set(data.nb.map((it) => yearOf(it.p.s)))]);
   console.log(`north-america stage built in ${(performance.now() - t0).toFixed(0)} ms; newberry ${data.nb.length}, ohm ${data.ohm.length}, cessions ${data.ces.length}`);
 
@@ -213,6 +236,7 @@ async function main() {
       const y = yearOf(state.date);
       const shown = (d, exact) => (exact ? longDate(d) : yearOf(d));
       milShown = state.tracker === 'military' ? militaryFor(state.date) : null;
+      placeMilitaryRecords(milShown?.war ? milShown : null);
       if (state.mode === 'diff') {
         const ecDiff = ecPair ? electionDiffFor(ecPair[0], ecPair[1]) : null;
         // (a Diff under the Military layer is the nations' Diff for now: who held what; the war's own Diff is a later milestone)
@@ -238,7 +262,11 @@ async function main() {
       if (state.mode === 'diff') q.set('from', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       if (state.exact) q.set('date', isoDate(state.date)); else q.set('year', y);
       if (state.tracker !== 'nations') q.set('tracker', state.tracker);
-      if (state.tracker === 'military') { if (state.war) q.set('war', state.war); if (state.names !== 'both') q.set('names', state.names); }
+      if (state.tracker === 'military') {
+        if (state.war) q.set('war', state.war);
+        if (state.names !== 'both') q.set('names', state.names);
+        for (const k of ['show', 'sequence', 'strip']) if (params.has(k)) q.set(k, params.get(k));
+      }
       // (a lesson map's own fields stay in the address, so it can be copied and opened again)
       for (const k of ORDER_PARAMS) if (!['date', 'year', 'from', 'tracker'].includes(k) && params.has(k)) q.set(k, params.get(k));
       history.replaceState(null, '', `?${q}`);
@@ -573,6 +601,7 @@ function riverRankFor(box) {
 function pointLegendRows(points) {
   const seen = new Set(), rows = [];
   for (const p of points) {
+    if (p.tracker === 'military') continue; // the Military layer's events have their own legend rows (src/military/events.js)
     const e = routesTracker.point_legend[p.value];
     if (e && !seen.has(e.label)) { seen.add(e.label); rows.push(e); }
   }
