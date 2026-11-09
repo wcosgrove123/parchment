@@ -64,6 +64,7 @@ reviewed the icons; the picture sheet of 2026-11-09 shows them for that review.
 |---|---|---|---|
 | Equipment icons (ships, cavalry, artillery, infantry, aircraft, forts, the human cost) | [game-icons.net](https://game-icons.net), from <https://github.com/game-icons/icons>; each icon's black square removed and white fill dropped, shapes unchanged | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) (that project's `license.txt`; two authors there are CC0, none used yet) | Lorc, Delapouite, Skoll, Cathelineau, Quoting, Lord Berandas, HeavenlyDog, Sbed, via game-icons.net |
 | Force frames, glyphs and size marks (MIL-STD-2525 / APP-6) | [milsymbol](https://github.com/spatialillusions/milsymbol) 3.0.5, vendored at `assets/vendor/milsymbol/` | MIT | Måns Beckman, Spatial Illusions |
+| Fine relief for battle frames (Gettysburg, milestone 9) | USGS 3D Elevation Program (3DEP), the National Map's 3DEPElevation image service, exported as a gray hillshade for the frame's box on 2026-11-09 (`assets/relief/gettysburg-plate-carree.png`, source and box in the JSON beside it) | Public domain (U.S. federal work) | U.S. Geological Survey, National Map 3D Elevation Program |
 
 <!-- military:end -->
 
