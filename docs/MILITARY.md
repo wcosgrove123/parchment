@@ -65,7 +65,7 @@ events, forces and lines; after a war's last day its armies stand down. An order
 date with `npm run map`, and `npm run film -- tests/maps/military/texas-film.json` writes every frame (six per second
 of film time) and an MP4 for a slide (ffmpeg with H.264; the frames and a manifest stay beside it). The first film runs
 from Mexican Texas through the Texas Revolution, the Republic's years and the war with Mexico to the Gadsden Purchase
-in about four and a half minutes; the base map changes by its own sources' dates (Coahuila y Tejas, the Republic and
+in just under four minutes (3 min 53 s); the base map changes by its own sources' dates (Coahuila y Tejas, the Republic and
 the joint claim, statehood, the cession, the 1850 line, the Gadsden strip).
 
 ## What it draws (milestone 1)
