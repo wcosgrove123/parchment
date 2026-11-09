@@ -124,3 +124,30 @@ body:not(.mode-diff) #toolbar .diff-only { display: none; }
 .record-labels .route-label.water { fill: var(--steel); letter-spacing: 0.08em; }
 /* names the highlight did not light stay as context, paler */
 .label.polity.unlit { fill-opacity: 0.55; }
+
+/* ---------- the Military layer (proposal P1; owner's defaults, 2026-11-09): fills by side, one pair of tokens per side ---------- */
+.na-fill.k-side-a path { fill: var(--side-a-fill); }
+.na-fill.k-side-a-dep path { fill: var(--side-a-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-a { fill: var(--side-a-fill); }
+.legend .swatch.fill-side-a-dep { fill: var(--side-a-fill); fill-opacity: 0.4; }
+.na-fill.k-side-b path { fill: var(--side-b-fill); }
+.na-fill.k-side-b-dep path { fill: var(--side-b-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-b { fill: var(--side-b-fill); }
+.legend .swatch.fill-side-b-dep { fill: var(--side-b-fill); fill-opacity: 0.4; }
+.na-fill.k-side-c path { fill: var(--side-c-fill); }
+.na-fill.k-side-c-dep path { fill: var(--side-c-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-c { fill: var(--side-c-fill); }
+.legend .swatch.fill-side-c-dep { fill: var(--side-c-fill); fill-opacity: 0.4; }
+.na-fill.k-side-d path { fill: var(--side-d-fill); }
+.na-fill.k-side-d-dep path { fill: var(--side-d-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-d { fill: var(--side-d-fill); }
+.legend .swatch.fill-side-d-dep { fill: var(--side-d-fill); fill-opacity: 0.4; }
+.na-fill.k-side-gray path { fill: var(--side-gray-fill); }
+.na-fill.k-side-gray-dep path { fill: var(--side-gray-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-gray { fill: var(--side-gray-fill); }
+.legend .swatch.fill-side-gray-dep { fill: var(--side-gray-fill); fill-opacity: 0.4; }
+.na-fill.k-side-red path { fill: var(--side-red-fill); }
+.na-fill.k-side-red-dep path { fill: var(--side-red-fill); fill-opacity: 0.4; }
+.legend .swatch.fill-side-red { fill: var(--side-red-fill); }
+.legend .swatch.fill-side-red-dep { fill: var(--side-red-fill); fill-opacity: 0.4; }
+body:not(.tracker-military) #war { display: none; }

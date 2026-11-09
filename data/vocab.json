@@ -225,6 +225,75 @@
       ],
       "palette": "sequential",
       "fill_key": "P"
+    },
+    "military": {
+      "version": "v3",
+      "_comment": "The Military layer (brief of 2026-11-09; proposal, off by default). Membership of a war is a region row: where = the state id, war = a war id below, side = one of that war's sides, value = the role (region_values), start/end = when it belonged. Events are point rows (point_values), movements arrow rows and lines path rows (values), each with war and side; the seven optional columns (war, side, force, outcome, strength, losses, tech) sit at the end of the table and stay blank on every other row. Milestone 1 reads memberships; events, movements and lines follow.",
+      "kinds": [
+        "region",
+        "point",
+        "arrow",
+        "path"
+      ],
+      "region_values": [
+        "belligerent",
+        "co-belligerent",
+        "associated",
+        "ally",
+        "auxiliary",
+        "dependent",
+        "satellite",
+        "occupied"
+      ],
+      "values": [
+        "advance",
+        "retreat",
+        "flank-march",
+        "envelopment",
+        "feint",
+        "pursuit",
+        "raid",
+        "landing",
+        "breakthrough",
+        "naval-passage",
+        "air-route",
+        "supply-line",
+        "front",
+        "blockade",
+        "siege-line",
+        "fortified-line",
+        "armistice-line"
+      ],
+      "point_values": [
+        "battle",
+        "siege",
+        "naval-battle",
+        "raid",
+        "landing",
+        "surrender",
+        "capture",
+        "declaration",
+        "treaty",
+        "armistice",
+        "massacre",
+        "fort",
+        "headquarters"
+      ],
+      "point_shapes": {
+        "battle": "rust-diamond",
+        "siege": "rust-diamond",
+        "naval-battle": "rust-diamond",
+        "raid": "rust-diamond",
+        "landing": "steel-circle",
+        "surrender": "navy-triangle",
+        "capture": "moss-circle",
+        "declaration": "navy-triangle",
+        "treaty": "navy-triangle",
+        "armistice": "navy-triangle",
+        "fort": "navy-square",
+        "headquarters": "navy-square"
+      },
+      "_shapes_note": "point_shapes are what another layer would draw for these rows; the Military layer draws battles in the victor's color (P5) and forts, headquarters and massacres with marks of their own (P6; the massacre mark awaits the owner and the co-teachers, so it has no shape here and is not drawn until it does)."
     }
   },
   "base_units": [
@@ -59867,6 +59936,33 @@
         1600
       ],
       "tracked": false
+    }
+  ],
+  "wars": [
+    {
+      "id": "mexican-american-war",
+      "names": {
+        "us": "The War with Mexico",
+        "mexico": "La intervención estadounidense en México"
+      },
+      "start": "1846-04-25",
+      "end": "1848-02-02",
+      "sides": [
+        {
+          "id": "us",
+          "label": "United States",
+          "color": "a",
+          "why": "first side in the fixed order (owner, 2026-11-09: the defaults of the picture sheet); listed first because its declaration of 13 May 1846 made the war a war between states"
+        },
+        {
+          "id": "mexico",
+          "label": "Mexico",
+          "color": "b",
+          "why": "second side in the fixed order"
+        }
+      ],
+      "source": "Dates: the Thornton Affair, 25 April 1846, opened the fighting; the Treaty of Guadalupe Hidalgo was signed 2 February 1848 (ratifications exchanged 30 May 1848). K. Jack Bauer, The Mexican War, 1846–1848 (New York: Macmillan, 1974). The Spanish name is the one used by Mexican historiography (Instituto Nacional de Estudios Históricos de las Revoluciones de México).",
+      "_comment": "TEST WAR for milestone 1: the owner and the teachers review it before it ships with real rows."
     }
   ]
 }

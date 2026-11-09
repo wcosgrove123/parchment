@@ -13,7 +13,9 @@ import { queryToOrder } from './frames.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
 const KM2 = 6371 * 6371;
-const COLOR_NAMES = { In: 'green', S: 'orange', P: 'blue', E: 'gold', C: 'purple', T: 'teal', focus: 'gold' };
+const COLOR_NAMES = { In: 'green', S: 'orange', P: 'blue', E: 'gold', C: 'purple', T: 'teal', focus: 'gold',
+  'side-a': 'blue (side A)', 'side-b': 'plum (side B)', 'side-c': 'teal (side C)', 'side-d': 'ochre (side D)', 'side-gray': 'gray', 'side-red': 'red',
+  'side-a-dep': 'blue at 40 % (dependent of side A)', 'side-b-dep': 'plum at 40 % (dependent of side B)', 'side-c-dep': 'teal at 40 % (dependent of side C)', 'side-d-dep': 'ochre at 40 % (dependent of side D)' };
 const iso = (d) => (d == null ? null : d >= OPEN ? 'present' : isoDate(d));
 
 // The source of one polygon, by the layer it came from.
@@ -122,12 +124,13 @@ function toHex(c) {
   return `#${[m[1], m[2], m[3]].map((x) => Number(x).toString(16).padStart(2, '0')).join('')}`;
 }
 
-export async function buildSlip({ atlas, data, state, stage, powers, trackers, params, sheet, frame, projectionMode, lesson, records, problems, loadJSON, ec }) {
+export async function buildSlip({ atlas, data, state, stage, powers, trackers, params, sheet, frame, projectionMode, lesson, records, problems, loadJSON, ec, military = null }) {
   const cur = atlas.current ?? {};
   const tags = (await loadJSON('data/us/ohm-sources.json').catch(() => null))?.relations ?? {};
   const root = getComputedStyle(document.documentElement);
   const fills = Object.fromEntries(['In', 'S', 'P', 'E', 'C', 'T'].map((k) => [k, root.getPropertyValue(`--fill-${k}`).trim()]));
   fills.focus = root.getPropertyValue('--focus').trim();
+  for (const k of ['a', 'b', 'c', 'd', 'gray', 'red']) { const v = root.getPropertyValue(`--side-${k}-fill`).trim(); if (v) { fills[`side-${k}`] = v; fills[`side-${k}-dep`] = v; } }
   const date = state.date;
   const diff = state.mode === 'diff';
   const tracker = trackers[state.tracker];
@@ -155,6 +158,15 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     legend_corner: info.legend?.anchor ?? null,
     water_names: info.waterLabels,
     records_file: records?.file ?? null,
+    // The Military layer (brief of 2026-11-09 §6): the war, its sides, and each member with its dates and role.
+    war: military?.war ? {
+      id: military.war.id, names: military.war.names, names_shown: military.names, start: military.war.start, end: military.war.end, source: military.war.source ?? null,
+      sides: military.war.sides.map((s) => ({
+        id: s.id, label: s.label, color: s.color, fill: root.getPropertyValue(`--side-${s.color}-fill`).trim() || null, line: root.getPropertyValue(`--side-${s.color}-line`).trim() || null, why: s.why ?? null,
+        members: military.members.filter((m) => m.side === s.id).map((m) => ({ record: m.id, where: m.where, label: m.label, role: m.value, start: m.startWhen ? String(m.start_raw ?? '') || null : null, end: null, dates: `${m.startWhen?.year ?? ''}${m.startWhen?.month ? `-${String(m.startWhen.month).padStart(2, '0')}` : ''}${m.startWhen?.day ? `-${String(m.startWhen.day).padStart(2, '0')}` : ''} – ${m.endWhen?.year ?? ''}${m.endWhen?.month ? `-${String(m.endWhen.month).padStart(2, '0')}` : ''}${m.endWhen?.day ? `-${String(m.endWhen.day).padStart(2, '0')}` : ''}`, grade: m.grade, source: m.source, qc_status: m.qc_status || null })),
+      })),
+      members_file: records?.file ?? military.file ?? null,
+    } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
 
@@ -318,7 +330,7 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
   const where = frame ? `framed on ${frame.title ?? 'a box of the continent'}` : 'North America';
   if (changes) s.push(`Parchment map of change, ${changes.from} to ${changes.to}, ${resolved.tracker.title.toLowerCase()}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
   else s.push(`Parchment map, ${resolved.date_text}, ${resolved.tracker.title.toLowerCase()}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
-  const fillRows = legend.rows.filter((r) => r.role === 'category' && r.key && COLOR_NAMES[r.key]);
+  const fillRows = legend.rows.filter((r) => (r.role === 'category' || r.role === 'side') && r.key && COLOR_NAMES[r.key]);
   if (fillRows.length) s.push(`Shaded: ${list(fillRows.map((r) => `${r.label} in ${COLOR_NAMES[r.key]}`))}.`);
   const hatch = legend.rows.filter((r) => r.role === 'dispute' || r.role === 'dispute or overlap');
   if (hatch.length) s.push(`Hatched in rust: ${list(hatch.map((r) => r.label.charAt(0).toLowerCase() + r.label.slice(1)))}.`);

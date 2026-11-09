@@ -40,7 +40,9 @@
     { "id": "texas", "title": "Texas", "level": 4, "parents": ["north-america", "southwest"], "page": "us.html", "extent": { "west": -107, "south": 24.5, "east": -92.5, "north": 37.5 }, "label": { "lon": -99, "lat": 31 } },
     { "id": "oregon-country", "title": "The Oregon Country", "level": 4, "parents": ["north-america"], "page": "us.html", "extent": { "west": -126, "south": 40, "east": -108, "north": 56 }, "label": { "lon": -120, "lat": 47 } },
     { "id": "plains", "title": "The Plains", "level": 4, "parents": ["north-america"], "page": "us.html", "extent": { "west": -105, "south": 35, "east": -89, "north": 46 }, "label": { "lon": -97, "lat": 40 } },
-    { "id": "border-states", "title": "The Border States", "level": 4, "parents": ["north-america", "east"], "page": "us.html", "extent": { "west": -92, "south": 35, "east": -74, "north": 41.5 }, "label": { "lon": -84, "lat": 38 } }
+    { "id": "border-states", "title": "The Border States", "level": 4, "parents": ["north-america", "east"], "page": "us.html", "extent": { "west": -92, "south": 35, "east": -74, "north": 41.5 }, "label": { "lon": -84, "lat": 38 } },
+    { "id": "mexico-war", "title": "The War with Mexico", "level": 3, "parents": ["north-america", "southwest"], "page": "us.html", "extent": { "west": -125, "south": 15, "east": -88, "north": 43 }, "label": { "lon": -104, "lat": 27 } },
+    { "id": "mexico-city", "title": "The Valley of Mexico", "level": 4, "parents": ["mexico-war"], "page": "us.html", "extent": { "west": -99.6, "south": 18.9, "east": -98.6, "north": 19.8 }, "label": { "lon": -99.1, "lat": 19.4 } }
   ],
   "water": [
     { "text": "Atlantic Ocean", "lon": -35, "lat": 25, "min": 1, "max": 2 },

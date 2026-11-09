@@ -28,6 +28,11 @@
     "title": "Native population",
     "_comment": "From the first full census (1890) the states and territories are shaded by American Indians counted per 1,000 km² (src/us/native.js DENSITY_BREAKS, the same steps every year), with the largest counts as number badges. Before 1890 the census left most Native people out, so nothing is shaded: the scholarly estimates of data/us/native-estimates.csv speak instead, as badges with their ranges, and the national figure as a line of the legend."
   },
+  "military": {
+    "id": "military",
+    "title": "Military",
+    "_comment": "The Military layer (brief of 2026-11-09; proposal P1, owner's defaults of the same day). Off by default: nothing changes unless tracker=military is asked for. Fills mean the side: each polygon takes its side's fill while its state is a member of the war shown (membership rows in the record table under tracker military; the war and its sides in vocab.json). Non-members are paper. Disputes keep their hatch, Native homelands their stipple. Which war: ?war=id, else the longest war alive on the date."
+  },
   "electoral": {
     "id": "electoral",
     "title": "Electoral College",

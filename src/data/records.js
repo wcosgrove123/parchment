@@ -5,6 +5,9 @@
 
 export const COLUMNS = ['id', 'course', 'unit', 'topic', 'kc', 'theme', 'tracker', 'kind', 'where', 'lon', 'lat',
   'start', 'end', 'grade', 'value', 'certainty', 'label', 'source', 'qc_status', 'qc_by', 'qc_note'];
+// Optional columns at the end of the table (the Military layer, brief of 2026-11-09 §1): read when the header has
+// them, blank on every other row. A table without them is read exactly as before.
+export const EXTRA_COLUMNS = ['war', 'side', 'force', 'outcome', 'strength', 'losses', 'tech'];
 
 // RFC 4180-style CSV: quoted fields may hold commas, quotes ("") and newlines. Returns rows of strings.
 export function parseCSV(text) {
@@ -83,6 +86,8 @@ export function validateRecords(text, vocab) {
     return { records, problems, examples, templates, total: rows.length - 1 };
   }
   const col = Object.fromEntries(header.map((h, i) => [h, i]));
+  const extras = EXTRA_COLUMNS.filter((c) => header.includes(c));
+  const wars = vocab.wars ?? [];
   const baseUnits = new Set((vocab.base_units ?? []).map((u) => u.id));
   const states = new Set((vocab.states ?? []).map((s) => s.id));
   const seen = new Set();
@@ -91,7 +96,7 @@ export function validateRecords(text, vocab) {
     const line = r + 1;
     const cells = rows[r];
     const get = (c) => (cells[col[c]] ?? '').trim();
-    const rec = Object.fromEntries(COLUMNS.map((c) => [c, get(c)]));
+    const rec = Object.fromEntries([...COLUMNS, ...extras].map((c) => [c, get(c)]));
     const errs = [];
     const bad = (m) => errs.push(m);
 
@@ -132,7 +137,16 @@ export function validateRecords(text, vocab) {
     if (tracker) {
       if (rec.kind === 'value') { if (!isNum(rec.value)) bad(`value "${rec.value}" is not a number`); }
       else if (rec.kind === 'point' && tracker.point_values) { if (!tracker.point_values.includes(rec.value)) bad(`value "${rec.value}" is not a ${rec.tracker} point value (${tracker.point_values.join(', ')})`); }
+      else if (rec.kind === 'region' && tracker.region_values) { if (!tracker.region_values.includes(rec.value)) bad(`value "${rec.value}" is not a ${rec.tracker} role (${tracker.region_values.join(', ')})`); }
       else if (tracker.values && !tracker.values.includes(rec.value)) bad(`value "${rec.value}" is not a ${rec.tracker} value (${tracker.values.join(', ')})`);
+    }
+    // A Military row names its war, and a membership (or anything on one side) names its side.
+    if (rec.tracker === 'military') {
+      const war = wars.find((w) => w.id === rec.war);
+      if (!rec.war) bad('war is blank (a Military row names its war; the column goes at the end of the table)');
+      else if (!war) bad(`war "${rec.war}" is not in vocab.json's wars (${wars.map((w) => w.id).join(', ') || 'none yet'})`);
+      if (rec.kind === 'region' && !rec.side) bad('side is blank (a membership row names its side)');
+      if (rec.side && war && !war.sides.some((s) => s.id === rec.side)) bad(`side "${rec.side}" is not a side of ${rec.war} (${war.sides.map((s) => s.id).join(', ')})`);
     }
     if (!vocab.certainty.includes(rec.certainty)) bad(`certainty "${rec.certainty}" is not one of ${vocab.certainty.join(', ')}`);
     if (!rec.label) bad('label is blank');

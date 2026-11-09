@@ -1,0 +1,12 @@
+{
+  "_comment": "Military layer, milestone 1: test case 1's frame (mexico-war, src/focuses.json) on the day the United States declared war, with the two sides filled. No title: the cartouche takes the war's names from vocab.json (names=both prints both sides' names). Milestones 2–4 add the battles, the strip, the forces and the lines to this same order.",
+  "page": "us",
+  "layer": "military",
+  "war": "mexican-american-war",
+  "names": "both",
+  "date": "1846-05-13",
+  "frame": "mexico-war",
+  "size": "1920x1080",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/mexico-war-1846"
+}

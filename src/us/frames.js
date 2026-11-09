@@ -120,14 +120,17 @@ export function claimLabel(parties) {
 }
 
 // An order (the JSON spec of scripts/map.mjs) as an address on us.html, and back. Every field has a parameter.
-export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records'];
+export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'war', 'names', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records'];
 export function orderToQuery(order) {
   const q = new URLSearchParams();
   const a = order.annotate ?? {};
   const put = (k, v) => { if (v != null && v !== '' && !(Array.isArray(v) && !v.length)) q.set(k, Array.isArray(v) ? v.join(',') : String(v)); };
   if (order.date && /-/.test(String(order.date))) put('date', order.date); else put('year', order.date ?? order.year);
   put('from', order.from);
-  put('tracker', order.tracker);
+  // (the Military layer: "layer": "military" in an order is tracker=military on this page, with its war and whose names print)
+  put('tracker', order.layer === 'military' ? 'military' : order.tracker);
+  put('war', order.war);
+  put('names', order.names);
   put('frame', Array.isArray(order.frame) ? order.frame.join(',') : order.frame);
   put('highlight', order.highlight);
   put('rivers', a.rivers ?? order.rivers);
@@ -145,6 +148,8 @@ export function queryToOrder(q) {
   const order = { page: 'us' };
   if (get('date') ?? get('year')) order.date = get('date') ?? get('year');
   for (const k of ['from', 'tracker', 'title', 'size', 'projection', 'records']) if (get(k)) order[k] = get(k);
+  if (order.tracker === 'military') { delete order.tracker; order.layer = 'military'; }
+  for (const k of ['war', 'names']) if (get(k)) order[k] = get(k);
   if (get('scale')) order.scale = Number(get('scale'));
   if (get('frame')) order.frame = get('frame');
   if (get('highlight')) order.highlight = parseList(get('highlight'));

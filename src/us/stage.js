@@ -22,6 +22,7 @@ import { routeDefs, drawRoutes } from '../render/routes.js';
 import { drawMarks, MARK_RADIUS } from '../render/marks.js';
 import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
+import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { longDate, yearOf, isEndOfYear } from './dates.js';
 import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTreatyX, aliveLands, aliveICC, nbName, cleanLabel } from './model.js';
 import { diffUS, byKind } from './diff.js';
@@ -195,13 +196,20 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
 
   // ------------------------------------------------------------ one date
   // `electoral`: under the Electoral College tracker, the looks of the election shown (src/us/electoral.js).
-  function show(data, date, trackerId, { fade = 300, changes = [], electoral = null } = {}) {
-    const tracker = trackers[trackerId];
+  // `military` (the Military layer, src/military/wars.js): { war, members, names, title }; a polygon takes its
+  // side's fill while its state is a member on the date, and paper otherwise.
+  function show(data, date, trackerId, { fade = 300, changes = [], electoral = null, military = null } = {}) {
+    const tracker = trackerId === 'military' ? { ...trackers.military, mil: military } : trackers[trackerId];
     const nbAlive = aliveNB(data, date);
     const ohmAlive = aliveOHM(data, date);
     const cesAlive = trackerId === 'cessions' ? data.ces.filter((c) => c.p.d <= date) : [];
     const present = new Set();
     const items = [];
+    const militaryLook = (it, pw) => {
+      if (!military?.war) return { fill: null, label: null };
+      const hit = sideOf(military.war, military.members, itemKeys(it, { power: pw, powers, twins: lesson?.twins }), date);
+      return hit ? sideLook(hit) : { fill: null, label: null };
+    };
 
     // Category of every alive polygon under this tracker: a fill key, a pattern, or muted.
     for (const it of ohmAlive) {
@@ -212,6 +220,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       if (trackerId === 'cessions' && look.pattern) look = { fill: null, label: null };
       // (an election map keeps only the Confederacy's cross-hatch, which says why eleven states cast no vote in 1864)
       if (trackerId === 'electoral' && look.pattern && pw !== 'rebellion') look = { fill: null, label: null };
+      if (trackerId === 'military' && !look.pattern) look = militaryLook(it, pw);
       it.look = look;
       items.push(it);
     }
@@ -231,6 +240,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         it.look = electoralLook(electoral, it);
       } else if (pop) {
         it.look = pop.census?.full && it.popUnit ? { pop: it.popUnit.step, label: densityLabels()[it.popUnit.step - 1] } : { fill: null, label: null };
+      } else if (trackerId === 'military') {
+        it.look = militaryLook(it, it.p.power);
       } else it.look = categoryLook(powers, it.p.power);
       items.push(it);
     }
@@ -273,12 +284,13 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // a moment ago (scrubbing back and forth) comes back from the cache instead of being built again.
     const key = [fingerprint(trackerId, date, nbAlive, ohmAlive, cesAlive.length, natAlive), pop?.census?.year ?? '',
       (pop?.estimates.placed ?? []).concat(pop?.estimates.national ?? []).map((e) => e.id).join(','), lands.length, icc.length, electoral?.election.year ?? '',
-      treaty.map((it) => `${it.p.nation}${it.p.s}`).join(','), treatyX.length, ...(lesson ? [items.filter((it) => it.src === 'usmx').map((it) => it.p.id).join(',')] : [])].join('|');
+      treaty.map((it) => `${it.p.nation}${it.p.s}`).join(','), treatyX.length, ...(lesson ? [items.filter((it) => it.src === 'usmx').map((it) => it.p.id).join(',')] : []),
+      military?.war ? `mil:${military.war.id}:${military.members.filter((m) => memberAlive(m, date)).map((m) => m.id).join(',')}` : ''].join('|');
     const counts = { nb: nbAlive.length, ohm: ohmAlive.length, cessions: cesAlive.length };
     const before = current;
     current = { date, trackerId };
     diffList.hide();
-    cartouche.setTitle(titleOn(date));
+    cartouche.setTitle(trackerId === 'military' && military?.war && !lesson?.title ? military.title : titleOn(date));
     if (key === currentKey) { current = { ...before, date, trackerId }; return { ...counts, redrawn: false }; }
 
     // A lesson map is one picture: the legend first (only what is lit; a dispute by its sides), then the places,
@@ -1098,6 +1110,9 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     if (present.has('land:held')) rows.push({ swatch: 'fill', key: 'land', label: 'Native land today' });
     if (present.has('land:hawaiian')) rows.push({ swatch: 'fill', key: 'land-hawaiian', label: 'Hawaiian home lands' });
     if (present.has('icc')) rows.push({ swatch: 'line', style: 'icc', label: 'Original territory, as judged' });
+  } else if (trackerId === 'military') {
+    // the sides of the war shown, each with its members when there are several (src/military/wars.js)
+    rows.push(...militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both'));
   }
   for (const [key, c] of Object.entries(powers.categories)) {
     if (c.pattern && present.has(`pat:${c.pattern}`)) rows.push({ swatch: 'fill', key: c.pattern, label: c.label });
@@ -1105,7 +1120,7 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
   if (present.has('pat:hatch') && trackerId === 'states' && !rows.some((r) => r.key === 'hatch')) rows.push({ swatch: 'fill', key: 'hatch', label: tracker.types.Other.label });
   if (date >= US_FROM) rows.push({ swatch: 'line', style: 'solid', label: 'Documented border' });
   if (anyOHM && date < US_FROM) rows.push({ swatch: 'line', style: 'dashed', label: 'Approximate border' });
-  return { title: tracker.title, legend: rows };
+  return { title: trackerId === 'military' ? 'Sides' : tracker.title, legend: rows };
 }
 
 // The Diff view's legend: the focus color, the hatch, and the later date's border certainty.

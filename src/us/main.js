@@ -23,8 +23,10 @@ import routesTracker from '../trackers/routes.json';
 import focusTable from '../focuses.json';
 import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
 import { buildSlip } from './slip.js';
+import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
 
-const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral };
+// The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
+const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
 const [SPAN_A, SPAN_B] = stage.span;
 const params = new URLSearchParams(location.search);
 const PLAY_MS = 450;
@@ -135,7 +137,38 @@ async function main() {
     from: startFrom ? clampDate(startFrom) : null,
     fromExact: /-/.test(params.get('from') ?? ''),
     playing: null,
+    // the Military layer: which war (else the longest one alive on the date), and whose names print (a side's key, or both)
+    war: params.get('war') || null,
+    names: params.get('names') || 'both',
   };
+
+  // The Military layer's data, read once when the layer is first shown: the wars of vocab.json and the membership
+  // rows of the record table (the Sheet, or ?records= a file). Rows that fail validation are listed as problems.
+  let milData = null;
+  async function ensureMilitary() {
+    if (milData) return milData;
+    const [vocab, source] = await Promise.all([loadJSON('data/vocab.json'), loadRecordsText()]);
+    const checked = source.text ? validateRecords(source.text, vocab) : { records: [], problems: [] };
+    for (const p of checked.problems) if (/military|war|side/.test(p.message)) problems.push(`record table line ${p.line}${p.id ? ` (${p.id})` : ''}: ${p.message}`);
+    milData = { vocab, members: checked.records.filter((r) => r.tracker === 'military' && r.kind === 'region'), file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
+    if (!vocab.wars?.length) problems.push('vocab.json lists no wars yet; the Military layer has nothing to show');
+    return milData;
+  }
+  let milWarned = false;
+  // What the layer shows on a date: the war asked for, else the longest war alive that day; its members; its title.
+  function militaryFor(date) {
+    if (!milData) return null;
+    const war = state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
+    if (!war) {
+      if (!milWarned) { problems.push(state.war ? `war "${state.war}" is not in vocab.json's wars` : `no war in vocab.json is alive on ${longDate(date)}`); milWarned = true; }
+      return { war: null, members: [], names: state.names, title: 'Military', file: milData.file };
+    }
+    const members = membersOf(milData.members, war.id);
+    if (!members.length && !milWarned) { problems.push(`no membership rows for ${war.id} in ${milData.file}: every state is drawn as a non-member (paper)`); milWarned = true; }
+    return { war, members, names: state.names, title: warTitle(war, state.names), file: milData.file };
+  }
+  if (state.tracker === 'military') await ensureMilitary();
+  let milShown = null;
   // The earlier date when the Diff view opens without one: fifty years back, or the stage's first year.
   // (under the Electoral College: the election before the one shown)
   const defaultFrom = () => {
@@ -179,15 +212,17 @@ async function main() {
       if (ecPair) { state.from = ecPair[0].election.day; state.date = ecPair[1].election.day; state.fromExact = false; state.exact = false; }
       const y = yearOf(state.date);
       const shown = (d, exact) => (exact ? longDate(d) : yearOf(d));
+      milShown = state.tracker === 'military' ? militaryFor(state.date) : null;
       if (state.mode === 'diff') {
         const ecDiff = ecPair ? electionDiffFor(ecPair[0], ecPair[1]) : null;
-        const diff = atlas.showDiff(data, state.from, state.date, state.tracker, { fade: f, electoralDiff: ecDiff });
+        // (a Diff under the Military layer is the nations' Diff for now: who held what; the war's own Diff is a later milestone)
+        const diff = atlas.showDiff(data, state.from, state.date, state.tracker === 'military' ? 'nations' : state.tracker, { fade: f, electoralDiff: ecDiff });
         atlas.setRange(state.from, state.date, { exactA: state.fromExact, exactB: state.exact });
         if (ecPair) d3.select('.cartouche .base-note').text(`the elections of ${ecPair[0].election.year} and ${ecPair[1].election.year}`);
         document.title = `Parchment · North America · ${shown(state.from, state.fromExact)} → ${shown(state.date, state.exact)}`;
         console.log(`diff ${isoDate(state.from)} → ${isoDate(state.date)} (${state.tracker}): ${(performance.now() - t).toFixed(0)} ms; appeared ${diff.appeared.length}, changed ${diff.changed.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
       } else {
-        const n = atlas.show(data, state.date, state.tracker, { fade: f, electoral: ecShown });
+        const n = atlas.show(data, state.date, state.tracker, { fade: f, electoral: ecShown, military: milShown });
         atlas.setDate(state.date, { exact: state.exact });
         if (ecShown) d3.select('.cartouche .base-note').text(electionNote(ecShown.election));
         document.title = `Parchment · North America · ${shown(state.date, state.exact)}`;
@@ -196,11 +231,14 @@ async function main() {
       d3.select('#year-input').property('value', state.exact ? isoDate(state.date) : y);
       if (state.from != null) d3.select('#from-input').property('value', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       document.body.classList.toggle('mode-diff', state.mode === 'diff');
+      document.body.classList.toggle('tracker-military', state.tracker === 'military');
       d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
+      if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === milShown.war?.id);
       const q = new URLSearchParams();
       if (state.mode === 'diff') q.set('from', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       if (state.exact) q.set('date', isoDate(state.date)); else q.set('year', y);
       if (state.tracker !== 'nations') q.set('tracker', state.tracker);
+      if (state.tracker === 'military') { if (state.war) q.set('war', state.war); if (state.names !== 'both') q.set('names', state.names); }
       // (a lesson map's own fields stay in the address, so it can be copied and opened again)
       for (const k of ORDER_PARAMS) if (!['date', 'year', 'from', 'tracker'].includes(k) && params.has(k)) q.set(k, params.get(k));
       history.replaceState(null, '', `?${q}`);
@@ -251,8 +289,17 @@ async function main() {
   // ------------------------------------------------------------ toolbar (chrome; never exported)
   const tb = d3.select('#toolbar').html('');
   const sel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
-    .on('change', function () { state.tracker = this.value; closeInfo(); render(); });
+    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); } render(); });
   sel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
+  // The Military layer's war: shown only while that layer is on (us.css hides it otherwise).
+  const warSel = tb.append('select').attr('id', 'war').attr('title', 'The war shown')
+    .on('change', function () { state.war = this.value || null; milWarned = false; closeInfo(); render(); });
+  function fillWarMenu() {
+    const wars = milData?.vocab?.wars ?? [];
+    warSel.selectAll('option').data([{ id: '', names: { '': 'War alive on the date' } }, ...wars], (w) => w.id).join('option').attr('value', (w) => w.id).text((w) => warTitle(w, state.names))
+      .property('selected', (w) => w.id === (state.war ?? ''));
+  }
+  if (milData) fillWarMenu();
   tb.append('span').attr('class', 'sep');
   const seg = tb.append('span').attr('class', 'seg');
   seg.append('button').attr('data-mode', 'snapshot').attr('title', 'One date (D toggles)').text('Snapshot').on('click', () => setMode('snapshot'));
@@ -451,6 +498,7 @@ async function main() {
     packingSlip: () => buildSlip({
       atlas, data, state, stage, powers, trackers: TRACKERS, params, sheet: SHEET, frame: lesson?.frame ?? null, projectionMode,
       lesson, records: orderRecords, problems, loadJSON, ec: state.tracker === 'electoral' ? electoralFor(state.date) : null,
+      military: milShown,
     }),
     // The order this address is (the inverse of scripts/map.mjs's address).
     order: () => queryToOrder(new URLSearchParams(location.search)),

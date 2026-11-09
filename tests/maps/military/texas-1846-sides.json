@@ -1,0 +1,18 @@
+{
+  "_comment": "Military layer, milestone 1: the Texas 1846 lesson map with the layer on. Fills mean the side (United States side A, Mexico side B; src/military/sides.js); the dispute keeps its hatch; Taylor's march (a routes row with value military) draws as before. Memberships are test rows in tests/maps/military-records.csv; the war is in data/vocab.json.",
+  "page": "us",
+  "layer": "military",
+  "war": "mexican-american-war",
+  "names": "both",
+  "date": "1846-04-25",
+  "frame": "texas",
+  "annotate": {
+    "rivers": ["Nueces", "Rio Grande"],
+    "places": ["Q49242", "Q738353", "Q2613729", "Q16868"],
+    "routes": ["test-mx-taylor-march"]
+  },
+  "title": "The Disputed Land, 1846",
+  "size": "1600x1550",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/texas-1846-sides"
+}

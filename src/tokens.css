@@ -27,6 +27,14 @@
   --sponsor-france: #3860ac;
   --sponsor-netherlands: #007780;
 
+  /* Military layer: the sides of a war (owner, 2026-11-09); line L 0.47 C 0.13, fill L 0.72 C 0.09 */
+  --side-a-line: #3057a3;   --side-a-fill: #86a5de;
+  --side-b-line: #883871;   --side-b-fill: #cb8eb6;
+  --side-c-line: #007064;   --side-c-fill: #5bb7ac;
+  --side-d-line: #7c5200;   --side-d-fill: #bfa060;
+  --side-gray-line: #575b62;   --side-gray-fill: #a0a5ac;
+  --side-red-line: #963633;   --side-red-fill: #d78e88;
+
   /* Ground and water */
   --parchment: #EFE7D2;
   --parchment-deep: #dbd3bf;
