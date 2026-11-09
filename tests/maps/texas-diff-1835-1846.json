@@ -1,0 +1,11 @@
+{
+  "_comment": "Test case 4 of the lesson-maps brief (2026-11-06): a Diff framed on Texas lists Texas's changes only.",
+  "page": "us",
+  "from": "1835-06-01",
+  "date": "1846-06-01",
+  "tracker": "nations",
+  "frame": "texas",
+  "title": "Texas, 1835 to 1846",
+  "size": "1600x1550",
+  "out": "out/texas-diff-1835-1846"
+}

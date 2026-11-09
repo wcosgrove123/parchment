@@ -1,0 +1,16 @@
+{
+  "_comment": "Test case 1 of the lesson-maps brief (2026-11-06): Mexican Texas. Places are test records (tests/maps/texas-records.csv).",
+  "page": "us",
+  "date": "1830-06-01",
+  "tracker": "nations",
+  "frame": "texas",
+  "highlight": ["coahuila-y-tejas", "mexico", "united-states"],
+  "annotate": {
+    "rivers": ["Sabine", "Nueces", "Rio Grande"],
+    "places": ["Q975", "Q982494", "Q970482", "Q7413847"]
+  },
+  "title": "Mexican Texas, 1830",
+  "size": "1600x1550",
+  "records": "tests/maps/texas-records.csv",
+  "out": "out/texas-1830"
+}

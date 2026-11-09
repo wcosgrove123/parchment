@@ -47,6 +47,29 @@ behind it.
   Commission's 1978 map, and treaty land computed from Royce. How each is used: `docs/DECISIONS.md`, 2026-11-05 and
   2026-11-06.
 
+### Lesson maps for slides
+
+A small JSON **order form** (frame, date, highlight, rivers, places, size, title) becomes a slide-ready picture and a
+**packing slip** listing what is on it, with dates and sources: `npm run map -- tests/maps/texas-1836.json`. Every
+field is also an address: `us.html?frame=texas&date=1836-06-01&highlight=texas-republic&size=1600x1550`. Before
+choosing a date, ask the data: `npm run describe`, `npm run changes`, `npm run search` (details and the fields in
+[docs/LESSON-MAPS.md](docs/LESSON-MAPS.md)). Runs from a fresh clone on Linux or Windows with a Chromium-family browser
+(`PARCHMENT_BROWSER`, else Playwright's Chromium, else Chrome or Edge); makes no network calls.
+
+The same commands are tools for Claude through the MCP server `mcp/server.mjs` (`list_frames`, `describe`, `changes`,
+`search`, `render`). Claude Code in this folder picks it up from `.mcp.json`; `npm run mcp:smoke` checks it
+(`-- --render` also draws a map). Claude Desktop: Settings → Developer → Edit Config, add under `mcpServers` with the
+full path to `mcp\server.mjs` in your copy, restart:
+
+```json
+"parchment": {
+  "command": "C:\\Program Files\\nodejs\\node.exe",
+  "args": ["C:\\path\\to\\parchment\\mcp\\server.mjs"]
+}
+```
+
+It runs on the laptop, so a cloud session reaches it only while the laptop is on; the commands work on their own.
+
 ## Work on it
 
 ```
@@ -69,6 +92,12 @@ npm run derive:us    # simplify them into data/us/ (about 4 minutes); then node 
 npm run derive:native  # Native population and lands into data/us/ (after derive:us; Working Paper 56 is read by
                        # scripts/census-wp56.py, see its header, only when the PDF changes)
 npm run shot -- --page us --year 1803     # a picture of the North America stage (--date 1861-04-12, --tracker cessions)
+npm run map -- tests/maps/texas-1836.json # a lesson map from an order form: out/*.png + its packing slip (docs/LESSON-MAPS.md)
+npm run describe -- --date 1836-06-01 --frame texas   # what is alive in a frame (also: changes, search)
+npm run derive:sources   # OpenHistoricalMap's own source notes per polygon (data/us/ohm-sources.json; after fetch:us)
+npm run derive:disputes  # land claimed twice: Newberry against Newberry, and U.S. against Mexican states (data/us/)
+node scripts/derive-rivers.mjs   # Natural Earth 1:10m rivers of North America for frames (after fetch)
+node scripts/relief-region.mjs   # full-resolution relief of North America for frames (assets/relief/)
 ```
 
 ## Add a row

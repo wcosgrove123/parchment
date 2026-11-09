@@ -1,0 +1,16 @@
+{
+  "_comment": "Test case 2 of the lesson-maps brief (2026-11-06): the Texas Revolution. Places are test records (tests/maps/texas-records.csv): the battles of Gonzales, the Alamo and San Jacinto, the Goliad massacre, Washington-on-the-Brazos and Velasco, by their Wikidata ids.",
+  "page": "us",
+  "date": "1836-06-01",
+  "tracker": "nations",
+  "frame": "texas",
+  "highlight": ["texas-republic", "joint-mexico-texas-claim"],
+  "annotate": {
+    "rivers": ["Nueces", "Rio Grande"],
+    "places": ["Q1191854", "Q235344", "Q9030262", "Q841278", "Q540250", "Q838916"]
+  },
+  "title": "The Texas Revolution, 1836",
+  "size": "1600x1550",
+  "records": "tests/maps/texas-records.csv",
+  "out": "out/texas-1836"
+}

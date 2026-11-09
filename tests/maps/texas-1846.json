@@ -1,0 +1,16 @@
+{
+  "_comment": "Test case 3 of the lesson-maps brief (2026-11-06): the disputed land on the day of the Thornton skirmish. The hatch is computed (data/us/usmx-disputes.json); places and Taylor's march are test records (tests/maps/texas-records.csv).",
+  "page": "us",
+  "date": "1846-04-25",
+  "tracker": "nations",
+  "frame": "texas",
+  "annotate": {
+    "rivers": ["Nueces", "Rio Grande"],
+    "places": ["Q49242", "Q738353", "Q2613729", "Q16868"],
+    "routes": ["test-tx-taylor-march"]
+  },
+  "title": "The Disputed Land, 1846",
+  "size": "1600x1550",
+  "records": "tests/maps/texas-records.csv",
+  "out": "out/texas-1846"
+}

@@ -29,6 +29,12 @@
     "label": "Beijing",
     "fetched": "2026-11-05"
   },
+  "Q975": {
+    "lon": -98.4939,
+    "lat": 29.425,
+    "label": "Q975",
+    "fetched": "2026-11-06"
+  },
   "Q1384": {
     "lon": -75,
     "lat": 43,
@@ -155,6 +161,12 @@
     "label": "Nanjing",
     "fetched": "2026-11-05"
   },
+  "Q16868": {
+    "lon": -99.5072,
+    "lat": 27.5061,
+    "label": "Laredo",
+    "fetched": "2026-11-06"
+  },
   "Q18970": {
     "lon": 128.1783,
     "lat": -3.6967,
@@ -201,6 +213,12 @@
     "lon": -71,
     "lat": -54,
     "label": "Strait of Magellan",
+    "fetched": "2026-11-06"
+  },
+  "Q49242": {
+    "lon": -97.4019,
+    "lat": 27.7428,
+    "label": "Corpus Christi",
     "fetched": "2026-11-06"
   },
   "Q61089": {
@@ -323,6 +341,12 @@
     "label": "Mombasa",
     "fetched": "2026-11-06"
   },
+  "Q235344": {
+    "lon": -98.4861,
+    "lat": 29.4256,
+    "label": "Battle of the Alamo",
+    "fetched": "2026-11-06"
+  },
   "Q271411": {
     "lon": 40.1167,
     "lat": -3.2194,
@@ -375,6 +399,12 @@
     "lon": -17.11,
     "lat": 28.0922,
     "label": "San Sebastián de La Gomera",
+    "fetched": "2026-11-06"
+  },
+  "Q540250": {
+    "lon": -96.1535,
+    "lat": 30.324,
+    "label": "Washington-on-the-Brazos",
     "fetched": "2026-11-06"
   },
   "Q553907": {
@@ -431,6 +461,12 @@
     "label": "Panamá Viejo",
     "fetched": "2026-11-06"
   },
+  "Q738353": {
+    "lon": -97.5042,
+    "lat": 25.85,
+    "label": "Heroica Matamoros",
+    "fetched": "2026-11-06"
+  },
   "Q780339": {
     "lon": -124.4094,
     "lat": 40.44,
@@ -455,6 +491,18 @@
     "label": "Tumbes",
     "fetched": "2026-11-06"
   },
+  "Q838916": {
+    "lon": -95.3606,
+    "lat": 28.9619,
+    "label": "Velasco",
+    "fetched": "2026-11-06"
+  },
+  "Q841278": {
+    "lon": -95.0814,
+    "lat": 29.7493,
+    "label": "Battle of San Jacinto",
+    "fetched": "2026-11-06"
+  },
   "Q842950": {
     "lon": 124.858,
     "lat": 41.702,
@@ -471,6 +519,18 @@
     "lon": -67.7298,
     "lat": -49.307,
     "label": "Puerto San Julián",
+    "fetched": "2026-11-06"
+  },
+  "Q970482": {
+    "lon": -94.6508,
+    "lat": 31.6089,
+    "label": "Nacogdoches",
+    "fetched": "2026-11-06"
+  },
+  "Q982494": {
+    "lon": -97.3919,
+    "lat": 28.6689,
+    "label": "Goliad",
     "fetched": "2026-11-06"
   },
   "Q995615": {
@@ -537,6 +597,12 @@
     "lon": -104.6806,
     "lat": 19.2081,
     "label": "Barra de Navidad",
+    "fetched": "2026-11-06"
+  },
+  "Q1191854": {
+    "lon": -97.5217,
+    "lat": 29.4389,
+    "label": "Battle of Gonzales",
     "fetched": "2026-11-06"
   },
   "Q1254826": {
@@ -629,6 +695,12 @@
     "label": "Port St Johns",
     "fetched": "2026-11-06"
   },
+  "Q2613729": {
+    "lon": -97.4941,
+    "lat": 25.8862,
+    "label": "Fort Brown",
+    "fetched": "2026-11-06"
+  },
   "Q2735703": {
     "lon": -76.3289,
     "lat": -13.8589,
@@ -689,10 +761,22 @@
     "label": "Inharrime",
     "fetched": "2026-11-06"
   },
+  "Q7413847": {
+    "lon": -96.0975,
+    "lat": 29.8069,
+    "label": "San Felipe de Austin State Historic Site",
+    "fetched": "2026-11-06"
+  },
   "Q8254538": {
     "lon": -40.9283,
     "lat": -21.9917,
     "label": "Cabo de São Tomé",
+    "fetched": "2026-11-06"
+  },
+  "Q9030262": {
+    "lon": -97.383,
+    "lat": 28.6476,
+    "label": "Goliad massacre",
     "fetched": "2026-11-06"
   },
   "Q12506955": {
