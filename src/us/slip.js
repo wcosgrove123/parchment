@@ -32,7 +32,8 @@ function sourceOf(it, tags) {
     const t = tags[p.rid] ?? {};
     const notes = {};
     for (const [k, label] of [['se', 'start_event'], ['ee', 'end_event'], ['src', 'source'], ['srcName', 'source_name'], ['srcUrl', 'source_url'], ['cite', 'citation'], ['nbCite', 'newberry_citation'], ['sds', 'start_date_source'], ['eds', 'end_date_source'], ['note', 'note'], ['fixme', 'fixme'], ['est', 'estimated'], ['wp', 'wikipedia']]) if (t[k]) notes[label] = t[k];
-    return { dataset: 'OpenHistoricalMap', url: `https://www.openhistoricalmap.org/relation/${p.rid}`, license: 'CC0 1.0', wikidata: p.wd ?? null, notes };
+    // (a polygon the owner had cut at a river: its shape here ends at that river, src/us/disputes.js applyOHMCuts)
+    return { dataset: it.cut ? `OpenHistoricalMap, ending at the ${it.cut.river} (${it.cut.source}; ${it.cut.rule})` : 'OpenHistoricalMap', url: `https://www.openhistoricalmap.org/relation/${p.rid}`, license: 'CC0 1.0', wikidata: p.wd ?? null, notes, ...(it.cut ? { cut_at: it.cut } : {}) };
   }
   if (it.src === 'nbx') {
     return { dataset: 'Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of two Newberry polygons; nothing drawn', from: [{ newberry: p.a, version: p.av, name: p.an }, { newberry: p.b, version: p.bv, name: p.bn }], ended: p.ended ?? null };

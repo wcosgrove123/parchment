@@ -53,6 +53,7 @@ for (const size of SIZES) {
     const s = await render('texas-1836', size);
     const joint = feature(s, (f) => f.ids.ohm === 2693046);
     assert.deepEqual([joint.start, joint.end, joint.lit], ['1836-03-02', '1845-12-28', true]);
+    assert.equal(joint.source.cut_at?.river, 'Nueces', 'the joint claim ends at the Nueces, as the 1846 strip does (owner, 2026-11-09)');
     const rep = feature(s, (f) => f.ids.newberry === 'tx_republic');
     const copy = rep.ids.also_in_ohm.find((c) => c.ohm === 2692792);
     assert.deepEqual([copy.start, copy.end], ['1836-03-02', '1845-12-28'], 'OHM 2692792, the copy of the Republic, with its dates');

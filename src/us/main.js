@@ -14,7 +14,7 @@ import { parseDate, endOfYear, yearOf, longDate, isoDate, nextDay, OPEN } from '
 import { fmt as fmtN, pct as pctN } from './native.js';
 import parties from './parties.json';
 import { electionAt, electionDays, electionLooks, electoralCard, electionDiff } from './electoral.js';
-import { prepareDisputes, prepareUSMX } from './disputes.js';
+import { prepareDisputes, prepareUSMX, applyOHMCuts } from './disputes.js';
 import { loadText } from '../data/loader.js';
 import { loadRecordsText } from '../data/source.js';
 import { validateRecords, resolveRecords } from '../data/records.js';
@@ -64,6 +64,9 @@ async function main() {
   data.nbx = prepareDisputes(await loadJSON('data/us/nb-disputes.json').catch(() => null));
   // ...and land a U.S. state and a Mexican state claimed at once (data/us/usmx-disputes.json, the same script).
   data.usmx = prepareUSMX(await loadJSON('data/us/usmx-disputes.json').catch(() => null));
+  // ...and the OpenHistoricalMap polygons the owner had cut at a river (data/us/ohm-cuts.json: the 1836–1845 joint
+  // claim ends at the Nueces, as the 1846 strip does).
+  applyOHMCuts(data, await loadJSON('data/us/ohm-cuts.json').catch(() => null));
   // A lesson map reads a little more: OpenHistoricalMap's own notes on each polygon (to find a Newberry polygon by the
   // name OHM's copy of it carries: the Republic of Texas is Newberry's tx_republic), and the 1:10m rivers of North
   // America (the Nueces is not in the 1:50m set).

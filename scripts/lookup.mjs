@@ -18,7 +18,7 @@ import { geoArea, geoBounds } from 'd3';
 import { feature } from 'topojson-client';
 import polygonClipping from 'polygon-clipping';
 import { prepareData, aliveNB, aliveOHM, aliveNative, powerAt, nbName, cleanLabel, US_FROM } from '../src/us/model.js';
-import { prepareDisputes, aliveDisputes, prepareUSMX, aliveUSMX } from '../src/us/disputes.js';
+import { prepareDisputes, aliveDisputes, prepareUSMX, aliveUSMX, applyOHMCuts } from '../src/us/disputes.js';
 import { parseDate, isoDate, longDate, nextDay, OPEN } from '../src/us/dates.js';
 import { resolveFrame, slug } from '../src/us/frames.js';
 import { validateRecords, resolveRecords } from '../src/data/records.js';
@@ -37,6 +37,7 @@ export function loadAll() {
   const data = prepareData({ nbTopo: json('data/us/newberry.topojson'), ohmTopo: json('data/us/ohm.topojson'), cesTopo: json('data/us/cessions.topojson'), natTopo: json('data/us/native.topojson') });
   data.nbx = prepareDisputes(json('data/us/nb-disputes.json'));
   data.usmx = existsSync(join(ROOT, 'data/us/usmx-disputes.json')) ? prepareUSMX(json('data/us/usmx-disputes.json')) : [];
+  if (existsSync(join(ROOT, 'data/us/ohm-cuts.json'))) applyOHMCuts(data, json('data/us/ohm-cuts.json'));
   const tags = existsSync(join(ROOT, 'data/us/ohm-sources.json')) ? json('data/us/ohm-sources.json').relations : {};
   const rtopo = existsSync(join(ROOT, 'data/base/derived/rivers-na.topojson')) ? json('data/base/derived/rivers-na.topojson') : null;
   const rivers = rtopo ? feature(rtopo, rtopo.objects.rivers).features : [];

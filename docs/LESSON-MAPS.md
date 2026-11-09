@@ -68,9 +68,11 @@ finds ids.
 
 **Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the
 Republic of Texas has a color of its own and the land Mexico still claimed inside it keeps the hatch; the whole
-continent already shows five fills, so there the Republic stays hatched. From annexation to the Mexican Cession the
-hatch south of Texas is the land between the Nueces and the Rio Grande, edged by Natural Earth's Nueces; past the
-river's head it follows OpenHistoricalMap's Chihuahua and Nuevo México (the upper Rio Grande claim).
+continent already shows five fills, so there the Republic stays hatched. From 1836 to the Mexican Cession the hatch
+south of Texas is the land between the Nueces and the Rio Grande, edged by Natural Earth's Nueces: OpenHistoricalMap's
+Joint Mexico-Texas Claim (1836–1845) is cut at the river (`data/us/ohm-cuts.json`) as the computed strip of 1846–1848
+is, so the strip keeps its shape at annexation. Past the river's head both follow OpenHistoricalMap's Chihuahua and
+Nuevo México lines (the upper Rio Grande claim).
 
 **Places and routes** are records, as everywhere in Parchment: a `point` row with a Wikidata id in `where` and a
 `source`; an `arrow` or `path` row through gazetteer ids. A Wikidata id with no record is not drawn (the slip says

@@ -10,7 +10,7 @@ import { join } from 'node:path';
 import { geoContains } from 'd3';
 import { parseSize, sheetFor, resolveFrame, frameProjection, orderToQuery, queryToOrder, makeHighlight, itemKeys, claimLabel, slug } from '../src/us/frames.js';
 import { prepareData, aliveOHM, aliveNB } from '../src/us/model.js';
-import { prepareUSMX, aliveUSMX } from '../src/us/disputes.js';
+import { prepareUSMX, aliveUSMX, applyOHMCuts } from '../src/us/disputes.js';
 import { placeLabels, APART } from '../src/render/placement.js';
 import { findBrowser, playwrightBrowsers } from '../scripts/browser.mjs';
 import { describe as describeFrame, changes, search } from '../scripts/lookup.mjs';
@@ -76,6 +76,7 @@ test('a highlight names powers, polygons by name, and source ids; every id that 
 // ---------------------------------------------------------------- the computed U.S.–Mexico disputes
 const data = prepareData({ nbTopo: read('data/us/newberry.topojson'), ohmTopo: read('data/us/ohm.topojson'), cesTopo: null, natTopo: null });
 data.usmx = prepareUSMX(read('data/us/usmx-disputes.json'));
+applyOHMCuts(data, read('data/us/ohm-cuts.json'));
 const STRIP = [-98.0, 27.0]; // between the Nueces and the Rio Grande, inland from Baffin Bay
 const SANTA_FE = [-105.94, 35.69]; // the upper Rio Grande
 
@@ -115,6 +116,18 @@ test('the 1846 strip ends at the Nueces, and the overlaps the owner set aside ar
   assert.deepEqual(aliveUSMX(data, 18520601), [], 'no strip along Sonora: the sources disagreeing, not a claim');
   assert.deepEqual(aliveUSMX(data, 18540301), [], 'no Gadsden Purchase interval');
   assert.ok(aliveUSMX(data, 18300601).some((it) => it.p.a === 'ar_terr' && it.p.bn === 'Coahuila y Tejas'), 'Miller County stays: a real dispute');
+});
+
+test('the 1836–1845 joint claim ends at the Nueces too, so the strip keeps its shape at annexation (owner, 2026-11-09)', () => {
+  const joint = (d, pt) => aliveOHM(data, d).some((it) => it.p.rid === 2693046 && geoContains(it.f, pt));
+  const strip = (d, pt) => aliveUSMX(data, d).some((it) => geoContains(it.f, pt));
+  for (const [name, pt, inside] of [['Uvalde', [-99.786, 29.209], false], ['Carrizo Springs', [-99.861, 28.522], true], ['Laredo', [-99.507, 27.531], true], ['Corpus Christi', [-97.396, 27.8], true]]) {
+    assert.equal(joint(18400601, pt), inside, `${name}, 1 June 1840`);
+    assert.equal(strip(18460425, pt), inside, `${name}, 25 April 1846: the same as in 1840`);
+  }
+  const cut = data.ohm.find((it) => it.p.rid === 2693046);
+  assert.equal(cut.cut.river, 'Nueces');
+  assert.ok(cut.dropArcs.length > 0, "OpenHistoricalMap's old edge past the river is left out of the borders");
 });
 
 // ---------------------------------------------------------------- rivers count among the ten places

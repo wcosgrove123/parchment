@@ -295,4 +295,38 @@ console.log(`nb-disputes: ${pieces.length} pieces, ${disputes.size} disputes →
     console.log(`${p.s}–${p.e}  ${p.an} (${p.a} v${p.av}) × ${p.bn} (OHM ${p.b})  ${p.km2.toLocaleString('en-US')} km²  ended: ${p.ended.map((x) => `${x.day} ${x.text.slice(0, 60)}`).join(' | ')}`);
   }
   console.log(`usmx-disputes: ${usmx.features.length} pieces → data/us/usmx-disputes.json`);
+
+  // ---------------------------------------------------------------- 3. the joint claim, cut the same way
+  // Owner, 2026-11-09 ("cut it too"): before annexation the land both claimed is OpenHistoricalMap's own Joint
+  // Mexico-Texas Claim (relation 2693046, 2 March 1836 – 28 December 1845), which like the 1846 pieces reaches past the
+  // middle Nueces along OHM's Coahuila line. Its part inside OHM's Tamaulipas and Coahuila is cut at the river exactly
+  // as above; the rest (the upper Rio Grande claim, north and west of the river's head) keeps OHM's lines; and the
+  // Republic of Texas (Newberry) between the claim and the river on the Rio Grande side joins it. The page fills this
+  // shape in place of OHM's for that relation and leaves out the claim's old edges (src/us/disputes.js applyOHMCuts).
+  //   writes data/us/ohm-cuts.json
+  const JOINT = 2693046;
+  const republic = allNB.find((f) => f.properties.id === 'tx_republic');
+  const cuts = [];
+  for (const j of feature(ohmTopo, ohmTopo.objects.ohm).features.filter((f) => f.properties.rid === JOINT)) {
+    const pj = j.properties;
+    const across = (f) => f.properties.s <= pj.s && f.properties.e >= pj.e;
+    const strip = mx.filter((f) => NUECES_STATES.has(f.properties.name) && across(f));
+    const upper = mx.filter((f) => !NUECES_STATES.has(f.properties.name) && across(f));
+    if (strip.length < 2) { console.warn(`  joint claim: Tamaulipas or Coahuila not alive across ${pj.s}–${pj.e}; left as OHM draws it`); continue; }
+    const k = nueces.findIndex((p) => upper.some((f) => geoContains(f, p)));
+    const river = k < 0 ? nueces : nueces.slice(0, k + 1);
+    const cut = band(river, 0.05);
+    const rioGrandeSide = (mp) => mp.filter((poly) => onRioGrandeSide(poly, river));
+    const states = polygonClipping.union(...strip.map(rings));
+    const rest = polygonClipping.difference(rings(j), states);
+    const kept = rioGrandeSide(polygonClipping.difference(polygonClipping.intersection(rings(j), states), cut));
+    const gap = republic ? rioGrandeSide(polygonClipping.difference(polygonClipping.intersection(rings(republic), band(river, 15)), cut, rings(j))) : [];
+    // (not rounded: the claim's own edges keep OHM's coordinates exactly, so only the cut changes on the page)
+    const geometry = { type: 'MultiPolygon', coordinates: forD3(polygonClipping.union(rest, ...kept.map((p) => [p]), ...gap.map((p) => [p]))) };
+    const before = Math.round(geoArea(j) * KM2), after = Math.round(geoArea(geometry) * KM2);
+    cuts.push({ rid: JOINT, name: pj.name, s: pj.s, e: pj.e, km2_before: before, km2: after, edge: { river: 'Nueces', source: 'Natural Earth 1:10m rivers and lake centerlines, North American supplement (public domain)', rule: 'owner, 2026-11-09: the land both claimed ends at the Nueces, as in 1846' }, geometry });
+    console.log(`  cut at the Nueces: ${pj.name} (OHM ${JOINT}, ${pj.s}–${pj.e})  ${before.toLocaleString('en-US')} → ${after.toLocaleString('en-US')} km²`);
+  }
+  writeFileSync(join(ROOT, 'data', 'us', 'ohm-cuts.json'), `${JSON.stringify({ _source: 'Computed by scripts/derive-us-disputes.mjs (part 3): OpenHistoricalMap polygons the owner had cut at a river (2026-11-09), from OHM (CC0), Newberry and Natural Earth lines. Nothing drawn.', cuts })}\n`);
+  console.log(`ohm-cuts: ${cuts.length} polygon(s) → data/us/ohm-cuts.json`);
 }

@@ -8,7 +8,7 @@
 // of two powers carry a hatch instead). Nothing here moves a vertex; it only chooses, styles and projects.
 
 import * as d3 from 'd3';
-import { feature, mesh } from 'topojson-client';
+import { feature, mesh, meshArcs } from 'topojson-client';
 import { assetURL } from '../data/loader.js';
 import { paperDefs, drawPaper, drawPaperOverlay } from '../render/paper.js';
 import { drawStageLabels, makeMeasure, layoutLabels } from '../render/labels.js';
@@ -521,8 +521,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const borders = g.append('g').attr('class', 'na-borders').attr('clip-path', `url(#land-${v.id})`);
     if (ohmAlive.length) {
       const geoms = ohmAlive.filter((it) => it.p.lvl !== 'x').map((it) => it.g);
-      const m = mesh(data.ohmTopo, { type: 'GeometryCollection', geometries: geoms },
-        (a, b) => a !== b && (powerAt(a.properties, date) !== powerAt(b.properties, date) || a.properties.lvl === b.properties.lvl));
+      const coll = { type: 'GeometryCollection', geometries: geoms };
+      const between = (a, b) => a !== b && (powerAt(a.properties, date) !== powerAt(b.properties, date) || a.properties.lvl === b.properties.lvl);
+      // (a polygon the owner had cut at a river loses the edges the cut moved off it: src/us/disputes.js applyOHMCuts)
+      const drop = new Set(ohmAlive.flatMap((it) => it.dropArcs ?? []));
+      const m = drop.size ? meshWithout(data.ohmTopo, coll, between, drop) : mesh(data.ohmTopo, coll, between);
       borders.append('path').attr('class', `na-border ohm ${date < US_FROM ? 'approximate' : 'legal'}`).attr('d', v.path(m));
     }
     if (nbAlive.length) {
@@ -1033,6 +1036,19 @@ function smoothLine(s, step = 4, reach = 10) {
     for (let j = a; j <= b; j++) { x += even[j][0]; y += even[j][1]; }
     return [x / (b - a + 1), y / (b - a + 1)];
   });
+}
+
+// A topology's mesh without some arcs: meshArcs' lines, split wherever a dropped arc falls (drawBorders).
+function meshWithout(topology, object, filter, drop) {
+  const lines = [];
+  for (const line of meshArcs(topology, object, filter).arcs) {
+    let run = [];
+    for (const a of line) {
+      if (drop.has(a < 0 ? ~a : a)) { if (run.length) lines.push(run); run = []; } else run.push(a);
+    }
+    if (run.length) lines.push(run);
+  }
+  return feature(topology, { type: 'MultiLineString', arcs: lines }).geometry;
 }
 
 // ---------------------------------------------------------------- looks and legend
