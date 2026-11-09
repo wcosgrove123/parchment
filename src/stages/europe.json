@@ -1,7 +1,7 @@
 {
   "id": "europe",
   "title": "Europe",
-  "_comment": "Europe for its own lessons, absolutism first (the owner asked for it on 2026-11-09). Lambert azimuthal equal-area centered on 52°N 10°E: the projection the European Union uses for its maps of Europe (ETRS89-LAEA); owner to confirm from the pictures. The box is src/focuses.json's europe focus. Its own snapshots: 1650 and 1715 (data/calendar.json).",
+  "_comment": "Europe for its own lessons, absolutism first (the owner asked for it on 2026-11-09). Lambert azimuthal equal-area centered on 52°N 10°E: the projection the European Union uses for its maps of Europe (ETRS89-LAEA); the owner kept it after seeing the 1715 pictures (2026-11-09). The box is src/focuses.json's europe focus. Its own snapshots: 1650 and 1715 (data/calendar.json).",
   "projection": "lambertAzimuthalEqualArea",
   "rotate": [-10, -52],
   "extent": { "west": -25, "south": 34, "east": 45, "north": 71 },
