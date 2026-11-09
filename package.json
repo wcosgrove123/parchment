@@ -24,6 +24,7 @@
     "app:build": "electron-builder --win portable",
     "test": "node --test \"tests/**/*.test.mjs\"",
     "map": "node scripts/map.mjs",
+    "film": "node scripts/film.mjs",
     "describe": "node scripts/lookup.mjs describe",
     "changes": "node scripts/lookup.mjs changes",
     "search": "node scripts/lookup.mjs search",

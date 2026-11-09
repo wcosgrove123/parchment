@@ -68,6 +68,9 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
       } else if (e.swatch === 'hq') {
         row.append('line').attr('x1', 6).attr('x2', 6).attr('y1', -2).attr('y2', 15).attr('stroke', 'var(--navy)').attr('stroke-width', 1);
         row.append('path').attr('d', 'M6,-2L20,2L6,6Z').attr('fill', e.color ?? 'var(--navy)');
+      } else if (e.swatch === 'massacre') {
+        row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 6).attr('fill', 'none').attr('stroke', 'var(--navy)').attr('stroke-width', 1.4);
+        row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 2.2).attr('fill', 'var(--rust)');
       } else if (e.swatch === 'numeral') {
         row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 7.5).attr('fill', 'var(--cream)').attr('stroke', 'var(--navy)').attr('stroke-width', 1);
         row.append('text').attr('class', 'swatch-text').attr('x', 11).attr('y', 7).attr('text-anchor', 'middle').attr('dominant-baseline', 'central').attr('font-size', 9).attr('font-weight', 700).text('1');

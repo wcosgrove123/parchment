@@ -15,8 +15,9 @@ order or map changes unless it asks for `layer: military`.
 | 3 | forces and movements: arrows by side, hollow retreats, landing ticks, side-by-side legs, tabs at the frame's edge, force bars on the strip | done (`tests/maps/military/texas-1847-movements.json`) |
 | 4 | lines computed from the polygons: blockades off a coast, treaty lines, ghost borders; the `mexico-city` inset; `forces` to follow one campaign | done (`tests/maps/military/mexico-war-1848-full.json`); fronts, fortified lines and parallels wait for the maps that need them |
 | 5 | force marks: milsymbol frames by type and size, the equipment icon when the catalog allows it on the date, earlier stands faded; the star fort; ship icons on blockades | done (`data/tech.json`; the owner reviewed the icons 2026-11-09) |
+| 7 | play: films of chapters at their paces, ▶ on the page and an MP4 from `npm run film` (the owner asked for it on 2026-11-09, ahead of the human cost) | done (`tests/maps/military/texas-film.json`: Mexican Texas to the Gadsden Purchase, 1821–1854) |
 | 6 | the human cost | next |
-| 7–10 | play and video; panels and accounts; battle frames; strength width | |
+| 8–10 | panels and accounts; battle frames; strength width | |
 
 ## Turning it on
 
@@ -52,6 +53,20 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
+
+## Play: films (milestone 7)
+
+A **film** is an entry of `data/vocab.json`'s `films`: a title, a frame, and chapters, each with a title, a span of
+dates, the war whose record is shown, and a pace in map days per real second (`week`, `month`, `quarter`,
+`half-year`, `year`, or a number). On the page, `us.html?play=texas-1821-1854&frame=mexico-war&records=…` opens on
+the film's first day with the Military tracker on; press ▶ or space. The date steps on the film's clock, the war strip
+spans the chapter and names it, the cartouche's title is the chapter's, and each chapter's war brings its own fills,
+events, forces and lines; after a war's last day its armies stand down. An order with `"play"` renders a still of any
+date with `npm run map`, and `npm run film -- tests/maps/military/texas-film.json` writes every frame (six per second
+of film time) and an MP4 for a slide (ffmpeg with H.264; the frames and a manifest stay beside it). The first film runs
+from Mexican Texas through the Texas Revolution, the Republic's years and the war with Mexico to the Gadsden Purchase
+in about four and a half minutes; the base map changes by its own sources' dates (Coahuila y Tejas, the Republic and
+the joint claim, statehood, the cession, the 1850 line, the Gadsden strip).
 
 ## What it draws (milestone 1)
 

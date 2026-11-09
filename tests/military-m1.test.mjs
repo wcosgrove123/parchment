@@ -20,13 +20,14 @@ test('vocab.json: the military tracker and the first war, with sides that name t
   assert.deepEqual(t.kinds, ['region', 'point', 'arrow', 'path']);
   assert.ok(t.region_values.includes('belligerent') && t.region_values.includes('dependent'));
   assert.ok(t.values.includes('retreat') && t.values.includes('blockade'));
-  assert.ok(t.point_values.includes('massacre') && !t.point_shapes.massacre, 'a massacre has no shape until the owner and the co-teachers choose one');
+  assert.ok(t.point_values.includes('massacre') && t.point_shapes.massacre === 'steel-circle', 'a massacre draws a provisional mark (a navy ring with a rust dot, 2026-11-09) until the owner and the co-teachers choose one');
   const war = warById(vocab, 'mexican-american-war');
   assert.ok(war && war.names.us && war.names.mexico);
   assert.deepEqual(war.sides.map((s) => s.id), ['us', 'mexico']);
   for (const s of war.sides) { assert.ok(['a', 'b', 'c', 'd', 'gray', 'red'].includes(s.color)); assert.ok(s.why && s.why.length > 10, `${s.id} says why it has its color`); }
   assert.equal(warsOn(vocab, 18460513)[0]?.id, 'mexican-american-war');
-  assert.equal(warsOn(vocab, 18450101).length, 0);
+  assert.equal(warsOn(vocab, 18450101).length, 1, 'the Republic years are a conflict record of their own (the play run, 2026-11-09)');
+  assert.equal(warsOn(vocab, 18460101).length, 0);
   assert.equal(toInt('1848-02-02'), 18480202);
   assert.equal(toInt('1848', true), 18481231);
 });

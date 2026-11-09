@@ -321,9 +321,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const corner = legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right';
       const [vx, vy, vw, vh] = main.box;
       const flagged = (milNow.shown ?? []).map((r) => { const xy = r.lon != null ? projection([r.lon, r.lat]) : null; return { ...r, offSheet: !(xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh) }; });
-      milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner });
+      milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner, title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() });
       root.classed('war-strip-on', milNow.strip !== 'stage');
-      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date }); else root.selectAll('g.war-strip').remove();
+      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date, span: milNow.film?.span ?? null, chapter: milNow.film?.chapter ?? null }); else root.selectAll('g.war-strip').remove();
       // the computed lines of the war alive on the date (P7): blockades off the other side's coast, treaty lines, ghosts
       milNow.lines = (!milNow.show?.length || milNow.show.includes('lines')) ? computeLines(milNow, date, data) : [];
       drawLines(recordLayers.lines, defs, milNow.lines, milNow.icons ?? {});
@@ -828,9 +828,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const near = markPts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6);
       return near ? near.r : 0;
     };
-    // the forces where they stand (milestone 5) go first: route names and place names both keep clear of them
+    // the forces where they stand (milestone 5) go first: route names and place names keep clear of their boxes (the
+    // label pass below); the lines themselves run under the marks, so the boxes are not zones here (a zone trims a
+    // line, and at a continental scale a force's label box can cover a whole short march)
     const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box }) : (recordLayers.forces.selectAll('*').remove(), []);
-    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, [...zones, ...forceBoxes], clearance);
+    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
     drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
     // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
     // the course list says "off this map" for them)

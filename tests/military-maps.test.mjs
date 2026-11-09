@@ -165,6 +165,27 @@ test('force marks (milestone 5): each force where its movements put it, its icon
   } finally { unlinkSync(tankFile); }
 });
 
+test('the play run (milestone 7): a film still in its chapter, the chapter’s war and strip; after the war the armies stand down', { skip, timeout: 240000 }, async () => {
+  const { slip: s } = await render('military/texas-film', { date: '1836-04-21', out: undefined });
+  assert.deepEqual(s.render.page_errors, []);
+  assert.deepEqual([s.resolved.war.film.id, s.resolved.war.film.chapter.n, s.resolved.war.film.chapter.count, s.resolved.war.film.chapter.war], ['texas-1821-1854', 2, 5, 'texas-revolution']);
+  assert.deepEqual(s.resolved.war.film.chapter_span, ['1835-10-02', '1836-05-14']);
+  assert.equal(s.resolved.war.id, 'texas-revolution');
+  assert.equal(s.resolved.title, 'The Texas Revolution, 1835–1836', 'the cartouche carries the chapter');
+  assert.equal(s.points.length, 12, 'twelve events begun by San Jacinto, the four causes among them');
+  assert.ok(s.points.some((p) => p.record === 'test-tr-ev-goliad'));
+  assert.equal(s.routes.length, 5, 'Cos, Santa Anna twice, Urrea and Houston; the retreat under Filisola begins five days later');
+  const labels = s.legend.rows.map((r) => r.label);
+  assert.ok(labels.includes('Texas') && labels.includes('Mexico') && labels.some((l) => /under review/.test(l)));
+  assert.ok(s.resolved.war.forces.some((f) => f.id === 'houston' && f.since === '1836-04-20'));
+  const after = await render('military/texas-film', { date: '1853-12-31', out: undefined });
+  assert.deepEqual([after.slip.resolved.war.film.chapter.n, after.slip.resolved.war.id], [5, 'mexican-american-war']);
+  assert.equal(after.slip.routes.length, 0, 'after the war the armies stand down');
+  assert.equal(after.slip.resolved.war.forces.length, 0);
+  assert.equal(after.slip.points.length, 22, 'the war and its three aftermath events');
+  assert.equal(after.slip.resolved.war.course.at(-1).label, 'Gadsden Purchase treaty');
+});
+
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/texas-1846-sides', { layer: undefined, war: undefined, names: undefined, records: 'tests/maps/texas-records.csv', annotate: { rivers: ['Nueces', 'Rio Grande'], places: ['Q49242', 'Q738353', 'Q2613729', 'Q16868'], routes: ['test-tx-taylor-march'] } });
   assert.equal(s.resolved.tracker.id, 'nations');

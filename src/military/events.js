@@ -116,6 +116,7 @@ export function eventLook(r, war) {
   else if (r.value === 'landing') base.form = 'circle';
   else if (r.value === 'fort') { base.form = 'fort'; base.ring = r.captor ? sideOf(r.captor) : null; } // P6: one navy mark; a ring in a captor's color
   else if (r.value === 'headquarters') { base.form = 'hq'; base.ring = sideOf(r.side); }
+  else if (r.value === 'massacre') base.form = 'massacre'; // provisional: a navy ring with a rust dot (the sheet's first candidate) until the owner chooses
   return base;
 }
 
@@ -199,6 +200,7 @@ export function eventLegend(events, war, colorOf) {
   if (cap) rows.push({ swatch: 'shape', shape: 'moss-circle', ring: cap.ring ? colorOf(cap.ring.color).line : '#1F2A44', label: 'Place taken (ring: the captor)', role: 'event' });
   if (looks.some((l) => l.form === 'fort')) rows.push({ swatch: 'icon', icon: 'fort', label: 'Fort (one mark in every era)', role: 'event' });
   if (looks.some((l) => l.form === 'hq')) rows.push({ swatch: 'hq', label: 'Headquarters, dated', role: 'event' });
+  if (looks.some((l) => l.form === 'massacre')) rows.push({ swatch: 'massacre', label: 'Killing of prisoners or civilians (row under review)', role: 'event' });
   if (events.some((r) => r.seq != null)) rows.push({ swatch: 'numeral', label: 'The course of the war: see the list', role: 'event' });
   return rows;
 }

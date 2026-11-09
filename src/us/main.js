@@ -24,6 +24,8 @@ import focusTable from '../focuses.json';
 import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
 import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
+import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from '../military/play.js';
+import { toInt as warDay } from '../military/wars.js';
 import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
@@ -146,7 +148,7 @@ async function main() {
   const state = {
     date: clampDate(startDate),
     exact: !!params.get('date'),
-    tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'nations',
+    tracker: params.get('play') ? 'military' : TRACKERS[params.get('tracker')] ? params.get('tracker') : 'nations',
     mode: startFrom && !militaryStart ? 'diff' : 'snapshot',
     from: startFrom ? clampDate(startFrom) : null,
     since: startFrom && militaryStart ? clampDate(startFrom) : null,
@@ -160,6 +162,7 @@ async function main() {
     forces: parseList(params.get('forces')), // only these forces' movements (and events that name a force), to follow one campaign
     sequence: params.get('sequence') === 'false' ? false : params.get('sequence') && params.get('sequence') !== 'true' ? parseList(params.get('sequence')) : true,
     strip: params.get('strip') || 'war',
+    film: params.get('play') || null, // the play run: a film id from vocab.json's films (brief §5)
   };
 
   // The Military layer's data, read once when the layer is first shown: the wars of vocab.json and the membership
@@ -192,10 +195,13 @@ async function main() {
     return milData;
   }
   let milWarned = false;
+  let filmRec = null; // the film being played, resolved (src/military/play.js), once ?play= names one
   // What the layer shows on a date: the war asked for, else the longest war alive that day; its members; its title.
   function militaryFor(date) {
     if (!milData) return null;
-    const war = state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
+    // (under a film the chapter says which war's record is shown; the menu and the address's war wait)
+    const chapter = filmRec ? chapterOn(filmRec, date) : null;
+    const war = chapter?.war ? warById(milData.vocab, chapter.war) : state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
     if (!war) {
       if (!milWarned) { problems.push(state.war ? `war "${state.war}" is not in vocab.json's wars` : `no war in vocab.json is alive on ${longDate(date)}`); milWarned = true; }
       return { war: null, members: [], names: state.names, title: 'Military', file: milData.file };
@@ -212,13 +218,17 @@ async function main() {
     const allMoves = withSides(movementsOf(milData.movements, war.id), war);
     // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
     const since = state.since ?? 0;
-    const moves = !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !state.forces.length || state.forces.includes(r.force)) : [];
+    // after the war's last day (a film's aftermath chapter, or any later date) the armies stand down: no movements or
+    // stands are drawn; the events, the lines and the list stay
+    const over = date > warDay(war.end, true);
+    const moves = over ? [] : !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !state.forces.length || state.forces.includes(r.force)) : [];
     // where each force stands on the date (from every movement of its own, filtered only by `forces`), and whether
     // its equipment icon may draw: the row's tech, else the force's first, if the catalog's years cover the date
     const forcesOf = (war.forces ?? []).filter((f) => !state.forces.length || state.forces.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
-    const positions = !state.show.length || state.show.includes('forces') ? forcePositions(forcesOf, allMoves, date) : [];
+    const positions = over ? [] : !state.show.length || state.show.includes('forces') ? forcePositions(forcesOf, allMoves, date) : [];
     const checks = Object.fromEntries(positions.map((p) => [p.force.id, techFor(p.force, p.row, milData.tech, date)]));
-    return { war, members, events, shown, moves, allMoves, since, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names, title: warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show };
+    return { war, members, events, shown, moves, allMoves, since, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names, title: chapter ? chapter.title : warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show,
+      film: chapter ? { id: filmRec.id, title: filmRec.title, chapter: { n: chapter.n, count: filmRec.chapters.length, title: chapter.title, pace: chapter.pace, war: chapter.war, from: chapter.from, to: chapter.to }, span: [chapter.fromInt, chapter.toInt], seconds: filmRec.seconds, at: secondsAt(filmRec, date) } : null };
   }
   // The layer's events and movements join the order's places and routes on the sheet; set again only when they
   // change (a new date may add one).
@@ -298,6 +308,7 @@ async function main() {
       document.body.classList.toggle('tracker-military', state.tracker === 'military');
       d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
       if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === milShown.war?.id);
+      filmStatus();
       const q = new URLSearchParams();
       if (state.mode === 'diff') q.set('from', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       if (state.exact) q.set('date', isoDate(state.date)); else q.set('year', y);
@@ -343,6 +354,7 @@ async function main() {
     if (d) setDate(d, { exact: true });
   }
   function togglePlay() {
+    if (filmRec) return toggleFilm();
     if (state.playing) { clearInterval(state.playing); state.playing = null; }
     else {
       if (yearOf(state.date) >= SPAN_B) setDate(endOfYear(SPAN_A));
@@ -352,6 +364,33 @@ async function main() {
       }, PLAY_MS);
     }
     d3.select('#play').classed('active', !!state.playing).text(state.playing ? '❚❚' : '▶');
+  }
+  // The film's clock (brief §5): ▶ runs the chapters at their paces from the date shown (from the start once the end
+  // is reached). The date is read off the clock each animation frame, so a slow machine draws fewer frames and the
+  // film still keeps time; between the record's dates nothing slides (grammar: stepped, not morphed).
+  let filmRun = null;
+  function toggleFilm() {
+    if (filmRun) { cancelAnimationFrame(filmRun.raf); filmRun = null; }
+    else {
+      let clock = secondsAt(filmRec, state.date);
+      if (clock >= filmRec.seconds - 0.05) clock = 0;
+      const t0 = performance.now() - clock * 1000;
+      filmRun = { raf: 0 };
+      const tick = () => {
+        const fr = frameAt(filmRec, (performance.now() - t0) / 1000);
+        setDate(fr.date, { exact: true, fade: 0 });
+        if (fr.done) { filmRun = null; filmStatus(); d3.select('#play').classed('active', false).text('▶'); return; }
+        filmRun.raf = requestAnimationFrame(tick);
+      };
+      filmRun.raf = requestAnimationFrame(tick);
+    }
+    d3.select('#play').classed('active', !!filmRun).text(filmRun ? '❚❚' : '▶');
+  }
+  function filmStatus() {
+    if (!filmRec) return;
+    const ch = chapterOn(filmRec, state.date);
+    const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    d3.select('#film-status').text(ch ? `Chapter ${ch.n} of ${filmRec.chapters.length} · ${mmss(secondsAt(filmRec, state.date))} / ${mmss(filmRec.seconds)}` : '');
   }
 
   // ------------------------------------------------------------ toolbar (chrome; never exported)
@@ -398,6 +437,7 @@ async function main() {
   tb.append('button').attr('title', 'Next change in the record (])').text('⇥').on('click', () => stepChange(1));
   tb.append('span').attr('class', 'sep');
   tb.append('button').attr('id', 'play').attr('title', 'Play, a year at a time (space)').text('▶').on('click', togglePlay);
+  tb.append('span').attr('id', 'film-status').attr('class', 'film-status').attr('title', 'The play run: chapter, and where the film\'s clock stands');
   tb.append('span').attr('class', 'sep');
 
   const exportMenu = tb.append('span').attr('class', 'menu');
@@ -559,6 +599,11 @@ async function main() {
     setDate: (s, opts) => setDate(parseDate(s), { exact: /-/.test(s), ...opts }),
     setFrom: (s) => setFrom(parseDate(s), { exact: /-/.test(s) }),
     setMode,
+    // The play run (src/military/play.js): the film, its frames for export at a given rate, and a seek that resolves
+    // once the frame is painted (scripts/film.mjs).
+    film: () => (filmRec ? { id: filmRec.id, title: filmRec.title, seconds: filmRec.seconds, chapters: filmRec.chapters.map((c) => ({ n: c.n, title: c.title, from: c.from, to: c.to, pace: c.pace, war: c.war, seconds: c.seconds })) } : null),
+    filmFrames: (fps) => (filmRec ? frameList(filmRec, fps).map((f) => ({ index: f.index, at: f.at, date: isoDate(f.date), hold: f.hold, chapter: f.chapter.n })) : []),
+    filmSeek: async (s) => { setDate(parseDate(s), { exact: true, fade: 0 }); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return isoDate(state.date); },
     get state() { return { ...state, iso: isoDate(state.date), fromIso: state.from != null ? isoDate(state.from) : null }; },
     // Resolves once the first picture is on the sheet, relief, fonts and all: what scripts/map.mjs waits for.
     ready: readyPromise,
@@ -583,6 +628,21 @@ async function main() {
     else if (e.key === 'e' || e.key === 'E') doExport(e.shiftKey ? '4k' : 'png');
   });
 
+  // The play run (brief §5): ?play=<film id> from vocab.json's films. The page opens on the film's first day unless a
+  // date is given, the tracker is Military, each chapter names its war, and ▶ (space) runs the film.
+  if (state.film) {
+    await ensureMilitary();
+    filmRec = filmById(milData.vocab, state.film);
+    if (!filmRec) problems.push(`play "${state.film}" is not a film in vocab.json (${(milData.vocab.films ?? []).map((f) => f.id).join(', ') || 'none yet'})`);
+    else {
+      if (!params.get('date') && !params.get('year')) { state.date = clampDate(filmRec.start); state.exact = true; }
+      if (!params.get('names') && filmRec.names) state.names = filmRec.names;
+      fillWarMenu();
+      warSel.property('disabled', true).attr('title', 'Under a film each chapter names its war');
+      d3.select('#play').attr('title', `Play the film (space): ${filmRec.title}`);
+      console.log(describeFilm(filmRec));
+    }
+  }
   render({ fade: 0 });
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   document.body.classList.add('ready');
@@ -591,6 +651,7 @@ async function main() {
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   if (problems.length) console.warn(`lesson map: ${problems.join('; ')}`);
   resolveReady();
+  if (filmRec && params.has('autoplay')) toggleFilm();
 
   // ?bench: time a year change (script and paint) at a few dates, twice; for checking speed in a headless browser.
   if (params.has('bench')) {

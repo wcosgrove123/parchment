@@ -17,8 +17,9 @@ const colorOf = (k) => ({ line: `line-${k}` });
 
 test('the war\'s event rows validate, carry their outcomes, and are read in date order up to a date', () => {
   assert.deepEqual(checked.problems, [], JSON.stringify(checked.problems));
-  assert.equal(events.length, 19);
-  assert.ok(events.every((r) => r.lon != null && r.lat != null && r.source && /Bauer/.test(r.source)), 'every event has a coordinate and cites its source');
+  assert.equal(events.length, 22, 'nineteen events of the war and three of its aftermath (the play run)');
+  assert.ok(events.every((r) => r.lon != null && r.lat != null && r.source), 'every event has a coordinate and cites its source');
+  assert.ok(eventsUpTo(events, 18480202).every((r) => /Bauer/.test(r.source)), "the war's own events cite Bauer (1974); the aftermath rows cite their own sources");
   const upTo = eventsUpTo(events, 18460513);
   assert.deepEqual(upTo.map((r) => r.id), ['test-mx-ev-fort-texas-fort', 'test-mx-ev-thornton', 'test-mx-ev-fort-texas', 'test-mx-ev-palo-alto', 'test-mx-ev-resaca', 'test-mx-ev-us-declares'], 'the fort (begun 28 March) first; the siege (from 3 May) comes before Palo Alto (8 May)');
   assert.equal(eventsUpTo(events, 18460424).length, 1, 'before the Thornton Affair only the fort, begun 28 March');

@@ -125,6 +125,10 @@ export function validateRecords(text, vocab) {
       if (!ids) bad(`where "${rec.where}" should be two or more Wikidata QIDs in order, joined by > (like Q16666>Q36081>Q61089), for a ${rec.kind}`);
       else if (new Set(ids).size !== ids.length) bad(`where repeats a place (${ids.find((id, i) => ids.indexOf(id) !== i)}); a route visits each waypoint once`);
     }
+    // (a Military membership row may name a polygon key of the North America page that the places list does not
+    // know: a power, a polygon's own name such as texas-republic, a source id; the page reports a key that matches
+    // nothing on the date)
+    else if (rec.tracker === 'military' && rec.kind === 'region' && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(rec.where)) { /* checked on the page */ }
     else if (!states.has(rec.where) && !baseUnits.has(rec.where) && !isQID(rec.where)) bad(`where "${rec.where}" is not a state id from the places list (like ottoman) or a Wikidata QID`);
 
     if (rec.lon !== '' || rec.lat !== '') {

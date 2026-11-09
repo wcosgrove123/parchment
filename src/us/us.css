@@ -159,6 +159,9 @@ body:not(.tracker-military) #war { display: none; }
 .course-list .course-outcome { fill-opacity: 0.75; }
 .stage.na.war-strip-on .na-strip { display: none; }
 .war-strip text { font-family: var(--font); }
+.war-strip .chapter-label { font-style: italic; letter-spacing: 0.02em; }
+#toolbar .film-status { font-size: 12px; opacity: 0.8; margin-left: 6px; white-space: nowrap; }
+#toolbar .film-status:empty { display: none; }
 .marks .mark-group .mil-seq text { font-family: var(--font); }
 
 /* the Military layer's movements (milestone 3): a force's arrow in its side's line color; a retreat hollow; a landing's tick */

@@ -120,7 +120,7 @@ export function claimLabel(parties) {
 }
 
 // An order (the JSON spec of scripts/map.mjs) as an address on us.html, and back. Every field has a parameter.
-export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records'];
+export const ORDER_PARAMS = ['date', 'year', 'from', 'tracker', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'rivers', 'places', 'routes', 'title', 'size', 'scale', 'projection', 'records', 'play'];
 export function orderToQuery(order) {
   const q = new URLSearchParams();
   const a = order.annotate ?? {};
@@ -146,6 +146,7 @@ export function orderToQuery(order) {
   put('scale', order.scale);
   put('projection', order.projection);
   put('records', order.records);
+  put('play', order.play); // a film id (vocab.json films): the play run
   return q;
 }
 export function queryToOrder(q) {
@@ -156,6 +157,7 @@ export function queryToOrder(q) {
   if (order.tracker === 'military') { delete order.tracker; order.layer = 'military'; }
   for (const k of ['war', 'names', 'strip']) if (get(k)) order[k] = get(k);
   if (get('forces')) order.forces = parseList(get('forces'));
+  if (get('play')) { order.play = get('play'); order.layer = 'military'; delete order.tracker; }
   if (get('inset')) order.inset = { frame: get('inset') };
   if (get('show')) order.show = parseList(get('show'));
   if (get('sequence')) order.sequence = get('sequence') === 'true' ? true : get('sequence') === 'false' ? false : parseList(get('sequence'));

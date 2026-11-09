@@ -64,6 +64,13 @@ export function decorateMarks(layer, placed, war, icons = {}) {
       g.append('path').attr('class', 'mil').attr('d', `M0,${-h}L14,${-h + 4}L0,${-h + 8}Z`).attr('fill', look.ring ? cssColor(look.ring.color) : NAVY);
       g.append('circle').attr('class', 'mil').attr('r', 1.6).attr('fill', NAVY);
     }
+    if (look.form === 'massacre') {
+      // provisional (the owner has not chosen among the sheet's three candidates): a navy ring with a rust dot;
+      // numbers and words carry the event (brief: never a picture of victims)
+      path.style('display', 'none');
+      g.append('circle').attr('class', 'mil mil-massacre').attr('r', rad + 2).attr('fill', 'none').attr('stroke', NAVY).attr('stroke-width', 1.6);
+      g.append('circle').attr('class', 'mil mil-massacre').attr('r', 2.6).attr('fill', RUST);
+    }
     if (look.ring && look.form !== 'hq') g.insert('circle', ':first-child').attr('class', 'mil mil-ring').attr('r', rad + 5).attr('fill', 'none').attr('stroke', cssColor(look.ring.color)).attr('stroke-width', 2);
     if (r.seq != null) {
       // the numeral: an outlined circle beside the mark, at the first of eight places that is clear of other numerals
@@ -87,18 +94,26 @@ export function decorateMarks(layer, placed, war, icons = {}) {
 
 // The margin list (P8). corner: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'; `lift` px above the frame's
 // bottom for a bottom corner (to clear the legend). → { x, y, w, h } or null when nothing is numbered.
-export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner = 'top-right', lift = 0, title = 'The course of the war', width = 330 } = {}) {
+// avoid: a box on the same side (the legend) the list must not run into; when the rows will not fit above or
+// below it, the earliest fold into one line ("⋯ 14 earlier events") and the latest stay in full.
+export function drawCourseList(root, { x0, y0, x1, y1 }, events, war, { corner = 'top-right', lift = 0, title = 'The course of the war', width = 330, avoid = null } = {}) {
   root.selectAll('g.course-list').remove();
-  const rows = courseList(events, war);
+  let rows = courseList(events, war);
   if (!rows.length) return null;
   const PAD = 12, ROW = 17, W = width;
-  const H = PAD * 2 + 22 + rows.length * ROW;
+  const roomAll = corner.startsWith('top') ? (avoid ? avoid.y - y0 : y1 - y0) : (avoid ? y1 - (avoid.y + avoid.h) : y1 - y0);
+  const maxRows = Math.max(5, Math.floor((roomAll - 44 - 22 - 2 * PAD - lift) / ROW));
+  let folded = 0;
+  if (rows.length > maxRows) { folded = rows.length - (maxRows - 1); rows = rows.slice(folded); }
+  const H = PAD * 2 + 22 + (rows.length + (folded ? 1 : 0)) * ROW;
   const x = corner.endsWith('left') ? x0 + 22 : x1 - 22 - W;
   const y = corner.startsWith('top') ? y0 + 22 : y1 - 22 - H - lift;
   const g = root.append('g').attr('class', 'course-list legend').attr('transform', `translate(${x},${y})`);
   g.append('rect').attr('class', 'legend-box').attr('width', W).attr('height', H);
   g.append('text').attr('class', 'legend-title').attr('x', PAD).attr('y', PAD + 10).text(title);
-  rows.forEach((row, i) => {
+  if (folded) g.append('text').attr('class', 'course-row course-folded').attr('x', PAD).attr('y', PAD + 24 + 4).attr('font-size', 11).text(`⋯ ${folded} earlier events, numbered on the map`);
+  rows.forEach((row, i0) => {
+    const i = i0 + (folded ? 1 : 0);
     const ry = PAD + 24 + i * ROW;
     const n = g.append('g').attr('transform', `translate(${PAD + 8},${ry + 4})`);
     n.append('circle').attr('r', 7).attr('fill', CREAM).attr('stroke', NAVY).attr('stroke-width', 0.9);
@@ -281,23 +296,27 @@ export function drawEdgeTabs(layer, drawn, box) {
 // ticks, members' bars above the line, each force's campaign as a thinner bar below them, events as small marks in
 // the victor's color (treaties as navy triangles), and the shown date marked. events, moves: every one of the war's
 // (the strip shows the whole war, the map the date).
-export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, moves = [], date }) {
+// span: a film chapter's [first, last] day (YYYYMMDD) in place of the war's own; chapter: { n, count, title } named
+// at the strip's left. Members, forces and events outside the span are left off it.
+export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, moves = [], date, span = null, chapter = null }) {
   root.selectAll('g.war-strip').remove();
   if (!war) return;
   const g = root.append('g').attr('class', 'war-strip');
-  const t0 = toInt(war.start), t1 = toInt(war.end, true);
+  const [t0, t1] = span ?? [toInt(war.start), toInt(war.end, true)];
   const days = (d) => { const y = Math.floor(d / 10000), m = Math.floor((d % 10000) / 100), dd = d % 100; return Date.UTC(y, m - 1, dd) / 864e5; };
   const x = d3.scaleLinear().domain([days(t0), days(t1)]).range([x0 + 10, x1 - 10]).clamp(true);
+  const inSpan = (r) => eventFirst(r) <= t1 && eventLast(r) >= t0;
   const base = y1 + 24;
+  if (chapter) g.append('text').attr('class', 'chapter-label').attr('x', x0 + 10).attr('y', base - 38).attr('font-size', 11).attr('fill', NAVY).text(`Chapter ${chapter.n} of ${chapter.count}: ${chapter.title}`);
   // members: a thin bar per member, side's color, stacked above the line
-  const mem = members.filter((m) => war.sides.some((s) => s.id === m.side));
+  const mem = members.filter((m) => war.sides.some((s) => s.id === m.side) && inSpan(m));
   mem.forEach((m, i) => {
     const side = war.sides.find((s) => s.id === m.side);
     const a = Math.max(days(eventFirst(m)), days(t0)), b = Math.min(days(eventLast(m)), days(t1));
     g.append('rect').attr('x', x(a)).attr('y', base - 21 - i * 5).attr('width', Math.max(2, x(b) - x(a))).attr('height', 3).attr('rx', 1).attr('fill', cssColor(side.color)).append('title').text(`${m.label}: ${eventDate(m)}`);
   });
   // forces: one hairline bar each, in lanes by side, between the members' bars and the line
-  const bars = forceBars(moves);
+  const bars = forceBars(moves.filter(inSpan));
   const lanes = new Map();
   bars.forEach((b) => {
     const key = b.sideColor ?? 'x';
@@ -319,16 +338,18 @@ export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, moves
     const d = y * 10000 + m * 100 + 1;
     if (d < t0 || d > t1) continue;
     const major = m === 1;
+    if (!major && t1 - t0 > 60000) continue; // a span over six years: year ticks only
     g.append('line').attr('x1', x(days(d))).attr('x2', x(days(d))).attr('y1', base).attr('y2', base + (major ? 9 : 4)).attr('stroke', NAVY).attr('stroke-width', major ? 1 : 0.6);
     if (major) g.append('text').attr('class', 'tick-label').attr('x', x(days(d))).attr('y', base + 22).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', NAVY).text(String(y));
   }
   // events
-  for (const r of events) {
+  for (const r of events.filter(inSpan)) {
     const look = eventLook(r, war);
     const ex = x(days(eventFirst(r)));
     const e = g.append('g').attr('transform', `translate(${ex},${base})`);
     if (look.form === 'triangle') e.append('path').attr('d', 'M0,-6L5,4H-5Z').attr('fill', NAVY);
     else if (look.form === 'capital') e.append('circle').attr('r', 3.5).attr('fill', '#499737');
+    else if (look.form === 'massacre') { e.append('circle').attr('r', 4).attr('fill', 'none').attr('stroke', NAVY).attr('stroke-width', 1.2); e.append('circle').attr('r', 1.6).attr('fill', RUST); }
     else if (look.form === 'diamond') {
       const fill = look.winner ? cssColor(look.winner.color) : look.claimed.length === 2 ? cssColor(look.claimed[0].color) : RUST;
       if (look.outcome?.kind === 'inconclusive') e.append('path').attr('d', 'M0,-5L5,0L0,5L-5,0Z').attr('fill', CREAM).attr('stroke', RUST).attr('stroke-width', 1.2);

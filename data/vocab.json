@@ -291,7 +291,7 @@
         "treaty": "navy-triangle",
         "armistice": "navy-triangle",
         "fort": "navy-square",
-        "headquarters": "navy-square"
+        "headquarters": "navy-square", "massacre": "steel-circle"
       },
       "_shapes_note": "point_shapes are what another layer would draw for these rows; the Military layer draws battles in the victor's color (P5) and forts, headquarters and massacres with marks of their own (P6; the massacre mark awaits the owner and the co-teachers, so it has no shape here and is not drawn until it does)."
     }
@@ -64931,6 +64931,212 @@
         }
       ],
       "_forces_note": "Forces (brief §1, §3): each has a side, a type and size for its milsymbol frame (infantry, cavalry, artillery, armor, aviation, naval; I regiment, X brigade, XX division, XXX corps), the equipment keys it may carry from data/tech.json, and a strength with its source. Movement rows name the force by id; a row's own tech column overrides the force's list. TEST entries, for review."
+    },
+    {
+      "id": "texas-revolution",
+      "names": {
+        "texas": "The Texas Revolution",
+        "mexico": "La guerra de Texas"
+      },
+      "list_title": "The course of the revolution",
+      "start": "1835-10-02",
+      "end": "1836-05-14",
+      "sides": [
+        {
+          "id": "texas",
+          "label": "Texas",
+          "color": "c",
+          "why": "teal, the third color of the fixed order, so that Texas keeps one color across the whole play run from 1821 to 1854 while Mexico keeps plum and the United States blue (P1's per-war override, with its reason; the owner asked for the run on 2026-11-09)"
+        },
+        {
+          "id": "mexico",
+          "label": "Mexico",
+          "color": "b",
+          "why": "plum, as in the war with Mexico: one color per state across the run"
+        }
+      ],
+      "source": "Stephen L. Hardin, Texian Iliad: A Military History of the Texas Revolution (Austin: University of Texas Press, 1994); Handbook of Texas Online (Texas State Historical Association), s.v. 'Texas Revolution'. A test entry until the owner and the teachers review it.",
+      "_comment": "Events dated before 2 October 1835 (the Fredonian Rebellion, the Law of 6 April 1830, Velasco in 1832, Zacatecas in May 1835) are the causes the owner asked to see in the play run; the course list numbers them with the rest, and the film plays them in its first chapter.",
+      "forces": [
+        {
+          "id": "santa-anna-1836",
+          "side": "mexico",
+          "label": "Santa Anna",
+          "commander": "Antonio López de Santa Anna",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈6,000 in the Army of Operations",
+            "source": "Hardin (1994), ch. 6: about 6,000 crossed the Rio Grande in February 1836"
+          },
+          "source": "The Army of Operations: Hardin (1994), chs. 6–11."
+        },
+        {
+          "id": "urrea",
+          "side": "mexico",
+          "label": "Urrea",
+          "commander": "José de Urrea",
+          "type": "infantry",
+          "echelon": "X",
+          "tech": [
+            "musket",
+            "cavalry"
+          ],
+          "strength": {
+            "text": "≈1,000–1,500 on the coast road",
+            "source": "Hardin (1994), ch. 8"
+          },
+          "source": "Urrea's column from Matamoros: Hardin (1994), ch. 8; Handbook of Texas Online, s.v. 'Urrea, José de'."
+        },
+        {
+          "id": "cos",
+          "side": "mexico",
+          "label": "Cos",
+          "commander": "Martín Perfecto de Cos",
+          "type": "infantry",
+          "echelon": "X",
+          "tech": [
+            "musket"
+          ],
+          "strength": {
+            "text": "≈1,200 at Béxar, December 1835",
+            "source": "Handbook of Texas Online, s.v. 'Bexar, Siege of'"
+          },
+          "source": "The Béxar garrison of 1835: Hardin (1994), chs. 4–5; Handbook of Texas Online, s.v. 'Cos, Martín Perfecto de'."
+        },
+        {
+          "id": "houston",
+          "side": "texas",
+          "label": "Houston",
+          "commander": "Sam Houston",
+          "type": "infantry",
+          "echelon": "X",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈900 at San Jacinto",
+            "source": "Handbook of Texas Online, s.v. 'San Jacinto, Battle of'; Hardin (1994), ch. 10"
+          },
+          "source": "The Texian army of 1836: Hardin (1994), chs. 9–10."
+        },
+        {
+          "id": "fannin",
+          "side": "texas",
+          "label": "Fannin",
+          "commander": "James W. Fannin",
+          "type": "infantry",
+          "echelon": "I",
+          "tech": [
+            "musket"
+          ],
+          "strength": {
+            "text": "≈400 at Goliad",
+            "source": "Handbook of Texas Online, s.v. 'Goliad Massacre'"
+          },
+          "source": "The Goliad command: Hardin (1994), ch. 8; Handbook of Texas Online, s.v. 'Fannin, James Walker, Jr.'."
+        },
+        {
+          "id": "filisola",
+          "side": "mexico",
+          "label": "Filisola",
+          "commander": "Vicente Filisola",
+          "type": "infantry",
+          "echelon": "XX",
+          "tech": [
+            "musket"
+          ],
+          "strength": {
+            "text": "≈4,000 withdrawing after San Jacinto",
+            "source": "Hardin (1994), ch. 11"
+          },
+          "source": "The Army of Operations after San Jacinto, under Filisola: Hardin (1994), ch. 11."
+        }
+      ],
+      "_forces_note": "TEST entries, for review, as for the war with Mexico. Strengths are the standard figures of the works cited; each row carries its own source."
+    },
+    {
+      "id": "texas-republic-mexico",
+      "names": {
+        "texas": "Texas and Mexico after San Jacinto",
+        "mexico": "Texas y México después de San Jacinto"
+      },
+      "list_title": "Texas and Mexico, 1836–1845",
+      "start": "1836-05-15",
+      "end": "1845-12-28",
+      "sides": [
+        {
+          "id": "texas",
+          "label": "Republic of Texas",
+          "color": "c",
+          "why": "teal, as in the Texas Revolution: one color per state across the play run"
+        },
+        {
+          "id": "mexico",
+          "label": "Mexico",
+          "color": "b",
+          "why": "plum, as in the Texas Revolution and the war with Mexico"
+        },
+        {
+          "id": "us",
+          "label": "United States",
+          "color": "a",
+          "why": "blue, as in the war with Mexico; an associated party from the annexation resolution of 1 March 1845 to statehood"
+        }
+      ],
+      "source": "Handbook of Texas Online, s.v. 'Republic of Texas', 'Mexican Invasions of 1842', 'Mier Expedition', 'Texan Santa Fe Expedition', 'Annexation'. Mexico did not recognize the independence of Texas; this record holds the armed clashes of the Republic's years and the steps of annexation. A test entry until reviewed.",
+      "_comment": "Not a declared war: a conflict record, so that the Republic's years can be played with the same grammar as the wars on either side of them (the owner's play run, 2026-11-09). Its sides' fills show who held what; its events are the clashes and the declarations."
+    }
+  ],
+  "films": [
+    {
+      "id": "texas-1821-1854",
+      "title": "From Mexican Texas to the Gadsden Purchase, 1821–1854",
+      "frame": "mexico-war",
+      "names": "both",
+      "_comment": "The owner's play run (2026-11-09): press play and watch from the 1820s through the Texas Revolution and the war with Mexico to the new border. Chapters name the war whose record is shown, the dates, and the pace in map days per real second: week (7), month (30), quarter (91), half-year (182), year (365), or a number. The base map changes by its own sources' dates (Coahuila y Tejas, the Republic of Texas, statehood, the Mexican Cession, the Compromise of 1850, the Gadsden Purchase); nothing here draws geography.",
+      "chapters": [
+        {
+          "title": "Mexican Texas, 1821–1835",
+          "from": "1821-09-28",
+          "to": "1835-10-01",
+          "pace": "half-year",
+          "war": "texas-revolution"
+        },
+        {
+          "title": "The Texas Revolution, 1835–1836",
+          "from": "1835-10-02",
+          "to": "1836-05-14",
+          "pace": "week",
+          "war": "texas-revolution"
+        },
+        {
+          "title": "The Republic of Texas, 1836–1845",
+          "from": "1836-05-15",
+          "to": "1845-12-28",
+          "pace": "quarter",
+          "war": "texas-republic-mexico"
+        },
+        {
+          "title": "The War with Mexico, 1845–1848",
+          "from": "1845-12-29",
+          "to": "1848-02-02",
+          "pace": "week",
+          "war": "mexican-american-war"
+        },
+        {
+          "title": "The peace and the new border, 1848–1854",
+          "from": "1848-02-03",
+          "to": "1854-06-30",
+          "pace": "quarter",
+          "war": "mexican-american-war"
+        }
+      ]
     }
   ]
 }

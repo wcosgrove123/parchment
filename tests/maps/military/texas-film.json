@@ -1,0 +1,11 @@
+{
+  "_comment": "The owner's play run (2026-11-09): from Mexican Texas through the Texas Revolution, the Republic and the war with Mexico to the Gadsden Purchase. `play` names a film in data/vocab.json (films): its chapters, each with its war, dates and pace. Press ▶ (or space) on the live address; `npm run film -- tests/maps/military/texas-film.json` writes the frames and an MP4. Without `date` the page opens on the film's first day.",
+  "page": "us",
+  "layer": "military",
+  "play": "texas-1821-1854",
+  "frame": "mexico-war",
+  "names": "both",
+  "size": "1920x1080",
+  "records": "tests/maps/military-records.csv",
+  "out": "out/military/texas-film"
+}

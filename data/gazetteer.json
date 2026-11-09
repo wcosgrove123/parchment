@@ -38,8 +38,9 @@
   "Q975": {
     "lon": -98.4939,
     "lat": 29.425,
-    "label": "Q975",
-    "fetched": "2026-11-06"
+    "label": "San Antonio",
+    "fetched": "2026-11-09",
+    "label_note": "Wikidata returned no English label on 2026-11-09; the name is typed, the coordinate is Wikidata P625"
   },
   "Q1384": {
     "lon": -75,
@@ -161,6 +162,12 @@
     "label": "San Diego",
     "fetched": "2026-11-09"
   },
+  "Q16559": {
+    "lon": -97.7333,
+    "lat": 30.3,
+    "label": "Austin",
+    "fetched": "2026-11-09"
+  },
   "Q16635": {
     "lon": 144.8,
     "lat": 13.5,
@@ -177,7 +184,7 @@
     "lon": -99.5072,
     "lat": 27.5061,
     "label": "Laredo",
-    "fetched": "2026-11-06"
+    "fetched": "2026-11-09"
   },
   "Q18970": {
     "lon": 128.1783,
@@ -347,6 +354,12 @@
     "label": "Saint-Malo",
     "fetched": "2026-11-06"
   },
+  "Q173121": {
+    "lon": -100.3881,
+    "lat": 20.5881,
+    "label": "Santiago de Querétaro",
+    "fetched": "2026-11-09"
+  },
   "Q173270": {
     "lon": -96.1533,
     "lat": 19.1903,
@@ -497,6 +510,12 @@
     "label": "Palos de la Frontera",
     "fetched": "2026-11-06"
   },
+  "Q631325": {
+    "lon": -99.1486,
+    "lat": 26.4306,
+    "label": "Ciudad Mier",
+    "fetched": "2026-11-09"
+  },
   "Q657461": {
     "lon": -75.5253,
     "lat": 10.4236,
@@ -539,11 +558,23 @@
     "label": "Heroica Matamoros",
     "fetched": "2026-11-06"
   },
+  "Q765552": {
+    "lon": -97.4478,
+    "lat": 29.5089,
+    "label": "Gonzales",
+    "fetched": "2026-11-09"
+  },
   "Q780339": {
     "lon": -124.4094,
     "lat": 40.44,
     "label": "Cape Mendocino",
     "fetched": "2026-11-06"
+  },
+  "Q784496": {
+    "lon": -96.9933,
+    "lat": 28.8169,
+    "label": "Victoria",
+    "fetched": "2026-11-09"
   },
   "Q797147": {
     "lon": -79.655,
@@ -604,6 +635,18 @@
     "lat": 31.6089,
     "label": "Nacogdoches",
     "fetched": "2026-11-06"
+  },
+  "Q974215": {
+    "lon": -97.7731,
+    "lat": 27.9592,
+    "label": "San Patricio",
+    "fetched": "2026-11-09"
+  },
+  "Q975650": {
+    "lon": -97.2747,
+    "lat": 28.3058,
+    "label": "Refugio",
+    "fetched": "2026-11-09"
   },
   "Q982494": {
     "lon": -97.3919,
@@ -701,6 +744,18 @@
     "label": "Cape Coast Castle",
     "fetched": "2026-11-06"
   },
+  "Q1301146": {
+    "lon": -100.3787,
+    "lat": 28.3084,
+    "label": "Guerrero",
+    "fetched": "2026-11-09"
+  },
+  "Q1315700": {
+    "lon": -98.4903,
+    "lat": 29.3906,
+    "label": "Battle of Concepción",
+    "fetched": "2026-11-09"
+  },
   "Q1320260": {
     "lon": 42.59,
     "lat": 15.35,
@@ -712,6 +767,12 @@
     "lat": 34.0333,
     "label": "San Miguel Island",
     "fetched": "2026-11-06"
+  },
+  "Q1361501": {
+    "lon": -97.2334,
+    "lat": 28.6863,
+    "label": "Battle of Coleto",
+    "fetched": "2026-11-09"
   },
   "Q1375638": {
     "lon": 120.7205,
@@ -821,6 +882,12 @@
     "label": "Battle of Molino del Rey",
     "fetched": "2026-11-09"
   },
+  "Q2722368": {
+    "lon": -98.4933,
+    "lat": 29.4286,
+    "label": "Siege of Béxar",
+    "fetched": "2026-11-09"
+  },
   "Q2735703": {
     "lon": -76.3289,
     "lat": -13.8589,
@@ -881,6 +948,18 @@
     "label": "Camargo Municipality",
     "fetched": "2026-11-09"
   },
+  "Q4180430": {
+    "lon": -95.2776,
+    "lat": 29.7162,
+    "label": "Harrisburg",
+    "fetched": "2026-11-09"
+  },
+  "Q4872241": {
+    "lon": -98.4178,
+    "lat": 29.4879,
+    "label": "Battle of Salado Creek",
+    "fetched": "2026-11-09"
+  },
   "Q4872288": {
     "lon": -116.99,
     "lat": 33.0861,
@@ -916,6 +995,12 @@
     "lat": -38.0167,
     "label": "Cabo Corrientes, Mar del Plata",
     "fetched": "2026-11-06"
+  },
+  "Q5700558": {
+    "lon": -105.1422,
+    "lat": 35.2,
+    "label": "Anton Chico",
+    "fetched": "2026-11-09"
   },
   "Q6033690": {
     "lon": 35.0303,
