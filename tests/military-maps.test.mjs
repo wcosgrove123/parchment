@@ -149,8 +149,8 @@ test('force marks (milestone 5): each force where its movements put it, its icon
   const labels = s.legend.rows.map((r) => r.label);
   assert.ok(labels.includes('A force: its type and size (XX a division)') && labels.includes('Fort (one mark in every era)') && labels.some((l) => /^musket, 1500–1860$/.test(l)));
   // the date check: a copy of the table with a tank on Taylor's march
-  const csv = readFileSync(new URL('../data/military.csv', import.meta.url), 'utf8').replace(/(test-mx-mv-taylor-3,.*?,mexican-american-war,us,taylor,),,,$/m, '$1,,,tank-great-war');
-  assert.ok(/taylor,,,,tank-great-war/.test(csv), 'the test row carries the tank');
+  const csv = readFileSync(new URL('../data/military.csv', import.meta.url), 'utf8').replace(/(test-mx-mv-taylor-3,.*?,mexican-american-war,us,taylor,),,,,,$/m, '$1,,,tank-great-war,,');
+  assert.ok(/taylor,,,,tank-great-war,,/.test(csv), 'the test row carries the tank (battle and phase columns follow tech)');
   // the copy lives under the repository (the page fetches ?records= from the served folder) and is removed after
   const { writeFileSync, unlinkSync, mkdirSync } = await import('node:fs');
   const tankFile = new URL('../out/test-tank-records.csv', import.meta.url);
@@ -185,6 +185,26 @@ test('the play run (milestone 7): a film still in its chapter, the chapter’s w
   assert.equal(after.slip.resolved.war.forces.length, 0);
   assert.equal(after.slip.points.length, 22, 'the war and its three aftermath events');
   assert.equal(after.slip.resolved.war.course.at(-1).label, 'Gadsden Purchase treaty');
+});
+
+test('a battle frame (milestone 9): Gettysburg at the evening of 2 July on its own frame, the corps, both lines, no fills', { skip, timeout: 240000 }, async () => {
+  const { slip: s } = await render('military/gettysburg', { phase: 4, out: undefined });
+  assert.deepEqual(s.render.page_errors, []);
+  assert.equal(s.resolved.frame?.id, 'gettysburg', 'the battle brings its frame');
+  assert.deepEqual([s.resolved.war.id, s.resolved.war.battle.id, s.resolved.war.battle.phase.n, s.resolved.war.battle.phase.count], ['civil-war', 'gettysburg', 4, 7]);
+  assert.equal(s.resolved.title, 'Gettysburg, 1–3 July 1863');
+  assert.equal(s.points.length, 10, 'the ten named places');
+  assert.ok(s.points.every((p) => p.battle === 'gettysburg'));
+  assert.equal(s.resolved.war.forces.length, 11, 'every corps on the field');
+  assert.equal(s.resolved.war.forces.find((f) => f.id === 'union-i').earlier_stands, 3);
+  assert.deepEqual(s.routes.map((r) => r.record.replace('test-gb-', '')).sort(), ['ln-csa-2', 'ln-union-2', 'mv-early', 'mv-hood-mclaws', 'mv-johnson', 'mv-sykes']);
+  const labels = s.legend.rows.map((r) => r.label);
+  assert.ok(labels.includes('United States (Union): line of battle') && labels.includes('Confederate States: line of battle') && labels.includes('Hill, ridge or place the sources name'));
+  assert.ok(!labels.some((l) => /^No member/.test(l)), 'no empty member row on a battle frame');
+  const p1 = await render('military/gettysburg', { phase: 1, out: undefined });
+  assert.deepEqual(p1.slip.routes.map((r) => r.record.replace('test-gb-', '')).sort(), ['mv-heth', 'mv-reynolds']);
+  assert.equal(p1.slip.resolved.war.forces.length, 3);
+  assert.equal(p1.slip.resolved.date, '1863-07-01', 'the phase sets the day');
 });
 
 test('off by default: the same Texas order under the nations tracker is the nations map, legend and all', { skip, timeout: 180000 }, async () => {

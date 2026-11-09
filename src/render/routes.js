@@ -45,7 +45,7 @@ const HEADS = {
   // the Military layer's retreat (proposal P3, owner's default 2026-11-09): the barb outlined, never dashed
   hollow: { d: 'M0.5,0.8L9.4,5L0.5,9.2L3.2,5Z', w: 4, h: 4, ref: 8.5, open: 'hollow' },
 };
-const MIL_LABELS = { advance: 'Advance', retreat: 'Retreat or withdrawal', 'flank-march': 'Flank march', envelopment: 'Envelopment', feint: 'Feint', pursuit: 'Pursuit', raid: 'Raid', landing: 'Landing from the sea', breakthrough: 'Breakthrough', 'naval-passage': 'Fleet', 'air-route': 'Air route', 'supply-line': 'Supply line' };
+const MIL_LABELS = { front: 'Line of battle', 'siege-line': 'Siege line', 'fortified-line': 'Fortified line', 'armistice-line': 'Armistice line', advance: 'Advance', retreat: 'Retreat or withdrawal', 'flank-march': 'Flank march', envelopment: 'Envelopment', feint: 'Feint', pursuit: 'Pursuit', raid: 'Raid', landing: 'Landing from the sea', breakthrough: 'Breakthrough', 'naval-passage': 'Fleet', 'air-route': 'Air route', 'supply-line': 'Supply line' };
 
 // Style for one record: what the renderer and the legend both read.
 export function routeStyle(rec) {
@@ -55,6 +55,10 @@ export function routeStyle(rec) {
     const color = rec.sideColor ? `side-${rec.sideColor}` : 'rust';
     const retreat = rec.value === 'retreat';
     const landing = rec.value === 'landing';
+    // a line of battle, a front or a fortified line is a path: no head, a heavier stroke
+    if (rec.kind === 'path' || ['front', 'siege-line', 'fortified-line', 'armistice-line'].includes(rec.value)) {
+      return { color, width: WIDTHS.bold, tier: 'bold', dash: DASH[rec.certainty] ?? 'solid', heads: 'none', markerStart: null, markerEnd: null, military: true, front: true, classLabel: MIL_LABELS[rec.value] ?? 'Line' };
+    }
     return { color, width: retreat ? WIDTHS.regular + 1.4 : WIDTHS.regular, tier: 'regular', dash: DASH[rec.certainty] ?? 'solid', heads: 'barb',
       markerStart: null, markerEnd: retreat ? 'hollow' : 'barb', hollow: retreat, landing, military: true, classLabel: MIL_LABELS[rec.value] ?? 'Movement' };
   }
@@ -393,6 +397,8 @@ export function routeLegend(records) {
     const rows = [];
     const sides = [...new Map(mil.filter((r) => r.sideColor).map((r) => [r.sideColor, r])).values()];
     for (const r of sides) rows.push({ swatch: 'route', color: `side-${r.sideColor}`, heads: 'barb', label: `${r.sideLabel ?? r.sideColor}: an armed force` });
+    const fronts = [...new Map(mil.filter((r) => routeStyle(r).front).map((r) => [r.sideColor, r])).values()];
+    for (const r of fronts) rows.push({ swatch: 'route', color: `side-${r.sideColor}`, heads: 'none', bold: true, label: `${r.sideLabel ?? r.sideColor}: line of battle` });
     const first = sides[0]?.sideColor ? `side-${sides[0].sideColor}` : 'rust';
     if (mil.some((r) => r.value === 'retreat')) rows.push({ swatch: 'route', color: first, heads: 'hollow', hollow: true, label: 'Retreat or withdrawal' });
     if (mil.some((r) => r.value === 'landing')) rows.push({ swatch: 'route', color: first, heads: 'barb', landing: true, label: 'Landing from the sea' });

@@ -26,6 +26,7 @@ import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
 import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from '../military/play.js';
 import { toInt as warDay } from '../military/wars.js';
+import { battleById, battleRows, battlePositions, battleMoves, battleTerrain } from '../military/events.js';
 import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
@@ -58,6 +59,12 @@ async function main() {
   // The play run (?play=): without a frame in the address, the chapter's frame from vocab.json's films (the Texas
   // chapters on the Texas frame, the war on its theater); when a chapter with another frame begins, the page
   // re-frames itself (a reload on the chapter's first day). A frame in the address is kept for the whole film.
+  // A battle frame (milestone 9): its focus, unless the address names a frame; the day of its phase as the date.
+  if (params.get('battle') && !frameParam) {
+    const vocab0 = await loadJSON('data/vocab.json').catch(() => null);
+    const hit = vocab0 ? battleById(vocab0, params.get('battle')) : null;
+    if (hit?.battle.frame) { frameParam = hit.battle.frame; frameFound = resolveFrame(frameParam, focusTable); }
+  }
   if (params.get('play') && !frameParam) {
     const vocab0 = await loadJSON('data/vocab.json').catch(() => null);
     const film0 = vocab0 ? filmById(vocab0, params.get('play')) : null;
@@ -98,7 +105,9 @@ async function main() {
     LESSON ? loadJSON('assets/relief/north-america-plate-carree.json').catch(() => null) : null,
   ]);
   const within = (b, r) => b.west >= r.west && b.east <= r.east && b.south >= r.south && b.north <= r.north;
-  const sharp = regional && within(frameFound?.box ?? stage.extent, regional.box) ? regional : null;
+  // a focus may bring relief of its own (a battle frame's USGS hillshade, src/focuses.json "relief")
+  const focusRelief = frameFound?.focus?.relief ? await loadJSON(`assets/${frameFound.focus.relief}`).catch(() => null) : null;
+  const sharp = focusRelief && within(frameFound.box, focusRelief.box) ? focusRelief : regional && within(frameFound?.box ?? stage.extent, regional.box) ? regional : null;
   if (riverNames.length && !riversNA) problems.push('the 1:10m rivers (data/base/derived/rivers-na.topojson) could not be read; rivers are named from the 1:50m set');
   let lesson = null;
   if (LESSON) {
@@ -163,7 +172,7 @@ async function main() {
   const state = {
     date: clampDate(startDate),
     exact: !!params.get('date'),
-    tracker: params.get('play') ? 'military' : TRACKERS[params.get('tracker')] ? params.get('tracker') : 'nations',
+    tracker: params.get('play') || params.get('battle') ? 'military' : TRACKERS[params.get('tracker')] ? params.get('tracker') : 'nations',
     mode: startFrom && !militaryStart ? 'diff' : 'snapshot',
     from: startFrom ? clampDate(startFrom) : null,
     since: startFrom && militaryStart ? clampDate(startFrom) : null,
@@ -178,6 +187,8 @@ async function main() {
     sequence: params.get('sequence') === 'false' ? false : params.get('sequence') && params.get('sequence') !== 'true' ? parseList(params.get('sequence')) : true,
     strip: params.get('strip') || 'war',
     film: params.get('play') || null, // the play run: a film id from vocab.json's films (brief §5)
+    battle: params.get('battle') || null, // a battle frame (milestone 9): a battle id from a war's battles, at a phase
+    phase: Math.max(1, Number(params.get('phase')) || 1),
   };
 
   // The Military layer's data, read once when the layer is first shown: the wars of vocab.json and the membership
@@ -218,12 +229,14 @@ async function main() {
   }
   let milWarned = false;
   let filmRec = null; // the film being played, resolved (src/military/play.js), once ?play= names one
+  let battleRec = null; // { war, battle } once ?battle= names one of a war's battles
   // What the layer shows on a date: the war asked for, else the longest war alive that day; its members; its title.
   function militaryFor(date) {
     if (!milData) return null;
     // (under a film the chapter says which war's record is shown; the menu and the address's war wait)
     const chapter = filmRec ? chapterOn(filmRec, date) : null;
-    const war = chapter?.war ? warById(milData.vocab, chapter.war) : state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
+    const war = battleRec ? battleRec.war : chapter?.war ? warById(milData.vocab, chapter.war) : state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
+    if (battleRec && war) return battleFor(war, battleRec.battle);
     if (!war) {
       if (!milWarned) { problems.push(state.war ? `war "${state.war}" is not in vocab.json's wars` : `no war in vocab.json is alive on ${longDate(date)}`); milWarned = true; }
       return { war: null, members: [], names: state.names, title: 'Military', file: milData.file };
@@ -342,6 +355,7 @@ async function main() {
       }
       // (a lesson map's own fields stay in the address, so it can be copied and opened again)
       for (const k of ORDER_PARAMS) if (!['date', 'year', 'from', 'tracker'].includes(k) && params.has(k)) q.set(k, params.get(k));
+      if (battleRec) q.set('phase', String(state.phase));
       history.replaceState(null, '', `?${q}`);
     });
   }
@@ -368,7 +382,7 @@ async function main() {
     render();
   }
   // (under the Electoral College, ← → go from election to election; Shift still moves ten years)
-  const stepYear = (delta) => (state.tracker === 'electoral' && Math.abs(delta) === 1
+  const stepYear = (delta) => (battleRec && Math.abs(delta) === 1 ? setPhase(state.phase + delta) : state.tracker === 'electoral' && Math.abs(delta) === 1
     ? stepChange(delta) : setDate(endOfYear(yearOf(state.date) + delta)));
   function stepChange(dir) {
     const days = changeDays[state.tracker] ?? changeDays.nations;
@@ -377,6 +391,7 @@ async function main() {
   }
   function togglePlay() {
     if (filmRec) return toggleFilm();
+    if (battleRec) return toggleBattlePlay();
     if (state.playing) { clearInterval(state.playing); state.playing = null; }
     else {
       if (yearOf(state.date) >= SPAN_B) setDate(endOfYear(SPAN_A));
@@ -384,6 +399,46 @@ async function main() {
         if (yearOf(state.date) >= Math.min(SPAN_B, yearOf(TODAY))) { togglePlay(); return; }
         setDate(endOfYear(yearOf(state.date) + 1), { fade: 200 });
       }, PLAY_MS);
+    }
+    d3.select('#play').classed('active', !!state.playing).text(state.playing ? '❚❚' : '▶');
+  }
+  // A battle frame (milestone 9): what the sheet shows in phase n of a battle. Rows that name the battle: the forces'
+  // positions (the latest by the phase in full, earlier ones faded), the lines of battle and the attacks whose phase
+  // covers n, the terrain the sources name. No side fills, no course list: the phases are the list and the strip.
+  function battleFor(war, battle) {
+    const phases = battle.phases ?? [];
+    const n = Math.min(Math.max(1, state.phase), Math.max(1, phases.length));
+    const phase = phases.find((p) => p.n === n) ?? { n, label: `phase ${n}`, at: `${n}`, when: battle.start };
+    const rows = [...battleRows(milData.events, battle.id), ...battleRows(milData.movements, battle.id), ...battleRows(milData.members, battle.id)];
+    const members = membersOf(milData.members, war.id);
+    const forcesOf = (war.forces ?? []).filter((f) => !state.forces.length || state.forces.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
+    const show = state.show.length ? state.show : ['movements', 'forces', 'terrain'];
+    const moves = show.includes('movements') ? withSides(battleMoves(rows, n), war).filter((r) => !state.forces.length || !r.force || state.forces.includes(r.force)) : [];
+    const positions = show.includes('forces') ? battlePositions(forcesOf, rows, n, phases) : [];
+    const checks = Object.fromEntries(positions.map((p) => [p.force.id, techFor(p.force, p.row, milData.tech, state.date)]));
+    const shown = show.includes('terrain') ? battleTerrain(rows).map((r) => ({ ...r, seq: null })) : [];
+    return { war, members, events: [], shown, moves, allMoves: moves, since: 0, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names,
+      title: `${battle.label}, ${battle.dates}`, file: milData.file, strip: 'battle', show, film: null,
+      battle: { id: battle.id, record: battle, label: battle.label, dates: battle.dates, frame: battle.frame, phase: { n, label: phase.label, at: phase.at, when: phase.when, count: phases.length }, source: battle.source } };
+  }
+  function setPhase(n) {
+    if (!battleRec) return;
+    const phases = battleRec.battle.phases ?? [];
+    const k = Math.min(Math.max(1, n), Math.max(1, phases.length));
+    if (k === state.phase) return;
+    state.phase = k;
+    const p = phases.find((x) => x.n === k);
+    if (p?.when) { state.date = clampDate(parseDate(p.when) ?? state.date); state.exact = true; }
+    render({ fade: 0 });
+  }
+  // ▶ under a battle frame steps the phases, four seconds each
+  const PHASE_MS = 4000;
+  function toggleBattlePlay() {
+    if (state.playing) { clearInterval(state.playing); state.playing = null; }
+    else {
+      const count = battleRec.battle.phases?.length ?? 1;
+      if (state.phase >= count) setPhase(1);
+      state.playing = setInterval(() => { if (state.phase >= count) { toggleBattlePlay(); return; } setPhase(state.phase + 1); }, PHASE_MS);
     }
     d3.select('#play').classed('active', !!state.playing).text(state.playing ? '❚❚' : '▶');
   }
@@ -417,6 +472,7 @@ async function main() {
     d3.select('#play').classed('active', !!filmRun).text(filmRun ? '❚❚' : '▶');
   }
   function filmStatus() {
+    if (battleRec) { const n = battleRec.battle.phases?.length ?? 0; d3.select('#film-status').text(`Phase ${state.phase} of ${n}`); return; }
     if (!filmRec) return;
     const ch = chapterOn(filmRec, state.date);
     const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
@@ -633,6 +689,8 @@ async function main() {
     // once the frame is painted (scripts/film.mjs).
     film: () => (filmRec ? { id: filmRec.id, title: filmRec.title, frame: filmRec.frame ?? null, frame_shown: frameFound?.id ?? null, chapters_frame: filmFrames, seconds: filmRec.seconds, chapters: filmRec.chapters.map((c) => ({ n: c.n, title: c.title, from: c.from, to: c.to, pace: c.pace, war: c.war, frame: c.frame ?? filmRec.frame ?? null, seconds: c.seconds })) } : null),
     filmFrames: (fps) => (filmRec ? frameList(filmRec, fps).map((f) => ({ index: f.index, at: f.at, date: isoDate(f.date), hold: f.hold, chapter: f.chapter.n, frame: f.chapter.frame ?? filmRec.frame ?? null })) : []),
+    battle: () => (battleRec ? { id: battleRec.battle.id, label: battleRec.battle.label, war: battleRec.war.id, phase: state.phase, phases: battleRec.battle.phases } : null),
+    setPhase: async (n) => { setPhase(Number(n)); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return state.phase; },
     filmSeek: async (s) => { setDate(parseDate(s), { exact: true, fade: 0 }); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return isoDate(state.date); },
     get state() { return { ...state, iso: isoDate(state.date), fromIso: state.from != null ? isoDate(state.from) : null }; },
     // Resolves once the first picture is on the sheet, relief, fonts and all: what scripts/map.mjs waits for.
@@ -660,6 +718,21 @@ async function main() {
 
   // The play run (brief §5): ?play=<film id> from vocab.json's films. The page opens on the film's first day unless a
   // date is given, the tracker is Military, each chapter names its war, and ▶ (space) runs the film.
+  if (state.battle) {
+    await ensureMilitary();
+    battleRec = battleById(milData.vocab, state.battle);
+    if (!battleRec) problems.push(`battle "${state.battle}" is not a battle of any war in vocab.json`);
+    else {
+      state.war = battleRec.war.id;
+      const phases = battleRec.battle.phases ?? [];
+      state.phase = Math.min(Math.max(1, state.phase), Math.max(1, phases.length));
+      const p = phases.find((x) => x.n === state.phase);
+      if (!params.get('date') && !params.get('year') && p?.when) { state.date = clampDate(parseDate(p.when)); state.exact = true; }
+      fillWarMenu();
+      warSel.property('disabled', true).attr('title', 'A battle frame shows its own war');
+      d3.select('#play').attr('title', `Step through the phases of ${battleRec.battle.label} (space; ← → one phase)`);
+    }
+  }
   if (state.film) {
     await ensureMilitary();
     filmRec = filmById(milData.vocab, state.film);

@@ -1,0 +1,10 @@
+{
+  "_comment": "Battle frame (milestone 9): Gettysburg, 1–3 July 1863, in seven phases. `battle` names a battle of a war in data/vocab.json; `phase` picks the phase (1 by default; ▶ or ← → step through them on the live address). Without `frame` the battle's own focus is used (gettysburg, with USGS 3DEP relief). Positions are the sources' narrative read onto gazetteer places, each approximate; no side fills at this scale.",
+  "page": "us",
+  "layer": "military",
+  "battle": "gettysburg",
+  "phase": 4,
+  "size": "1920x1080",
+  "records": "data/military.csv",
+  "out": "out/military/gettysburg-phase-4"
+}

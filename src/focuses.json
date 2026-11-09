@@ -42,7 +42,8 @@
     { "id": "plains", "title": "The Plains", "level": 4, "parents": ["north-america"], "page": "us.html", "extent": { "west": -105, "south": 35, "east": -89, "north": 46 }, "label": { "lon": -97, "lat": 40 } },
     { "id": "border-states", "title": "The Border States", "level": 4, "parents": ["north-america", "east"], "page": "us.html", "extent": { "west": -92, "south": 35, "east": -74, "north": 41.5 }, "label": { "lon": -84, "lat": 38 } },
     { "id": "mexico-war", "title": "The War with Mexico", "level": 3, "parents": ["north-america", "southwest"], "page": "us.html", "extent": { "west": -125, "south": 15, "east": -88, "north": 43 }, "label": { "lon": -104, "lat": 27 } },
-    { "id": "mexico-city", "title": "The Valley of Mexico", "level": 4, "parents": ["mexico-war"], "page": "us.html", "extent": { "west": -99.6, "south": 18.9, "east": -98.6, "north": 19.8 }, "label": { "lon": -99.1, "lat": 19.4 } }
+    { "id": "mexico-city", "title": "The Valley of Mexico", "level": 4, "parents": ["mexico-war"], "page": "us.html", "extent": { "west": -99.6, "south": 18.9, "east": -98.6, "north": 19.8 }, "label": { "lon": -99.1, "lat": 19.4 } },
+    { "id": "gettysburg", "title": "Gettysburg", "level": 5, "parents": ["east"], "page": "us.html", "extent": { "west": -77.3, "south": 39.778, "east": -77.17, "north": 39.85 }, "label": { "lon": -77.23, "lat": 39.82 }, "relief": "relief/gettysburg-plate-carree.json", "_relief": "USGS 3DEP hillshade (public domain), fetched 2026-11-09 for the battle frame (milestone 9); the Natural Earth relief is a blur at this scale" }
   ],
   "water": [
     { "text": "Atlantic Ocean", "lon": -35, "lat": 25, "min": 1, "max": 2 },

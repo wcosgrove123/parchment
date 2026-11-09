@@ -9,7 +9,8 @@ function scaleBar(projection, center, targetPx = 170) {
   if (!p1 || !p2) return { km: 1000, px: targetPx };
   const kmPerDeg = d3.geoDistance([lon, lat], [lon + 1, lat]) * 6371;
   const pxPerKm = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) / kmPerDeg;
-  const km = [100, 200, 250, 500, 1000, 2000, 3000, 5000].reduce((b, k) => (Math.abs(k * pxPerKm - targetPx) < Math.abs(b * pxPerKm - targetPx) ? k : b));
+  // (steps down to half a kilometer: a battle frame ten kilometers across would otherwise get a bar the width of the sheet)
+  const km = [0.5, 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 3000, 5000].reduce((b, k) => (Math.abs(k * pxPerKm - targetPx) < Math.abs(b * pxPerKm - targetPx) ? k : b));
   return { km, px: km * pxPerKm };
 }
 
@@ -38,7 +39,7 @@ export function createCartouche(root, { x0, y1 }, stage, projection) {
   sb.selectAll('line.tick').data([0, px / 2, px]).join('line').attr('class', 'tick')
     .attr('x1', (d) => d).attr('x2', (d) => d).attr('y1', -5).attr('y2', 0);
   sb.append('rect').attr('x', 0).attr('y', -3).attr('width', px / 2).attr('height', 3);
-  sb.append('text').attr('x', px + 8).attr('y', 1).text(`${km.toLocaleString('en-US')} km`);
+  sb.append('text').attr('x', px + 8).attr('y', 1).text(km < 1 ? `${Math.round(km * 1000)} m` : `${km.toLocaleString('en-US')} km`);
 
   return {
     // The cartouche's rectangle on the sheet, a reserved zone for the label pass.

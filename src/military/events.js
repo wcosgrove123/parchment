@@ -9,7 +9,40 @@ const last = (w) => (w ? w.year * 10000 + (w.month ?? 12) * 100 + (w.day ?? 31) 
 export const eventFirst = (r) => first(r.startWhen);
 export const eventLast = (r) => last(r.endWhen);
 
-export const eventsOf = (records, warId) => (records ?? []).filter((r) => r.tracker === 'military' && r.kind === 'point' && r.war === warId);
+// (a battle frame's position and terrain points are not events: no diamond, no numeral, no place on the strip)
+export const NOT_EVENTS = new Set(['position', 'terrain']);
+export const eventsOf = (records, warId) => (records ?? []).filter((r) => r.tracker === 'military' && r.kind === 'point' && r.war === warId && !NOT_EVENTS.has(r.value) && !r.battle);
+
+// Battle frames (milestone 9). A battle's rows name it in `battle` and the phase they belong to in `phase` (a
+// number, or a range 3-5); a row with no phase stands through the whole battle.
+export function parsePhase(s) {
+  const m = /^(\d+)(?:-(\d+))?$/.exec(String(s ?? '').trim());
+  return m ? { from: Number(m[1]), to: Number(m[2] ?? m[1]) } : null;
+}
+export const phaseCovers = (row, n) => { const p = parsePhase(row.phase); return !p || (p.from <= n && n >= p.from && n <= p.to); };
+export const phaseFrom = (row) => parsePhase(row.phase)?.from ?? 1;
+export const battleRows = (records, battleId) => (records ?? []).filter((r) => r.tracker === 'military' && r.battle === battleId);
+export function battleById(vocab, id) {
+  for (const w of vocab?.wars ?? []) { const b = (w.battles ?? []).find((x) => x.id === id); if (b) return { war: w, battle: b }; }
+  return null;
+}
+// Where each force stands in phase n: its latest position row begun by n in full; its earlier positions faded (P4),
+// earliest lightest. The shape is forcePositions': { force, side, at, since, moving, row, earlier }.
+export function battlePositions(forces, rows, n, phases = []) {
+  const out = [];
+  const label = (k) => phases.find((p) => p.n === k)?.at ?? `phase ${k}`;
+  for (const f of forces) {
+    const mine = rows.filter((r) => r.kind === 'point' && r.value === 'position' && r.force === f.id && r.lon != null && phaseFrom(r) <= n).sort((a, b) => phaseFrom(a) - phaseFrom(b));
+    if (!mine.length) continue;
+    const now = mine[mine.length - 1];
+    const earlier = mine.slice(0, -1).filter((r) => r.lon !== now.lon || r.lat !== now.lat).map((r) => ({ at: [r.lon, r.lat], label: r.label, date: label(phaseFrom(r)) }));
+    out.push({ force: f, side: f.side, at: [now.lon, now.lat], since: now.start, moving: false, row: now, earlier, phase: phaseFrom(now) });
+  }
+  return out;
+}
+// The marches and attacks of phase n (arrows whose phase range covers n), and the lines of battle standing in it.
+export const battleMoves = (rows, n) => rows.filter((r) => (r.kind === 'arrow' || r.kind === 'path') && r.coords && phaseCovers(r, n));
+export const battleTerrain = (rows) => rows.filter((r) => r.kind === 'point' && r.value === 'terrain' && r.lon != null);
 
 // Events that have begun by the date, in date order (the strip and the list keep every event of the war).
 export const eventsUpTo = (events, date) => events.filter((r) => eventFirst(r) <= date).sort((a, b) => eventFirst(a) - eventFirst(b) || a.id.localeCompare(b.id));
@@ -116,7 +149,10 @@ export function eventLook(r, war) {
   else if (r.value === 'landing') base.form = 'circle';
   else if (r.value === 'fort') { base.form = 'fort'; base.ring = r.captor ? sideOf(r.captor) : null; } // P6: one navy mark; a ring in a captor's color
   else if (r.value === 'headquarters') { base.form = 'hq'; base.ring = sideOf(r.side); }
-  else if (r.value === 'massacre') base.form = 'massacre'; // provisional: a navy ring with a rust dot (the sheet's first candidate) until the owner chooses
+  else if (r.value === 'massacre') base.form = 'massacre';
+  else if (r.value === 'terrain') base.form = 'terrain'; // a hill, ridge or place the sources name: a hollow dot and its name
+  else if (r.value === 'position') base.form = 'position'; // a force's stand in a battle phase: the force mark alone
+ // provisional: a navy ring with a rust dot (the sheet's first candidate) until the owner chooses
   return base;
 }
 
@@ -201,6 +237,7 @@ export function eventLegend(events, war, colorOf) {
   if (looks.some((l) => l.form === 'fort')) rows.push({ swatch: 'icon', icon: 'fort', label: 'Fort (one mark in every era)', role: 'event' });
   if (looks.some((l) => l.form === 'hq')) rows.push({ swatch: 'hq', label: 'Headquarters, dated', role: 'event' });
   if (looks.some((l) => l.form === 'massacre')) rows.push({ swatch: 'massacre', label: 'Killing of prisoners or civilians (row under review)', role: 'event' });
+  if (looks.some((l) => l.form === 'terrain')) rows.push({ swatch: 'terrain', label: 'Hill, ridge or place the sources name', role: 'event' });
   if (events.some((r) => r.seq != null)) rows.push({ swatch: 'numeral', label: 'The course of the war: see the list', role: 'event' });
   return rows;
 }

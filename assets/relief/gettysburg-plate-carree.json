@@ -1,0 +1,12 @@
+{
+  "_source": "USGS 3D Elevation Program (3DEP), National Map 3DEPElevation ImageServer, rendering rule Hillshade Gray, exported 2026-11-09 for the Gettysburg battle frame (public domain, U.S. federal); scripts/fetch-relief-3dep.mjs",
+  "image": "relief/gettysburg-plate-carree.png",
+  "width": 3120,
+  "height": 2400,
+  "box": {
+    "west": -77.36,
+    "south": 39.72,
+    "east": -77.1,
+    "north": 39.92
+  }
+}

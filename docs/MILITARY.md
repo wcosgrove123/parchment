@@ -16,8 +16,9 @@ order or map changes unless it asks for `layer: military`.
 | 4 | lines computed from the polygons: blockades off a coast, treaty lines, ghost borders; the `mexico-city` inset; `forces` to follow one campaign | done (`tests/maps/military/mexico-war-1848-full.json`); fronts, fortified lines and parallels wait for the maps that need them |
 | 5 | force marks: milsymbol frames by type and size, the equipment icon when the catalog allows it on the date, earlier stands faded; the star fort; ship icons on blockades | done (`data/tech.json`; the owner reviewed the icons 2026-11-09) |
 | 7 | play: films of chapters at their paces, ▶ on the page and an MP4 from `npm run film` (the owner asked for it on 2026-11-09, ahead of the human cost) | done (`tests/maps/military/texas-film.json`: Mexican Texas to the Gadsden Purchase, 1821–1854) |
+| 9 | battle frames: a battle's phases on its own frame with USGS relief, lines of battle, attacks, the corps where they stood, the hills the sources name (the owner chose it before the human cost) | done (`tests/maps/military/gettysburg.json`: Gettysburg, 1–3 July 1863, seven phases) |
 | 6 | the human cost | next |
-| 8–10 | panels and accounts; battle frames; strength width | |
+| 8, 10 | panels and accounts; strength width | |
 
 ## Turning it on
 
@@ -53,6 +54,17 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
+
+## Battle frames (milestone 9)
+
+A **battle** is an entry of a war's `battles` in `data/vocab.json`: label, dates, a frame (a focus of `src/focuses.json`,
+which may carry fine relief of its own) and numbered phases, each with its day, a short name and a sentence. Rows of the
+war table name the battle and a phase (`battle`, `phase`: a number or a range such as 4-5): `position` points stand a
+force at a place for a phase, `front` paths are the lines of battle, arrows the attacks and marches, `terrain` points
+the hills and places the sources name. `us.html?battle=gettysburg&phase=4` opens the frame on that phase; ▶ steps the
+phases, ← → one at a time; an order with `battle` and `phase` renders a still. There are no side fills at this scale;
+the force marks are compact; positions are the sources' narrative read onto gazetteer places and say so (approximate).
+Gettysburg's relief is a USGS 3DEP hillshade (public domain, `assets/relief/gettysburg-plate-carree.json`).
 
 ## Play: films (milestone 7)
 

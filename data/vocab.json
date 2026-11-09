@@ -277,7 +277,7 @@
         "armistice",
         "massacre",
         "fort",
-        "headquarters"
+        "headquarters","position","terrain"
       ],
       "point_shapes": {
         "battle": "rust-diamond",
@@ -291,7 +291,7 @@
         "treaty": "navy-triangle",
         "armistice": "navy-triangle",
         "fort": "navy-square",
-        "headquarters": "navy-square", "massacre": "steel-circle"
+        "headquarters": "navy-square", "massacre": "steel-circle", "position": "steel-circle", "terrain": "steel-circle"
       },
       "_shapes_note": "point_shapes are what another layer would draw for these rows; the Military layer draws battles in the victor's color (P5) and forts, headquarters and massacres with marks of their own (P6; the massacre mark awaits the owner and the co-teachers, so it has no shape here and is not drawn until it does)."
     }
@@ -65091,6 +65091,244 @@
       ],
       "source": "Handbook of Texas Online, s.v. 'Republic of Texas', 'Mexican Invasions of 1842', 'Mier Expedition', 'Texan Santa Fe Expedition', 'Annexation'. Mexico did not recognize the independence of Texas; this record holds the armed clashes of the Republic's years and the steps of annexation. A test entry until reviewed.",
       "_comment": "Not a declared war: a conflict record, so that the Republic's years can be played with the same grammar as the wars on either side of them (the owner's play run, 2026-11-09). Its sides' fills show who held what; its events are the clashes and the declarations."
+    },
+    {
+      "id": "civil-war",
+      "names": {
+        "us": "The Civil War",
+        "confederacy": "The War Between the States"
+      },
+      "list_title": "The course of the war",
+      "start": "1861-04-12",
+      "end": "1865-05-26",
+      "sides": [
+        {
+          "id": "us",
+          "label": "United States (Union)",
+          "color": "a",
+          "why": "blue, the uniform color: the Union's blue and the Confederacy's gray are the colors the period itself used, which P1 allows as a per-war override with its reason (owner's defaults, 2026-11-09)"
+        },
+        {
+          "id": "confederacy",
+          "label": "Confederate States",
+          "color": "gray",
+          "why": "gray, the uniform color, by the same override"
+        }
+      ],
+      "source": "A test entry (2026-11-09) made for the first battle frame, Gettysburg; the war as a whole (members, events, movements) waits for its own rows. Dates: the firing on Fort Sumter, 12 April 1861, to the surrender of the Trans-Mississippi Department, 26 May 1865 (National Park Service).",
+      "_comment": "Battle frames (brief, milestone 9): a battle is an entry of `battles` with a frame (a focus of src/focuses.json) and numbered phases. Rows of the record table name the battle (`battle`) and the phase they belong to (`phase`: a number, or a range 3-5): `position` points stand a force at a place for a phase; `front` paths are lines of battle; arrows are the attacks and marches; `terrain` points name the hills, ridges and places the sources use. Positions are read off the sources' narratives as paths through gazetteer places, never traced from another map; each is approximate.",
+      "battles": [
+        {
+          "id": "gettysburg",
+          "label": "Gettysburg",
+          "dates": "1–3 July 1863",
+          "start": "1863-07-01",
+          "end": "1863-07-03",
+          "frame": "gettysburg",
+          "source": "National Park Service, Gettysburg National Military Park, 'The Battle of Gettysburg' (battle summaries by day); Edwin B. Coddington, The Gettysburg Campaign: A Study in Command (1968); Stephen W. Sears, Gettysburg (2003); strengths from John W. Busey and David G. Martin, Regimental Strengths and Losses at Gettysburg (1986). A test entry until the owner and the teachers review it.",
+          "phases": [
+            {
+              "n": 1,
+              "when": "1863-07-01",
+              "at": "1 Jul, morning",
+              "label": "1 July, morning: Buford's cavalry holds the ridges west of the town until Reynolds brings up the I Corps"
+            },
+            {
+              "n": 2,
+              "when": "1863-07-01",
+              "at": "1 Jul, afternoon",
+              "label": "1 July, afternoon: Hill from the west and Ewell from the north drive the I and XI Corps through the town to Cemetery Hill"
+            },
+            {
+              "n": 3,
+              "when": "1863-07-02",
+              "at": "2 Jul, morning",
+              "label": "2 July, morning: the Union line from Culp's Hill to the Round Tops; Lee plans to strike both ends of it"
+            },
+            {
+              "n": 4,
+              "when": "1863-07-02",
+              "at": "2 Jul, evening",
+              "label": "2 July, late afternoon and evening: Longstreet attacks the Union left, Ewell the right"
+            },
+            {
+              "n": 5,
+              "when": "1863-07-03",
+              "at": "3 Jul, morning",
+              "label": "3 July, morning: the fight for Culp's Hill"
+            },
+            {
+              "n": 6,
+              "when": "1863-07-03",
+              "at": "3 Jul, afternoon",
+              "label": "3 July, afternoon: the cannonade and Pickett's Charge against the Union center"
+            },
+            {
+              "n": 7,
+              "when": "1863-07-04",
+              "at": "4 Jul",
+              "label": "4 July: Lee withdraws toward Cashtown and the Potomac"
+            }
+          ]
+        }
+      ],
+      "forces": [
+        {
+          "id": "union-cav-buford",
+          "side": "us",
+          "label": "Buford",
+          "commander": "John Buford (1st Cavalry Division)",
+          "type": "cavalry",
+          "echelon": "XX",
+          "tech": [],
+          "strength": {
+            "text": "≈2,700 engaged on 1 July",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968), ch. 10."
+        },
+        {
+          "id": "union-i",
+          "side": "us",
+          "label": "I Corps",
+          "commander": "John F. Reynolds, then Abner Doubleday, then John Newton",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈12,200",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968); NPS battle summary, 1 July."
+        },
+        {
+          "id": "union-ii",
+          "side": "us",
+          "label": "II Corps",
+          "commander": "Winfield S. Hancock",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈11,300",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968)."
+        },
+        {
+          "id": "union-iii",
+          "side": "us",
+          "label": "III Corps",
+          "commander": "Daniel E. Sickles",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈10,700",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968); NPS battle summary, 2 July."
+        },
+        {
+          "id": "union-v",
+          "side": "us",
+          "label": "V Corps",
+          "commander": "George Sykes",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈10,900",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968)."
+        },
+        {
+          "id": "union-vi",
+          "side": "us",
+          "label": "VI Corps",
+          "commander": "John Sedgwick",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈13,600",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968)."
+        },
+        {
+          "id": "union-xi",
+          "side": "us",
+          "label": "XI Corps",
+          "commander": "Oliver O. Howard",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈9,200",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968); NPS battle summary, 1 July."
+        },
+        {
+          "id": "union-xii",
+          "side": "us",
+          "label": "XII Corps",
+          "commander": "Henry W. Slocum",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈9,800",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968)."
+        },
+        {
+          "id": "csa-first",
+          "side": "confederacy",
+          "label": "Longstreet",
+          "commander": "James Longstreet (First Corps)",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈20,700",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968); NPS battle summary, 2 July."
+        },
+        {
+          "id": "csa-second",
+          "side": "confederacy",
+          "label": "Ewell",
+          "commander": "Richard S. Ewell (Second Corps)",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈20,600",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968)."
+        },
+        {
+          "id": "csa-third",
+          "side": "confederacy",
+          "label": "Hill",
+          "commander": "Ambrose Powell Hill (Third Corps)",
+          "type": "infantry",
+          "echelon": "XXX",
+          "tech": [],
+          "strength": {
+            "text": "≈22,100",
+            "source": "Busey and Martin (1986)"
+          },
+          "source": "Coddington (1968); NPS battle summary, 1 July."
+        }
+      ],
+      "_forces_note": "The corps at Gettysburg. tech is empty on purpose: the catalog's musket icon ends in 1860 and no rifled-musket icon is reviewed yet (a gap for the owner); Stuart's cavalry, which reached the field on 2 July, has no sourced place among the gazetteer features and is left off. TEST entries, for review."
     }
   ],
   "films": [

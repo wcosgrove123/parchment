@@ -32,8 +32,8 @@ test('vocab.json: the military tracker and the first war, with sides that name t
   assert.equal(toInt('1848', true), 18481231);
 });
 
-test('the record table reads the seven optional columns when the header has them, and never otherwise', () => {
-  assert.deepEqual(EXTRA_COLUMNS, ['war', 'side', 'force', 'outcome', 'strength', 'losses', 'tech']);
+test('the record table reads the nine optional columns when the header has them, and never otherwise', () => {
+  assert.deepEqual(EXTRA_COLUMNS, ['war', 'side', 'force', 'outcome', 'strength', 'losses', 'tech', 'battle', 'phase']);
   const checked = validateRecords(csv, vocab);
   assert.deepEqual(checked.problems, [], JSON.stringify(checked.problems));
   const us = checked.records.find((r) => r.id === 'test-mx-member-us');

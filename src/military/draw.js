@@ -64,6 +64,12 @@ export function decorateMarks(layer, placed, war, icons = {}) {
       g.append('path').attr('class', 'mil').attr('d', `M0,${-h}L14,${-h + 4}L0,${-h + 8}Z`).attr('fill', look.ring ? cssColor(look.ring.color) : NAVY);
       g.append('circle').attr('class', 'mil').attr('r', 1.6).attr('fill', NAVY);
     }
+    if (look.form === 'terrain') {
+      path.style('display', 'none');
+      g.append('circle').attr('class', 'mil mil-terrain').attr('r', 2.8).attr('fill', CREAM).attr('stroke', NAVY).attr('stroke-width', 1.1);
+    } else if (look.form === 'position') {
+      path.style('display', 'none'); // the force mark stands here (drawForceMarks)
+    }
     if (look.form === 'massacre') {
       // provisional (the owner has not chosen among the sheet's three candidates): a navy ring with a rust dot;
       // numbers and words carry the event (brief: never a picture of victims)
@@ -215,7 +221,7 @@ export function forceFrame(g, x, y, { glyph = 'infantry', echelon = 'XX', color 
 // the frame in the side's color with the equipment icon beside it when the catalog allows it on that date, the
 // label below; earlier stands as smaller frames in lighter steps, earliest lightest. positions: forcePositions;
 // checks: { forceId → techFor result }. Returns the boxes drawn, for the label pass to keep clear of.
-export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}, box = null } = {}) {
+export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}, box = null, compact = false } = {}) {
   layer.selectAll('*').remove();
   const boxes = [];
   const inBox = (p) => !box || (p[0] >= box[0] && p[0] <= box[0] + box[2] && p[1] >= box[1] && p[1] <= box[1] + box[3]);
@@ -236,7 +242,8 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
     const g = layer.append('g').attr('class', 'mil-force');
     // several forces at one place (two armies met at a battle) stack: the first at the usual offset, the next
     // below, then above, then farther, until the frame and label touch no earlier force's box
-    const strengthText = f.strength?.text ? f.strength.text.split(';')[0].replace(/ at .*$/, '') : '';
+    // (compact, on a battle frame: the frame and the name alone; the strength stays on the slip and in the title)
+    const strengthText = !compact && f.strength?.text ? f.strength.text.split(';')[0].replace(/ at .*$/, '') : '';
     const labelW = (f.label.length + (strengthText ? strengthText.length + 3 : 0)) * 6.4;
     const need = { w: Math.max(labelW, 60) + 4, h: 22 + 22 };
     const free = (bx, by) => !boxes.some((b) => bx < b.x + b.w + 4 && bx + need.w > b.x - 4 && by < b.y + b.h + 4 && by + need.h > b.y - 4);
@@ -248,7 +255,7 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
     }
     g.append('line').attr('x1', xy[0]).attr('y1', xy[1]).attr('x2', fx - 6).attr('y2', fy + 6).attr('stroke', color).attr('stroke-width', 0.8).attr('stroke-opacity', 0.8);
     g.append('circle').attr('cx', xy[0]).attr('cy', xy[1]).attr('r', 2).attr('fill', color);
-    const fr = forceFrame(g, fx, fy, { glyph: f.type, echelon: f.echelon ?? '', color, size: 22 });
+    const fr = forceFrame(g, fx, fy, { glyph: f.type, echelon: f.echelon ?? '', color, size: compact ? 18 : 22 });
     let right = fx + fr.w / 2;
     const check = checks[f.id];
     if (check?.ok && icons[check.key]) { iconAt(g, icons, check.key, right + 12, fy, 20, color); right += 24; }
@@ -262,6 +269,52 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
   }
   return boxes;
 }
+
+// Battle frames (milestone 9): the phases of the battle as the list in the margin (the current one in full, the
+// ones to come lighter) and as a strip of steps under the map, the current step gold.
+export function drawPhaseList(root, { x0, y0, x1, y1 }, battle, n, { corner = 'top-right', width = 360, avoid = null } = {}) {
+  root.selectAll('g.course-list').remove();
+  const phases = battle?.phases ?? [];
+  if (!phases.length) return null;
+  const PAD = 12, ROW = 17, W = width;
+  const wrap = (t, max = 58) => { const words = t.split(' '); const lines = ['']; for (const w of words) { if ((lines[lines.length - 1] + ' ' + w).trim().length > max) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + ' ' + w).trim(); } return lines; };
+  const rows = phases.map((p) => ({ ...p, lines: wrap(p.label) }));
+  const H = PAD * 2 + 22 + rows.reduce((a, r) => a + r.lines.length * ROW, 0) + rows.length * 3;
+  const x = corner.endsWith('left') ? x0 + 22 : x1 - 22 - W;
+  const y = corner.startsWith('top') ? y0 + 22 : y1 - 22 - H;
+  const g = root.append('g').attr('class', 'course-list legend phase-list').attr('transform', `translate(${x},${y})`);
+  g.append('rect').attr('class', 'legend-box').attr('width', W).attr('height', H);
+  g.append('text').attr('class', 'legend-title').attr('x', PAD).attr('y', PAD + 10).text(`${battle.label}, ${battle.dates}: the phases`);
+  let ry = PAD + 24;
+  for (const r of rows) {
+    const cur = r.n === n, past = r.n < n;
+    const nn = g.append('g').attr('transform', `translate(${PAD + 8},${ry - 4})`).attr('opacity', past ? 0.75 : cur ? 1 : 0.45);
+    nn.append('circle').attr('r', 7.5).attr('fill', cur ? GOLD : CREAM).attr('stroke', NAVY).attr('stroke-width', 1);
+    nn.append('text').attr('text-anchor', 'middle').attr('dominant-baseline', 'central').attr('font-size', 9).attr('font-weight', 700).attr('fill', NAVY).text(String(r.n));
+    r.lines.forEach((line, i) => {
+      g.append('text').attr('class', `course-row${cur ? ' course-what' : ''}`).attr('x', PAD + 22).attr('y', ry + i * ROW).attr('font-size', 11.5).attr('opacity', past ? 0.75 : cur ? 1 : 0.5).text(line);
+    });
+    ry += r.lines.length * ROW + 3;
+  }
+  return { x, y, w: W, h: H };
+}
+export function drawPhaseStrip(root, { x0, x1, y1 }, battle, n) {
+  root.selectAll('g.war-strip').remove();
+  const phases = battle?.phases ?? [];
+  if (!phases.length) return;
+  const g = root.append('g').attr('class', 'war-strip phase-strip');
+  const base = y1 + 24;
+  const w = (x1 - x0 - 20) / phases.length;
+  g.append('text').attr('class', 'chapter-label').attr('x', x0 + 10).attr('y', base - 38).attr('font-size', 11).attr('fill', NAVY).text(`${battle.label}, ${battle.dates}: phase ${n} of ${phases.length}`);
+  phases.forEach((p, i) => {
+    const x = x0 + 10 + i * w;
+    const cur = p.n === n, past = p.n < n;
+    g.append('rect').attr('x', x + 1).attr('y', base - 10).attr('width', w - 2).attr('height', 10).attr('rx', 2).attr('fill', cur ? GOLD : past ? NAVY : CREAM).attr('fill-opacity', cur ? 1 : past ? 0.55 : 1).attr('stroke', NAVY).attr('stroke-width', 0.8);
+    g.append('text').attr('class', 'tick-label').attr('x', x + w / 2).attr('y', base + 16).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', NAVY).attr('font-weight', cur ? 700 : 400).text(p.at);
+  });
+  g.append('line').attr('class', 'baseline').attr('x1', x0).attr('x2', x1).attr('y1', base).attr('y2', base).attr('stroke', NAVY).attr('stroke-width', 1.2);
+}
+
 
 // A route that leaves the frame stops at its edge with a tab saying where it went (P3). drawn: from drawRoutes;
 // box: the main view's [x, y, w, h]. Tabs go in the labels layer, above everything.

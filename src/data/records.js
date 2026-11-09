@@ -9,7 +9,7 @@ export const COLUMNS = ['id', 'course', 'unit', 'topic', 'kc', 'theme', 'tracker
   'start', 'end', 'grade', 'value', 'certainty', 'label', 'source', 'qc_status', 'qc_by', 'qc_note'];
 // Optional columns at the end of the table (the Military layer, brief of 2026-11-09 §1): read when the header has
 // them, blank on every other row. A table without them is read exactly as before.
-export const EXTRA_COLUMNS = ['war', 'side', 'force', 'outcome', 'strength', 'losses', 'tech'];
+export const EXTRA_COLUMNS = ['war', 'side', 'force', 'outcome', 'strength', 'losses', 'tech', 'battle', 'phase'];
 
 // RFC 4180-style CSV: quoted fields may hold commas, quotes ("") and newlines. Returns rows of strings.
 export function parseCSV(text) {
@@ -155,6 +155,17 @@ export function validateRecords(text, vocab) {
       if (rec.side && war && !war.sides.some((s) => s.id === rec.side)) bad(`side "${rec.side}" is not a side of ${rec.war} (${war.sides.map((s) => s.id).join(', ')})`);
       const op = rec.outcome ? outcomeProblem(rec.outcome, war) : null;
       if (op) bad(op);
+      // a battle frame's rows (milestone 9): the battle is one of the war's, the phase a number or a range within it
+      if (rec.battle && war) {
+        const b = (war.battles ?? []).find((x) => x.id === rec.battle);
+        if (!b) bad(`battle "${rec.battle}" is not a battle of ${rec.war} (${(war.battles ?? []).map((x) => x.id).join(', ') || 'none yet'})`);
+        else if (rec.phase) {
+          const pm = /^(\d+)(?:-(\d+))?$/.exec(String(rec.phase).trim());
+          const n = b.phases?.length ?? 0;
+          if (!pm) bad(`phase "${rec.phase}" should be a number (3) or a range (3-5)`);
+          else if (Number(pm[1]) < 1 || Number(pm[2] ?? pm[1]) > n || Number(pm[1]) > Number(pm[2] ?? pm[1])) bad(`phase "${rec.phase}" is outside ${b.id}'s ${n} phases`);
+        }
+      } else if (rec.phase && !rec.battle) bad('phase is set but battle is blank');
     }
     if (!vocab.certainty.includes(rec.certainty)) bad(`certainty "${rec.certainty}" is not one of ${vocab.certainty.join(', ')}`);
     if (!rec.label) bad('label is blank');

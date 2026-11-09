@@ -534,6 +534,12 @@
     "label": "Tlaxcala de Xicoténcatl",
     "fetched": "2026-11-06"
   },
+  "Q694550": {
+    "lon": -77.2322,
+    "lat": 39.8283,
+    "label": "Gettysburg",
+    "fetched": "2026-11-09"
+  },
   "Q695265": {
     "lon": 56.46,
     "lat": 27.0675,
@@ -557,6 +563,18 @@
     "lat": 25.85,
     "label": "Heroica Matamoros",
     "fetched": "2026-11-06"
+  },
+  "Q754471": {
+    "lon": -77.3253,
+    "lat": 39.7047,
+    "label": "Emmitsburg",
+    "fetched": "2026-11-09"
+  },
+  "Q754640": {
+    "lon": -77.1706,
+    "lat": 39.6572,
+    "label": "Taneytown",
+    "fetched": "2026-11-09"
   },
   "Q765552": {
     "lon": -97.4478,
@@ -623,6 +641,12 @@
     "lat": 24.035,
     "label": "San Salvador Island",
     "fetched": "2026-11-06"
+  },
+  "Q953597": {
+    "lon": -77.2363,
+    "lat": 39.792,
+    "label": "Little Round Top",
+    "fetched": "2026-11-09"
   },
   "Q955668": {
     "lon": -67.7298,
@@ -954,6 +978,12 @@
     "label": "Harrisburg",
     "fetched": "2026-11-09"
   },
+  "Q4210323": {
+    "lon": -77.2203,
+    "lat": 39.8201,
+    "label": "Culp's Hill",
+    "fetched": "2026-11-09"
+  },
   "Q4872241": {
     "lon": -98.4178,
     "lat": 29.4879,
@@ -970,6 +1000,36 @@
     "lon": -106.1864,
     "lat": 28.8717,
     "label": "Battle of the Sacramento River",
+    "fetched": "2026-11-09"
+  },
+  "Q4906242": {
+    "lon": -77.2394,
+    "lat": 39.7861,
+    "label": "Big Round Top",
+    "fetched": "2026-11-09"
+  },
+  "Q4916916": {
+    "lon": -77.3586,
+    "lat": 39.8839,
+    "label": "Cashtown",
+    "fetched": "2026-11-09"
+  },
+  "Q4993727": {
+    "lon": -77.2289,
+    "lat": 39.8216,
+    "label": "Cemetery Hill",
+    "fetched": "2026-11-09"
+  },
+  "Q4994034": {
+    "lon": -77.2325,
+    "lat": 39.8181,
+    "label": "Cemetery Ridge",
+    "fetched": "2026-11-09"
+  },
+  "Q4994059": {
+    "lon": -77.2424,
+    "lat": 39.7915,
+    "label": "Devil's Den",
     "fetched": "2026-11-09"
   },
   "Q5034593": {
@@ -996,6 +1056,12 @@
     "label": "Cabo Corrientes, Mar del Plata",
     "fetched": "2026-11-06"
   },
+  "Q5699020": {
+    "lon": -77.1461,
+    "lat": 39.9492,
+    "label": "Heidlersburg",
+    "fetched": "2026-11-09"
+  },
   "Q5700558": {
     "lon": -105.1422,
     "lat": 35.2,
@@ -1008,11 +1074,29 @@
     "label": "Inharrime",
     "fetched": "2026-11-06"
   },
+  "Q6802600": {
+    "lon": -77.25,
+    "lat": 39.84,
+    "label": "McPherson Ridge",
+    "fetched": "2026-11-09"
+  },
   "Q7413847": {
     "lon": -96.0975,
     "lat": 29.8069,
     "label": "San Felipe de Austin State Historic Site",
     "fetched": "2026-11-06"
+  },
+  "Q7431849": {
+    "lon": -77.2447,
+    "lat": 39.8319,
+    "label": "Schmucker Hall",
+    "fetched": "2026-11-09"
+  },
+  "Q7449472": {
+    "lon": -77.2464,
+    "lat": 39.8256,
+    "label": "Seminary Ridge",
+    "fetched": "2026-11-09"
   },
   "Q7796515": {
     "lon": -97.7842,
@@ -1090,6 +1174,12 @@
     "lon": -97.1586,
     "lat": 26.0656,
     "label": "Brazos Santiago Pass",
+    "fetched": "2026-11-09"
+  },
+  "Q49689131": {
+    "lon": -77.2722,
+    "lat": 39.8333,
+    "label": "Herr Ridge",
     "fetched": "2026-11-09"
   },
   "Q61127668": {

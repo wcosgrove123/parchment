@@ -113,6 +113,7 @@ export function labelPriority(r, termini) {
 // Under the routes tracker a point prints its date only when it has one (start = end); a port called at across
 // a voyage's span prints its name alone, the span stays in the hover. Other trackers print the date as always.
 export function markWhen(r) {
+  if (r.tracker === 'military' && (r.value === 'terrain' || r.value === 'position')) return ''; // a hill or a stand on a battle frame: the name alone
   return r.tracker === 'routes' && r.start !== r.end ? '' : yearLabel(r);
 }
 

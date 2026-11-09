@@ -68,6 +68,8 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
       } else if (e.swatch === 'hq') {
         row.append('line').attr('x1', 6).attr('x2', 6).attr('y1', -2).attr('y2', 15).attr('stroke', 'var(--navy)').attr('stroke-width', 1);
         row.append('path').attr('d', 'M6,-2L20,2L6,6Z').attr('fill', e.color ?? 'var(--navy)');
+      } else if (e.swatch === 'terrain') {
+        row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 3).attr('fill', 'var(--cream)').attr('stroke', 'var(--navy)').attr('stroke-width', 1.1);
       } else if (e.swatch === 'massacre') {
         row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 6).attr('fill', 'none').attr('stroke', 'var(--navy)').attr('stroke-width', 1.4);
         row.append('circle').attr('cx', 11).attr('cy', 7).attr('r', 2.2).attr('fill', 'var(--rust)');

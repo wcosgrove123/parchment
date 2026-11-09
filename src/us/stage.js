@@ -24,7 +24,7 @@ import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { eventLegend } from '../military/events.js';
-import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf } from '../military/draw.js';
+import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf, drawPhaseList, drawPhaseStrip } from '../military/draw.js';
 import { forceLegend } from '../military/events.js';
 import { linesOn, blockadeRuns, borderRuns, dedupeRuns, runsLength } from '../military/lines.js';
 import { toInt as warInt } from '../military/wars.js';
@@ -230,6 +230,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const items = [];
     const militaryLook = (it, pw) => {
       if (!military?.war) return { fill: null, label: null };
+      if (military.show?.length && !military.show.includes('territory')) return { fill: null, label: null }; // a battle frame: no side fills
       const hit = sideOf(military.war, military.members, itemKeys(it, { power: pw, powers, twins: lesson?.twins }), date);
       return hit ? sideLook(hit) : { fill: null, label: null };
     };
@@ -321,9 +322,16 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const corner = legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right';
       const [vx, vy, vw, vh] = main.box;
       const flagged = (milNow.shown ?? []).map((r) => { const xy = r.lon != null ? projection([r.lon, r.lat]) : null; return { ...r, offSheet: !(xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh) }; });
-      milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner, title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() });
-      root.classed('war-strip-on', milNow.strip !== 'stage');
-      if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date, span: milNow.film?.span ?? null, chapter: milNow.film?.chapter ?? null }); else root.selectAll('g.war-strip').remove();
+      if (milNow.battle) {
+        // a battle frame (milestone 9): the phases in the margin and as the strip
+        milListBox = drawPhaseList(root, frame, milNow.battle.record, milNow.battle.phase.n, { corner, avoid: legend.box() });
+        root.classed('war-strip-on', true);
+        drawPhaseStrip(root, frame, milNow.battle.record, milNow.battle.phase.n);
+      } else {
+        milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner, title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() });
+        root.classed('war-strip-on', milNow.strip !== 'stage');
+        if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date, span: milNow.film?.span ?? null, chapter: milNow.film?.chapter ?? null }); else root.selectAll('g.war-strip').remove();
+      }
       // the computed lines of the war alive on the date (P7): blockades off the other side's coast, treaty lines, ghosts
       milNow.lines = (!milNow.show?.length || milNow.show.includes('lines')) ? computeLines(milNow, date, data) : [];
       drawLines(recordLayers.lines, defs, milNow.lines, milNow.icons ?? {});
@@ -831,7 +839,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // the forces where they stand (milestone 5) go first: route names and place names keep clear of their boxes (the
     // label pass below); the lines themselves run under the marks, so the boxes are not zones here (a zone trims a
     // line, and at a continental scale a force's label box can cover a whole short march)
-    const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box }) : (recordLayers.forces.selectAll('*').remove(), []);
+    const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box, compact: !!milNow.battle }) : (recordLayers.forces.selectAll('*').remove(), []);
     const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
     drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
     // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
@@ -1239,7 +1247,9 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     if (present.has('icc')) rows.push({ swatch: 'line', style: 'icc', label: 'Original territory, as judged' });
   } else if (trackerId === 'military') {
     // the sides of the war shown, each with its members when there are several (src/military/wars.js)
-    rows.push(...militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both'));
+    const milRows = militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both');
+    // (a battle frame has no side fills: the sides are named by their lines and forces below, not by an empty member row)
+    rows.push(...(tracker.mil?.battle ? milRows.filter((r) => r.role !== 'name' && !/^No member/.test(r.label)) : milRows));
     const icons = tracker.mil?.icons ?? {};
     const withIcon = (r) => (r.swatch === 'icon' ? { ...r, d: icons[r.icon]?.d ?? null } : r);
     rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf).map(withIcon));
