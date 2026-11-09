@@ -41,8 +41,10 @@ const PLAY_MS = 450;
 // order form (scripts/map.mjs). With none of them the page is exactly what it was.
 const LESSON = ORDER_PARAMS.filter((k) => !['date', 'year', 'from', 'tracker', 'records'].includes(k)).some((k) => params.has(k));
 const problems = [];
-const frameParam = params.get('frame');
-const frameFound = frameParam ? resolveFrame(frameParam, focusTable) : null;
+// (the play run may set the frame from its chapter before the stage is built: see the start of main())
+let frameParam = params.get('frame');
+let frameFound = frameParam ? resolveFrame(frameParam, focusTable) : null;
+let filmFrames = false; // true when the film's chapters choose the frame (no frame in the address)
 if (frameParam && !frameFound) problems.push(`frame "${frameParam}" is neither a focus in src/focuses.json nor a box W,S,E,N; the continent is shown`);
 const sizeParam = params.get('size');
 const sizeFound = sizeParam ? parseSize(sizeParam) : null;
@@ -53,6 +55,19 @@ if (params.get('projection') && !['page', 'auto'].includes(params.get('projectio
 
 async function main() {
   const t0 = performance.now();
+  // The play run (?play=): without a frame in the address, the chapter's frame from vocab.json's films (the Texas
+  // chapters on the Texas frame, the war on its theater); when a chapter with another frame begins, the page
+  // re-frames itself (a reload on the chapter's first day). A frame in the address is kept for the whole film.
+  if (params.get('play') && !frameParam) {
+    const vocab0 = await loadJSON('data/vocab.json').catch(() => null);
+    const film0 = vocab0 ? filmById(vocab0, params.get('play')) : null;
+    if (film0) {
+      const ch0 = chapterOn(film0, parseDate(params.get('date')) ?? film0.start);
+      frameParam = ch0?.frame ?? film0.frame ?? null;
+      frameFound = frameParam ? resolveFrame(frameParam, focusTable) : null;
+      filmFrames = !!frameFound;
+    }
+  }
   const [ne, bathy, nbTopo, ohmTopo, cesTopo, natTopo, popData, landsTopo] = await Promise.all([
     loadJSON('data/base/derived/ne.topojson'),
     loadJSON('data/base/derived/bathymetry.topojson'),
@@ -170,7 +185,14 @@ async function main() {
   let milData = null;
   async function ensureMilitary() {
     if (milData) return milData;
-    const [vocab, source, gazetteer] = await Promise.all([loadJSON('data/vocab.json'), loadRecordsText(), loadJSON('data/gazetteer.json').catch(() => ({}))]);
+    // The war rows live in a table of their own, data/military.csv (brief, question 5: provisionally a separate
+    // table, 2026-11-09), read whenever the layer is on; ?records= points at another file instead.
+    const loadMilitaryText = async () => {
+      if (params.get('records')) return loadRecordsText();
+      const text = await loadText('data/military.csv').catch(() => null);
+      return text != null ? { text, from: 'file', sheet: {} } : loadRecordsText();
+    };
+    const [vocab, source, gazetteer] = await Promise.all([loadJSON('data/vocab.json'), loadMilitaryText(), loadJSON('data/gazetteer.json').catch(() => ({}))]);
     const checked = source.text ? validateRecords(source.text, vocab) : { records: [], problems: [] };
     for (const p of checked.problems) if (/military|war|side|outcome/.test(p.message)) problems.push(`record table line ${p.line}${p.id ? ` (${p.id})` : ''}: ${p.message}`);
     const mil = checked.records.filter((r) => r.tracker === 'military');
@@ -190,7 +212,7 @@ async function main() {
     const icons = {};
     await Promise.all([...keys].map(async (k) => { const it = tech.items?.[k]; if (!it) return; const svg = await loadText(it.icon.file).catch(() => null); if (svg) icons[k] = svgPath(svg); }));
     if (!globalThis.ms) await new Promise((ok) => { const s = document.createElement('script'); s.src = 'assets/vendor/milsymbol/milsymbol.js'; s.onload = () => ok(true); s.onerror = () => { problems.push('milsymbol did not load: force frames are drawn plain'); ok(false); }; document.head.appendChild(s); });
-    milData = { vocab, tech, icons, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), movements, file: source.from === 'file' ? (params.get('records') ?? 'data/records.csv') : source.from };
+    milData = { vocab, tech, icons, members: mil.filter((r) => r.kind === 'region'), events: pts.filter((r) => r.lon != null && r.lat != null), movements, file: source.from === 'file' ? (params.get('records') ?? 'data/military.csv') : source.from };
     if (!vocab.wars?.length) problems.push('vocab.json lists no wars yet; the Military layer has nothing to show');
     return milData;
   }
@@ -378,6 +400,14 @@ async function main() {
       filmRun = { raf: 0 };
       const tick = () => {
         const fr = frameAt(filmRec, (performance.now() - t0) / 1000);
+        // a chapter framed elsewhere: the page reloads on its first day, framed on it, and plays on
+        if (filmFrames && fr.chapter.frame && fr.chapter.frame !== frameFound?.id && resolveFrame(fr.chapter.frame, focusTable)) {
+          filmRun = null;
+          const q = new URLSearchParams(location.search);
+          q.delete('frame'); q.delete('year'); q.set('date', fr.chapter.from); q.set('autoplay', '1');
+          location.replace(`?${q}`);
+          return;
+        }
         setDate(fr.date, { exact: true, fade: 0 });
         if (fr.done) { filmRun = null; filmStatus(); d3.select('#play').classed('active', false).text('▶'); return; }
         filmRun.raf = requestAnimationFrame(tick);
@@ -601,8 +631,8 @@ async function main() {
     setMode,
     // The play run (src/military/play.js): the film, its frames for export at a given rate, and a seek that resolves
     // once the frame is painted (scripts/film.mjs).
-    film: () => (filmRec ? { id: filmRec.id, title: filmRec.title, seconds: filmRec.seconds, chapters: filmRec.chapters.map((c) => ({ n: c.n, title: c.title, from: c.from, to: c.to, pace: c.pace, war: c.war, seconds: c.seconds })) } : null),
-    filmFrames: (fps) => (filmRec ? frameList(filmRec, fps).map((f) => ({ index: f.index, at: f.at, date: isoDate(f.date), hold: f.hold, chapter: f.chapter.n })) : []),
+    film: () => (filmRec ? { id: filmRec.id, title: filmRec.title, frame: filmRec.frame ?? null, frame_shown: frameFound?.id ?? null, chapters_frame: filmFrames, seconds: filmRec.seconds, chapters: filmRec.chapters.map((c) => ({ n: c.n, title: c.title, from: c.from, to: c.to, pace: c.pace, war: c.war, frame: c.frame ?? filmRec.frame ?? null, seconds: c.seconds })) } : null),
+    filmFrames: (fps) => (filmRec ? frameList(filmRec, fps).map((f) => ({ index: f.index, at: f.at, date: isoDate(f.date), hold: f.hold, chapter: f.chapter.n, frame: f.chapter.frame ?? filmRec.frame ?? null })) : []),
     filmSeek: async (s) => { setDate(parseDate(s), { exact: true, fade: 0 }); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return isoDate(state.date); },
     get state() { return { ...state, iso: isoDate(state.date), fromIso: state.from != null ? isoDate(state.from) : null }; },
     // Resolves once the first picture is on the sheet, relief, fonts and all: what scripts/map.mjs waits for.

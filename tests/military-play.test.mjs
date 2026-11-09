@@ -11,7 +11,7 @@ import { eventsOf, eventsUpTo, movementsOf, eventLook, eventLegend, sequenceFor 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const gazetteer = JSON.parse(read('data/gazetteer.json'));
-const checked = validateRecords(read('tests/maps/military-records.csv'), vocab);
+const checked = validateRecords(read('data/military.csv'), vocab);
 const resolved = resolveRecords(checked.records, gazetteer).records;
 
 test('paces and days: words to map days per second, dates to day numbers and back', () => {
@@ -26,6 +26,9 @@ test('the film of the Texas question: five chapters in order, each with a war of
   assert.ok(film, 'the film is in vocab.json');
   assert.equal(film.chapters.length, 5);
   assert.deepEqual(film.chapters.map((c) => c.war), ['texas-revolution', 'texas-revolution', 'texas-republic-mexico', 'mexican-american-war', 'mexican-american-war']);
+  assert.deepEqual(film.chapters.map((c) => c.frame), ['texas', 'texas', 'texas', 'mexico-war', 'mexico-war'], 'the Texas chapters on the Texas frame, the war on its theater');
+  const focuses = JSON.parse(read('src/focuses.json')).focuses.map((f) => f.id);
+  for (const c of film.chapters) assert.ok(focuses.includes(c.frame), `${c.frame} is a focus`);
   for (const c of film.chapters) assert.ok(warById(vocab, c.war), `${c.war} is a war of the record`);
   for (let i = 1; i < film.chapters.length; i++) assert.ok(film.chapters[i].fromInt > film.chapters[i - 1].toInt, 'chapters follow each other without overlap');
   assert.deepEqual([film.start, film.end], [18210928, 18540630]);

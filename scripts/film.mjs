@@ -56,7 +56,17 @@ export async function renderFilm(order, { out = null, fps = 6, mp4 = true, limit
     log(`${film.title}: ${film.chapters.length} chapters, ${Math.round(film.seconds)} s of film; ${frames.length} distinct frames at ${fps}/s`);
     const list = [];
     let last = null;
+    const fixedFrame = !!order.frame;
+    let frameNow = film.frame_shown ?? null;
     for (const fr of frames) {
+      // a chapter framed elsewhere: open the page again on that frame (as the live page reloads itself)
+      if (!fixedFrame && fr.frame && fr.frame !== frameNow) {
+        const q2 = new URLSearchParams(query); q2.set('frame', fr.frame); q2.set('date', fr.date);
+        await page.goto(`${server.origin}/us.html?${q2}`);
+        await page.eval(`new Promise((resolve, reject) => { const t0 = Date.now(); (function wait() { if (window.parchment && window.parchment.ready) window.parchment.ready.then(() => resolve(true), (e) => reject(String(e && e.message || e))); else if (Date.now() - t0 > 90000) reject('the page did not finish drawing in 90 s'); else setTimeout(wait, 50); })(); })`);
+        frameNow = fr.frame;
+        log(`  chapter ${fr.chapter} on the ${fr.frame} frame`);
+      }
       const shown = await page.eval(`window.parchment.filmSeek(${JSON.stringify(fr.date)})`);
       const png = await page.screenshot();
       const name = `f${String(fr.index + 1).padStart(6, '0')}.png`;

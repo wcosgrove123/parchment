@@ -1,5 +1,5 @@
 {
-  "_comment": "Places the milestone-0 picture sheet marks on the Texas 1846 map (brief of 2026-11-09, order of work, step 0). Coordinates are Wikidata's (P625, CC0), read from the API on 2026-11-09 by hand-checked id; nothing is typed from a map. These are NOT records: the sheet is a mock-up of proposals P1–P10, and every mark on it is an illustration of a form, dated and named from the sources in 'note'. Real rows go through the owner and the teachers (tests/maps/military-records.csv, milestone 1 on).",
+  "_comment": "Places the milestone-0 picture sheet marks on the Texas 1846 map (brief of 2026-11-09, order of work, step 0). Coordinates are Wikidata's (P625, CC0), read from the API on 2026-11-09 by hand-checked id; nothing is typed from a map. These are NOT records: the sheet is a mock-up of proposals P1–P10, and every mark on it is an illustration of a form, dated and named from the sources in 'note'. Real rows go through the owner and the teachers (data/military.csv, milestone 1 on).",
   "retrieved": "2026-11-09",
   "source": "Wikidata, property P625 (coordinate location), CC0",
   "places": {

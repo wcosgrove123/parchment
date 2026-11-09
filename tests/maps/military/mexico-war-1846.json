@@ -7,6 +7,6 @@
   "date": "1846-05-13",
   "frame": "mexico-war",
   "size": "1920x1080",
-  "records": "tests/maps/military-records.csv",
+  "records": "data/military.csv",
   "out": "out/military/mexico-war-1846"
 }

@@ -13,13 +13,13 @@ const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const gazetteer = JSON.parse(read('data/gazetteer.json'));
 const war = warById(vocab, 'mexican-american-war');
-const checked = validateRecords(read('tests/maps/military-records.csv'), vocab);
+const checked = validateRecords(read('data/military.csv'), vocab);
 const moves = withSides(movementsOf(resolveRecords(checked.records, gazetteer).records, war.id), war);
 
 test('the fourteen movement rows validate, resolve every waypoint through the gazetteer, and carry a side and a force', () => {
   assert.deepEqual(checked.problems, [], JSON.stringify(checked.problems));
   assert.equal(moves.length, 14);
-  assert.ok(moves.every((r) => r.coords && r.coords.length === r.waypoints.length), 'every waypoint has a coordinate (npm run geocode --file tests/maps/military-records.csv)');
+  assert.ok(moves.every((r) => r.coords && r.coords.length === r.waypoints.length), 'every waypoint has a coordinate (npm run geocode --file data/military.csv)');
   assert.ok(moves.every((r) => r.sideColor && r.force && /Bauer/.test(r.source)));
   assert.deepEqual([...new Set(moves.map((r) => r.force))].sort(), ['ampudia', 'arista', 'doniphan', 'kearny', 'santa-anna', 'scott', 'taylor', 'wool']);
   assert.deepEqual([...new Set(moves.map((r) => r.value))].sort(), ['advance', 'landing', 'retreat']);

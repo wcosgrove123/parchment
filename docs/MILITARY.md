@@ -34,7 +34,7 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
   "date": "1846-05-13",
   "frame": "mexico-war",
   "size": "1920x1080",
-  "records": "tests/maps/military-records.csv",
+  "records": "data/military.csv",
   "out": "out/military/mexico-war-1846"
 }
 ```
@@ -86,10 +86,11 @@ side's name for the war.
 - **Membership** is a `region` row of the record table under `tracker: military`: `where` the state id, `war` the
   war, `side` one of its sides, `value` the role (`belligerent`, `co-belligerent`, `associated`, `ally`, `auxiliary`,
   `dependent`, `satellite`, `occupied`), `start` and `end` the dates it belonged, `source` as always.
+- **The war table.** The Military layer reads `data/military.csv` whenever it is on (the test rows for the war with Mexico, the Texas Revolution and the Republic years are there); `?records=` or an order's `records` points at another file. Whether these rows fold into `data/records.csv` is still the owner's call (question 5; a separate table for now, 2026-11-09).
 - **Seven optional columns** (`war`, `side`, `force`, `outcome`, `strength`, `losses`, `tech`) go at the end of the
   table and are read only when the header has them; a table without them is read exactly as before. Whether they
   live in `data/records.csv` or in a table of their own is the owner's call (brief, question 5); the test rows are in
-  `tests/maps/military-records.csv`.
+  `data/military.csv`.
 - **Events** are `point` rows under the same tracker: `where` a Wikidata id (the coordinate from the gazetteer or
   `npm run geocode`), `value` the kind (`battle`, `siege`, `naval-battle`, `raid`, `landing`, `surrender`, `capture`,
   `declaration`, `treaty`, `armistice`, `massacre`, `fort`, `headquarters`), `war`, `side` where one side owns the

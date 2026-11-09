@@ -9,6 +9,6 @@
   "sequence": true,
   "title": "The War with Mexico, 1846–1848",
   "size": "1920x1080",
-  "records": "tests/maps/military-records.csv",
+  "records": "data/military.csv",
   "out": "out/military/mexico-war-1848"
 }

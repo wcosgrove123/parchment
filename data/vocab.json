@@ -65103,6 +65103,7 @@
       "chapters": [
         {
           "title": "Mexican Texas, 1821–1835",
+          "frame": "texas",
           "from": "1821-09-28",
           "to": "1835-10-01",
           "pace": "half-year",
@@ -65110,6 +65111,7 @@
         },
         {
           "title": "The Texas Revolution, 1835–1836",
+          "frame": "texas",
           "from": "1835-10-02",
           "to": "1836-05-14",
           "pace": "week",
@@ -65117,6 +65119,7 @@
         },
         {
           "title": "The Republic of Texas, 1836–1845",
+          "frame": "texas",
           "from": "1836-05-15",
           "to": "1845-12-28",
           "pace": "quarter",
@@ -65124,6 +65127,7 @@
         },
         {
           "title": "The War with Mexico, 1845–1848",
+          "frame": "mexico-war",
           "from": "1845-12-29",
           "to": "1848-02-02",
           "pace": "week",
@@ -65131,6 +65135,7 @@
         },
         {
           "title": "The peace and the new border, 1848–1854",
+          "frame": "mexico-war",
           "from": "1848-02-03",
           "to": "1854-06-30",
           "pace": "quarter",

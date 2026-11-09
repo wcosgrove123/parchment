@@ -9,6 +9,6 @@
   "annotate": { "rivers": ["Nueces", "Rio Grande"] },
   "title": "The War in the North, 1846–1847",
   "size": "1600x1550",
-  "records": "tests/maps/military-records.csv",
+  "records": "data/military.csv",
   "out": "out/military/texas-1847-movements"
 }

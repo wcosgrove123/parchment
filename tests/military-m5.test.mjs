@@ -12,7 +12,7 @@ const vocab = JSON.parse(read('data/vocab.json'));
 const tech = JSON.parse(read('data/tech.json'));
 const gazetteer = JSON.parse(read('data/gazetteer.json'));
 const war = warById(vocab, 'mexican-american-war');
-const checked = validateRecords(read('tests/maps/military-records.csv'), vocab);
+const checked = validateRecords(read('data/military.csv'), vocab);
 const moves = withSides(movementsOf(resolveRecords(checked.records, gazetteer).records, war.id), war);
 const forces = war.forces.map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color }));
 
