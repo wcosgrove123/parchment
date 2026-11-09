@@ -17,11 +17,23 @@ import extent from './trackers/extent.json';
 import expansion from './trackers/expansion.json';
 import routes from './trackers/routes.json';
 import explorers from './trackers/explorers.json';
+import { makeStatesSource, isRealmLine } from './render/states.js';
+import { empireBand, drawEmpireBand, placeEmpireLabel } from './render/realms.js';
 
-// Trackers. Extent highlights base polygons; expansion draws point records by shape; routes draws path and arrow
-// records through gazetteer waypoints with the points on them; explorers (owner, 2026-11-06) draws every expedition
-// whose dates touch a typed range of years, colored by the state that sent it.
+// Trackers. Extent is the political map (owner, 2026-11-09): every state in force in the year shown, each in its own
+// color, from Cliopatria; expansion draws point records by shape; routes draws path and arrow records through gazetteer
+// waypoints with the points on them; explorers (owner, 2026-11-06) draws every expedition whose dates touch a typed
+// range of years, colored by the state that sent it. Under the last three the states are drawn quiet, as ground.
 const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes, explorers };
+
+// The political map's legend: what is on this map only.
+function statesLegend(year, view, band) {
+  const rows = [{ swatch: 'states', label: 'Each state in its own color' }];
+  rows.push(year >= 1648 ? { swatch: 'line', style: 'solid', label: 'Documented border' } : { swatch: 'line', style: 'dashed', label: 'Approximate border' });
+  if (view.wholes.some(isRealmLine)) rows.push({ swatch: 'whole', label: 'A realm around its members' });
+  if (band) rows.push({ swatch: 'band', style: band.source === 'ohm' ? 'dashed' : null, label: 'Holy Roman Empire' });
+  return { ...TRACKERS.extent, title: 'States', legend: rows };
+}
 
 // A route layer's legend names only what is on the map: route classes (or sending states), point types, certainties.
 function legendFor(tracker, rows) {
@@ -47,6 +59,9 @@ const PLAY_HOLD_MS = 1500;
 // ?stage=europe is Europe for its own lessons, absolutism first (the owner asked for it on 2026-11-09).
 const STAGES = Object.fromEntries([stageEqualEarth, stageLambert, stageWorld, stageWorldPacific, stageEurope].map((s) => [s.id, s]));
 const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
+// ?band=focus|moss|rust|navy draws the Empire's band in another of the apparatus colors, for the owner to compare.
+const BAND = params.get('band');
+if (['navy', 'focus', 'moss', 'rust', 'steel'].includes(BAND)) document.documentElement.style.setProperty('--band', `var(--${BAND})`);
 
 // Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year; an entry
 // that names its stages lights only there (src/data/highlights.js).
@@ -57,6 +72,16 @@ const matchHighlight = (f, year) => highlightFor(f.properties.name, year);
 function classifyExtent(f, year) {
   const h = matchHighlight(f, year);
   return h ? { status: 'highlight', key: h.id, label: h.label } : { status: 'muted' };
+}
+// The political map: every state in force has its color ("every empire existing during whatever year is selected",
+// owner, 2026-11-09); ?focus= keeps the named ones and quiets the rest. A tracked state is named as its entry says
+// (the name of the time) on every stage; any other by Cliopatria's own name.
+const entryByName = new Map(extent.highlights.flatMap((h) => h.names.map((n) => [n, h])));
+const entryFor = (f, year) => { const h = entryByName.get(f.properties.name); return h && year >= h.start && year <= h.end ? h : null; };
+function classifyState(f, year) {
+  const h = entryFor(f, year);
+  if (FOCUS.size && !(h && FOCUS.has(h.id))) return { status: 'muted', label: h?.label };
+  return { status: 'state', key: h?.id, label: h?.label };
 }
 // Diff identity: a tracked state keeps its identity across renames (Muscovy → Russia). With scope 'tracked'
 // (the default) only tracked states take part; with scope 'all' every named polygon does, by its name.
@@ -70,13 +95,16 @@ function identifyFor(scope) {
 
 async function main() {
   const t0 = performance.now();
-  const [calendar, ne, bathy, vocab, gazetteer, source] = await Promise.all([
+  const [calendar, ne, bathy, vocab, gazetteer, source, cliopatriaTopo, realmsTopo] = await Promise.all([
     loadJSON('data/calendar.json'),
     loadJSON('data/base/derived/ne.topojson'),
     loadJSON('data/base/derived/bathymetry.topojson'),
     loadJSON('data/vocab.json'),
     loadJSON('data/gazetteer.json').catch(() => ({})),
     loadRecordsText(),
+    // Every state from 1200 to 2000 (Cliopatria; about 10 MB, 2 MB as served), and the Empire's dated outer border.
+    loadJSON('data/base/derived/cliopatria.topojson'),
+    loadJSON('data/base/derived/realms.topojson').catch(() => null),
     // The label pass measures text with the real font, so the four faces are loaded before the first render.
     document.fonts?.load ? Promise.all(['400', '700', 'italic 400', 'italic 700'].map((f) => document.fonts.load(`${f} 13px "Libre Baskerville"`).catch(() => null))) : null,
   ]);
@@ -91,22 +119,19 @@ async function main() {
   const noCoords = resolved.waiting;
   console.log(`records (${source.from}): ${checked.total} rows · ${records.length} render · ${checked.examples} examples · ${checked.problems.length} skipped · ${noCoords.length} waiting for coordinates`);
   showDataProblems(checked, noCoords, source);
-  // The stage's snapshot years: the shared ones plus any the calendar keeps for this stage (1530 and 1650 for the world).
-  const years = stageYears(calendar, stage);
-  const bySnapshot = new Map(calendar.snapshots.map((s) => [s.year, s]));
-  const snapshot = (year) => loadJSON(`data/base/derived/world_${year}.topojson`);
-
-  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'extent', year: snapYear(years, START_YEAR, 1450), from: null, playing: null };
-  // A year that is not a snapshot (?year=1522) opens the first snapshot at or after it, as a record's home snapshot does.
-  state.from = START_FROM ? snapYear(years, START_FROM) : years[Math.max(0, years.indexOf(state.year) - 1)];
-  if (state.year !== START_YEAR) console.log(`year ${START_YEAR} is not a snapshot on this stage; showing ${state.year}`);
-  // Explorers: a typed range of years, any years (?tracker=explorers&from=1492&year=1522). The base map under it is the
-  // latest snapshot not after the range's end, so no border is drawn before it existed.
+  // Any year (owner, 2026-11-09: "i want to be able to type in any year and see the geopolitical landscape of the
+  // world"): every stage draws the states in force that year from one source, Cliopatria. The calendar's years are
+  // suggestions (the year buttons, the dots on the strip, the steps of ← → and Play); any other year can be typed.
+  const cliopatria = makeStatesSource(cliopatriaTopo);
+  const years = calendar.suggested ?? stageYears(calendar, stage);
   const [spanMin, spanMax] = stage.span;
   const clampYear = (y) => Math.max(spanMin, Math.min(spanMax, Math.round(y)));
+  const state = { mode: 'snapshot', scope: params.get('scope') === 'all' ? 'all' : 'tracked', tracker: TRACKERS[params.get('tracker')] ? params.get('tracker') : 'extent', year: clampYear(START_YEAR), from: null, playing: null };
+  state.from = START_FROM ? clampYear(START_FROM) : ([...years].reverse().find((y) => y < state.year) ?? years[0]);
+  // Explorers: a typed range of years, any years (?tracker=explorers&from=1492&year=1522), over the states of the range's end.
   state.span = { from: clampYear(START_FROM ?? 1492), to: clampYear(Number(params.get('year')) || 1522) };
   if (state.span.from > state.span.to) state.span = { from: state.span.to, to: state.span.from };
-  const baseYearFor = (to) => [...years].reverse().find((y) => y <= to) ?? years[0];
+  let lastView = null;
 
   const svg = d3.select('#map');
   const atlas = createStage(svg, stage, { ne, bathy }, { tracker: TRACKERS[state.tracker], years, onYear: (y) => setYear(y) });
@@ -115,35 +140,42 @@ async function main() {
   async function render() {
     const t = performance.now();
     for (const id of Object.keys(TRACKERS)) document.body.classList.toggle(`tracker-${id}`, id === state.tracker);
+    d3.select('#year-in').property('value', state.year);
+    const quiet = () => ({ status: 'muted' });
     if (state.tracker === 'explorers') {
       const { from, to } = state.span;
-      const base = baseYearFor(to);
-      const topo = await snapshot(base);
+      const view = cliopatria.at(to);
       const rows = recordsInRange(records, 'explorers', from, to);
       atlas.setTracker(legendFor(explorers, rows));
-      atlas.showSnapshot(base, topo, () => ({ status: 'muted' }));
+      atlas.showStates(to, view, quiet);
       const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
-      atlas.setSpan(from, to, bySnapshot.get(base).source_year);
+      atlas.setSpan(from, to);
       document.title = `Parchment · ${from}–${to}`;
       document.body.classList.remove('mode-diff');
       const dropped = n.labels.filter((l) => l.dropped);
-      console.log(`explorers ${from}–${to} on the ${base} base map: ${(performance.now() - t).toFixed(1)} ms, ${n.routes} lines, ${n.marks} marks${dropped.length ? `; labels not placed: ${dropped.map((l) => `${l.id} (${l.dropped})`).join(', ')}` : ''}`);
+      console.log(`explorers ${from}–${to} over the states of ${to}: ${(performance.now() - t).toFixed(1)} ms, ${n.routes} lines, ${n.marks} marks${dropped.length ? `; labels not placed: ${dropped.map((l) => `${l.id} (${l.dropped})`).join(', ')}` : ''}`);
       return;
     }
     if (state.mode === 'diff') {
-      const [a, b] = await Promise.all([snapshot(state.from), snapshot(state.year)]);
-      const diff = atlas.showDiff({ year: state.from, topo: a }, { year: state.year, topo: b }, identifyFor(state.scope));
-      atlas.setRange({ year: state.from, sourceYear: bySnapshot.get(state.from).source_year }, { year: state.year, sourceYear: bySnapshot.get(state.year).source_year });
+      const a = cliopatria.at(state.from), b = cliopatria.at(state.year);
+      const diff = atlas.showDiff({ year: state.from, view: a }, { year: state.year, view: b }, identifyFor(state.scope));
+      atlas.setRange({ year: state.from }, { year: state.year });
       document.title = `Parchment · ${state.from} → ${state.year}`;
       console.log(`diff ${state.from} → ${state.year}: ${(performance.now() - t).toFixed(1)} ms; appeared ${diff.appeared.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
     } else {
-      const topo = await snapshot(state.year);
-      // Extent highlights the tracked states; expansion and routes show every polity muted with the records on top.
-      const rows = state.tracker === 'extent' ? [] : recordsFor(records, state.tracker, state.year, years);
-      atlas.setTracker(state.tracker === 'routes' ? legendFor(routes, rows) : TRACKERS[state.tracker]);
-      atlas.showSnapshot(state.year, topo, state.tracker === 'extent' ? classifyExtent : () => ({ status: 'muted' }));
+      // The political map colors every state; expansion and routes draw them quiet with the records on top. The
+      // Empire's band rides on the political map only.
+      const view = cliopatria.at(state.year);
+      const political = state.tracker === 'extent';
+      const band = political ? empireBand(state.year, { realmsTopo, states: view }) : null;
+      const rows = political ? [] : recordsFor(records, state.tracker, state.year, [...years, state.year]);
+      atlas.setTracker(state.tracker === 'routes' ? legendFor(routes, rows) : political ? statesLegend(state.year, view, band) : TRACKERS[state.tracker]);
+      let empireName = null;
+      const overlay = band ? { reserve: (ctx) => { empireName = placeEmpireLabel(band, ctx); return empireName ? [empireName.box] : []; }, over: (g, lg, ctx) => drawEmpireBand(g, lg, band, ctx, empireName) } : null;
+      atlas.showStates(state.year, view, political ? classifyState : quiet, overlay);
+      lastView = { year: state.year, states: view.states.map((f) => ({ name: f.properties.n, from: f.properties.f, to: f.properties.t, color: f.properties.c, status: f.properties.cls.status, label: f.properties.cls.label ?? null })), wholes: view.wholes.map((f) => f.properties.n), empire: band && { source: band.source, rids: band.rids ?? null, from: band.from ?? band.start, to: band.to ?? band.end } };
       const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
-      atlas.setYear(state.year, bySnapshot.get(state.year).source_year);
+      atlas.setYear(state.year);
       document.title = `Parchment · ${state.year}`;
       const dropped = n.labels.filter((l) => l.dropped);
       console.log(`snapshot ${state.year} (${state.tracker}): ${(performance.now() - t).toFixed(1)} ms${n.marks ? `, ${n.marks} marks` : ''}${n.routes ? `, ${n.routes} routes` : ''}${dropped.length ? `; labels not placed: ${dropped.map((l) => `${l.id} (${l.dropped})`).join(', ')}` : ''}`);
@@ -155,19 +187,19 @@ async function main() {
     d3.selectAll('#years-a button').classed('active', function () { return Number(this.dataset.year) === state.from; });
   }
 
-  function setYear(y) { if (years.includes(y)) { state.year = y; render(); } }
-  function setFrom(y) { if (years.includes(y)) { state.from = y; render(); } }
-  function setMode(m) { state.mode = m; if (m === 'diff' && state.from === state.year) state.from = years[Math.max(0, years.indexOf(state.year) - 1)]; render(); }
+  function setYear(y) { const c = clampYear(y); if (Number.isFinite(c)) { state.year = c; render(); } }
+  function setFrom(y) { const c = clampYear(y); if (Number.isFinite(c)) { state.from = c; render(); } }
+  function setMode(m) { state.mode = m; if (m === 'diff' && state.from === state.year) state.from = [...years].reverse().find((y) => y < state.year) ?? years[0]; render(); }
+  // ← → and Play step from the year shown to the next suggested year either way.
   function step(delta) {
-    const i = years.indexOf(state.year);
-    const j = Math.max(0, Math.min(years.length - 1, i + delta));
-    if (j !== i) setYear(years[j]);
-    return j !== i;
+    const next = delta > 0 ? years.find((y) => y > state.year) : [...years].reverse().find((y) => y < state.year);
+    if (next != null) setYear(next);
+    return next != null;
   }
   function togglePlay() {
     if (state.playing) { clearInterval(state.playing); state.playing = null; }
     else {
-      if (years.indexOf(state.year) === years.length - 1) setYear(years[0]);
+      if (state.year >= years[years.length - 1]) setYear(years[0]);
       state.playing = setInterval(() => { if (!step(1)) togglePlay(); }, PLAY_HOLD_MS);
     }
     d3.select('#play').classed('active', !!state.playing).text(state.playing ? '❚❚' : '▶');
@@ -204,6 +236,18 @@ async function main() {
   }
   for (const input of [fromIn, toIn]) input.on('change', setSpan).on('keydown', (e) => { if (e.key === 'Enter') setSpan(); });
   showSpan();
+  // Any year typed in (owner, 2026-11-09); Enter or leaving the box redraws. Not under Explorers, which types a range.
+  const yearBox = tb.append('span').attr('id', 'year-box').attr('title', 'Any year: every state in force that year (Cliopatria)');
+  yearBox.append('label').attr('for', 'year-in').text('year');
+  const yearIn = yearBox.append('input').attr('id', 'year-in').attr('type', 'number').attr('step', 1).attr('min', spanMin).attr('max', spanMax).property('value', state.year);
+  function setTypedYear() {
+    const raw = yearIn.property('value'), v = Number(raw);
+    if (raw === '' || !Number.isFinite(v)) { yearIn.property('value', state.year); return; }
+    const y = clampYear(v);
+    yearIn.property('value', y);
+    if (y !== state.year) { state.year = y; render(); }
+  }
+  yearIn.on('change', setTypedYear).on('keydown', (e) => { if (e.key === 'Enter') setTypedYear(); });
   tb.append('span').attr('class', 'sep');
   const seg = tb.append('span').attr('class', 'seg');
   seg.append('button').attr('data-mode', 'snapshot').text('Snapshot').on('click', () => setMode('snapshot'));
@@ -277,7 +321,7 @@ async function main() {
     .on('click', () => about.classed('open', !about.classed('open')));
   const ap = about.append('span').attr('class', 'popover about');
   ap.append('p').html('<b>Parchment</b> — a historical timeline atlas for the classroom.<br>Atlas, design and ideas: Wil Cosgrove.');
-  ap.append('p').html('Borders: <a href="https://github.com/aourednik/historical-basemaps" target="_blank" rel="noopener">historical-basemaps</a> (GPL-3). Coast, rivers, relief: <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a> (public domain). Place coordinates: Wikidata (CC0). Type: Libre Baskerville (OFL).');
+  ap.append('p').html('States: <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener">Cliopatria</a>, Seshat Global History Databank (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; simplified and colored for Parchment); the Holy Roman Empire\'s border from 1648: <a href="https://www.openhistoricalmap.org" target="_blank" rel="noopener">OpenHistoricalMap</a> (CC0). Coast, rivers, relief: <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a> (public domain). Place coordinates: Wikidata (CC0). Type: Libre Baskerville (OFL).');
   ap.append('p').html('<a href="https://github.com/wcosgrove123/parchment/blob/main/docs/DATA-LICENSES.md" target="_blank" rel="noopener">Data licences and attribution</a> · <a href="https://github.com/wcosgrove123/parchment" target="_blank" rel="noopener">Source</a> (MIT)');
   document.addEventListener('click', (e) => {
     if (!exportMenu.node().contains(e.target)) exportMenu.classed('open', false);
@@ -290,6 +334,8 @@ async function main() {
     renderSVG: (opts) => renderSVG(svg.node(), opts),
     exportName: (opts) => exportName({ ...describe(), ...opts }),
     get state() { return { ...state }; },
+    // The political map: the states the last map drew (Cliopatria's names and years, color, status) and the Empire's line.
+    get states() { return lastView; },
   };
 
   // Keyboard: ← → step through the calendar; space plays; D toggles the Diff view.
@@ -307,8 +353,6 @@ async function main() {
   if (START_FROM && state.tracker !== 'explorers') state.mode = 'diff'; // under Explorers, from is the range's start
   await render();
   document.body.classList.add('ready');
-  // Prefetch the rest so switching is instant.
-  for (const y of years) snapshot(y);
 }
 
 // The data-problems panel: every skipped row with its line number and reason, plus point rows still waiting

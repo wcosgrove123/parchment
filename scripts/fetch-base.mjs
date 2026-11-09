@@ -105,6 +105,28 @@ if (indexBuf) {
 await writeFile(calendarPath, JSON.stringify(calendar, null, 2) + '\n');
 console.log(`  wrote    data/calendar.json (rule: ${rule})`);
 
+// ---------------------------------------------------------------- 1b. Cliopatria
+// The states of the world page, dated year by year (owner, 2026-11-09: one single source of truth for every stage).
+// Seshat Global History Databank, Cliopatria v0.2.1: one zipped GeoJSON at a tagged release, its license and readme.
+// scripts/derive-cliopatria.mjs unzips nothing itself: the GeoJSON is unzipped here, beside the zip.
+const CLIO_TAG = 'v0.2.1';
+const CLIO_RAW = `https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/${CLIO_TAG}`;
+const CLIO_META = { source: 'cliopatria', license: 'CC BY 4.0', attribution: 'Cliopatria, Seshat Global History Databank (Bennett, J. S. et al., Scientific Data 12, 247 (2025), doi:10.1038/s41597-025-04516-9)', tag: CLIO_TAG };
+console.log('Cliopatria');
+for (const f of ['cliopatria.geojson.zip', 'LICENSE.md', 'README.md']) {
+  await attempt(`cliopatria ${f}`, async () => {
+    const buf = await download(`${CLIO_RAW}/${f}`, join(RAW, 'cliopatria', f), { ...CLIO_META, layer: f });
+    if (!f.endsWith('.zip')) return;
+    const out = join(RAW, 'cliopatria', 'cliopatria_polities_only_v021.geojson');
+    if (!FORCE && (await exists(out))) { console.log(`  cached   ${rel(out)}`); return; }
+    for (const [name, data] of Object.entries(unzipSync(new Uint8Array(buf)))) {
+      if (!data.length) continue;
+      await writeFile(join(RAW, 'cliopatria', name.split('/').pop()), data);
+      console.log(`  unzipped ${rel(join(RAW, 'cliopatria', name.split('/').pop()))} (${(data.length / 1048576).toFixed(0)} MB)`);
+    }
+  });
+}
+
 // ---------------------------------------------------------------- 2. Natural Earth vectors
 // GeoJSON from the Natural Earth maintainers' own repository (the source the download page is built from).
 const NE_GH = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson';
@@ -204,7 +226,8 @@ const licenses = [
   '',
   '| layer | source | license | attribution |',
   '|---|---|---|---|',
-  `| World polities by year | [historical-basemaps](https://github.com/aourednik/historical-basemaps)${commitNote} | GPL-3.0 | Historical Basemaps, Andrej Ourednik and contributors. Borders are approximate by nature; see that project's README. |`,
+  '| States of the world, year by year, 1200–2000: every map of the world page (since 2026-11-09) | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) v0.2.1, Seshat Global History Databank; J. S. Bennett et al., "Cliopatria", *Scientific Data* 12, 247 (2025), doi:[10.1038/s41597-025-04516-9](https://doi.org/10.1038/s41597-025-04516-9) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Cliopatria, Seshat Global History Databank. Changes made for Parchment (`scripts/derive-cliopatria.mjs`): the rows alive 1200–2000 kept, rings rewound, shapes simplified (about 0.01°), and a color, a kind and an id added to each row. |',
+  `| World polities by year (before 2026-11-09; kept for the admin page) | [historical-basemaps](https://github.com/aourednik/historical-basemaps)${commitNote} | GPL-3.0 | Historical Basemaps, Andrej Ourednik and contributors. Borders are approximate by nature; see that project's README. |`,
   '| Land, coastlines, lakes, rivers, bathymetry | [Natural Earth](https://www.naturalearthdata.com) vectors (1:50m; bathymetry 1:10m; rivers of North America also 1:10m, with the North American supplement, for framed lesson maps) | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |',
   '| Shaded relief | [Natural Earth](https://www.naturalearthdata.com) raster SR_50M | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |',
   '| U.S. states and territories, 1783–2000, dated to the day (North America stage) | [Atlas of Historical County Boundaries](https://digital.newberry.org/ahcb/), The Newberry Library: U.S. Historical States and Territories, generalized 0.001° (2011) | Newberry terms: any lawful purpose, no fees ([rights and reproductions](https://www.newberry.org/rights-and-reproductions)); the files still carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored | Atlas of Historical County Boundaries, ed. John H. Long; U.S. Historical States and Territories compiled by Peter Siczewicz and Emily Kelley. Chicago: The Newberry Library, 2011. |',

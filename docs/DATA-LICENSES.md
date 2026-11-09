@@ -6,7 +6,8 @@ file in `data/base/MANIFEST.json`. The atlas code is MIT-licensed; the data stay
 
 | layer | source | license | attribution |
 |---|---|---|---|
-| World polities by year | [historical-basemaps](https://github.com/aourednik/historical-basemaps) (commit `4b5039e`, 2026-11-02) | GPL-3.0 | Historical Basemaps, Andrej Ourednik and contributors. Borders are approximate by nature; see that project's README. |
+| States of the world, year by year, 1200–2000: every map of the world page (since 2026-11-09) | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) v0.2.1, Seshat Global History Databank; J. S. Bennett et al., "Cliopatria", *Scientific Data* 12, 247 (2025), doi:[10.1038/s41597-025-04516-9](https://doi.org/10.1038/s41597-025-04516-9) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | Cliopatria, Seshat Global History Databank. Changes made for Parchment (`scripts/derive-cliopatria.mjs`): the rows alive 1200–2000 kept, rings rewound, shapes simplified (about 0.01°), and a color, a kind and an id added to each row. |
+| World polities by year (before 2026-11-09; kept for the admin page) | [historical-basemaps](https://github.com/aourednik/historical-basemaps) (commit `4b5039e`, 2026-11-02) | GPL-3.0 | Historical Basemaps, Andrej Ourednik and contributors. Borders are approximate by nature; see that project's README. |
 | Land, coastlines, lakes, rivers, bathymetry | [Natural Earth](https://www.naturalearthdata.com) vectors (1:50m; bathymetry 1:10m; rivers of North America also 1:10m, with the North American supplement, for framed lesson maps) | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |
 | Shaded relief | [Natural Earth](https://www.naturalearthdata.com) raster SR_50M | Public domain | Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com |
 | U.S. states and territories, 1783–2000, dated to the day (North America stage) | [Atlas of Historical County Boundaries](https://digital.newberry.org/ahcb/), The Newberry Library: U.S. Historical States and Territories, generalized 0.001° (2011) | Newberry terms: any lawful purpose, no fees ([rights and reproductions](https://www.newberry.org/rights-and-reproductions)); the files still carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored | Atlas of Historical County Boundaries, ed. John H. Long; U.S. Historical States and Territories compiled by Peter Siczewicz and Emily Kelley. Chicago: The Newberry Library, 2011. |
@@ -18,7 +19,7 @@ The North America stage's sources are downloaded by `scripts/fetch-us.mjs`, whic
 checksums in `data/base/MANIFEST-north-america.json`. Point coordinates come from Wikidata (CC0) through
 `scripts/geocode.mjs`. Planned, not yet downloaded: Native Land Digital (per site terms).
 
-Last run of fetch-base.mjs: 2026-11-06.
+Last run of fetch-base.mjs: 2026-11-09.
 
 <!-- fetch-us:native:start -->
 
@@ -65,3 +66,17 @@ reviewed the icons; the picture sheet of 2026-11-09 shows them for that review.
 | Force frames, glyphs and size marks (MIL-STD-2525 / APP-6) | [milsymbol](https://github.com/spatialillusions/milsymbol) 3.0.5, vendored at `assets/vendor/milsymbol/` | MIT | Måns Beckman, Spatial Illusions |
 
 <!-- military:end -->
+
+<!-- europe:start -->
+
+### The Holy Roman Empire's outer border, 1648–1766
+
+Fetched by `scripts/fetch-europe.mjs` (the queries, dates and checksums in `data/base/MANIFEST-europe.json`) and
+simplified by `scripts/derive-europe.mjs` into `data/base/derived/realms.topojson`; drawn over the political map
+for the dates OpenHistoricalMap gives it a border (src/render/realms.js). No shape is drawn or moved by hand.
+
+| layer | source | license | attribution |
+|---|---|---|---|
+| The Holy Roman Empire's outer border, dated by treaty: 24 October 1648 – 7 November 1659 and 17 September 1678 – 1766 | [OpenHistoricalMap](https://www.openhistoricalmap.org) via its Overpass API | CC0 1.0 | OpenHistoricalMap contributors |
+
+<!-- europe:end -->

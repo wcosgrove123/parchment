@@ -35,9 +35,10 @@ sizes.push(['styles + fonts', css]);
 //    "</" → "<\/" and "<!--" → "<!--" mean the same to a JSON parser (inside strings) but keep the HTML
 //    parser from ending the <script> block early.
 const safe = (text) => text.replace(/<\//g, '<\\/').replace(/<!--/g, '\\u003c!--');
-const calendar = JSON.parse(read('data/calendar.json'));
 const dataFiles = ['data/calendar.json', 'data/vocab.json', 'data/gazetteer.json', 'data/base/derived/ne.topojson', 'data/base/derived/bathymetry.topojson',
-  ...calendar.snapshots.map((s) => `data/base/derived/world_${s.year}.topojson`)];
+  // Every state of every year (Cliopatria, 2026-11-09) and the Holy Roman Empire's dated border: what the world page
+  // draws now. The historical-basemaps snapshots (calendar.snapshots) are no longer drawn here, so they stay out.
+  'data/base/derived/cliopatria.topojson', 'data/base/derived/realms.topojson'];
 const jsonBlock = (p) => {
   const text = safe(read(p));
   sizes.push([p, text]);

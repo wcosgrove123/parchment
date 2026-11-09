@@ -32,6 +32,16 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
       const row = d3Select(this);
       if (e.swatch === 'fill') {
         row.append('rect').attr('class', `swatch fill-${e.key}`).attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14);
+      } else if (e.swatch === 'band') {
+        // the Holy Roman Empire's outer border (2026-11-09): a band along the inside of a line
+        row.append('rect').attr('class', 'swatch-band').attr('x', 0).attr('y', 1).attr('width', 22).attr('height', 7);
+        row.append('line').attr('class', `swatch-band-line${e.style === 'dashed' ? ' dashed' : ''}`).attr('x1', 0).attr('x2', 22).attr('y1', 1).attr('y2', 1);
+      } else if (e.swatch === 'states') {
+        // the political map (2026-11-09): every state its own color, three of the palette's side by side
+        [1, 9, 4].forEach((k, j) => row.append('rect').attr('class', `swatch-state pol-${k}`).attr('x', j * 7.5).attr('y', 0).attr('width', 7).attr('height', 14));
+      } else if (e.swatch === 'whole') {
+        // a realm drawn as the sum of its members: its border over theirs
+        row.append('line').attr('class', 'swatch-whole').attr('x1', 0).attr('x2', 22).attr('y1', 7).attr('y2', 7);
       } else if (e.swatch === 'hatch') {
         row.append('rect').attr('class', 'swatch hatch').attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14);
       } else if (e.swatch === 'line') {

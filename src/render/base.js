@@ -15,6 +15,7 @@ import { createLegend } from './legend.js';
 import { createDiffList } from './difflist.js';
 import { computeDiff } from '../views/diff.js';
 import { drawMarks, MARK_RADIUS } from './marks.js';
+import { placeStateLabels, isRealmLine } from './states.js';
 
 export const CROSSFADE_MS = 300;
 
@@ -165,7 +166,15 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   let currentYear = null;
 
   // Crossfade: build the new layer at opacity 0, fade it in while every older layer fades out and is removed.
+  // A picture (?shot=1, scripts/screenshot.mjs) shows the finished map at once: no fade for the capture to land in.
+  const instant = globalThis.location ? new URLSearchParams(globalThis.location.search).has('shot') : false;
   function crossfade(build) {
+    if (instant) {
+      snapshots.selectAll('g.snap').remove();
+      labelLayers.selectAll('g.snap-labels').remove();
+      build(snapshots.append('g').attr('class', 'snap'), labelLayers.append('g').attr('class', 'snap-labels'));
+      return;
+    }
     const g = snapshots.append('g').attr('class', 'snap').style('opacity', 0);
     const lg = labelLayers.append('g').attr('class', 'snap-labels').style('opacity', 0);
     build(g, lg);
@@ -191,17 +200,56 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   };
 
   // classify(feature, year) → { status: 'highlight' | 'muted', key?, label? }
-  function showSnapshot(year, topo, classify = () => ({ status: 'muted' })) {
+  // overlay (optional; the Europe stage's Britain and the Empire, src/render/realms.js): { under(g, ctx) } draws between
+  // the polities and their borders, { over(g, lg, ctx) } above them, both inside the snapshot so they crossfade with it.
+  function showSnapshot(year, topo, classify = () => ({ status: 'muted' }), overlay = null) {
     const named = namedOf(topo);
     for (const f of named) f.properties.cls = classify(f, year);
     const certainty = named[0]?.properties.certainty ?? 'approximate';
+    const ctx = { d, defs, labelData: (fs) => polityLabelData(fs, labelPath, labelMin), landClip: stage.relief ? 'land-clip' : null };
     crossfade((g, lg) => {
       g.append('g').attr('class', 'polities').selectAll('path').data(named).join('path')
         .attr('class', (f) => `polity ${f.properties.certainty} ${f.properties.cls.status}`)
         .attr('d', d)
         .append('title').text((f) => f.properties.cls.label ?? f.properties.name);
+      overlay?.under?.(g, ctx);
       g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(topo)));
       drawPolityLabels(lg, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), labelPath, labelMin));
+      overlay?.over?.(g, lg, ctx);
+    });
+    if (currentTracker) legend.set(currentTracker);
+    diffList.hide();
+    currentYear = year;
+  }
+
+  // The political map (owner, 2026-11-09; src/render/states.js): every state in force in `year`, from Cliopatria,
+  // each in its palette color (classify → { status: 'state' | 'muted', label }); the borders two states share,
+  // drawn once and dashed before 1648; a realm made of members (a "whole") as a heavier line over them; names placed
+  // largest first where they fit. overlay as for showSnapshot (the Holy Roman Empire's band).
+  function showStates(year, view, classify, overlay = null) {
+    for (const f of view.states) f.properties.cls = classify(f, year);
+    const certainty = year >= 1648 ? 'legal' : 'approximate';
+    const ctx = { d, defs, labelData: (fs) => polityLabelData(fs, labelPath, labelMin), landClip: stage.relief ? 'land-clip' : null, measure };
+    crossfade((g, lg) => {
+      g.append('g').attr('class', 'polities states').selectAll('path').data(view.states).join('path')
+        .attr('class', (f) => `polity state ${f.properties.cls.status} pol-${f.properties.c ?? 0}`)
+        .attr('d', d)
+        .append('title').text((f) => `${f.properties.cls.label ?? f.properties.n} · ${f.properties.f}–${f.properties.t} (Cliopatria)`);
+      overlay?.under?.(g, ctx);
+      g.append('path').attr('class', `border ${certainty}`).attr('d', d(view.border()));
+      g.append('g').attr('class', 'wholes').selectAll('path').data(view.wholes.filter(isRealmLine)).join('path')
+        .attr('class', `whole ${certainty}`).attr('d', d)
+        .append('title').text((f) => `${f.properties.n.replace(/^\(|\)$/g, '')} and its members · ${f.properties.f}–${f.properties.t} (Cliopatria)`);
+      // An overlay's own names (the Empire's) are placed first and kept clear of the states' names.
+      const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...(overlay?.reserve?.(ctx) ?? [])];
+      const candidates = view.states.filter((f) => f.properties.cls.status !== 'muted').map((f) => ({ f, text: f.properties.cls.label ?? f.properties.n }));
+      const labels = placeStateLabels(candidates, { path: labelPath, measure, zones, frame, ...(stage.label_min ? labelMin : {}) });
+      lg.selectAll('text').data(labels, (l) => l.id).join('text')
+        .attr('class', 'label polity state-name')
+        .attr('x', (l) => l.x).attr('y', (l) => l.y).attr('font-size', (l) => l.size)
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+        .text((l) => l.text);
+      overlay?.over?.(g, lg, ctx);
     });
     if (currentTracker) legend.set(currentTracker);
     diffList.hide();
@@ -213,11 +261,16 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   const measure = makeMeasure();
   // The stage's region and water names are text too: their boxes are reserved (measured once, after layout).
   let stageLabelBoxes = null;
+  // (The political map hides the stage's region names, src/app.css; a hidden name reserves nothing, so the boxes are
+  // measured once for each of the two cases.)
+  const zoneCache = new Map();
   function stageLabelZones() {
-    if (stageLabelBoxes) return stageLabelBoxes;
+    const key = globalThis.document?.body?.classList.contains('tracker-extent') ? 'political' : 'other';
+    if (zoneCache.has(key)) return zoneCache.get(key);
     stageLabelBoxes = [];
     root.selectAll('g.stage-labels text').each(function () {
       try {
+        if (globalThis.getComputedStyle && getComputedStyle(this).display === 'none') return;
         const b = this.getBBox();
         // A name longer than its guide line reports a box over half the sheet, which would keep every route and
         // label out of it: leave it out and say so (lengthen the label's `span` in the stage file).
@@ -225,8 +278,8 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
         else if (b.width > 0) stageLabelBoxes.push({ x: b.x, y: b.y, w: b.width, h: b.height });
       } catch { /* not rendered yet */ }
     });
-    if (!stageLabelBoxes.length) stageLabelBoxes = null;
-    return stageLabelBoxes ?? [];
+    if (stageLabelBoxes.length) zoneCache.set(key, stageLabelBoxes);
+    return stageLabelBoxes;
   }
   function showRecords({ points = [], routes = [] } = {}) {
     const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones()];
@@ -247,8 +300,10 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
 
   // Diff: B is the ground (muted, its borders); appeared = B features in the focus colour;
   // vanished = A features hatched and outlined in rust; persisted = muted.
+  // a and b: { year, topo } (a base map) or { year, view } (the political map's states in force, src/render/states.js).
   function showDiff(a, b, identify) {
-    const aNamed = namedOf(a.topo), bNamed = namedOf(b.topo);
+    const aNamed = a.view ? a.view.states : namedOf(a.topo), bNamed = b.view ? b.view.states : namedOf(b.topo);
+    const bBorder = b.view ? b.view.border() : interiorOf(b.topo);
     const diff = computeDiff({ aFeatures: aNamed, aYear: a.year, bFeatures: bNamed, bYear: b.year, identify, path, frame, minKm2: stage.diff_min_km2 ?? 120000 });
     const appeared = diff.appeared.flatMap((it) => it.b.map((f) => ({ f, label: it.label, key: it.key })));
     const vanished = diff.vanished.flatMap((it) => it.a.map((f) => ({ f, label: it.label, key: it.key })));
@@ -257,7 +312,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
       g.append('g').attr('class', 'polities').selectAll('path').data(bNamed).join('path')
         .attr('class', (f) => `polity ${f.properties.certainty} muted`).attr('d', d)
         .append('title').text((f) => f.properties.name);
-      g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(b.topo)));
+      g.append('path').attr('class', `border ${certainty}`).attr('d', d(bBorder));
       g.append('g').attr('class', 'appeared').selectAll('path').data(appeared).join('path')
         .attr('class', 'polity appeared').attr('d', (x) => d(x.f)).append('title').text((x) => `${x.label} — appeared by ${b.year}`);
       g.append('g').attr('class', 'vanished').selectAll('path').data(vanished).join('path')
@@ -288,5 +343,5 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setRange(from, to);
   }
 
-  return { projection, path, d, frame, showSnapshot, showDiff, showMarks, showRecords, setTracker, setYear, setRange, setSpan, legend, cartouche, get year() { return currentYear; } };
+  return { projection, path, d, frame, showSnapshot, showStates, showDiff, showMarks, showRecords, setTracker, setYear, setRange, setSpan, legend, cartouche, get year() { return currentYear; } };
 }

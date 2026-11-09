@@ -1,0 +1,36 @@
+{
+  "generated": "2026-11-09T22:17:17.812Z",
+  "note": "Written by scripts/fetch-europe.mjs. Raw downloads live in data/base/raw/ohm-europe/ (not committed); scripts/derive-europe.mjs writes data/base/derived/realms.topojson.",
+  "entries": [
+    {
+      "source": "openhistoricalmap",
+      "license": "CC0 1.0",
+      "attribution": "OpenHistoricalMap contributors, https://www.openhistoricalmap.org (CC0)",
+      "layer": "chronology relations and their members",
+      "url": "https://overpass-api.openhistoricalmap.org/api/interpreter",
+      "query": "[out:json][timeout:120];rel(id:2750624);out body;",
+      "file": "data/base/raw/ohm-europe/chronologies.json",
+      "bytes": 4386,
+      "sha256": "de95959c4311d47282af13611b7ffde4108ebeb1532488e73f93464ce0643c65",
+      "retrieved": "2026-11-09T22:17:18.525Z",
+      "osm_base": "2026-11-09T22:13:51Z",
+      "cached": false
+    },
+    {
+      "source": "openhistoricalmap",
+      "license": "CC0 1.0",
+      "attribution": "OpenHistoricalMap contributors, https://www.openhistoricalmap.org (CC0)",
+      "layer": "relations, member ways and nodes",
+      "relations": 22,
+      "query_note": "rel(id:<every member of the chronologies above and every relation src/trackers/realms.json names>);out body;>;out skel qt;",
+      "url": "https://overpass-api.openhistoricalmap.org/api/interpreter",
+      "query": "[out:json][timeout:600][maxsize:1073741824];rel(id:2696467,2750623,2805484,2805485,2806831,2810171,2810442,2815272,2815362,2815489,2815499,2830353,2830620,2831111,2831324,2831515,2857597,2890097,2891973,2891979,2892299,2957553);out body;>;out skel qt;",
+      "file": "data/base/raw/ohm-europe/realms-geometry.json",
+      "bytes": 14431697,
+      "sha256": "efd37cb2cf4929879d055adc2c9dcf343bf819e7397a13bf872cf67e28165e5d",
+      "retrieved": "2026-11-09T22:17:19.570Z",
+      "osm_base": "2026-11-09T22:13:51Z",
+      "cached": false
+    }
+  ]
+}

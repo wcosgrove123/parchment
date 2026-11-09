@@ -1,6 +1,6 @@
 # Parchment
 
-A historical timeline atlas for the classroom. A live map in the browser with fixed stages, snapshot years,
+A historical timeline atlas for the classroom. A live map in the browser with fixed stages, any year from 1200 to 2000,
 thematic trackers and a diff view for continuity and change over time. It exports slide-ready images.
 
 Parchment is designed and directed by Wil Cosgrove.
@@ -13,15 +13,24 @@ Parchment is designed and directed by Wil Cosgrove.
   Desktop shortcut **Parchment** opens it. `F11` is full screen.
 - Offline in a browser: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
 - For working on it: `scripts/start-parchment.cmd` starts the dev server at http://127.0.0.1:8321 and opens a browser.
-- Keys: `←` `→` step through the snapshot years; `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
-- Lesson maps: add `?focus=ottoman,safavid,mughal,qing` to the address to light only those states (ids in `src/trackers/extent.json`).
+- Keys: `←` `→` step through the suggested years (the year box takes any other); `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
+- Lesson maps: add `?focus=ottoman,safavid,mughal,qing` to the address to keep only those states in color (ids in `src/trackers/extent.json`).
 - Trying rows: `?records=data/some-file.csv` reads a file from the site instead of the Sheet.
 - Export: the toolbar's Export menu saves the current view as PNG (1920×1080 or 3840×2160) or SVG, with legend, cartouche and timeline baked in.
+
+### Any year, every state
+
+Every map of the world page draws the states of the year shown from one source, Cliopatria (Seshat Global History
+Databank): type any year from 1200 to 2000, or `?year=1536`, on any stage, and each state is drawn with the shape
+Cliopatria gives it that year, in a color of its own; neighbors never share one. A realm Cliopatria builds from member
+states (France with its fiefs, England with its Irish earldoms) gets a heavier line around its members, and the Holy
+Roman Empire a band inside its outer border (Cliopatria's to 1458, OpenHistoricalMap's from 1648; none in between).
+The year buttons are suggestions. The data: `data/base/derived/cliopatria.topojson` (`scripts/derive-cliopatria.mjs`).
 
 ### The world (`?stage=world`)
 
 The **World** link in the toolbar opens the whole globe (Equal Earth) for transoceanic voyages and exchanges, with
-the same trackers, keys and exports, and two more snapshots (1530, 1650). A route that crosses the Pacific edge of
+the same trackers, keys and exports. A route that crosses the Pacific edge of
 the map runs off one side and carries on from the other. Draft Unit 4 rows to try are in `data/drafts/` (see its
 README). Two views: the Atlantic view (`?stage=world`) and the Pacific view (`?stage=world-pacific`); the toolbar switches
 between them and keeps the year. The **Explorers** layer (any stage) takes a typed range of years and draws every
@@ -29,10 +38,8 @@ expedition whose dates touch it, colored by the state that sent it: `?tracker=ex
 
 ### Europe (`?stage=europe`)
 
-The **Europe** link opens Europe on its own, equal-area and centered on Germany, with two more snapshots (1650, 1715).
-It lights France, Spain, the Habsburg Monarchy, Prussia, Sweden and Russia; `?focus=` picks what to light instead
-(`?stage=europe&year=1715&focus=britain,dutch-republic` for the constitutional contrast). Use 1715 for the
-eighteenth century: the 1700 base map folds Brandenburg and Austria into the Holy Roman Empire.
+The **Europe** link opens Europe on its own, equal-area and centered on Germany. `?focus=` keeps only the named states in
+color (`?stage=europe&year=1715&focus=britain,dutch-republic` for the constitutional contrast).
 
 ### North America, 1492 to the present (`us.html`)
 
@@ -83,6 +90,8 @@ It runs on the laptop, so a cloud session reaches it only while the laptop is on
 npm install          # once
 npm run fetch        # download base data (records every source in data/base/MANIFEST.json)
 npm run derive       # simplify it for the browser (data/base/derived/)
+node --max-old-space-size=8192 scripts/derive-cliopatria.mjs   # the states of every year, colored (cliopatria.topojson)
+node scripts/fetch-europe.mjs && node scripts/derive-europe.mjs  # the Holy Roman Empire's dated border (realms.topojson)
 node scripts/relief.mjs   # pre-render shaded relief per stage (assets/relief/)
 npm run dev          # http://localhost:8321/  (rebuilds on save)
 npm run build        # app.js for GitHub Pages
@@ -127,7 +136,9 @@ A one-year event appears on the first snapshot at or after its year (a 1526 batt
 ## Credits
 
 Atlas, design and ideas: Wil Cosgrove. Code written with the help of an AI assistant.
-Map data: Historical Basemaps (GPL-3.0), Natural Earth (public domain); for North America also the Newberry Library's
+Map data: Cliopatria, Seshat Global History Databank (CC BY 4.0), Natural Earth (public domain), OpenHistoricalMap (CC0)
+for the Holy Roman Empire's border after 1648, and Historical Basemaps (GPL-3.0) for the admin page; for North America
+also the Newberry Library's
 Atlas of Historical County Boundaries, OpenHistoricalMap (CC0), the U.S. Forest Service's Royce land cessions, the U.S.
 Census Bureau, and the National Park Service's digitization of the Indian Claims Commission's 1978 map.
 Type: Libre Baskerville (OFL).

@@ -83,14 +83,25 @@ The site works in any browser. For the classroom computer there is also `Parchme
 window and icon that needs no browser and works without a network. Copy the one file anywhere and double-click it;
 `F11` fills the screen. It reads the Sheet live when the computer is online and shows the saved copy when it is not.
 
+## Any year, every state
+
+Type any year from 1200 to 2000 in the **year** box beside the year buttons (or add `&year=1536` to the address), on
+any map: the world, Afro-Eurasia or Europe. Every state that existed that year is drawn in a color of its own, and
+its neighbors in other colors. The year buttons are only suggestions; the arrow keys and Play step through them.
+
+All of it comes from one source, Cliopatria (Seshat Global History Databank), so every map agrees for the same year.
+A state changes shape only in the years Cliopatria records a change, never in between. Where Cliopatria builds a
+realm out of member states (France with its counties and duchies, England with its Irish earldoms), the members
+keep their own colors and a heavier line runs around the realm. The Holy Roman Empire has a band along the inside of
+its border: up to 1458 from Cliopatria, and from the Peace of Westphalia (1648) from OpenHistoricalMap, dashed.
+Between 1459 and 1648 neither source draws the Empire's outer border, so the map leaves it out rather than guess.
+Land no state held is left plain. A few of Cliopatria's choices are listed for review in `docs/DECISIONS.md`.
+
 ## A map of Europe
 
-The **Europe** link in the toolbar opens Europe on its own, for lessons such as absolutism. It has two extra years,
-1650 and 1715 (the year Louis XIV died). It lights France, Spain, the Habsburg Monarchy, Prussia, Sweden and Russia.
-To light others, add `focus=` to the address: `index.html?stage=europe&year=1715&focus=britain,dutch-republic`
-shows Great Britain and the Dutch Republic for the constitutional contrast. Use 1715 rather than 1700: the 1700
-map draws Brandenburg and Austria inside one Holy Roman Empire shape, so Prussia and the Habsburg lands are only
-partly lit there.
+The **Europe** link in the toolbar opens Europe on its own, for lessons such as absolutism. To keep only some
+states in color, add `focus=` to the address: `index.html?stage=europe&year=1715&focus=britain,dutch-republic`
+shows Great Britain and the Dutch Republic for the constitutional contrast.
 
 ## When a point appears
 

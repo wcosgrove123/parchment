@@ -1,0 +1,14 @@
+{
+  "_comment": "The Holy Roman Empire's outer border from OpenHistoricalMap (CC0), drawn over the political map for the years it is dated (src/render/realms.js; owner, 2026-11-09: \"That's fine with me\"). scripts/fetch-europe.mjs fetches every member of the chronology named here; scripts/derive-europe.mjs writes data/base/derived/realms.topojson. Only the relations with a border are drawn: 24 October 1648 – 7 November 1659 and 17 September 1678 – 23 February 1766 (2831515, 2831324, 2831111, 2815489, 2815362, and the later ones). The 1201–1512 relation has no shape at all, and the 1512–1648 and 1659–1678 relations only list some Imperial Circles. Every relation is tagged 'needs source for boundary lines', so the line is drawn dashed (approximate).",
+  "id": "realms",
+  "date_in_year": "07-01",
+  "realms": [
+    {
+      "id": "hre",
+      "label": "Holy Roman Empire",
+      "draw": "band",
+      "chronology": [2750624],
+      "ohm": []
+    }
+  ]
+}

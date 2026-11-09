@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T14:23:32.480Z",
+  "generated": "2026-11-09T20:18:11.685Z",
   "settings": {
     "polities": {
       "minWeight": 0.0001,
@@ -138,6 +138,43 @@
         "quantization": 200000
       },
       "written_by": "scripts/derive-rivers.mjs"
+    },
+    "realms": {
+      "file": "realms.topojson",
+      "bytes": 185361,
+      "features": 19,
+      "by_realm": {
+        "hre": 19
+      },
+      "settings": {
+        "minWeight": 0.00002,
+        "quantization": 200000
+      },
+      "written_by": "scripts/derive-europe.mjs"
+    },
+    "cliopatria": {
+      "file": "cliopatria.topojson",
+      "bytes": 10348425,
+      "rows": 8510,
+      "by_kind": {
+        "state": 7393,
+        "rel": 189,
+        "whole": 928
+      },
+      "span": [
+        1200,
+        2000
+      ],
+      "palette": 12,
+      "grid_degrees": 0.5,
+      "neighbor_pairs": 4331,
+      "clashes": 0,
+      "settings": {
+        "minWeight": 0.0001,
+        "quantization": 100000
+      },
+      "source": "Cliopatria v0.2.1 (Seshat Global History Databank, CC BY 4.0)",
+      "written_by": "scripts/derive-cliopatria.mjs"
     }
   }
 }

@@ -1,5 +1,21 @@
 {
   "_comment": "Course-wide snapshot years shared by every stage. fetch-base.mjs fills source_year and gap from historical-basemaps index.json using `rule` (nearest-not-after: latest base map not later than the calendar year; or nearest). A snapshot may pin a base year with source_override. The cartouche shows calendar year · base map source_year when they differ. A snapshot with \"stages\" belongs only to those stages and their variants (\"world\" also covers world-atlantic, world-americas); the rest are shared by every stage.",
+  "suggested": [
+    1200,
+    1250,
+    1300,
+    1400,
+    1450,
+    1500,
+    1530,
+    1600,
+    1650,
+    1700,
+    1750,
+    1900,
+    2000
+  ],
+  "_suggested": "The world page's suggested years (owner, 2026-11-09: any year can be typed, and every stage draws Cliopatria's states in force that year): the year buttons, the dots on the timeline strip, and the steps of the arrow keys and Play, the same on every stage. The course years, the Unit 3 and 4 years, and 1250, 1300 and 1400 for the owner's 1250-1750 maps. The `snapshots` below stay for the historical-basemaps derivation (scripts/derive.mjs) and the admin page; the world page no longer draws them.",
   "course": [
     1200,
     1450,

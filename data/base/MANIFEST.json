@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-06T22:07:30.828Z",
+  "generated": "2026-11-09T22:17:08.726Z",
   "note": "Written by scripts/fetch-base.mjs. Raw downloads live in data/base/raw/ (not committed). Derived simplifications are written by scripts/derive.mjs to data/base/derived/.",
   "entries": [
     {
@@ -108,6 +108,19 @@
       "source": "historical-basemaps",
       "license": "GPL-3.0",
       "attribution": "Historical Basemaps, Andrej Ourednik and contributors, https://github.com/aourednik/historical-basemaps",
+      "calendar_year": 1715,
+      "base_year": 1715,
+      "url": "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1715.geojson",
+      "file": "data/base/raw/historical-basemaps/world_1715.geojson",
+      "bytes": 1695707,
+      "sha256": "fdf5097dd21c30c9d7bfb1d5c2c2a11a5a39c397e6910116d7173580619f5b5a",
+      "retrieved": "2026-10-29T12:28:29.346Z",
+      "cached": true
+    },
+    {
+      "source": "historical-basemaps",
+      "license": "GPL-3.0",
+      "attribution": "Historical Basemaps, Andrej Ourednik and contributors, https://github.com/aourednik/historical-basemaps",
       "calendar_year": 1750,
       "base_year": 1715,
       "url": "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1715.geojson",
@@ -141,6 +154,45 @@
       "bytes": 1893869,
       "sha256": "7de99c532c410c5175abba2d540ed3a21f526f85abb9db408eafef88b0b7fcb3",
       "retrieved": "2026-10-29T12:28:29.922Z",
+      "cached": true
+    },
+    {
+      "source": "cliopatria",
+      "license": "CC BY 4.0",
+      "attribution": "Cliopatria, Seshat Global History Databank (Bennett, J. S. et al., Scientific Data 12, 247 (2025), doi:10.1038/s41597-025-04516-9)",
+      "tag": "v0.2.1",
+      "layer": "cliopatria.geojson.zip",
+      "url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.1/cliopatria.geojson.zip",
+      "file": "data/base/raw/cliopatria/cliopatria.geojson.zip",
+      "bytes": 46005176,
+      "sha256": "e10a4e429fca708788ff9e7572a95fce801fae55852d217cffabc1c59cd4eed4",
+      "retrieved": "2026-11-09T21:42:06.852Z",
+      "cached": true
+    },
+    {
+      "source": "cliopatria",
+      "license": "CC BY 4.0",
+      "attribution": "Cliopatria, Seshat Global History Databank (Bennett, J. S. et al., Scientific Data 12, 247 (2025), doi:10.1038/s41597-025-04516-9)",
+      "tag": "v0.2.1",
+      "layer": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.1/LICENSE.md",
+      "file": "data/base/raw/cliopatria/LICENSE.md",
+      "bytes": 404,
+      "sha256": "62ca7e92dee4ebe402372d5e64f87845de445a6c0e5d76fddb68b3e33739d1a6",
+      "retrieved": "2026-11-09T21:42:07.262Z",
+      "cached": true
+    },
+    {
+      "source": "cliopatria",
+      "license": "CC BY 4.0",
+      "attribution": "Cliopatria, Seshat Global History Databank (Bennett, J. S. et al., Scientific Data 12, 247 (2025), doi:10.1038/s41597-025-04516-9)",
+      "tag": "v0.2.1",
+      "layer": "README.md",
+      "url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/v0.2.1/README.md",
+      "file": "data/base/raw/cliopatria/README.md",
+      "bytes": 6669,
+      "sha256": "1d7057948a3dcdeb359eb2e1482b71f9d9fd7650d0e55ab09dc9f90dc341b5e9",
+      "retrieved": "2026-11-09T21:42:07.673Z",
       "cached": true
     },
     {
@@ -200,8 +252,8 @@
       "file": "data/base/raw/natural-earth/ne_10m_rivers_lake_centerlines.geojson",
       "bytes": 7307743,
       "sha256": "bb854a900ecbd3b408df46d5e16e3e0f974ba55993f9d8b5c26e855273c0905a",
-      "retrieved": "2026-11-06T22:07:32.895Z",
-      "cached": false
+      "retrieved": "2026-11-06T22:07:32.884Z",
+      "cached": true
     },
     {
       "source": "Natural Earth",
@@ -212,8 +264,8 @@
       "file": "data/base/raw/natural-earth/ne_10m_rivers_north_america.geojson",
       "bytes": 8734704,
       "sha256": "dcd2348655a5f3d0ea7be35024073ab24f09115d2e4efb77e7bc0a33567db682",
-      "retrieved": "2026-11-06T22:07:33.630Z",
-      "cached": false
+      "retrieved": "2026-11-06T22:07:33.617Z",
+      "cached": true
     },
     {
       "source": "Natural Earth",
@@ -320,7 +372,7 @@
       "file": "assets/fonts/libre-baskerville-latin-400-normal.woff2",
       "bytes": 20108,
       "sha256": "3eb80fbca70498126925ce16ff5c20b2fa35e67ae7123ddb46302d2778dfbf0e",
-      "retrieved": "2026-11-06T22:07:33.885Z"
+      "retrieved": "2026-11-09T22:17:09.538Z"
     },
     {
       "source": "Libre Baskerville",
@@ -330,7 +382,7 @@
       "file": "assets/fonts/libre-baskerville-latin-400-italic.woff2",
       "bytes": 21564,
       "sha256": "efb7e5f4376a557314f5bb9f5197ef837d86c0ab38e1a50a0ff5c60c3400c629",
-      "retrieved": "2026-11-06T22:07:33.893Z"
+      "retrieved": "2026-11-09T22:17:09.541Z"
     },
     {
       "source": "Libre Baskerville",
@@ -340,7 +392,7 @@
       "file": "assets/fonts/libre-baskerville-latin-700-normal.woff2",
       "bytes": 20436,
       "sha256": "96fa63376eed93029fa2514a02f5cb80276b016e239426858787de6e794d8619",
-      "retrieved": "2026-11-06T22:07:33.901Z"
+      "retrieved": "2026-11-09T22:17:09.545Z"
     },
     {
       "source": "Libre Baskerville",
@@ -350,7 +402,7 @@
       "file": "assets/fonts/libre-baskerville-latin-700-italic.woff2",
       "bytes": 21840,
       "sha256": "41cee933f4b0f98abfdcee0f5188f96e885f40fff88c7fe771ba95c0e1309579",
-      "retrieved": "2026-11-06T22:07:33.909Z"
+      "retrieved": "2026-11-09T22:17:09.547Z"
     }
   ],
   "historical_basemaps": {
@@ -403,6 +455,12 @@
         "source_year": 1700,
         "gap": 0,
         "file": "world_1700.geojson"
+      },
+      {
+        "year": 1715,
+        "source_year": 1715,
+        "gap": 0,
+        "file": "world_1715.geojson"
       },
       {
         "year": 1750,

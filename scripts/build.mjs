@@ -10,11 +10,13 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const serve = process.argv.includes('--serve');
+// PARCHMENT_ONLY=app (or app,admin) builds only those bundles: another session may be reading us.js meanwhile.
+const only = process.env.PARCHMENT_ONLY ? new Set(process.env.PARCHMENT_ONLY.split(',')) : null;
 const port = Number(process.env.PORT ?? 8321);
 
 const options = {
   absWorkingDir: ROOT,
-  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }, { in: join(ROOT, 'src', 'us', 'main.js'), out: 'us' }],
+  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }, { in: join(ROOT, 'src', 'us', 'main.js'), out: 'us' }].filter((e) => !only || only.has(e.out)),
   outdir: ROOT,
   bundle: true,
   format: 'iife',

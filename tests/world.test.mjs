@@ -170,7 +170,8 @@ test('the Explorers layer draws in a shot: a typed range, color by state, a Paci
       '--virtual-time-budget=15000', '--timeout=30000', '--dump-dom', url], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 60000 });
     assert.match(dom, /<text class="map-title"[^>]*>The World<\/text>/);
     assert.match(dom, /<text class="year[^"]*"[^>]*>1519–1522<\/text>/, 'the cartouche shows the typed range');
-    assert.match(dom, /<text class="base-note"[^>]*>base map 1500<\/text>/, 'the latest snapshot not after 1522');
+    assert.match(dom, /<path class="polity state muted pol-\d+"/, 'the states of 1522 (Cliopatria, 2026-11-09), drawn quiet under the routes');
+    assert.match(dom, /<text class="base-note"[^>]*><\/text>/, 'no base map stands in: every year is drawn as it was');
     assert.match(dom, /<body class="[^"]*tracker-explorers/);
     assert.match(dom, /<path class="route spain regular solid spain" id="route-magellan-1519-1" d="[^"]*" stroke-width="3">/, 'solid, Spain, the first piece runs to the edge with no head');
     assert.match(dom, /id="route-magellan-1519-2" d="[^"]*" stroke-width="3" marker-end="url\(#route-head-arrow-spain\)"/, 'the second piece carries the head');

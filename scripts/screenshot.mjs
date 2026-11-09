@@ -57,6 +57,7 @@ if (tracker) query.set('tracker', tracker);
 if (focus) query.set('focus', focus);
 if (records) query.set('records', records);
 if (labels) query.set('labels', labels);
+if (arg('band', '')) query.set('band', arg('band', '')); // --band rust: the Europe stage's Empire band in another color
 
 try {
   execFileSync(browser, [

@@ -65,6 +65,13 @@ const sideHues = { a: 262, b: 340, c: 185, d: 85, gray: 260, red: 25 };
 const sideC = (k) => (k === 'gray' ? 0.012 : null);
 const sideLine = (k) => oklchToHex({ L: 0.47, C: sideC(k) ?? 0.13, h: sideHues[k] });
 const sideFill = (k) => oklchToHex({ L: 0.72, C: sideC(k) ?? 0.09, h: sideHues[k] });
+// The political map (owner, 2026-11-09: "use the color scheme to highlight countries/states/nations/etc like the
+// other map does"): every state in force in the year shown has a color of its own, its neighbors another
+// (scripts/derive-cliopatria.mjs assigns them). Six hues, each pale (L 0.86, C 0.055) and mid (L 0.77, C 0.07):
+// tempered like Set A, lighter so names and borders read over them, and far from the apparatus's dark lines.
+// Provisional until the owner has seen the picture sheet.
+const polHues = [25, 75, 120, 165, 215, 290];
+const pol = [...polHues.map((h) => oklchToHex({ L: 0.86, C: 0.055, h })), ...polHues.map((h) => oklchToHex({ L: 0.77, C: 0.07, h }))];
 // Water: paper lightness, nudged toward blue.
 const paperL = hexToOklch('#D9D6CC').L;
 const ocean = oklchToHex({ L: paperL, C: 0.022, h: 235 });
@@ -99,6 +106,9 @@ ${Object.entries(sponsors).map(([k, v]) => `  --sponsor-${k}: ${v};`).join('\n')
 
   /* Military layer: the sides of a war (owner, 2026-11-09); line L 0.47 C 0.13, fill L 0.72 C 0.09 */
 ${Object.keys(sideHues).map((k) => `  --side-${k}-line: ${sideLine(k)};   --side-${k}-fill: ${sideFill(k)};`).join('\n')}
+
+  /* Political map: a color per state, neighbors apart (owner, 2026-11-09); pale L 0.86 C 0.055, mid L 0.77 C 0.07 */
+${pol.map((v, k) => `  --pol-${k}: ${v};`).join('\n')}
 
   /* Ground and water */
   --parchment: ${parchment};

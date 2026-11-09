@@ -203,3 +203,47 @@ body.tracker-routes .relief, body.tracker-explorers .relief { opacity: 0.38; }
 #toolbar #span input { font: inherit; width: 4.2em; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
 body.tracker-explorers #toolbar #span { display: inline-flex; }
 body.tracker-explorers #toolbar .seg, body.tracker-explorers #years, body.tracker-explorers #years-a, body.tracker-explorers #scope, body.tracker-explorers #play { display: none; }
+
+/* The political map (owner, 2026-11-09: "use the color scheme to highlight countries/states/nations/etc like the other
+   map does"; src/render/states.js). Every state in force has its own palette color (--pol-0…11, src/tokens.css), its
+   neighbors another; a realm Cliopatria draws as the sum of its members (a "whole") gets a heavier line over theirs.
+   The Holy Roman Empire is a band along the inside of its outer border with a line on the border itself, dashed while
+   the border is approximate; navy, the borders' own color, until the owner chooses the band's look. */
+.polity.state { stroke: none; fill-opacity: 0.78; }
+.polity.state.muted { fill: var(--cream); fill-opacity: 0; }
+.pol-0 { fill: var(--pol-0); }
+.pol-1 { fill: var(--pol-1); }
+.pol-2 { fill: var(--pol-2); }
+.pol-3 { fill: var(--pol-3); }
+.pol-4 { fill: var(--pol-4); }
+.pol-5 { fill: var(--pol-5); }
+.pol-6 { fill: var(--pol-6); }
+.pol-7 { fill: var(--pol-7); }
+.pol-8 { fill: var(--pol-8); }
+.pol-9 { fill: var(--pol-9); }
+.pol-10 { fill: var(--pol-10); }
+.pol-11 { fill: var(--pol-11); }
+.legend .swatch-state { stroke: none; fill-opacity: 0.85; }
+.whole { fill: none; stroke: var(--navy); stroke-width: 1.7; stroke-opacity: 0.75; stroke-linejoin: round; }
+.whole.approximate { stroke-dasharray: 6 3; }
+.legend .swatch-whole { stroke: var(--navy); stroke-width: 1.7; stroke-opacity: 0.75; }
+.label.polity.state-name { letter-spacing: 0.12em; }
+:root { --band: var(--navy); --band-opacity: 0.2; }
+.hre-band { fill: none; stroke: var(--band); stroke-opacity: var(--band-opacity); stroke-width: 16; stroke-linejoin: round; }
+.hre-line { fill: none; stroke: var(--band); stroke-width: 1.3; stroke-opacity: 0.8; stroke-linejoin: round; }
+.hre-line.approximate, .hre-line.dashed { stroke-dasharray: 5 3; }
+.legend .swatch-band { fill: var(--band); fill-opacity: var(--band-opacity); stroke: none; }
+.legend .swatch-band-line { stroke: var(--band); stroke-width: 1.3; stroke-opacity: 0.8; }
+.legend .swatch-band-line.dashed { stroke-dasharray: 5 3; }
+.label.polity.hre { font-size: 16px; letter-spacing: 0.24em; font-weight: 400; fill: var(--navy); fill-opacity: 0.75; }
+.hre-line.small { stroke-width: 0.9; }
+
+/* Any year typed in (owner, 2026-11-09), beside the suggested years; not under Explorers, which types a range. */
+#toolbar #year-box { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
+#toolbar #year-box input { font: inherit; width: 4.2em; background: var(--cream); color: var(--ink); border: 1px solid var(--navy); border-radius: 3px; padding: 1px 4px; }
+body.tracker-explorers #toolbar #year-box { display: none; }
+/* On a screen narrower than the toolbar (a 1366 Chromebook), the toolbar wraps to a second row instead of running
+   off both edges. At 1920 it is one row as before. */
+#toolbar { max-width: calc(100vw - 16px); flex-wrap: wrap; justify-content: center; row-gap: 4px; }
+/* The political map names states, so the stage's region names (Europe, Central Asia…) step aside; seas stay. */
+body.tracker-extent .stage-labels .label.region { display: none; }
