@@ -42,7 +42,10 @@ function buildTopo(objects, { minWeight, quantization }) {
   return topo;
 }
 
-const index = { generated: new Date().toISOString(), settings: SETTINGS, certainty_legal_from: CERTAINTY_LEGAL_FROM, snapshots: [], layers: {} };
+// Layers other scripts add to this index (rivers-na, scripts/derive-rivers.mjs) are carried over; this run rewrites
+// only its own (ne, bathymetry).
+const previous = await readFile(join(OUT, 'index.json'), 'utf8').then(JSON.parse).catch(() => ({}));
+const index = { generated: new Date().toISOString(), settings: SETTINGS, certainty_legal_from: CERTAINTY_LEGAL_FROM, snapshots: [], layers: { ...(previous.layers ?? {}) } };
 
 // ---------------------------------------------------------------- polities per calendar snapshot
 const calendar = JSON.parse(await readFile(join(ROOT, 'data', 'calendar.json'), 'utf8'));

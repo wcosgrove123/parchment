@@ -1,5 +1,5 @@
 {
-  "_comment": "Extent tracker (v0). Which downloaded base polygons are highlighted, by the NAME the base map gives them in each era, bounded by start/end years. The polygons themselves are never edited. Rows in data/records.csv with tracker=extent can add to or override this list.",
+  "_comment": "Extent tracker (v0). Which downloaded base polygons are highlighted, by the NAME the base map gives them in each era, bounded by start/end years. The polygons themselves are never edited. Rows in data/records.csv with tracker=extent can add to or override this list. An entry with `stages` lights by default only on those stages (an empty list: only when ?focus= names it), so the Europe stage's states (2026-11-09) leave every other stage's map as it was; `label` is what the map prints, which may differ from the base map's own name (historical-basemaps calls the Habsburg lands 'Austrian Empire' before 1804 and Great Britain 'United Kingdom' in 1715).",
   "title": "Extent of states",
   "fill_key": "P",
   "legend": [
@@ -113,6 +113,101 @@
       "names": [
         "Tokugawa shogunate",
         "Tokugawa Shogunate"
+      ]
+    },
+    {
+      "id": "france",
+      "label": "France",
+      "start": 1450,
+      "end": 2000,
+      "stages": ["europe"],
+      "names": [
+        "France",
+        "Kingdom of France"
+      ]
+    },
+    {
+      "id": "spain",
+      "label": "Spain",
+      "start": 1516,
+      "end": 2000,
+      "stages": ["europe"],
+      "_why": "From Charles I (1516), who ruled Castile and Aragon together; historical-basemaps names the polygon Spain from its 1530 map (Castile before).",
+      "names": [
+        "Spain"
+      ]
+    },
+    {
+      "id": "habsburg",
+      "label": "Habsburg Monarchy",
+      "start": 1526,
+      "end": 1866,
+      "stages": ["europe"],
+      "_why": "From 1526 (Bohemia and Hungary to the Habsburgs). historical-basemaps names these lands 'Austrian Empire', a title first used in 1804; the label says Habsburg Monarchy. Its 1700 map has only Hungary and its neighbors in that polygon (Austria and Bohemia are inside the Holy Roman Empire's); its 1715 map has all three.",
+      "names": [
+        "Austrian Empire",
+        "Habsburg Monarchy",
+        "Archduchy of Austria"
+      ]
+    },
+    {
+      "id": "prussia",
+      "label": "Prussia",
+      "start": 1618,
+      "end": 1871,
+      "stages": ["europe"],
+      "_why": "From 1618, when Brandenburg's elector inherited the Duchy of Prussia. historical-basemaps draws Brandenburg (subject of Prussia) apart only from its 1715 map; before that Brandenburg is inside the Holy Roman Empire's polygon and only the duchy is lit.",
+      "names": [
+        "Prussia",
+        "Brandenburg",
+        "Kingdom of Prussia"
+      ]
+    },
+    {
+      "id": "sweden",
+      "label": "Sweden",
+      "start": 1523,
+      "end": 2000,
+      "stages": ["europe"],
+      "names": [
+        "Sweden"
+      ]
+    },
+    {
+      "id": "england",
+      "label": "England",
+      "start": 1450,
+      "end": 1706,
+      "stages": [],
+      "_why": "Lit only when an order names it (?focus=england): the constitutional contrast for an absolutism lesson. historical-basemaps' 'England and Ireland' (1530–1700) is labeled England.",
+      "names": [
+        "England",
+        "England and Ireland",
+        "Kingdom of England"
+      ]
+    },
+    {
+      "id": "britain",
+      "label": "Great Britain",
+      "start": 1707,
+      "end": 1800,
+      "stages": [],
+      "_why": "Lit only when an order names it (?focus=britain). From the Union of 1707; historical-basemaps' 1715 map calls it 'United Kingdom', a name first used in 1801, so the label says Great Britain.",
+      "names": [
+        "United Kingdom",
+        "Kingdom of Great Britain",
+        "Great Britain"
+      ]
+    },
+    {
+      "id": "dutch-republic",
+      "label": "Dutch Republic",
+      "start": 1581,
+      "end": 1795,
+      "stages": [],
+      "_why": "Lit only when an order names it (?focus=dutch-republic): the republican contrast.",
+      "names": [
+        "Dutch Republic"
       ]
     }
   ]

@@ -83,6 +83,15 @@ The site works in any browser. For the classroom computer there is also `Parchme
 window and icon that needs no browser and works without a network. Copy the one file anywhere and double-click it;
 `F11` fills the screen. It reads the Sheet live when the computer is online and shows the saved copy when it is not.
 
+## A map of Europe
+
+The **Europe** link in the toolbar opens Europe on its own, for lessons such as absolutism. It has two extra years,
+1650 and 1715 (the year Louis XIV died). It lights France, Spain, the Habsburg Monarchy, Prussia, Sweden and Russia.
+To light others, add `focus=` to the address: `index.html?stage=europe&year=1715&focus=britain,dutch-republic`
+shows Great Britain and the Dutch Republic for the constitutional contrast. Use 1715 rather than 1700: the 1700
+map draws Brandenburg and Austria inside one Holy Roman Empire shape, so Prussia and the Habsburg lands are only
+partly lit there.
+
 ## When a point appears
 
 A span (start to end) shows on every snapshot year inside it. A one-year event shows on the first snapshot year at

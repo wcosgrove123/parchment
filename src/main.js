@@ -10,7 +10,9 @@ import stageEqualEarth from './stages/afro-eurasia.json';
 import stageLambert from './stages/afro-eurasia-lambert.json';
 import stageWorld from './stages/world.json';
 import stageWorldPacific from './stages/world-pacific.json';
+import stageEurope from './stages/europe.json';
 import { stageYears, snapYear } from './data/calendar.js';
+import { makeHighlighter } from './data/highlights.js';
 import extent from './trackers/extent.json';
 import expansion from './trackers/expansion.json';
 import routes from './trackers/routes.json';
@@ -42,19 +44,16 @@ const PLAY_HOLD_MS = 1500;
 
 // ?stage=afro-eurasia-lambert shows the alternative projection for comparison. ?stage=world is the whole globe with the
 // Atlantic in view (Unit 4 voyages); ?stage=world-pacific is the same globe centered on the Pacific (the owner asked for both).
-const STAGES = Object.fromEntries([stageEqualEarth, stageLambert, stageWorld, stageWorldPacific].map((s) => [s.id, s]));
+// ?stage=europe is Europe for its own lessons, absolutism first (the owner asked for it on 2026-11-09).
+const STAGES = Object.fromEntries([stageEqualEarth, stageLambert, stageWorld, stageWorldPacific, stageEurope].map((s) => [s.id, s]));
 const stage = STAGES[params.get('stage')] ?? stageEqualEarth;
 
-// Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year.
-const byName = new Map();
-for (const h of extent.highlights) for (const n of h.names) byName.set(n, h);
+// Extent tracker: a base polygon is highlighted when its NAME matches a highlight entry alive in that year; an entry
+// that names its stages lights only there (src/data/highlights.js).
 // ?focus=ottoman,safavid,mughal,qing limits the highlights to those tracked states (ids from extent.json): a lesson map.
 const FOCUS = new Set((params.get('focus') || '').split(',').map((s) => s.trim()).filter(Boolean));
-function matchHighlight(f, year) {
-  const h = byName.get(f.properties.name);
-  if (!h || year < h.start || year > h.end) return null;
-  return FOCUS.size && !FOCUS.has(h.id) ? null : h;
-}
+const highlightFor = makeHighlighter(extent.highlights, { stage: stage.id, focus: FOCUS });
+const matchHighlight = (f, year) => highlightFor(f.properties.name, year);
 function classifyExtent(f, year) {
   const h = matchHighlight(f, year);
   return h ? { status: 'highlight', key: h.id, label: h.label } : { status: 'muted' };
@@ -269,6 +268,9 @@ async function main() {
   if (stage.id === 'world-pacific') tb.append('a').attr('class', 'admin-link').attr('href', keep('world')).attr('title', 'The same world with the Atlantic in view').text('Atlantic view').on('click', function () { this.href = keep('world'); });
   if (stage.id.startsWith('world')) tb.append('a').attr('class', 'admin-link').attr('href', '?').attr('title', 'The Afro-Eurasia stage').text('Afro-Eurasia');
   else tb.append('a').attr('class', 'admin-link').attr('href', '?stage=world').attr('title', 'The whole world: transoceanic voyages and exchanges').text('World');
+  // Europe (2026-11-09) and Afro-Eurasia link to each other, keeping the year and tracker.
+  if (stage.id === 'europe') tb.append('a').attr('class', 'admin-link').attr('href', '?').attr('title', 'The Afro-Eurasia stage').text('Afro-Eurasia');
+  else tb.append('a').attr('class', 'admin-link').attr('href', keep('europe')).attr('title', 'Europe on its own: absolutism, the Reformation, the wars of religion').text('Europe').on('click', function () { this.href = keep('europe'); });
   // Credits: who made the atlas and where the data comes from, with the licence file. Site chrome only.
   const about = tb.append('span').attr('class', 'menu');
   about.append('button').attr('id', 'about').attr('title', 'About Parchment').text('ⓘ')

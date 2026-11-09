@@ -1,0 +1,23 @@
+{
+  "id": "europe",
+  "title": "Europe",
+  "_comment": "Europe for its own lessons, absolutism first (the owner asked for it on 2026-11-09). Lambert azimuthal equal-area centered on 52°N 10°E: the projection the European Union uses for its maps of Europe (ETRS89-LAEA); owner to confirm from the pictures. The box is src/focuses.json's europe focus. Its own snapshots: 1650 and 1715 (data/calendar.json).",
+  "projection": "lambertAzimuthalEqualArea",
+  "rotate": [-10, -52],
+  "extent": { "west": -25, "south": 34, "east": 45, "north": 71 },
+  "span": [1200, 2000],
+  "relief": "relief/europe.png",
+  "legend": { "anchor": "top-left" },
+  "labels_inside": true,
+  "label_min": [40, 20],
+  "_layout": "The legend sits over the open Atlantic (top left), not over Russia; a state is named at the middle of the part the frame shows (labels_inside), so Russia's name is on European Russia, not in Siberia.",
+  "labels": [
+    { "text": "Atlantic Ocean", "lon": -17, "lat": 46, "kind": "water", "span": 14 },
+    { "text": "North Sea", "lon": 3.5, "lat": 56.3, "kind": "water", "span": 8 },
+    { "text": "Baltic Sea", "lon": 19.6, "lat": 56.6, "kind": "water", "span": 8 },
+    { "text": "Norwegian Sea", "lon": 2, "lat": 66, "kind": "water", "span": 22 },
+    { "text": "Mediterranean Sea", "lon": 17, "lat": 35.2, "kind": "water", "span": 14 },
+    { "text": "Black Sea", "lon": 34, "lat": 43.3, "kind": "water", "span": 8 }
+  ],
+  "diff_min_km2": 20000
+}

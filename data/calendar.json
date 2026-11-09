@@ -68,15 +68,26 @@
       "gap": 0,
       "source_file": "world_1650.geojson",
       "stages": [
-        "world"
+        "world",
+        "europe"
       ],
-      "stages_reason": "Added 2026-11-06 for the world stage (Unit 4 voyages: 1530 for Magellan-Elcano, 1650 for the mid-century galleon and Atlantic maps). Not on the Afro-Eurasia stage until the owner decides."
+      "stages_reason": "Added 2026-11-06 for the world stage (Unit 4 voyages: 1530 for Magellan-Elcano, 1650 for the mid-century galleon and Atlantic maps). Not on the Afro-Eurasia stage until the owner decides. On the Europe stage from 2026-11-09: just after the Peace of Westphalia, at the start of Louis XIV's reign."
     },
     {
       "year": 1700,
       "source_year": 1700,
       "gap": 0,
       "source_file": "world_1700.geojson"
+    },
+    {
+      "year": 1715,
+      "source_year": 1715,
+      "gap": 0,
+      "source_file": "world_1715.geojson",
+      "stages": [
+        "europe"
+      ],
+      "stages_reason": "Added 2026-11-09 for the Europe stage (absolutism; Louis XIV died on 1 September 1715). historical-basemaps' 1715 map draws Brandenburg under Prussia and the Habsburg lands as one state; its 1700 map folds both into the Holy Roman Empire."
     },
     {
       "year": 1750,

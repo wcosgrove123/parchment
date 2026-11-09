@@ -27,6 +27,13 @@ README). Two views: the Atlantic view (`?stage=world`) and the Pacific view (`?s
 between them and keeps the year. The **Explorers** layer (any stage) takes a typed range of years and draws every
 expedition whose dates touch it, colored by the state that sent it: `?tracker=explorers&from=1492&year=1522`.
 
+### Europe (`?stage=europe`)
+
+The **Europe** link opens Europe on its own, equal-area and centered on Germany, with two more snapshots (1650, 1715).
+It lights France, Spain, the Habsburg Monarchy, Prussia, Sweden and Russia; `?focus=` picks what to light instead
+(`?stage=europe&year=1715&focus=britain,dutch-republic` for the constitutional contrast). Use 1715 for the
+eighteenth century: the 1700 base map folds Brandenburg and Austria into the Holy Roman Empire.
+
 ### North America, 1492 to the present (`us.html`)
 
 The **North America** link in the toolbar opens the United States stage: any year from 1492 to today, or any day

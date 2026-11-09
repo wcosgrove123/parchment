@@ -35,7 +35,8 @@ function largestPolygon(f) {
   return best;
 }
 
-export function polityLabelData(features, path) {
+// minW, minH: the smallest polygon that carries a name (a stage may lower it: Europe names the Dutch Republic).
+export function polityLabelData(features, path, { minW = 70, minH = 24 } = {}) {
   // One label per name: some base maps split a state into several same-named polygons; label the largest.
   const best = new Map();
   for (const f of features) {
@@ -43,7 +44,7 @@ export function polityLabelData(features, path) {
     if (!poly) continue;
     const [[bx0, by0], [bx1, by1]] = path.bounds(poly);
     const w = bx1 - bx0, h = by1 - by0;
-    if (!(w > 70 && h > 24)) continue; // too small to carry a name at this scale
+    if (!(w > minW && h > minH)) continue; // too small to carry a name at this scale
     const [cx, cy] = path.centroid(poly);
     if (!Number.isFinite(cx)) continue;
     const text = f.properties.cls?.label ?? f.properties.name;

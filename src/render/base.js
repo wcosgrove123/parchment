@@ -73,6 +73,11 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   const frame = { x0, y0, x1, y1 };
   const projection = makeProjection(stage, inner);
   const path = d3.geoPath(projection);
+  // A stage that sets labels_inside (Europe, 2026-11-09) names a state at the middle of the part the frame shows:
+  // Russia's middle is in Siberia, off a map of Europe. Every other stage keeps the whole polygon's middle.
+  const labelPath = stage.labels_inside ? d3.geoPath(makeProjection(stage, inner).clipExtent(inner)) : path;
+  // ...and a stage may name smaller polygons than the usual 70 × 24 px (label_min: [w, h]; Europe's Dutch Republic).
+  const labelMin = stage.label_min ? { minW: stage.label_min[0], minH: stage.label_min[1] } : {};
   // The seam, for routes that cross the meridian opposite the stage's center (routes.js, makeSeam).
   const seam = RAW_PROJECTIONS[stage.projection] ? makeSeam(projection, RAW_PROJECTIONS[stage.projection], d3.geoRotation(projection.rotate())) : null;
 
@@ -196,7 +201,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
         .attr('d', d)
         .append('title').text((f) => f.properties.cls.label ?? f.properties.name);
       g.append('path').attr('class', `border ${certainty}`).attr('d', d(interiorOf(topo)));
-      drawPolityLabels(lg, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), path));
+      drawPolityLabels(lg, polityLabelData(named.filter((f) => f.properties.cls.status === 'highlight'), labelPath, labelMin));
     });
     if (currentTracker) legend.set(currentTracker);
     diffList.hide();
@@ -257,7 +262,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
         .attr('class', 'polity appeared').attr('d', (x) => d(x.f)).append('title').text((x) => `${x.label} — appeared by ${b.year}`);
       g.append('g').attr('class', 'vanished').selectAll('path').data(vanished).join('path')
         .attr('class', 'polity vanished').attr('d', (x) => d(x.f)).append('title').text((x) => `${x.label} — gone by ${b.year}`);
-      const labelled = (items, cls) => polityLabelData(items.map((x) => { x.f.properties.cls = { label: x.label }; return x.f; }), path).map((l) => ({ ...l, cls }));
+      const labelled = (items, cls) => polityLabelData(items.map((x) => { x.f.properties.cls = { label: x.label }; return x.f; }), labelPath, labelMin).map((l) => ({ ...l, cls }));
       drawPolityLabels(lg, [...labelled(appeared, 'appeared'), ...labelled(vanished, 'vanished')]);
       lg.selectAll('text').attr('class', (l) => `label polity ${l.cls ?? ''}`);
     });

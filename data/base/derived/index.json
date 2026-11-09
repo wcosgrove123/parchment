@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-06T13:10:02.615Z",
+  "generated": "2026-11-09T14:23:32.480Z",
   "settings": {
     "polities": {
       "minWeight": 0.0001,
@@ -71,6 +71,14 @@
       "bytes": 509759,
       "features": 782,
       "named": 591
+    },
+    {
+      "year": 1715,
+      "source_year": 1715,
+      "file": "world_1715.topojson",
+      "bytes": 517061,
+      "features": 758,
+      "named": 606
     },
     {
       "year": 1750,
