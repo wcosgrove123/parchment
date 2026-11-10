@@ -234,7 +234,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
       g.append('g').attr('class', 'polities states').selectAll('path').data(view.states).join('path')
         .attr('class', (f) => `polity state ${f.properties.cls.status} pol-${f.properties.c ?? 0}`)
         .attr('d', d)
-        .append('title').text((f) => `${f.properties.cls.label ?? f.properties.n} · ${f.properties.f}–${f.properties.t} (Cliopatria)`);
+        .append('title').text((f) => `${f.properties.cls.label ?? f.properties.n} · ${f.properties.f}–${f.properties.t} (Cliopatria${f.properties.o ? `, which names it ${f.properties.o}; renamed with sources in data/cliopatria-renames.json` : ''})`);
       overlay?.under?.(g, ctx);
       g.append('path').attr('class', `border ${certainty}`).attr('d', d(view.border()));
       g.append('g').attr('class', 'wholes').selectAll('path').data(view.wholes.filter(isRealmLine)).join('path')

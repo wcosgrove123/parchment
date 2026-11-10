@@ -1,0 +1,21 @@
+{
+  "_comment": "Cliopatria rows that Parchment draws under another name, each with the owner's go-ahead, its reason and its sources (CLAUDE.md §1: we author attributes, never shapes). A row keeps its shape and its years; only its name and Wikidata id change. scripts/derive-cliopatria.mjs applies these and keeps Cliopatria's own name on the row as `o`, which the map's hover text shows. A rename matches every row of `name` that begins on or after `from` and ends on or before `to`.",
+  "renames": [
+    {
+      "name": "Golden Horde",
+      "from": 1547,
+      "to": 1695,
+      "as": "Khalkha",
+      "wikidata": "Q842323",
+      "wikipedia": "Khalkha Mongols",
+      "owner": "2026-11-10, asked whether to rename the 1547-1695 \"Golden Horde\" over Mongolia: \"Yes, with a source\"",
+      "reason": "Cliopatria v0.2.1 draws a \"Golden Horde\" over northern Mongolia (97-126°E) in 15 rows from 1547 to 1695, with the Golden Horde's own Wikidata id (Q79965), though its Golden Horde proper lies on the Volga steppe (29-57°E) and ends in 1501, as the Horde broke up by 1502. The northern Mongolian lands in those years were the Khalkha Mongols', ruled by Dayan Khan's descendants after the death of the khagan Bodi Alagh in 1547 (the year Cliopatria splits Mongolia between this row and its 'Mongol Khanate' in the south, the Chahar khagans' domain), until the Khalkha khans declared themselves vassals of the Qing Kangxi Emperor at the Dolon Nor assembly in May 1691, after the Dzungar invasion of 1688. The rows after 1691 (to 1695) are Cliopatria's; the name is kept for the land and its people.",
+      "sources": [
+        "Library of Congress, Federal Research Division, Mongolia: A Country Study (1989), 'The End of Independence': https://countrystudies.us/mongolia/25.htm",
+        "Encyclopaedia Britannica, 'Mongolia: The ascendancy of the Manchu': https://www.britannica.com/place/Mongolia/The-ascendancy-of-the-Manchu",
+        "Wikipedia, 'Mongolia under Qing rule' (the Dolon Nor assembly, 1691) and 'Timeline of the Northern Yuan'",
+        "Wikidata Q842323 (Khalkhas, a Mongol ethnic group)"
+      ]
+    }
+  ]
+}

@@ -45,14 +45,20 @@ console.log('Cliopatria');
 const raw = JSON.parse(await readFile(RAW, 'utf8'));
 const rows = raw.features.filter((f) => f.properties.ToYear >= SPAN[0] && f.properties.FromYear <= SPAN[1] && f.geometry);
 const kindOf = (p) => (p.Type === 'RELATION' ? 'rel' : !p.Name.startsWith('(') ? 'state' : /^\(Personal union/i.test(p.Name) ? 'union' : 'whole');
+// Renames with the owner's go-ahead and a source each (data/cliopatria-renames.json): the row keeps its shape and
+// years; its name and Wikidata id change, and Cliopatria's own name stays on the row as `o`.
+const RENAMES = JSON.parse(await readFile(join(ROOT, 'data', 'cliopatria-renames.json'), 'utf8')).renames;
+let renamed = 0;
 const features = rows.map((f, i) => {
-  const p = f.properties;
+  const rn = RENAMES.find((r) => r.name === f.properties.Name && f.properties.FromYear >= r.from && f.properties.ToYear <= r.to);
+  const p = rn ? { ...f.properties, Name: rn.as, Wikidata: rn.wikidata, _o: f.properties.Name } : f.properties;
+  if (rn) renamed++;
   const k = kindOf(p);
   const geometry = { type: 'MultiPolygon', coordinates: polygonsOf(f.geometry).map(rewind) };
   return {
     type: 'Feature',
     properties: {
-      n: p.Name, f: p.FromYear, t: p.ToYear, k, id: kebab(p.Name.replace(/^\(|\)$/g, '')),
+      n: p.Name, f: p.FromYear, t: p.ToYear, k, id: kebab(p.Name.replace(/^\(|\)$/g, '')), ...(p._o ? { o: p._o } : {}),
       ...(p.MemberOf ? { m: p.MemberOf } : {}),
       ...(k === 'whole' || k === 'union' ? { cn: (p.Components || '').split(';').filter(Boolean).length } : {}),
       ...(p.Wikidata ? { wd: p.Wikidata } : {}),
@@ -65,7 +71,7 @@ const features = rows.map((f, i) => {
 });
 raw.features = null;
 const byKind = {}; for (const f of features) byKind[f.properties.k] = (byKind[f.properties.k] ?? 0) + 1;
-console.log(`  ${features.length} rows alive ${SPAN[0]}–${SPAN[1]} (${Object.entries(byKind).map(([k, v]) => `${k} ${v}`).join(', ')}), ${new Set(features.map((f) => f.properties.n)).size} names`);
+console.log(`  ${features.length} rows alive ${SPAN[0]}–${SPAN[1]} (${Object.entries(byKind).map(([k, v]) => `${k} ${v}`).join(', ')}), ${new Set(features.map((f) => f.properties.n)).size} names; ${renamed} rows renamed (data/cliopatria-renames.json)`);
 
 // ---------------------------------------------------------------- simplify
 let topo = topology({ states: { type: 'FeatureCollection', features } }, SETTINGS.quantization);

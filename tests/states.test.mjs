@@ -85,3 +85,14 @@ test('no piece is read inside out (simplifying can flip a tiny triangle; the der
     for (const p of parts) assert.ok(geoArea({ type: 'Polygon', coordinates: p }) <= 2 * Math.PI, `${g.properties.n} ${g.properties.f}–${g.properties.t}`);
   }
 });
+
+test('renamed with a source: no Golden Horde after 1501; Cliopatria’s 1547–1695 “Golden Horde” over Mongolia is the Khalkha', () => {
+  const renames = JSON.parse(readFileSync(new URL('../data/cliopatria-renames.json', import.meta.url), 'utf8')).renames;
+  assert.ok(renames.every((r) => r.reason && r.sources?.length && r.owner), 'every rename carries the owner’s word, a reason and sources');
+  for (const y of [1502, 1547, 1600, 1650, 1690]) assert.ok(!names(y).includes('Golden Horde'), `${y}: no Golden Horde`);
+  assert.ok(names(1450).includes('Golden Horde'), '1450: the Horde on the Volga stays as Cliopatria draws it');
+  const k = src.at(1600).states.find((f) => f.properties.n === 'Khalkha');
+  assert.ok(k, '1600: the Khalkha');
+  assert.equal(k.properties.o, 'Golden Horde', 'Cliopatria’s own name is kept on the row');
+  assert.equal(k.properties.wd, 'Q842323');
+});
