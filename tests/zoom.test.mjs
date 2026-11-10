@@ -67,7 +67,8 @@ test('a view by its center and width: the stage is rebuilt on it, north up at th
   assert.deepEqual(rest, { shown: true, transform: null, zooming: false }, 'at rest the drawing itself shows, unmoved');
 
   // the picture a gesture slides is taken a moment after the map rests, and is no part of an export
-  await pause(1200);
+  // (how long the picture takes depends on the machine: wait for it, up to ten seconds, not for a fixed time)
+  await page.eval(inPage(() => new Promise((res) => { const t = Date.now(); (function w() { if (document.querySelector('.zoom-proxy') || Date.now() - t > 10000) res(); else setTimeout(w, 100); })(); })));
   const proxy = await page.eval(inPage(async () => ({ proxy: document.querySelectorAll('.zoom-proxy').length, exported: (await (await window.parchment.renderSVG()).text()).includes('zoom-proxy') })));
   assert.equal(proxy.proxy, 1, 'one picture under the map');
   assert.equal(proxy.exported, false, 'not in the exported SVG');

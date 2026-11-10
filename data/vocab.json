@@ -65541,6 +65541,66 @@
         }
       ],
       "_forces_note": "The corps at Gettysburg. tech is empty on purpose: the catalog's musket icon ends in 1860 and no rifled-musket icon is reviewed yet (a gap for the owner); Stuart's cavalry, which reached the field on 2 July, has no sourced place among the gazetteer features and is left off. TEST entries, for review."
+    },
+    {
+      "id": "american-revolution",
+      "frame": "east",
+      "names": {
+        "us": "The Revolutionary War",
+        "britain": "The American War of Independence"
+      },
+      "key_events": [
+        "test-ar-ev-lexington-and-concord",
+        "test-ar-ev-capture-of-fort-ticonderoga",
+        "test-ar-ev-siege-of-boston",
+        "test-ar-ev-quebec",
+        "test-ar-ev-sullivans-island",
+        "test-ar-ev-long-island",
+        "test-ar-ev-trenton",
+        "test-ar-ev-princeton",
+        "test-ar-ev-saratoga",
+        "test-ar-ev-brandywine",
+        "test-ar-ev-germantown",
+        "test-ar-ev-monmouth",
+        "test-ar-ev-siege-of-savannah",
+        "test-ar-ev-siege-of-charleston",
+        "test-ar-ev-cowpens",
+        "test-ar-ev-guilford-court-house",
+        "test-ar-ev-siege-of-yorktown",
+        "test-ar-ev-treaty-paris"
+      ],
+      "_key_note": "The numbered events, and the classroom preset: the sixteen named campaigns of the U.S. Army for the Revolutionary War (U.S. Army Center of Military History, the campaign streamers: Lexington, Ticonderoga, Boston, Quebec, Charleston, Long Island, Trenton, Princeton, Saratoga, Brandywine, Germantown, Monmouth, Savannah, Cowpens, Guilford Court House, Yorktown), each as the row that stands for it (Charleston twice: Sullivan's Island, 1776, and the siege of 1780; Savannah by the siege of 1779), and the treaty. The owner edits the list.",
+      "list_title": "The course of the war",
+      "start": "1775-04-19",
+      "end": "1783-09-03",
+      "sides": [
+        {
+          "id": "us",
+          "label": "United States",
+          "color": "a",
+          "why": "blue, the uniform color: Continental blue and British red are the colors the period itself used, which P1 allows as a per-war override with its reason (owner's defaults, 2026-11-09). Until 4 July 1776 the side is the United Colonies under the Continental Congress."
+        },
+        {
+          "id": "britain",
+          "label": "Great Britain",
+          "color": "red",
+          "why": "red, the uniform color, by the same override"
+        },
+        {
+          "id": "france",
+          "label": "France",
+          "color": "c",
+          "why": "teal, the third color of the fixed order, standing in until the owner settles the war's palette (owner, 2026-11-10: green for France, \"not sure yet\"). France was the United States' ally from the Treaty of Alliance, 6 February 1778."
+        },
+        {
+          "id": "spain",
+          "label": "Spain",
+          "color": "d",
+          "why": "ochre, the fourth color of the fixed order, standing in until the owner settles the war's palette (owner, 2026-11-10: orange for Spain, \"not sure yet\"). Spain went to war with Great Britain in June 1779 as France's ally; it made no alliance with the United States."
+        }
+      ],
+      "source": "A test entry (2026-11-10) made so that the war's engagements can be marked; members, forces, campaigns and battle frames wait for their own rows. Dates: the fighting at Lexington and Concord, 19 April 1775, to the signing of the definitive Treaty of Paris, 3 September 1783 (National Archives, Milestone Documents, 'Treaty of Paris (1783)'; National Park Service, Minute Man National Historical Park). The names: 'Revolutionary War' as the National Park Service and the U.S. Army Center of Military History use it; 'American War of Independence' as the National Army Museum (London) titles it. The Native nations that fought (on both sides, and for their own ends) and the German auxiliaries are not yet sides here: each is to be its own named side when its rows are written.",
+      "_comment": "TEST WAR: the owner and the teachers review it before it ships. Its event rows are pulled from Wikidata by scripts/pull-war.mjs (place, date and kind only; no winners)."
     }
   ],
   "films": [

@@ -79,6 +79,17 @@ war's map, and, if it is to read at that scale, downloaded ground (`scripts/fetc
 
 A war is drawn through its last day (`end` in its record). The day after, the layer shows the plain map of nations.
 
+## A war's engagements from Wikidata (2026-11-10)
+
+`node scripts/pull-war.mjs --war <id> --root <the war's Wikidata id> --prefix <test-xx>` writes one TEST ROW for
+every battle, siege, naval battle, raid and landing Wikidata files under the war (place, dates, kind; no winner),
+inside the war's dates and the North America focus; `node scripts/geocode.mjs --file data/military.csv` then fills
+the coordinates. What was left out, and why, is in `out/pull-war/<war>.json`. A second run replaces only the rows
+the script wrote (their note says PULLED). The Revolutionary War (`american-revolution`, root `Q40949`, prefix
+`test-ar`) is the first: 174 rows, to check against the National Park Service's battlefield list.
+
+A war with more than forty events numbers and lists only its `key_events`; the rest are unnumbered marks.
+
 ## Occupied land (the review of 2026-11-10)
 
 A membership row with the role `occupied` shades what an army holds while the war is on: its `side` is the occupier,

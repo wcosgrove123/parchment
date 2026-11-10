@@ -30,6 +30,9 @@ import { battleById, battleRows, battlePositions, battleMoves, battleTerrain, st
 import { viewMembers } from '../military/wars.js';
 import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
+// More events than this on a war's map, and only the war's key events carry a numeral (the Revolution has 170).
+const MANY_EVENTS = 40;
+
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
 const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
 const [SPAN_A, SPAN_B] = stage.span;
@@ -304,7 +307,11 @@ async function main() {
     const showEvents = !state.show.length || state.show.includes('events');
     const seqSpec = state.show.length && !state.show.includes('sequence') ? false : state.sequence;
     const byForce = (r) => !state.forces.length || !r.force || state.forces.includes(r.force);
-    const shown = showEvents ? sequenceFor(eventsUpTo(events, date).filter(byForce).filter((r) => !keyEvents || keyEvents.has(r.id)), seqSpec) : [];
+    const begun = showEvents ? eventsUpTo(events, date).filter(byForce).filter((r) => !keyEvents || keyEvents.has(r.id)) : [];
+    // (a war with more events than a list can hold, the Revolution's 170: only its key events carry a numeral,
+    // unless the order says which; without a key list, none does)
+    const crowded = seqSpec === true && begun.length > MANY_EVENTS;
+    const shown = sequenceFor(begun, crowded ? (war.key_events?.length ? war.key_events : false) : seqSpec);
     // movements since `from` (else the war's start) that have begun by the date, in their sides' colors
     const forceById = new Map((war.forces ?? []).map((f) => [f.id, f]));
     // (a battle's own marches, attacks and lines belong to the battle seen close, not to the war's map: detailFor)

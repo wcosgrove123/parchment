@@ -11,6 +11,12 @@
     "label": "Los Angeles",
     "fetched": "2026-11-10"
   },
+  "Q90": {
+    "lon": 2.3522,
+    "lat": 48.8567,
+    "label": "Paris",
+    "fetched": "2026-11-10"
+  },
   "Q334": {
     "lon": 103.8,
     "lat": 1.3,
@@ -222,6 +228,12 @@
     "label": "Ciudad Juárez",
     "fetched": "2026-11-09"
   },
+  "Q32198": {
+    "lon": -70.6637,
+    "lat": 42.6064,
+    "label": "Battle of Gloucester",
+    "fetched": "2026-11-10"
+  },
   "Q33132": {
     "lon": -77.2258,
     "lat": 39.8114,
@@ -270,6 +282,12 @@
     "label": "Mazatlán",
     "fetched": "2026-11-10"
   },
+  "Q45067": {
+    "lon": -82.0244,
+    "lat": 34.1469,
+    "label": "Siege of Savage's Old Fields",
+    "fetched": "2026-11-10"
+  },
   "Q48365": {
     "lon": -71,
     "lat": -54,
@@ -305,6 +323,12 @@
     "lat": 28.6369,
     "label": "Chihuahua City",
     "fetched": "2026-11-09"
+  },
+  "Q63313": {
+    "lon": -73.8105,
+    "lat": 40.8662,
+    "label": "Battle of Pell's Point",
+    "fetched": "2026-11-10"
   },
   "Q68814": {
     "lon": 117.6612,
@@ -360,6 +384,12 @@
     "label": "Santiago",
     "fetched": "2026-11-06"
   },
+  "Q111648": {
+    "lon": -73.9735,
+    "lat": 41.2418,
+    "label": "Battle of Stony Point",
+    "fetched": "2026-11-10"
+  },
   "Q120405": {
     "lon": -103.4292,
     "lat": 38.0428,
@@ -413,6 +443,12 @@
     "lat": 19.1903,
     "label": "Veracruz",
     "fetched": "2026-11-06"
+  },
+  "Q198670": {
+    "lon": -76.285,
+    "lat": 36.8475,
+    "label": "Burning of Norfolk",
+    "fetched": "2026-11-10"
   },
   "Q204271": {
     "lon": -100.975,
@@ -480,6 +516,12 @@
     "label": "Mombasa",
     "fetched": "2026-11-06"
   },
+  "Q233417": {
+    "lon": -74.7642,
+    "lat": 40.2181,
+    "label": "Battle of the Assunpink Creek",
+    "fetched": "2026-11-10"
+  },
   "Q235344": {
     "lon": -98.4861,
     "lat": 29.4256,
@@ -508,6 +550,12 @@
     "lon": -118.29,
     "lat": 33.74,
     "label": "San Pedro",
+    "fetched": "2026-11-10"
+  },
+  "Q301487": {
+    "lon": -75.5901,
+    "lat": 39.872,
+    "label": "Battle of Brandywine",
     "fetched": "2026-11-10"
   },
   "Q318306": {
@@ -540,11 +588,29 @@
     "label": "Ciudad Victoria",
     "fetched": "2026-11-10"
   },
+  "Q334029": {
+    "lon": -71.0608,
+    "lat": 42.3764,
+    "label": "Battle of Bunker Hill",
+    "fetched": "2026-11-10"
+  },
   "Q374365": {
     "lon": 39.1611,
     "lat": 21.5292,
     "label": "Jeddah",
     "fetched": "2026-11-05"
+  },
+  "Q421399": {
+    "lon": -74.9666,
+    "lat": 39.0832,
+    "label": "Battle of Delaware Bay",
+    "fetched": "2026-11-10"
+  },
+  "Q425773": {
+    "lon": -79.844,
+    "lat": 36.132,
+    "label": "Battle of Guilford Court House",
+    "fetched": "2026-11-10"
   },
   "Q426957": {
     "lon": -122.396,
@@ -558,6 +624,12 @@
     "label": "Alvarado",
     "fetched": "2026-11-10"
   },
+  "Q459447": {
+    "lon": -76.5025,
+    "lat": 37.2308,
+    "label": "Siege of Yorktown",
+    "fetched": "2026-11-10"
+  },
   "Q487315": {
     "lon": -121.8947,
     "lat": 36.6002,
@@ -569,6 +641,12 @@
     "lat": 16.6153,
     "label": "São Nicolau",
     "fetched": "2026-11-06"
+  },
+  "Q494318": {
+    "lon": -80.6072,
+    "lat": 34.2744,
+    "label": "Battle of Hobkirk's Hill",
+    "fetched": "2026-11-10"
   },
   "Q499922": {
     "lon": -39.065,
@@ -592,6 +670,18 @@
     "lon": -118.1113,
     "lat": 33.9921,
     "label": "Battle of Rio San Gabriel",
+    "fetched": "2026-11-10"
+  },
+  "Q523857": {
+    "lon": -75.1597,
+    "lat": 40.0238,
+    "label": "Battle of Germantown",
+    "fetched": "2026-11-10"
+  },
+  "Q528183": {
+    "lon": -76.7333,
+    "lat": 42.0453,
+    "label": "Battle of Newtown",
     "fetched": "2026-11-10"
   },
   "Q540250": {
@@ -630,6 +720,12 @@
     "label": "Battle of Panipat",
     "fetched": "2026-11-05"
   },
+  "Q609453": {
+    "lon": -75.1887,
+    "lat": 39.8721,
+    "label": "Battle of Gloucester",
+    "fetched": "2026-11-10"
+  },
   "Q622030": {
     "lon": -6.8932,
     "lat": 37.2278,
@@ -642,6 +738,12 @@
     "label": "Ciudad Mier",
     "fetched": "2026-11-09"
   },
+  "Q653664": {
+    "lon": -74.7647,
+    "lat": 40.2258,
+    "label": "Battle of Trenton",
+    "fetched": "2026-11-10"
+  },
   "Q657461": {
     "lon": -75.5253,
     "lat": 10.4236,
@@ -652,6 +754,12 @@
     "lon": -100.6444,
     "lat": 23.6464,
     "label": "Matehuala",
+    "fetched": "2026-11-10"
+  },
+  "Q668595": {
+    "lon": -73.9636,
+    "lat": 40.8119,
+    "label": "Battle of Harlem Heights",
     "fetched": "2026-11-10"
   },
   "Q676171": {
@@ -672,6 +780,12 @@
     "label": "Tlaxcala de Xicoténcatl",
     "fetched": "2026-11-06"
   },
+  "Q692137": {
+    "lon": -73.9747,
+    "lat": 40.7364,
+    "label": "Landing at Kip's Bay",
+    "fetched": "2026-11-10"
+  },
   "Q694550": {
     "lon": -77.2322,
     "lat": 39.8283,
@@ -684,6 +798,12 @@
     "label": "Hormuz Island",
     "fetched": "2026-11-05"
   },
+  "Q706755": {
+    "lon": -73.938,
+    "lat": 40.853,
+    "label": "Battle of Fort Washington",
+    "fetched": "2026-11-10"
+  },
   "Q712335": {
     "lon": -79.4851,
     "lat": 9.0068,
@@ -695,6 +815,12 @@
     "lat": 19.4844,
     "label": "Villa de Guadalupe Hidalgo",
     "fetched": "2026-11-09"
+  },
+  "Q731564": {
+    "lon": -71.25,
+    "lat": 40.9,
+    "label": "Battle of Block Island",
+    "fetched": "2026-11-10"
   },
   "Q738303": {
     "lon": -98.2778,
@@ -732,6 +858,12 @@
     "label": "Gonzales",
     "fetched": "2026-11-09"
   },
+  "Q778010": {
+    "lon": -71.2308,
+    "lat": 42.4494,
+    "label": "Battles of Lexington and Concord",
+    "fetched": "2026-11-10"
+  },
   "Q780339": {
     "lon": -124.4094,
     "lat": 40.44,
@@ -749,6 +881,12 @@
     "lat": 9.5544,
     "label": "Portobelo",
     "fetched": "2026-11-06"
+  },
+  "Q815128": {
+    "lon": -71.0579,
+    "lat": 42.3632,
+    "label": "Siege of Boston",
+    "fetched": "2026-11-10"
   },
   "Q815139": {
     "lon": -97.4922,
@@ -792,10 +930,40 @@
     "label": "San Salvador Island",
     "fetched": "2026-11-06"
   },
+  "Q846674": {
+    "lon": -73.6375,
+    "lat": 42.9989,
+    "label": "Battles of Saratoga",
+    "fetched": "2026-11-10"
+  },
+  "Q862751": {
+    "lon": -73.981,
+    "lat": 40.665,
+    "label": "Battle of Long Island",
+    "fetched": "2026-11-10"
+  },
   "Q876315": {
     "lon": -105.5733,
     "lat": 36.4072,
     "label": "Taos",
+    "fetched": "2026-11-10"
+  },
+  "Q906018": {
+    "lon": -76.2392,
+    "lat": 36.7214,
+    "label": "Battle of Great Bridge",
+    "fetched": "2026-11-10"
+  },
+  "Q922790": {
+    "lon": -73.1386,
+    "lat": 43.6953,
+    "label": "Battle of Hubbardton",
+    "fetched": "2026-11-10"
+  },
+  "Q934626": {
+    "lon": -73.4303,
+    "lat": 44.6106,
+    "label": "Battle of Valcour Island",
     "fetched": "2026-11-10"
   },
   "Q953597": {
@@ -809,6 +977,12 @@
     "lat": -49.307,
     "label": "Puerto San Julián",
     "fetched": "2026-11-06"
+  },
+  "Q960723": {
+    "lon": -73.78,
+    "lat": 41.03,
+    "label": "Battle of White Plains",
+    "fetched": "2026-11-10"
   },
   "Q970482": {
     "lon": -94.6508,
@@ -918,6 +1092,12 @@
     "label": "Great Fish River",
     "fetched": "2026-11-06"
   },
+  "Q1132579": {
+    "lon": -74.675,
+    "lat": 40.33,
+    "label": "Battle of Princeton",
+    "fetched": "2026-11-10"
+  },
   "Q1136198": {
     "lon": -9.2722,
     "lat": 42.8825,
@@ -942,6 +1122,18 @@
     "label": "Battle of Gonzales",
     "fetched": "2026-11-06"
   },
+  "Q1238033": {
+    "lon": -73.4805,
+    "lat": 43.4261,
+    "label": "Battle of Fort Anne",
+    "fetched": "2026-11-10"
+  },
+  "Q1247957": {
+    "lon": -72.5525,
+    "lat": 46.3428,
+    "label": "Battle of Trois-Rivières",
+    "fetched": "2026-11-10"
+  },
   "Q1254826": {
     "lon": -1.2412,
     "lat": 5.1036,
@@ -954,6 +1146,12 @@
     "label": "Guerrero",
     "fetched": "2026-11-09"
   },
+  "Q1307876": {
+    "lon": -73.3881,
+    "lat": 43.8414,
+    "label": "Siege of Fort Ticonderoga",
+    "fetched": "2026-11-10"
+  },
   "Q1315700": {
     "lon": -98.4903,
     "lat": 29.3906,
@@ -965,6 +1163,12 @@
     "lat": 15.35,
     "label": "Kamaran",
     "fetched": "2026-11-05"
+  },
+  "Q1326527": {
+    "lon": -81.816,
+    "lat": 35.1368,
+    "label": "Battle of Cowpens",
+    "fetched": "2026-11-10"
   },
   "Q1348353": {
     "lon": -120.3833,
@@ -984,10 +1188,22 @@
     "label": "Xingcheng",
     "fetched": "2026-11-05"
   },
+  "Q1375813": {
+    "lon": -75.3694,
+    "lat": 43.1772,
+    "label": "Battle of Oriskany",
+    "fetched": "2026-11-10"
+  },
   "Q1413695": {
     "lon": -97.2261,
     "lat": 21.4699,
     "label": "Isla de Lobos",
+    "fetched": "2026-11-10"
+  },
+  "Q1419459": {
+    "lon": -75.5392,
+    "lat": 36.9675,
+    "label": "Battle of the Chesapeake",
     "fetched": "2026-11-10"
   },
   "Q1495331": {
@@ -996,11 +1212,29 @@
     "label": "Punta Pariñas",
     "fetched": "2026-11-06"
   },
+  "Q1518787": {
+    "lon": -78.1097,
+    "lat": 34.4578,
+    "label": "Battle of Moore's Creek Bridge",
+    "fetched": "2026-11-10"
+  },
   "Q1536618": {
     "lon": -99.182,
     "lat": 19.421,
     "label": "Battle of Chapultepec",
     "fetched": "2026-11-09"
+  },
+  "Q1539513": {
+    "lon": -80.6139,
+    "lat": 34.3646,
+    "label": "Battle of Camden",
+    "fetched": "2026-11-10"
+  },
+  "Q1546173": {
+    "lon": -73.3881,
+    "lat": 43.8414,
+    "label": "Capture of Fort Ticonderoga",
+    "fetched": "2026-11-10"
   },
   "Q1576377": {
     "lon": 124.1967,
@@ -1020,16 +1254,40 @@
     "label": "Battle of Monterrey",
     "fetched": "2026-11-09"
   },
+  "Q1638488": {
+    "lon": -74.2753,
+    "lat": 40.2589,
+    "label": "Battle of Monmouth",
+    "fetched": "2026-11-10"
+  },
   "Q1741475": {
     "lon": 39.5172,
     "lat": -8.9817,
     "label": "Kilwa Kisiwani",
     "fetched": "2026-11-06"
   },
+  "Q1754313": {
+    "lon": -73.3044,
+    "lat": 42.9386,
+    "label": "Battle of Bennington",
+    "fetched": "2026-11-10"
+  },
   "Q1772061": {
     "lon": -121.8997,
     "lat": 36.6064,
     "label": "Battle of Monterey",
+    "fetched": "2026-11-10"
+  },
+  "Q1779428": {
+    "lon": -73.2517,
+    "lat": 45.2989,
+    "label": "Siege of Fort St. Jean",
+    "fetched": "2026-11-10"
+  },
+  "Q1779439": {
+    "lon": -74.0546,
+    "lat": 45.3062,
+    "label": "Battle of The Cedars",
     "fetched": "2026-11-10"
   },
   "Q1798978": {
@@ -1044,6 +1302,18 @@
     "label": "Battle of Buena Vista",
     "fetched": "2026-11-09"
   },
+  "Q1811438": {
+    "lon": -80.6258,
+    "lat": 34.742,
+    "label": "Battle of Waxhaws",
+    "fetched": "2026-11-10"
+  },
+  "Q1840117": {
+    "lon": -71.2022,
+    "lat": 46.815,
+    "label": "Battle of Quebec",
+    "fetched": "2026-11-10"
+  },
   "Q1857392": {
     "lon": -69.7167,
     "lat": 48.15,
@@ -1056,10 +1326,34 @@
     "label": "Parras de la Fuente",
     "fetched": "2026-11-10"
   },
+  "Q1862538": {
+    "lon": -74.4856,
+    "lat": 42.6792,
+    "label": "Battle of Cobleskill",
+    "fetched": "2026-11-10"
+  },
   "Q1949114": {
     "lon": -110.7703,
     "lat": 32.9881,
     "label": "Winkelman",
+    "fetched": "2026-11-10"
+  },
+  "Q1949707": {
+    "lon": -80.7436,
+    "lat": 32.5003,
+    "label": "Battle of Beaufort",
+    "fetched": "2026-11-10"
+  },
+  "Q2035455": {
+    "lon": -81.3806,
+    "lat": 35.1425,
+    "label": "Battle of Kings Mountain",
+    "fetched": "2026-11-10"
+  },
+  "Q2060558": {
+    "lon": -87.2972,
+    "lat": 30.3478,
+    "label": "Siege of Pensacola",
     "fetched": "2026-11-10"
   },
   "Q2071648": {
@@ -1068,17 +1362,59 @@
     "label": "Perote",
     "fetched": "2026-11-10"
   },
+  "Q2112104": {
+    "lon": -74.1448,
+    "lat": 40.5763,
+    "label": "Battle of Staten Island",
+    "fetched": "2026-11-10"
+  },
+  "Q2113284": {
+    "lon": -81.0858,
+    "lat": 32.0813,
+    "label": "Battle of the Rice Boats",
+    "fetched": "2026-11-10"
+  },
   "Q2117213": {
     "lon": -80.1333,
     "lat": -2.8333,
     "label": "Puná Island",
     "fetched": "2026-11-06"
   },
+  "Q2190013": {
+    "lon": -75.8189,
+    "lat": 41.3206,
+    "label": "Battle of Wyoming",
+    "fetched": "2026-11-10"
+  },
   "Q2219470": {
     "lon": -117.1912,
     "lat": 32.648,
     "label": "San Diego Bay",
     "fetched": "2026-11-06"
+  },
+  "Q2237194": {
+    "lon": -73.9897,
+    "lat": 41.3228,
+    "label": "Battle of Forts Clinton and Montgomery",
+    "fetched": "2026-11-10"
+  },
+  "Q2237633": {
+    "lon": -81.8525,
+    "lat": 34.5935,
+    "label": "Battle of Musgrove Mill",
+    "fetched": "2026-11-10"
+  },
+  "Q2296381": {
+    "lon": -74.9708,
+    "lat": 41.4889,
+    "label": "Battle of Minisink",
+    "fetched": "2026-11-10"
+  },
+  "Q2323163": {
+    "lon": -81.8333,
+    "lat": 30.5664,
+    "label": "Battle of Alligator Bridge",
+    "fetched": "2026-11-10"
   },
   "Q2333407": {
     "lon": -99.149,
@@ -1096,6 +1432,12 @@
     "lon": -106.042,
     "lat": 35.9936,
     "label": "Santa Cruz",
+    "fetched": "2026-11-10"
+  },
+  "Q2425434": {
+    "lon": -73.5308,
+    "lat": 45.5625,
+    "label": "Battle of Longue-Pointe",
     "fetched": "2026-11-10"
   },
   "Q2448297": {
@@ -1116,6 +1458,12 @@
     "label": "Santa María la Antigua del Darién",
     "fetched": "2026-11-06"
   },
+  "Q2575889": {
+    "lon": -71.263,
+    "lat": 41.596,
+    "label": "Battle of Rhode Island",
+    "fetched": "2026-11-10"
+  },
   "Q2604557": {
     "lon": 29.5369,
     "lat": -31.6288,
@@ -1127,6 +1475,12 @@
     "lat": 25.8862,
     "label": "Fort Brown",
     "fetched": "2026-11-06"
+  },
+  "Q2682171": {
+    "lon": -88.0415,
+    "lat": 30.6861,
+    "label": "Battle of Fort Charlotte",
+    "fetched": "2026-11-10"
   },
   "Q2689975": {
     "lon": -99.191,
@@ -1140,6 +1494,12 @@
     "label": "Siege of Béxar",
     "fetched": "2026-11-09"
   },
+  "Q2729621": {
+    "lon": -90.1903,
+    "lat": 38.6248,
+    "label": "Battle of St. Louis",
+    "fetched": "2026-11-10"
+  },
   "Q2735703": {
     "lon": -76.3289,
     "lat": -13.8589,
@@ -1151,6 +1511,12 @@
     "lat": 26.0201,
     "label": "Battle of Palo Alto",
     "fetched": "2026-11-09"
+  },
+  "Q2744875": {
+    "lon": -81.1039,
+    "lat": 32.0508,
+    "label": "Siege of Savannah",
+    "fetched": "2026-11-10"
   },
   "Q2745368": {
     "lon": -96.1533,
@@ -1176,17 +1542,71 @@
     "label": "Antón Lizardo",
     "fetched": "2026-11-10"
   },
+  "Q2888104": {
+    "lon": -75.2508,
+    "lat": 40.0842,
+    "label": "Battle of Barren Hill",
+    "fetched": "2026-11-10"
+  },
+  "Q2888231": {
+    "lon": -91.1333,
+    "lat": 30.45,
+    "label": "Battle of Baton Rouge",
+    "fetched": "2026-11-10"
+  },
   "Q2888281": {
     "lon": -96.91,
     "lat": 19.53,
     "label": "Battle of Cerro Gordo",
     "fetched": "2026-11-09"
   },
+  "Q2888486": {
+    "lon": -80.2987,
+    "lat": 33.4073,
+    "label": "Battle of Eutaw Springs",
+    "fetched": "2026-11-10"
+  },
+  "Q2888688": {
+    "lon": -76.785,
+    "lat": 37.235,
+    "label": "Battle of Green Spring",
+    "fetched": "2026-11-10"
+  },
+  "Q2889477": {
+    "lon": -77.345,
+    "lat": 25.06,
+    "label": "Raid of Nassau",
+    "fetched": "2026-11-10"
+  },
+  "Q2889754": {
+    "lon": -75.1894,
+    "lat": 39.8714,
+    "label": "Battle of Red Bank",
+    "fetched": "2026-11-10"
+  },
+  "Q2889989": {
+    "lon": -74.332,
+    "lat": 40.75,
+    "label": "Battle of Short Hills",
+    "fetched": "2026-11-10"
+  },
+  "Q2890385": {
+    "lon": -75.23,
+    "lat": 40.12,
+    "label": "Battle of White Marsh",
+    "fetched": "2026-11-10"
+  },
   "Q2890818": {
     "lon": -97.4862,
     "lat": 25.9374,
     "label": "Battle of Resaca de la Palma",
     "fetched": "2026-11-09"
+  },
+  "Q2890866": {
+    "lon": -75.152,
+    "lat": 37.15,
+    "label": "Battle of Cape Henry",
+    "fetched": "2026-11-10"
   },
   "Q2932434": {
     "lon": -105.6943,
@@ -1200,11 +1620,41 @@
     "label": "Cape San Antonio",
     "fetched": "2026-11-06"
   },
+  "Q2984963": {
+    "lon": -69.3167,
+    "lat": 19.1833,
+    "label": "Action of 18 October 1782",
+    "fetched": "2026-11-10"
+  },
+  "Q3078508": {
+    "lon": -71.0464,
+    "lat": 42.3328,
+    "label": "Fortification of Dorchester Heights",
+    "fetched": "2026-11-10"
+  },
+  "Q3097919": {
+    "lon": -91.1369,
+    "lat": 30.3236,
+    "label": "Capture of Fort Bute",
+    "fetched": "2026-11-10"
+  },
   "Q3142013": {
     "lon": -123.02,
     "lat": 37.9968,
     "label": "Point Reyes",
     "fetched": "2026-11-06"
+  },
+  "Q3235083": {
+    "lon": -79.942,
+    "lat": 32.7942,
+    "label": "Siege of Charleston",
+    "fetched": "2026-11-10"
+  },
+  "Q3271228": {
+    "lon": -74.5278,
+    "lat": 40.5589,
+    "label": "Battle of Bound Brook",
+    "fetched": "2026-11-10"
   },
   "Q3307973": {
     "lon": -120.4714,
@@ -1218,11 +1668,47 @@
     "label": "Marín",
     "fetched": "2026-11-10"
   },
+  "Q3355796": {
+    "lon": -87.9118,
+    "lat": 30.659,
+    "label": "Battle of Mobile",
+    "fetched": "2026-11-10"
+  },
+  "Q3788426": {
+    "lon": -74.845,
+    "lat": 38.9697,
+    "label": "Battle of Turtle Gut Inlet",
+    "fetched": "2026-11-10"
+  },
   "Q3845876": {
     "lon": -98.85,
     "lat": 26.1833,
     "label": "Camargo Municipality",
     "fetched": "2026-11-09"
+  },
+  "Q4071933": {
+    "lon": -79.8577,
+    "lat": 32.7594,
+    "label": "Battle of Sullivan's Island",
+    "fetched": "2026-11-10"
+  },
+  "Q4090287": {
+    "lon": -68,
+    "lat": 18.5,
+    "label": "Battle of the Mona Passage",
+    "fetched": "2026-11-10"
+  },
+  "Q4090317": {
+    "lon": -67.3831,
+    "lat": 44.6844,
+    "label": "Battle of Machias",
+    "fetched": "2026-11-10"
+  },
+  "Q4140507": {
+    "lon": -72.2922,
+    "lat": 40.9967,
+    "label": "Meigs Raid",
+    "fetched": "2026-11-10"
   },
   "Q4180430": {
     "lon": -95.2776,
@@ -1230,16 +1716,130 @@
     "label": "Harrisburg",
     "fetched": "2026-11-09"
   },
+  "Q4204344": {
+    "lon": -71.032,
+    "lat": 42.3819,
+    "label": "Battle of Chelsea Creek",
+    "fetched": "2026-11-10"
+  },
+  "Q4204624": {
+    "lon": -90.1014,
+    "lat": 30.1889,
+    "label": "Battle of Lake Pontchartrain",
+    "fetched": "2026-11-10"
+  },
   "Q4210323": {
     "lon": -77.2203,
     "lat": 39.8201,
     "label": "Culp's Hill",
     "fetched": "2026-11-09"
   },
+  "Q4391287": {
+    "lon": -81.4828,
+    "lat": 32.8116,
+    "label": "Battle of Brier Creek",
+    "fetched": "2026-11-10"
+  },
+  "Q4392087": {
+    "lon": -70.6294,
+    "lat": 46.92,
+    "label": "Battle of Saint-Pierre",
+    "fetched": "2026-11-10"
+  },
+  "Q4514812": {
+    "lon": -76.1833,
+    "lat": 38.05,
+    "label": "Chesapeake Raid",
+    "fetched": "2026-11-10"
+  },
+  "Q4583774": {
+    "lon": -82.8858,
+    "lat": 33.6908,
+    "label": "Battle of Kettle Creek",
+    "fetched": "2026-11-10"
+  },
+  "Q4677299": {
+    "lon": -76.1572,
+    "lat": 37.0902,
+    "label": "Action of 22 January 1783",
+    "fetched": "2026-11-10"
+  },
+  "Q4742016": {
+    "lon": -74.8594,
+    "lat": 40.4569,
+    "label": "Ambush of Geary",
+    "fetched": "2026-11-10"
+  },
+  "Q4845442": {
+    "lon": -81.7916,
+    "lat": 30.5056,
+    "label": "Battle of Thomas Creek",
+    "fetched": "2026-11-10"
+  },
+  "Q4870491": {
+    "lon": -79.4333,
+    "lat": 33.6167,
+    "label": "Battle of Black Mingo",
+    "fetched": "2026-11-10"
+  },
+  "Q4870493": {
+    "lon": -81.8124,
+    "lat": 34.6793,
+    "label": "Battle of Blackstock's Farm",
+    "fetched": "2026-11-10"
+  },
+  "Q4870497": {
+    "lon": -77.3939,
+    "lat": 37.2344,
+    "label": "Battle of Blandford",
+    "fetched": "2026-11-10"
+  },
+  "Q4870589": {
+    "lon": -74,
+    "lat": 40.789,
+    "label": "Battle of Bull's Ferry",
+    "fetched": "2026-11-10"
+  },
   "Q4870683": {
     "lon": -106.039,
     "lat": 35.987,
     "label": "Battle of Cañada",
+    "fetched": "2026-11-10"
+  },
+  "Q4870718": {
+    "lon": -80.8433,
+    "lat": 35.2269,
+    "label": "Battle of Charlotte",
+    "fetched": "2026-11-10"
+  },
+  "Q4870723": {
+    "lon": -74.4614,
+    "lat": 39.5446,
+    "label": "Battle of Chestnut Neck",
+    "fetched": "2026-11-10"
+  },
+  "Q4870776": {
+    "lon": -80.0849,
+    "lat": 35.1544,
+    "label": "Battle of Colson's Mill",
+    "fetched": "2026-11-10"
+  },
+  "Q4870783": {
+    "lon": -74.2734,
+    "lat": 40.6951,
+    "label": "Battle of Connecticut Farms",
+    "fetched": "2026-11-10"
+  },
+  "Q4870787": {
+    "lon": -75.7267,
+    "lat": 39.6397,
+    "label": "Battle of Cooch's Bridge",
+    "fetched": "2026-11-10"
+  },
+  "Q4870799": {
+    "lon": -80.9519,
+    "lat": 35.4283,
+    "label": "Battle of Cowan's Ford",
     "fetched": "2026-11-10"
   },
   "Q4870893": {
@@ -1254,6 +1854,174 @@
     "label": "Battle of Embudo Pass",
     "fetched": "2026-11-10"
   },
+  "Q4871019": {
+    "lon": -81.4196,
+    "lat": 34.5951,
+    "label": "Battle of Fishdam Ford",
+    "fetched": "2026-11-10"
+  },
+  "Q4871020": {
+    "lon": -80.9058,
+    "lat": 34.635,
+    "label": "Battle of Fishing Creek",
+    "fetched": "2026-11-10"
+  },
+  "Q4871053": {
+    "lon": -73.3008,
+    "lat": 40.9125,
+    "label": "Battle of Fort Slongo",
+    "fetched": "2026-11-10"
+  },
+  "Q4871057": {
+    "lon": -73.0439,
+    "lat": 40.9644,
+    "label": "Battle of Fort St. George",
+    "fetched": "2026-11-10"
+  },
+  "Q4871134": {
+    "lon": -72.4583,
+    "lat": 21.6667,
+    "label": "Battle of Grand Turk",
+    "fetched": "2026-11-10"
+  },
+  "Q4871143": {
+    "lon": -72.0794,
+    "lat": 41.3536,
+    "label": "Battle of Groton Heights",
+    "fetched": "2026-11-10"
+  },
+  "Q4871187": {
+    "lon": -80.6618,
+    "lat": 34.5657,
+    "label": "Battle of Hanging Rock",
+    "fetched": "2026-11-10"
+  },
+  "Q4871284": {
+    "lon": -74.7869,
+    "lat": 39.995,
+    "label": "Battle of Iron Works Hill",
+    "fetched": "2026-11-10"
+  },
+  "Q4871344": {
+    "lon": -74.3722,
+    "lat": 43.0072,
+    "label": "Battle of Johnstown",
+    "fetched": "2026-11-10"
+  },
+  "Q4871413": {
+    "lon": -76.1603,
+    "lat": 36.8269,
+    "label": "Battle of Kemp's Landing",
+    "fetched": "2026-11-10"
+  },
+  "Q4871460": {
+    "lon": -74.7083,
+    "lat": 42.9994,
+    "label": "Battle of Klock's Field",
+    "fetched": "2026-11-10"
+  },
+  "Q4871550": {
+    "lon": -79.6751,
+    "lat": 33.3047,
+    "label": "Battle of Lenud's Ferry",
+    "fetched": "2026-11-10"
+  },
+  "Q4871561": {
+    "lon": -79.3472,
+    "lat": 35.8897,
+    "label": "Battle of Lindley's Mill",
+    "fetched": "2026-11-10"
+  },
+  "Q4871562": {
+    "lon": -82.1183,
+    "lat": 34.4597,
+    "label": "Battle of Lindley's Fort",
+    "fetched": "2026-11-10"
+  },
+  "Q4871625": {
+    "lon": -67.4609,
+    "lat": 44.7141,
+    "label": "Second Battle of Machias",
+    "fetched": "2026-11-10"
+  },
+  "Q4871696": {
+    "lon": -75.3099,
+    "lat": 40.0713,
+    "label": "Battle of Matson's Ford",
+    "fetched": "2026-11-10"
+  },
+  "Q4871737": {
+    "lon": -74.5933,
+    "lat": 40.5389,
+    "label": "Battle of Millstone",
+    "fetched": "2026-11-10"
+  },
+  "Q4871749": {
+    "lon": -81.2725,
+    "lat": 34.4533,
+    "label": "Battle of Mobley's Meeting House",
+    "fetched": "2026-11-10"
+  },
+  "Q4871769": {
+    "lon": -80.0067,
+    "lat": 33.1967,
+    "label": "Battle of Monck's Corner",
+    "fetched": "2026-11-10"
+  },
+  "Q4871916": {
+    "lon": -73.4095,
+    "lat": 41.1174,
+    "label": "Battle of Norwalk",
+    "fetched": "2026-11-10"
+  },
+  "Q4871984": {
+    "lon": -75.5194,
+    "lat": 40.0283,
+    "label": "Battle of Paoli",
+    "fetched": "2026-11-10"
+  },
+  "Q4871999": {
+    "lon": -74.0396,
+    "lat": 40.7076,
+    "label": "Battle of Paulus Hook",
+    "fetched": "2026-11-10"
+  },
+  "Q4872050": {
+    "lon": -83.9083,
+    "lat": 39.9125,
+    "label": "Battle of Piqua",
+    "fetched": "2026-11-10"
+  },
+  "Q4872127": {
+    "lon": -74.357,
+    "lat": 40.523,
+    "label": "Battle of Punk Hill",
+    "fetched": "2026-11-10"
+  },
+  "Q4872143": {
+    "lon": -75.4144,
+    "lat": 39.5485,
+    "label": "Battle of Quinton's Bridge",
+    "fetched": "2026-11-10"
+  },
+  "Q4872160": {
+    "lon": -81.2591,
+    "lat": 35.4784,
+    "label": "Battle of Ramsour's Mill",
+    "fetched": "2026-11-10"
+  },
+  "Q4872181": {
+    "lon": -73.5014,
+    "lat": 41.3053,
+    "label": "Battle of Ridgefield",
+    "fetched": "2026-11-10"
+  },
+  "Q4872195": {
+    "lon": -80.8759,
+    "lat": 34.5399,
+    "label": "Battle of Rocky Mount",
+    "fetched": "2026-11-10"
+  },
   "Q4872241": {
     "lon": -98.4178,
     "lat": 29.4879,
@@ -1266,11 +2034,95 @@
     "label": "Battle of San Pasqual",
     "fetched": "2026-11-09"
   },
+  "Q4872357": {
+    "lon": -73.1114,
+    "lat": 40.9458,
+    "label": "Battle of Setauket",
+    "fetched": "2026-11-10"
+  },
+  "Q4872360": {
+    "lon": -80.5294,
+    "lat": 36.0822,
+    "label": "Battle of Shallow Ford",
+    "fetched": "2026-11-10"
+  },
+  "Q4872420": {
+    "lon": -76.7981,
+    "lat": 37.3195,
+    "label": "Battle of Spencer's Ordinary",
+    "fetched": "2026-11-10"
+  },
+  "Q4872426": {
+    "lon": -74.3069,
+    "lat": 40.7101,
+    "label": "Battle of Springfield",
+    "fetched": "2026-11-10"
+  },
+  "Q4872446": {
+    "lon": -80.1339,
+    "lat": 32.757,
+    "label": "Battle of Stono Ferry",
+    "fetched": "2026-11-10"
+  },
+  "Q4872520": {
+    "lon": -80.125,
+    "lat": 33.803,
+    "label": "Battle of Tearcoat Swamp",
+    "fetched": "2026-11-10"
+  },
+  "Q4872576": {
+    "lon": -80.8485,
+    "lat": 35.039,
+    "label": "Battle of Torrence's Tavern",
+    "fetched": "2026-11-10"
+  },
+  "Q4872706": {
+    "lon": -80.7626,
+    "lat": 34.8608,
+    "label": "Battle of Wahab's Plantation",
+    "fetched": "2026-11-10"
+  },
+  "Q4872729": {
+    "lon": -79.79,
+    "lat": 36.08,
+    "label": "Battle of Wetzell's Mill",
+    "fetched": "2026-11-10"
+  },
+  "Q4872793": {
+    "lon": -73.7769,
+    "lat": 41.1217,
+    "label": "Battle of Young's House",
+    "fetched": "2026-11-10"
+  },
+  "Q4872890": {
+    "lon": -75.5731,
+    "lat": 40.0453,
+    "label": "Battle of the Clouds",
+    "fetched": "2026-11-10"
+  },
+  "Q4872894": {
+    "lon": -80.5733,
+    "lat": 32.5825,
+    "label": "Battle of the Combahee River",
+    "fetched": "2026-11-10"
+  },
+  "Q4872933": {
+    "lon": -79.48,
+    "lat": 35.31,
+    "label": "Battle of the House in the Horseshoe",
+    "fetched": "2026-11-10"
+  },
   "Q4873005": {
     "lon": -106.1864,
     "lat": 28.8717,
     "label": "Battle of the Sacramento River",
     "fetched": "2026-11-09"
+  },
+  "Q4874605": {
+    "lon": -74.0081,
+    "lat": 41.0129,
+    "label": "Baylor Massacre",
+    "fetched": "2026-11-10"
   },
   "Q4906242": {
     "lon": -77.2394,
@@ -1320,6 +2172,18 @@
     "label": "Cape San Antonio, Argentina",
     "fetched": "2026-11-06"
   },
+  "Q5037020": {
+    "lon": -79.837,
+    "lat": 32.69,
+    "label": "Capture of HMS Savage",
+    "fetched": "2026-11-10"
+  },
+  "Q5092505": {
+    "lon": -74.7564,
+    "lat": 42.7942,
+    "label": "Cherry Valley massacre",
+    "fetched": "2026-11-10"
+  },
   "Q5328040": {
     "lon": -77.229,
     "lat": 39.822,
@@ -1330,6 +2194,12 @@
     "lon": -105.925,
     "lat": 36.2131,
     "label": "Embudo",
+    "fetched": "2026-11-10"
+  },
+  "Q5497190": {
+    "lon": -81.4186,
+    "lat": 31.1946,
+    "label": "Frederica naval action",
     "fetched": "2026-11-10"
   },
   "Q5582862": {
@@ -1380,11 +2250,29 @@
     "label": "Túxpam de Rodríguez Cano",
     "fetched": "2026-11-10"
   },
+  "Q6665169": {
+    "lon": -84.8861,
+    "lat": 39.0258,
+    "label": "Lochry's Defeat",
+    "fetched": "2026-11-10"
+  },
   "Q6802600": {
     "lon": -77.25,
     "lat": 39.84,
     "label": "McPherson Ridge",
     "fetched": "2026-11-09"
+  },
+  "Q6921294": {
+    "lon": -71.216,
+    "lat": 41.694,
+    "label": "Mount Hope Bay raids",
+    "fetched": "2026-11-10"
+  },
+  "Q6981993": {
+    "lon": -63.4,
+    "lat": 44.3,
+    "label": "Naval battle off Halifax",
+    "fetched": "2026-11-10"
   },
   "Q7156301": {
     "lon": -98.9815,
@@ -1396,6 +2284,12 @@
     "lon": -77.2562,
     "lat": 39.8046,
     "label": "Pitzer Woods",
+    "fetched": "2026-11-10"
+  },
+  "Q7263080": {
+    "lon": -79.4,
+    "lat": 36.04,
+    "label": "Pyle's Massacre",
     "fetched": "2026-11-10"
   },
   "Q7367981": {
@@ -1434,10 +2328,76 @@
     "label": "Seminary Ridge",
     "fetched": "2026-11-09"
   },
+  "Q7509832": {
+    "lon": -81.975,
+    "lat": 33.47,
+    "label": "Siege of Augusta",
+    "fetched": "2026-11-10"
+  },
+  "Q7509881": {
+    "lon": -84.2719,
+    "lat": 37.9083,
+    "label": "Siege of Boonesborough",
+    "fetched": "2026-11-10"
+  },
+  "Q7510008": {
+    "lon": -80.725,
+    "lat": 40.0639,
+    "label": "Siege of Fort Henry",
+    "fetched": "2026-11-10"
+  },
+  "Q7510009": {
+    "lon": -80.725,
+    "lat": 40.0639,
+    "label": "Siege of Fort Henry",
+    "fetched": "2026-11-10"
+  },
+  "Q7510017": {
+    "lon": -75.2132,
+    "lat": 39.8749,
+    "label": "Siege of Fort Mifflin",
+    "fetched": "2026-11-10"
+  },
+  "Q7510019": {
+    "lon": -80.6697,
+    "lat": 33.7608,
+    "label": "Siege of Fort Motte",
+    "fetched": "2026-11-10"
+  },
+  "Q7510027": {
+    "lon": -75.4553,
+    "lat": 43.2106,
+    "label": "Siege of Fort Stanwix",
+    "fetched": "2026-11-10"
+  },
+  "Q7510029": {
+    "lon": -87.5356,
+    "lat": 38.6792,
+    "label": "Siege of Fort Vincennes",
+    "fetched": "2026-11-10"
+  },
+  "Q7510031": {
+    "lon": -80.4378,
+    "lat": 33.539,
+    "label": "Siege of Fort Watson",
+    "fetched": "2026-11-10"
+  },
+  "Q7510275": {
+    "lon": -82.0244,
+    "lat": 34.1469,
+    "label": "Siege of Ninety-Six",
+    "fetched": "2026-11-10"
+  },
   "Q7510332": {
     "lon": -105.5453,
     "lat": 36.4389,
     "label": "Siege of Pueblo de Taos",
+    "fetched": "2026-11-10"
+  },
+  "Q7712756": {
+    "lon": -74.375,
+    "lat": 39.549,
+    "label": "Affair at Little Egg Harbor",
     "fetched": "2026-11-10"
   },
   "Q7713801": {
@@ -1482,11 +2442,23 @@
     "label": "Goliad massacre",
     "fetched": "2026-11-06"
   },
+  "Q12001363": {
+    "lon": -75.109,
+    "lat": 40.171,
+    "label": "Battle of Crooked Billet",
+    "fetched": "2026-11-10"
+  },
   "Q12506955": {
     "lon": 127.4108,
     "lat": 0.6864,
     "label": "Tidore Island",
     "fetched": "2026-11-06"
+  },
+  "Q14680788": {
+    "lon": -91.3454,
+    "lat": 34.0182,
+    "label": "Colbert raid",
+    "fetched": "2026-11-10"
   },
   "Q15262498": {
     "lon": -77.2473,
@@ -1494,10 +2466,28 @@
     "label": "North Carolina Monument",
     "fetched": "2026-11-10"
   },
+  "Q16253782": {
+    "lon": -74.972,
+    "lat": 38.965,
+    "label": "Battle of the Delaware Capes",
+    "fetched": "2026-11-10"
+  },
   "Q16891146": {
     "lon": -77.2434,
     "lat": 39.8484,
     "label": "Eternal Light Peace Memorial",
+    "fetched": "2026-11-10"
+  },
+  "Q17515528": {
+    "lon": -70.7667,
+    "lat": 41.5667,
+    "label": "Battle off Fairhaven",
+    "fetched": "2026-11-10"
+  },
+  "Q19865266": {
+    "lon": -73.8814,
+    "lat": 40.9983,
+    "label": "Battle of Edgar's Lane",
     "fetched": "2026-11-10"
   },
   "Q20119933": {
@@ -1524,6 +2514,12 @@
     "label": "Ciudad Melchor Múzquiz",
     "fetched": "2026-11-10"
   },
+  "Q21187832": {
+    "lon": -73.7355,
+    "lat": 40.9465,
+    "label": "Battle of Mamaroneck",
+    "fetched": "2026-11-10"
+  },
   "Q22016425": {
     "lon": -34.9406,
     "lat": -8.3515,
@@ -1542,6 +2538,12 @@
     "label": "Cabo Frio",
     "fetched": "2026-11-06"
   },
+  "Q23074154": {
+    "lon": -82.3164,
+    "lat": 34.6561,
+    "label": "Battle of Great Cane Brake",
+    "fetched": "2026-11-10"
+  },
   "Q23804625": {
     "lon": -76.0114,
     "lat": 21.0756,
@@ -1553,6 +2555,12 @@
     "lat": -1.0667,
     "label": "Cabo San Lorenzo",
     "fetched": "2026-11-06"
+  },
+  "Q29075488": {
+    "lon": -82.7093,
+    "lat": 34.1432,
+    "label": "Battle of Van Creek",
+    "fetched": "2026-11-10"
   },
   "Q32000438": {
     "lon": -54.9519,
@@ -1590,16 +2598,58 @@
     "label": "Agua Nueva",
     "fetched": "2026-11-10"
   },
+  "Q55605054": {
+    "lon": -63.562,
+    "lat": 44.436,
+    "label": "Battle off Halifax",
+    "fetched": "2026-11-10"
+  },
   "Q61127668": {
     "lon": -99.6147,
     "lat": 26.0899,
     "label": "Cerralvo",
     "fetched": "2026-11-09"
   },
+  "Q74555900": {
+    "lon": -81.4561,
+    "lat": 40.6389,
+    "label": "Siege of Fort Laurens",
+    "fetched": "2026-11-10"
+  },
+  "Q75827070": {
+    "lon": -73.9631,
+    "lat": 40.8503,
+    "label": "Battle of Fort Lee",
+    "fetched": "2026-11-10"
+  },
+  "Q113627344": {
+    "lon": -73.6375,
+    "lat": 42.9989,
+    "label": "Battle of Freeman's Farm",
+    "fetched": "2026-11-10"
+  },
   "Q122555434": {
     "lon": -77.2261,
     "lat": 39.8454,
     "label": "Barlow Knoll",
+    "fetched": "2026-11-10"
+  },
+  "Q124321810": {
+    "lon": -71.2311,
+    "lat": 42.4497,
+    "label": "Battle of Lexington",
+    "fetched": "2026-11-10"
+  },
+  "Q124321820": {
+    "lon": -71.3508,
+    "lat": 42.4689,
+    "label": "Battle of Concord",
+    "fetched": "2026-11-10"
+  },
+  "Q139500029": {
+    "lon": -74.0106,
+    "lat": 40.7072,
+    "label": "New York Armory Raid",
     "fetched": "2026-11-10"
   }
 }
