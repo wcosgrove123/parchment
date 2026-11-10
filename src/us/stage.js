@@ -277,7 +277,17 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       for (const it of aliveDisputes(data, date)) { it.look = { pattern: 'hatch', label: 'Disputed or overlapping claims' }; items.push(it); }
       // ...and land a U.S. state and a Mexican state claimed at once (the Nueces Strip and the upper Rio Grande,
       // 1845–1848; scripts/derive-us-disputes.mjs), the same way.
-      for (const it of aliveUSMX(data, date)) { it.look = { pattern: 'hatch', label: 'Disputed or overlapping claims' }; items.push(it); }
+      for (const it of aliveUSMX(data, date)) {
+        it.look = { pattern: 'hatch', label: 'Disputed or overlapping claims' };
+        // The Military layer: a Mexican state's land that a U.S. claim lies over (New Mexico east of the Rio Grande,
+        // which Texas claimed; the Nueces strip) is drawn as this disputed piece, the state's own polygon hidden.
+        // If that state is occupied on the date, the piece carries the occupier's hatch and the state's name.
+        if (trackerId === 'military' && military?.war && !(military.show?.length && !military.show.includes('territory'))) {
+          const hit = sideOf(military.war, military.members, new Set([slug(it.p.bn), slug(it.p.bpower ?? '')].filter(Boolean)), date);
+          if (hit?.role === 'occupied') { const l = sideLook(hit); it.look = { ...it.look, occ: l.occ, occBy: l.occBy, occLabel: l.occLabel, occName: l.occName }; }
+        }
+        items.push(it);
+      }
     }
     // Native lands under the cessions tracker: today's held land from 2020 (Census 2025 boundaries), and the lands the
     // Indian Claims Commission later found to be each nation's original territory, outlined from 1784 to its 1978 map.
@@ -530,7 +540,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     zones.push(...ecBadges.map((b) => b.box));
     const named = electoral ? nbItems.filter((it) => !resultFor(electoral, it.p)?.badge) : nbItems;
     // (a battle frame names its hills and roads, not the state it lies in)
-    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines });
+    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines });
     drawBadges(lg, badges);
     drawElectoralBadges(lg, ecBadges);
 
@@ -1409,7 +1419,7 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     if (!isNB && it.look.pattern !== 'stipple' && it.cat === 'other' && trackerId === 'nations' && !main) continue;
     if (it.src === 'ohm' && (p.lvl === 'x' || silent(p.name))) continue; // overlaps carry a hatch, not a name
     // (occupied land prints the name its occupation row gives it: New Mexico, Mexico City)
-    const texts = [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? [nbName(p), p.name, p.abbr] : [p.name, shortName(p.name)])].map(cleanLabel);
+    const texts = (it.src === 'usmx' ? [it.look.occName] : [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? [nbName(p), p.name, p.abbr] : [p.name, shortName(p.name)])]).map(cleanLabel);
     const poly = largestPolygon(it.f);
     if (!poly) continue;
     const [[bx0, by0], [bx1, by1]] = v.path.bounds(poly);
@@ -1417,7 +1427,8 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     if (!(w > 18 && h > 9)) continue;
     let [cx, cy] = v.path.centroid(poly);
     if (!Number.isFinite(cx)) continue;
-    if (it.src === 'ohm' && !it.look.pattern) {
+    // (occupied land keeps its name even where a U.S. claim lies over it: New Mexico east of the Rio Grande, which Texas claimed)
+    if (it.src === 'ohm' && !it.look.pattern && !it.look.occName) {
       const ll = v.proj.invert([cx, cy]);
       if (!ll || covered(it, ll) || !d3.geoContains(poly, ll)) {
         const alt = betterPoint(v, poly, [cx, cy], (q) => !covered(it, q));
@@ -1432,7 +1443,7 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     // a nation's name, in italic (a Native nation an order did not light keeps its italic name, without the stipple)
     const native = it.look.pattern === 'stipple' || it.src === 'treaty' || (it.lit === false && (it.cat === 'native' || it.src === 'hb'));
     const rank = it.src === 'treaty' ? -1 : isNB ? 0 : native ? 2 : p.lvl === 2 ? 1 : 3;
-    seen.set(key, { key, texts: [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank: it.look?.occName ? 0.5 : rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false, poly, x0: bx0, y0: by0 });
+    seen.set(key, { key, texts: [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank: it.look?.occName ? 0.5 : rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false, poly, x0: bx0, y0: by0, occ: !!it.look?.occName });
   }
   for (const c of seen.values()) cands.push(c);
   cands.sort((a, b) => b.lit - a.lit || a.rank - b.rank || b.area - a.area);
@@ -1454,12 +1465,14 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
         const ll = v.proj.invert(q);
         if (ll && d3.geoContains(c.poly, ll)) centers.push(q);
       }
+      // (occupied land that is a narrow strip on this frame may carry its name just beside it, west or east)
+      if (c.occ) { const tw0 = textWidth(measure, c.texts[0], minSize, false); centers.push([c.x0 - tw0 / 2 - 6, c.y0 + c.h * 0.4], [c.x0 + c.w + tw0 / 2 + 6, c.y0 + c.h * 0.4], [c.x0 - tw0 / 2 - 6, c.y0 + c.h * 0.7], [c.x0 + c.w + tw0 / 2 + 6, c.y0 + c.h * 0.7]); }
     }
     for (const [ccx, ccy] of centers) {
       for (const t of c.texts) {
         for (let s = size; s >= minSize; s -= 1.5) {
           const tw = textWidth(measure, t, s, c.native), th = s * 1.05;
-          if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24)) continue;
+          if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24) && !c.occ) continue;
           const box = { x: ccx - tw / 2, y: ccy - th / 2, w: tw, h: th };
           if (box.x < bx + 4 || box.x + box.w > bx + bw - 4 || box.y < by + 4 || box.y + box.h > by + bh - 4) continue;
           if (placed.some((z) => overlaps(z, box, 2))) continue;
