@@ -318,17 +318,22 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // The Military layer's margin and strip (P8, P10): drawn on every date, before the layers (names keep clear of them).
     milNow = trackerId === 'military' ? military : null;
     milListBox = null;
+    // (the list is drawn again once the legend of this date is set, so it folds against the legend it will sit beside)
+    let drawMilList = null;
     if (milNow?.war) {
-      const corner = legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right';
+      const cornerNow = () => (legend.anchor === 'top-right' || legend.anchor === 'top-left' ? 'bottom-right' : 'top-right');
+      const corner = cornerNow();
       const [vx, vy, vw, vh] = main.box;
       const flagged = (milNow.shown ?? []).map((r) => { const xy = r.lon != null ? projection([r.lon, r.lat]) : null; return { ...r, offSheet: !(xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh) }; });
       if (milNow.battle) {
         // a battle frame (milestone 9): the phases in the margin and as the strip
-        milListBox = drawPhaseList(root, frame, milNow.battle.record, milNow.battle.phase.n, { corner, avoid: legend.box() });
+        drawMilList = () => { milListBox = drawPhaseList(root, frame, milNow.battle.record, milNow.battle.phase.n, { corner: cornerNow(), avoid: legend.box() }); };
+        drawMilList();
         root.classed('war-strip-on', true);
         drawPhaseStrip(root, frame, milNow.battle.record, milNow.battle.phase.n);
       } else {
-        milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner, title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() });
+        drawMilList = () => { milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner: cornerNow(), title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() }); };
+        drawMilList();
         root.classed('war-strip-on', milNow.strip !== 'stage');
         if (milNow.strip !== 'stage') drawWarStrip(root, frame, { war: milNow.war, members: milNow.members, events: milNow.events ?? [], moves: milNow.allMoves ?? [], date, span: milNow.film?.span ?? null, chapter: milNow.film?.chapter ?? null }); else root.selectAll('g.war-strip').remove();
       }
@@ -347,8 +352,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // routes and rivers the order points at, then the polity names, which keep clear of all of them.
     if (lesson) {
       for (const it of [...items, ...cesAlive, ...lands, ...treaty]) {
-        if (!(it.look && (it.look.fill || it.look.pattern || it.look.seq || it.look.pop || it.look.land))) continue;
-        if (views.some((v) => v.shows(it.f))) present.add(lookKey(it.look));
+        if (!(it.look && (it.look.fill || it.look.pattern || it.look.seq || it.look.pop || it.look.land || it.look.occ))) continue;
+        if (views.some((v) => v.shows(it.f))) addPresent(present, it.look);
       }
       if (icc.length) present.add('icc');
       if (treatyX.some((it) => views.some((v) => v.shows(it.f)))) present.add('treatyX');
@@ -357,6 +362,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         : legendFor(powers, tracker, trackerId, present, date, ohmAlive.length > 0, pop);
       const shownLegend = lessonLegend(base, items, trackerId, hl);
       legend.set(shownLegend);
+      if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
       recordLayout = layoutRecords(milZones);
       const layers = views.map((v) => drawView(v, data, date, { items, nbAlive, ohmAlive, cesAlive, trackerId, pop, lands, icc, electoral, treaty, treatyX,
         extraZones: v.id === 'main' ? recordLayout.zones : [], lines: v.id === 'main' ? recordLayout.lines : [] }));
@@ -371,8 +377,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     else {
       // The legend names only what reaches the sheet: the main map or an inset.
       for (const it of [...items, ...cesAlive, ...lands, ...treaty]) {
-        if (!(it.look && (it.look.fill || it.look.pattern || it.look.seq || it.look.pop || it.look.land))) continue;
-        if (views.some((v) => v.shows(it.f))) present.add(lookKey(it.look));
+        if (!(it.look && (it.look.fill || it.look.pattern || it.look.seq || it.look.pop || it.look.land || it.look.occ))) continue;
+        if (views.some((v) => v.shows(it.f))) addPresent(present, it.look);
       }
       if (icc.length) present.add('icc');
       if (treatyX.some((it) => views.some((v) => v.shows(it.f)))) present.add('treatyX');
@@ -387,6 +393,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     while (cache.size > CACHE_MAX) cache.delete(cache.keys().next().value);
     views.forEach((v, i) => swapIn(v, entry.layers[i], fade));
     legend.set(entry.legend);
+    if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
     // (the live page: the Military layer's events, or the clearing of them when the layer goes off)
     if (milNow?.war || records.points.length || records.routes.length || recordLayout) recordLayout = layoutRecords(milZones);
     currentKey = key;
@@ -480,6 +487,19 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const pats = items.filter((it) => it.look.pattern && it.look.pattern !== 'stipple' && it.src !== 'nbx' && it.src !== 'usmx');
     fills.append('g').attr('class', 'na-patterns').selectAll('path').data(pats).join('path')
       .attr('class', (it) => `na-pattern p-${it.look.pattern}`).attr('d', (it) => v.d(it.f));
+
+    // 5b. Occupied land (the Military layer, P2): the occupier's hatch over the owner's fill.
+    const occItems = items.filter((it) => it.look.occ);
+    if (occItems.length) {
+      for (const c of new Set(occItems.map((it) => it.look.occ))) {
+        if (!defs.select(`#hatch-side-${c}`).empty()) continue;
+        defs.append('pattern').attr('id', `hatch-side-${c}`).attr('patternUnits', 'userSpaceOnUse').attr('width', 8).attr('height', 8).attr('patternTransform', 'rotate(-45)')
+          .append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 8).attr('class', `hatch-side-line side-${c}`);
+      }
+      fills.append('g').attr('class', 'na-occupied').selectAll('path').data(occItems).join('path')
+        .attr('class', (it) => `na-pattern p-occ side-${it.look.occ}`).attr('d', (it) => v.d(it.f))
+        .append('title').text((it) => `Occupied by ${it.look.occLabel}`);
+    }
 
     drawBorders(g, v, data, date, nbAlive, ohmAlive);
     // 6. Land two U.S. polygons claimed at once (src/us/disputes.js), over the borders: the Toledo Strip is a few
@@ -1205,6 +1225,8 @@ function categoryLook(powers, key) {
   if (c.fill) return { fill: c.fill, label: c.label, cat: key };
   return { fill: null, label: null };
 }
+// (an occupied polygon is present twice: as its owner's fill, and as the occupier's hatch)
+const addPresent = (present, l) => { present.add(lookKey(l)); if (l.occ) present.add(`occ:side-${l.occ}:${l.occBy}`); };
 const lookKey = (l) => (l.seq ? `seq:${l.seq}` : l.pop ? `pop:${l.pop}` : l.land ? `land:${l.land}` : l.pattern ? `pat:${l.pattern}` : l.fill ? `fill:${l.fill}:${l.cat ?? l.label}` : 'none');
 
 function labelFor(cat, date) {

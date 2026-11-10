@@ -11,7 +11,7 @@ import { orderToQuery, queryToOrder } from '../src/us/frames.js';
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const war = warById(vocab, 'mexican-american-war');
-const checked = validateRecords(read('data/military.csv'), vocab);
+const checked = validateRecords(read('tests/maps/military-fixture.csv'), vocab);
 const events = eventsOf(checked.records, war.id);
 const colorOf = (k) => ({ line: `line-${k}` });
 
@@ -36,8 +36,8 @@ test('outcomes: won:<side>, inconclusive, claimed:<a>;<b>; anything else, or a s
   assert.match(outcomeProblem('won:texas', war), /not a side of mexican-american-war/);
   assert.match(outcomeProblem('victory', war), /should be won:<side>, inconclusive, or claimed/);
   assert.match(outcomeProblem('claimed:us;us', war), /two different sides/);
-  const header = read('data/military.csv').split('\n')[0];
-  const row = read('data/military.csv').split('\n').find((l) => l.startsWith('test-mx-ev-palo-alto'));
+  const header = read('tests/maps/military-fixture.csv').split('\n')[0];
+  const row = read('tests/maps/military-fixture.csv').split('\n').find((l) => l.startsWith('test-mx-ev-palo-alto'));
   const bad = validateRecords(`${header}\n${row.replace('won:us', 'won:texas')}`, vocab);
   assert.equal(bad.problems.length, 1);
   assert.match(bad.problems[0].message, /not a side/);

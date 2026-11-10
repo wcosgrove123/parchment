@@ -55,6 +55,15 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
 
+## Occupied land (the review of 2026-11-10)
+
+A membership row with the role `occupied` shades what an army holds while the war is on: its `side` is the occupier,
+its `where` a province or state the base map draws (`nuevo-mexico`, `alta-california`, `veracruz`,
+`federal-district-of-mexico`), its dates the occupation's. The polygon keeps its owner's fill and takes a hatch in the
+occupier's line color (proposal P2), slanted the other way from a dispute's rust hatch; the legend says "Occupied by
+United States, in whole or in part", because the polygon is the whole province and the row's source says which part.
+A port held alone is a place-taken mark, not a hatch. The slip lists every occupation on the map's date with its source.
+
 ## Battle frames (milestone 9)
 
 A **battle** is an entry of a war's `battles` in `data/vocab.json`: label, dates, a frame (a focus of `src/focuses.json`,
@@ -108,6 +117,7 @@ side's name for the war.
   `declaration`, `treaty`, `armistice`, `massacre`, `fort`, `headquarters`), `war`, `side` where one side owns the
   event (a siege's besieger, a place's captor, the side that declared), `outcome` as `won:<side>`, `inconclusive` or
   `claimed:<side>;<side>`, dates, label and source. Who won is the row's claim, never inferred.
+- **Tests and the live table.** `data/military.csv` is the owner's to edit; the tests read a frozen copy (`tests/maps/military-fixture.csv`) and check the live table only for soundness (`tests/military-war2.test.mjs`).
 - **Movements** are `arrow` rows through gazetteer places (`where` as for any route: `Q49242>Q982504>Q2613729`), with
   `war`, `side`, `force` (one id for all of a force's rows: `taylor`, `santa-anna`), `value` the kind (`advance`,
   `retreat`, `flank-march`, `envelopment`, `feint`, `pursuit`, `raid`, `landing`, `breakthrough`, `naval-passage`,

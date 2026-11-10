@@ -64711,6 +64711,9 @@
   "wars": [
     {
       "id": "mexican-american-war",
+      "key_events": ["test-mx-ev-thornton","test-mx-ev-palo-alto","test-mx-ev-us-declares","test-mx-ev-monterey-ca","test-mx-ev-santa-fe","test-mx-ev-monterrey","test-mx-ev-buena-vista","test-mx-ev-veracruz","test-mx-ev-cerro-gordo","test-mx-ev-mexico-city","test-mx-ev-treaty"],
+      "key_forces": ["taylor","kearny","scott","santa-anna"],
+      "_key_note": "The classroom preset (owner's review, 2026-11-10) shows only these events and forces, a short key and larger type; every other row stays on the full map and the slip. The owner edits the two lists.",
       "names": {
         "us": "The War with Mexico",
         "mexico": "La intervención estadounidense en México"
@@ -64928,6 +64931,69 @@
             "source": "Bauer (1974), ch. 11"
           },
           "source": "Bauer (1974), chs. 10–15."
+        },
+        {
+          "id": "pacific-squadron",
+          "side": "us",
+          "label": "Pacific Squadron",
+          "commander": "John D. Sloat, then Robert F. Stockton, then W. Branford Shubrick",
+          "type": "naval",
+          "echelon": "",
+          "tech": [],
+          "strength": {
+            "text": "≈360 landed at San Pedro, August 1846",
+            "source": "Neal Harlow, California Conquered (1982)"
+          },
+          "source": "K. Jack Bauer, Surfboats and Horse Marines (1969). Sailing frigates and sloops: no reviewed icon fits (the catalog has the galleon and the paddle steamer), so none is drawn."
+        },
+        {
+          "id": "home-squadron",
+          "side": "us",
+          "label": "Home Squadron",
+          "commander": "David Conner, then Matthew C. Perry",
+          "type": "naval",
+          "echelon": "",
+          "tech": [
+            "paddle-steamer"
+          ],
+          "strength": {
+            "text": "the Gulf squadron",
+            "source": "Bauer, Surfboats and Horse Marines (1969)"
+          },
+          "source": "K. Jack Bauer, Surfboats and Horse Marines (1969): the steam frigate Mississippi and the small steamers did the river work."
+        },
+        {
+          "id": "fremont",
+          "side": "us",
+          "label": "Frémont",
+          "commander": "John C. Frémont (California Battalion)",
+          "type": "cavalry",
+          "echelon": "I",
+          "tech": [
+            "cavalry"
+          ],
+          "strength": {
+            "text": "≈430 in the California Battalion",
+            "source": "Harlow (1982)"
+          },
+          "source": "Harlow (1982); K. Jack Bauer, The Mexican War, 1846–1848 (1974)."
+        },
+        {
+          "id": "price",
+          "side": "us",
+          "label": "Price",
+          "commander": "Sterling Price",
+          "type": "infantry",
+          "echelon": "I",
+          "tech": [
+            "musket",
+            "cannon"
+          ],
+          "strength": {
+            "text": "≈480 at Taos",
+            "source": "K. Jack Bauer, The Mexican War, 1846–1848 (1974)"
+          },
+          "source": "K. Jack Bauer, The Mexican War, 1846–1848 (1974): the column that put down the Taos revolt."
         }
       ],
       "_forces_note": "Forces (brief §1, §3): each has a side, a type and size for its milsymbol frame (infantry, cavalry, artillery, armor, aviation, naval; I regiment, X brigade, XX division, XXX corps), the equipment keys it may carry from data/tech.json, and a strength with its source. Movement rows name the force by id; a row's own tech column overrides the force's list. TEST entries, for review."

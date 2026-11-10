@@ -13,14 +13,14 @@ import focuses from '../src/focuses.json' with { type: 'json' };
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const gazetteer = JSON.parse(read('data/gazetteer.json'));
-const checked = validateRecords(read('data/military.csv'), vocab);
+const checked = validateRecords(read('tests/maps/military-fixture.csv'), vocab);
 const resolved = resolveRecords(checked.records, gazetteer).records;
 const hit = battleById(vocab, 'gettysburg');
 
 test('the table carries battle and phase columns; the rows validate; a bad phase or a wrong battle is refused', () => {
   assert.deepEqual(EXTRA_COLUMNS.slice(-2), ['battle', 'phase']);
   assert.deepEqual(checked.problems, [], JSON.stringify(checked.problems));
-  const header = read('data/military.csv').split(/\r?\n/)[0];
+  const header = read('tests/maps/military-fixture.csv').split(/\r?\n/)[0];
   const row = (over) => { const cells = Object.assign({ id: 'x', course: 'apush', tracker: 'military', kind: 'point', where: 'Q4210323', start: '1863-07-02', end: '1863-07-02', grade: 'circa', value: 'position', certainty: 'approximate', label: 'x', source: 's', war: 'civil-war', side: 'us', force: 'union-xii', battle: 'gettysburg', phase: '3' }, over); return header.split(',').map((c) => cells[c] ?? '').join(','); };
   const probe = (over) => validateRecords(`${header}\n${row(over)}`, vocab).problems.map((p) => p.message).join(' | ');
   assert.equal(probe({}), '');

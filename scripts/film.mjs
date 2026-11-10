@@ -72,7 +72,9 @@ export async function renderFilm(order, { out = null, fps = 6, mp4 = true, limit
     const pageFor = (fr) => { const q2 = new URLSearchParams(query); if (!fixedFrame && fr.frame) q2.set('frame', fr.frame); q2.set('date', fr.date); return `${server.origin}/us.html?${q2}`; };
     for (const fr of frames) {
       const name = `f${String(fr.index + 1).padStart(6, '0')}.png`;
-      if (resume && existsSync(join(framesDir, name))) { list.push({ ...fr, shown: fr.date, file: `frames/${name}`, kept: true }); frameNow = (!fixedFrame && fr.frame) ? fr.frame : frameNow; continue; }
+      // (a kept frame does not move the page: frameNow is the frame the open page is on, nothing else. The first
+      // resumed run forgot that and drew the rest of the war chapter on the first chapter's frame.)
+      if (resume && existsSync(join(framesDir, name))) { list.push({ ...fr, shown: fr.date, file: `frames/${name}`, kept: true }); continue; }
       // a chapter framed elsewhere: open the page again on that frame (as the live page reloads itself); and a fresh
       // browser every BATCH frames, so a long film does not grow in memory
       if (inBatch >= BATCH) { await page.close().catch(() => {}); page = null; await b.close(); b = await launch({ browser: found }); inBatch = 0; await open(pageFor(fr)); frameNow = (!fixedFrame && fr.frame) ? fr.frame : frameNow; }

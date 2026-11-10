@@ -167,6 +167,9 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
         id: s.id, label: s.label, color: s.color, fill: root.getPropertyValue(`--side-${s.color}-fill`).trim() || null, line: root.getPropertyValue(`--side-${s.color}-line`).trim() || null, why: s.why ?? null,
         members: military.members.filter((m) => m.side === s.id).map((m) => ({ record: m.id, where: m.where, label: m.label, role: m.value, start: m.startWhen ? String(m.start_raw ?? '') || null : null, end: null, dates: `${m.startWhen?.year ?? ''}${m.startWhen?.month ? `-${String(m.startWhen.month).padStart(2, '0')}` : ''}${m.startWhen?.day ? `-${String(m.startWhen.day).padStart(2, '0')}` : ''} – ${m.endWhen?.year ?? ''}${m.endWhen?.month ? `-${String(m.endWhen.month).padStart(2, '0')}` : ''}${m.endWhen?.day ? `-${String(m.endWhen.day).padStart(2, '0')}` : ''}`, grade: m.grade, source: m.source, qc_status: m.qc_status || null })),
       })),
+      // occupied land on the map's date (P2): the province, the occupier, the dates and the source of each row
+      occupied: military.members.filter((m) => m.value === 'occupied' && (m.startWhen ? (m.startWhen.year * 10000 + (m.startWhen.month ?? 1) * 100 + (m.startWhen.day ?? 1)) <= state.date : true) && (m.endWhen ? (m.endWhen.year * 10000 + (m.endWhen.month ?? 12) * 100 + (m.endWhen.day ?? 31)) >= state.date : true))
+        .map((m) => ({ record: m.id, where: m.where, label: m.label, by: m.side, start: m.start ?? null, end: m.end ?? null, grade: m.grade ?? null, source: m.source ?? null })),
       members_file: records?.file ?? military.file ?? null,
       // milestone 2: the events on the sheet and the course of the war as the margin list prints it; the strip
       events_on_sheet: (military.shown ?? []).map((r) => r.id), events_in_war: (military.events ?? []).length,
@@ -370,6 +373,7 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
   // the Military layer: the sides and the forces shown (brief §6)
   if (resolved.war) {
     s.push(`The war shown: ${resolved.title ?? resolved.war.id}, sides ${list(resolved.war.sides.map((x) => x.label))}.`);
+    if (resolved.war.occupied?.length) s.push(`Hatched over its owner's color, land occupied on this date: ${list(resolved.war.occupied.map((o) => o.label))}.`);
     if (resolved.war.forces?.length) s.push(`Forces on the map: ${list(resolved.war.forces.map((f) => `${f.label} (${f.side}${f.tech_drawn ? `, ${f.tech}` : ''})`))}.`);
     if (resolved.war.lines?.length) s.push(`Lines: ${list(resolved.war.lines.map((l) => l.label))}.`);
   }

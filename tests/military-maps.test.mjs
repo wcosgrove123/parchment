@@ -15,7 +15,7 @@ const skip = browser ? false : 'no Chromium-family browser found';
 const order = (p) => JSON.parse(readFileSync(new URL(`./maps/${p}.json`, import.meta.url), 'utf8'));
 const OUT = mkdtempSync(join(tmpdir(), 'parchment-military-'));
 test.after(() => rmSync(OUT, { recursive: true, force: true }));
-const render = (p, over = {}) => renderOrder({ ...order(p), ...over }, { out: join(OUT, p.replace(/\//g, '-')), base: OUT, browser });
+const render = (p, over = {}) => renderOrder({ ...order(p), records: 'tests/maps/military-fixture.csv', ...over }, { out: join(OUT, p.replace(/\//g, '-')), base: OUT, browser });
 
 test('Texas, 25 April 1846, with the Military layer on: fills by side, the dispute still hatched, Taylor\'s march as before', { skip, timeout: 180000 }, async () => {
   const { slip: s } = await render('military/texas-1846-sides');
@@ -149,7 +149,7 @@ test('force marks (milestone 5): each force where its movements put it, its icon
   const labels = s.legend.rows.map((r) => r.label);
   assert.ok(labels.includes('A force: its type and size (XX a division)') && labels.includes('Fort (one mark in every era)') && labels.some((l) => /^musket, 1500–1860$/.test(l)));
   // the date check: a copy of the table with a tank on Taylor's march
-  const csv = readFileSync(new URL('../data/military.csv', import.meta.url), 'utf8').replace(/(test-mx-mv-taylor-3,.*?,mexican-american-war,us,taylor,),,,,,$/m, '$1,,,tank-great-war,,');
+  const csv = readFileSync(new URL('./maps/military-fixture.csv', import.meta.url), 'utf8').replace(/(test-mx-mv-taylor-3,.*?,mexican-american-war,us,taylor,),,,,,$/m, '$1,,,tank-great-war,,');
   assert.ok(/taylor,,,,tank-great-war,,/.test(csv), 'the test row carries the tank (battle and phase columns follow tech)');
   // the copy lives under the repository (the page fetches ?records= from the served folder) and is removed after
   const { writeFileSync, unlinkSync, mkdirSync } = await import('node:fs');

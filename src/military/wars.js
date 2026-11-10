@@ -44,23 +44,32 @@ export const aliveOn = (r, date) => first(r.startWhen) <= date && date <= last(r
 
 // A polygon's side on a date: the first membership alive whose `where` is one of the polygon's keys (its power,
 // the power's labels, its own names and ids: src/us/frames.js itemKeys). → { side, member, role } or null.
+// An `occupied` row (its side is the occupier, its `where` a province or a state) lies over the polygon's own
+// membership: → { side: the owner's (or null), role: 'occupied', holder: the occupier's side, occupation: the row }.
 export function sideOf(war, members, keys, date) {
   if (!war) return null;
+  let own = null, occ = null;
   for (const m of members) {
     if (!aliveOn(m, date) || !keys.has(slug(m.where))) continue;
     const side = war.sides.find((s) => s.id === m.side);
-    if (side) return { side, member: m, role: m.value || 'belligerent' };
+    if (!side) continue;
+    if ((m.value || 'belligerent') === 'occupied') occ ??= { side, member: m };
+    else own ??= { side, member: m, role: m.value || 'belligerent' };
   }
-  return null;
+  if (occ && (!own || own.side.id !== occ.side.id)) return { side: own?.side ?? null, member: own?.member ?? occ.member, role: 'occupied', holder: occ.side, occupation: occ.member };
+  return own;
 }
 
 // Roles drawn at 40 % (grammar §5: influence or claim; proposal P2): dependents and satellites. (Occupied land,
 // hatched in the holder's color over the claimant's fill, comes with the lines milestone.)
-export const DEPENDENT = new Set(['dependent', 'satellite', 'occupied']);
+export const DEPENDENT = new Set(['dependent', 'satellite']);
 export const sideFillKey = (side, role = 'belligerent') => `side-${side.color}${DEPENDENT.has(role) ? '-dep' : ''}`;
 
 // The look a polygon takes on the Military layer: the side's fill (CSS: .na-fill.k-side-a), its label and id.
-export const lookFor = ({ side, role }) => ({ fill: sideFillKey(side, role), label: side.label, cat: side.id, side: side.id, role });
+// Occupied land (P2): the owner's fill, with `occ` the holder's color key for the hatch drawn over it.
+export const lookFor = ({ side, role, holder }) => (role === 'occupied'
+  ? { fill: side ? sideFillKey(side) : null, label: side?.label ?? null, cat: side?.id ?? `occupied-by-${holder.id}`, side: side?.id ?? null, role, occ: holder.color, occBy: holder.id, occLabel: holder.label }
+  : { fill: sideFillKey(side, role), label: side.label, cat: side.id, side: side.id, role });
 
 // Legend rows: one per side on the sheet, then its members with their dates when a side has more than one, then the
 // 40 % row where a dependent shows. `present` holds the look keys the sheet shows (src/us/stage.js lookKey).
@@ -77,9 +86,15 @@ export function militaryLegend(war, members, present, date, names = 'both') {
     const full = `fill:side-${side.color}:${side.id}`, dep = `fill:side-${side.color}-dep:${side.id}`;
     if (!present.has(full) && !present.has(dep)) continue;
     rows.push({ swatch: 'fill', key: `side-${side.color}`, label: side.label, role: 'side' });
-    const mine = members.filter((m) => m.side === side.id && aliveOn(m, date));
+    const mine = members.filter((m) => m.side === side.id && aliveOn(m, date) && m.value !== 'occupied');
     if (mine.length > 1) for (const m of mine) rows.push({ swatch: 'none', label: `  ${m.label}${when(m) ? `, ${when(m)}` : ''}${m.value && m.value !== 'belligerent' ? ` (${m.value})` : ''}`, role: 'member' });
     if (present.has(dep)) rows.push({ swatch: 'fill', key: `side-${side.color}-dep`, label: `Dependent or satellite of ${side.label}`, role: 'side' });
+  }
+  // occupied land: the holder's hatch over the owner's fill (P2), named once per occupier on the sheet
+  for (const side of war.sides) {
+    if (!present.has(`occ:side-${side.color}:${side.id}`)) continue;
+    const under = war.sides.find((s) => s.id !== side.id && present.has(`fill:side-${s.color}:${s.id}`));
+    rows.push({ swatch: 'occupied', key: under ? `side-${under.color}` : null, occ: side.color, label: `Occupied by ${side.label}, in whole or in part`, role: 'occupied' });
   }
   if (!rows.length) rows.push({ swatch: 'none', label: 'No member of either side on this sheet' });
   // The perspective rule (brief, ground rules): the order chooses whose name prints; the other side's name is not lost.

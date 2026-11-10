@@ -163,6 +163,19 @@ body:not(.tracker-military) #war { display: none; }
 #toolbar .film-status { font-size: 12px; opacity: 0.8; margin-left: 6px; white-space: nowrap; }
 #toolbar .film-status:empty { display: none; }
 .phase-list .course-row { font-size: 11.5px; }
+/* occupied land (P2): the occupier's line color as a hatch over the owner's fill; opposite slant to the rust dispute hatch */
+.hatch-side-line { stroke-width: 2.4; }
+.hatch-side-line.side-a { stroke: var(--side-a-line); } .hatch-side-line.side-b { stroke: var(--side-b-line); }
+.hatch-side-line.side-c { stroke: var(--side-c-line); } .hatch-side-line.side-d { stroke: var(--side-d-line); }
+.hatch-side-line.side-gray { stroke: var(--side-gray-line); } .hatch-side-line.side-red { stroke: var(--side-red-line); }
+.na-pattern.p-occ { stroke: none; fill-opacity: 0.8; }
+.na-pattern.p-occ.side-a { fill: url(#hatch-side-a); } .na-pattern.p-occ.side-b { fill: url(#hatch-side-b); }
+.na-pattern.p-occ.side-c { fill: url(#hatch-side-c); } .na-pattern.p-occ.side-d { fill: url(#hatch-side-d); }
+.na-pattern.p-occ.side-gray { fill: url(#hatch-side-gray); } .na-pattern.p-occ.side-red { fill: url(#hatch-side-red); }
+.legend .swatch-occ { stroke: var(--navy); stroke-width: 0.6; fill-opacity: 0.9; }
+.legend .swatch-occ.side-a { fill: url(#hatch-side-a); } .legend .swatch-occ.side-b { fill: url(#hatch-side-b); }
+.legend .swatch-occ.side-c { fill: url(#hatch-side-c); } .legend .swatch-occ.side-d { fill: url(#hatch-side-d); }
+.legend .swatch-occ.side-gray { fill: url(#hatch-side-gray); } .legend .swatch-occ.side-red { fill: url(#hatch-side-red); }
 .phase-strip .tick-label { font-size: 11px; }
 .marks .mark-group .mil-seq text { font-family: var(--font); }
 

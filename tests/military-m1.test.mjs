@@ -13,7 +13,7 @@ const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const powers = JSON.parse(read('src/us/powers.json'));
 const focuses = JSON.parse(read('src/focuses.json'));
-const csv = read('data/military.csv');
+const csv = read('tests/maps/military-fixture.csv');
 
 test('vocab.json: the military tracker and the first war, with sides that name their colors and reasons', () => {
   const t = vocab.trackers.military;
@@ -84,13 +84,13 @@ test('the legend lists each side on the sheet, members when several, and the oth
 });
 
 test('an order with layer: military carries its war and names into the address and back', () => {
-  const order = { page: 'us', layer: 'military', war: 'mexican-american-war', names: 'both', date: '1846-05-13', frame: 'mexico-war', size: '1920x1080', records: 'data/military.csv' };
+  const order = { page: 'us', layer: 'military', war: 'mexican-american-war', names: 'both', date: '1846-05-13', frame: 'mexico-war', size: '1920x1080', records: 'tests/maps/military-fixture.csv' };
   const q = orderToQuery(order);
   assert.equal(q.get('tracker'), 'military');
   assert.equal(q.get('war'), 'mexican-american-war');
   assert.equal(q.get('names'), 'both');
   const back = queryToOrder(q);
-  assert.deepEqual(back, { page: 'us', date: '1846-05-13', layer: 'military', war: 'mexican-american-war', names: 'both', size: '1920x1080', records: 'data/military.csv', frame: 'mexico-war' });
+  assert.deepEqual(back, { page: 'us', date: '1846-05-13', layer: 'military', war: 'mexican-american-war', names: 'both', size: '1920x1080', records: 'tests/maps/military-fixture.csv', frame: 'mexico-war' });
   assert.equal(orderToQuery({ page: 'us', date: '1846', tracker: 'nations' }).has('war'), false, 'an ordinary order is unchanged');
   for (const [id, box] of [['mexico-war', { west: -125, south: 15, east: -88, north: 43 }], ['mexico-city', { west: -99.6, south: 18.9, east: -98.6, north: 19.8 }]]) {
     const f = resolveFrame(id, focuses);

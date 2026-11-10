@@ -11,7 +11,7 @@ import { eventsOf, eventsUpTo, movementsOf, eventLook, eventLegend, sequenceFor 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const vocab = JSON.parse(read('data/vocab.json'));
 const gazetteer = JSON.parse(read('data/gazetteer.json'));
-const checked = validateRecords(read('data/military.csv'), vocab);
+const checked = validateRecords(read('tests/maps/military-fixture.csv'), vocab);
 const resolved = resolveRecords(checked.records, gazetteer).records;
 
 test('paces and days: words to map days per second, dates to day numbers and back', () => {

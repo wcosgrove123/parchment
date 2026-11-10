@@ -362,7 +362,7 @@ export function drawWarStrip(root, { x0, x1, y1 }, { war, members, events, moves
   const base = y1 + 24;
   if (chapter) g.append('text').attr('class', 'chapter-label').attr('x', x0 + 10).attr('y', base - 38).attr('font-size', 11).attr('fill', NAVY).text(`Chapter ${chapter.n} of ${chapter.count}: ${chapter.title}`);
   // members: a thin bar per member, side's color, stacked above the line
-  const mem = members.filter((m) => war.sides.some((s) => s.id === m.side) && inSpan(m));
+  const mem = members.filter((m) => war.sides.some((s) => s.id === m.side) && inSpan(m) && m.value !== 'occupied');
   mem.forEach((m, i) => {
     const side = war.sides.find((s) => s.id === m.side);
     const a = Math.max(days(eventFirst(m)), days(t0)), b = Math.min(days(eventLast(m)), days(t1));
