@@ -30,6 +30,46 @@ export function empireBand(year, { realmsTopo = null, states = null, label = 'Ho
   return null;
 }
 
+// Every year the Empire stood, the map says what it can show (owner, 2026-11-10: "Yes, mark them"): its outer border
+// as a band where a source dates one; where none does (1459 – 23 October 1648, 8 November 1659 – 16 September 1678),
+// the small states Cliopatria groups as "Holy Roman Empire Minor States" are named in words that cannot be read as the
+// whole Empire, and the legend says the border is not dated for that year.
+export const EMPIRE_MINOR = 'Holy Roman Empire Minor States';
+export const MINOR_LABEL = 'Minor states of the Empire';
+export const GAP_LEGEND = 'Holy Roman Empire: no dated outer border this year';
+// → { band, gap, minor }: band as empireBand gives it; gap = the Empire stood (Cliopatria has its whole or its minor
+// states in force) but no source draws its outer border; minor = the minor states' shape, to be named in a gap year.
+export function empireMarking(year, { realmsTopo = null, states = null, label = 'Holy Roman Empire' } = {}) {
+  const band = empireBand(year, { realmsTopo, states, label });
+  const minor = states?.states.find((f) => f.properties.n === EMPIRE_MINOR) ?? null;
+  const stood = !!minor || !!states?.wholes.some((f) => f.properties.n === '(Holy Roman Empire)');
+  return { band, gap: !band && stood, minor: !band && stood ? minor : null };
+}
+// The legend's line for the Empire: its band, or the gap.
+export function empireLegendRows({ band, gap }) {
+  if (band) return [{ swatch: 'band', style: band.source === 'ohm' ? 'dashed' : null, label: band.label }];
+  if (gap) return [{ swatch: 'band', style: 'missing', label: GAP_LEGEND }];
+  return [];
+}
+// The minor states' name in a gap year: over the middle of their largest piece, placed before the states' names (it
+// reads across the patchwork, as the Empire's name does in a band year) → { id, text, x, y, box } or null.
+export function placeMinorLabel(minor, { labelData, measure }) {
+  if (!minor) return null;
+  const parts = minor.geometry.type === 'MultiPolygon' ? minor.geometry.coordinates.map((c) => ({ type: 'Polygon', coordinates: c })) : [minor.geometry];
+  const biggest = parts.sort((a, b) => geoArea(b) - geoArea(a))[0];
+  const [l] = labelData([{ type: 'Feature', geometry: biggest, properties: { cls: { label: MINOR_LABEL } } }]);
+  if (!l) return null;
+  const size = 13, w = (measure ? measure(MINOR_LABEL, { size, bold: true }) : MINOR_LABEL.length * size * 0.62) + MINOR_LABEL.length * size * 0.12;
+  return { id: `minor:${l.id}`, text: MINOR_LABEL, x: l.x, y: l.y, size, box: { x: l.x - w / 2 - 3, y: l.y - size * 0.7, w: w + 6, h: size * 1.4 } };
+}
+export function drawMinorLabel(lg, label) {
+  lg.append('g').attr('class', 'empire-minor-label').selectAll('text').data(label ? [label] : [], (l) => l.id).join('text')
+    .attr('class', 'label polity state-name minor')
+    .attr('x', (l) => l.x).attr('y', (l) => l.y).attr('font-size', (l) => l.size)
+    .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+    .text((l) => l.text);
+}
+
 // The Empire's pieces by size: the band runs round the large ones; an enclave smaller than this keeps only the line
 // (after 1648 OpenHistoricalMap draws dozens of them in Alsace and Lorraine, and a band round each is a smudge).
 export const BAND_MIN_KM2 = 1500;

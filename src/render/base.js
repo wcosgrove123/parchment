@@ -156,7 +156,9 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Frame: gold on three sides; the bottom edge is the timeline strip's baseline.
   root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}`);
 
-  const legend = createLegend(root, frame, stage.legend);
+  // (fit: a legend widens to its longest line, as the lesson maps' do; the political map's gap-year line for the Empire
+  // is long. A legend whose lines all fit keeps its 236 px.)
+  const legend = createLegend(root, frame, { fit: true, ...stage.legend });
   let currentTracker = tracker;
   if (tracker) legend.set(tracker);
   const diffList = createDiffList(root, frame);
@@ -242,7 +244,7 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
         .append('title').text((f) => `${f.properties.n.replace(/^\(|\)$/g, '')} and its members · ${f.properties.f}–${f.properties.t} (Cliopatria)`);
       // An overlay's own names (the Empire's) are placed first and kept clear of the states' names.
       const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...(overlay?.reserve?.(ctx) ?? [])];
-      const candidates = view.states.filter((f) => f.properties.cls.status !== 'muted').map((f) => ({ f, text: f.properties.cls.label ?? f.properties.n }));
+      const candidates = view.states.filter((f) => f.properties.cls.status !== 'muted' && !f.properties.cls.noLabel).map((f) => ({ f, text: f.properties.cls.label ?? f.properties.n }));
       const labels = placeStateLabels(candidates, { path: labelPath, measure, zones, frame, ...(stage.label_min ? labelMin : {}) });
       lg.selectAll('text').data(labels, (l) => l.id).join('text')
         .attr('class', 'label polity state-name')

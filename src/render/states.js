@@ -54,12 +54,15 @@ export function makeStatesSource(topo) {
   return { at, rows: geoms.length, span };
 }
 
-// The Holy Roman Empire's whole: Cliopatria's "(Holy Roman Empire)" stands for the whole Empire only while it lists
-// more than one member (to 1458); from 1459 it holds only "Holy Roman Empire Minor States".
-export const isWholeEmpire = (f) => f.properties.n === '(Holy Roman Empire)' && (f.properties.cn ?? 0) > 1;
-// A realm drawn around its members: a whole of two or more members (a whole of one is that member's own outline,
-// as "(Holy Roman Empire)" is from 1459, when it lists only the Minor States). The Empire's whole has its band instead.
-export const isRealmLine = (f) => (f.properties.cn ?? 0) > 1 && !isWholeEmpire(f);
+// The Holy Roman Empire's whole: Cliopatria's "(Holy Roman Empire)" stands for the whole Empire only to 1458, while it
+// lists its electorates and duchies; from 1459 it holds only "Holy Roman Empire Minor States". (For 1619–1621 it lists
+// two members again, the Minor States and a leaf "Holy Roman Empire" that holds Prague: under half the Empire, so the
+// test is held to rows that end by 1458; found from the lesson-maps session's pictures, 2026-11-10.)
+export const isWholeEmpire = (f) => f.properties.n === '(Holy Roman Empire)' && (f.properties.cn ?? 0) > 1 && f.properties.t <= 1458;
+// A realm drawn around its members: a whole of two or more members (a whole of one is that member's own outline).
+// Cliopatria's "(Holy Roman Empire)" never gets this line: where it is the whole Empire it has its band, and where it
+// is not (1459 on, including its two-member rows of 1619–1621) a line round it would read as the Empire's border.
+export const isRealmLine = (f) => (f.properties.cn ?? 0) > 1 && f.properties.n !== '(Holy Roman Empire)';
 
 // What a state is called on the map: a tracked state's label (the name of the time, src/trackers/extent.json),
 // else Cliopatria's own name.

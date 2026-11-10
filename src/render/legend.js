@@ -32,6 +32,9 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
       const row = d3Select(this);
       if (e.swatch === 'fill') {
         row.append('rect').attr('class', `swatch fill-${e.key}`).attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14);
+      } else if (e.swatch === 'band' && e.style === 'missing') {
+        // a year with no dated outer border for the Empire (2026-11-10): the band's outline only, faint and dotted
+        row.append('rect').attr('class', 'swatch-band-missing').attr('x', 0.5).attr('y', 1).attr('width', 21).attr('height', 7);
       } else if (e.swatch === 'band') {
         // the Holy Roman Empire's outer border (2026-11-09): a band along the inside of a line
         row.append('rect').attr('class', 'swatch-band').attr('x', 0).attr('y', 1).attr('width', 22).attr('height', 7);

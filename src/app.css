@@ -247,3 +247,5 @@ body.tracker-explorers #toolbar #year-box { display: none; }
 #toolbar { max-width: calc(100vw - 16px); flex-wrap: wrap; justify-content: center; row-gap: 4px; }
 /* The political map names states, so the stage's region names (Europe, Central Asia…) step aside; seas stay. */
 body.tracker-extent .stage-labels .label.region { display: none; }
+/* A year with no dated outer border for the Empire (2026-11-10): the legend shows the band's outline only. */
+.legend .swatch-band-missing { fill: none; stroke: var(--band); stroke-width: 1; stroke-opacity: 0.55; stroke-dasharray: 2 2; }

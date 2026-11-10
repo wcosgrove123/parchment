@@ -97,6 +97,25 @@ its border: up to 1458 from Cliopatria, and from the Peace of Westphalia (1648) 
 Between 1459 and 1648 neither source draws the Empire's outer border, so the map leaves it out rather than guess.
 Land no state held is left plain. A few of Cliopatria's choices are listed for review in `docs/DECISIONS.md`.
 
+## The Holy Roman Empire through time
+
+The Empire was not one country with one government. It was a legal umbrella over hundreds of states that governed
+themselves (kingdoms, duchies, bishoprics, free cities) under an elected emperor. Its outer edge moved with
+marriages, wars and treaties, and some of its strongest rulers held land on both sides of it: the Habsburgs ruled
+Austria and Bohemia inside it and Hungary outside; the Hohenzollerns ruled Brandenburg inside it and Prussia outside.
+That is why maps of it look so different: some draw the whole umbrella, some only its members, some a rough outline.
+
+What Parchment shows, year by year:
+
+- **Up to 1458:** a band along the inside of the Empire's outer border, from Cliopatria, with its members in their
+  own colors inside it.
+- **1459 to October 1648, and November 1659 to September 1678:** no source gives the Empire's outer border for
+  these years, so the map draws none. Its bigger members (Austria, Bohemia, Bavaria, Saxony, Brandenburg) are drawn
+  as states of their own; the many small ones that Cliopatria groups together are named "Minor states of the
+  Empire", and the legend says "Holy Roman Empire: no dated outer border this year".
+- **From the Peace of Westphalia (24 October 1648) to 1659, and from 1678:** the border from OpenHistoricalMap, dated
+  by treaty, drawn dashed because its makers mark its lines as still needing a source.
+
 ## A map of Europe
 
 The **Europe** link in the toolbar opens Europe on its own, for lessons such as absolutism. To keep only some

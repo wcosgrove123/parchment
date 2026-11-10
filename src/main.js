@@ -18,7 +18,7 @@ import expansion from './trackers/expansion.json';
 import routes from './trackers/routes.json';
 import explorers from './trackers/explorers.json';
 import { makeStatesSource, isRealmLine } from './render/states.js';
-import { empireBand, drawEmpireBand, placeEmpireLabel } from './render/realms.js';
+import { empireMarking, empireLegendRows, drawEmpireBand, placeEmpireLabel, placeMinorLabel, drawMinorLabel, MINOR_LABEL } from './render/realms.js';
 
 // Trackers. Extent is the political map (owner, 2026-11-09): every state in force in the year shown, each in its own
 // color, from Cliopatria; expansion draws point records by shape; routes draws path and arrow records through gazetteer
@@ -27,11 +27,11 @@ import { empireBand, drawEmpireBand, placeEmpireLabel } from './render/realms.js
 const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes, explorers };
 
 // The political map's legend: what is on this map only.
-function statesLegend(year, view, band) {
+function statesLegend(year, view, marking) {
   const rows = [{ swatch: 'states', label: 'Each state in its own color' }];
   rows.push(year >= 1648 ? { swatch: 'line', style: 'solid', label: 'Documented border' } : { swatch: 'line', style: 'dashed', label: 'Approximate border' });
   if (view.wholes.some(isRealmLine)) rows.push({ swatch: 'whole', label: 'A realm around its members' });
-  if (band) rows.push({ swatch: 'band', style: band.source === 'ohm' ? 'dashed' : null, label: 'Holy Roman Empire' });
+  rows.push(...empireLegendRows(marking));
   return { ...TRACKERS.extent, title: 'States', legend: rows };
 }
 
@@ -167,13 +167,22 @@ async function main() {
       // Empire's band rides on the political map only.
       const view = cliopatria.at(state.year);
       const political = state.tracker === 'extent';
-      const band = political ? empireBand(state.year, { realmsTopo, states: view }) : null;
+      // The Empire: its band where a source dates its border; in the years none does, its minor states named and a
+      // legend line saying so (owner, 2026-11-10: "Yes, mark them"; src/render/realms.js).
+      const marking = political ? empireMarking(state.year, { realmsTopo, states: view }) : { band: null, gap: false, minor: null };
+      const band = marking.band;
       const rows = political ? [] : recordsFor(records, state.tracker, state.year, [...years, state.year]);
-      atlas.setTracker(state.tracker === 'routes' ? legendFor(routes, rows) : political ? statesLegend(state.year, view, band) : TRACKERS[state.tracker]);
-      let empireName = null;
-      const overlay = band ? { reserve: (ctx) => { empireName = placeEmpireLabel(band, ctx); return empireName ? [empireName.box] : []; }, over: (g, lg, ctx) => drawEmpireBand(g, lg, band, ctx, empireName) } : null;
-      atlas.showStates(state.year, view, political ? classifyState : quiet, overlay);
-      lastView = { year: state.year, states: view.states.map((f) => ({ name: f.properties.n, from: f.properties.f, to: f.properties.t, color: f.properties.c, status: f.properties.cls.status, label: f.properties.cls.label ?? null })), wholes: view.wholes.map((f) => f.properties.n), empire: band && { source: band.source, rids: band.rids ?? null, from: band.from ?? band.start, to: band.to ?? band.end } };
+      atlas.setTracker(state.tracker === 'routes' ? legendFor(routes, rows) : political ? statesLegend(state.year, view, marking) : TRACKERS[state.tracker]);
+      let empireName = null, minorName = null;
+      const overlay = band
+        ? { reserve: (ctx) => { empireName = placeEmpireLabel(band, ctx); return empireName ? [empireName.box] : []; }, over: (g, lg, ctx) => drawEmpireBand(g, lg, band, ctx, empireName) }
+        : marking.minor
+          ? { reserve: (ctx) => { minorName = placeMinorLabel(marking.minor, ctx); return minorName ? [minorName.box] : []; }, over: (g, lg) => drawMinorLabel(lg, minorName) }
+          : null;
+      // (In a gap year the minor states carry their name from the overlay, placed first; the label pass leaves them.)
+      const classify = !political ? quiet : marking.minor ? (f, y) => ({ ...classifyState(f, y), ...(f === marking.minor ? { label: MINOR_LABEL, noLabel: true } : {}) }) : classifyState;
+      atlas.showStates(state.year, view, classify, overlay);
+      lastView = { year: state.year, states: view.states.map((f) => ({ name: f.properties.n, from: f.properties.f, to: f.properties.t, color: f.properties.c, status: f.properties.cls.status, label: f.properties.cls.label ?? null })), wholes: view.wholes.map((f) => f.properties.n), empire: band ? { source: band.source, rids: band.rids ?? null, from: band.from ?? band.start, to: band.to ?? band.end } : marking.gap ? { gap: true, minor: minorName?.text ?? null } : null };
       const n = atlas.showRecords({ points: rows.filter((r) => r.kind === 'point'), routes: rows.filter((r) => r.kind === 'path' || r.kind === 'arrow') });
       atlas.setYear(state.year);
       document.title = `Parchment · ${state.year}`;
