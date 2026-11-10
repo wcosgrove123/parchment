@@ -15,7 +15,7 @@ import { createLegend } from './legend.js';
 import { createDiffList } from './difflist.js';
 import { computeDiff } from '../views/diff.js';
 import { drawMarks, MARK_RADIUS } from './marks.js';
-import { placeStateLabels, isRealmLine } from './states.js';
+import { placeStateLabels, isRealmLine, POL_COLORS, tieTitle, realmTitle } from './states.js';
 
 export const CROSSFADE_MS = 300;
 
@@ -127,6 +127,12 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // Hatch for vanished / disputed (grammar §5): rust diagonals.
   defs.append('pattern').attr('id', 'hatch-rust').attr('patternUnits', 'userSpaceOnUse').attr('width', 9).attr('height', 9).attr('patternTransform', 'rotate(45)')
     .append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 9).attr('class', 'hatch-line');
+  // Stripes over a vassal or tributary, in its overlord's color (2026-11-10; hatch = overlap, §5: two rulers over one
+  // land): one pattern per palette color, in its deep shade, on the other diagonal from the rust hatch.
+  for (let k = 0; k < POL_COLORS; k++) {
+    defs.append('pattern').attr('id', `tie-${k}`).attr('patternUnits', 'userSpaceOnUse').attr('width', 7).attr('height', 7).attr('patternTransform', 'rotate(-45)')
+      .append('line').attr('x1', 3.5).attr('y1', 0).attr('x2', 3.5).attr('y2', 7).attr('class', 'tie-line').style('stroke', `var(--pol-${k}-deep)`);
+  }
 
   // Snapshot layers (polities, borders, labels) live here; each show() creates a new group and crossfades.
   const snapshots = map.append('g').attr('class', 'snapshots');
@@ -226,22 +232,29 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
 
   // The political map (owner, 2026-11-09; src/render/states.js): every state in force in `year`, from Cliopatria,
   // each in its palette color (classify → { status: 'state' | 'muted', label }); the borders two states share,
-  // drawn once and dashed before 1648; a realm made of members (a "whole") as a heavier line over them; names placed
-  // largest first where they fit. overlay as for showSnapshot (the Holy Roman Empire's band).
+  // drawn once and dashed before 1648; a realm made of members (a "whole"), or crowns that shared a ruler (a personal
+  // union), as a heavier line over them; a vassal or tributary striped in its overlord's color, where the overlord's
+  // own color shows (not muted); names placed largest first where they fit. overlay as for showSnapshot (the Holy
+  // Roman Empire's band).
   function showStates(year, view, classify, overlay = null) {
     for (const f of view.states) f.properties.cls = classify(f, year);
     const certainty = year >= 1648 ? 'legal' : 'approximate';
     const ctx = { d, defs, labelData: (fs) => polityLabelData(fs, labelPath, labelMin), landClip: stage.relief ? 'land-clip' : null, measure };
+    const nameOf = (f) => f.properties.cls?.label ?? f.properties.n.replace(/^\(|\)$/g, '');
+    const ties = (view.ties ?? []).filter((t) => t.over.properties.cls?.status !== 'muted');
     crossfade((g, lg) => {
       g.append('g').attr('class', 'polities states').selectAll('path').data(view.states).join('path')
         .attr('class', (f) => `polity state ${f.properties.cls.status} pol-${f.properties.c ?? 0}`)
         .attr('d', d)
         .append('title').text((f) => `${f.properties.cls.label ?? f.properties.n} · ${f.properties.f}–${f.properties.t} (Cliopatria${f.properties.o ? `, which names it ${f.properties.o}; renamed with sources in data/cliopatria-renames.json` : ''})`);
+      g.append('g').attr('class', 'ties').selectAll('path').data(ties).join('path')
+        .attr('class', (t) => `tie ${t.kind}`).attr('d', (t) => d(t.vassal)).attr('fill', (t) => `url(#tie-${t.over.properties.c ?? 0})`)
+        .append('title').text((t) => tieTitle(t, nameOf(t.vassal), nameOf(t.over)));
       overlay?.under?.(g, ctx);
       g.append('path').attr('class', `border ${certainty}`).attr('d', d(view.border()));
-      g.append('g').attr('class', 'wholes').selectAll('path').data(view.wholes.filter(isRealmLine)).join('path')
+      g.append('g').attr('class', 'wholes').selectAll('path').data([...view.wholes.filter(isRealmLine), ...(view.unions ?? [])]).join('path')
         .attr('class', `whole ${certainty}`).attr('d', d)
-        .append('title').text((f) => `${f.properties.n.replace(/^\(|\)$/g, '')} and its members · ${f.properties.f}–${f.properties.t} (Cliopatria)`);
+        .append('title').text(realmTitle);
       // An overlay's own names (the Empire's) are placed first and kept clear of the states' names.
       const zones = [cartouche.box(), legend.box(), { x: x0, y: y1 - 14, w: x1 - x0, h: 40 }, ...stageLabelZones(), ...(overlay?.reserve?.(ctx) ?? [])];
       const candidates = view.states.filter((f) => f.properties.cls.status !== 'muted' && !f.properties.cls.noLabel).map((f) => ({ f, text: f.properties.cls.label ?? f.properties.n }));

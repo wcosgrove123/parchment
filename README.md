@@ -25,7 +25,9 @@ Databank): type any year from 1200 to 2000, or `?year=1536`, on any stage, and e
 Cliopatria gives it that year, in a color of its own; neighbors never share one. A realm Cliopatria builds from member
 states (France with its fiefs, England with its Irish earldoms) gets a heavier line around its members, and the Holy
 Roman Empire a band inside its outer border (Cliopatria's to 1458, OpenHistoricalMap's from 1648; none in between).
-The year buttons are suggestions. The data: `data/base/derived/cliopatria.topojson` (`scripts/derive-cliopatria.mjs`).
+A vassal or tributary is striped in its overlord's color (Cliopatria's own vassalage and allegiance records, and the
+Mongol yoke over the Rus' principalities to 1480 from cited sources, `data/tributaries.json`); crowns that shared a
+ruler sit inside one realm line. The year buttons are suggestions. The data: `data/base/derived/cliopatria.topojson` (`scripts/derive-cliopatria.mjs`).
 
 ### The world (`?stage=world`)
 

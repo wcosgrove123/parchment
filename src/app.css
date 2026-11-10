@@ -249,3 +249,9 @@ body.tracker-explorers #toolbar #year-box { display: none; }
 body.tracker-extent .stage-labels .label.region { display: none; }
 /* A year with no dated outer border for the Empire (2026-11-10): the legend shows the band's outline only. */
 .legend .swatch-band-missing { fill: none; stroke: var(--band); stroke-width: 1; stroke-opacity: 0.55; stroke-dasharray: 2 2; }
+/* Vassals and tributaries (2026-11-10): stripes in the overlord's deep color (--pol-k-deep) over the vassal's own
+   fill, which still shows between them; the pattern's color is set per palette index (src/render/base.js). */
+.tie { stroke: none; }
+.tie-line { stroke-width: 1.5; stroke-opacity: 0.85; }
+.legend .swatch-tie { fill: var(--cream); fill-opacity: 1; }
+.legend .swatch-tie-stripes { stroke: none; }

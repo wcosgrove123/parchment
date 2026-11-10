@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { geoPath, geoEqualEarth } from 'd3';
-import { makeStatesSource, isWholeEmpire, isRealmLine, placeStateLabels } from '../src/render/states.js';
+import { makeStatesSource, isWholeEmpire, isRealmLine, placeStateLabels, tieLegendLabel } from '../src/render/states.js';
 import { makeHighlighter } from '../src/data/highlights.js';
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
@@ -95,4 +95,73 @@ test('renamed with a source: no Golden Horde after 1501; Cliopatria’s 1547–1
   assert.ok(k, '1600: the Khalkha');
   assert.equal(k.properties.o, 'Golden Horde', 'Cliopatria’s own name is kept on the row');
   assert.equal(k.properties.wd, 'Q842323');
+});
+
+// Vassals and tribute (owner, 2026-11-10: "Yes, do that next", to "Do vassals and tribute next, including the Mongol
+// yoke over Russia?"): Cliopatria's own vassalage and allegiance rows, and the ties it does not record, each sourced
+// in data/tributaries.json; drawn as stripes in the overlord's color over the vassal.
+const tie = (y, vassal) => src.at(y).ties.find((t) => t.vassal.properties.n === vassal || t.vassal.properties.n === `(${vassal})`);
+
+test('the Mongol yoke: the Rus’ principalities pay the Horde, each to the year its sources give', () => {
+  const tributaries = read('data/tributaries.json');
+  for (const r of tributaries.ties) {
+    assert.ok(r.why && r.sources.length, `${r.id}: a reason and sources`);
+    for (const s of r.sources) assert.match(tributaries.sources[s]?.url ?? '', /^https:\/\//, `${r.id}: ${s} has a link`);
+    assert.ok(topo.ties.some((t) => t.s === r.id && t.v === r.vassal && t.f === r.from && t.t === r.to), `${r.id} is in the derived file`);
+  }
+  for (const v of ['Grand Principality of Moscow', 'Principality of Vladimir-Suzdal', 'Tver', 'Novgorod Republic', 'Galicia-Volhynia', 'Nizhny Novgorod']) {
+    const t = tie(1300, v);
+    assert.ok(t, `1300: ${v} pays tribute`);
+    assert.equal(t.over.properties.n, 'Golden Horde');
+    assert.equal(t.kind, 'tribute');
+  }
+  assert.equal(tie(1290, 'Novgorod Republic')?.over.properties.n, 'Mongol Empire', '1290: Cliopatria draws the Horde inside the Mongol Empire, so the tribute goes there');
+  assert.ok(tie(1480, 'Grand Principality of Moscow'), '1480: the stand on the Ugra, the last year of the yoke');
+  assert.ok(!tie(1481, 'Grand Principality of Moscow'), '1481: Moscow pays no one');
+  assert.ok(tie(1478, 'Novgorod Republic') && !tie(1479, 'Novgorod Republic'), 'Novgorod: annexed by Moscow in 1478, though Cliopatria draws it to 1481');
+  assert.ok(tie(1349, 'Galicia-Volhynia') && !tie(1350, 'Galicia-Volhynia'), 'Galicia-Volhynia: the Polish conquest of 1349 ended its vassalage');
+  assert.ok(!tie(1300, 'Pskov Republic'), 'Pskov is left out: no source found says it paid the Horde');
+  assert.ok(tributaries.left_out.some((l) => l.state === 'Pskov Republic'), 'and the file says why');
+});
+
+test('Cliopatria’s vassalage and allegiance rows are ties, except the Empire’s, whose members its band already shows', () => {
+  const rels = topo.objects.states.geometries.map((g) => g.properties).filter((p) => p.k === 'rel');
+  let toEmpire = 0;
+  for (const p of rels) {
+    const m = p.n.match(/^\((Vassalage|Allegiance) of (.+) to (.+)\)$/);
+    if (!m) continue;
+    if (m[3] === 'Holy Roman Empire') {
+      toEmpire++;
+      for (let y = Math.max(p.f, 1200); y <= p.t; y++) {
+        const v = src.at(y).states.find((f) => f.properties.n === m[2]);
+        assert.ok(v && (v.properties.m ?? '').split(';').includes('(Holy Roman Empire)'), `${y}: ${m[2]} is a member of the Empire’s whole, inside its band`);
+      }
+      continue;
+    }
+    assert.ok(topo.ties.some((t) => t.s === 'cliopatria' && t.v === m[2] && t.o === m[3] && t.f === p.f && t.t === p.t), `${p.n} ${p.f}–${p.t} is a tie`);
+  }
+  assert.ok(toEmpire > 0);
+  assert.ok(!topo.ties.some((t) => [].concat(t.o).includes('Holy Roman Empire')));
+  const y1400 = src.at(1400);
+  assert.equal(tie(1400, 'Joseon')?.over.properties.n, 'Ming Dynasty');
+  assert.equal(tie(1400, 'Joseon')?.kind, 'allegiance');
+  assert.equal(tie(1400, 'Kingdom of Georgia')?.over.properties.n, 'Timurid Empire');
+  assert.equal(tie(1400, 'Kingdom of Georgia')?.kind, 'vassal');
+  for (const t of y1400.ties) assert.ok(t.from <= 1400 && 1400 <= t.to && y1400.states.includes(t.over), `${t.vassal.properties.n}: in force, its overlord on the map`);
+  assert.equal(tie(1300, 'Golden Horde')?.over.properties.n, 'Yuan Dynasty', '1300: the western khanates owe allegiance to the Great Khan');
+});
+
+test('crowns under one ruler (Cliopatria’s personal unions) are drawn as a realm line round them', () => {
+  const u = (y) => src.at(y).unions.map((f) => f.properties.n);
+  assert.ok(u(1500).includes('(Personal union of Crown of Aragon with Crown of Castile)'), '1500: Ferdinand and Isabella');
+  assert.ok(u(1500).includes('(Personal union of Kingdom of Bohemia with Kingdom of Hungary)'));
+  assert.ok(u(1530).includes('(Personal union of Spanish Empire with Habsburg Monarchy)'), '1530: Charles V');
+  assert.ok(!src.at(1500).rels.some((f) => f.properties.n.startsWith('(Personal union')), 'not left among the undrawn relation rows');
+});
+
+test('a tie in words: the legend line for each overlord, with “the” only before a title', () => {
+  assert.equal(tieLegendLabel('tribute', 'Golden Horde'), 'Pays tribute to the Golden Horde');
+  assert.equal(tieLegendLabel('vassal', 'Timurid Empire'), 'Vassal of the Timurid Empire');
+  assert.equal(tieLegendLabel('allegiance', 'Ming China'), 'Owes allegiance to Ming China');
+  assert.equal(tieLegendLabel('allegiance', 'Yuan Dynasty'), 'Owes allegiance to the Yuan Dynasty');
 });

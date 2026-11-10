@@ -8,8 +8,12 @@
 //
 // Attributes authored here, from the source's own fields:
 //   k   kind: 'state' (a polity row), 'whole' (a name in parentheses: a realm made of its Components, drawn as a
-//       border over them), 'union' ('(Personal union of …)'), 'rel' (a RELATION row: vassalage or allegiance; kept,
-//       not drawn yet)
+//       border over them), 'union' ('(Personal union of …)' typed POLITY), 'rel' (a RELATION row: vassalage,
+//       allegiance, personal union or alliance; a personal union is drawn as a realm line round its crowns, vassalage
+//       and allegiance become ties, below; an alliance is kept, not drawn)
+//
+// And beside the rows, topo.ties: who owed whom, [{ v: vassal, o: overlord (a name, or names tried in order), f, t,
+// k: 'tribute' | 'vassal' | 'allegiance', s: 'cliopatria' or the id of a sourced row in data/tributaries.json }].
 //   c   palette color (0…PALETTE-1) for states: neighbors in force at the same time never share one, and a state keeps
 //       its color through time wherever its neighbors allow (computed on a grid of RES°; see colorStates)
 //   id  a stable id from the name (kebab-case), for the extent tracker, ?focus= and the Sheet's place list
@@ -72,6 +76,36 @@ const features = rows.map((f, i) => {
 raw.features = null;
 const byKind = {}; for (const f of features) byKind[f.properties.k] = (byKind[f.properties.k] ?? 0) + 1;
 console.log(`  ${features.length} rows alive ${SPAN[0]}–${SPAN[1]} (${Object.entries(byKind).map(([k, v]) => `${k} ${v}`).join(', ')}), ${new Set(features.map((f) => f.properties.n)).size} names; ${renamed} rows renamed (data/cliopatria-renames.json)`);
+
+// ---------------------------------------------------------------- ties: who owed whom (owner, 2026-11-10)
+// Cliopatria's own RELATION rows "(Vassalage of X to Y)" and "(Allegiance of X to Y)", a tie for each row and its
+// years; then the ties it does not record, each with its sources (data/tributaries.json: the Mongol yoke over the
+// Rus' principalities). Ties to the Holy Roman Empire are left out: each such vassal is a member of the Empire's
+// whole in every one of its years (tests/states.test.mjs), inside the band that already says it belongs.
+const TRIBUTARIES = JSON.parse(await readFile(join(ROOT, 'data', 'tributaries.json'), 'utf8'));
+const ties = [];
+let toEmpire = 0;
+for (const f of features) {
+  const p = f.properties;
+  const m = p.k === 'rel' && p.n.match(/^\((Vassalage|Allegiance) of (.+) to (.+)\)$/);
+  if (!m) continue;
+  if (m[3] === 'Holy Roman Empire') { toEmpire++; continue; }
+  ties.push({ v: m[2], o: m[3], f: p.f, t: p.t, k: m[1] === 'Vassalage' ? 'vassal' : 'allegiance', s: 'cliopatria' });
+}
+// A sourced tie must meet its states on the map: the vassal (or its whole) and one of its overlords in force in the
+// same year at least once, or a name is misspelled.
+const alive = (n, y) => features.some((f) => f.properties.n === n && (f.properties.k === 'state' || f.properties.k === 'whole') && f.properties.f <= y && y <= f.properties.t);
+for (const r of TRIBUTARIES.ties) {
+  const over = [].concat(r.overlord);
+  let years = 0;
+  for (let y = Math.max(r.from, SPAN[0]); y <= Math.min(r.to, SPAN[1]); y++) if ((alive(r.vassal, y) || alive(`(${r.vassal})`, y)) && over.some((o) => alive(o, y))) years++;
+  if (!years) throw new Error(`data/tributaries.json: ${r.id} (${r.vassal} → ${over.join(' / ')}) never meets its states on the map`);
+  for (const s of r.sources) if (!TRIBUTARIES.sources[s]?.url) throw new Error(`data/tributaries.json: ${r.id} cites "${s}", which has no url`);
+  ties.push({ v: r.vassal, o: over.length > 1 ? over : over[0], f: r.from, t: r.to, k: r.kind, s: r.id });
+  if (REPORT) console.log(`    ${r.id}: drawn in ${years} years`);
+}
+const tieCount = {}; for (const t of ties) { const key = t.s === 'cliopatria' ? `cliopatria ${t.k}` : 'sourced'; tieCount[key] = (tieCount[key] ?? 0) + 1; }
+console.log(`  ${ties.length} ties (${Object.entries(tieCount).map(([k, v]) => `${k} ${v}`).join(', ')}); ${toEmpire} rows of ties to the Holy Roman Empire left to its band`);
 
 // ---------------------------------------------------------------- simplify
 let topo = topology({ states: { type: 'FeatureCollection', features } }, SETTINGS.quantization);
@@ -212,11 +246,12 @@ for (const g of topo.objects.states.geometries) if (rowColor.has(g.properties.i)
 for (const g of topo.objects.states.geometries) delete g.properties.i;
 
 // ---------------------------------------------------------------- write
+topo.ties = ties;
 const text = JSON.stringify(topo);
 await writeFile(join(OUT, 'cliopatria.topojson'), text);
 const indexPath = join(OUT, 'index.json');
 const index = JSON.parse(await readFile(indexPath, 'utf8'));
-index.layers.cliopatria = { file: 'cliopatria.topojson', bytes: text.length, rows: features.length, by_kind: byKind, span: SPAN, palette: PALETTE, grid_degrees: RES, neighbor_pairs: pairWeight.size, clashes, settings: SETTINGS, source: 'Cliopatria v0.2.1 (Seshat Global History Databank, CC BY 4.0)', written_by: 'scripts/derive-cliopatria.mjs' };
+index.layers.cliopatria = { file: 'cliopatria.topojson', bytes: text.length, rows: features.length, by_kind: byKind, span: SPAN, palette: PALETTE, grid_degrees: RES, neighbor_pairs: pairWeight.size, clashes, ties: tieCount, settings: SETTINGS, source: 'Cliopatria v0.2.1 (Seshat Global History Databank, CC BY 4.0)', written_by: 'scripts/derive-cliopatria.mjs' };
 await writeFile(indexPath, JSON.stringify(index, null, 2) + '\n');
 console.log(`  wrote data/base/derived/cliopatria.topojson (${(text.length / 1048576).toFixed(1)} MB)`);
 

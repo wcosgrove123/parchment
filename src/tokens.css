@@ -48,6 +48,19 @@
   --pol-9: #8ac3a9;
   --pol-10: #7fc0d0;
   --pol-11: #b3adde;
+  /* …and each one's deep shade, for the stripes over a state's vassals (L 0.56 / 0.46, C 0.10) */
+  --pol-0-deep: #a75c56;
+  --pol-1-deep: #966b27;
+  --pol-2-deep: #6d7d34;
+  --pol-3-deep: #2c8766;
+  --pol-4-deep: #008399;
+  --pol-5-deep: #746aab;
+  --pol-6-deep: #873f3b;
+  --pol-7-deep: #784e00;
+  --pol-8-deep: #516012;
+  --pol-9-deep: #00694a;
+  --pol-10-deep: #00657b;
+  --pol-11-deep: #584d8c;
 
   /* Ground and water */
   --parchment: #EFE7D2;

@@ -45,6 +45,10 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
       } else if (e.swatch === 'whole') {
         // a realm drawn as the sum of its members: its border over theirs
         row.append('line').attr('class', 'swatch-whole').attr('x1', 0).attr('x2', 22).attr('y1', 7).attr('y2', 7);
+      } else if (e.swatch === 'tie') {
+        // a vassal or tributary (2026-11-10): stripes in its overlord's color (palette index e.color) over the paper
+        row.append('rect').attr('class', 'swatch swatch-tie').attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14);
+        row.append('rect').attr('class', 'swatch-tie-stripes').attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14).attr('fill', `url(#tie-${e.color ?? 0})`);
       } else if (e.swatch === 'hatch') {
         row.append('rect').attr('class', 'swatch hatch').attr('x', 0).attr('y', 0).attr('width', 22).attr('height', 14);
       } else if (e.swatch === 'line') {

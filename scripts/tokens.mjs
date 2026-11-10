@@ -72,6 +72,9 @@ const sideFill = (k) => oklchToHex({ L: 0.72, C: sideC(k) ?? 0.09, h: sideHues[k
 // The owner's choice (2026-11-10): he tried a bolder set (twelve hues, chroma 0.10; b079a7d) and kept this one.
 const polHues = [25, 75, 120, 165, 215, 290];
 const pol = [...polHues.map((h) => oklchToHex({ L: 0.86, C: 0.055, h })), ...polHues.map((h) => oklchToHex({ L: 0.77, C: 0.07, h }))];
+// A vassal's stripes are its overlord's color, deep enough to read over any of the fills (2026-11-10): the same
+// hues, the pale set's at L 0.56 and the mid set's at L 0.46, so two overlords of one hue still differ.
+const polDeep = [...polHues.map((h) => oklchToHex({ L: 0.56, C: 0.1, h })), ...polHues.map((h) => oklchToHex({ L: 0.46, C: 0.1, h }))];
 // Water: paper lightness, nudged toward blue.
 const paperL = hexToOklch('#D9D6CC').L;
 const ocean = oklchToHex({ L: paperL, C: 0.022, h: 235 });
@@ -109,6 +112,8 @@ ${Object.keys(sideHues).map((k) => `  --side-${k}-line: ${sideLine(k)};   --side
 
   /* Political map: a color per state, neighbors apart (owner, 2026-11-09); pale L 0.86 C 0.055, mid L 0.77 C 0.07 */
 ${pol.map((v, k) => `  --pol-${k}: ${v};`).join('\n')}
+  /* …and each one's deep shade, for the stripes over a state's vassals (L 0.56 / 0.46, C 0.10) */
+${polDeep.map((v, k) => `  --pol-${k}-deep: ${v};`).join('\n')}
 
   /* Ground and water */
   --parchment: ${parchment};

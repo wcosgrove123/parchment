@@ -187,6 +187,42 @@ test('the Explorers layer draws in a shot: a typed range, color by state, a Paci
   }
 });
 
+// Vassals and tribute on the political map (owner, 2026-11-10): stripes in the overlord's color, a legend line per
+// overlord in the frame; crowns under one ruler inside a realm line.
+test('the political map draws vassals striped in their overlord’s color and names each overlord in the legend', { skip: !browser ? 'no Chrome or Edge installed' : false }, async () => {
+  const { spawn, execFileSync } = await import('node:child_process');
+  const { fileURLToPath } = await import('node:url');
+  const ROOT = fileURLToPath(new URL('..', import.meta.url));
+  const port = 8398;
+  const server = spawn(process.execPath, ['scripts/build.mjs', '--serve'], { cwd: ROOT, env: { ...process.env, PORT: String(port) }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const dump = (q) => execFileSync(browser, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--window-size=1920,1080',
+    '--virtual-time-budget=15000', '--timeout=30000', '--dump-dom', `http://127.0.0.1:${port}/?shot=1&${q}`], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 60000 });
+  try {
+    await new Promise((ok, fail) => {
+      const onData = (b) => { if (String(b).includes(`:${port}/`)) ok(); };
+      server.stdout.on('data', onData);
+      server.stderr.on('data', onData);
+      server.on('exit', (c) => fail(new Error(`dev server exited early (${c})`)));
+      setTimeout(() => fail(new Error('dev server did not start')), 30000);
+    });
+    const d1400 = dump('stage=europe&year=1400');
+    assert.match(d1400, /<pattern id="tie-11"/, 'a stripe pattern for every palette color');
+    assert.match(d1400, /<path class="tie tribute" d="[^"]+" fill="url\(#tie-\d+\)"><title>Novgorod Republic · pays tribute to the Golden Horde, 1259–1478 \(sources in data\/tributaries\.json\)/);
+    assert.match(d1400, /<path class="tie vassal"[^>]*><title>Kingdom of Georgia · vassal of the Timurid Empire, 1395–14\d\d \(Cliopatria\)/);
+    assert.match(d1400, />Pays tribute to the Golden Horde<\/text>/);
+    assert.match(d1400, />Vassal of the Timurid Empire<\/text>/);
+    assert.doesNotMatch(d1400, /Owes allegiance to Ming China/, 'Joseon and the Ming are off the Europe sheet: no line for them');
+    const d1500 = dump('stage=europe&year=1500');
+    assert.doesNotMatch(d1500, /pays tribute to the Golden Horde/, '1500: the yoke ended in 1480');
+    assert.doesNotMatch(d1500, />Vassal of the Vijayanagara Empire<\/text>/, 'Jaffna’s tie (to 1501) is off the Europe sheet: drawn under the clip, no legend line');
+    assert.match(d1500, />A realm, or crowns under one ruler<\/text>/);
+    assert.match(d1500, /<path class="whole approximate"[^>]*><title>Personal union of Crown of Aragon with Crown of Castile: two crowns, one ruler · 14\d\d–15\d\d \(Cliopatria\)/);
+  } finally {
+    server.kill();
+    execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore' });
+  }
+});
+
 test('every draft row reads cleanly and every waypoint is in the gazetteer', () => {
   const vocab = read('data/vocab.json');
   const gazetteer = read('data/gazetteer.json');

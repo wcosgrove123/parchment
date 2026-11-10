@@ -1,0 +1,62 @@
+{
+  "_about": [
+    "Vassals and tributaries that Cliopatria does not record, each with its sources (owner, 2026-11-10: \"Yes, do that next\", to \"Do vassals and tribute next, including the Mongol yoke over Russia?\").",
+    "scripts/derive-cliopatria.mjs adds these to cliopatria.topojson's ties, beside Cliopatria's own vassalage and allegiance rows; the political map draws a tie as stripes in the overlord's color over the vassal (src/render/states.js, src/render/base.js).",
+    "vassal and overlord are written exactly as Cliopatria names the states. An overlord list is read in order: the first of them on the map in a year takes the tie (Cliopatria draws the Golden Horde inside the Mongol Empire to 1293, and from 1294 as its own state).",
+    "from and to bound the tie, both years included; it is drawn only in the years both states are on the map. kind: tribute | vassal | allegiance.",
+    "Cliopatria draws no Rus' principality from 1241 to 1293 except Novgorod and Pskov (from 1285): their lands are inside the Mongol Empire in those years, so the yoke shows from 1285 for Novgorod and from 1294 for the rest."
+  ],
+  "ties": [
+    {
+      "id": "yoke-moscow", "vassal": "Grand Principality of Moscow", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1242, "to": 1480, "kind": "tribute",
+      "why": "Ruled by the khan's patent and paid his tribute; from Ivan I (1325-1340) its princes collected the tribute of the other Russian principalities for the khans. Muscovy stopped paying in the 1470s (1476), and the khans' overlordship ended officially with the stand on the Ugra in 1480.",
+      "sources": ["mongol-invasion", "loc-muscovy", "ugra"]
+    },
+    {
+      "id": "yoke-vladimir", "vassal": "Principality of Vladimir-Suzdal", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1242, "to": 1480, "kind": "tribute",
+      "why": "One of the principalities the invasion of 1237-1241 made vassals; its grand-princely title was the khan's to give. Tribute to 1480, as for Moscow.",
+      "sources": ["mongol-invasion", "loc-muscovy"]
+    },
+    {
+      "id": "yoke-tver", "vassal": "Tver", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1242, "to": 1480, "kind": "tribute",
+      "why": "Its prince Mikhail was executed at the Horde in 1318, its rising of 1327 crushed, and after 1382 its princes submitted to Khan Tokhtamysh. The overlordship over the Russian lands ended in 1480; Moscow annexed Tver in 1485.",
+      "sources": ["tver", "mongol-invasion", "loc-muscovy"]
+    },
+    {
+      "id": "yoke-nizhny", "vassal": "Nizhny Novgorod", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1242, "to": 1392, "kind": "tribute",
+      "why": "Its princes took the throne by the khan's patent and submitted to Tokhtamysh after 1382; Moscow annexed the principality in 1392 (Cliopatria draws it to 1394).",
+      "sources": ["nizhny", "tver", "mongol-invasion"]
+    },
+    {
+      "id": "yoke-beloozero", "vassal": "Principality of Beloozero", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1242, "to": 1389, "kind": "tribute",
+      "why": "A northeastern Rus' principality, tributary as the others were (the general sources); subjugated by Muscovy in 1389. Cliopatria draws it to 1343.",
+      "sources": ["mongol-invasion", "beloozero"]
+    },
+    {
+      "id": "yoke-novgorod", "vassal": "Novgorod Republic", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1259, "to": 1478, "kind": "tribute",
+      "why": "Never taken by the Mongols, but in the winter of 1258/59 Alexander Nevsky and the Horde's troops put down the city's opposition to the tribute, which it then paid. Moscow annexed the republic in 1478 (Cliopatria draws it to 1481).",
+      "sources": ["gh-timeline", "novgorod", "mongol-invasion"]
+    },
+    {
+      "id": "yoke-galicia", "vassal": "Galicia-Volhynia", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1246, "to": 1349, "kind": "tribute",
+      "why": "Daniel of Galicia went to Sarai in the winter of 1245/46 to submit to Batu as a vassal, and his house paid the Horde tribute; still tributary in 1308-1323. The Polish conquest of 1349 ended the vassalage.",
+      "sources": ["galicia", "mongol-invasion"]
+    }
+  ],
+  "left_out": [
+    { "state": "Pskov Republic", "why": "Its article does not say it paid the Horde; from 1399 it recognized Moscow's suzerainty." },
+    { "state": "Ryazan", "why": "Cliopatria draws Ryazan only from 1453 (its land is inside the Golden Horde before), and its article has Ivan of Ryazan (1427-1456) renouncing his allegiance to the Horde, with no year." },
+    { "state": "Principality of Smolensk", "why": "Its article mentions a campaign of 1340 over unpaid tribute but gives no span; Lithuania took the city between 1395 and 1404." }
+  ],
+  "sources": {
+    "mongol-invasion": { "title": "Mongol invasion of Kievan Rus' (Wikipedia; \"Tatar yoke\" leads there)", "url": "https://en.wikipedia.org/wiki/Mongol_invasion_of_Kievan_Rus%27", "accessed": "2026-11-10", "supports": "After the invasion of 1237-1241 the Rus' principalities became vassals and paid tribute; Galicia-Volhynia, Polotsk and Novgorod well into the 14th century; the demands of tribute from Russian princes continued until about 1480." },
+    "loc-muscovy": { "title": "Russia: A Country Study, \"Muscovy\" (Library of Congress, Federal Research Division, 1996)", "url": "https://countrystudies.us/russia/3.htm", "accessed": "2026-11-10", "supports": "Ivan I (1325-1340) collected tribute from the other Russian principalities for the khans; Mongol overlordship ended officially in 1480; Novgorod conquered in 1478, Tver in 1485." },
+    "ugra": { "title": "Great Stand on the Ugra River (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Great_Stand_on_the_Ugra_River", "accessed": "2026-11-10", "supports": "8 October - 11 November 1480; read in Russia as the end of the Tatar yoke, which some historians dispute; Russia officially stopped paying tribute in 1476 (Halperin: sometime in the 1470s)." },
+    "gh-timeline": { "title": "Timeline of the Golden Horde (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Timeline_of_the_Golden_Horde", "accessed": "2026-11-10", "supports": "Winter 1258/59: in the Novgorod Republic, Alexander Nevsky and the Golden Horde's troops suppress opposition to tribute." },
+    "novgorod": { "title": "Novgorod Republic (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Novgorod_Republic", "accessed": "2026-11-10", "supports": "Alexander Nevsky agreed to pay tribute; the republic ended in 1478." },
+    "tver": { "title": "Principality of Tver (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Tver", "accessed": "2026-11-10", "supports": "Mikhail of Tver executed at the Horde (1318); the anti-Tatar uprising of 1327 crushed; after 1382 the princes of Tver and Nizhny Novgorod submitted to Tokhtamysh; annexed by Moscow in 1485." },
+    "nizhny": { "title": "Principality of Nizhny Novgorod-Suzdal (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Nizhny_Novgorod-Suzdal", "accessed": "2026-11-10", "supports": "Its princes received the patent for the throne from the khan; annexed by Moscow in 1392." },
+    "beloozero": { "title": "Principality of Beloozero (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Beloozero", "accessed": "2026-11-10", "supports": "Subjugated by Muscovy in 1389 (formally incorporated 1485/1486)." },
+    "galicia": { "title": "Kingdom of Galicia-Volhynia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Galicia%E2%80%93Volhynia", "accessed": "2026-11-10", "supports": "Daniel submitted to Batu as a vassal in the winter of 1245/46 (allegiance pledged 1246) and his house paid the Horde tribute; still tributary in 1308-1323; the Polish conquest of 1349 ended its vassalage to the Golden Horde (the infobox's 1246-1253 disagrees with the body)." }
+  }
+}

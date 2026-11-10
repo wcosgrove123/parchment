@@ -6,15 +6,22 @@
 //   - wholes: a realm Cliopatria draws as the sum of its members (a name in parentheses, e.g. "(Kingdom of France)"
 //     over the County of Champagne and the Duchy of Aquitaine): its border over theirs;
 //   - the Holy Roman Empire as a band inside its outer border (src/render/realms.js): Cliopatria's whole while it holds
-//     more than one member (to 1458), OpenHistoricalMap's dated border from 24 October 1648, nothing in between.
+//     more than one member (to 1458), OpenHistoricalMap's dated border from 24 October 1648, nothing in between;
+//   - ties (owner, 2026-11-10: "Yes, do that next", to vassals and tribute, the Mongol yoke over Russia first): a vassal
+//     or tributary striped in its overlord's color over its own; crowns that shared a ruler (Cliopatria's personal
+//     unions) inside one realm line.
 // No shape is moved between the years the source records (CLAUDE.md §1.5: stepped, not morphed).
 
 import { feature, mesh } from 'topojson-client';
+
+// The palette's size (--pol-0 … --pol-11, scripts/tokens.mjs; scripts/derive-cliopatria.mjs's PALETTE).
+export const POL_COLORS = 12;
 
 // One loaded file, any year: the rows in force are picked by FromYear ≤ year ≤ ToYear, and each row's shape is
 // decoded once and kept, so stepping a year re-uses every shape that did not change.
 export function makeStatesSource(topo) {
   const geoms = topo.objects.states.geometries;
+  const ties = topo.ties ?? [];
   const decoded = new Map();
   const meshes = new Map();
   const shape = (k) => {
@@ -28,7 +35,7 @@ export function makeStatesSource(topo) {
     return f;
   };
   function at(year) {
-    const view = { year, states: [], wholes: [], unions: [], rels: [] };
+    const view = { year, states: [], wholes: [], unions: [], rels: [], ties: [] };
     const alive = [];
     geoms.forEach((g, k) => {
       const p = g.properties;
@@ -36,9 +43,18 @@ export function makeStatesSource(topo) {
       const f = shape(k);
       if (p.k === 'state') { view.states.push(f); alive.push(g); }
       else if (p.k === 'whole') view.wholes.push(f);
-      else if (p.k === 'union') view.unions.push(f);
+      else if (p.k === 'union' || (p.k === 'rel' && p.n.startsWith('(Personal union'))) view.unions.push(f);
       else view.rels.push(f);
     });
+    // Who owed whom this year: a tie whose vassal (its whole, where it has one) and an overlord are both on the map.
+    const stateBy = new Map(view.states.map((f) => [f.properties.n, f]));
+    const wholeBy = new Map(view.wholes.map((f) => [f.properties.n, f]));
+    for (const t of ties) {
+      if (t.f > year || year > t.t) continue;
+      const vassal = wholeBy.get(`(${t.v})`) ?? stateBy.get(t.v);
+      const over = [].concat(t.o).map((n) => stateBy.get(n)).find(Boolean);
+      if (vassal && over && vassal !== over) view.ties.push({ vassal, over, kind: t.k, from: t.f, to: t.t, source: t.s });
+    }
     // Borders between two states in force, each drawn once (where their shapes share a line).
     const key = alive.map((g) => g.properties.n).join('|') + year;
     view.border = () => {
@@ -63,6 +79,17 @@ export const isWholeEmpire = (f) => f.properties.n === '(Holy Roman Empire)' && 
 // Cliopatria's "(Holy Roman Empire)" never gets this line: where it is the whole Empire it has its band, and where it
 // is not (1459 on, including its two-member rows of 1619–1621) a line round it would read as the Empire's border.
 export const isRealmLine = (f) => (f.properties.cn ?? 0) > 1 && f.properties.n !== '(Holy Roman Empire)';
+
+// A tie in words. The legend's line: "Pays tribute to the Golden Horde", "Vassal of the Timurid Empire", "Owes
+// allegiance to Ming China" ("the" before a name with a title in it, none before a bare name).
+export const TIE_WORDS = { tribute: 'Pays tribute to', vassal: 'Vassal of', allegiance: 'Owes allegiance to' };
+const TITLED = /\b(Empire|Dynasty|Horde|Caliphate|Khanate|Ilkhanate|Kingdom|Sultanate|Republic|Principality|Confederation|Order|Union|Duchy|Jin)\b/;
+export const theName = (n) => (/^the /i.test(n) || !TITLED.test(n) ? n : `the ${n}`);
+export const tieLegendLabel = (kind, overName) => `${TIE_WORDS[kind] ?? TIE_WORDS.vassal} ${theName(overName)}`;
+// Its tooltip: who, to whom, the years, and where it comes from.
+export const tieTitle = (t, vassalName, overName) => `${vassalName} · ${(TIE_WORDS[t.kind] ?? TIE_WORDS.vassal).toLowerCase()} ${theName(overName)}, ${t.from}–${t.to} (${t.source === 'cliopatria' ? 'Cliopatria' : 'sources in data/tributaries.json'})`;
+// A realm line's tooltip: a whole and its members, or crowns under one ruler.
+export const realmTitle = (f) => `${f.properties.n.startsWith('(Personal union') ? `${f.properties.n.slice(1, -1)}: two crowns, one ruler` : `${f.properties.n.replace(/^\(|\)$/g, '')} and its members`} · ${f.properties.f}–${f.properties.t} (Cliopatria)`;
 
 // What a state is called on the map: a tracked state's label (the name of the time, src/trackers/extent.json),
 // else Cliopatria's own name.

@@ -116,6 +116,32 @@ What Parchment shows, year by year:
 - **From the Peace of Westphalia (24 October 1648) to 1659, and from 1678:** the border from OpenHistoricalMap, dated
   by treaty, drawn dashed because its makers mark its lines as still needing a source.
 
+## Vassals, tribute and shared crowns
+
+Some states on the map were not fully their own masters. A vassal or a tributary kept its own ruler but paid tribute
+to a stronger state, or took its orders. Parchment draws such a state in its own color with **stripes in its
+overlord's color** over it, and the legend names each overlord whose vassals are on the sheet ("Pays tribute to the
+Golden Horde", "Vassal of the Timurid Empire"). Hover over the stripes for the years and the source.
+
+- **The Mongol yoke over Russia, to 1480.** After the invasion of 1237–1241 the Rus' principalities paid tribute to
+  the Golden Horde, and their princes ruled by the khan's patent. The map stripes Moscow, Vladimir-Suzdal, Tver,
+  Nizhny Novgorod and Beloozero in the Horde's color, Novgorod from 1259 until Moscow took it in 1478, and
+  Galicia-Volhynia from 1246 until the Polish conquest of 1349. The stripes end after 1480, the year of the stand on
+  the Ugra River (Moscow had stopped paying in the 1470s). Before 1294 the source draws these lands inside the Mongol
+  Empire itself, so the stripes begin with the Horde in 1294 (for Novgorod, 1285, in the Mongol Empire's color).
+  Pskov, Ryazan and Smolensk are left plain: the sources found do not date their tribute. Every date and its source
+  is in `data/tributaries.json`.
+- **From Cliopatria itself:** Joseon owes allegiance to the Ming (1395–1571 in the source), Georgia and the Qara
+  Qoyunlu are vassals of the Timurids, Jaffna of Vijayanagara, and from 1294 the western Mongol khanates (the Golden
+  Horde, the Ilkhanate and the Chagatai Khanate) owe allegiance to the Yuan emperor, the Great Khan.
+- **Crowns under one ruler** (personal unions): Castile and Aragon under Ferdinand and Isabella, Bohemia and Hungary,
+  the Scandinavian crowns, Charles V's Spain and Austria. Each crown keeps its color and the pair sits inside one
+  heavy navy line, the line a realm draws around its members.
+- The Holy Roman Empire's members are not striped: its band already shows who belonged.
+
+Not yet on the map: the Ottomans' vassals (Crimea, Wallachia, Moldavia, Transylvania), Korea under the Qing after
+1637, and other ties the source does not record. Each can be added with its sources, the way the yoke was.
+
 ## A map of Europe
 
 The **Europe** link in the toolbar opens Europe on its own, for lessons such as absolutism. To keep only some
