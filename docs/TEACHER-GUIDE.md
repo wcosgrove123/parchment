@@ -118,10 +118,11 @@ What Parchment shows, year by year:
 
 ## Vassals, tribute and shared crowns
 
-Some states on the map were not fully their own masters. A vassal or a tributary kept its own ruler but paid tribute
-to a stronger state, or took its orders. Parchment draws such a state in its own color with **stripes in its
-overlord's color** over it, and the legend names each overlord whose vassals are on the sheet ("Pays tribute to the
-Golden Horde", "Vassal of the Timurid Empire"). Hover over the stripes for the years and the source.
+Some states on the map were not fully their own masters. A vassal, a tributary or a protectorate kept its own ruler
+but paid tribute to a stronger state, took its orders, or lived under its protection. Parchment draws such a state in
+its own color with **stripes in its overlord's color** over it, and the legend gives each overlord whose vassals are
+on the sheet one line ("Pays tribute to the Golden Horde"; "Vassal, tributary or protectorate of the Ottoman Empire"
+where they differ). Hover over the stripes for each one's own tie, its years and its source.
 
 - **The Mongol yoke over Russia, to 1480.** After the invasion of 1237–1241 the Rus' principalities paid tribute to
   the Golden Horde, and their princes ruled by the khan's patent. The map stripes Moscow, Vladimir-Suzdal, Tver,
@@ -131,6 +132,14 @@ Golden Horde", "Vassal of the Timurid Empire"). Hover over the stripes for the y
   Empire itself, so the stripes begin with the Horde in 1294 (for Novgorod, 1285, in the Mongol Empire's color).
   Pskov, Ryazan and Smolensk are left plain: the sources found do not date their tribute. Every date and its source
   is in `data/tributaries.json`.
+- **The Ottomans' vassals.** Byzantium itself, 1371–1393 and again from 1424 to the fall of Constantinople in 1453;
+  Wallachia from 1417 (plain under Vlad III, 1456–1462, who refused the tribute, and under Michael the Brave,
+  1593–1601); Moldavia 1498–1572, 1574–1600 and from 1618 (a Polish vassal in between); eastern Hungary from 1529
+  and then the Principality of Transylvania, to 1690; Ragusa (Dubrovnik), a tributary from 1458; and the Crimean
+  Khanate, an Ottoman protectorate from 1475 to 1774 (it paid no tribute, but from 1524 the sultan chose its khans).
+- **The Qing's.** Korea (Joseon) owes allegiance to the Ming until 1636 and pays tribute to the Qing from its
+  surrender in 1637 (the source calls the Qing state the "Later Jin" until 1644); the Khalkha Mongols submit at
+  Dolon Nor in 1691; Tibet is a Qing protectorate from 1720.
 - **From Cliopatria itself:** Joseon owes allegiance to the Ming (1395–1571 in the source), Georgia and the Qara
   Qoyunlu are vassals of the Timurids, Jaffna of Vijayanagara, and from 1294 the western Mongol khanates (the Golden
   Horde, the Ilkhanate and the Chagatai Khanate) owe allegiance to the Yuan emperor, the Great Khan.
@@ -139,8 +148,9 @@ Golden Horde", "Vassal of the Timurid Empire"). Hover over the stripes for the y
   heavy navy line, the line a realm draws around its members.
 - The Holy Roman Empire's members are not striped: its band already shows who belonged.
 
-Not yet on the map: the Ottomans' vassals (Crimea, Wallachia, Moldavia, Transylvania), Korea under the Qing after
-1637, and other ties the source does not record. Each can be added with its sources, the way the yoke was.
+Not yet on the map: Vietnam's tribute to the Ming and the Qing (the source's states for Vietnam need a closer look
+first), the Ottomans' Serbian, Bulgarian and Georgian vassals, and other ties the source does not record. Each can
+be added with its sources, the way these were. Every tie, with what its sources say, is in `data/tributaries.json`.
 
 ## A map of Europe
 

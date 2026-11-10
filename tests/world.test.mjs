@@ -217,6 +217,10 @@ test('the political map draws vassals striped in their overlord’s color and na
     assert.doesNotMatch(d1500, />Vassal of the Vijayanagara Empire<\/text>/, 'Jaffna’s tie (to 1501) is off the Europe sheet: drawn under the clip, no legend line');
     assert.match(d1500, />A realm, or crowns under one ruler<\/text>/);
     assert.match(d1500, /<path class="whole approximate"[^>]*><title>Personal union of Crown of Aragon with Crown of Castile: two crowns, one ruler · 14\d\d–15\d\d \(Cliopatria\)/);
+    const d1550 = dump('stage=europe&year=1550');
+    assert.match(d1550, />Vassal, tributary or protectorate of the Ottoman Empire<\/text>/, 'one line for the Ottomans: Wallachia, Moldavia and eastern Hungary, Ragusa, the Crimea');
+    assert.doesNotMatch(d1550, />Vassal of the Ottoman Empire<\/text>/);
+    assert.match(d1550, /<title>Crimean Khanate · protectorate of the Ottoman Empire, 1475–1774 \(sources in data\/tributaries\.json\)/);
   } finally {
     server.kill();
     execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: ROOT, stdio: 'ignore' });

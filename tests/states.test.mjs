@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { geoPath, geoEqualEarth } from 'd3';
-import { makeStatesSource, isWholeEmpire, isRealmLine, placeStateLabels, tieLegendLabel } from '../src/render/states.js';
+import { makeStatesSource, isWholeEmpire, isRealmLine, placeStateLabels, tieLegendLabel, tieLegendRows } from '../src/render/states.js';
 import { makeHighlighter } from '../src/data/highlights.js';
 
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
@@ -151,6 +151,27 @@ test('Cliopatria’s vassalage and allegiance rows are ties, except the Empire�
   assert.equal(tie(1300, 'Golden Horde')?.over.properties.n, 'Yuan Dynasty', '1300: the western khanates owe allegiance to the Great Khan');
 });
 
+test('the Ottomans’ and the Qing’s vassals, each to the years its sources give, breaks included', () => {
+  const by = (y, v) => { const t = tie(y, v); return t ? `${t.kind} ${t.over.properties.n}` : null; };
+  for (const v of ['Principality of Wallachia', 'Principality of Moldavia', 'Eastern Hungarian Kingdom']) assert.equal(by(1550, v), 'vassal Ottoman Empire', `1550: ${v}`);
+  assert.equal(by(1550, 'Crimean Khanate'), 'protectorate Ottoman Empire', 'Crimea: a protectorate, which paid no tribute');
+  assert.equal(by(1550, 'Republic of Ragusa'), 'tribute Ottoman Empire');
+  assert.equal(by(1460, 'Principality of Wallachia'), null, 'Vlad III (1456–1462) refused the tribute');
+  assert.ok(by(1455, 'Principality of Wallachia') && by(1463, 'Principality of Wallachia'));
+  assert.ok(by(1600, 'Principality of Moldavia') && !by(1610, 'Principality of Moldavia') && by(1618, 'Principality of Moldavia'), 'Moldavia: a Polish vassal 1601–1618');
+  assert.ok(by(1390, 'Byzantine Empire') && !by(1400, 'Byzantine Empire') && by(1430, 'Byzantine Empire'), 'Byzantium: a vassal 1371–1393, free 1394–1423, a vassal again from 1424');
+  assert.ok(by(1690, 'Principality of Transylvania') && !by(1691, 'Principality of Transylvania'), 'Transylvania: under Vienna from 1690');
+  assert.ok(by(1774, 'Crimean Khanate') && !by(1775, 'Crimean Khanate'), 'Crimea: to Küçük Kaynarca, 1774');
+  assert.equal(by(1600, 'Joseon'), 'allegiance Ming Dynasty', '1600: Cliopatria’s own row ends in 1571; the sourced row carries it to 1636');
+  assert.equal(tie(1600, 'Joseon').source, 'joseon-ming');
+  assert.equal(by(1640, 'Joseon'), 'tribute Later Jin Dynasty', '1640: Cliopatria names the Qing state the Later Jin to 1644');
+  assert.equal(by(1700, 'Joseon'), 'tribute Qing Dynasty');
+  assert.equal(by(1693, 'Khalkha'), 'vassal Qing Dynasty', '1691: Dolon Nor');
+  assert.equal(by(1690, 'Khalkha'), null);
+  assert.equal(by(1750, 'Tibet'), 'protectorate Qing Dynasty');
+  assert.equal(by(1719, 'Tibet'), null);
+});
+
 test('crowns under one ruler (Cliopatria’s personal unions) are drawn as a realm line round them', () => {
   const u = (y) => src.at(y).unions.map((f) => f.properties.n);
   assert.ok(u(1500).includes('(Personal union of Crown of Aragon with Crown of Castile)'), '1500: Ferdinand and Isabella');
@@ -164,4 +185,18 @@ test('a tie in words: the legend line for each overlord, with “the” only bef
   assert.equal(tieLegendLabel('vassal', 'Timurid Empire'), 'Vassal of the Timurid Empire');
   assert.equal(tieLegendLabel('allegiance', 'Ming China'), 'Owes allegiance to Ming China');
   assert.equal(tieLegendLabel('allegiance', 'Yuan Dynasty'), 'Owes allegiance to the Yuan Dynasty');
+  assert.equal(tieLegendLabel('protectorate', 'Qing China'), 'Protectorate of Qing China');
+  assert.equal(tieLegendLabel('protectorate', 'Ottoman Empire'), 'Protectorate of the Ottoman Empire');
+  // One line per overlord (its stripes are one color whatever the tie); an allegiance keeps its own.
+  const over = (n, c) => ({ properties: { n, c } });
+  const ott = over('Ottoman Empire', 3), qing = over('Qing Dynasty', 8);
+  const rows = tieLegendRows([
+    { kind: 'vassal', over: ott, overName: 'Ottoman Empire' }, { kind: 'protectorate', over: ott, overName: 'Ottoman Empire' },
+    { kind: 'tribute', over: ott, overName: 'Ottoman Empire' }, { kind: 'vassal', over: ott, overName: 'Ottoman Empire' },
+    { kind: 'tribute', over: over('Golden Horde', 10), overName: 'Golden Horde' },
+    { kind: 'protectorate', over: qing, overName: 'Qing China' }, { kind: 'tribute', over: qing, overName: 'Qing China' },
+    { kind: 'allegiance', over: over('Yuan Dynasty', 8), overName: 'Yuan Dynasty' }, { kind: 'vassal', over: over('Yuan Dynasty', 8), overName: 'Yuan Dynasty' },
+  ]);
+  assert.deepEqual(rows.map((r) => r.label), ['Vassal, tributary or protectorate of the Ottoman Empire', 'Pays tribute to the Golden Horde', 'Tributary or protectorate of Qing China', 'Vassal of the Yuan Dynasty', 'Owes allegiance to the Yuan Dynasty']);
+  assert.deepEqual(rows.map((r) => r.color), [3, 10, 8, 8, 8]);
 });

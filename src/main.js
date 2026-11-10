@@ -17,7 +17,7 @@ import extent from './trackers/extent.json';
 import expansion from './trackers/expansion.json';
 import routes from './trackers/routes.json';
 import explorers from './trackers/explorers.json';
-import { makeStatesSource, isRealmLine, tieLegendLabel } from './render/states.js';
+import { makeStatesSource, isRealmLine, tieLegendRows } from './render/states.js';
 import { empireMarking, empireLegendRows, drawEmpireBand, placeEmpireLabel, placeMinorLabel, drawMinorLabel, MINOR_LABEL } from './render/realms.js';
 
 // Trackers. Extent is the political map (owner, 2026-11-09): every state in force in the year shown, each in its own
@@ -27,17 +27,14 @@ import { empireMarking, empireLegendRows, drawEmpireBand, placeEmpireLabel, plac
 const TRACKERS = { extent: { ...extent, id: 'extent' }, expansion, routes, explorers };
 
 // The political map's legend: what is on this map only. ties: the ties drawn in the frame; each overlord with
-// vassals there gets a line of its own, its stripes beside it ("Pays tribute to the Golden Horde").
+// vassals there gets a line of its own, its stripes beside it ("Pays tribute to the Golden Horde"; "Vassal,
+// tributary or protectorate of the Ottoman Empire" where its ties differ in kind).
 function statesLegend(year, view, marking, ties = []) {
   const rows = [{ swatch: 'states', label: 'Each state in its own color' }];
   rows.push(year >= 1648 ? { swatch: 'line', style: 'solid', label: 'Documented border' } : { swatch: 'line', style: 'dashed', label: 'Approximate border' });
   const realms = view.wholes.some(isRealmLine), unions = (view.unions ?? []).length > 0;
   if (realms || unions) rows.push({ swatch: 'whole', label: realms && unions ? 'A realm, or crowns under one ruler' : unions ? 'Crowns under one ruler' : 'A realm around its members' });
-  const seen = new Set();
-  for (const t of ties) {
-    const label = tieLegendLabel(t.kind, t.overName);
-    if (!seen.has(label)) { seen.add(label); rows.push({ swatch: 'tie', color: t.over.properties.c ?? 0, label }); }
-  }
+  rows.push(...tieLegendRows(ties));
   rows.push(...empireLegendRows(marking));
   return { ...TRACKERS.extent, title: 'States', legend: rows };
 }

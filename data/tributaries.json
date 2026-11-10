@@ -1,9 +1,9 @@
 {
   "_about": [
-    "Vassals and tributaries that Cliopatria does not record, each with its sources (owner, 2026-11-10: \"Yes, do that next\", to \"Do vassals and tribute next, including the Mongol yoke over Russia?\").",
+    "Vassals and tributaries that Cliopatria does not record, each with its sources (owner, 2026-11-10: \"Yes, do that next\", to \"Do vassals and tribute next, including the Mongol yoke over Russia?\"; then \"Yes, add them\", to \"Add the Ottoman and Qing vassals in these stripes next?\").",
     "scripts/derive-cliopatria.mjs adds these to cliopatria.topojson's ties, beside Cliopatria's own vassalage and allegiance rows; the political map draws a tie as stripes in the overlord's color over the vassal (src/render/states.js, src/render/base.js).",
     "vassal and overlord are written exactly as Cliopatria names the states. An overlord list is read in order: the first of them on the map in a year takes the tie (Cliopatria draws the Golden Horde inside the Mongol Empire to 1293, and from 1294 as its own state).",
-    "from and to bound the tie, both years included; it is drawn only in the years both states are on the map. kind: tribute | vassal | allegiance.",
+    "from and to bound the tie, both years included; it is drawn only in the years both states are on the map. kind: tribute | vassal | allegiance | protectorate (each in its sources' word). A tie broken and renewed is one row per stretch.",
     "Cliopatria draws no Rus' principality from 1241 to 1293 except Novgorod and Pskov (from 1285): their lands are inside the Mongol Empire in those years, so the yoke shows from 1285 for Novgorod and from 1294 for the rest."
   ],
   "ties": [
@@ -41,12 +41,96 @@
       "id": "yoke-galicia", "vassal": "Galicia-Volhynia", "overlord": ["Golden Horde", "Mongol Empire"], "from": 1246, "to": 1349, "kind": "tribute",
       "why": "Daniel of Galicia went to Sarai in the winter of 1245/46 to submit to Batu as a vassal, and his house paid the Horde tribute; still tributary in 1308-1323. The Polish conquest of 1349 ended the vassalage.",
       "sources": ["galicia", "mongol-invasion"]
+    },
+    {
+      "id": "ott-byzantium-1371", "vassal": "Byzantine Empire", "overlord": "Ottoman Empire", "from": 1371, "to": 1393, "kind": "vassal",
+      "why": "After the Battle of Maritsa (1371) John V swore allegiance to Murad I as his vassal. In 1394 Manuel II refused the tribute and Bayezid laid siege to Constantinople, until Timur defeated him in 1402.",
+      "sources": ["byzantium"]
+    },
+    {
+      "id": "ott-byzantium-1424", "vassal": "Byzantine Empire", "overlord": "Ottoman Empire", "from": 1424, "to": 1453, "kind": "vassal",
+      "why": "In February 1424 Manuel II made Byzantium a vassal of the Ottomans again, for 300,000 silver coins a year, until the fall of Constantinople in 1453.",
+      "sources": ["byzantium"]
+    },
+    {
+      "id": "ott-wallachia-1417", "vassal": "Principality of Wallachia", "overlord": "Ottoman Empire", "from": 1417, "to": 1455, "kind": "vassal",
+      "why": "Mircea the Elder submitted to Sultan Mehmed I in 1417 and agreed to an annual tribute. The suzerainty lasted to the mid-19th century, with interruptions: Vlad III (1456-1462) defied the sultan by refusing the tribute.",
+      "sources": ["loc-romania", "wallachia"]
+    },
+    {
+      "id": "ott-wallachia-1463", "vassal": "Principality of Wallachia", "overlord": "Ottoman Empire", "from": 1463, "to": 1592, "kind": "vassal",
+      "why": "Under the sultan again after Vlad III, until Michael the Brave (1593-1601), who rose against the Ottomans.",
+      "sources": ["loc-romania", "wallachia"]
+    },
+    {
+      "id": "ott-wallachia-1602", "vassal": "Principality of Wallachia", "overlord": "Ottoman Empire", "from": 1602, "to": 1859, "kind": "vassal",
+      "why": "Under the sultan again after Michael the Brave, to the union with Moldavia in 1859 (its article's infobox: an Ottoman vassal 1417-1862, with interruptions).",
+      "sources": ["wallachia", "loc-romania"]
+    },
+    {
+      "id": "ott-moldavia-1498", "vassal": "Principality of Moldavia", "overlord": "Ottoman Empire", "from": 1498, "to": 1572, "kind": "vassal",
+      "why": "In 1498 Stephen the Great agreed to keep paying tribute to Bayezid II. Its article's infobox dates the vassalage 1498-1572, 1574-1600 and 1618-1859 (a Polish vassal 1601-1618); the map follows those spans.",
+      "sources": ["moldavia"]
+    },
+    {
+      "id": "ott-moldavia-1574", "vassal": "Principality of Moldavia", "overlord": "Ottoman Empire", "from": 1574, "to": 1600, "kind": "vassal",
+      "why": "The infobox's second span (after the revolt of John the Terrible, 1572-1574).",
+      "sources": ["moldavia"]
+    },
+    {
+      "id": "ott-moldavia-1618", "vassal": "Principality of Moldavia", "overlord": "Ottoman Empire", "from": 1618, "to": 1859, "kind": "vassal",
+      "why": "The infobox's third span, after Moldavia's years as a Polish vassal (1601-1618), to the union with Wallachia in 1859.",
+      "sources": ["moldavia"]
+    },
+    {
+      "id": "ott-eastern-hungary", "vassal": "Eastern Hungarian Kingdom", "overlord": "Ottoman Empire", "from": 1529, "to": 1570, "kind": "vassal",
+      "why": "John Zapolya swore fealty to Suleiman on 19 August 1529, and the sultan later recognized his son John II as king and his vassal. The Treaty of Speyer (1570) ended the kingdom; its eastern part went on as the Principality of Transylvania.",
+      "sources": ["eastern-hungary"]
+    },
+    {
+      "id": "ott-transylvania", "vassal": "Principality of Transylvania", "overlord": "Ottoman Empire", "from": 1570, "to": 1690, "kind": "vassal",
+      "why": "An autonomous principality under Ottoman suzerainty, paying the Porte an annual tribute, governed by native princes until 1690, when the Habsburgs' Diploma Leopoldinum put it under Vienna (the Ottomans gave it up at Karlowitz in 1699).",
+      "sources": ["loc-romania", "transylvania"]
+    },
+    {
+      "id": "ott-ragusa", "vassal": "Republic of Ragusa", "overlord": "Ottoman Empire", "from": 1458, "to": 1808, "kind": "tribute",
+      "why": "A treaty of 1458 made the city a tributary of the sultan (12,500 gold coins a year from 1481). After 1684, under Habsburg protection as well, it went on recognizing Ottoman sovereignty until the French abolished the Republic in 1808 (Cliopatria draws it to 1806).",
+      "sources": ["ragusa"]
+    },
+    {
+      "id": "ott-crimea", "vassal": "Crimean Khanate", "overlord": "Ottoman Empire", "from": 1475, "to": 1774, "kind": "protectorate",
+      "why": "In 1475 Ottoman forces under Gedik Ahmed Pasha took the Genoese ports of the Crimea, and thenceforth the khanate was a protectorate of the Ottoman Empire. It paid no tribute; from 1524 the sultan appointed its khans. The Treaty of Kucuk Kaynarca (1774) ended the protectorate.",
+      "sources": ["crimea"]
+    },
+    {
+      "id": "joseon-ming", "vassal": "Joseon", "overlord": "Ming Dynasty", "from": 1572, "to": 1636, "kind": "allegiance",
+      "why": "Cliopatria's own record of Joseon's allegiance to the Ming ends in 1571, but Joseon kept its tributary relations with the Ming until the Qing invasion of 1636-37. Its kind stays Cliopatria's word, allegiance, so the legend does not change in 1572.",
+      "sources": ["joseon", "joseon-qing"]
+    },
+    {
+      "id": "joseon-qing", "vassal": "Joseon", "overlord": ["Qing Dynasty", "Later Jin Dynasty"], "from": 1637, "to": 1895, "kind": "tribute",
+      "why": "On its surrender in January 1637 Joseon had to sever its relationship with the Ming, give up the Ming seals and send the Qing tribute every year; its tributary relations lasted until 1895. Cliopatria names the Qing state the Later Jin Dynasty to 1644, and draws Joseon to 1859.",
+      "sources": ["joseon-qing", "joseon"]
+    },
+    {
+      "id": "khalkha-qing", "vassal": "Khalkha", "overlord": "Qing Dynasty", "from": 1691, "to": 1911, "kind": "vassal",
+      "why": "At Dolon Nor (Duolun) in May 1691 the Kangxi Emperor called the Khalkha chiefs together, and they acknowledged Manchu overlordship in return for protection against the Dzungars; Outer Mongolia declared its independence in December 1911. Cliopatria draws the Khalkha to 1695.",
+      "sources": ["loc-mongolia", "mongolia-qing"]
+    },
+    {
+      "id": "tibet-qing", "vassal": "Tibet", "overlord": "Qing Dynasty", "from": 1720, "to": 1912, "kind": "protectorate",
+      "why": "The Qing ruled Tibet from 1720 to 1912. Its article's infobox calls it a protectorate and territory of the Qing dynasty, and its text notes that the Qing word for it, fanbu, is usually translated as vassal. Cliopatria draws Tibet to 1793.",
+      "sources": ["tibet-qing"]
     }
   ],
   "left_out": [
     { "state": "Pskov Republic", "why": "Its article does not say it paid the Horde; from 1399 it recognized Moscow's suzerainty." },
     { "state": "Ryazan", "why": "Cliopatria draws Ryazan only from 1453 (its land is inside the Golden Horde before), and its article has Ivan of Ryazan (1427-1456) renouncing his allegiance to the Horde, with no year." },
-    { "state": "Principality of Smolensk", "why": "Its article mentions a campaign of 1340 over unpaid tribute but gives no span; Lithuania took the city between 1395 and 1404." }
+    { "state": "Principality of Smolensk", "why": "Its article mentions a campaign of 1340 over unpaid tribute but gives no span; Lithuania took the city between 1395 and 1404." },
+    { "state": "Principality of Moldavia (before 1498)", "why": "Moldavia paid the sultan tribute at times from the 1450s (Petru Aron); its article's infobox starts the vassalage in 1498, and the map follows the infobox." },
+    { "state": "Lê Dynasty and Đại Việt (Vietnam)", "why": "The Lê court had a tributary relationship with the Ming from 1428 (its article), and its infobox lists the Qing 1662-1789. Cliopatria's Vietnam after 1571 (Đại Việt, 1529-1802) also covers the Mạc and the Trịnh and Nguyễn lords, so these ties wait for a closer reading." },
+    { "state": "Ryukyu Kingdom", "why": "Cliopatria draws it only to 1520." },
+    { "state": "Serbia, Bulgaria and the Georgian kingdoms", "why": "Ottoman (and for Georgia, Safavid) vassals at times; not yet sourced." }
   ],
   "sources": {
     "mongol-invasion": { "title": "Mongol invasion of Kievan Rus' (Wikipedia; \"Tatar yoke\" leads there)", "url": "https://en.wikipedia.org/wiki/Mongol_invasion_of_Kievan_Rus%27", "accessed": "2026-11-10", "supports": "After the invasion of 1237-1241 the Rus' principalities became vassals and paid tribute; Galicia-Volhynia, Polotsk and Novgorod well into the 14th century; the demands of tribute from Russian princes continued until about 1480." },
@@ -57,6 +141,19 @@
     "tver": { "title": "Principality of Tver (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Tver", "accessed": "2026-11-10", "supports": "Mikhail of Tver executed at the Horde (1318); the anti-Tatar uprising of 1327 crushed; after 1382 the princes of Tver and Nizhny Novgorod submitted to Tokhtamysh; annexed by Moscow in 1485." },
     "nizhny": { "title": "Principality of Nizhny Novgorod-Suzdal (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Nizhny_Novgorod-Suzdal", "accessed": "2026-11-10", "supports": "Its princes received the patent for the throne from the khan; annexed by Moscow in 1392." },
     "beloozero": { "title": "Principality of Beloozero (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Beloozero", "accessed": "2026-11-10", "supports": "Subjugated by Muscovy in 1389 (formally incorporated 1485/1486)." },
+    "byzantium": { "title": "Byzantine Empire under the Palaiologos dynasty (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Byzantine_Empire_under_the_Palaiologos_dynasty", "accessed": "2026-11-10", "supports": "After Maritsa (1371) John V swore allegiance as a vassal to Murad; Manuel II refused the tribute and Bayezid's siege began in 1394; in February 1424 Manuel II re-established Byzantium as a vassal of the Ottomans (300,000 silver coins a year); to the fall of Constantinople, 1453." },
+    "loc-romania": { "title": "Romania: A Country Study, \"The Ottoman Invasions\" (Library of Congress, Federal Research Division)", "url": "https://countrystudies.us/romania/8.htm", "accessed": "2026-11-10", "supports": "In 1417 Mircea capitulated to Sultan Mehmed I and agreed to an annual tribute; Vlad Tepes (1456-62) defied the sultan by refusing to pay tribute; Michael the Brave (1593-1601); after 1541 Transylvania an autonomous principality under Ottoman suzerainty, paying the Porte an annual tribute as a vassal; native princes governed it from 1540 to 1690." },
+    "wallachia": { "title": "Wallachia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Wallachia", "accessed": "2026-11-10", "supports": "In 1417 Wallachia was forced to accept Ottoman suzerainty, which lasted until the mid-19th century, with interruptions brought about by local rulers (Michael the Brave among them); in 1859 Wallachia united with Moldavia (the infobox: Ottoman vassal 1417-1862, with interruptions)." },
+    "moldavia": { "title": "Moldavia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Moldavia", "accessed": "2026-11-10", "supports": "Infobox: Ottoman vassal 1498-1572, 1574-1600, 1618-1859; Polish vassal 1601-1618. Body: in 1498 Stephen the Great agreed to continue paying tribute to Bayezid II; Moldavia united with Wallachia in 1859." },
+    "eastern-hungary": { "title": "Eastern Hungarian Kingdom (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Eastern_Hungarian_Kingdom", "accessed": "2026-11-10", "supports": "John I swore fealty to the sultan on 19 August 1529; Suleiman recognized John II as king and his vassal; the Treaty of Speyer (16 August 1570) ended the kingdom." },
+    "transylvania": { "title": "Principality of Transylvania (1570-1711) (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Principality_of_Transylvania_(1570%E2%80%931711)", "accessed": "2026-11-10", "supports": "An Ottoman vassal state for the majority of the 16th and 17th centuries; the Diploma Leopoldinum (1690); formally attached to Habsburg Hungary after the Treaty of Karlowitz (1699)." },
+    "ragusa": { "title": "Republic of Ragusa (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Republic_of_Ragusa", "accessed": "2026-11-10", "supports": "The treaty of 1458 made it a tributary of the sultan (12,500 gold coins a year from 1481); in 1684 it continued to recognize the sovereignty of the Ottomans; Marshal Marmont abolished the Republic in 1808 (the infobox gives the Ottoman Empire 1458-1684, with a Habsburg protectorate from 1684)." },
+    "crimea": { "title": "Crimean Khanate (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Crimean_Khanate", "accessed": "2026-11-10", "supports": "In 1475 Ottoman forces under Gedik Ahmet Pasha conquered the Crimean coast, and thenceforth the khanate was a protectorate of the Ottoman Empire; it paid no tribute; the sultan appointed its khans from 1524; the Treaty of Kucuk Kaynarca, 1774." },
+    "joseon": { "title": "Joseon (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Joseon", "accessed": "2026-11-10", "supports": "Infobox: tributary relations with the Ming and Qing, 1401-1895." },
+    "joseon-qing": { "title": "Qing invasion of Joseon (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Qing_invasion_of_Joseon", "accessed": "2026-11-10", "supports": "9 December 1636 - 30 January 1637; Joseon switched its tributary allegiance from the Ming to the Qing, formally severing its relationship with the Ming, gave up the Ming seals of investiture and had to send tributes every year." },
+    "mongolia-qing": { "title": "Mongolia under Qing rule (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Mongolia_under_Qing_rule", "accessed": "2026-11-10", "supports": "The Khalkha submitted to the Qing dynasty in 1691, at a congress at Duolun where the Khalkha khans formally declared allegiance; Outer Mongolia declared its independence in December 1911 (infobox)." },
+    "loc-mongolia": { "title": "Mongolia: A Country Study (Library of Congress, Federal Research Division)", "url": "https://countrystudies.us/mongolia/25.htm", "accessed": "2026-11-10", "supports": "In May 1691 the Kangxi Emperor called a kuriltai of Khalkha chiefs at Dolonnur; those present acknowledged Manchu overlordship in return for protection against the Dzungar." },
+    "tibet-qing": { "title": "Tibet under Qing rule (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Tibet_under_Qing_rule", "accessed": "2026-11-10", "supports": "The Qing ruled Tibet from 1720 to 1912; the infobox calls it a protectorate and territory of the Qing dynasty; the Qing term fanbu has usually been translated as vassal; Western historians have called it a protectorate, vassal state or tributary." },
     "galicia": { "title": "Kingdom of Galicia-Volhynia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Galicia%E2%80%93Volhynia", "accessed": "2026-11-10", "supports": "Daniel submitted to Batu as a vassal in the winter of 1245/46 (allegiance pledged 1246) and his house paid the Horde tribute; still tributary in 1308-1323; the Polish conquest of 1349 ended its vassalage to the Golden Horde (the infobox's 1246-1253 disagrees with the body)." }
   }
 }

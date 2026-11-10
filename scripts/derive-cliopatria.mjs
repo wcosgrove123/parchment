@@ -13,7 +13,8 @@
 //       and allegiance become ties, below; an alliance is kept, not drawn)
 //
 // And beside the rows, topo.ties: who owed whom, [{ v: vassal, o: overlord (a name, or names tried in order), f, t,
-// k: 'tribute' | 'vassal' | 'allegiance', s: 'cliopatria' or the id of a sourced row in data/tributaries.json }].
+// k: 'tribute' | 'vassal' | 'allegiance' | 'protectorate', s: 'cliopatria' or the id of a sourced row in
+// data/tributaries.json }].
 //   c   palette color (0…PALETTE-1) for states: neighbors in force at the same time never share one, and a state keeps
 //       its color through time wherever its neighbors allow (computed on a grid of RES°; see colorStates)
 //   id  a stable id from the name (kebab-case), for the extent tracker, ?focus= and the Sheet's place list
@@ -100,6 +101,8 @@ for (const r of TRIBUTARIES.ties) {
   let years = 0;
   for (let y = Math.max(r.from, SPAN[0]); y <= Math.min(r.to, SPAN[1]); y++) if ((alive(r.vassal, y) || alive(`(${r.vassal})`, y)) && over.some((o) => alive(o, y))) years++;
   if (!years) throw new Error(`data/tributaries.json: ${r.id} (${r.vassal} → ${over.join(' / ')}) never meets its states on the map`);
+  if (!['tribute', 'vassal', 'allegiance', 'protectorate'].includes(r.kind)) throw new Error(`data/tributaries.json: ${r.id} has kind "${r.kind}", which the legend has no words for (src/render/states.js TIE_WORDS)`);
+  if (ties.some((t) => t.s === r.id)) throw new Error(`data/tributaries.json: the id ${r.id} is used twice`);
   for (const s of r.sources) if (!TRIBUTARIES.sources[s]?.url) throw new Error(`data/tributaries.json: ${r.id} cites "${s}", which has no url`);
   ties.push({ v: r.vassal, o: over.length > 1 ? over : over[0], f: r.from, t: r.to, k: r.kind, s: r.id });
   if (REPORT) console.log(`    ${r.id}: drawn in ${years} years`);

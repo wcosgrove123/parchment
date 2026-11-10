@@ -80,12 +80,37 @@ export const isWholeEmpire = (f) => f.properties.n === '(Holy Roman Empire)' && 
 // is not (1459 on, including its two-member rows of 1619–1621) a line round it would read as the Empire's border.
 export const isRealmLine = (f) => (f.properties.cn ?? 0) > 1 && f.properties.n !== '(Holy Roman Empire)';
 
-// A tie in words. The legend's line: "Pays tribute to the Golden Horde", "Vassal of the Timurid Empire", "Owes
-// allegiance to Ming China" ("the" before a name with a title in it, none before a bare name).
-export const TIE_WORDS = { tribute: 'Pays tribute to', vassal: 'Vassal of', allegiance: 'Owes allegiance to' };
+// A tie in words, each kind in its sources' word. The legend's line: "Pays tribute to the Golden Horde", "Vassal of
+// the Timurid Empire", "Owes allegiance to Ming China", "Protectorate of Qing China" ("the" before a name with a
+// title in it, none before a bare name).
+export const TIE_WORDS = { tribute: 'Pays tribute to', vassal: 'Vassal of', allegiance: 'Owes allegiance to', protectorate: 'Protectorate of' };
 const TITLED = /\b(Empire|Dynasty|Horde|Caliphate|Khanate|Ilkhanate|Kingdom|Sultanate|Republic|Principality|Confederation|Order|Union|Duchy|Jin)\b/;
 export const theName = (n) => (/^the /i.test(n) || !TITLED.test(n) ? n : `the ${n}`);
 export const tieLegendLabel = (kind, overName) => `${TIE_WORDS[kind] ?? TIE_WORDS.vassal} ${theName(overName)}`;
+// The legend's lines for the ties in the frame: one per overlord, since its stripes are one color whatever the tie
+// ("Vassal, tributary or protectorate of the Ottoman Empire"; each vassal's own tie is in its hover text). An
+// allegiance has no such noun and keeps a line of its own. ties: [{ kind, over, overName }].
+const TIE_NOUNS = { vassal: 'vassal', tribute: 'tributary', protectorate: 'protectorate' };
+export function tieLegendRows(ties) {
+  const groups = new Map();
+  for (const t of ties) {
+    const g = groups.get(t.overName) ?? { color: t.over.properties.c ?? 0, kinds: new Set() };
+    g.kinds.add(t.kind);
+    groups.set(t.overName, g);
+  }
+  const rows = [];
+  for (const [overName, { color, kinds }] of groups) {
+    const nouns = Object.keys(TIE_NOUNS).filter((k) => kinds.has(k));
+    const rest = [...kinds].filter((k) => !TIE_NOUNS[k]);
+    if (nouns.length > 1) {
+      const words = nouns.map((k) => TIE_NOUNS[k]);
+      const list = `${words.slice(0, -1).join(', ')} or ${words.at(-1)}`;
+      rows.push({ swatch: 'tie', color, label: `${list[0].toUpperCase()}${list.slice(1)} of ${theName(overName)}` });
+    } else if (nouns.length === 1) rows.push({ swatch: 'tie', color, label: tieLegendLabel(nouns[0], overName) });
+    for (const k of rest) rows.push({ swatch: 'tie', color, label: tieLegendLabel(k, overName) });
+  }
+  return rows;
+}
 // Its tooltip: who, to whom, the years, and where it comes from.
 export const tieTitle = (t, vassalName, overName) => `${vassalName} · ${(TIE_WORDS[t.kind] ?? TIE_WORDS.vassal).toLowerCase()} ${theName(overName)}, ${t.from}–${t.to} (${t.source === 'cliopatria' ? 'Cliopatria' : 'sources in data/tributaries.json'})`;
 // A realm line's tooltip: a whole and its members, or crowns under one ruler.
