@@ -366,6 +366,7 @@ async function main() {
       d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
       if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === milShown.war?.id);
       filmStatus();
+      if (state.tracker === 'military') fillMilitaryTools();
       const q = new URLSearchParams();
       if (state.mode === 'diff') q.set('from', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       if (state.exact) q.set('date', isoDate(state.date)); else q.set('year', y);
@@ -378,6 +379,7 @@ async function main() {
       // (a lesson map's own fields stay in the address, so it can be copied and opened again)
       for (const k of ORDER_PARAMS) if (!['date', 'year', 'from', 'tracker'].includes(k) && params.has(k)) q.set(k, params.get(k));
       if (battleRec) q.set('phase', String(state.phase));
+      if (state.tracker === 'military' && state.view) q.set('view', state.view); else q.delete('view');
       history.replaceState(null, '', `?${q}`);
     });
   }
@@ -504,7 +506,7 @@ async function main() {
   // ------------------------------------------------------------ toolbar (chrome; never exported)
   const tb = d3.select('#toolbar').html('');
   const sel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
-    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); } render(); });
+    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
   sel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
   // The Military layer's war: shown only while that layer is on (us.css hides it otherwise).
   const warSel = tb.append('select').attr('id', 'war').attr('title', 'The war shown')
@@ -515,6 +517,59 @@ async function main() {
       .property('selected', (w) => w.id === (state.war ?? ''));
   }
   if (milData) fillWarMenu();
+  // The Military layer's other doors (owner, 2026-11-10: the desktop app has no address bar, so what opened only
+  // by address needs a control): a "Go to" menu (the war's theater, a film, a battle frame, back to the continent),
+  // whose view of the land, and the classroom preset. Shown only while the layer is on. The frame and the sheet are
+  // set when the page starts, so these open the page again at the new address; the view redraws in place.
+  const openAt = (patch, { fresh = false } = {}) => {
+    const q = fresh ? new URLSearchParams() : new URLSearchParams(location.search);
+    for (const [k, v] of Object.entries(patch)) { if (v == null) q.delete(k); else q.set(k, v); }
+    if (!q.has('play') && !q.has('battle')) q.set('tracker', 'military');
+    location.assign(`?${q}`);
+  };
+  const goSel = tb.append('select').attr('id', 'mil-go').attr('class', 'mil-only').attr('title', 'Open the theater of this war, the film, or a battle')
+    .on('change', function () {
+      const v = this.value; this.value = '';
+      const war = milShown?.war ?? null;
+      if (v === 'theater' && war?.frame) openAt({ frame: war.frame, war: war.id, play: null, battle: null, phase: null, size: null, autoplay: null });
+      else if (v.startsWith('film:')) openAt({ play: v.slice(5) }, { fresh: true });
+      else if (v.startsWith('battle:')) openAt({ battle: v.slice(7), phase: '1' }, { fresh: true });
+      else if (v === 'continent') openAt({ tracker: 'military', date: isoDate(state.date), ...(war ? { war: war.id } : {}) }, { fresh: true });
+    });
+  const viewSel = tb.append('select').attr('id', 'mil-view').attr('class', 'mil-only').attr('title', 'Whose view of the land the map draws')
+    .on('change', function () { state.view = this.value || null; milWarned = false; closeInfo(); render(); });
+  const classBtn = tb.append('button').attr('id', 'mil-classroom').attr('class', 'mil-only').attr('title', 'Classroom: the key events only, a short key, larger type, arrows as wide as each army')
+    .text('Classroom').on('click', () => openAt({ preset: state.preset === 'classroom' ? 'full' : 'classroom', scale: null }));
+  let milToolsKey = null;
+  function fillMilitaryTools() {
+    if (!milData) return;
+    const war = milShown?.war ?? null;
+    const framed = frameFound?.id ?? null;
+    const key = [war?.id, framed, state.film, state.battle, state.view, state.preset].join('|');
+    if (key === milToolsKey) return;
+    milToolsKey = key;
+    const node = goSel.node();
+    node.textContent = '';
+    const opt = (parent, value, text) => { const o = document.createElement('option'); o.value = value; o.textContent = text; parent.appendChild(o); return o; };
+    const group = (label) => { const g = document.createElement('optgroup'); g.label = label; node.appendChild(g); return g; };
+    opt(node, '', 'Go to…');
+    if (war?.frame && (framed !== war.frame || state.film || state.battle)) opt(node, 'theater', 'The theater of this war');
+    const films = milData.vocab.films ?? [];
+    if (films.length) { const g = group('Films (press ▶ to play)'); for (const f of films) opt(g, `film:${f.id}`, f.title); }
+    const battles = (milData.vocab.wars ?? []).flatMap((w) => (w.battles ?? []).map((b) => ({ ...b, war: w })));
+    if (battles.length) { const g = group('Battles, phase by phase'); for (const b of battles) opt(g, `battle:${b.id}`, `${b.label}, ${b.dates}`); }
+    if (framed || state.film || state.battle) opt(node, 'continent', 'The whole continent');
+    node.value = '';
+    // whose view: the war's own views, if it has any
+    const views = Object.keys(war?.views ?? {});
+    const vnode = viewSel.node();
+    vnode.textContent = '';
+    opt(vnode, '', 'As U.S. law drew it');
+    for (const v of views) opt(vnode, v, `As ${war.sides.find((s) => s.id === v)?.label ?? v} saw it`);
+    vnode.value = views.includes(state.view) ? state.view : '';
+    viewSel.style('display', views.length && !state.battle ? null : 'none');
+    classBtn.classed('active', state.preset === 'classroom').style('display', state.battle ? 'none' : null);
+  }
   tb.append('span').attr('class', 'sep');
   const seg = tb.append('span').attr('class', 'seg');
   seg.append('button').attr('data-mode', 'snapshot').attr('title', 'One date (D toggles)').text('Snapshot').on('click', () => setMode('snapshot'));

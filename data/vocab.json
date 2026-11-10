@@ -64711,6 +64711,7 @@
   "wars": [
     {
       "id": "mexican-american-war",
+      "frame": "mexico-war",
       "views": {
         "mexico": {
           "note": "As Mexico saw it: Texas is Mexican, to the Sabine",
@@ -65024,6 +65025,7 @@
     },
     {
       "id": "texas-revolution",
+      "frame": "texas",
       "key_events": [
         "test-tr-ev-law-1830",
         "test-tr-ev-gonzales",
@@ -65193,6 +65195,7 @@
     },
     {
       "id": "texas-republic-mexico",
+      "frame": "texas",
       "key_events": [
         "test-rp-ev-woll",
         "test-rp-ev-mier",
@@ -65258,6 +65261,7 @@
     },
     {
       "id": "civil-war",
+      "frame": "east",
       "names": {
         "us": "The Civil War",
         "confederacy": "The War Between the States"

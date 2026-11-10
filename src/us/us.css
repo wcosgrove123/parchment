@@ -151,6 +151,15 @@ body:not(.mode-diff) #toolbar .diff-only { display: none; }
 .legend .swatch.fill-side-red { fill: var(--side-red-fill); }
 .legend .swatch.fill-side-red-dep { fill: var(--side-red-fill); fill-opacity: 0.4; }
 body:not(.tracker-military) #war { display: none; }
+body:not(.tracker-military) #toolbar .mil-only { display: none; }
+#toolbar #mil-go { max-width: 9.5em; }
+#toolbar #mil-view { max-width: 13em; }
+@media (max-width: 1500px) {
+  body.tracker-military #toolbar #war { max-width: 10.5em; }
+  body.tracker-military #toolbar #tracker { max-width: 8.5em; }
+  body.tracker-military #toolbar #mil-go { max-width: 6.5em; }
+  body.tracker-military #toolbar #mil-view { max-width: 9.5em; }
+}
 
 /* the Military layer's list and strip (milestone 2): the list is a legend box; the war strip stands in for the stage's */
 .course-list .course-row { fill: var(--ink); }

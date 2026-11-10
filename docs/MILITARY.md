@@ -24,7 +24,9 @@ order or map changes unless it asks for `layer: military`.
 ## Turning it on
 
 On the North America page: the **Military** entry of the tracker menu, with a second menu for the war (the one
-alive on the date by default). As an address: `us.html?tracker=military&war=mexican-american-war&date=1846-05-13`.
+alive on the date by default). Beside it, while the layer is on: **Go to…** (the theater of this war, a film, a battle
+frame, the whole continent), whose view of the land (for a war with `views`), and **Classroom** (the classroom
+preset, on or off); everything below that has an address has a control there. As an address: `us.html?tracker=military&war=mexican-american-war&date=1846-05-13`.
 As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`):
 
 ```json
