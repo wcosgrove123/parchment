@@ -133,6 +133,8 @@ where they differ). Hover over the stripes for each one's own tie, its years and
   Pskov, Ryazan and Smolensk are left plain: the sources found do not date their tribute. Every date and its source
   is in `data/tributaries.json`.
 - **The Ottomans' vassals.** Byzantium itself, 1371–1393 and again from 1424 to the fall of Constantinople in 1453;
+  Bulgaria from 1371 until Tarnovo fell in 1393; Serbia 1390–1402, 1409–1439 and 1444–1459 (the source keeps calling
+  it the "Serbian Empire" after 1371);
   Wallachia from 1417 (plain under Vlad III, 1456–1462, who refused the tribute, and under Michael the Brave,
   1593–1601); Moldavia 1498–1572, 1574–1600 and from 1618 (a Polish vassal in between); eastern Hungary from 1529
   and then the Principality of Transylvania, to 1690; Ragusa (Dubrovnik), a tributary from 1458; and the Crimean
@@ -140,6 +142,14 @@ where they differ). Hover over the stripes for each one's own tie, its years and
 - **The Qing's.** Korea (Joseon) owes allegiance to the Ming until 1636 and pays tribute to the Qing from its
   surrender in 1637 (the source calls the Qing state the "Later Jin" until 1644); the Khalkha Mongols submit at
   Dolon Nor in 1691; Tibet is a Qing protectorate from 1720.
+- **Vietnam.** The Lê court paid tribute to the Ming from 1428 until the Mạc took the throne in 1527; from 1540 both
+  the restored Lê and the Mạc paid it (the source calls the Mạc "Đại Việt"). After 1572 the source draws the Lê
+  emperors' realm as the Trịnh lords, who ran their court, and it paid the Ming and, from 1667, the Qing. The Tây Sơn
+  were invested by the Qing in 1789.
+- **Georgia.** Kartli and Kakheti were Iran's vassals from the Peace of Amasya (1555), the Ottomans' from 1578, Iran's
+  again from 1612, the Ottomans' from 1723, and Nader Shah's from 1736 until his death in 1747 (the source calls
+  Kartli the "Kingdom of Georgia" in some years). United Kartli-Kakheti became a Russian protectorate by the Treaty of
+  Georgievsk (1783) until Russia annexed it in 1800.
 - **From Cliopatria itself:** Joseon owes allegiance to the Ming (1395–1571 in the source), Georgia and the Qara
   Qoyunlu are vassals of the Timurids, Jaffna of Vijayanagara, and from 1294 the western Mongol khanates (the Golden
   Horde, the Ilkhanate and the Chagatai Khanate) owe allegiance to the Yuan emperor, the Great Khan.
@@ -148,9 +158,10 @@ where they differ). Hover over the stripes for each one's own tie, its years and
   heavy navy line, the line a realm draws around its members.
 - The Holy Roman Empire's members are not striped: its band already shows who belonged.
 
-Not yet on the map: Vietnam's tribute to the Ming and the Qing (the source's states for Vietnam need a closer look
-first), the Ottomans' Serbian, Bulgarian and Georgian vassals, and other ties the source does not record. Each can
-be added with its sources, the way these were. Every tie, with what its sources say, is in `data/tributaries.json`.
+Not yet on the map: western Georgia (Imereti, Mingrelia, Guria) under the Ottomans, Vidin and Dobruja, Vuk
+Branković's lands and the Nguyễn lords: the sources found give no years for these ties. Each can be added once a
+source dates it. Every tie, with what its sources say, and every one left out, with why, is in
+`data/tributaries.json`.
 
 ## A map of Europe
 

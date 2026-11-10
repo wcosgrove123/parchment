@@ -96,15 +96,17 @@ for (const f of features) {
 // A sourced tie must meet its states on the map: the vassal (or its whole) and one of its overlords in force in the
 // same year at least once, or a name is misspelled.
 const alive = (n, y) => features.some((f) => f.properties.n === n && (f.properties.k === 'state' || f.properties.k === 'whole') && f.properties.f <= y && y <= f.properties.t);
+// A row may name several of Cliopatria's states for one vassal (it calls Kartli "Kingdom of Georgia" in some years
+// and "Kingdom of Kartli" in others): a tie for each name.
 for (const r of TRIBUTARIES.ties) {
-  const over = [].concat(r.overlord);
+  const over = [].concat(r.overlord), vassals = [].concat(r.vassal);
   let years = 0;
-  for (let y = Math.max(r.from, SPAN[0]); y <= Math.min(r.to, SPAN[1]); y++) if ((alive(r.vassal, y) || alive(`(${r.vassal})`, y)) && over.some((o) => alive(o, y))) years++;
-  if (!years) throw new Error(`data/tributaries.json: ${r.id} (${r.vassal} → ${over.join(' / ')}) never meets its states on the map`);
+  for (let y = Math.max(r.from, SPAN[0]); y <= Math.min(r.to, SPAN[1]); y++) if (vassals.some((v) => alive(v, y) || alive(`(${v})`, y)) && over.some((o) => alive(o, y))) years++;
+  if (!years) throw new Error(`data/tributaries.json: ${r.id} (${vassals.join(' / ')} → ${over.join(' / ')}) never meets its states on the map`);
   if (!['tribute', 'vassal', 'allegiance', 'protectorate'].includes(r.kind)) throw new Error(`data/tributaries.json: ${r.id} has kind "${r.kind}", which the legend has no words for (src/render/states.js TIE_WORDS)`);
   if (ties.some((t) => t.s === r.id)) throw new Error(`data/tributaries.json: the id ${r.id} is used twice`);
   for (const s of r.sources) if (!TRIBUTARIES.sources[s]?.url) throw new Error(`data/tributaries.json: ${r.id} cites "${s}", which has no url`);
-  ties.push({ v: r.vassal, o: over.length > 1 ? over : over[0], f: r.from, t: r.to, k: r.kind, s: r.id });
+  for (const v of vassals) ties.push({ v, o: over.length > 1 ? over : over[0], f: r.from, t: r.to, k: r.kind, s: r.id });
   if (REPORT) console.log(`    ${r.id}: drawn in ${years} years`);
 }
 const tieCount = {}; for (const t of ties) { const key = t.s === 'cliopatria' ? `cliopatria ${t.k}` : 'sourced'; tieCount[key] = (tieCount[key] ?? 0) + 1; }

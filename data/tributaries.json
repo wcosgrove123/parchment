@@ -2,7 +2,7 @@
   "_about": [
     "Vassals and tributaries that Cliopatria does not record, each with its sources (owner, 2026-11-10: \"Yes, do that next\", to \"Do vassals and tribute next, including the Mongol yoke over Russia?\"; then \"Yes, add them\", to \"Add the Ottoman and Qing vassals in these stripes next?\").",
     "scripts/derive-cliopatria.mjs adds these to cliopatria.topojson's ties, beside Cliopatria's own vassalage and allegiance rows; the political map draws a tie as stripes in the overlord's color over the vassal (src/render/states.js, src/render/base.js).",
-    "vassal and overlord are written exactly as Cliopatria names the states. An overlord list is read in order: the first of them on the map in a year takes the tie (Cliopatria draws the Golden Horde inside the Mongol Empire to 1293, and from 1294 as its own state).",
+    "vassal and overlord are written exactly as Cliopatria names the states. An overlord list is read in order: the first of them on the map in a year takes the tie (Cliopatria draws the Golden Horde inside the Mongol Empire to 1293, and from 1294 as its own state). A vassal list gives each of Cliopatria's names for one vassal, a tie for each (it calls Kartli the Kingdom of Georgia in some years and the Kingdom of Kartli in others). Cliopatria's own names can mislead: its Serbian Empire after 1371 is Moravian Serbia and then the Serbian Despotate, and its Đại Việt to 1682 is the Mạc dynasty; each row's why says so.",
     "from and to bound the tie, both years included; it is drawn only in the years both states are on the map. kind: tribute | vassal | allegiance | protectorate (each in its sources' word). A tie broken and renewed is one row per stretch.",
     "Cliopatria draws no Rus' principality from 1241 to 1293 except Novgorod and Pskov (from 1285): their lands are inside the Mongol Empire in those years, so the yoke shows from 1285 for Novgorod and from 1294 for the rest."
   ],
@@ -121,6 +121,96 @@
       "id": "tibet-qing", "vassal": "Tibet", "overlord": "Qing Dynasty", "from": 1720, "to": 1912, "kind": "protectorate",
       "why": "The Qing ruled Tibet from 1720 to 1912. Its article's infobox calls it a protectorate and territory of the Qing dynasty, and its text notes that the Qing word for it, fanbu, is usually translated as vassal. Cliopatria draws Tibet to 1793.",
       "sources": ["tibet-qing"]
+    },
+    {
+      "id": "serbia-1390", "vassal": "Serbian Empire", "overlord": "Ottoman Empire", "from": 1390, "to": 1402, "kind": "vassal",
+      "why": "Cliopatria keeps the name Serbian Empire after 1371 for Prince Lazar's Moravian Serbia and then the Serbian Despotate. After Kosovo (1389), Lazar's widow Milica accepted Ottoman suzerainty in the summer of 1390; her son Stefan fought as an Ottoman vassal until the Battle of Ankara (1402), after which his state became the Serbian Despotate.",
+      "sources": ["moravian-serbia"]
+    },
+    {
+      "id": "serbia-1409", "vassal": "Serbian Empire", "overlord": "Ottoman Empire", "from": 1409, "to": 1438, "kind": "vassal",
+      "why": "After a dispute in 1408, Despot Stefan accepted Ottoman vassalage again in 1409; the Ottomans took Smederevo, the capital, on 18 August 1439.",
+      "sources": ["serbian-despotate"]
+    },
+    {
+      "id": "serbia-1444", "vassal": "Serbian Empire", "overlord": "Ottoman Empire", "from": 1444, "to": 1459, "kind": "vassal",
+      "why": "The Peace of Szeged (1444) restored the Despotate, officially an Ottoman vassal in 1447-48 and paying tribute in 1457, until the Ottomans took it on 20 June 1459 (Cliopatria draws it to 1458).",
+      "sources": ["serbian-despotate"]
+    },
+    {
+      "id": "bulgaria-1371", "vassal": "Second Bulgarian Empire", "overlord": "Ottoman Empire", "from": 1371, "to": 1393, "kind": "vassal",
+      "why": "After the Battle of Chernomen (26 September 1371) the Bulgarian tsar was forced to become an Ottoman vassal. Ivan Shishman later reneged, provoking the invasions of 1388 and 1393, when Tarnovo fell after a three-month siege.",
+      "sources": ["bulgaria"]
+    },
+    {
+      "id": "le-ming-1428", "vassal": "Lê Dynasty", "overlord": "Ming Dynasty", "from": 1428, "to": 1527, "kind": "tribute",
+      "why": "In 1428 Lê Lợi established a tributary relationship with the Ming, which lasted until Mạc Đăng Dung took the throne on 15 June 1527.",
+      "sources": ["le-dynasty"]
+    },
+    {
+      "id": "le-ming-1540", "vassal": "Lê Dynasty", "overlord": "Ming Dynasty", "from": 1540, "to": 1644, "kind": "tribute",
+      "why": "After 1540 the Ming received tribute from both the restored Lê, then in the south, and the Mạc; the Ming recognized the Lê monarch in 1597. Cliopatria draws the Lê to 1571, and the realm the Lê emperors kept under the Trịnh lords after that (see trinh-ming).",
+      "sources": ["le-dynasty", "mac-dynasty"]
+    },
+    {
+      "id": "mac-ming", "vassal": "Đại Việt", "overlord": "Ming Dynasty", "from": 1540, "to": 1644, "kind": "tribute",
+      "why": "Cliopatria's Đại Việt is the Mạc dynasty (Hanoi to 1592, then its last holdout at Cao Bằng). In 1540 the Ming downgraded Mạc Đăng Dung from emperor to governor (đô thống sứ) and took tribute from the Mạc as from the Lê.",
+      "sources": ["mac-dynasty", "le-dynasty"]
+    },
+    {
+      "id": "mac-qing", "vassal": "Đại Việt", "overlord": "Qing Dynasty", "from": 1662, "to": 1677, "kind": "tribute",
+      "why": "After the Southern Ming both the Lê and the Mạc became tributaries of the Qing (the Mạc article's infobox gives 1662-1677); in 1667 the Kangxi Emperor demanded that Cao Bằng be returned to the Mạc, whose dynasty ended in 1677.",
+      "sources": ["mac-dynasty"]
+    },
+    {
+      "id": "trinh-ming", "vassal": "Trịnh lords", "overlord": "Ming Dynasty", "from": 1572, "to": 1644, "kind": "tribute",
+      "why": "From 1572 Cliopatria draws the realm of the restored Lê emperors as the Trịnh lords, who ran their court; that court sent the tribute (the Trịnh treated the Qing 'as they had treated the Ming Emperors, sending tribute', its article says; only the Lê ruler met China's envoys).",
+      "sources": ["trinh-lords", "le-dynasty"]
+    },
+    {
+      "id": "trinh-qing", "vassal": "Trịnh lords", "overlord": "Qing Dynasty", "from": 1667, "to": 1787, "kind": "tribute",
+      "why": "In 1667 the Kangxi Emperor named the Lê emperor King of Annam (An Nam Quốc Vương); the Lê court under the Trịnh paid tribute to the Qing as it had to the Ming, until the Trịnh fell in 1787 (the Lê dynasty ended in 1789).",
+      "sources": ["le-dynasty", "trinh-lords"]
+    },
+    {
+      "id": "tayson-qing", "vassal": "Tây Sơn dynasty", "overlord": "Qing Dynasty", "from": 1789, "to": 1802, "kind": "tribute",
+      "why": "In 1789 the Qianlong Emperor re-established the tributary relationship and made Nguyễn Huệ King of Annam; its article's infobox gives the Qing tributary years as 1789-1802, when the Nguyễn took Thăng Long.",
+      "sources": ["tay-son"]
+    },
+    {
+      "id": "georgia-safavid-1555", "vassal": ["Kingdom of Georgia", "Kingdom of Kartli", "Kingdom of Kakheti"], "overlord": "Safavid Dynasty", "from": 1555, "to": 1577, "kind": "vassal",
+      "why": "Kartli (which Cliopatria calls the Kingdom of Georgia in 1468-1578, 1706-1737 and 1744-1802) and Kakheti. The Peace of Amasya (29 May 1555) left eastern Georgia to Iran, under native vassal princes; both kingdoms' articles date their Persian vassalage 1555-1578.",
+      "sources": ["amasya", "kartli", "kakheti", "safavid-georgia"]
+    },
+    {
+      "id": "georgia-ottoman-1578", "vassal": ["Kingdom of Georgia", "Kingdom of Kartli", "Kingdom of Kakheti"], "overlord": "Ottoman Empire", "from": 1578, "to": 1611, "kind": "vassal",
+      "why": "The Ottoman invasion of 1578 made Kartli and Kakheti Ottoman vassals (Kakheti paid a yearly tribute of 30 bales of silk) until 1612; Cliopatria draws no Georgian kingdom from 1579 to 1611.",
+      "sources": ["kartli", "kakheti", "safavid-georgia"]
+    },
+    {
+      "id": "georgia-safavid-1612", "vassal": ["Kingdom of Georgia", "Kingdom of Kartli", "Kingdom of Kakheti"], "overlord": "Safavid Dynasty", "from": 1612, "to": 1722, "kind": "vassal",
+      "why": "Persian vassals again from 1612 (both kingdoms' infoboxes: 1612-1723); from 1632 the shah appointed Kartli's kings, and the Treaty of Zuhab (1639) reconfirmed Kartli and Kakheti as Iranian domains.",
+      "sources": ["kartli", "kakheti", "safavid-georgia"]
+    },
+    {
+      "id": "georgia-ottoman-1723", "vassal": ["Kingdom of Georgia", "Kingdom of Kartli", "Kingdom of Kakheti"], "overlord": "Ottoman Empire", "from": 1723, "to": 1735, "kind": "vassal",
+      "why": "Ottoman vassals 1723-1736 (both infoboxes; the Treaty of Constantinople of 1724 gave Georgia back to the Ottomans) until Nader Shah drove them out; in 1736 the Ottomans gave up Kartli and Kakheti.",
+      "sources": ["kartli", "kakheti", "safavid-georgia"]
+    },
+    {
+      "id": "georgia-afsharid-1736", "vassal": ["Kingdom of Georgia", "Kingdom of Kartli", "Kingdom of Kakheti"], "overlord": "Afsharid Iran", "from": 1736, "to": 1747, "kind": "vassal",
+      "why": "Vassals of Nader Shah's Iran 1736-1747 (both infoboxes); in 1744 he gave Kartli to Teimuraz II and Kakheti to Erekle II, and on his death in 1747 they declared their de facto independence. Cliopatria draws eastern Georgia inside Afsharid Iran from 1738 to 1743.",
+      "sources": ["kartli", "kakheti"]
+    },
+    {
+      "id": "kartli-kakheti-zand", "vassal": "Kingdom of Georgia", "overlord": "Zand Dynasty", "from": 1762, "to": 1763, "kind": "allegiance",
+      "why": "Kartli and Kakheti united under Erekle II in 1762; he tendered his de jure submission to Karim Khan Zand and received his investiture as vali (its article's infobox: 1762-1763).",
+      "sources": ["kartli-kakheti"]
+    },
+    {
+      "id": "kartli-kakheti-russia", "vassal": "Kingdom of Georgia", "overlord": "Russian Empire", "from": 1783, "to": 1800, "kind": "protectorate",
+      "why": "The Treaty of Georgievsk (24 July 1783) made Kartli-Kakheti a Russian protectorate, renouncing any dependence on Iran; Paul I annexed it by decree on 18 December 1800 (confirmed 12 September 1801).",
+      "sources": ["kartli-kakheti"]
     }
   ],
   "left_out": [
@@ -128,9 +218,12 @@
     { "state": "Ryazan", "why": "Cliopatria draws Ryazan only from 1453 (its land is inside the Golden Horde before), and its article has Ivan of Ryazan (1427-1456) renouncing his allegiance to the Horde, with no year." },
     { "state": "Principality of Smolensk", "why": "Its article mentions a campaign of 1340 over unpaid tribute but gives no span; Lithuania took the city between 1395 and 1404." },
     { "state": "Principality of Moldavia (before 1498)", "why": "Moldavia paid the sultan tribute at times from the 1450s (Petru Aron); its article's infobox starts the vassalage in 1498, and the map follows the infobox." },
-    { "state": "Lê Dynasty and Đại Việt (Vietnam)", "why": "The Lê court had a tributary relationship with the Ming from 1428 (its article), and its infobox lists the Qing 1662-1789. Cliopatria's Vietnam after 1571 (Đại Việt, 1529-1802) also covers the Mạc and the Trịnh and Nguyễn lords, so these ties wait for a closer reading." },
+    { "state": "Nguyễn lords", "why": "Nominally under the Lê emperor in the north; their articles give them no tribute or investiture of their own." },
+    { "state": "Đại Việt after 1682", "why": "Cliopatria's Đại Việt from 1683 to 1793 is a small piece of the far south, not the Mạc; no tie is drawn on it." },
     { "state": "Ryukyu Kingdom", "why": "Cliopatria draws it only to 1520." },
-    { "state": "Serbia, Bulgaria and the Georgian kingdoms", "why": "Ottoman (and for Georgia, Safavid) vassals at times; not yet sourced." }
+    { "state": "Despotate of Vidin and Despotate of Dobruja", "why": "Their articles give no years for an Ottoman vassalage: Vidin fell to the Ottomans after Nicopolis (1396), and Dobruja was incorporated in 1411." },
+    { "state": "Serbian Despots (Vuk Branković's lands)", "why": "Only a category on its article calls it an Ottoman vassal; the text gives no years." },
+    { "state": "Kingdom of Imereti, Principality of Mingrelia, Principality of Guria", "why": "The Peace of Amasya (1555) put western Georgia in the Ottoman sphere under native vassal princes, and Guria owed the Porte a yearly tribute from 1614, but no source found says when these ties ended." }
   ],
   "sources": {
     "mongol-invasion": { "title": "Mongol invasion of Kievan Rus' (Wikipedia; \"Tatar yoke\" leads there)", "url": "https://en.wikipedia.org/wiki/Mongol_invasion_of_Kievan_Rus%27", "accessed": "2026-11-10", "supports": "After the invasion of 1237-1241 the Rus' principalities became vassals and paid tribute; Galicia-Volhynia, Polotsk and Novgorod well into the 14th century; the demands of tribute from Russian princes continued until about 1480." },
@@ -154,6 +247,18 @@
     "mongolia-qing": { "title": "Mongolia under Qing rule (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Mongolia_under_Qing_rule", "accessed": "2026-11-10", "supports": "The Khalkha submitted to the Qing dynasty in 1691, at a congress at Duolun where the Khalkha khans formally declared allegiance; Outer Mongolia declared its independence in December 1911 (infobox)." },
     "loc-mongolia": { "title": "Mongolia: A Country Study (Library of Congress, Federal Research Division)", "url": "https://countrystudies.us/mongolia/25.htm", "accessed": "2026-11-10", "supports": "In May 1691 the Kangxi Emperor called a kuriltai of Khalkha chiefs at Dolonnur; those present acknowledged Manchu overlordship in return for protection against the Dzungar." },
     "tibet-qing": { "title": "Tibet under Qing rule (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Tibet_under_Qing_rule", "accessed": "2026-11-10", "supports": "The Qing ruled Tibet from 1720 to 1912; the infobox calls it a protectorate and territory of the Qing dynasty; the Qing term fanbu has usually been translated as vassal; Western historians have called it a protectorate, vassal state or tributary." },
+    "moravian-serbia": { "title": "Moravian Serbia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Moravian_Serbia", "accessed": "2026-11-10", "supports": "In the summer of 1390 Milica accepted Ottoman suzerainty; Stefan fought as an Ottoman vassal to the Battle of Ankara (1402), after which his state became the Serbian Despotate; infobox: vassal state of the Ottoman Empire, 1390-1402." },
+    "serbian-despotate": { "title": "Serbian Despotate (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Serbian_Despotate", "accessed": "2026-11-10", "supports": "Serbia a vassal Ottoman state after Kosovo (1390 or 1391); in 1409 Stefan accepted Ottoman vassalage after the dispute of 1408; Smederevo fell on 18 August 1439; restored by the Peace of Szeged (1444); officially an Ottoman vassal in 1447-48; tribute in 1457; conquered on 20 June 1459." },
+    "bulgaria": { "title": "Second Bulgarian Empire (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Second_Bulgarian_Empire", "accessed": "2026-11-10", "supports": "After the Battle of Chernomen (26 September 1371) the Bulgarian monarch was forced to become an Ottoman vassal; Ivan Shishman later reneged, provoking the invasions of 1388 and 1393; Tarnovo taken after a three-month siege." },
+    "le-dynasty": { "title": "Lê dynasty (Wikipedia)", "url": "https://en.wikipedia.org/wiki/L%C3%AA_dynasty", "accessed": "2026-11-10", "supports": "In 1428 Lê Lợi established a tributary relationship with the Ming; Mạc Đăng Dung took the throne on 15 June 1527; after 1540 the Ming received tribute from both the Lê and the Mạc, which continued through the Qing; in 1597 the Ming recognized the Lê monarch; in 1667 the Kangxi Emperor gave Lê Duy Vũ the title An Nam Quốc Vương; the dynasty ended in 1789." },
+    "mac-dynasty": { "title": "Mạc dynasty (Wikipedia)", "url": "https://en.wikipedia.org/wiki/M%E1%BA%A1c_dynasty", "accessed": "2026-11-10", "supports": "In 1540 Mạc Đăng Dung was downgraded from emperor to governor (đô thống sứ); after 1540 the Ming received tribute from both the Lê and the Mạc; Thăng Long lost in 1592, then Cao Bằng; after the Southern Ming both became Qing tributaries (infobox: Qing 1662-1677); in 1667 Kangxi demanded Cao Bằng be returned to the Mạc; the dynasty ended in 1677." },
+    "trinh-lords": { "title": "Trịnh lords (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Tr%E1%BB%8Bnh_lords", "accessed": "2026-11-10", "supports": "The Trịnh treated the Qing as they had treated the Ming emperors, sending tribute and formal acknowledgements; only the Lê ruler, not the Trịnh lord, met the Qing's diplomats." },
+    "tay-son": { "title": "Tây Sơn dynasty (Wikipedia)", "url": "https://en.wikipedia.org/wiki/T%C3%A2y_S%C6%A1n_dynasty", "accessed": "2026-11-10", "supports": "In 1789 the Qianlong Emperor agreed to re-establish the tributary relationship and enfeoff Nguyễn Huệ as King of Annam; infobox: within the Qing tributary system, 1789-1802." },
+    "amasya": { "title": "Peace of Amasya (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Peace_of_Amasya", "accessed": "2026-11-10", "supports": "Agreed on 29 May 1555; eastern Georgia stayed in Iranian hands and western Georgia fell in Ottoman hands, under native vassal princes." },
+    "kartli": { "title": "Kingdom of Kartli (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Kartli", "accessed": "2026-11-10", "supports": "Infobox: vassal of Persia 1555-1578, 1612-1723 and 1736-1747, of the Ottoman Empire 1578-1612 and 1723-1736; Kartli under vassalage of successive dynasties of Persia; Rostom appointed king (wali) in 1632; de facto independence after Nader Shah's death (1747); united with Kakheti in 1762." },
+    "kakheti": { "title": "Kingdom of Kakheti (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Kakheti", "accessed": "2026-11-10", "supports": "Infobox: vassal of Persia 1555-1578, 1612-1723 and 1736-1747, of the Ottoman Empire 1578-1612 and 1723-1736 (a yearly tribute of 30 bales of silk from 1578); the Peace of Amasya (1555) left it in the Safavid sphere; successive Ottoman and Iranian occupations 1724-1744; Nader Shah's grant of 1744; united with Kartli in 1762." },
+    "safavid-georgia": { "title": "Safavid Georgia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Safavid_Georgia", "accessed": "2026-11-10", "supports": "Kartli and Kakheti Safavid vassals from the 1510s; the Ottoman invasion of 1578; the Treaty of Zuhab (1639) reconfirmed them as Iranian domains; the Treaty of Constantinople (1724) gave Georgia back to the Ottomans; Nader deposed the Safavids in 1736." },
+    "kartli-kakheti": { "title": "Kingdom of Kartli-Kakheti (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Kartli-Kakheti", "accessed": "2026-11-10", "supports": "1762-1801; Erekle II's de jure submission to Karim Khan Zand and investiture as vali (infobox: 1762-1763); the Treaty of Georgievsk (24 July 1783) made the kingdom a Russian protectorate, abjuring any dependence on Iran; annexed by Paul I's decree of 18 December 1800, confirmed on 12 September 1801." },
     "galicia": { "title": "Kingdom of Galicia-Volhynia (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Kingdom_of_Galicia%E2%80%93Volhynia", "accessed": "2026-11-10", "supports": "Daniel submitted to Batu as a vassal in the winter of 1245/46 (allegiance pledged 1246) and his house paid the Horde tribute; still tributary in 1308-1323; the Polish conquest of 1349 ended its vassalage to the Golden Horde (the infobox's 1246-1253 disagrees with the body)." }
   }
 }

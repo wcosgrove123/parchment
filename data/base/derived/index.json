@@ -154,7 +154,7 @@
     },
     "cliopatria": {
       "file": "cliopatria.topojson",
-      "bytes": 10358379,
+      "bytes": 10361186,
       "rows": 8510,
       "by_kind": {
         "state": 7393,
@@ -172,7 +172,7 @@
       "ties": {
         "cliopatria allegiance": 61,
         "cliopatria vassal": 18,
-        "sourced": 23
+        "sourced": 51
       },
       "settings": {
         "minWeight": 0.0001,

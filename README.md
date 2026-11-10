@@ -27,7 +27,7 @@ states (France with its fiefs, England with its Irish earldoms) gets a heavier l
 Roman Empire a band inside its outer border (Cliopatria's to 1458, OpenHistoricalMap's from 1648; none in between).
 A vassal, tributary or protectorate is striped in its overlord's color (Cliopatria's own vassalage and allegiance
 records and, from cited sources in `data/tributaries.json`, the Mongol yoke over the Rus' principalities and the
-Ottomans' and the Qing's vassals); crowns that shared a ruler sit inside one realm line. The year buttons are suggestions. The data: `data/base/derived/cliopatria.topojson` (`scripts/derive-cliopatria.mjs`).
+vassals of the Ottomans, Persia, the Ming, the Qing and Russia); crowns that shared a ruler sit inside one realm line. The year buttons are suggestions. The data: `data/base/derived/cliopatria.topojson` (`scripts/derive-cliopatria.mjs`).
 
 ### The world (`?stage=world`)
 

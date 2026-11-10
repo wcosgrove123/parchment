@@ -107,7 +107,7 @@ test('the Mongol yoke: the Rus’ principalities pay the Horde, each to the year
   for (const r of tributaries.ties) {
     assert.ok(r.why && r.sources.length, `${r.id}: a reason and sources`);
     for (const s of r.sources) assert.match(tributaries.sources[s]?.url ?? '', /^https:\/\//, `${r.id}: ${s} has a link`);
-    assert.ok(topo.ties.some((t) => t.s === r.id && t.v === r.vassal && t.f === r.from && t.t === r.to), `${r.id} is in the derived file`);
+    for (const v of [].concat(r.vassal)) assert.ok(topo.ties.some((t) => t.s === r.id && t.v === v && t.f === r.from && t.t === r.to), `${r.id} (${v}) is in the derived file`);
   }
   for (const v of ['Grand Principality of Moscow', 'Principality of Vladimir-Suzdal', 'Tver', 'Novgorod Republic', 'Galicia-Volhynia', 'Nizhny Novgorod']) {
     const t = tie(1300, v);
@@ -170,6 +170,47 @@ test('the Ottomans’ and the Qing’s vassals, each to the years its sources gi
   assert.equal(by(1690, 'Khalkha'), null);
   assert.equal(by(1750, 'Tibet'), 'protectorate Qing Dynasty');
   assert.equal(by(1719, 'Tibet'), null);
+});
+
+test('Serbia, Bulgaria, Vietnam and Georgia: each tie to its sources’ years, under Cliopatria’s names', () => {
+  const by = (y, v) => { const t = tie(y, v); return t ? `${t.kind} ${t.over.properties.n}` : null; };
+  // Serbia (Cliopatria's "Serbian Empire" after 1371 is Moravian Serbia, then the Despotate) and Bulgaria
+  assert.equal(by(1395, 'Serbian Empire'), 'vassal Ottoman Empire', '1390: Milica accepts Ottoman suzerainty');
+  assert.equal(by(1405, 'Serbian Empire'), null, 'after Ankara (1402), until 1409');
+  assert.equal(by(1420, 'Serbian Empire'), 'vassal Ottoman Empire');
+  assert.equal(by(1441, 'Serbian Empire'), null, 'Smederevo taken in 1439; restored at Szeged in 1444');
+  assert.equal(by(1450, 'Serbian Empire'), 'vassal Ottoman Empire');
+  assert.equal(by(1380, 'Second Bulgarian Empire'), 'vassal Ottoman Empire', 'after Chernomen, 1371');
+  assert.equal(by(1370, 'Second Bulgarian Empire'), null);
+  // Vietnam
+  assert.equal(by(1450, 'Lê Dynasty'), 'tribute Ming Dynasty', '1428: Lê Lợi');
+  assert.equal(by(1550, 'Đại Việt'), 'tribute Ming Dynasty', 'the Mạc, from 1540');
+  assert.equal(by(1550, 'Lê Dynasty'), 'tribute Ming Dynasty', 'the restored Lê, from 1540');
+  assert.equal(by(1600, 'Trịnh lords'), 'tribute Ming Dynasty', 'the Lê court under the Trịnh');
+  assert.equal(by(1655, 'Trịnh lords'), null, 'between the Ming and the Qing investiture of 1667');
+  assert.equal(by(1700, 'Trịnh lords'), 'tribute Qing Dynasty');
+  assert.equal(by(1670, 'Đại Việt'), 'tribute Qing Dynasty', 'the Mạc at Cao Bằng, to 1677');
+  assert.equal(by(1700, 'Đại Việt'), null, 'Cliopatria’s Đại Việt after 1682 is not the Mạc');
+  assert.equal(by(1790, 'Tây Sơn dynasty'), 'tribute Qing Dynasty', '1789: Quang Trung invested');
+  // Georgia (Cliopatria calls Kartli the Kingdom of Georgia in some years, the Kingdom of Kartli in others)
+  assert.equal(by(1560, 'Kingdom of Georgia'), 'vassal Safavid Dynasty', 'Amasya, 1555');
+  assert.equal(by(1560, 'Kingdom of Kakheti'), 'vassal Safavid Dynasty');
+  assert.equal(by(1650, 'Kingdom of Kartli'), 'vassal Safavid Dynasty');
+  assert.equal(by(1730, 'Kingdom of Georgia'), 'vassal Ottoman Empire', '1723–1736');
+  assert.equal(by(1745, 'Kingdom of Kakheti'), 'vassal Afsharid Iran', 'Nader Shah’s grant of 1744');
+  assert.equal(by(1750, 'Kingdom of Georgia'), null, 'de facto independent after 1747');
+  assert.equal(by(1762, 'Kingdom of Georgia'), 'allegiance Zand Dynasty');
+  assert.equal(by(1790, 'Kingdom of Georgia'), 'protectorate Russian Empire', 'Georgievsk, 1783');
+  assert.equal(by(1801, 'Kingdom of Georgia'), null);
+});
+
+test('no state carries two ties in the same year (the second set of stripes would hide the first)', () => {
+  const byVassal = new Map();
+  for (const t of topo.ties) { if (!byVassal.has(t.v)) byVassal.set(t.v, []); byVassal.get(t.v).push(t); }
+  for (const [v, ts] of byVassal) for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) {
+    const a = ts[i], b = ts[j];
+    assert.ok(a.t < b.f || b.t < a.f, `${v}: ${a.s} ${a.f}–${a.t} and ${b.s} ${b.f}–${b.t} overlap`);
+  }
 });
 
 test('crowns under one ruler (Cliopatria’s personal unions) are drawn as a realm line round them', () => {
