@@ -67,12 +67,11 @@ const sideLine = (k) => oklchToHex({ L: 0.47, C: sideC(k) ?? 0.13, h: sideHues[k
 const sideFill = (k) => oklchToHex({ L: 0.72, C: sideC(k) ?? 0.09, h: sideHues[k] });
 // The political map (owner, 2026-11-09: "use the color scheme to highlight countries/states/nations/etc like the
 // other map does"): every state in force in the year shown has a color of its own, its neighbors another
-// (scripts/derive-cliopatria.mjs assigns them). Twelve hues 30° apart, chroma 0.10 ("Make it bolder", owner,
-// 2026-11-10: the first set was six hues, pale L 0.86 C 0.055 and mid L 0.77 C 0.07), lightness stepping between
-// lighter and deeper so hue-neighbors differ in tone too; the blues sit deeper (L 0.68–0.74) so no state reads as
-// sea. All in sRGB; the closest pair is 0.065 apart in OKLab (the first set's 0.042), the sea 0.124 away, rust 0.126.
-const polSpec = [[20, 0.79], [50, 0.72], [80, 0.84], [110, 0.76], [140, 0.81], [170, 0.72], [200, 0.78], [230, 0.68], [260, 0.74], [290, 0.70], [320, 0.78], [350, 0.70]];
-const pol = polSpec.map(([h, L]) => oklchToHex({ L, C: 0.1, h }));
+// (scripts/derive-cliopatria.mjs assigns them). Six hues, each pale (L 0.86, C 0.055) and mid (L 0.77, C 0.07):
+// tempered like Set A, lighter so names and borders read over them, and far from the apparatus's dark lines.
+// The owner's choice (2026-11-10): he tried a bolder set (twelve hues, chroma 0.10; b079a7d) and kept this one.
+const polHues = [25, 75, 120, 165, 215, 290];
+const pol = [...polHues.map((h) => oklchToHex({ L: 0.86, C: 0.055, h })), ...polHues.map((h) => oklchToHex({ L: 0.77, C: 0.07, h }))];
 // Water: paper lightness, nudged toward blue.
 const paperL = hexToOklch('#D9D6CC').L;
 const ocean = oklchToHex({ L: paperL, C: 0.022, h: 235 });
@@ -108,7 +107,7 @@ ${Object.entries(sponsors).map(([k, v]) => `  --sponsor-${k}: ${v};`).join('\n')
   /* Military layer: the sides of a war (owner, 2026-11-09); line L 0.47 C 0.13, fill L 0.72 C 0.09 */
 ${Object.keys(sideHues).map((k) => `  --side-${k}-line: ${sideLine(k)};   --side-${k}-fill: ${sideFill(k)};`).join('\n')}
 
-  /* Political map: a color per state, neighbors apart (owner, 2026-11-09; bolder 2026-11-10): twelve hues, C 0.10 */
+  /* Political map: a color per state, neighbors apart (owner, 2026-11-09); pale L 0.86 C 0.055, mid L 0.77 C 0.07 */
 ${pol.map((v, k) => `  --pol-${k}: ${v};`).join('\n')}
 
   /* Ground and water */
