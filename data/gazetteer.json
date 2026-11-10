@@ -222,6 +222,12 @@
     "label": "Ciudad Juárez",
     "fetched": "2026-11-09"
   },
+  "Q33132": {
+    "lon": -77.2258,
+    "lat": 39.8114,
+    "label": "Battle of Gettysburg",
+    "fetched": "2026-11-10"
+  },
   "Q34804": {
     "lon": -106.6503,
     "lat": 35.0844,

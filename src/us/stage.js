@@ -44,17 +44,63 @@ let uid = 0;
 // `lesson` (src/us/frames.js, built by main.js from the address): a sheet sized for a slide ({ w, h } in sheet units),
 // a frame ({ box, ... } with its projection), a title, a highlight, named rivers and the records to point at.
 // Without it the page is exactly the 1920×1080 continent it has always been.
-export function createUSStage(svg, stage, layers, { powers, trackers, onPick, onYear, lesson = null }) {
+// The sheet and the projection a stage is built on: the 1920×1080 continent, the continent on a sheet of another
+// shape, a frame fitted to its box, or a free view (pan and zoom: a center and a scale, src/us/main.js).
+function stageGeometry(stage, lesson) {
   const W = lesson?.sheet?.w ?? BASE_W, H = lesson?.sheet?.h ?? BASE_H;
   const framed = !!lesson?.frame;
   const resized = W !== BASE_W || H !== BASE_H;
   const inner = [[FRAME.left, FRAME.top], [W - FRAME.right, H - FRAME.bottom]];
-  const [[x0, y0], [x1, y1]] = inner;
-  const frame = { x0, y0, x1, y1 };
   // A frame re-fits the projection to its box (the projection the frame names, src/us/frames.js); a bare change of
   // size fits the continent to the new shape. Neither touches the 1920×1080 continent.
-  const projection = framed ? fitFrame(lesson.frame.projection, lesson.frame.box, inner)
+  const projection = framed ? fitFrame(lesson.frame.projection, lesson.frame.box, inner, lesson.frame.view ?? null)
     : resized ? fitContinent(stage, inner) : makeProjection(stage, inner);
+  return { W, H, framed, resized, inner, projection };
+}
+const reliefJob = (lesson, projection, [[x0, y0], [x1, y1]]) => reliefFor(`na-${lesson.key}`, assetURL(lesson.reliefWorld ?? 'assets/relief/world-plate-carree.png'), projection, [x0, y0, x1, y1],
+  { scale: lesson.reliefScale ?? 0.5, bounds: lesson.reliefBounds ?? null, trust: !!lesson.frame?.view, over: (lesson.reliefOver ?? []).map((o) => ({ url: assetURL(o.url), bounds: o.bounds })) });
+// The relief of a view about to be shown, made before the stage is rebuilt on it (so the swap shows no bare land).
+export function prepareRelief(stage, lesson) {
+  if (!lesson || !(lesson.frame || lesson.sheet)) return Promise.resolve();
+  const g = stageGeometry(stage, lesson);
+  if (!(g.framed || g.resized)) return Promise.resolve();
+  return reliefJob(lesson, g.projection, g.inner).catch(() => null);
+}
+// Sheet pixels per kilometer at a place (measured along its meridian).
+export function pxPerKmAt(p, [lon, lat]) {
+  const a = p([lon, lat - 0.005]), b = p([lon, lat + 0.005]);
+  return a && b ? Math.hypot(b[0] - a[0], b[1] - a[1]) / (0.01 * 111.195) : NaN;
+}
+// A free view: where the sheet's middle looks and how close (pixels per kilometer). Lambert azimuthal equal-area
+// centered on that point (north is up at the middle of the sheet at every zoom, and a zoom about the middle changes
+// nothing but the scale). → a frame like resolveFrame's, with the box of longitude and latitude the sheet covers.
+export function freeFrame(center, pxPerKm, sheet = null) {
+  const W = sheet?.w ?? BASE_W, H = sheet?.h ?? BASE_H;
+  const inner = [[FRAME.left, FRAME.top], [W - FRAME.right, H - FRAME.bottom]];
+  const spec = { projection: 'lambertAzimuthalEqualArea', rotate: [-center[0], -center[1]], chosenBy: 'view' };
+  const view = { center: [center[0], center[1]], pxPerKm };
+  const p = fitFrame(spec, null, inner, view);
+  const [[ax, ay], [bx, by]] = inner;
+  let west = Infinity, east = -Infinity, south = Infinity, north = -Infinity;
+  const N = 24;
+  for (let i = 0; i <= N; i++) {
+    const t = i / N;
+    for (const pt of [[ax + (bx - ax) * t, ay], [ax + (bx - ax) * t, by], [ax, ay + (by - ay) * t], [bx, ay + (by - ay) * t]]) {
+      const ll = p.invert(pt);
+      if (!ll || !Number.isFinite(ll[0]) || !Number.isFinite(ll[1])) continue;
+      // (longitudes are read on the center's side of the antimeridian)
+      let lon = ll[0]; while (lon - center[0] > 180) lon -= 360; while (lon - center[0] < -180) lon += 360;
+      west = Math.min(west, lon); east = Math.max(east, lon); south = Math.min(south, ll[1]); north = Math.max(north, ll[1]);
+    }
+  }
+  const r = (x) => Math.round(x * 10000) / 10000;
+  return { id: null, title: null, box: { west: r(west), south: r(Math.max(-85, south)), east: r(east), north: r(Math.min(85, north)) }, focus: null, raw: true, view, spec };
+}
+
+export function createUSStage(svg, stage, layers, { powers, trackers, onPick, onYear, onPhase = null, lesson = null }) {
+  const { W, H, framed, resized, inner, projection } = stageGeometry(stage, lesson);
+  const [[x0, y0], [x1, y1]] = inner;
+  const frame = { x0, y0, x1, y1 };
 
   svg.attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
   svg.selectAll('*').remove();
@@ -94,8 +140,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const [bx, by, bw, bh] = box;
     defs.append('clipPath').attr('id', `clip-${id}`).append('rect').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
     defs.append('clipPath').attr('id', `land-${id}`).append('path').attr('d', d(land));
-    const g = root.append('g').attr('class', `view view-${id}`).attr('clip-path', `url(#clip-${id})`);
-    g.append('rect').attr('class', 'view-bg').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
+    // (the clip sits on an outer group, so a pan or a zoom can slide the map under it: src/us/main.js)
+    const clipG = root.append('g').attr('class', `view-clip view-clip-${id}`).attr('clip-path', `url(#clip-${id})`);
+    clipG.append('rect').attr('class', 'view-bg').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
+    const g = clipG.append('g').attr('class', `view view-${id}`);
     g.append('path').attr('class', 'ocean').attr('d', d({ type: 'Sphere' }));
     if (bathymetry) g.append('g').attr('class', 'bathymetry').selectAll('path').data(bathy.features).join('path').attr('d', d);
     g.append('path').attr('class', 'land').attr('d', d(land));
@@ -133,14 +181,13 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   const reshade = !!lesson && (framed || resized);
   const main = makeView('main', projection, [x0, y0, x1 - x0, y1 - y0], { relief: reshade ? null : stage.relief, reliefSlot: reshade });
   const reliefReady = main.reliefImg
-    ? reliefFor(`na-${lesson.key}`, assetURL(lesson.reliefWorld ?? 'assets/relief/world-plate-carree.png'), projection, [x0, y0, x1, y1], { scale: lesson.reliefScale ?? 0.5, bounds: lesson.reliefBounds ?? null })
-      .then((url) => { main.reliefImg.attr('href', url); }).catch((err) => console.warn(err.message))
+    ? reliefJob(lesson, projection, inner).then((url) => { main.reliefImg.attr('href', url); }).catch((err) => console.warn(err.message))
     : Promise.resolve();
   // In a frame the water names are placed where their water shows: along their parallel, on the longest open stretch
   // inside the frame clear of the cartouche and legend, or left off (src/us/stage.js, frameWaterLabels).
   const land1 = framed ? rasterLand(projection, land, W, H) : null;
   const legendSpec = framed ? { anchor: lesson.frame.legend ?? quieterCorner(land1, frame), lift: 22 } : stage.legend;
-  const stageLabelList = framed ? frameWaterLabels([...stage.labels, ...(lesson.frame.water ?? [])], projection, frame, land1, legendSpec, makeMeasure()) : stage.labels;
+  const stageLabelList = framed ? frameWaterLabels([...stage.labels, ...(lesson.frame.water ?? [])], projection, frame, land1, legendSpec, makeMeasure(), { near: lesson.frame.view ? 3 : null }) : stage.labels;
   drawStageLabels(main.stageLabels, defs, { ...stage, labels: stageLabelList }, main.path);
   // Water names change too: a stage label may list later names with the day each took effect (the Gulf of Mexico
   // is the Gulf of America in U.S. federal use from 7 February 2025). The sheet shows the name in force on its date.
@@ -338,10 +385,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const flagged = (milNow.shown ?? []).map((r) => { const xy = r.lon != null ? projection([r.lon, r.lat]) : null; return { ...r, offSheet: !(xy && xy[0] >= vx && xy[0] <= vx + vw && xy[1] >= vy && xy[1] <= vy + vh) }; });
       if (milNow.battle) {
         // a battle frame (milestone 9): the phases in the margin and as the strip
-        drawMilList = () => { milListBox = drawPhaseList(root, frame, milNow.battle.record, milNow.battle.phase.n, { corner: cornerNow(), avoid: legend.box() }); };
+        drawMilList = () => { milListBox = drawPhaseList(root, frame, milNow.battle.record, milNow.battle.phase.n, { corner: cornerNow(), avoid: legend.box(), whole: !!milNow.battle.whole, onPick: onPhase }); };
         drawMilList();
         root.classed('war-strip-on', true);
-        drawPhaseStrip(root, frame, milNow.battle.record, milNow.battle.phase.n);
+        drawPhaseStrip(root, frame, milNow.battle.record, milNow.battle.phase.n, { whole: !!milNow.battle.whole, onPick: onPhase });
         if (recordLayers.ground) drawGround(recordLayers.ground, defs, milNow.battle.ground ?? null, projection, main.box);
       } else {
         drawMilList = () => { milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner: cornerNow(), title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() }); };
@@ -1083,6 +1130,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     setRecords({ points = [], routes = [] } = {}) { records = { points, routes }; currentKey = null; },
     // resolves once a reshaded relief is on the sheet (a picture taken earlier would lack it)
     reliefReady,
+    // pan and zoom (src/us/main.js): the layer that slides, the projection on the sheet, and its scale at a place
+    geo: { node: main.g.node(), projection, inner: [x0, y0, x1, y1], framed, pxPerKmAt: (ll) => pxPerKmAt(projection, ll), insets: insets.map((v) => v.g.node().parentNode) },
     sheet: { w: W, h: H },
     frameInfo: () => ({ framed, resized, legend: legendSpec, waterLabels: stageLabelList.map((l) => l.text), region: framed ? frameRegion().rect : { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, inner: { x0, y0, x1, y1 }, insets: insets.map((i) => i.box) }),
     inFrame,
@@ -1095,8 +1144,21 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
 
 // ---------------------------------------------------------------- lesson-map geometry (no state)
 // A frame's box fitted to the sheet in its projection (src/us/frames.js), with a small margin so its edges show.
-function fitFrame(spec, box, [[ax, ay], [bx, by]]) {
+function fitFrame(spec, box, [[ax, ay], [bx, by]], view = null) {
   const p = buildProjection(spec);
+  if (view) {
+    // a free view (pan and zoom): a center on the middle of the sheet and a scale, not a box to fit
+    p.scale(1000).translate([0, 0]);
+    p.scale((1000 * view.pxPerKm) / pxPerKmAt(p, view.center));
+    const c = p(view.center);
+    p.translate([(ax + bx) / 2 - c[0], (ay + by) / 2 - c[1]]);
+    // Only what lies near the sheet is worked: a circle about the center, a little wider than the sheet's corners.
+    // (d3 refines every line to the scale before it cuts to the frame; at a battlefield's scale the whole world's
+    // coast would be refined to the meter.)
+    const reachKm = Math.hypot(bx - ax, by - ay) / 2 / view.pxPerKm;
+    if (p.clipAngle) p.clipAngle(Math.min(90, Math.max(1.5, (reachKm / 111.195) * 1.2 + 0.5)));
+    return p;
+  }
   p.fitExtent([[ax + 10, ay + 10], [bx - 10, by - 10]], extentPolygon(box, 0.5));
   return p;
 }
@@ -1139,7 +1201,9 @@ function quieterCorner(mask, { x1, y0, y1 }) {
 }
 // Water names in a frame: each along its own parallel, on the longest stretch of open water inside the frame and
 // clear of the cartouche and the legend's corner; left off where no stretch is long enough for the name.
-function frameWaterLabels(labels, proj, { x0, y0, x1, y1 }, mask, legendSpec, measure) {
+// near (a free view, pan and zoom): the open stretch must reach within that many degrees of the name's own place,
+// or the name is left off (the Atlantic's name, slid west along its parallel, would land in the Gulf of Mexico).
+function frameWaterLabels(labels, proj, { x0, y0, x1, y1 }, mask, legendSpec, measure, { near = null } = {}) {
   const keep = [
     { x: x0, y: y1 - 22 - 150, w: 22 + 380 + 20, h: 150 + 22 }, // the cartouche
     // (a lesson map's legend widens to its longest line, up to 340 px: src/render/legend.js)
@@ -1168,7 +1232,7 @@ function frameWaterLabels(labels, proj, { x0, y0, x1, y1 }, mask, legendSpec, me
         else { run.len += Math.hypot(p[0] - run.pb[0], p[1] - run.pb[1]); run.b = lon; run.pb = p; }
       }
       close();
-      if (best && best.len >= need) { found = { ...best, lat }; break; }
+      if (best && best.len >= need && (near == null || (best.a - near <= l.lon && l.lon <= best.b + near))) { found = { ...best, lat }; break; }
     }
     if (!found) continue;
     seen.add(l.text);

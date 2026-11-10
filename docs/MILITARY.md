@@ -63,6 +63,22 @@ As an order (`npm run map`, the same form as a lesson map, `docs/LESSON-MAPS.md`
 Everything else (`frame`, `date`, `from`, `annotate`, `title`, `size`, `records`…) is as for a lesson map. Two new
 frames: `mexico-war` (−125, 15, −88, 43) and `mexico-city` (−99.6, 18.9, −98.6, 19.8).
 
+## Pan, zoom and detail by zoom level (2026-11-10)
+
+The North America page pans and zooms under every tracker: drag, wheel or pinch, double-click, the toolbar's − + ⌂,
+the keys − + 0. A view is rebuilt when the gesture rests (`src/us/main.js`, "pan and zoom"; `freeFrame` in
+`src/us/stage.js`) and written to the address as `frame=W,S,E,N`.
+
+Under the Military layer the zoom brings detail in. Close on a battle of the war shown (its `frame` focus in
+`src/focuses.json`: 35% of the field on the sheet, the field a fifth of the sheet's width) the sheet shows the battle,
+as `?battle=` does: whole if it is already fought, by the phase reached on its own days, not at all before it. Its
+rows (`battle`, `phase`) are drawn only there; on the war's map the battle is one event row. A new battle needs: a
+focus for its field, a record under its war's `battles` (phases, dates, source), its rows, an event row for the
+war's map, and, if it is to read at that scale, downloaded ground (`scripts/fetch-battle-ground.mjs`) and relief
+(`scripts/fetch-relief-3dep.mjs`).
+
+A war is drawn through its last day (`end` in its record). The day after, the layer shows the plain map of nations.
+
 ## Occupied land (the review of 2026-11-10)
 
 A membership row with the role `occupied` shades what an army holds while the war is on: its `side` is the occupier,

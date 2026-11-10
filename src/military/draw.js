@@ -314,44 +314,49 @@ export function drawGround(layer, defs, ground, proj, box) {
 
 // Battle frames (milestone 9): the phases of the battle as the list in the margin (the current one in full, the
 // ones to come lighter) and as a strip of steps under the map, the current step gold.
-export function drawPhaseList(root, { x0, y0, x1, y1 }, battle, n, { corner = 'top-right', width = 360, avoid = null } = {}) {
+// whole: every phase in full (a battle already fought, seen whole). onPick(n | null): a phase row, or the title for
+// the whole battle, was clicked.
+export function drawPhaseList(root, { x0, y0, x1, y1 }, battle, n, { corner = 'top-right', width = 360, avoid = null, whole = false, onPick = null } = {}) {
   root.selectAll('g.course-list').remove();
   const phases = battle?.phases ?? [];
   if (!phases.length) return null;
   const PAD = 12, ROW = 17, W = width;
   const wrap = (t, max = 58) => { const words = t.split(' '); const lines = ['']; for (const w of words) { if ((lines[lines.length - 1] + ' ' + w).trim().length > max) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + ' ' + w).trim(); } return lines; };
-  const rows = phases.map((p) => ({ ...p, lines: wrap(p.label) }));
+  const rows = phases.map((p) => ({ ...p, lines: wrap(p.label, 50) }));
   const H = PAD * 2 + 22 + rows.reduce((a, r) => a + r.lines.length * ROW, 0) + rows.length * 3;
   const x = corner.endsWith('left') ? x0 + 22 : x1 - 22 - W;
   const y = corner.startsWith('top') ? y0 + 22 : y1 - 22 - H;
   const g = root.append('g').attr('class', 'course-list legend phase-list').attr('transform', `translate(${x},${y})`);
   g.append('rect').attr('class', 'legend-box').attr('width', W).attr('height', H);
-  g.append('text').attr('class', 'legend-title').attr('x', PAD).attr('y', PAD + 10).text(`${battle.label}, ${battle.dates}: the phases`);
+  const title = g.append('text').attr('class', 'legend-title').attr('x', PAD).attr('y', PAD + 10).text(whole ? `${battle.label}: the whole battle` : `${battle.label}, ${battle.dates}: the phases`);
+  if (onPick) title.style('cursor', 'pointer').on('click', () => onPick(null)).append('title').text('Show the whole battle');
   let ry = PAD + 24;
   for (const r of rows) {
-    const cur = r.n === n, past = r.n < n;
-    const nn = g.append('g').attr('transform', `translate(${PAD + 8},${ry - 4})`).attr('opacity', past ? 0.75 : cur ? 1 : 0.45);
+    const cur = !whole && r.n === n, past = whole || r.n < n;
+    if (onPick) g.append('rect').attr('x', 2).attr('y', ry - 13).attr('width', W - 4).attr('height', r.lines.length * ROW + 2).attr('fill', 'transparent').style('cursor', 'pointer').on('click', () => onPick(r.n)).append('title').text(`Show phase ${r.n} alone`);
+    const nn = g.append('g').attr('transform', `translate(${PAD + 8},${ry - 4})`).attr('opacity', whole ? 1 : past ? 0.75 : cur ? 1 : 0.45).style('pointer-events', 'none');
     nn.append('circle').attr('r', 7.5).attr('fill', cur ? GOLD : CREAM).attr('stroke', NAVY).attr('stroke-width', 1);
     nn.append('text').attr('text-anchor', 'middle').attr('dominant-baseline', 'central').attr('font-size', 9).attr('font-weight', 700).attr('fill', NAVY).text(String(r.n));
     r.lines.forEach((line, i) => {
-      g.append('text').attr('class', `course-row${cur ? ' course-what' : ''}`).attr('x', PAD + 22).attr('y', ry + i * ROW).attr('font-size', 11.5).attr('opacity', past ? 0.75 : cur ? 1 : 0.5).text(line);
+      g.append('text').attr('class', `course-row${cur ? ' course-what' : ''}`).attr('x', PAD + 22).attr('y', ry + i * ROW).attr('font-size', 11.5).attr('opacity', whole ? 1 : past ? 0.75 : cur ? 1 : 0.5).style('pointer-events', 'none').text(line);
     });
     ry += r.lines.length * ROW + 3;
   }
   return { x, y, w: W, h: H };
 }
-export function drawPhaseStrip(root, { x0, x1, y1 }, battle, n) {
+export function drawPhaseStrip(root, { x0, x1, y1 }, battle, n, { whole = false, onPick = null } = {}) {
   root.selectAll('g.war-strip').remove();
   const phases = battle?.phases ?? [];
   if (!phases.length) return;
   const g = root.append('g').attr('class', 'war-strip phase-strip');
   const base = y1 + 24;
   const w = (x1 - x0 - 20) / phases.length;
-  g.append('text').attr('class', 'chapter-label').attr('x', x0 + 10).attr('y', base - 38).attr('font-size', 11).attr('fill', NAVY).text(`${battle.label}, ${battle.dates}: phase ${n} of ${phases.length}`);
+  g.append('text').attr('class', 'chapter-label').attr('x', x0 + 10).attr('y', base - 38).attr('font-size', 11).attr('fill', NAVY).text(`${battle.label}, ${battle.dates}: ${whole ? `the whole battle, ${phases.length} phases` : `phase ${n} of ${phases.length}`}`);
   phases.forEach((p, i) => {
     const x = x0 + 10 + i * w;
-    const cur = p.n === n, past = p.n < n;
-    g.append('rect').attr('x', x + 1).attr('y', base - 10).attr('width', w - 2).attr('height', 10).attr('rx', 2).attr('fill', cur ? GOLD : past ? NAVY : CREAM).attr('fill-opacity', cur ? 1 : past ? 0.55 : 1).attr('stroke', NAVY).attr('stroke-width', 0.8);
+    const cur = !whole && p.n === n, past = whole || p.n < n;
+    const step = g.append('rect').attr('x', x + 1).attr('y', base - 10).attr('width', w - 2).attr('height', 10).attr('rx', 2).attr('fill', cur ? GOLD : past ? NAVY : CREAM).attr('fill-opacity', cur ? 1 : past ? 0.55 : 1).attr('stroke', NAVY).attr('stroke-width', 0.8);
+    if (onPick) step.style('cursor', 'pointer').on('click', () => onPick(p.n));
     g.append('text').attr('class', 'tick-label').attr('x', x + w / 2).attr('y', base + 16).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', NAVY).attr('font-weight', cur ? 700 : 400).text(p.at);
   });
   g.append('line').attr('class', 'baseline').attr('x1', x0).attr('x2', x1).attr('y1', base).attr('y2', base).attr('stroke', NAVY).attr('stroke-width', 1.2);

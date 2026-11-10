@@ -79,6 +79,8 @@ export async function snapshotSVG(svgNode, { transparent = false } = {}) {
   }
   // Transparent background: no sheet, no grain, no vignette. Off by default.
   if (transparent) clone.querySelectorAll('.paper, .paper-overlay, .paper-vignette').forEach((e) => e.remove());
+  // (the picture a pan slides, src/us/main.js, lies hidden under the map: not part of an export)
+  clone.querySelectorAll('.zoom-proxy').forEach((e) => e.remove());
 
   for (const img of clone.querySelectorAll('image')) {
     const href = img.getAttribute('href') || img.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
@@ -118,6 +120,48 @@ export async function renderPNG(svgNode, { width = 1920, height = 1080, transpar
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     if (!blob) throw new Error('The browser could not encode the PNG.');
     return blob;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+// A picture of the map alone (one view of the sheet, without the legend, the cartouche or the strip) at the size it
+// has on screen: what a pan or a zoom slides while the gesture runs (src/us/main.js). rect: the view's box on the
+// sheet; keep: the group that holds it. → a blob: URL of a JPEG, the caller's to revoke.
+export async function renderViewBitmap(svgNode, { keep = '.view-clip-main', rect, scale = 1 } = {}) {
+  const clone = svgNode.cloneNode(true);
+  const [x, y, w, h] = rect;
+  clone.setAttribute('xmlns', SVG_NS);
+  clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+  clone.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
+  clone.setAttribute('width', Math.round(w * scale));
+  clone.setAttribute('height', Math.round(h * scale));
+  clone.removeAttribute('style');
+  const kept = clone.querySelector(keep);
+  if (!kept) throw new Error('no view to picture');
+  for (const el of [...kept.parentNode.children]) if (el !== kept) el.remove();
+  kept.querySelectorAll('.zoom-proxy').forEach((e) => e.remove());
+  for (const sel of ['g.snapshots > g.snap', 'g.polity-labels > g.snap-labels']) {
+    const layers = clone.querySelectorAll(sel);
+    layers.forEach((g, i) => { if (i < layers.length - 1) g.remove(); else g.style.opacity = 1; });
+  }
+  for (const img of clone.querySelectorAll('image')) {
+    const href = img.getAttribute('href') || img.getAttributeNS('http://www.w3.org/1999/xlink', 'href');
+    if (href) img.setAttribute('href', await toDataURL(new URL(href, location.href).href));
+  }
+  const style = document.createElementNS(SVG_NS, 'style');
+  style.textContent = await collectCSS();
+  clone.insertBefore(style, clone.firstChild);
+  const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], { type: 'image/svg+xml;charset=utf-8' }));
+  try {
+    const img = await loadImage(url);
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+    if (!blob) throw new Error('The browser could not encode the picture.');
+    return URL.createObjectURL(blob);
   } finally {
     URL.revokeObjectURL(url);
   }

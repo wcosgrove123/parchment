@@ -51,6 +51,11 @@ body.shot .na-hits path:hover { fill-opacity: 0; }
 /* labels */
 .label.polity.native { font-variant: normal; font-style: italic; font-weight: 400; letter-spacing: 0.04em; fill-opacity: 0.85; }
 .view-bg { fill: var(--parchment); }
+/* pan and zoom: the map is dragged; while a gesture runs on the continent its insets step aside */
+#map { touch-action: none; }
+.view-clip-main { cursor: grab; }
+.view-clip-main:active { cursor: grabbing; }
+.stage.zooming .view-clip:not(.view-clip-main), .stage.zooming .inset-frame, .stage.zooming .inset-title { display: none; }
 
 /* insets */
 .inset-frame { fill: none; stroke: var(--navy); stroke-width: 0.9; }

@@ -35,9 +35,22 @@ function loadSource(url) {
 // box: [x0, y0, x1, y1] of the frame on the sheet. Resolves to a PNG data URL the size of the frame.
 // bounds: { west, south, east, north } when the image is one region's (scripts/relief-region.mjs), not the world's;
 // outside it the ground is flat.
-export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale = 0.5, bounds = null } = {}) {
+// over: finer images of smaller regions ([{ url, bounds }], a battlefield's hillshade), laid over the base one where
+// they reach and feathered into it at their edges.
+const KEEP = 24; // views kept (a pan-and-zoom session makes one per view; the oldest are made again if asked for)
+function sampleBox(src, b, ll) {
+  const fx = ((ll[0] - b.west) / (b.east - b.west)) * src.w - 0.5, fy = ((b.north - ll[1]) / (b.north - b.south)) * src.h - 0.5;
+  if (!(fx >= 0 && fy >= 0 && fx < src.w - 1 && fy < src.h - 1)) return null;
+  const xa = Math.floor(fx), ya = Math.floor(fy), tx = fx - xa, ty = fy - ya, g = src.g, w = src.w;
+  const v = (g[ya * w + xa] * (1 - tx) + g[ya * w + xa + 1] * tx) * (1 - ty) + (g[(ya + 1) * w + xa] * (1 - tx) + g[(ya + 1) * w + xa + 1] * tx) * ty;
+  // how far inside the image, 0 at its edge to 1 a tenth of the way in
+  const edge = Math.min(fx / src.w, 1 - fx / src.w, fy / src.h, 1 - fy / src.h);
+  return { v, weight: Math.max(0, Math.min(1, edge / 0.1)) };
+}
+export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale = 0.5, bounds = null, over = [], trust = false } = {}) {
   if (made.has(key)) return made.get(key);
-  const job = loadSource(url).then(({ w, h, g }) => {
+  const job = Promise.all([loadSource(url), ...over.map((o) => loadSource(o.url).catch(() => null))]).then(([{ w, h, g }, ...tops]) => {
+    const fine = over.map((o, i) => (tops[i] ? { ...tops[i], b: o.bounds } : null)).filter(Boolean);
     const ow = Math.round((x1 - x0) * scale), oh = Math.round((y1 - y0) * scale);
     const canvas = document.createElement('canvas');
     canvas.width = ow; canvas.height = oh;
@@ -51,7 +64,8 @@ export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale 
         let v = 255;
         const ll = projection.invert([sx, sy]);
         if (ll && Number.isFinite(ll[0]) && Number.isFinite(ll[1]) && Math.abs(ll[1]) <= 90) {
-          const back = projection(ll);
+          // (trust: a free view lies well inside its projection, every pixel of it a real place; no need to check the way back)
+          const back = trust ? [sx, sy] : projection(ll);
           if (bounds && back && Math.abs(back[0] - sx) < 1 && Math.abs(back[1] - sy) < 1) {
             // a region's image: bilinear inside its box, no wrapping
             const fx = ((ll[0] - bounds.west) / (bounds.east - bounds.west)) * w - 0.5, fy = ((bounds.north - ll[1]) / (bounds.north - bounds.south)) * h - 0.5;
@@ -67,6 +81,13 @@ export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale 
             const xl = (xa + w) % w, xr = (xa + 1) % w, yb = Math.min(h - 1, ya + 1);
             v = (g[ya * w + xl] * (1 - tx) + g[ya * w + xr] * tx) * (1 - ty) + (g[yb * w + xl] * (1 - tx) + g[yb * w + xr] * tx) * ty;
           }
+          if (fine.length && back && Math.abs(back[0] - sx) < 1 && Math.abs(back[1] - sy) < 1) {
+            for (const t of fine) {
+              if (ll[0] <= t.b.west || ll[0] >= t.b.east || ll[1] <= t.b.south || ll[1] >= t.b.north) continue;
+              const s = sampleBox(t, t.b, ll);
+              if (s) { v = v * (1 - s.weight) + s.v * s.weight; break; }
+            }
+          }
         }
         const k = (py * ow + px) * 4;
         d[k] = d[k + 1] = d[k + 2] = v; d[k + 3] = 255;
@@ -76,5 +97,6 @@ export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale 
     return canvas.toDataURL('image/png');
   });
   made.set(key, job);
+  while (made.size > KEEP) made.delete(made.keys().next().value);
   return job;
 }

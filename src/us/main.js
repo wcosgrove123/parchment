@@ -5,11 +5,11 @@
 
 import * as d3 from 'd3';
 import { loadJSON } from '../data/loader.js';
-import { renderPNG, renderSVG, download, exportName } from '../export/export.js';
+import { renderPNG, renderSVG, download, exportName, renderViewBitmap } from '../export/export.js';
 import stage from '../stages/north-america.json';
 import powers from './powers.json';
 import trackerDefs from './trackers.json';
-import { createUSStage, prepareData, powerAt, nbName, US_FROM } from './stage.js';
+import { createUSStage, prepareData, powerAt, nbName, US_FROM, prepareRelief, freeFrame } from './stage.js';
 import { parseDate, endOfYear, yearOf, longDate, isoDate, nextDay, OPEN } from './dates.js';
 import { fmt as fmtN, pct as pctN } from './native.js';
 import parties from './parties.json';
@@ -26,7 +26,7 @@ import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
 import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from '../military/play.js';
 import { toInt as warDay } from '../military/wars.js';
-import { battleById, battleRows, battlePositions, battleMoves, battleTerrain, strengthOf } from '../military/events.js';
+import { battleById, battleRows, battlePositions, battleMoves, battleTerrain, strengthOf, phaseCovers } from '../military/events.js';
 import { viewMembers } from '../military/wars.js';
 import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
@@ -105,7 +105,7 @@ async function main() {
   // name OHM's copy of it carries: the Republic of Texas is Newberry's tx_republic), and the 1:10m rivers of North
   // America (the Nueces is not in the 1:50m set).
   const riverNames = parseList(params.get('rivers'));
-  const [ohmSources, riversNA, regional] = await Promise.all([
+  let [ohmSources, riversNA, regional] = await Promise.all([
     LESSON && params.get('highlight') ? loadJSON('data/us/ohm-sources.json').catch(() => null) : null,
     LESSON && (frameFound || riverNames.length) ? loadJSON('data/base/derived/rivers-na.topojson').catch(() => null) : null,
     // relief for a frame: North America at Natural Earth's full resolution (scripts/relief-region.mjs), else the world
@@ -156,6 +156,33 @@ async function main() {
       legendRows: (recs) => [...routeLegend(recs.routes), ...pointLegendRows(recs.points)],
     };
   }
+  // Pan and zoom (owner, 2026-11-10): the lesson for a view the reader moved to. `fr`: a frame (a free view from
+  // stage.js freeFrame, or a focus), or null for the continent. What the page opened with (its title, highlight,
+  // rivers, inset) is kept; only the frame, its relief and its rivers follow the view.
+  const lesson0 = lesson;
+  let tilesJob = null; // the finer reliefs some focuses bring (a battlefield's hillshade), read once
+  const reliefTiles = () => (tilesJob ??= Promise.all((focusTable.focuses ?? []).filter((f) => f.relief)
+    .map((f) => loadJSON(`assets/${f.relief}`).then((j) => ({ id: f.id, image: j.image, box: j.box })).catch(() => null))).then((l) => l.filter(Boolean)));
+  async function lessonFor(fr) {
+    if (!fr && !LESSON) return null;
+    if (fr && (!riversNA || !regional)) {
+      const [r, g] = await Promise.all([riversNA ?? loadJSON('data/base/derived/rivers-na.topojson').catch(() => null), regional ?? loadJSON('assets/relief/north-america-plate-carree.json').catch(() => null)]);
+      riversNA = r; regional = g;
+    }
+    const tiles = fr ? await reliefTiles() : [];
+    const box = fr?.box ?? stage.extent;
+    const own = fr?.focus?.relief ? tiles.find((t) => t.id === fr.focus.id) : null;
+    const base = own && within(box, own.box) ? own : regional && within(box, regional.box) ? regional : null;
+    const reaches = (t) => t.box.west < box.east && t.box.east > box.west && t.box.south < box.north && t.box.north > box.south;
+    // (a finer image is laid over the base where it reaches the view, once the view is close enough for it to tell)
+    const over = fr ? tiles.filter((t) => t !== base && reaches(t) && (box.east - box.west) < 12 * (t.box.east - t.box.west)).map((t) => ({ url: `assets/${t.image}`, bounds: t.box })) : [];
+    const frame = fr ? { ...fr, projection: fr.view ? fr.spec : frameProjection(fr, projectionMode), legend: fr.focus?.legend ?? (fr.view ? 'bottom-right' : null), water: fr.focus?.water ?? [] } : null;
+    const kept = lesson0 ?? { sheet: { w: SHEET.w, h: SHEET.h }, inset: null, title: null, highlight: null, twins: new Map(), rivers: riverNames,
+      reliefScale: params.has('shot') ? 1 : 0.5, legendRows: (recs) => [...routeLegend(recs.routes), ...pointLegendRows(recs.points)] };
+    const name = fr?.view ? `view:${fr.view.center.map((x) => x.toFixed(4)).join(',')}@${fr.view.pxPerKm.toPrecision(5)}` : fr ? (fr.id ?? `${fr.box.west},${fr.box.south},${fr.box.east},${fr.box.north}`) : 'continent';
+    return { ...kept, key: `${name}-${projectionMode}-${SHEET.w}x${SHEET.h}`, frame, riverRank: frame ? riverRankFor(frame.box) : 0,
+      reliefWorld: base ? `assets/${base.image}` : 'assets/relief/world-plate-carree.png', reliefBounds: base ? base.box : null, reliefOver: over };
+  }
   // The Electoral College (National Archives, data/us/electoral.json): each election's looks, worked out once.
   const ec = await loadJSON('data/us/electoral.json').catch(() => null);
   const ecLooks = new Map();
@@ -201,6 +228,7 @@ async function main() {
     view: params.get('view') || null,
     battle: params.get('battle') || null, // a battle frame (milestone 9): a battle id from a war's battles, at a phase
     phase: Math.max(1, Number(params.get('phase')) || 1),
+    detailPhase: null, // a battle seen by zooming in: the phase picked in its list (null: the whole battle, or the phase the date has reached)
   };
 
   // The Military layer's data, read once when the layer is first shown: the wars of vocab.json and the membership
@@ -250,10 +278,18 @@ async function main() {
     const chapter = filmRec ? chapterOn(filmRec, date) : null;
     const war = battleRec ? battleRec.war : chapter?.war ? warById(milData.vocab, chapter.war) : state.war ? warById(milData.vocab, state.war) : (warsOn(milData.vocab, date)[0] ?? null);
     if (battleRec && war) return battleFor(war, battleRec.battle);
-    if (!war) {
-      if (!milWarned) { problems.push(state.war ? `war "${state.war}" is not in vocab.json's wars` : `no war in vocab.json is alive on ${longDate(date)}`); milWarned = true; }
-      return { war: null, members: [], names: state.names, title: 'Military', file: milData.file };
+    // A war is shown through its last day and no longer (owner, 2026-11-10: "the day after the treaty, it goes right
+    // back to normal country map and removes the battle/war history"). A film's chapters still say what they show.
+    const past = !!war && !chapter && date > warDay(war.end, true);
+    if (!war || past) {
+      if (!war && state.war && !milWarned) { problems.push(`war "${state.war}" is not in vocab.json's wars`); milWarned = true; }
+      detailRec = null; detailId = null; state.detailPhase = null;
+      return { war: null, members: [], names: state.names, title: 'Military', file: milData.file, after: past ? war.id : null };
     }
+    // Close enough to one of the war's battles, the sheet shows that battle (detailFor, below)
+    const det = chapter ? null : detailFor(war, date);
+    detailRec = det ? { war, battle: det.battle } : null;
+    if (det) return battleFor(war, det.battle, det);
     const viewRows = state.view ? viewMembers(war, state.view) : [];
     if (state.view && !viewRows.length && !milWarned) { problems.push(`view "${state.view}" is not one of ${war.id}'s (${Object.keys(war.views ?? {}).join(', ') || 'none yet'}); the map is drawn without it`); milWarned = true; }
     const members = [...viewRows, ...membersOf(milData.members, war.id)];
@@ -271,7 +307,8 @@ async function main() {
     const shown = showEvents ? sequenceFor(eventsUpTo(events, date).filter(byForce).filter((r) => !keyEvents || keyEvents.has(r.id)), seqSpec) : [];
     // movements since `from` (else the war's start) that have begun by the date, in their sides' colors
     const forceById = new Map((war.forces ?? []).map((f) => [f.id, f]));
-    const allMoves = withSides(movementsOf(milData.movements, war.id), war).map((r) => (widthMode ? { ...r, strengthN: strengthOf(r, forceById.get(r.force)) } : r));
+    // (a battle's own marches, attacks and lines belong to the battle seen close, not to the war's map: detailFor)
+    const allMoves = withSides(movementsOf(milData.movements, war.id).filter((r) => !r.battle), war).map((r) => (widthMode ? { ...r, strengthN: strengthOf(r, forceById.get(r.force)) } : r));
     // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
     const since = state.since ?? 0;
     // after the war's last day (a film's aftermath chapter, or any later date) the armies stand down: no movements or
@@ -310,12 +347,15 @@ async function main() {
   changeDays.electoral = electionDays(ec);
 
   const svg = d3.select('#map');
-  const atlas = createUSStage(svg, stage, { ne, bathy, riversNA }, {
+  // (built again whenever the reader pans or zooms to a new view: see "pan and zoom" below)
+  const buildStage = () => createUSStage(svg, stage, { ne, bathy, riversNA }, {
     powers, trackers: TRACKERS,
     onPick: (it, date) => showInfo(it, date),
     onYear: (y, { live }) => { setDate(endOfYear(y), { exact: false, fade: live ? 0 : 250 }); },
+    onPhase: (n) => pickPhase(n),
     lesson,
   });
+  let atlas = buildStage();
   // The records an order points at: points by Wikidata id or record id, routes by record id, from the record table
   // (the Sheet, or ?records=path.csv; an order rendered by scripts/map.mjs always names a file in the repository).
   const orderRecords = LESSON && (params.get('places') || params.get('routes')) ? await recordsForOrder(state.date) : { points: [], routes: [], warnings: [], file: null };
@@ -330,8 +370,11 @@ async function main() {
     // Live dragging asks for many dates a second; draw the latest one per frame.
     if (pending) { pending.fade = Math.min(pending.fade, fade); return; }
     pending = { fade };
-    requestAnimationFrame(() => {
-      const { fade: f } = pending; pending = null;
+    requestAnimationFrame(() => { const { fade: f } = pending; pending = null; draw(f); });
+  }
+  // One picture of the state as it stands (render() asks for it on the next frame; a re-framed stage draws at once).
+  function draw(f) {
+    {
       const t = performance.now();
       // Electoral College: the latest election held by the date, shown on the map of its own day.
       const ecShown = state.mode !== 'diff' && state.tracker === 'electoral' ? electoralFor(state.date) : null;
@@ -353,7 +396,9 @@ async function main() {
         document.title = `Parchment · North America · ${shown(state.from, state.fromExact)} → ${shown(state.date, state.exact)}`;
         console.log(`diff ${isoDate(state.from)} → ${isoDate(state.date)} (${state.tracker}): ${(performance.now() - t).toFixed(0)} ms; appeared ${diff.appeared.length}, changed ${diff.changed.length}, vanished ${diff.vanished.length}, persisted ${diff.persisted.length}`);
       } else {
-        const n = atlas.show(data, state.date, state.tracker, { fade: f, electoral: ecShown, military: milShown });
+        // (the Military layer with no war on the date is the plain map of nations: see militaryFor)
+        const plain = state.tracker === 'military' && !milShown?.war;
+        const n = atlas.show(data, state.date, plain ? 'nations' : state.tracker, { fade: f, electoral: ecShown, military: plain ? null : milShown });
         atlas.setDate(state.date, { exact: state.exact });
         if (ecShown) d3.select('.cartouche .base-note').text(electionNote(ecShown.election));
         document.title = `Parchment · North America · ${shown(state.date, state.exact)}`;
@@ -364,7 +409,7 @@ async function main() {
       document.body.classList.toggle('mode-diff', state.mode === 'diff');
       document.body.classList.toggle('tracker-military', state.tracker === 'military');
       d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
-      if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === milShown.war?.id);
+      if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === (milShown.war?.id ?? state.war ?? ''));
       filmStatus();
       if (state.tracker === 'military') fillMilitaryTools();
       const q = new URLSearchParams();
@@ -381,7 +426,8 @@ async function main() {
       if (battleRec) q.set('phase', String(state.phase));
       if (state.tracker === 'military' && state.view) q.set('view', state.view); else q.delete('view');
       history.replaceState(null, '', `?${q}`);
-    });
+      staleProxy();
+    }
   }
 
   function setDate(d, { exact = false, fade = 300 } = {}) {
@@ -406,7 +452,7 @@ async function main() {
     render();
   }
   // (under the Electoral College, ← → go from election to election; Shift still moves ten years)
-  const stepYear = (delta) => (battleRec && Math.abs(delta) === 1 ? setPhase(state.phase + delta) : state.tracker === 'electoral' && Math.abs(delta) === 1
+  const stepYear = (delta) => (battleRec && Math.abs(delta) === 1 ? setPhase(state.phase + delta) : detailRec && Math.abs(delta) === 1 ? stepDetail(delta) : state.tracker === 'electoral' && Math.abs(delta) === 1
     ? stepChange(delta) : setDate(endOfYear(yearOf(state.date) + delta)));
   function stepChange(dir) {
     const days = changeDays[state.tracker] ?? changeDays.nations;
@@ -416,6 +462,13 @@ async function main() {
   function togglePlay() {
     if (filmRec) return toggleFilm();
     if (battleRec) return toggleBattlePlay();
+    if (detailRec && !state.playing) {
+      // ▶ over a battle seen close: its phases, four seconds each, then the whole battle again
+      pickPhase(1);
+      state.playing = setInterval(() => { if (!detailRec || state.detailPhase == null) { togglePlay(); return; } stepDetail(1); if (state.detailPhase == null) togglePlay(); }, PHASE_MS);
+      d3.select('#play').classed('active', true).text('❚❚');
+      return;
+    }
     if (state.playing) { clearInterval(state.playing); state.playing = null; }
     else {
       if (yearOf(state.date) >= SPAN_B) setDate(endOfYear(SPAN_A));
@@ -429,21 +482,71 @@ async function main() {
   // A battle frame (milestone 9): what the sheet shows in phase n of a battle. Rows that name the battle: the forces'
   // positions (the latest by the phase in full, earlier ones faded), the lines of battle and the attacks whose phase
   // covers n, the terrain the sources name. No side fills, no course list: the phases are the list and the strip.
-  function battleFor(war, battle) {
+  // `whole` (a battle already fought, seen by zooming in): every phase's marches and attacks at once, the forces where
+  // the last phase left them (their earlier stands faded), the lines of battle of the last phase.
+  function battleFor(war, battle, { n: asked = null, whole = false, ground = battleGround, auto = false } = {}) {
     const phases = battle.phases ?? [];
-    const n = Math.min(Math.max(1, state.phase), Math.max(1, phases.length));
+    const n = Math.min(Math.max(1, asked ?? state.phase), Math.max(1, phases.length));
     const phase = phases.find((p) => p.n === n) ?? { n, label: `phase ${n}`, at: `${n}`, when: battle.start };
     const rows = [...battleRows(milData.events, battle.id), ...battleRows(milData.movements, battle.id), ...battleRows(milData.members, battle.id)];
     const members = membersOf(milData.members, war.id);
     const forcesOf = (war.forces ?? []).filter((f) => !state.forces.length || state.forces.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
     const show = state.show.length ? state.show : ['movements', 'forces', 'terrain'];
-    const moves = show.includes('movements') ? withSides(battleMoves(rows, n), war).filter((r) => !state.forces.length || !r.force || state.forces.includes(r.force)) : [];
+    const isLine = (r) => r.kind === 'path' || ['front', 'siege-line', 'fortified-line', 'armistice-line'].includes(r.value);
+    const inPhase = whole ? rows.filter((r) => (r.kind === 'arrow' || r.kind === 'path') && r.coords && (isLine(r) ? phaseCovers(r, n) : true)) : battleMoves(rows, n);
+    const moves = show.includes('movements') ? withSides(inPhase, war).filter((r) => !state.forces.length || !r.force || state.forces.includes(r.force)) : [];
     const positions = show.includes('forces') ? battlePositions(forcesOf, rows, n, phases) : [];
     const checks = Object.fromEntries(positions.map((p) => [p.force.id, techFor(p.force, p.row, milData.tech, state.date)]));
     const shown = show.includes('terrain') ? battleTerrain(rows).map((r) => ({ ...r, seq: null })) : [];
     return { war, members, events: [], shown, moves, allMoves: moves, since: 0, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names,
       title: `${battle.label}, ${battle.dates}`, file: milData.file, strip: 'battle', show, film: null,
-      battle: { id: battle.id, record: battle, label: battle.label, dates: battle.dates, frame: battle.frame, phase: { n, label: phase.label, at: phase.at, when: phase.when, count: phases.length }, source: battle.source, ground: battleGround } };
+      battle: { id: battle.id, record: battle, label: battle.label, dates: battle.dates, frame: battle.frame, phase: { n, label: phase.label, at: phase.at, when: phase.when, count: phases.length }, source: battle.source, ground, whole, auto } };
+  }
+  // Detail by zoom (owner, 2026-11-10: "if i was zoomed in enough, it would show me the siege itself with different
+  // icons and arrows. but then i pan upwards to new york and everything else is still there"). When the view is
+  // close on one of the shown war's battles (most of its field on the sheet, and the field at least a fifth of the
+  // sheet's width) and the battle has begun by the date, the sheet shows that battle: on a day of the battle, the
+  // phase reached that day; afterwards, the whole battle. A phase picked in the list is shown alone.
+  let detailRec = null, detailId = null;
+  const grounds = new Map(); // battle id → its downloaded roads and streams (null until read)
+  function groundOf(b) {
+    if (!b.ground?.file) return null;
+    if (!grounds.has(b.id)) { grounds.set(b.id, null); loadJSON(b.ground.file).then((g) => { grounds.set(b.id, g); render({ fade: 0 }); }).catch(() => {}); }
+    return grounds.get(b.id);
+  }
+  function detailFor(war, date) {
+    const v = frameFound?.box;
+    let best = null;
+    if (v) for (const b of war.battles ?? []) {
+      if (!b.frame || date < warDay(b.start)) continue; // not yet fought
+      const f = resolveFrame(b.frame, focusTable);
+      if (!f) continue;
+      const ow = Math.min(v.east, f.box.east) - Math.max(v.west, f.box.west), oh = Math.min(v.north, f.box.north) - Math.max(v.south, f.box.south);
+      if (ow <= 0 || oh <= 0) continue;
+      const onSheet = (ow * oh) / ((f.box.east - f.box.west) * (f.box.north - f.box.south)); // how much of the field the sheet holds
+      const share = (f.box.east - f.box.west) / (v.east - v.west); // how much of the sheet's width the field takes
+      if (onSheet < 0.35 || share < 0.2) continue;
+      if (!best || onSheet * share > best.score) best = { battle: b, score: onSheet * share };
+    }
+    if (!best) { detailId = null; state.detailPhase = null; return null; }
+    const b = best.battle, phases = b.phases ?? [];
+    if (b.id !== detailId) { detailId = b.id; state.detailPhase = null; }
+    const done = date > warDay(b.end, true);
+    let reached = 1;
+    for (const p of phases) if (p.when && warDay(p.when) <= date) reached = p.n;
+    return { battle: b, n: state.detailPhase ?? (done ? Math.max(1, phases.length) : reached), whole: done && state.detailPhase == null, ground: groundOf(b), auto: true };
+  }
+  function pickPhase(n) {
+    if (battleRec) { if (n != null) setPhase(n); return; }
+    if (!detailRec) return;
+    state.detailPhase = n;
+    render({ fade: 0 });
+  }
+  function stepDetail(dir) {
+    const count = detailRec?.battle.phases?.length ?? 0;
+    if (!count) return;
+    const next = state.detailPhase == null ? (dir > 0 ? 1 : count) : state.detailPhase + dir;
+    pickPhase(next < 1 || next > count ? null : next);
   }
   function setPhase(n) {
     if (!battleRec) return;
@@ -497,11 +600,139 @@ async function main() {
   }
   function filmStatus() {
     if (battleRec) { const n = battleRec.battle.phases?.length ?? 0; d3.select('#film-status').text(`Phase ${state.phase} of ${n}`); return; }
-    if (!filmRec) return;
+    if (detailRec) { const b = milShown?.battle; d3.select('#film-status').text(b ? (b.whole ? `${b.label}: the whole battle` : `${b.label}: phase ${b.phase.n} of ${b.phase.count}`) : ''); return; }
+    if (!filmRec) { d3.select('#film-status').text(''); return; }
     const ch = chapterOn(filmRec, state.date);
     const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
     d3.select('#film-status').text(ch ? `Chapter ${ch.n} of ${filmRec.chapters.length} · ${mmss(secondsAt(filmRec, state.date))} / ${mmss(filmRec.seconds)}` : '');
   }
+
+  // ------------------------------------------------------------ pan and zoom (owner, 2026-11-10)
+  // Drag to pan, wheel or pinch to zoom, double-click to step in. While the gesture runs the drawn map slides and
+  // scales as it is; when it rests the stage is built again on the view it reached (a center and a scale: north up at
+  // the middle of the sheet, relief reshaded, rivers by scale, names placed afresh), so every resting view is a map
+  // the page could have opened on, and its address says so (frame=W,S,E,N). Zooming out to the continent's own scale
+  // returns the continent as it opens, insets and all.
+  const KM_CLOSEST = 5; // the closest view: about five kilometers across the sheet
+  const midOf = ([ax, ay, bx, by]) => [(ax + bx) / 2, (ay + by) / 2];
+  const scaleNow = () => { const g = atlas.geo; const c = g.projection.invert(midOf(g.inner)); return { center: c, k: g.pxPerKmAt(c) }; };
+  // the continent's own scale (pixels per kilometer at its middle): measured, or reckoned from its extent when the page opened on a frame
+  const continentK = !frameFound ? scaleNow().k
+    : (atlas.geo.inner[2] - atlas.geo.inner[0]) / ((stage.extent.east - stage.extent.west) * Math.cos((((stage.extent.south + stage.extent.north) / 2) * Math.PI) / 180) * 111.195);
+  let zoomT = d3.zoomIdentity, reframes = 0, resetting = false;
+  // What slides during the gesture is a picture of the map, not the drawing itself (thousands of paths, clips and
+  // hatches are slow to move; one picture is not). The picture is taken a moment after every redraw and laid under
+  // the drawing, where it cannot be seen; the first movement of a gesture hides the drawing and slides the picture.
+  // If a gesture begins before the picture is ready, the drawing itself slides.
+  let proxy = null, proxyStamp = 0, proxyTimer = null, sliding = null;
+  function staleProxy() {
+    proxyStamp++;
+    clearTimeout(proxyTimer);
+    proxyTimer = setTimeout(makeProxy, 180);
+  }
+  async function makeProxy() {
+    if (document.hidden || sliding || params.has('shot')) return;
+    const stamp = proxyStamp, g = atlas.geo, [ax, ay, bx, by] = g.inner;
+    const box = svg.node().getBoundingClientRect();
+    const scale = Math.min(2, Math.max(0.5, (box.width / atlas.sheet.w) * (window.devicePixelRatio || 1)));
+    let url = null;
+    try { url = await renderViewBitmap(svg.node(), { rect: [ax, ay, bx - ax, by - ay], scale }); } catch { return; }
+    if (stamp !== proxyStamp || sliding || g !== atlas.geo) { URL.revokeObjectURL(url); return; }
+    if (proxy) { proxy.node.remove(); URL.revokeObjectURL(proxy.url); }
+    const node = d3.select(g.node.parentNode).insert('image', '.view-main').attr('class', 'zoom-proxy')
+      .attr('x', ax).attr('y', ay).attr('width', bx - ax).attr('height', by - ay).attr('preserveAspectRatio', 'none').attr('href', url).node();
+    proxy = { url, node, stamp };
+  }
+  const zoomer = d3.zoom()
+    .filter((ev) => !ev.button && (!ev.ctrlKey || ev.type === 'wheel') && !!ev.target.closest?.('.view-clip-main'))
+    .on('zoom', (ev) => {
+      if (resetting) return;
+      zoomT = ev.transform;
+      if (!sliding) {
+        // (the picture, if it shows the map as it now stands; else the drawing)
+        const fresh = proxy && proxy.stamp === proxyStamp && proxy.node.isConnected;
+        sliding = fresh ? proxy.node : atlas.geo.node;
+        if (fresh) atlas.geo.node.style.display = 'none';
+        clearTimeout(proxyTimer);
+        svg.select('g.stage').classed('zooming', true);
+      }
+      sliding.setAttribute('transform', zoomT.toString());
+    })
+    .on('end', () => { if (!resetting) settle(); });
+  // (a gesture that ended where it began: the drawing as it was)
+  function restView() {
+    if (sliding) { sliding.removeAttribute('transform'); atlas.geo.node.style.display = ''; sliding = null; }
+    svg.select('g.stage').classed('zooming', false);
+  }
+  function zoomLimits() {
+    const g = atlas.geo, k = scaleNow().k, [ax, ay, bx, by] = g.inner;
+    zoomer.extent([[ax, ay], [bx, by]])
+      .scaleExtent([g.framed ? Math.min(1, continentK / k) : 1, Math.max(1, (bx - ax) / KM_CLOSEST / k)])
+      .translateExtent(g.framed ? [[-1e7, -1e7], [1e7, 1e7]] : [[ax, ay], [bx, by]]);
+  }
+  const frameText = (fr) => { const [ax, ay, bx, by] = atlas.geo.inner; return fr.view ? (() => {
+    // the address's box: the meridians at the middle of the left and right edges, the parallels at the middle of the top and bottom
+    const p = freeProjection(fr); const l = p.invert([ax, (ay + by) / 2]), r = p.invert([bx, (ay + by) / 2]), t = p.invert([(ax + bx) / 2, ay]), b = p.invert([(ax + bx) / 2, by]);
+    return [l[0], b[1], r[0], t[1]].map((x) => +x.toFixed(4)).join(',');
+  })() : `${fr.box.west},${fr.box.south},${fr.box.east},${fr.box.north}`; };
+  // (the free view's own projection, to read its edges)
+  function freeProjection(fr) {
+    const [ax, ay, bx, by] = atlas.geo.inner;
+    const p = d3.geoAzimuthalEqualArea().rotate(fr.spec.rotate).scale(1000).translate([0, 0]);
+    const a = p([fr.view.center[0], fr.view.center[1] - 0.005]), c = p([fr.view.center[0], fr.view.center[1] + 0.005]);
+    p.scale((1000 * fr.view.pxPerKm) / (Math.hypot(c[0] - a[0], c[1] - a[1]) / (0.01 * 111.195))).translate([(ax + bx) / 2, (ay + by) / 2]);
+    return p;
+  }
+  // Build the stage on a frame (null: the continent) and draw it at once. The relief is made first, so the swap is one step.
+  async function applyFrame(fr, still = () => true) {
+    const mine = ++reframes;
+    const t0v = performance.now();
+    const next = await lessonFor(fr);
+    await prepareRelief(stage, next);
+    if (mine !== reframes || !still()) return false; // the reader moved on; the view they rest on is drawn instead
+    frameFound = fr;
+    frameParam = fr ? (fr.id ?? frameText(fr)) : null;
+    if (frameParam) params.set('frame', frameParam); else params.delete('frame');
+    lesson = next;
+    if (filmRec) filmFrames = false; // the reader has taken the frame from the film's chapters
+    closeInfo();
+    if (proxy) { URL.revokeObjectURL(proxy.url); proxy = null; }
+    sliding = null;
+    atlas = buildStage();
+    if (lesson) atlas.setRecords(orderRecords);
+    atlas.strip.setChanges([...new Set(data.nb.map((it) => yearOf(it.p.s)))]);
+    recKey = null; milToolsKey = null;
+    zoomT = d3.zoomIdentity;
+    resetting = true; svg.call(zoomer.transform, d3.zoomIdentity); resetting = false;
+    zoomLimits();
+    draw(0);
+    console.log(`view ${frameParam ?? 'continent'}: rebuilt in ${(performance.now() - t0v).toFixed(0)} ms`);
+    return true;
+  }
+  function settle() {
+    const t = zoomT;
+    if (t.k === 1 && t.x === 0 && t.y === 0) { restView(); return; }
+    const g = atlas.geo;
+    let center = g.projection.invert(t.invert(midOf(g.inner)));
+    if (!center || !center.every(Number.isFinite)) { resetting = true; svg.call(zoomer.transform, d3.zoomIdentity); resetting = false; zoomT = d3.zoomIdentity; restView(); return; }
+    const k = g.pxPerKmAt(center) * t.k;
+    const e = stage.extent;
+    center = [Math.max(e.west, Math.min(e.east, center[0])), Math.max(e.south, Math.min(e.north, center[1]))];
+    // (at the continent's own scale, or wider, the continent itself)
+    applyFrame(k > continentK * 1.04 ? freeFrame(center, k, { w: SHEET.w, h: SHEET.h }) : null, () => zoomT === t);
+  }
+  svg.call(zoomer);
+  zoomLimits();
+  const zoomBy = (f) => svg.transition().duration(220).call(zoomer.scaleBy, f);
+  const zoomHome = () => applyFrame(null);
+  // (for scripts and tests: a view by its center and how many kilometers the sheet is wide; resolves once drawn)
+  const zoomTo = async (center, kmWide) => {
+    const [ax, , bx] = atlas.geo.inner;
+    const ok = await applyFrame(freeFrame(center, (bx - ax) / kmWide, { w: SHEET.w, h: SHEET.h }));
+    await atlas.reliefReady;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    return ok;
+  };
 
   // ------------------------------------------------------------ toolbar (chrome; never exported)
   const tb = d3.select('#toolbar').html('');
@@ -603,6 +834,10 @@ async function main() {
   tb.append('span').attr('id', 'film-status').attr('class', 'film-status').attr('title', 'The play run: chapter, and where the film\'s clock stands');
   tb.append('span').attr('class', 'sep');
 
+  tb.append('button').attr('id', 'zoom-out').attr('title', 'Zoom out (−)').text('−').on('click', () => zoomBy(1 / 1.8));
+  tb.append('button').attr('id', 'zoom-in').attr('title', 'Zoom in (+). Or: wheel to zoom, drag to pan, double-click to step in').text('+').on('click', () => zoomBy(1.8));
+  tb.append('button').attr('id', 'zoom-home').attr('title', 'The whole continent (0)').text('⌂').on('click', () => zoomHome());
+  tb.append('span').attr('class', 'sep');
   const exportMenu = tb.append('span').attr('class', 'menu');
   const exportBtn = exportMenu.append('button').attr('id', 'export').attr('title', 'Export the current view (E)').text('Export ▾')
     .on('click', () => exportMenu.classed('open', !exportMenu.classed('open')));
@@ -770,6 +1005,11 @@ async function main() {
     setPhase: async (n) => { setPhase(Number(n)); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return state.phase; },
     filmSeek: async (s) => { setDate(parseDate(s), { exact: true, fade: 0 }); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return isoDate(state.date); },
     get state() { return { ...state, iso: isoDate(state.date), fromIso: state.from != null ? isoDate(state.from) : null }; },
+    // Pan and zoom: the view shown, and a view by its center and width in kilometers (resolves once drawn).
+    view: () => ({ frame: frameParam, box: frameFound?.box ?? null, center: scaleNow().center, pxPerKm: scaleNow().k, kmWide: (atlas.geo.inner[2] - atlas.geo.inner[0]) / scaleNow().k, detail: detailRec ? detailRec.battle.id : null, phase: milShown?.battle ? { n: milShown.battle.phase.n, whole: !!milShown.battle.whole } : null }),
+    zoomTo: (center, kmWide) => zoomTo(center, kmWide),
+    zoomHome: async () => { await zoomHome(); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return true; },
+    pickPhase: async (n) => { pickPhase(n); await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))); return state.detailPhase; },
     // Resolves once the first picture is on the sheet, relief, fonts and all: what scripts/map.mjs waits for.
     ready: readyPromise,
     // The packing slip (src/us/slip.js): what this map shows, with dates and sources, as JSON.
@@ -789,6 +1029,9 @@ async function main() {
     else if (e.key === '[') stepChange(-1);
     else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
     else if (e.key === 'Escape') closeInfo();
+    else if (e.key === '+' || e.key === '=') zoomBy(1.8);
+    else if (e.key === '-' || e.key === '_') zoomBy(1 / 1.8);
+    else if (e.key === '0') zoomHome();
     else if (e.key === 'd' || e.key === 'D') setMode(state.mode === 'diff' ? 'snapshot' : 'diff');
     else if (e.key === 'e' || e.key === 'E') doExport(e.shiftKey ? '4k' : 'png');
   });
