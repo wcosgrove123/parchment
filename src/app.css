@@ -209,7 +209,7 @@ body.tracker-explorers #toolbar .seg, body.tracker-explorers #years, body.tracke
    neighbors another; a realm Cliopatria draws as the sum of its members (a "whole") gets a heavier line over theirs.
    The Holy Roman Empire is a band along the inside of its outer border with a line on the border itself, dashed while
    the border is approximate; navy, the borders' own color, until the owner chooses the band's look. */
-.polity.state { stroke: none; fill-opacity: 0.78; }
+.polity.state { stroke: none; fill-opacity: 0.86; }
 .polity.state.muted { fill: var(--cream); fill-opacity: 0; }
 .pol-0 { fill: var(--pol-0); }
 .pol-1 { fill: var(--pol-1); }

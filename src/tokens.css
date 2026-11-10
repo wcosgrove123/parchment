@@ -35,19 +35,19 @@
   --side-gray-line: #575b62;   --side-gray-fill: #a0a5ac;
   --side-red-line: #963633;   --side-red-fill: #d78e88;
 
-  /* Political map: a color per state, neighbors apart (owner, 2026-11-09); pale L 0.86 C 0.055, mid L 0.77 C 0.07 */
-  --pol-0: #f3c4bf;
-  --pol-1: #e7cdaa;
-  --pol-2: #ccd7af;
-  --pol-3: #b0ddc8;
-  --pol-4: #a8dbe8;
-  --pol-5: #d0ccf3;
-  --pol-6: #dea39e;
-  --pol-7: #cfae82;
-  --pol-8: #aebb89;
-  --pol-9: #8ac3a9;
-  --pol-10: #7fc0d0;
-  --pol-11: #b3adde;
+  /* Political map: a color per state, neighbors apart (owner, 2026-11-09; bolder 2026-11-10): twelve hues, C 0.10 */
+  --pol-0: #f4a1a0;
+  --pol-1: #d7926b;
+  --pol-2: #edc47d;
+  --pol-3: #b5b76a;
+  --pol-4: #9ed193;
+  --pol-5: #5cb99b;
+  --pol-6: #5dcbd1;
+  --pol-7: #4ea4ca;
+  --pol-8: #86acea;
+  --pol-9: #9d94d9;
+  --pol-10: #d4a3df;
+  --pol-11: #ce84a7;
 
   /* Ground and water */
   --parchment: #EFE7D2;
