@@ -1314,6 +1314,12 @@
     "label": "Cape San Antonio, Argentina",
     "fetched": "2026-11-06"
   },
+  "Q5328040": {
+    "lon": -77.229,
+    "lat": 39.822,
+    "label": "East Cemetery Hill",
+    "fetched": "2026-11-10"
+  },
   "Q5370269": {
     "lon": -105.925,
     "lat": 36.2131,
@@ -1380,6 +1386,18 @@
     "label": "Pawnee Rock",
     "fetched": "2026-11-10"
   },
+  "Q7199572": {
+    "lon": -77.2562,
+    "lat": 39.8046,
+    "label": "Pitzer Woods",
+    "fetched": "2026-11-10"
+  },
+  "Q7367981": {
+    "lon": -77.2439,
+    "lat": 39.7952,
+    "label": "Rose Woods",
+    "fetched": "2026-11-10"
+  },
   "Q7413847": {
     "lon": -96.0975,
     "lat": 29.8069,
@@ -1416,11 +1434,29 @@
     "label": "Siege of Pueblo de Taos",
     "fetched": "2026-11-10"
   },
+  "Q7713801": {
+    "lon": -77.2364,
+    "lat": 39.8134,
+    "label": "The Angle",
+    "fetched": "2026-11-10"
+  },
+  "Q7756563": {
+    "lon": -77.2352,
+    "lat": 39.8076,
+    "label": "The Pennsylvania State Memorial",
+    "fetched": "2026-11-10"
+  },
   "Q7796515": {
     "lon": -97.7842,
     "lat": 26.0619,
     "label": "Thornton Affair",
     "fetched": "2026-11-09"
+  },
+  "Q7934417": {
+    "lon": -77.2503,
+    "lat": 39.8141,
+    "label": "Virginia Monument",
+    "fetched": "2026-11-10"
   },
   "Q7969688": {
     "lon": -116.6508,
@@ -1445,6 +1481,18 @@
     "lat": 0.6864,
     "label": "Tidore Island",
     "fetched": "2026-11-06"
+  },
+  "Q15262498": {
+    "lon": -77.2473,
+    "lat": 39.8183,
+    "label": "North Carolina Monument",
+    "fetched": "2026-11-10"
+  },
+  "Q16891146": {
+    "lon": -77.2434,
+    "lat": 39.8484,
+    "label": "Eternal Light Peace Memorial",
+    "fetched": "2026-11-10"
   },
   "Q20119933": {
     "lon": -86.9167,
@@ -1512,6 +1560,12 @@
     "label": "Brazos Santiago Pass",
     "fetched": "2026-11-09"
   },
+  "Q49012070": {
+    "lon": -77.2142,
+    "lat": 39.8261,
+    "label": "Benner Hill",
+    "fetched": "2026-11-10"
+  },
   "Q49475661": {
     "lon": -106.6983,
     "lat": 32.1825,
@@ -1535,5 +1589,11 @@
     "lat": 26.0899,
     "label": "Cerralvo",
     "fetched": "2026-11-09"
+  },
+  "Q122555434": {
+    "lon": -77.2261,
+    "lat": 39.8454,
+    "label": "Barlow Knoll",
+    "fetched": "2026-11-10"
   }
 }

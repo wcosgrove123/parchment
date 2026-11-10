@@ -156,9 +156,39 @@ export function layoutLabels(layer, defs, { marks, routes, rivers = [], zones, f
     zones, frame, width, maxPlaces, apart,
   });
 
+  // A route name that found no room along its line (a short arrow) sits beside the line's middle instead, level,
+  // in the line's color: the first of eight places clear of every other name, mark and zone (owner's review,
+  // 2026-11-10: "keep names on short arrows").
+  const hit = (a, b, pad = 2) => a.x < b.x + b.w + pad && b.x < a.x + a.w + pad && a.y < b.y + b.h + pad && b.y < a.y + a.h + pad;
+  const taken = [...zones, ...result.filter((p) => p.box).map((p) => p.box), ...marks.map((m) => ({ x: m.x - m.radius, y: m.y - m.radius, w: 2 * m.radius, h: 2 * m.radius }))];
+  for (const p of result) {
+    if (p.kind !== 'route' || p.box || p.dropped !== 'no-room') continue;
+    const l = byId.get(p.id);
+    if (!l || l.place || !l.samples?.length) continue;
+    const vis = frame ? l.samples.filter((q) => q[0] > frame.x0 + 8 && q[0] < frame.x1 - 8 && q[1] > frame.y0 + 8 && q[1] < frame.y1 - 8) : l.samples;
+    if (vis.length < 2) continue;
+    const g = l.width / 2 + 5;
+    let found = null;
+    for (const t of [0.5, 0.35, 0.65, 0.2, 0.8]) {
+      const [mx, my] = vis[Math.min(vis.length - 1, Math.floor(vis.length * t))];
+      for (const [dx, dy] of [[g, -g - l.h], [g, g], [-g - l.w, -g - l.h], [-g - l.w, g], [-l.w / 2, -g - l.h - 2], [-l.w / 2, g + 2], [g + 4, -l.h / 2], [-g - l.w - 4, -l.h / 2]]) {
+        const box = { x: mx + dx, y: my + dy, w: l.w, h: l.h };
+        if (frame && (box.x < frame.x0 + 4 || box.x + box.w > frame.x1 - 4 || box.y < frame.y0 + 4 || box.y + box.h > frame.y1 - 4)) continue;
+        if (taken.some((z) => hit(z, box))) continue;
+        found = box; break;
+      }
+      if (found) break;
+    }
+    if (!found) continue;
+    p.box = found; p.beside = true; delete p.dropped;
+    taken.push(found);
+  }
   // Leaders under the text, then point labels, then route names along their (possibly reversed) line.
   const placedPoints = result.filter((p) => p.kind === 'point' && p.box).map((p) => ({ ...p, l: byId.get(p.id) }));
-  const placedRoutes = result.filter((p) => p.kind === 'route' && p.box).map((p) => ({ ...p, l: byId.get(p.id) }));
+  const placedRoutes = result.filter((p) => p.kind === 'route' && p.box && !p.beside).map((p) => ({ ...p, l: byId.get(p.id) }));
+  const besideRoutes = result.filter((p) => p.kind === 'route' && p.box && p.beside).map((p) => ({ ...p, l: byId.get(p.id) }));
+  layer.selectAll('text.route-label-beside').data(besideRoutes, (p) => p.id).join('text')
+    .attr('class', (p) => `route-label route-label-beside ${p.l.color}`).attr('x', (p) => p.box.x).attr('y', (p) => p.box.y + p.box.h * 0.8).text((p) => p.l.text);
 
   layer.selectAll('line.leader').data(placedPoints.filter((p) => p.leader), (p) => p.id).join('line')
     .attr('class', 'leader')

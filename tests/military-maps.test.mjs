@@ -166,7 +166,7 @@ test('force marks (milestone 5): each force where its movements put it, its icon
 });
 
 test('the play run (milestone 7): a film still in its chapter, the chapter’s war and strip; after the war the armies stand down', { skip, timeout: 240000 }, async () => {
-  const { slip: s } = await render('military/texas-film', { date: '1836-04-21', out: undefined });
+  const { slip: s } = await render('military/texas-film', { date: '1836-04-21', preset: 'full', out: undefined });
   assert.deepEqual(s.render.page_errors, []);
   assert.deepEqual([s.resolved.war.film.id, s.resolved.war.film.chapter.n, s.resolved.war.film.chapter.count, s.resolved.war.film.chapter.war], ['texas-1821-1854', 2, 5, 'texas-revolution']);
   assert.deepEqual(s.resolved.war.film.chapter_span, ['1835-10-02', '1836-05-14']);
@@ -179,12 +179,21 @@ test('the play run (milestone 7): a film still in its chapter, the chapter’s w
   const labels = s.legend.rows.map((r) => r.label);
   assert.ok(labels.includes('Texas') && labels.includes('Mexico') && labels.some((l) => /under review/.test(l)));
   assert.ok(s.resolved.war.forces.some((f) => f.id === 'houston' && f.since === '1836-04-20'));
-  const after = await render('military/texas-film', { date: '1853-12-31', out: undefined });
+  const after = await render('military/texas-film', { date: '1853-12-31', preset: 'full', out: undefined });
   assert.deepEqual([after.slip.resolved.war.film.chapter.n, after.slip.resolved.war.id], [5, 'mexican-american-war']);
   assert.equal(after.slip.routes.length, 0, 'after the war the armies stand down');
   assert.equal(after.slip.resolved.war.forces.length, 0);
   assert.equal(after.slip.points.length, 22, 'the war and its three aftermath events');
   assert.equal(after.slip.resolved.war.course.at(-1).label, 'Gadsden Purchase treaty');
+  // the film's own preset is the classroom's: key events and forces, the short key, larger type, widths by numbers
+  const cls = await render('military/texas-film', { date: '1836-04-21', out: undefined });
+  assert.equal(cls.slip.resolved.war.preset, 'classroom', 'the film asks for it (vocab.json films)');
+  assert.equal(cls.slip.resolved.war.width, 'strength');
+  assert.ok(cls.slip.resolved.war.course.length <= 7 && cls.slip.resolved.war.course.length >= 4, 'key events only');
+  assert.deepEqual(cls.slip.resolved.war.forces.map((f) => f.id).sort(), ['houston', 'santa-anna-1836', 'urrea']);
+  const key = cls.slip.legend.rows.map((r) => r.label);
+  assert.ok(key.includes('Line width: the size of the force') && !key.some((l) => /^A force:|^Native nations|^Documented/.test(l)), 'a short key');
+  assert.ok(cls.slip.resolved.size.scale > 1.3, 'type sized for the back of the room');
 });
 
 test('a battle frame (milestone 9): Gettysburg at the evening of 2 July on its own frame, the corps, both lines, no fills', { skip, timeout: 240000 }, async () => {

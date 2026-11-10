@@ -24,7 +24,7 @@ import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
 import { eventLegend } from '../military/events.js';
-import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf, drawPhaseList, drawPhaseStrip } from '../military/draw.js';
+import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf, drawPhaseList, drawPhaseStrip, drawGround } from '../military/draw.js';
 import { forceLegend } from '../military/events.js';
 import { linesOn, blockadeRuns, borderRuns, dedupeRuns, runsLength } from '../military/lines.js';
 import { toInt as warInt } from '../military/wars.js';
@@ -201,6 +201,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   // (always made, since 2026-11-09: the Military layer draws its events through them on the live page too; empty
   // groups otherwise, so every other map is what it was)
   const recordLayers = {
+    ground: main.g.append('g').attr('class', 'mil-ground'), // a battle frame's downloaded roads and streams, under everything
     lines: main.g.append('g').attr('class', 'mil-lines'), // the Military layer's computed lines, under the routes
     routes: main.g.append('g').attr('class', 'routes'),
     marks: main.g.append('g').attr('class', 'marks'),
@@ -331,6 +332,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         drawMilList();
         root.classed('war-strip-on', true);
         drawPhaseStrip(root, frame, milNow.battle.record, milNow.battle.phase.n);
+        if (recordLayers.ground) drawGround(recordLayers.ground, defs, milNow.battle.ground ?? null, projection, main.box);
       } else {
         drawMilList = () => { milListBox = drawCourseList(root, frame, flagged, milNow.war, { corner: cornerNow(), title: milNow.war.list_title ?? 'The course of the war', avoid: legend.box() }); };
         drawMilList();
@@ -360,7 +362,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const base = trackerId === 'electoral'
         ? (electoral ? electoralLegend(electoral, { abstained: someAbstained(electoral, nbAlive) }) : { title: tracker.title, legend: [{ swatch: 'none', label: 'The first electors voted on 4 February 1789' }] })
         : legendFor(powers, tracker, trackerId, present, date, ohmAlive.length > 0, pop);
-      const shownLegend = lessonLegend(base, items, trackerId, hl);
+      const shownLegend = shortKey(lessonLegend(base, items, trackerId, hl), milNow);
       legend.set(shownLegend);
       if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
       recordLayout = layoutRecords(milZones);
@@ -527,7 +529,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const ecBadges = electoral ? fitElectoralBadges(v, nbItems, (p) => resultFor(electoral, p), zones, measure) : [];
     zones.push(...ecBadges.map((b) => b.box));
     const named = electoral ? nbItems.filter((it) => !resultFor(electoral, it.p)?.badge) : nbItems;
-    const labels = placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines });
+    // (a battle frame names its hills and roads, not the state it lies in)
+    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines });
     drawBadges(lg, badges);
     drawElectoralBadges(lg, ecBadges);
 
@@ -859,7 +862,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // the forces where they stand (milestone 5) go first: route names and place names keep clear of their boxes (the
     // label pass below); the lines themselves run under the marks, so the boxes are not zones here (a zone trims a
     // line, and at a continental scale a force's label box can cover a whole short march)
-    const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box, compact: !!milNow.battle }) : (recordLayers.forces.selectAll('*').remove(), []);
+    const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box, compact: milNow.preset === 'classroom', big: !!milNow.battle }) : (recordLayers.forces.selectAll('*').remove(), []);
     const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
     drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
     // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
@@ -1225,6 +1228,18 @@ function categoryLook(powers, key) {
   if (c.fill) return { fill: c.fill, label: c.label, cat: key };
   return { fill: null, label: null };
 }
+// The classroom preset's short key (owner's review, 2026-11-10): the sides, occupied land, how a battle and a place
+// taken are marked, the armies and their retreat, and the width key when widths mean numbers. Everything else the
+// full map's key explains (the numbered list, force frames and icons, computed lines, borders, Native nations,
+// certainty) is left to the full map and the slip.
+function shortKey(leg, mil) {
+  if (mil?.battle && leg?.legend) return { ...leg, legend: leg.legend.filter((r) => r.label !== 'Documented border') };
+  if (mil?.preset !== 'classroom' || !leg?.legend) return leg;
+  const keep = (r) => r.role === 'side' || r.role === 'occupied' || r.role === 'view' || r.role === 'width'
+    || (r.role === 'event' && (r.swatch === 'shape' || r.swatch === 'massacre'))
+    || (r.swatch === 'route' && (/: an armed force$/.test(r.label) || /^Retreat/.test(r.label)));
+  return { ...leg, legend: leg.legend.filter(keep) };
+}
 // (an occupied polygon is present twice: as its owner's fill, and as the occupier's hatch)
 const addPresent = (present, l) => { present.add(lookKey(l)); if (l.occ) present.add(`occ:side-${l.occ}:${l.occBy}`); };
 const lookKey = (l) => (l.seq ? `seq:${l.seq}` : l.pop ? `pop:${l.pop}` : l.land ? `land:${l.land}` : l.pattern ? `pat:${l.pattern}` : l.fill ? `fill:${l.fill}:${l.cat ?? l.label}` : 'none');
@@ -1269,7 +1284,7 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     if (present.has('icc')) rows.push({ swatch: 'line', style: 'icc', label: 'Original territory, as judged' });
   } else if (trackerId === 'military') {
     // the sides of the war shown, each with its members when there are several (src/military/wars.js)
-    const milRows = militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both');
+    const milRows = militaryLegend(tracker.mil?.war ?? null, tracker.mil?.members ?? [], present, date, tracker.mil?.names ?? 'both', tracker.mil?.view ?? null);
     // (a battle frame has no side fills: the sides are named by their lines and forces below, not by an empty member row)
     rows.push(...(tracker.mil?.battle ? milRows.filter((r) => r.role !== 'name' && !/^No member/.test(r.label)) : milRows));
     const icons = tracker.mil?.icons ?? {};
@@ -1393,7 +1408,8 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     const isNB = it.src === 'newberry';
     if (!isNB && it.look.pattern !== 'stipple' && it.cat === 'other' && trackerId === 'nations' && !main) continue;
     if (it.src === 'ohm' && (p.lvl === 'x' || silent(p.name))) continue; // overlaps carry a hatch, not a name
-    const texts = (isNB ? [nbName(p), p.name, p.abbr] : [p.name, shortName(p.name)]).map(cleanLabel);
+    // (occupied land prints the name its occupation row gives it: New Mexico, Mexico City)
+    const texts = [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? [nbName(p), p.name, p.abbr] : [p.name, shortName(p.name)])].map(cleanLabel);
     const poly = largestPolygon(it.f);
     if (!poly) continue;
     const [[bx0, by0], [bx1, by1]] = v.path.bounds(poly);
@@ -1416,7 +1432,7 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     // a nation's name, in italic (a Native nation an order did not light keeps its italic name, without the stipple)
     const native = it.look.pattern === 'stipple' || it.src === 'treaty' || (it.lit === false && (it.cat === 'native' || it.src === 'hb'));
     const rank = it.src === 'treaty' ? -1 : isNB ? 0 : native ? 2 : p.lvl === 2 ? 1 : 3;
-    seen.set(key, { key, texts: [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false });
+    seen.set(key, { key, texts: [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank: it.look?.occName ? 0.5 : rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false, poly, x0: bx0, y0: by0 });
   }
   for (const c of seen.values()) cands.push(c);
   cands.sort((a, b) => b.lit - a.lit || a.rank - b.rank || b.area - a.area);
@@ -1429,19 +1445,32 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
   for (const c of cands) {
     let size = Math.max(minSize, Math.min(maxSize, Math.sqrt(c.area) / (main ? 14 : 10)));
     let pick = null;
-    for (const t of c.texts) {
-      for (let s = size; s >= minSize; s -= 1.5) {
-        const tw = textWidth(measure, t, s, c.native), th = s * 1.05;
-        if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24)) continue;
-        const box = { x: c.cx - tw / 2, y: c.cy - th / 2, w: tw, h: th };
-        if (box.x < bx + 4 || box.x + box.w > bx + bw - 4 || box.y < by + 4 || box.y + box.h > by + bh - 4) continue;
-        if (placed.some((z) => overlaps(z, box, 2))) continue;
-        // (small caps are measured, not set: keep a few pixels more from an order's route lines)
-        if (lines.length && lines.some((s) => polylineHitsRect(s, box, 6))) continue;
-        pick = { t, s, box };
-        break;
+    // Under the Military layer a name whose middle is taken (a march runs down the Rio Grande through the middle of
+    // New Mexico) tries other places inside its polygon before it is given up (owner's review, 2026-11-10).
+    const centers = [[c.cx, c.cy]];
+    if (trackerId === 'military' && c.poly) {
+      for (const [fx, fy] of [[0.5, 0.3], [0.5, 0.7], [0.3, 0.5], [0.7, 0.5], [0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7], [0.5, 0.15], [0.5, 0.85]]) {
+        const q = [c.x0 + c.w * fx, c.y0 + c.h * fy];
+        const ll = v.proj.invert(q);
+        if (ll && d3.geoContains(c.poly, ll)) centers.push(q);
       }
-      if (pick) break;
+    }
+    for (const [ccx, ccy] of centers) {
+      for (const t of c.texts) {
+        for (let s = size; s >= minSize; s -= 1.5) {
+          const tw = textWidth(measure, t, s, c.native), th = s * 1.05;
+          if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24)) continue;
+          const box = { x: ccx - tw / 2, y: ccy - th / 2, w: tw, h: th };
+          if (box.x < bx + 4 || box.x + box.w > bx + bw - 4 || box.y < by + 4 || box.y + box.h > by + bh - 4) continue;
+          if (placed.some((z) => overlaps(z, box, 2))) continue;
+          // (small caps are measured, not set: keep a few pixels more from an order's route lines)
+          if (lines.length && lines.some((s) => polylineHitsRect(s, box, 6))) continue;
+          pick = { t, s, box };
+          break;
+        }
+        if (pick) break;
+      }
+      if (pick) { c.cx = ccx; c.cy = ccy; break; }
     }
     if (!pick) continue;
     if (c.native && ++natives > NATIVE_MAX) continue;

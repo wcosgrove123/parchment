@@ -26,7 +26,8 @@ import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
 import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from '../military/play.js';
 import { toInt as warDay } from '../military/wars.js';
-import { battleById, battleRows, battlePositions, battleMoves, battleTerrain } from '../military/events.js';
+import { battleById, battleRows, battlePositions, battleMoves, battleTerrain, strengthOf } from '../military/events.js';
+import { viewMembers } from '../military/wars.js';
 import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
@@ -50,7 +51,8 @@ if (frameParam && !frameFound) problems.push(`frame "${frameParam}" is neither a
 const sizeParam = params.get('size');
 const sizeFound = sizeParam ? parseSize(sizeParam) : null;
 if (sizeParam && !sizeFound) problems.push(`size "${sizeParam}" is not WIDTHxHEIGHT between 800 and 3840 pixels wide; 1920x1080 is used`);
-const SHEET = sheetFor(sizeFound, params.get('scale'));
+// (the classroom preset sets type larger: the sheet is drawn at 1.35, unless the address gives its own scale)
+const SHEET = sheetFor(sizeFound, params.get('scale') ?? (params.get('preset') === 'classroom' ? '1.35' : null));
 const projectionMode = params.get('projection') === 'page' ? 'page' : 'auto';
 if (params.get('projection') && !['page', 'auto'].includes(params.get('projection'))) problems.push(`projection "${params.get('projection')}" is not auto or page; auto is used`);
 
@@ -63,16 +65,21 @@ async function main() {
   if (params.get('battle') && !frameParam) {
     const vocab0 = await loadJSON('data/vocab.json').catch(() => null);
     const hit = vocab0 ? battleById(vocab0, params.get('battle')) : null;
+    // (a battle may ask for its own sheet, nearer the shape of its field: the page takes it into its address first)
+    if (hit?.battle.size && !params.has('size')) { const q = new URLSearchParams(location.search); q.set('size', hit.battle.size); location.replace(`?${q}`); return; }
     if (hit?.battle.frame) { frameParam = hit.battle.frame; frameFound = resolveFrame(frameParam, focusTable); }
   }
-  if (params.get('play') && !frameParam) {
+  if (params.get('play') && (!frameParam || !params.has('preset'))) {
     const vocab0 = await loadJSON('data/vocab.json').catch(() => null);
     const film0 = vocab0 ? filmById(vocab0, params.get('play')) : null;
+    if (film0?.preset && !params.has('preset')) { const q = new URLSearchParams(location.search); q.set('preset', film0.preset); location.replace(`?${q}`); return; }
     if (film0) {
       const ch0 = chapterOn(film0, parseDate(params.get('date')) ?? film0.start);
-      frameParam = ch0?.frame ?? film0.frame ?? null;
-      frameFound = frameParam ? resolveFrame(frameParam, focusTable) : null;
-      filmFrames = !!frameFound;
+      if (!frameParam) {
+        frameParam = ch0?.frame ?? film0.frame ?? null;
+        frameFound = frameParam ? resolveFrame(frameParam, focusTable) : null;
+        filmFrames = !!frameFound;
+      }
     }
   }
   const [ne, bathy, nbTopo, ohmTopo, cesTopo, natTopo, popData, landsTopo] = await Promise.all([
@@ -187,6 +194,11 @@ async function main() {
     sequence: params.get('sequence') === 'false' ? false : params.get('sequence') && params.get('sequence') !== 'true' ? parseList(params.get('sequence')) : true,
     strip: params.get('strip') || 'war',
     film: params.get('play') || null, // the play run: a film id from vocab.json's films (brief §5)
+    // the classroom preset (key events and forces, a short key, larger type, widths by numbers); width=strength on its
+    // own; view=<side>: the map as that side saw it (vocab.json wars[].views)
+    preset: params.get('preset') || null,
+    width: params.get('width') || null,
+    view: params.get('view') || null,
     battle: params.get('battle') || null, // a battle frame (milestone 9): a battle id from a war's battles, at a phase
     phase: Math.max(1, Number(params.get('phase')) || 1),
   };
@@ -230,6 +242,7 @@ async function main() {
   let milWarned = false;
   let filmRec = null; // the film being played, resolved (src/military/play.js), once ?play= names one
   let battleRec = null; // { war, battle } once ?battle= names one of a war's battles
+  let battleGround = null; // its downloaded roads and streams (data/battles/<id>.json)
   // What the layer shows on a date: the war asked for, else the longest war alive that day; its members; its title.
   function militaryFor(date) {
     if (!milData) return null;
@@ -241,28 +254,37 @@ async function main() {
       if (!milWarned) { problems.push(state.war ? `war "${state.war}" is not in vocab.json's wars` : `no war in vocab.json is alive on ${longDate(date)}`); milWarned = true; }
       return { war: null, members: [], names: state.names, title: 'Military', file: milData.file };
     }
-    const members = membersOf(milData.members, war.id);
+    const viewRows = state.view ? viewMembers(war, state.view) : [];
+    if (state.view && !viewRows.length && !milWarned) { problems.push(`view "${state.view}" is not one of ${war.id}'s (${Object.keys(war.views ?? {}).join(', ') || 'none yet'}); the map is drawn without it`); milWarned = true; }
+    const members = [...viewRows, ...membersOf(milData.members, war.id)];
+    // the classroom preset: the war's key events and key forces only (vocab.json), unless the order names forces
+    const classroom = state.preset === 'classroom';
+    const keyEvents = classroom && war.key_events?.length ? new Set(war.key_events) : null;
+    const forcesWanted = state.forces.length ? state.forces : classroom && war.key_forces?.length ? war.key_forces : [];
+    const widthMode = state.width === 'strength' || (classroom && state.width !== 'plain');
     if (!members.length && !milWarned) { problems.push(`no membership rows for ${war.id} in ${milData.file}: every state is drawn as a non-member (paper)`); milWarned = true; }
     // the war's events: all of them for the strip; those begun by the date for the map, numbered as the order says
     const events = eventsOf(milData.events, war.id);
     const showEvents = !state.show.length || state.show.includes('events');
     const seqSpec = state.show.length && !state.show.includes('sequence') ? false : state.sequence;
     const byForce = (r) => !state.forces.length || !r.force || state.forces.includes(r.force);
-    const shown = showEvents ? sequenceFor(eventsUpTo(events, date).filter(byForce), seqSpec) : [];
+    const shown = showEvents ? sequenceFor(eventsUpTo(events, date).filter(byForce).filter((r) => !keyEvents || keyEvents.has(r.id)), seqSpec) : [];
     // movements since `from` (else the war's start) that have begun by the date, in their sides' colors
-    const allMoves = withSides(movementsOf(milData.movements, war.id), war);
+    const forceById = new Map((war.forces ?? []).map((f) => [f.id, f]));
+    const allMoves = withSides(movementsOf(milData.movements, war.id), war).map((r) => (widthMode ? { ...r, strengthN: strengthOf(r, forceById.get(r.force)) } : r));
     // (without `from`, every movement begun by the date: an army's approach march before the first shot belongs on the map)
     const since = state.since ?? 0;
     // after the war's last day (a film's aftermath chapter, or any later date) the armies stand down: no movements or
     // stands are drawn; the events, the lines and the list stay
     const over = date > warDay(war.end, true);
-    const moves = over ? [] : !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !state.forces.length || state.forces.includes(r.force)) : [];
+    const moves = over ? [] : !state.show.length || state.show.includes('movements') ? movementsSince(allMoves, since, date).filter((r) => !forcesWanted.length || forcesWanted.includes(r.force)) : [];
     // where each force stands on the date (from every movement of its own, filtered only by `forces`), and whether
     // its equipment icon may draw: the row's tech, else the force's first, if the catalog's years cover the date
-    const forcesOf = (war.forces ?? []).filter((f) => !state.forces.length || state.forces.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
+    const forcesOf = (war.forces ?? []).filter((f) => !forcesWanted.length || forcesWanted.includes(f.id)).map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color ?? null }));
     const positions = over ? [] : !state.show.length || state.show.includes('forces') ? forcePositions(forcesOf, allMoves, date) : [];
     const checks = Object.fromEntries(positions.map((p) => [p.force.id, techFor(p.force, p.row, milData.tech, date)]));
     return { war, members, events, shown, moves, allMoves, since, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names, title: chapter ? chapter.title : warTitle(war, state.names), file: milData.file, strip: state.strip, show: state.show,
+      preset: state.preset, widthMode, view: viewRows.length ? state.view : null,
       film: chapter ? { id: filmRec.id, title: filmRec.title, chapter: { n: chapter.n, count: filmRec.chapters.length, title: chapter.title, pace: chapter.pace, war: chapter.war, from: chapter.from, to: chapter.to }, span: [chapter.fromInt, chapter.toInt], seconds: filmRec.seconds, at: secondsAt(filmRec, date) } : null };
   }
   // The layer's events and movements join the order's places and routes on the sheet; set again only when they
@@ -419,7 +441,7 @@ async function main() {
     const shown = show.includes('terrain') ? battleTerrain(rows).map((r) => ({ ...r, seq: null })) : [];
     return { war, members, events: [], shown, moves, allMoves: moves, since: 0, positions, checks, tech: milData.tech, icons: milData.icons, forces: state.forces, names: state.names,
       title: `${battle.label}, ${battle.dates}`, file: milData.file, strip: 'battle', show, film: null,
-      battle: { id: battle.id, record: battle, label: battle.label, dates: battle.dates, frame: battle.frame, phase: { n, label: phase.label, at: phase.at, when: phase.when, count: phases.length }, source: battle.source } };
+      battle: { id: battle.id, record: battle, label: battle.label, dates: battle.dates, frame: battle.frame, phase: { n, label: phase.label, at: phase.at, when: phase.when, count: phases.length }, source: battle.source, ground: battleGround } };
   }
   function setPhase(n) {
     if (!battleRec) return;
@@ -724,6 +746,7 @@ async function main() {
     if (!battleRec) problems.push(`battle "${state.battle}" is not a battle of any war in vocab.json`);
     else {
       state.war = battleRec.war.id;
+      if (battleRec.battle.ground?.file) battleGround = await loadJSON(battleRec.battle.ground.file).catch(() => { problems.push(`the ground of ${battleRec.battle.label} (${battleRec.battle.ground.file}) could not be read; the frame is drawn without roads and streams`); return null; });
       const phases = battleRec.battle.phases ?? [];
       state.phase = Math.min(Math.max(1, state.phase), Math.max(1, phases.length));
       const p = phases.find((x) => x.n === state.phase);

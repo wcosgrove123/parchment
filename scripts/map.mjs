@@ -20,17 +20,31 @@ import { serve, bundle } from './serve.mjs';
 import { orderToQuery, parseSize, sheetFor } from '../src/us/frames.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'play', 'battle', 'phase', 'out', 'svg', '_comment', 'notes']);
+// A film may name a preset and a battle a sheet size (data/vocab.json): an order that leaves them out takes them.
+function withRecordDefaults(order) {
+  if (!order.play && !order.battle) return order;
+  let vocab = null;
+  try { vocab = JSON.parse(readFileSync(join(ROOT, 'data', 'vocab.json'), 'utf8')); } catch { return order; }
+  const o = { ...order };
+  const film = order.play ? (vocab.films ?? []).find((f) => f.id === order.play) : null;
+  if (film?.preset && o.preset == null) o.preset = film.preset;
+  const battle = order.battle ? (vocab.wars ?? []).flatMap((w) => w.battles ?? []).find((b) => b.id === order.battle) : null;
+  if (battle?.size && o.size == null) o.size = battle.size;
+  return o;
+}
+
+const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'play', 'battle', 'phase', 'preset', 'width', 'view', 'out', 'svg', '_comment', 'notes']);
 
 // Renders one order. → { png, json, svg, slip, address }. Used by this command and by the MCP server (mcp/server.mjs).
-export async function renderOrder(order, { out = null, svg = false, base = process.cwd(), log = () => {}, browser = null } = {}) {
+export async function renderOrder(orderIn, { out = null, svg = false, base = process.cwd(), log = () => {}, browser = null } = {}) {
+  const order = withRecordDefaults(orderIn);
   const warnings = [];
   for (const k of Object.keys(order)) if (!FIELDS.has(k)) warnings.push(`the order's field "${k}" is not one Parchment reads`);
   for (const k of Object.keys(order.annotate ?? {})) if (!['rivers', 'places', 'routes'].includes(k)) warnings.push(`annotate.${k} is not one Parchment reads (rivers, places, routes)`);
   if ((order.page ?? 'us') !== 'us') throw new Error(`page "${order.page}": lesson maps are made on the North America page ("us") for now`);
   const size = order.size ? parseSize(order.size) : { width: 1920, height: 1080 };
   if (!size) throw new Error(`size "${order.size}" must be WIDTHxHEIGHT, 800 to 3840 pixels wide`);
-  const sheet = sheetFor(size, order.scale);
+  const sheet = sheetFor(size, order.scale ?? (order.preset === 'classroom' ? 1.35 : null));
   // Places and routes come from a records file in this folder, never from the Sheet: a render makes no network call.
   const a = order.annotate ?? {};
   const o = { ...order, records: order.records ?? ((a.places?.length || a.routes?.length) ? 'data/records.csv' : undefined) };

@@ -221,7 +221,9 @@ export function forceFrame(g, x, y, { glyph = 'infantry', echelon = 'XX', color 
 // the frame in the side's color with the equipment icon beside it when the catalog allows it on that date, the
 // label below; earlier stands as smaller frames in lighter steps, earliest lightest. positions: forcePositions;
 // checks: { forceId → techFor result }. Returns the boxes drawn, for the label pass to keep clear of.
-export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}, box = null, compact = false } = {}) {
+// big (a battle frame): a larger frame and name, no strength; compact (the classroom preset): frame and name only.
+export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}, box = null, compact = false, big = false } = {}) {
+  if (big) compact = true;
   layer.selectAll('*').remove();
   const boxes = [];
   const inBox = (p) => !box || (p[0] >= box[0] && p[0] <= box[0] + box[2] && p[1] >= box[1] && p[1] <= box[1] + box[3]);
@@ -234,7 +236,7 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
       if (!xy || !inBox(xy)) return;
       const t = 1 - (i + 1) / (pos.earlier.length + 1); // 1 = earliest
       const g = layer.append('g').attr('class', 'mil-force earlier').attr('opacity', 0.95);
-      forceFrame(g, xy[0] + 12, xy[1] - 12, { glyph: f.type, echelon: f.echelon ?? '', color: faded(color, 0.35 + 0.5 * t), size: 15 });
+      forceFrame(g, xy[0] + 12, xy[1] - 12, { glyph: f.type, echelon: f.echelon ?? '', color: faded(color, 0.35 + 0.5 * t), size: big ? 20 : 15 });
       g.append('title').text(`${f.label}: ${e.label}, to ${e.date}`);
     });
     const xy = proj(pos.at);
@@ -255,11 +257,11 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
     }
     g.append('line').attr('x1', xy[0]).attr('y1', xy[1]).attr('x2', fx - 6).attr('y2', fy + 6).attr('stroke', color).attr('stroke-width', 0.8).attr('stroke-opacity', 0.8);
     g.append('circle').attr('cx', xy[0]).attr('cy', xy[1]).attr('r', 2).attr('fill', color);
-    const fr = forceFrame(g, fx, fy, { glyph: f.type, echelon: f.echelon ?? '', color, size: compact ? 18 : 22 });
+    const fr = forceFrame(g, fx, fy, { glyph: f.type, echelon: f.echelon ?? '', color, size: big ? 30 : compact ? 18 : 22 });
     let right = fx + fr.w / 2;
     const check = checks[f.id];
     if (check?.ok && icons[check.key]) { iconAt(g, icons, check.key, right + 12, fy, 20, color); right += 24; }
-    const label = g.append('text').attr('class', 'mil-force-label').attr('x', fx).attr('y', fy + fr.h / 2 + 12).attr('text-anchor', 'middle').attr('font-size', 11).attr('font-weight', 700).attr('fill', color)
+    const label = g.append('text').attr('class', 'mil-force-label').attr('x', fx).attr('y', fy + fr.h / 2 + (big ? 15 : 12)).attr('text-anchor', 'middle').attr('font-size', big ? 14 : 11).attr('font-weight', 700).attr('fill', color)
       .attr('paint-order', 'stroke fill').attr('stroke', CREAM).attr('stroke-width', 3).attr('stroke-linejoin', 'round');
     label.append('tspan').text(f.label);
     if (strengthText) label.append('tspan').attr('font-weight', 400).attr('font-style', 'italic').attr('font-size', 10).text(` · ${strengthText}`);
@@ -268,6 +270,46 @@ export function drawForceMarks(layer, positions, proj, { icons = {}, checks = {}
     boxes.push({ x: fx - Math.max(labelW, fr.w) / 2 - 2, y: fy - fr.h / 2 - 2, w: w + 4, h: fr.h + 18 });
   }
   return boxes;
+}
+
+// The ground under a battle frame (owner's review, 2026-11-10: "the ground is bare gray with no roads, town or
+// creeks"): downloaded roads and streams (data/battles/<id>.json, scripts/fetch-battle-ground.mjs). Roads with a
+// period name are a cased line with the name along it; the town's streets a thinner one; streams steel blue with
+// their names in the water italic. proj: the frame's projection; box: [x, y, w, h].
+export function drawGround(layer, defs, ground, proj, box) {
+  layer.selectAll('*').remove();
+  if (!ground?.features?.length) return [];
+  const [bx, by, bw, bh] = box;
+  const inside = (p) => p && p[0] >= bx && p[0] <= bx + bw && p[1] >= by && p[1] <= by + bh;
+  const line = (pts) => 'M' + pts.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join('L');
+  const named = [];
+  let uid = 0;
+  for (const kind of ['stream', 'road']) {
+    for (const f of ground.features.filter((x) => x.properties.kind === kind)) {
+      const runs = f.geometry.coordinates.map((l) => l.map((c) => proj(c)).filter(Boolean)).filter((l) => l.length > 1);
+      if (!runs.length) continue;
+      const d = runs.map(line).join('');
+      const cls = kind === 'stream' ? 'ground-stream' : f.properties.town ? 'ground-street' : 'ground-road';
+      if (cls === 'ground-road') layer.append('path').attr('class', 'ground-road-case').attr('d', d);
+      layer.append('path').attr('class', cls).attr('d', d).append('title').text(kind === 'road' ? `${f.properties.name ?? 'street'} (today: ${f.properties.today})` : f.properties.name);
+      if (!f.properties.name) continue;
+      // the name runs along the longest stretch inside the frame, left to right
+      let best = null;
+      for (const r of runs) { const vis = r.filter(inside); const len = vis.reduce((a, p, i) => (i ? a + Math.hypot(p[0] - vis[i - 1][0], p[1] - vis[i - 1][1]) : 0), 0); if (!best || len > best.len) best = { vis, len }; }
+      const w = f.properties.name.length * 6.2;
+      if (!best || best.len < w + 30) continue;
+      const pts = best.vis[0][0] <= best.vis[best.vis.length - 1][0] ? best.vis : [...best.vis].reverse();
+      const id = `ground-name-${++uid}`;
+      defs.selectAll(`#${id}`).remove();
+      defs.append('path').attr('id', id).attr('class', 'ground-name-guide').attr('d', line(pts));
+      named.push({ id, name: f.properties.name, kind });
+    }
+  }
+  for (const n of named) {
+    layer.append('text').attr('class', `ground-name ${n.kind}`).attr('dy', n.kind === 'stream' ? -3 : -4)
+      .append('textPath').attr('href', `#${n.id}`).attr('startOffset', n.kind === 'stream' ? '62%' : '74%').attr('text-anchor', 'middle').text(n.name);
+  }
+  return named;
 }
 
 // Battle frames (milestone 9): the phases of the battle as the list in the margin (the current one in full, the

@@ -60,6 +60,17 @@ export function sideOf(war, members, keys, date) {
   return own;
 }
 
+// A side's view of the map (the owner's review, 2026-11-10: "how Mexico saw Texas, not only how U.S. law did"): a
+// war's `views` in vocab.json give, per side, membership rows that lie over the table's while the view is on (Texas
+// as Mexico's own land, held by the rebels and then by the United States). → rows shaped like the table's.
+export function viewMembers(war, view) {
+  const v = war?.views?.[view];
+  if (!v) return [];
+  const when = (iso) => { const [y, m, d] = String(iso).split('-').map(Number); return { year: y, month: m || undefined, day: d || undefined }; };
+  return (v.members ?? []).map((m, i) => ({ id: `view-${war.id}-${view}-${i + 1}`, tracker: 'military', kind: 'region', war: war.id, where: m.where, side: m.side, value: m.value ?? 'belligerent',
+    start: m.start, end: m.end, startWhen: when(m.start), endWhen: when(m.end), label: m.label ?? m.where, source: v.source ?? null, certainty: 'approximate', grade: 'exact', view }));
+}
+
 // Roles drawn at 40 % (grammar §5: influence or claim; proposal P2): dependents and satellites. (Occupied land,
 // hatched in the holder's color over the claimant's fill, comes with the lines milestone.)
 export const DEPENDENT = new Set(['dependent', 'satellite']);
@@ -67,13 +78,13 @@ export const sideFillKey = (side, role = 'belligerent') => `side-${side.color}${
 
 // The look a polygon takes on the Military layer: the side's fill (CSS: .na-fill.k-side-a), its label and id.
 // Occupied land (P2): the owner's fill, with `occ` the holder's color key for the hatch drawn over it.
-export const lookFor = ({ side, role, holder }) => (role === 'occupied'
-  ? { fill: side ? sideFillKey(side) : null, label: side?.label ?? null, cat: side?.id ?? `occupied-by-${holder.id}`, side: side?.id ?? null, role, occ: holder.color, occBy: holder.id, occLabel: holder.label }
+export const lookFor = ({ side, role, holder, occupation }) => (role === 'occupied'
+  ? { fill: side ? sideFillKey(side) : null, label: side?.label ?? null, cat: side?.id ?? `occupied-by-${holder.id}`, side: side?.id ?? null, role, occ: holder.color, occBy: holder.id, occLabel: holder.label, occName: String(occupation?.label ?? '').split(',')[0].trim() || null }
   : { fill: sideFillKey(side, role), label: side.label, cat: side.id, side: side.id, role });
 
 // Legend rows: one per side on the sheet, then its members with their dates when a side has more than one, then the
 // 40 % row where a dependent shows. `present` holds the look keys the sheet shows (src/us/stage.js lookKey).
-export function militaryLegend(war, members, present, date, names = 'both') {
+export function militaryLegend(war, members, present, date, names = 'both', view = null) {
   const rows = [];
   if (!war) return [{ swatch: 'none', label: 'No war named for this date' }];
   const when = (m) => {
@@ -86,7 +97,7 @@ export function militaryLegend(war, members, present, date, names = 'both') {
     const full = `fill:side-${side.color}:${side.id}`, dep = `fill:side-${side.color}-dep:${side.id}`;
     if (!present.has(full) && !present.has(dep)) continue;
     rows.push({ swatch: 'fill', key: `side-${side.color}`, label: side.label, role: 'side' });
-    const mine = members.filter((m) => m.side === side.id && aliveOn(m, date) && m.value !== 'occupied');
+    const mine = members.filter((m) => m.side === side.id && aliveOn(m, date) && m.value !== 'occupied' && !m.view);
     if (mine.length > 1) for (const m of mine) rows.push({ swatch: 'none', label: `  ${m.label}${when(m) ? `, ${when(m)}` : ''}${m.value && m.value !== 'belligerent' ? ` (${m.value})` : ''}`, role: 'member' });
     if (present.has(dep)) rows.push({ swatch: 'fill', key: `side-${side.color}-dep`, label: `Dependent or satellite of ${side.label}`, role: 'side' });
   }
@@ -94,8 +105,9 @@ export function militaryLegend(war, members, present, date, names = 'both') {
   for (const side of war.sides) {
     if (!present.has(`occ:side-${side.color}:${side.id}`)) continue;
     const under = war.sides.find((s) => s.id !== side.id && present.has(`fill:side-${s.color}:${s.id}`));
-    rows.push({ swatch: 'occupied', key: under ? `side-${under.color}` : null, occ: side.color, label: `Occupied by ${side.label}, in whole or in part`, role: 'occupied' });
+    rows.push({ swatch: 'occupied', key: under ? `side-${under.color}` : null, occ: side.color, label: war.views?.[view]?.hatch_labels?.[side.id] ?? `Occupied by ${side.label}, in whole or in part`, role: 'occupied' });
   }
+  if (view && war.views?.[view]?.note) rows.push({ swatch: 'none', label: war.views[view].note, role: 'view' });
   if (!rows.length) rows.push({ swatch: 'none', label: 'No member of either side on this sheet' });
   // The perspective rule (brief, ground rules): the order chooses whose name prints; the other side's name is not lost.
   if (names === 'both') for (const o of otherNames(war, names)) rows.push({ swatch: 'none', label: `${o.label}: ${o.name}`, role: 'name' });

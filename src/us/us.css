@@ -163,6 +163,16 @@ body:not(.tracker-military) #war { display: none; }
 #toolbar .film-status { font-size: 12px; opacity: 0.8; margin-left: 6px; white-space: nowrap; }
 #toolbar .film-status:empty { display: none; }
 .phase-list .course-row { font-size: 11.5px; }
+.record-labels .route-label-beside { font-size: 13px; }
+/* the ground under a battle frame: downloaded roads and streams */
+.ground-road-case { fill: none; stroke: var(--cream); stroke-width: 4.2; stroke-opacity: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.ground-road { fill: none; stroke: var(--navy); stroke-width: 1.5; stroke-opacity: 0.62; stroke-linecap: round; stroke-linejoin: round; }
+.ground-street { fill: none; stroke: var(--navy); stroke-width: 1; stroke-opacity: 0.5; stroke-linecap: round; }
+.ground-stream { fill: none; stroke: var(--steel); stroke-width: 1.5; stroke-opacity: 0.75; stroke-linecap: round; stroke-linejoin: round; }
+.ground-name-guide { fill: none; stroke: none; }
+.ground-name { font-family: var(--font); font-size: 10.5px; font-style: italic; letter-spacing: 0.04em; paint-order: stroke fill; stroke: var(--cream); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.ground-name.road { fill: var(--navy); fill-opacity: 0.78; }
+.ground-name.stream { fill: var(--steel); }
 /* occupied land (P2): the occupier's line color as a hatch over the owner's fill; opposite slant to the rust dispute hatch */
 .hatch-side-line { stroke-width: 2.4; }
 .hatch-side-line.side-a { stroke: var(--side-a-line); } .hatch-side-line.side-b { stroke: var(--side-b-line); }

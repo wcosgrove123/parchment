@@ -81,6 +81,17 @@ export function movementsSince(moves, since, date) {
 export function withSides(rows, war) {
   return rows.map((r) => { const s = (war?.sides ?? []).find((x) => x.id === r.side); return s ? { ...r, sideColor: s.color, sideLabel: s.label } : { ...r }; });
 }
+// A movement's strength as a number, for the width mode (brief P3; milestone 10): the row's own `strength`
+// (`us=110`, `mexico=3000-4000`: the figure for the row's side, a range taken at its middle), else the first
+// number of its force's strength text ("≈2,300 at Palo Alto"). → a number, or null when neither says.
+export function strengthOf(row, force = null) {
+  const num = (t) => { const m = /(\d[\d,]*)(?:\s*[-–]\s*(\d[\d,]*))?/.exec(String(t ?? '')); if (!m) return null; const a = Number(m[1].replace(/,/g, '')), b = m[2] ? Number(m[2].replace(/,/g, '')) : a; return Math.round((a + b) / 2); };
+  const own = String(row?.strength ?? '').split(';').map((x) => x.trim()).filter(Boolean).map((x) => x.split('=').map((y) => y.trim()));
+  const mine = own.find(([k]) => k === row?.side) ?? (own.length === 1 && own[0].length === 1 ? ['', own[0][0]] : null);
+  if (mine && num(mine[1]) != null) return num(mine[1]);
+  return num(force?.strength?.text);
+}
+
 // The forces on the strip: one bar per `force` id (else per label), spanning its movements, in its side's color.
 export function forceBars(moves) {
   const by = new Map();

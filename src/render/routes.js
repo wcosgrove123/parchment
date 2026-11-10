@@ -47,6 +47,12 @@ const HEADS = {
 };
 const MIL_LABELS = { front: 'Line of battle', 'siege-line': 'Siege line', 'fortified-line': 'Fortified line', 'armistice-line': 'Armistice line', advance: 'Advance', retreat: 'Retreat or withdrawal', 'flank-march': 'Flank march', envelopment: 'Envelopment', feint: 'Feint', pursuit: 'Pursuit', raid: 'Raid', landing: 'Landing from the sea', breakthrough: 'Breakthrough', 'naval-passage': 'Fleet', 'air-route': 'Air route', 'supply-line': 'Supply line' };
 
+// Strength mode (brief P3, milestone 10; Minard): a force's line as wide as the square root of its numbers, from
+// 1.6 px for a hundred men to 10 px for twenty thousand. Only when the record carries `strengthN` (the page sets it
+// in strength mode), and always with the legend's three sample widths.
+export const strengthWidth = (n) => Math.max(1.6, Math.min(10, 1.5 + 8.5 * Math.sqrt(Math.max(0, n) / 20000)));
+export const STRENGTH_SAMPLES = [500, 5000, 20000];
+
 // Style for one record: what the renderer and the legend both read.
 export function routeStyle(rec) {
   // The Military layer: the closed barb means an armed force, as now, in its side's color (rec.sideColor, set by the
@@ -57,10 +63,13 @@ export function routeStyle(rec) {
     const landing = rec.value === 'landing';
     // a line of battle, a front or a fortified line is a path: no head, a heavier stroke
     if (rec.kind === 'path' || ['front', 'siege-line', 'fortified-line', 'armistice-line'].includes(rec.value)) {
-      return { color, width: WIDTHS.bold, tier: 'bold', dash: DASH[rec.certainty] ?? 'solid', heads: 'none', markerStart: null, markerEnd: null, military: true, front: true, classLabel: MIL_LABELS[rec.value] ?? 'Line' };
+      // (on a battle frame the line of battle is the heaviest stroke on the sheet; solid whatever its certainty,
+      // which its row and the slip still state: at this width a dash reads as a row of blocks)
+      return { color, width: rec.battle ? 7.5 : WIDTHS.bold, tier: 'bold', dash: rec.battle ? 'solid' : (DASH[rec.certainty] ?? 'solid'), heads: 'none', markerStart: null, markerEnd: null, military: true, front: true, classLabel: MIL_LABELS[rec.value] ?? 'Line' };
     }
-    return { color, width: retreat ? WIDTHS.regular + 1.4 : WIDTHS.regular, tier: 'regular', dash: DASH[rec.certainty] ?? 'solid', heads: 'barb',
-      markerStart: null, markerEnd: retreat ? 'hollow' : 'barb', hollow: retreat, landing, military: true, classLabel: MIL_LABELS[rec.value] ?? 'Movement' };
+    const base = rec.strengthN ? strengthWidth(rec.strengthN) : rec.battle ? WIDTHS.bold : WIDTHS.regular;
+    return { color, width: retreat ? base + 1.4 : base, tier: 'regular', dash: DASH[rec.certainty] ?? 'solid', heads: 'barb',
+      markerStart: null, markerEnd: retreat ? 'hollow' : 'barb', hollow: retreat, landing, military: true, strength: rec.strengthN ?? null, classLabel: MIL_LABELS[rec.value] ?? 'Movement' };
   }
   if (rec.tracker === 'explorers') {
     const color = SPONSORS[rec.value] ? rec.value : 'ink';
@@ -314,7 +323,20 @@ export function routeDefs(defs) {
       m.append('path').attr('d', h.d).attr('class', h.open === 'hollow' ? 'hollow' : h.open ? 'open' : 'closed');
     }
   }
+  // Strength mode: heads of one size whatever the line's width (a marker otherwise grows with its line, and a
+  // twenty-thousand-man column would end in a barb forty pixels across). Sized in sheet units, a little wider than
+  // the widest line.
+  for (const name of ['barb', 'hollow']) {
+    const h = HEADS[name];
+    for (const color of SIDE_COLORS) {
+      const m = defs.append('marker').attr('id', `route-head-${name}-${color}-fixed`).attr('class', `route-head ${name} ${color}`)
+        .attr('viewBox', '0 0 10 10').attr('refX', h.ref).attr('refY', 5).attr('markerUnits', 'userSpaceOnUse')
+        .attr('markerWidth', 17).attr('markerHeight', 17).attr('orient', 'auto-start-reverse');
+      m.append('path').attr('d', h.d).attr('class', h.open === 'hollow' ? 'hollow' : h.open ? 'open' : 'closed');
+    }
+  }
 }
+const headId = (d, which) => `route-head-${d.style[which]}-${d.style.color}${d.style.strength ? '-fixed' : ''}`;
 
 // records: resolved route rows (with `coords`); projection: the stage projection; zones: reserved rects;
 // clearance(qid) → px to keep back from a waypoint that carries a mark (0 when it has none).
@@ -360,7 +382,7 @@ export function drawRoutes(layer, records, projection, zones = [], clearance = (
     .attr('class', (d) => `route route-stop ${d.style.color} ${d.style.tier}`)
     .attr('d', (d) => pathFrom([d.from, d.to]))
     .attr('stroke-width', (d) => d.style.width)
-    .attr('marker-end', (d) => `url(#route-head-${d.style.markerEnd}-${d.style.color})`);
+    .attr('marker-end', (d) => `url(#${headId(d, 'markerEnd')})`);
   const g = layer.selectChildren('path.route').data(drawn, (d) => d.pathId).join('path');
   g.attr('class', (d) => `route ${d.style.color} ${d.style.tier} ${d.style.dash} ${d.r.value}`)
     .attr('id', (d) => d.pathId)
@@ -369,7 +391,7 @@ export function drawRoutes(layer, records, projection, zones = [], clearance = (
     .attr('stroke-dasharray', (d) => dashArray(d.style.dash, d.style.width))
     // Heads only where the route really starts and ends, never at the edge of the sheet.
     .attr('marker-start', (d) => (d.style.markerStart && d.start ? `url(#route-head-${d.style.markerStart}-${d.style.color})` : null))
-    .attr('marker-end', (d) => (d.style.markerEnd && d.end ? `url(#route-head-${d.style.markerEnd}-${d.style.color})` : null));
+    .attr('marker-end', (d) => (d.style.markerEnd && d.end ? `url(#${headId(d, 'markerEnd')})` : null));
   g.selectAll('title').remove();
   g.append('title').text((d) => `${d.r.label} · ${d.style.classLabel.toLowerCase()}${d.r.source ? `\n${d.r.source}` : ''}`);
   // The Military layer: a retreat is hollow (a paper core inside the side's color, stopping short of the head), and a
@@ -403,6 +425,10 @@ export function routeLegend(records) {
     if (mil.some((r) => r.value === 'retreat')) rows.push({ swatch: 'route', color: first, heads: 'hollow', hollow: true, label: 'Retreat or withdrawal' });
     if (mil.some((r) => r.value === 'landing')) rows.push({ swatch: 'route', color: first, heads: 'barb', landing: true, label: 'Landing from the sea' });
     if (mil.some((r) => r.value === 'naval-passage')) rows.push({ swatch: 'route', color: first, heads: 'barb', label: 'Fleet, over water' });
+    if (mil.some((r) => r.strengthN)) {
+      rows.push({ swatch: 'none', label: 'Line width: the size of the force', role: 'width' });
+      for (const n of STRENGTH_SAMPLES) rows.push({ swatch: 'route', color: first, heads: 'none', w: strengthWidth(n), label: `${n.toLocaleString('en-US')} men`, role: 'width' });
+    }
     const seen = [...new Set(mil.map((r) => DASH[r.certainty]))];
     for (const d of ['solid', 'dashed', 'dotted']) if (seen.includes(d)) rows.push({ swatch: 'line', style: d, label: DASH_LABEL[Object.keys(DASH).find((k) => DASH[k] === d)] });
     const rest = records.filter((r) => r.tracker !== 'military');

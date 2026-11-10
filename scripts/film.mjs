@@ -16,16 +16,30 @@ import { serve, bundle } from './serve.mjs';
 import { orderToQuery, parseSize, sheetFor } from '../src/us/frames.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+// A film may name a preset and a battle a sheet size (data/vocab.json): an order that leaves them out takes them.
+function withRecordDefaults(order) {
+  if (!order.play && !order.battle) return order;
+  let vocab = null;
+  try { vocab = JSON.parse(readFileSync(join(ROOT, 'data', 'vocab.json'), 'utf8')); } catch { return order; }
+  const o = { ...order };
+  const film = order.play ? (vocab.films ?? []).find((f) => f.id === order.play) : null;
+  if (film?.preset && o.preset == null) o.preset = film.preset;
+  const battle = order.battle ? (vocab.wars ?? []).flatMap((w) => w.battles ?? []).find((b) => b.id === order.battle) : null;
+  if (battle?.size && o.size == null) o.size = battle.size;
+  return o;
+}
+
 const OUT_FPS = 24; // the video's frame rate; frames are held to fill it
 
 // resume: keep frames already on disk (a run that stopped) and write only the missing ones; the browser is opened
 // afresh every BATCH frames, which keeps memory flat over a long film.
 const BATCH = 250;
-export async function renderFilm(order, { out = null, fps = 6, mp4 = true, limit = 0, resume = false, base = process.cwd(), log = () => {}, browser = null } = {}) {
-  if (!order.play) throw new Error('the order has no "play": the id of a film in data/vocab.json');
+export async function renderFilm(orderIn, { out = null, fps = 6, mp4 = true, limit = 0, resume = false, base = process.cwd(), log = () => {}, browser = null } = {}) {
+  if (!orderIn.play) throw new Error('the order has no "play": the id of a film in data/vocab.json');
+  const order = withRecordDefaults(orderIn);
   const size = order.size ? parseSize(order.size) : { width: 1920, height: 1080 };
   if (!size) throw new Error(`size "${order.size}" must be WIDTHxHEIGHT`);
-  const sheet = sheetFor(size, order.scale);
+  const sheet = sheetFor(size, order.scale ?? (order.preset === 'classroom' ? 1.35 : null));
   const o = { ...order, layer: 'military' };
   const query = orderToQuery(o);
   query.set('shot', '1');

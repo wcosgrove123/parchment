@@ -64711,6 +64711,30 @@
   "wars": [
     {
       "id": "mexican-american-war",
+      "views": {
+        "mexico": {
+          "note": "As Mexico saw it: Texas is Mexican, to the Sabine",
+          "source": "Mexico's government repudiated the Treaties of Velasco and never recognized the Republic of Texas; it held annexation to be the seizure of a Mexican department (Handbook of Texas Online, s.v. 'Velasco, Treaties of', 'Republic of Texas', 'Annexation'; K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 1). A test entry until the owner and the teachers review it.",
+          "members": [
+            {
+              "where": "texas",
+              "side": "mexico",
+              "value": "belligerent",
+              "start": "1846-04-25",
+              "end": "1848-02-02",
+              "label": "Texas"
+            },
+            {
+              "where": "texas",
+              "side": "us",
+              "value": "occupied",
+              "start": "1846-04-25",
+              "end": "1848-02-02",
+              "label": "Texas, annexed by the United States"
+            }
+          ]
+        }
+      },
       "key_events": ["test-mx-ev-thornton","test-mx-ev-palo-alto","test-mx-ev-us-declares","test-mx-ev-monterey-ca","test-mx-ev-santa-fe","test-mx-ev-monterrey","test-mx-ev-buena-vista","test-mx-ev-veracruz","test-mx-ev-cerro-gordo","test-mx-ev-mexico-city","test-mx-ev-treaty"],
       "key_forces": ["taylor","kearny","scott","santa-anna"],
       "_key_note": "The classroom preset (owner's review, 2026-11-10) shows only these events and forces, a short key and larger type; every other row stays on the full map and the slip. The owner edits the two lists.",
@@ -65000,6 +65024,47 @@
     },
     {
       "id": "texas-revolution",
+      "key_events": [
+        "test-tr-ev-law-1830",
+        "test-tr-ev-gonzales",
+        "test-tr-ev-alamo",
+        "test-tr-ev-declaration",
+        "test-tr-ev-goliad",
+        "test-tr-ev-san-jacinto",
+        "test-tr-ev-velasco-treaties"
+      ],
+      "key_forces": [
+        "santa-anna-1836",
+        "urrea",
+        "houston"
+      ],
+      "views": {
+        "mexico": {
+          "note": "As Mexico saw it: Texas, a department in revolt",
+          "hatch_labels": {
+            "texas": "Mexican land, in Mexico's eyes, held by the Texan rebels"
+          },
+          "source": "Mexico's government repudiated the Treaties of Velasco and never recognized the Republic of Texas; it held annexation to be the seizure of a Mexican department (Handbook of Texas Online, s.v. 'Velasco, Treaties of', 'Republic of Texas', 'Annexation'; K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 1). A test entry until the owner and the teachers review it.",
+          "members": [
+            {
+              "where": "texas-republic",
+              "side": "mexico",
+              "value": "belligerent",
+              "start": "1836-03-02",
+              "end": "1836-05-14",
+              "label": "Texas"
+            },
+            {
+              "where": "texas-republic",
+              "side": "texas",
+              "value": "occupied",
+              "start": "1836-03-02",
+              "end": "1836-05-14",
+              "label": "Texas, held by the rebels"
+            }
+          ]
+        }
+      },
       "names": {
         "texas": "The Texas Revolution",
         "mexico": "La guerra de Texas"
@@ -65128,6 +65193,39 @@
     },
     {
       "id": "texas-republic-mexico",
+      "key_events": [
+        "test-rp-ev-woll",
+        "test-rp-ev-mier",
+        "test-rp-ev-annex-resolution",
+        "test-rp-ev-statehood"
+      ],
+      "views": {
+        "mexico": {
+          "note": "As Mexico saw it: Texas, a department in revolt",
+          "hatch_labels": {
+            "texas": "Mexican land, in Mexico's eyes, held by the Texan rebels"
+          },
+          "source": "Mexico's government repudiated the Treaties of Velasco and never recognized the Republic of Texas; it held annexation to be the seizure of a Mexican department (Handbook of Texas Online, s.v. 'Velasco, Treaties of', 'Republic of Texas', 'Annexation'; K. Jack Bauer, The Mexican War, 1846–1848 (1974), ch. 1). A test entry until the owner and the teachers review it.",
+          "members": [
+            {
+              "where": "texas-republic",
+              "side": "mexico",
+              "value": "belligerent",
+              "start": "1836-05-15",
+              "end": "1845-12-28",
+              "label": "Texas"
+            },
+            {
+              "where": "texas-republic",
+              "side": "texas",
+              "value": "occupied",
+              "start": "1836-05-15",
+              "end": "1845-12-28",
+              "label": "Texas, held by the rebels"
+            }
+          ]
+        }
+      },
       "names": {
         "texas": "Texas and Mexico after San Jacinto",
         "mexico": "Texas y México después de San Jacinto"
@@ -65186,6 +65284,50 @@
       "battles": [
         {
           "id": "gettysburg",
+          "size": "1440x1080",
+          "ground": {
+            "file": "data/battles/gettysburg.json",
+            "box": {
+              "west": -77.31,
+              "south": 39.765,
+              "east": -77.16,
+              "north": 39.865
+            },
+            "roads_skip": [
+              "US Hwy 15 Bus",
+              "US Hwy 30",
+              "State Rte 34",
+              "State Rte 97",
+              "State Rte 134",
+              "State Rte 116",
+              "E Broadway"
+            ],
+            "roads_local": [
+              "Mummasburg Rd"
+            ],
+            "road_names": {
+              "Chambersburg Rd": "Chambersburg Pike",
+              "Buford Ave": "Chambersburg Pike",
+              "Emmitsburg Rd": "Emmitsburg Road",
+              "Steinwehr Ave": "Emmitsburg Road",
+              "Taneytown Rd": "Taneytown Road",
+              "Baltimore Pike": "Baltimore Pike",
+              "Old Harrisburg Rd": "Harrisburg Road",
+              "Biglerville Rd": "Carlisle Road",
+              "York Rd": "York Pike",
+              "Hanover Rd": "Hanover Road",
+              "Fairfield Rd": "Fairfield Road",
+              "Mummasburg Rd": "Mummasburg Road"
+            },
+            "streams": [
+              "Rock Creek",
+              "Willoughby Run",
+              "Plum Run",
+              "Marsh Creek",
+              "Stevens Run"
+            ],
+            "_note": "The ground under the frame is downloaded (scripts/fetch-battle-ground.mjs): today's roads from the Census Bureau's TIGER/Line, which at Gettysburg run on the lines of the ten roads of 1863 (road_names gives each its period name; the unnamed ones are the town's main streets), and named streams from the USGS National Hydrography Dataset. Nothing is drawn by hand."
+          },
           "label": "Gettysburg",
           "dates": "1–3 July 1863",
           "start": "1863-07-01",
@@ -65400,6 +65542,7 @@
   "films": [
     {
       "id": "texas-1821-1854",
+      "preset": "classroom",
       "title": "From Mexican Texas to the Gadsden Purchase, 1821–1854",
       "frame": "mexico-war",
       "names": "both",
