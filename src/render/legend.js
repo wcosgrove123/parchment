@@ -3,6 +3,9 @@
 
 import { select as d3Select } from 'd3';
 
+// (ids for the clip of a two-colored icon swatch: both sides claimed the victory)
+let halves = 0;
+
 // Placement: top-right by default; a stage may anchor it bottom-right instead, its bottom edge `lift` px above the
 // frame's bottom (the North America stage keeps the top right for New England and the Diff list).
 // fit (lesson maps on the North America page; every world-page stage): the box widens, up to 460 px, to its longest
@@ -76,7 +79,16 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
         if (e.half) row.append('path').attr('class', 'swatch-half').attr('transform', 'translate(11,7)').attr('d', 'M0,-7L7,0L0,7Z').attr('fill', e.half);
       } else if (e.swatch === 'icon' && e.d) {
         // an equipment icon from the Military layer's catalog (path data passed with the row)
-        row.append('path').attr('class', 'swatch-icon').attr('d', e.d).attr('fill', e.color ?? 'var(--navy)').attr('transform', `translate(${11 - 8},${7 - 8}) scale(${16 / 512})`);
+        // (an event's icon may carry what its shape carried: a ring, a second half, an outline on paper)
+        const at = `translate(${11 - 8},${7 - 8}) scale(${16 / 512})`;
+        if (e.ring) row.append('circle').attr('class', 'swatch-ring').attr('cx', 11).attr('cy', 7).attr('r', 10.5).attr('fill', 'none').attr('stroke', e.ring).attr('stroke-width', 1.8);
+        const p = row.append('path').attr('class', 'swatch-icon').attr('d', e.d).attr('fill', e.color ?? 'var(--navy)').attr('transform', at);
+        if (e.outline) p.attr('fill', 'var(--cream)').attr('stroke', 'var(--rust)').attr('stroke-width', (1.1 * 512) / 16).attr('stroke-linejoin', 'round');
+        if (e.half) {
+          const id = `swatch-half-${++halves}`;
+          row.append('clipPath').attr('id', id).append('rect').attr('x', 256).attr('y', -64).attr('width', 320).attr('height', 640);
+          row.append('path').attr('class', 'swatch-icon').attr('d', e.d).attr('fill', e.half).attr('transform', at).attr('clip-path', `url(#${id})`);
+        }
       } else if (e.swatch === 'force') {
         row.append('rect').attr('x', 1).attr('y', 1).attr('width', 20).attr('height', 12).attr('fill', 'none').attr('stroke', e.color ?? 'var(--navy)').attr('stroke-width', 1.2);
         row.append('path').attr('d', 'M1,1L21,13M21,1L1,13').attr('stroke', e.color ?? 'var(--navy)').attr('stroke-width', 1).attr('fill', 'none');

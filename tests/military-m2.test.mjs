@@ -78,7 +78,7 @@ test('the legend rows name only what is on the sheet, in the grammar\'s shapes',
   const rows = eventLegend(sequenceFor(eventsUpTo(events, 18480202), true), war, colorOf);
   assert.deepEqual(rows.map((r) => r.label), ['Battle won by Mexico', 'Battle won by United States', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'Fort (one mark in every era)', 'The course of the war: see the list']);
   assert.ok(rows.every((r) => r.swatch === 'numeral' || r.swatch === 'icon' || r.shape), 'every row is a point shape of §5 (or the numeral, or the fort icon)');
-  assert.deepEqual(rows[0], { swatch: 'shape', shape: 'rust-diamond', fill: 'line-b', label: 'Battle won by Mexico', role: 'event' });
+  assert.deepEqual(rows[0], { swatch: 'shape', shape: 'rust-diamond', fill: 'line-b', label: 'Battle won by Mexico', role: 'event', icon: 'ev-battle' }, 'the shape of §5, and the icon that stands for it on the page (owner, 2026-11-10)');
   assert.equal(rows[2].half, 'line-b');
   const early = eventLegend(sequenceFor(eventsUpTo(events, 18460425), false), war, colorOf);
   assert.deepEqual(early.map((r) => r.label), ['Battle won by Mexico', 'Fort (one mark in every era)'], 'on 25 April 1846: the Thornton skirmish and the fort begun a month before');

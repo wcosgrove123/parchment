@@ -28,7 +28,7 @@ import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from
 import { toInt as warDay } from '../military/wars.js';
 import { battleById, battleRows, battlePositions, battleMoves, battleTerrain, strengthOf, phaseCovers } from '../military/events.js';
 import { viewMembers } from '../military/wars.js';
-import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath } from '../military/events.js';
+import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSides, forcePositions, techFor, svgPath, EVENT_ICONS } from '../military/events.js';
 
 // More events than this on a war's map, and only the war's key events carry a numeral (the Revolution has 170).
 const MANY_EVENTS = 40;
@@ -260,7 +260,7 @@ async function main() {
     // the tech catalog, the reviewed icons the wars' forces and lines may carry (their path data), and milsymbol for
     // the force frames (vendored, MIT; a script, so the page's bundle stays light)
     const tech = await loadJSON('data/tech.json').catch(() => ({ items: {} }));
-    const keys = new Set(['fort']);
+    const keys = new Set(['fort', ...Object.values(EVENT_ICONS)]); // (the fort and the marks for the kinds of event)
     for (const w of vocab.wars ?? []) { for (const f of w.forces ?? []) for (const k of f.tech ?? []) keys.add(k); for (const l of w.lines ?? []) if (l.tech) keys.add(l.tech); }
     for (const r of mil) if (r.tech) keys.add(r.tech.trim());
     const icons = {};

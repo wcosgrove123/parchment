@@ -81,7 +81,7 @@ async function main() {
       author: a.name, author_url: a.url, license: a.license,
       license_url: a.license === 'CC0' ? 'https://creativecommons.org/publicdomain/zero/1.0/' : 'https://creativecommons.org/licenses/by/3.0/',
       retrieved, changed: 'background square removed; fill left to the map',
-      class: ic.class, domain: ic.domain, depicts: ic.depicts, era_starting_point: ic.era, status: ic.status, note: ic.note ?? null, owner_review: 'pending',
+      class: ic.class, domain: ic.domain, depicts: ic.depicts, era_starting_point: ic.era, status: ic.status, note: ic.note ?? null, owner_review: ic.review ?? 'pending', // (the owner's verdict as the catalog records it; a rerun must not wipe it)
     });
   }
   writeFileSync(manifestFile, `${JSON.stringify(manifest, null, 2)}\n`);

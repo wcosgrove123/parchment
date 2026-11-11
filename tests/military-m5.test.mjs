@@ -17,10 +17,12 @@ const moves = withSides(movementsOf(resolveRecords(checked.records, gazetteer).r
 const forces = war.forces.map((f) => ({ ...f, sideColor: war.sides.find((s) => s.id === f.side)?.color }));
 
 test('the tech catalog: every reviewed icon, with its years, file, author, license and a reference to check against', () => {
-  assert.equal(Object.keys(tech.items).length, 24);
+  assert.equal(Object.keys(tech.items).length, 33, 'the 24 reviewed on 2026-11-09 and the nine marks for kinds of event (Set A, 2026-11-10)');
   for (const [k, it] of Object.entries(tech.items)) {
     assert.ok(it.in_use && it.in_use.from < it.in_use.to, `${k} has years`);
-    assert.match(it.in_use.note, /to source/, 'the years are starting points until sourced');
+    // (a mark for a kind of event is no piece of equipment: it has no years to source, and says so)
+    if (it.class === 'event') assert.match(it.in_use.note, /not a piece of equipment/, `${k}: a mark for every era`);
+    else assert.match(it.in_use.note, /to source/, 'the years are starting points until sourced');
     assert.ok(existsSync(new URL(`../${it.icon.file}`, import.meta.url)), `${k}'s icon file is in the repository`);
     assert.ok(it.icon.author && /CC BY 3\.0|CC0/.test(it.icon.license) && it.reference, k);
   }

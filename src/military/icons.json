@@ -41,6 +41,11 @@
       "name": "Sbed",
       "url": "http://opengameart.org/content/95-game-icons",
       "license": "CC BY 3.0"
+    },
+    "pierre-leducq": {
+      "name": "Pierre Leducq",
+      "url": null,
+      "license": "CC BY 3.0"
     }
   },
   "icons": [
@@ -324,6 +329,96 @@
       "era": "the human cost (§4)",
       "status": "proposed",
       "review": "accepted by the owner, 2026-11-09"
+    },
+    {
+      "key": "ev-battle",
+      "file": "lorc/crossed-swords",
+      "class": "event",
+      "domain": "land",
+      "depicts": "battle: crossed swords",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-siege",
+      "file": "delapouite/mortar",
+      "class": "event",
+      "domain": "land",
+      "depicts": "siege: a mortar",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-naval-battle",
+      "file": "lorc/anchor",
+      "class": "event",
+      "domain": "land",
+      "depicts": "naval battle: an anchor",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-raid",
+      "file": "delapouite/torch",
+      "class": "event",
+      "domain": "land",
+      "depicts": "raid or skirmish: a torch",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-landing",
+      "file": "pierre-leducq/small-fishing-sailboat",
+      "class": "event",
+      "domain": "land",
+      "depicts": "landing: a small sailing boat",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-surrender",
+      "file": "lorc/flying-flag",
+      "class": "event",
+      "domain": "land",
+      "depicts": "surrender: a flag",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-capture",
+      "file": "delapouite/tower-flag",
+      "class": "event",
+      "domain": "land",
+      "depicts": "place taken: a flag on a tower",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-camp",
+      "file": "delapouite/barracks-tent",
+      "class": "event",
+      "domain": "land",
+      "depicts": "camp, headquarters or winter quarters: a tent",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
+    },
+    {
+      "key": "ev-treaty",
+      "file": "delapouite/scroll-quill",
+      "class": "event",
+      "domain": "land",
+      "depicts": "treaty, declaration or armistice: a scroll and quill",
+      "era": "every era (a mark for a kind of event, not a piece of equipment)",
+      "status": "proposed",
+      "review": "accepted by the owner, 2026-11-10"
     },
     {
       "key": "x-rifle",

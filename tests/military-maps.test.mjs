@@ -68,10 +68,10 @@ test('the theater, 2 February 1848 (milestone 2): nineteen events by outcome, nu
   assert.equal(s.resolved.war.course[18].label, 'Treaty of Guadalupe Hidalgo');
   assert.equal(s.resolved.war.strip, 'war');
   const labels = s.legend.rows.map((r) => r.label);
-  for (const l of ['Battle won by United States', 'Battle won by Mexico', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', 'Place taken (ring: the captor)', 'The course of the war: see the list']) assert.ok(labels.includes(l), l);
+  for (const l of ['Battle won by United States', 'Battle won by Mexico', 'Both sides claimed victory', 'Siege (ring: the besieger)', 'Declaration of war, treaty', "Place taken (in the captor's color)", 'The course of the war: see the list']) assert.ok(labels.includes(l), l);
   assert.ok(!labels.includes('Battle or siege') && !labels.includes('Treaty'), 'the routes layer\'s point legend does not repeat the events');
   const won = s.legend.rows.find((r) => r.label === 'Battle won by United States');
-  assert.equal(won.fill, '#3057a3', 'the diamond\'s fill is the victor\'s line color');
+  assert.equal(won.fill, '#3057a3', 'the mark\'s color is the victor\'s line color');
   const palo = s.points.find((p) => p.record === 'test-mx-ev-palo-alto');
   assert.deepEqual([palo.outcome, palo.outcome_text], ['won:us', 'won by United States']);
   assert.ok(s.layout.legend.inside && s.layout.cartouche.inside && s.layout.clipped_text.length === 0);
@@ -142,7 +142,7 @@ test('force marks (milestone 5): each force where its movements put it, its icon
   assert.deepEqual([by('taylor').since, by('taylor').tech, by('taylor').tech_drawn, by('taylor').earlier_stands], ['1847-02-22', 'musket', true, 2]);
   assert.deepEqual([by('scott').since, by('scott').at.lat > 19 && by('scott').at.lat < 19.6], ['1847-09-14', true], 'Scott stands in Mexico City');
   assert.equal(by('kearny').tech, 'cavalry');
-  assert.deepEqual(s.resolved.war.icons_used.map((i) => i.key).sort(), ['cavalry', 'fort', 'musket', 'paddle-steamer']);
+  assert.deepEqual(s.resolved.war.icons_used.map((i) => i.key).sort(), ['cavalry', 'ev-battle', 'ev-capture', 'ev-siege', 'ev-treaty', 'fort', 'musket', 'paddle-steamer'], 'the equipment, the fort and the marks for the kinds of event drawn');
   assert.ok(s.resolved.war.icons_used.every((i) => i.author && i.license === 'CC BY 3.0' && i.reference));
   assert.match(s.credit, /icons: game-icons\.net contributors \(CC BY 3\.0\); force frames: milsymbol \(MIT\)/);
   assert.match(s.alt_text, /Forces on the map: Taylor \(us, musket\)/);

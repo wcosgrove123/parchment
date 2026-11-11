@@ -456,6 +456,177 @@
       },
       "reference": "to choose: a period plate or recognition manual (brief §3)",
       "reviewed": "2026-11-09"
+    },
+    "ev-battle": {
+      "depicts": "battle: crossed swords",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/crossed-swords.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/crossed-swords.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-siege": {
+      "depicts": "siege: a mortar",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/mortar.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/mortar.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-naval-battle": {
+      "depicts": "naval battle: an anchor",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/anchor.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/anchor.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-raid": {
+      "depicts": "raid or skirmish: a torch",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/torch.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/torch.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-landing": {
+      "depicts": "landing: a small sailing boat",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/pierre-leducq/small-fishing-sailboat.svg",
+        "author": "Pierre Leducq",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/pierre-leducq/small-fishing-sailboat.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-surrender": {
+      "depicts": "surrender: a flag",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/lorc/flying-flag.svg",
+        "author": "Lorc",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/flying-flag.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-capture": {
+      "depicts": "place taken: a flag on a tower",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/tower-flag.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/tower-flag.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-camp": {
+      "depicts": "camp, headquarters or winter quarters: a tent",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/barracks-tent.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/barracks-tent.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
+    },
+    "ev-treaty": {
+      "depicts": "treaty, declaration or armistice: a scroll and quill",
+      "domain": "land",
+      "class": "event",
+      "in_use": {
+        "from": -9999,
+        "to": 2100,
+        "note": "a mark for a kind of event in every era, not a piece of equipment (owner, 2026-11-10: Set A)",
+        "source": null
+      },
+      "icon": {
+        "file": "assets/icons/military/delapouite/scroll-quill.svg",
+        "author": "Delapouite",
+        "license": "CC BY 3.0",
+        "source_url": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/scroll-quill.svg"
+      },
+      "reference": "the event-marks picture sheet, docs/progress/2026-11-10-event-marks-1-catalog.png",
+      "reviewed": "2026-11-10"
     }
   }
 }

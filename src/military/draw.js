@@ -12,6 +12,7 @@ import { smoothRun, thinRun } from './lines.js';
 import { faded } from './sides.js';
 
 const NAVY = '#1F2A44', RUST = '#C8601A', CREAM = '#F7F5EF', GOLD = '#c8a65d';
+const EVENT_ICON_PX = 18; // an event's icon on the map (a raid's is 15)
 const HALF_L = (r) => `M0,${-r}L${-r},0L0,${r}Z`;
 const HALF_R = (r) => `M0,${-r}L${r},0L0,${r}Z`;
 
@@ -42,8 +43,29 @@ export function decorateMarks(layer, placed, war, icons = {}) {
     g.selectAll('.mil').remove();
     const look = eventLook(r, war);
     const path = g.select('path.mark');
-    const rad = m.radius;
-    if (look.form === 'diamond') {
+    let rad = m.radius;
+    // the kind's own mark (owner, 2026-11-10: Set A): the icon stands where the diamond, the triangle or the circle
+    // stood, in the color the outcome gives (a victor's, both claimants', rust when none is recorded, an outline
+    // when inconclusive), the captor's or the side's for a place taken, a landing or a camp, navy for a paper
+    const ic = look.icon && icons[look.icon] ? look.icon : null;
+    if (ic) {
+      path.style('display', 'none');
+      const size = r.value === 'raid' ? 15 : EVENT_ICON_PX;
+      rad = size / 2;
+      const put = (fill) => iconAt(g, icons, ic, 0, 0, size, fill).attr('class', `mil mil-ev icon-${ic}`);
+      const halo = (p) => p.attr('stroke', CREAM).attr('stroke-width', (1.6 * 512) / size).attr('paint-order', 'stroke').attr('stroke-linejoin', 'round');
+      if (look.form === 'diamond') {
+        if (look.claimed.length === 2) {
+          const id = `mil-half-${String(r.id).replace(/[^\w-]/g, '')}`;
+          halo(put(cssColor(look.claimed[0].color)));
+          g.append('clipPath').attr('class', 'mil').attr('id', id).append('rect').attr('x', 256).attr('y', -64).attr('width', 320).attr('height', 640);
+          put(cssColor(look.claimed[1].color)).attr('clip-path', `url(#${id})`);
+        } else if (look.outcome?.kind === 'inconclusive') put(CREAM).attr('stroke', RUST).attr('stroke-width', (1.1 * 512) / size).attr('stroke-linejoin', 'round');
+        else halo(put(look.winner ? cssColor(look.winner.color) : RUST));
+      } else if (look.form === 'capital') halo(put(look.ring ? cssColor(look.ring.color) : '#499737'));
+      else if (look.form === 'hq' || look.form === 'circle') halo(put(look.side ? cssColor(look.side.color) : NAVY));
+      else halo(put(NAVY));
+    } else if (look.form === 'diamond') {
       if (look.winner) path.style('fill', cssColor(look.winner.color)).style('stroke', null);
       else if (look.claimed.length === 2) {
         path.style('fill', 'none').style('stroke', 'none');
@@ -57,7 +79,7 @@ export function decorateMarks(layer, placed, war, icons = {}) {
       // the star fort in navy stands in for the square the other layers would draw
       path.style('display', 'none');
       iconAt(g, icons, 'fort', 0, 0, 20, NAVY).attr('class', 'mil mil-fort');
-    } else if (look.form === 'hq') {
+    } else if (look.form === 'hq' && !ic) {
       path.style('display', 'none');
       const h = 18;
       g.append('line').attr('class', 'mil').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', -h).attr('stroke', NAVY).attr('stroke-width', 1.1);
@@ -77,7 +99,7 @@ export function decorateMarks(layer, placed, war, icons = {}) {
       g.append('circle').attr('class', 'mil mil-massacre').attr('r', rad + 2).attr('fill', 'none').attr('stroke', NAVY).attr('stroke-width', 1.6);
       g.append('circle').attr('class', 'mil mil-massacre').attr('r', 2.6).attr('fill', RUST);
     }
-    if (look.ring && look.form !== 'hq') g.insert('circle', ':first-child').attr('class', 'mil mil-ring').attr('r', rad + 5).attr('fill', 'none').attr('stroke', cssColor(look.ring.color)).attr('stroke-width', 2);
+    if (look.ring && look.form !== 'hq' && !(ic && look.form === 'capital')) g.insert('circle', ':first-child').attr('class', 'mil mil-ring').attr('r', rad + 5).attr('fill', 'none').attr('stroke', cssColor(look.ring.color)).attr('stroke-width', 2);
     if (r.seq != null) {
       // the numeral: an outlined circle beside the mark, at the first of eight places that is clear of other numerals
       const R = 8.5, d = rad + R + 1;

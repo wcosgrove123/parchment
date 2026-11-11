@@ -65,9 +65,15 @@ test('on the page: every engagement is marked, only the key events are numbered 
   const seen = await page.eval(inPage(async () => {
     const slip = await window.parchment.packingSlip();
     const groups = [...document.querySelectorAll('.view-main g.mark-group')].map((g) => g.__data__?.r).filter((r) => r && r.tracker === 'military');
-    return { war: slip.resolved?.war?.id ?? null, marks: groups.length, numbered: groups.filter((r) => r.seq != null).map((r) => r.id), title: document.querySelector('.course-list .legend-title')?.textContent ?? null };
+    const kinds = (v) => [...document.querySelectorAll('.view-main g.mark-group')].filter((g) => g.__data__?.r?.value === v);
+    const drawn = (v, key) => { const g = kinds(v); return g.length > 0 && g.every((n) => n.querySelector('.mil-ev.icon-' + key) && n.querySelector('path.mark').style.display === 'none'); };
+    return { icons: { battle: drawn('battle', 'ev-battle'), siege: drawn('siege', 'ev-siege'), naval: drawn('naval-battle', 'ev-naval-battle'), raid: drawn('raid', 'ev-raid'), landing: drawn('landing', 'ev-landing') }, credited: (slip.resolved?.war?.icons_used ?? []).map((i) => i.key ?? i), legend: [...document.querySelectorAll('.legend text')].map((x) => x.textContent),
+      war: slip.resolved?.war?.id ?? null, marks: groups.length, numbered: groups.filter((r) => r.seq != null).map((r) => r.id), title: document.querySelector('.course-list .legend-title')?.textContent ?? null };
   }));
   assert.equal(seen.war, 'american-revolution', 'the date names the war');
+  assert.deepEqual(seen.icons, { battle: true, siege: true, naval: true, raid: true, landing: true }, 'each kind of fighting has its own mark, in place of the diamond');
+  for (const l of ['Naval battle', 'Raid or skirmish', 'Landing', 'Siege (ring: the besieger)']) assert.ok(seen.legend.includes(l), 'the legend names ' + l);
+  for (const k of ['ev-battle', 'ev-siege', 'ev-naval-battle']) assert.ok(seen.credited.includes(k), k + ' is listed on the packing slip with its author');
   assert.ok(seen.marks > 100, `the engagements on the sheet (${seen.marks})`);
   assert.ok(seen.numbered.length > 5 && seen.numbered.length <= war.key_events.length, `only key events carry a numeral (${seen.numbered.length})`);
   for (const id of seen.numbered) assert.ok(war.key_events.includes(id), `${id} is a key event`);

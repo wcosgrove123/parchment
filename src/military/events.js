@@ -140,6 +140,11 @@ export function techFor(force, row, tech, date) {
 
 const DIAMONDS = new Set(['battle', 'siege', 'naval-battle', 'raid']);
 const TRIANGLES = new Set(['declaration', 'treaty', 'armistice', 'surrender']);
+// The mark for each kind of event (owner, 2026-11-10: "sieges, battles, naval battles, and other types of fighting
+// encounters should have different icons"; "Set A"): the catalog key of its icon (data/tech.json). The color still
+// says who won; the shape now says what kind of event it was. Where an icon has not loaded, the older shape (the
+// diamond, the triangle, the circle) stands as before.
+export const EVENT_ICONS = { battle: 'ev-battle', siege: 'ev-siege', 'naval-battle': 'ev-naval-battle', raid: 'ev-raid', landing: 'ev-landing', surrender: 'ev-surrender', capture: 'ev-capture', headquarters: 'ev-camp', treaty: 'ev-treaty', declaration: 'ev-treaty', armistice: 'ev-treaty' };
 
 // How an event draws on the Military layer (P5, P6): the mark's form and the sides that color it.
 //   form: 'diamond' (fill = victor's line color; outline rust on paper when inconclusive; split when both claimed),
@@ -149,7 +154,7 @@ const TRIANGLES = new Set(['declaration', 'treaty', 'armistice', 'surrender']);
 export function eventLook(r, war) {
   const sideOf = (id) => (war?.sides ?? []).find((s) => s.id === id) ?? null;
   const o = parseOutcome(r.outcome);
-  const base = { id: r.id, value: r.value, outcome: o, winner: null, claimed: [], ring: null, form: null };
+  const base = { id: r.id, value: r.value, outcome: o, winner: null, claimed: [], ring: null, form: null, icon: EVENT_ICONS[r.value] ?? null, side: sideOf(r.side) };
   if (DIAMONDS.has(r.value)) {
     base.form = 'diamond';
     if (o?.kind === 'won') base.winner = sideOf(o.sides[0]);
@@ -229,24 +234,32 @@ export function forceLegend(positions, checks, tech) {
   return rows;
 }
 
+// Legend rows for the kinds that had no row of their own while every fight was a diamond: drawn only with their icons.
+export function kindLegend(events) {
+  const have = new Set(events.map((r) => r.value));
+  return [['naval-battle', 'Naval battle'], ['raid', 'Raid or skirmish'], ['landing', 'Landing'], ['surrender', 'Surrender']]
+    .filter(([v]) => have.has(v)).map(([v, label]) => ({ swatch: 'icon', icon: EVENT_ICONS[v], label, role: 'event', kind: v }));
+}
+
 // Legend rows for the events on the sheet (grammar §5 kept: the diamond stays; its fill is the victor's color).
 // sides: { id → { color } } from the war; colors: (colorKey) → { line } (src/military/sides.js or the tokens).
 export function eventLegend(events, war, colorOf) {
   const rows = [];
   const looks = events.map((r) => eventLook(r, war));
   const winners = [...new Map(looks.filter((l) => l.winner).map((l) => [l.winner.id, l.winner])).values()];
-  for (const s of winners) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: colorOf(s.color).line, label: `Battle won by ${s.label}`, role: 'event' });
+  // (each row also names the kind's icon; the page draws it in place of the shape when the catalog has loaded it)
+  for (const s of winners) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: colorOf(s.color).line, label: `Battle won by ${s.label}`, role: 'event', icon: 'ev-battle' });
   const claimed = looks.find((l) => l.claimed.length === 2);
-  if (claimed) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: colorOf(claimed.claimed[0].color).line, half: colorOf(claimed.claimed[1].color).line, label: 'Both sides claimed victory', role: 'event' });
-  if (looks.some((l) => l.form === 'diamond' && l.outcome?.kind === 'inconclusive')) rows.push({ swatch: 'shape', shape: 'rust-diamond', outline: true, label: 'Inconclusive', role: 'event' });
-  if (looks.some((l) => l.form === 'diamond' && !l.outcome)) rows.push({ swatch: 'shape', shape: 'rust-diamond', label: 'Battle, outcome not recorded', role: 'event' });
+  if (claimed) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: colorOf(claimed.claimed[0].color).line, half: colorOf(claimed.claimed[1].color).line, label: 'Both sides claimed victory', role: 'event', icon: 'ev-battle' });
+  if (looks.some((l) => l.form === 'diamond' && l.outcome?.kind === 'inconclusive')) rows.push({ swatch: 'shape', shape: 'rust-diamond', outline: true, label: 'Inconclusive', role: 'event', icon: 'ev-battle' });
+  if (looks.some((l) => l.form === 'diamond' && !l.outcome)) rows.push({ swatch: 'shape', shape: 'rust-diamond', label: 'Battle, outcome not recorded', role: 'event', icon: 'ev-battle' });
   const siege = looks.find((l) => l.value === 'siege');
-  if (siege) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: siege.winner ? colorOf(siege.winner.color).line : null, ring: siege.ring ? colorOf(siege.ring.color).line : '#1F2A44', label: `Siege (ring: the besieger)`, role: 'event' });
-  if (looks.some((l) => l.form === 'triangle')) rows.push({ swatch: 'shape', shape: 'navy-triangle', label: 'Declaration of war, treaty', role: 'event' });
+  if (siege) rows.push({ swatch: 'shape', shape: 'rust-diamond', fill: siege.winner ? colorOf(siege.winner.color).line : null, ring: siege.ring ? colorOf(siege.ring.color).line : '#1F2A44', label: `Siege (ring: the besieger)`, role: 'event', icon: 'ev-siege' });
+  if (looks.some((l) => l.form === 'triangle')) rows.push({ swatch: 'shape', shape: 'navy-triangle', label: 'Declaration of war, treaty', role: 'event', icon: 'ev-treaty' });
   const cap = looks.find((l) => l.form === 'capital');
-  if (cap) rows.push({ swatch: 'shape', shape: 'moss-circle', ring: cap.ring ? colorOf(cap.ring.color).line : '#1F2A44', label: 'Place taken (ring: the captor)', role: 'event' });
+  if (cap) rows.push({ swatch: 'shape', shape: 'moss-circle', ring: cap.ring ? colorOf(cap.ring.color).line : '#1F2A44', label: 'Place taken (ring: the captor)', role: 'event', icon: 'ev-capture', iconLabel: "Place taken (in the captor's color)", iconColor: cap.ring ? colorOf(cap.ring.color).line : null });
   if (looks.some((l) => l.form === 'fort')) rows.push({ swatch: 'icon', icon: 'fort', label: 'Fort (one mark in every era)', role: 'event' });
-  if (looks.some((l) => l.form === 'hq')) rows.push({ swatch: 'hq', label: 'Headquarters, dated', role: 'event' });
+  if (looks.some((l) => l.form === 'hq')) rows.push({ swatch: 'hq', label: 'Headquarters, dated', role: 'event', icon: 'ev-camp', iconLabel: 'Camp or headquarters, dated' });
   if (looks.some((l) => l.form === 'massacre')) rows.push({ swatch: 'massacre', label: 'Killing of prisoners or civilians (row under review)', role: 'event' });
   if (looks.some((l) => l.form === 'terrain')) rows.push({ swatch: 'terrain', label: 'Hill, ridge or place the sources name', role: 'event' });
   if (events.some((r) => r.seq != null)) rows.push({ swatch: 'numeral', label: 'The course of the war: see the list', role: 'event' });

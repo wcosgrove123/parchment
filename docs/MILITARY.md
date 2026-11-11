@@ -79,6 +79,13 @@ war's map, and, if it is to read at that scale, downloaded ground (`scripts/fetc
 
 A war is drawn through its last day (`end` in its record). The day after, the layer shows the plain map of nations.
 
+## Marks by kind of event (2026-11-11)
+
+Each kind of event draws its own icon (`EVENT_ICONS` in `src/military/events.js`; the files and their authors in
+`data/tech.json` under class `event`): the owner's Set A. `eventLook` still gives the form and the sides; the icon
+takes the color the form would have had. A new kind needs a key in `EVENT_ICONS`, an entry in
+`src/military/icons.json` and `data/tech.json`, and `node scripts/military-icons.mjs` to fetch it.
+
 ## A war's engagements from Wikidata (2026-11-10)
 
 `node scripts/pull-war.mjs --war <id> --root <the war's Wikidata id> --prefix <test-xx>` writes one TEST ROW for

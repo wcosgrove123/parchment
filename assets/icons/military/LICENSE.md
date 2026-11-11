@@ -13,6 +13,7 @@ Authors of the icons in this folder:
 - Skoll, CC BY 3.0
 - Quoting, CC BY 3.0
 - HeavenlyDog (http://www.gnomosygoblins.blogspot.com), CC BY 3.0
+- Pierre Leducq, CC BY 3.0
 - Sbed (http://opengameart.org/content/95-game-icons), CC BY 3.0
 - Lord Berandas (http://berandas.deviantart.com), CC BY 3.0
 

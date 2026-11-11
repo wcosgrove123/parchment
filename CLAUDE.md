@@ -105,7 +105,7 @@ Rules:
 | outline style | certainty (solid / dashed / none+blur) |
 | fill opacity | 100% direct control, 40% influence or claim |
 | hatch | overlap or dispute |
-| point shape | event type: battle/siege = rust diamond; founding/capital = moss circle; monument = navy square; treaty = navy triangle; port of call = small steel circle |
+| point shape | event type: battle/siege = rust diamond; founding/capital = moss circle; monument = navy square; treaty = navy triangle; port of call = small steel circle. On the Military layer each kind of event has its own mark (owner, 2026-11-10, "Set A"): crossed swords = battle; mortar = siege (ringed in the besieger's color); anchor = naval battle; torch = raid or skirmish; small boat = landing; flag = surrender; flag on a tower = place taken; tent = camp or headquarters; scroll and quill = treaty or declaration; star fort = fort. The mark's color is the outcome: the victor's, both claimants' halves, rust when no winner is recorded, an outline when inconclusive |
 | line style | certainty, for routes as for borders: solid = documented, dashed = approximate, dotted and faint = conjectured. **Dash never encodes type.** |
 | route colour | what moved: steel blue = sea trade and voyages; umber (`--route-land`) = land trade; rust = armies and migrations; ink = the carrier of a diffusion. In the Explorers layer only: the state that sent the expedition (`--sponsor-*`, owner 2026-11-06) |
 | arrowhead | direction and kind: none (a `path`) or small heads at both ends (trade went both ways); one terminal head = a voyage; closed barb = an army; open chevron = a migration. A one-way route is also tipped at each marked stop on the way, never partway along |

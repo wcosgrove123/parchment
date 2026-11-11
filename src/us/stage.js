@@ -23,7 +23,7 @@ import { drawMarks, MARK_RADIUS } from '../render/marks.js';
 import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
 import { sideOf, lookFor as sideLook, militaryLegend, aliveOn as memberAlive } from '../military/wars.js';
-import { eventLegend } from '../military/events.js';
+import { eventLegend, kindLegend } from '../military/events.js';
 import { decorateMarks, drawCourseList, drawWarStrip, drawEdgeTabs, drawLines, drawForceMarks, lineColorOf, drawPhaseList, drawPhaseStrip, drawGround } from '../military/draw.js';
 import { forceLegend } from '../military/events.js';
 import { linesOn, blockadeRuns, borderRuns, dedupeRuns, runsLength } from '../military/lines.js';
@@ -1362,8 +1362,19 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     // (a battle frame has no side fills: the sides are named by their lines and forces below, not by an empty member row)
     rows.push(...(tracker.mil?.battle ? milRows.filter((r) => r.role !== 'name' && !/^No member/.test(r.label)) : milRows));
     const icons = tracker.mil?.icons ?? {};
-    const withIcon = (r) => (r.swatch === 'icon' ? { ...r, d: icons[r.icon]?.d ?? null } : r);
-    rows.push(...eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf).map(withIcon));
+    // a row that names an icon draws it when the catalog has it (an event's kind, in the row's own color); without
+    // it the row keeps its shape, and a row that is only an icon is left out
+    const withIcon = (r) => {
+      const d = r.icon ? icons[r.icon]?.d ?? null : null;
+      if (r.swatch === 'icon') return d ? { ...r, d } : (r.kind ? null : { ...r, d });
+      if (!d) return r;
+      return { ...r, swatch: 'icon', d, label: r.iconLabel ?? r.label, ring: r.icon === 'ev-capture' ? null : r.ring, color: r.iconColor ?? r.fill ?? (r.shape === 'rust-diamond' ? 'var(--rust)' : null) };
+    };
+    const evRows = eventLegend(tracker.mil?.shown ?? [], tracker.mil?.war ?? null, lineColorOf).map(withIcon);
+    // (the kinds that had no row of their own go in before the numeral's row, with the other marks)
+    const numeralAt = evRows.findIndex((r) => r.swatch === 'numeral');
+    evRows.splice(numeralAt < 0 ? evRows.length : numeralAt, 0, ...kindLegend(tracker.mil?.shown ?? []).map(withIcon).filter(Boolean));
+    rows.push(...evRows);
     rows.push(...forceLegend(tracker.mil?.positions ?? [], tracker.mil?.checks ?? {}, tracker.mil?.tech).map(withIcon));
     for (const l of tracker.mil?.lines ?? []) {
       if (l.kind === 'blockade') rows.push({ swatch: 'line', style: `blockade side-${l.color ?? 'a'}`, label: l.label, role: 'line' });
