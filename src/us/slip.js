@@ -6,9 +6,10 @@
 // template, never written by a model; and a one-line credit for the slide. It lets whoever builds the slide check
 // that the map says what the slide says, cite it, and describe it without guessing.
 
-import { geoArea } from 'd3';
+import { geoArea, geoContains } from 'd3';
 import { isoDate, longDate, yearOf, OPEN } from './dates.js';
-import { US_FROM, nbName, cleanLabel, powerAt } from './model.js';
+import { US_FROM, nbName, cleanLabel, powerAt, aliveNB } from './model.js';
+import { covered, slaveryCount } from './slavery.js';
 import { queryToOrder } from './frames.js';
 import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
@@ -160,6 +161,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     legend_corner: info.legend?.anchor ?? null,
     water_names: info.waterLabels,
     records_file: records?.file ?? null,
+    // The slavery-status tracker: the table, the span it speaks for, and the count of states by status on the date.
+    status: state.tracker === 'slavery' && data.slavery ? { table: data.slavery.file, coverage: (tracker.coverage ?? []).map((d) => isoDate(d)), covered: covered(tracker, date), ...slaveryCount(data.slavery, tracker, aliveNB(data, date), date), note: 'counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper' } : null,
     // The Military layer (brief of 2026-11-09 §6): the war, its sides, and each member with its dates and role.
     war: military?.war ? {
       id: military.war.id, names: military.war.names, names_shown: military.names, start: military.war.start, end: military.war.end, source: military.war.source ?? null,
@@ -233,6 +236,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     return {
       layer: layerOf(it), name: cleanLabel(nameOf(it)) ?? nameOf(it), local: it.p.local ?? null, ids, ...datesOf(it),
       certainty: certaintyOf(it, date), power: pw, power_label: pl, look, diff_role: r,
+      ...(state.tracker === 'slavery' && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
       lit: diff ? null : it.lit ?? null, lit_by: diff ? null : it.litBy ?? null, lit_as_named: !diff && !!(it.lit && it.litBy && !atlas.isPowerKey(it.litBy, pw)), labeled: !!label, label, cut_by_frame: atlas.cutByFrame(it.f),
       km2: Math.round(geoArea(it.f) * KM2), source: sourceOf(it, tags),
     };
@@ -244,6 +248,12 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     if (n?.fixme && (f.lit || f.labeled)) warnings.push(`OpenHistoricalMap's own note on ${f.name}: ${n.fixme}`);
     if (n?.estimated === 'yes' && (f.lit || f.labeled)) warnings.push(`${f.name}: OpenHistoricalMap marks its dates as estimated${f.end ? ` (end ${f.end})` : ''}`);
   }
+  if (resolved.status) {
+    const rows = features.filter((f) => f.status_row);
+    if (rows.length) warnings.push(`the status of ${rows.length} state${rows.length === 1 ? '' : 's'} on this map comes from TEST ROWS (${resolved.status.table}), not yet reviewed${rows.some((f) => /PENDING/.test(f.status_row.source ?? '')) ? '; their sources are PENDING OWNER' : ''}`);
+    if (resolved.status.without_a_row.length) warnings.push(`no status row for ${resolved.status.without_a_row.join(', ')} on ${longDate(date)}: drawn as paper`);
+    if (!resolved.status.covered) warnings.push(`the status table is entered for ${resolved.status.coverage.join(' to ')} only: no state is given a status on ${longDate(date)}`);
+  }
   if (date > 20001231) warnings.push("Newberry's record ends on 31 December 2000; its polygons in force that day are held open to the present");
 
   // ---- places, routes, rivers
@@ -254,6 +264,16 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     return { record: r.id, asked: r.asked ?? null, label: r.label, value: r.value, where: r.where, lon: r.lon, lat: r.lat, start: formatWhenIso(r.startWhen), end: formatWhenIso(r.endWhen), grade: r.grade, certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null,
       ...(r.tracker === 'military' ? { war: r.war, side: r.side || null, outcome: r.outcome || null, outcome_text: outcomeText(r, military?.war) || null, seq: r.seq ?? null, ...(r.battle ? { battle: r.battle, phase: r.phase || null } : {}) } : {}) };
   });
+  // A place whose record ended before the map's date stands on the map of a later day: say so, and say what the land
+  // under it was called on its own day when the Newberry drew it otherwise (Louisiana was the Territory of Orleans in 1811).
+  for (const m of rec?.marks ?? []) {
+    const r = m.r;
+    if (r.tracker === 'military' || !r.last || r.last >= date || diff) continue;
+    const under = (d) => aliveNB(data, d).find((it) => geoContains(it.f, [r.lon, r.lat]));
+    const then = under(r.first), now = under(date);
+    const differs = then && now && then.p.id !== now.p.id;
+    warnings.push(`${r.label} (${formatWhenIso(r.startWhen)}) predates the map's date, ${longDate(date)}${differs ? `: the land it stands on was ${nbName(then.p)} on its own day and is drawn as ${nbName(now.p)}` : ''}`);
+  }
   for (const p of points) if (p.dropped) warnings.push(`place ${p.label} (${p.record}): name dropped (${p.dropped === 'ceiling' ? 'the ten-name limit' : p.dropped === 'no-room' ? 'no room' : p.dropped})`);
   // (the Military layer: an event of the course beyond the frame is listed but not drawn)
   if (resolved.war) for (const c of resolved.war.course) c.off = !points.some((p) => p.record === c.record);
@@ -345,6 +365,7 @@ function creditLine(features, points, routes, rivers, trackerId) {
   if (has('land-cession') || has('treaty-land')) parts.push('land cessions: U.S. Forest Service (Royce 1899)');
   if (trackerId === 'electoral') parts.push('votes: National Archives');
   if (trackerId === 'population') parts.push('counts: U.S. Census Bureau');
+  if (trackerId === 'slavery') parts.push('status of states: the Parchment status table (test rows)');
   if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at)) parts.push('rivers: Natural Earth');
   if (points.length || routes.length) parts.push('places: the Parchment record table, coordinates from Wikidata');
   return parts.join('; ');

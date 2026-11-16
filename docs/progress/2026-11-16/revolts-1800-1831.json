@@ -1,0 +1,1973 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1831-08-21",
+    "tracker": "nations",
+    "title": "Slave revolts and conspiracies, 1800 to 1831",
+    "size": "1920x1080",
+    "records": "tests/maps/antebellum-records.csv",
+    "scale": 1.3,
+    "frame": "south",
+    "highlight": [
+      "none"
+    ],
+    "annotate": {
+      "rivers": [
+        "Mississippi"
+      ],
+      "places": [
+        "test-ab-gabriel-1800",
+        "test-ab-german-coast-1811",
+        "test-ab-vesey-1822",
+        "test-ab-turner-1831"
+      ]
+    }
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1831-08-21&frame=south&highlight=none&rivers=Mississippi&places=test-ab-gabriel-1800%2Ctest-ab-german-coast-1811%2Ctest-ab-vesey-1822%2Ctest-ab-turner-1831&title=Slave+revolts+and+conspiracies%2C+1800+to+1831&size=1920x1080&scale=1.3&records=tests%2Fmaps%2Fantebellum-records.csv",
+    "mode": "snapshot",
+    "date": "1831-08-21",
+    "date_text": "21 August 1831",
+    "from": null,
+    "tracker": {
+      "id": "nations",
+      "title": "Nations and empires"
+    },
+    "election": null,
+    "frame": {
+      "id": "south",
+      "title": "The South",
+      "box": {
+        "west": -107,
+        "south": 24,
+        "east": -74,
+        "north": 41
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        90.5,
+        0
+      ],
+      "parallels": [
+        26.8,
+        38.2
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1477,
+        831
+      ],
+      "scale": 1.3
+    },
+    "title": "Slave revolts and conspiracies, 1800 to 1831",
+    "highlight": {
+      "ids": [
+        "none"
+      ],
+      "unmatched": []
+    },
+    "inset": null,
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean",
+      "Gulf of Mexico"
+    ],
+    "records_file": "tests/maps/antebellum-records.csv",
+    "status": null,
+    "war": null
+  },
+  "legend": {
+    "title": "Nations and empires",
+    "rows": [
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      },
+      {
+        "label": "Revolt or conspiracy",
+        "swatch": "shape",
+        "key": null,
+        "fill": "#c8601a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": "rust-diamond",
+        "heads": null,
+        "role": "point type"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico",
+      "local": "México",
+      "ids": {
+        "ohm": 2969267,
+        "wikidata": "Q1109279"
+      },
+      "start": "1824-10-04",
+      "end": "1835-10-23",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mexico",
+      "cut_by_frame": true,
+      "km2": 4513165,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2969267",
+        "license": "CC0 1.0",
+        "wikidata": "Q1109279",
+        "notes": {
+          "start_event": "Republic legally established",
+          "end_event": "Government change",
+          "wikipedia": "en:First Mexican Republic"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 7,
+        "also_in_ohm": [
+          {
+            "ohm": 2692982,
+            "url": "https://www.openhistoricalmap.org/relation/2692982",
+            "name": "Unorganized Federal Territory",
+            "start": "1824-05-26",
+            "end": "1834-06-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1824-05-26",
+      "end": "1834-06-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorganized Federal Territory",
+      "cut_by_frame": true,
+      "km2": 1678024,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 7,
+          "change": "The unorganized federal territory lost to the creation of Indian Territory.",
+          "authority": "(U.S. Stat., vol. 4, ch. 155 [1824]/pp. 40-41)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Alta California",
+      "local": null,
+      "ids": {
+        "ohm": 2841224,
+        "wikidata": "Q1422806"
+      },
+      "start": "1821-02-22",
+      "end": "1836-03-02",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alta California",
+      "cut_by_frame": true,
+      "km2": 1228313,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841224",
+        "license": "CC0 1.0",
+        "wikidata": "Q1422806",
+        "notes": {
+          "start_event": "Adams Onis Treaty",
+          "end_event": "Texas Independence",
+          "wikipedia": "en:Alta California"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Coahuila y Tejas",
+      "local": null,
+      "ids": {
+        "ohm": 2841297,
+        "wikidata": "Q949898"
+      },
+      "start": "1824-05-07",
+      "end": "1835-12-15",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Coahuila y Tejas",
+      "cut_by_frame": false,
+      "km2": 544436,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841297",
+        "license": "CC0 1.0",
+        "wikidata": "Q949898",
+        "notes": {
+          "start_event": "State creation",
+          "end_event": "State gets split",
+          "wikipedia": "en:Coahuila y Tejas"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Comancheria",
+      "local": "Nʉmʉnʉʉ Sookobitʉ",
+      "ids": {
+        "ohm": 2692912,
+        "wikidata": "Q648279"
+      },
+      "start": "1790-01-01",
+      "end": "1860-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Comancheria",
+      "cut_by_frame": false,
+      "km2": 485931,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2692912",
+        "license": "CC0 1.0",
+        "wikidata": "Q648279",
+        "notes": {
+          "source": "https://texashistory.unt.edu/ark:/67531/metapth493255/",
+          "source_name": "The Comanche Country and Adjacent Territory, 1860;pub. 1933",
+          "fixme": "Need more details from source map, as well as warping of a higher res version of the source",
+          "estimated": "yes",
+          "wikipedia": "en:Comancheria"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Chihuahua",
+      "local": null,
+      "ids": {
+        "ohm": 2841299,
+        "wikidata": "Q655"
+      },
+      "start": "1824-05-07",
+      "end": "1848-02-02",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Chihuahua",
+      "cut_by_frame": false,
+      "km2": 363338,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841299",
+        "license": "CC0 1.0",
+        "wikidata": "Q655",
+        "notes": {
+          "start_event": "New states created",
+          "end_event": "Mexican Cession",
+          "wikipedia": "en:Chihuahua (state)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Missouri",
+      "local": null,
+      "ids": {
+        "newberry": "mo_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692939,
+            "url": "https://www.openhistoricalmap.org/relation/2692939",
+            "name": "Missouri",
+            "start": "1821-08-10",
+            "end": "1837-03-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1821-08-10",
+      "end": "1837-03-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri",
+      "cut_by_frame": false,
+      "km2": 172197,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_state",
+          "version": 1,
+          "change": "The state of Missouri was created from Missouri Territory, with all modern boundaries, except for the northwestern corner of the present state, which became unorganized federal territory.",
+          "authority": "(Terr. Papers U.S., 15:742-744; U.S. Stat., vol. 3, ch. 22[1820]/pp. 545-548)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indian Territory",
+      "local": null,
+      "ids": {
+        "newberry": "it_indianterr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692971,
+            "url": "https://www.openhistoricalmap.org/relation/2692971",
+            "name": "Indian Territory",
+            "start": "1828-05-06",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1828-05-06",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indian Territory",
+      "cut_by_frame": false,
+      "km2": 166256,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "it_indianterr",
+          "version": 2,
+          "change": "Indian Territory gained from Arkansas Territory when the Treaty of Washington between the United States and Choctaw Indians definitively established the eastern line of the Choctaw Cession and affirmed Choctaw control of the area west of the line.",
+          "authority": "(U.S. Stat., vol. 7, p. 311; Gabler, 37-39; Royce, 720-721; Van Zandt, 119)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693700,
+            "url": "https://www.openhistoricalmap.org/relation/2693700",
+            "name": "Virginia",
+            "start": "1792-06-01",
+            "end": "1846-09-06",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-06-01",
+      "end": "1846-09-06",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 166167,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 4,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., vol. 1, ch. 4[1791]/p. 189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ar_terr",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2692937,
+            "url": "https://www.openhistoricalmap.org/relation/2692937",
+            "name": "Arkansas Territory",
+            "start": "1828-05-06",
+            "end": "1836-06-14",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1828-05-06",
+      "end": "1836-06-14",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas Territory",
+      "cut_by_frame": false,
+      "km2": 148239,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_terr",
+          "version": 3,
+          "change": "CLARK, CRAWFORD, LOVELEY, and MILLER lost to Indian lands when the treaty between the United States and Cherokee Indians established the western line of Arkansas Territory north of Red River along the eastern line of the Choctaw Cession.",
+          "authority": "(U.S. Stat., vol. 7, p. 311; Gabler, 37-39; Royce, 720-721; Van Zandt, 119)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Florida Territory",
+      "local": null,
+      "ids": {
+        "newberry": "fl_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693737,
+            "url": "https://www.openhistoricalmap.org/relation/2693737",
+            "name": "Florida Territory",
+            "start": "1822-03-30",
+            "end": "1845-03-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1822-03-30",
+      "end": "1845-03-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Florida Territory",
+      "cut_by_frame": false,
+      "km2": 146872,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "fl_terr",
+          "version": 1,
+          "change": "The United States created the Territory of Florida from the provinces of East and West Florida ceded by Spain to the United States. The territory had the same boundaries as the present state of Florida.",
+          "authority": "(Terr. Papers U.S., 22:389-399; U.S. Stat., vol. 3, ch. 13 [1822], sec. 1/p. 654)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Illinois",
+      "local": null,
+      "ids": {
+        "newberry": "il_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693067,
+            "url": "https://www.openhistoricalmap.org/relation/2693067",
+            "name": "Illinois",
+            "start": "1818-12-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Illinois",
+      "cut_by_frame": true,
+      "km2": 145768,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "il_state",
+          "version": 1,
+          "change": "The state of Illinois was created from Illinois Territory; Illinois Territory eliminated.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], secs. 1-2, 7/pp. 428-429, 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alabama",
+      "local": null,
+      "ids": {
+        "newberry": "al_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693721,
+            "url": "https://www.openhistoricalmap.org/relation/2693721",
+            "name": "Alabama",
+            "start": "1820-12-19",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-12-19",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alabama",
+      "cut_by_frame": false,
+      "km2": 133863,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "al_state",
+          "version": 3,
+          "change": "MARION's overlap of the state of Mississippi and TUSCALOOSA's overlap of the state of Mississippi ended.",
+          "authority": "(Ala. Acts 1820, 2d sess., secs. 1, 9/pp. 90, 92)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Mississippi",
+      "local": null,
+      "ids": {
+        "newberry": "ms_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693716,
+            "url": "https://www.openhistoricalmap.org/relation/2693716",
+            "name": "Mississippi",
+            "start": "1820-05-29",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mississippi",
+      "cut_by_frame": false,
+      "km2": 123526,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ms_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Louisiana",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693673,
+            "url": "https://www.openhistoricalmap.org/relation/2693673",
+            "name": "Pennsylvania",
+            "start": "1792-03-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": true,
+      "km2": 117177,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 2,
+          "change": "Pennsylvania purchased from the federal government the Erie Triangle, a small area immediately north of Pennsylvania and west of New York, giving Pennsylvania an outlet to Lake Erie.",
+          "authority": "(Van Zandt, 83-84)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Tennessee",
+      "local": null,
+      "ids": {
+        "newberry": "tn_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693739,
+            "url": "https://www.openhistoricalmap.org/relation/2693739",
+            "name": "Tennessee",
+            "start": "1796-06-01",
+            "end": "1859-11-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1796-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tennessee",
+      "cut_by_frame": false,
+      "km2": 109125,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tn_state",
+          "version": 1,
+          "change": "The state of Tennessee was created from the Territory of the United States South of the River Ohio (Southwest Territory); Southwest Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 1, ch. 47[1796], pp. 491-492; Folmsbee, Corlew, and Mitchell 110)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Ohio",
+      "local": null,
+      "ids": {
+        "newberry": "oh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2663622,
+            "url": "https://www.openhistoricalmap.org/relation/2663622",
+            "name": "Ohio",
+            "start": "1803-03-01",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1803-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Ohio",
+      "cut_by_frame": false,
+      "km2": 106748,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "oh_state",
+          "version": 1,
+          "change": "The state of Ohio was created from the Northwest Territory and Indiana Territory.",
+          "authority": "(Ind. Terr., Exec. Journal, 114-115; Pence and Armstrong, 218; U.S. Stat., vol. 2, ch. 40 [1802], secs. 1-3/pp. 173-174; Van Zandt, 112)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kentucky",
+      "local": null,
+      "ids": {
+        "newberry": "ky_state",
+        "newberry_version": 1
+      },
+      "start": "1792-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kentucky",
+      "cut_by_frame": false,
+      "km2": 104608,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ky_state",
+          "version": 1,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., 1:189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indiana",
+      "local": null,
+      "ids": {
+        "newberry": "in_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693335,
+            "url": "https://www.openhistoricalmap.org/relation/2693335",
+            "name": "Indiana",
+            "start": "1816-12-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1816-12-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indiana",
+      "cut_by_frame": false,
+      "km2": 93616,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "in_state",
+          "version": 1,
+          "change": "The state of Indiana was created from Indiana Territory and small parts of Illinois and Michigan Territories.",
+          "authority": "(U.S. Stat., vol. 3, ch. 57 [1816], secs. 1-2/p. 289 and res. 1 [1816]/p. 399; Van Zandt, 115)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of the Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2832950,
+        "wikidata": "Q778"
+      },
+      "start": "1783-09-03",
+      "end": "1848-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Bahamas",
+      "cut_by_frame": true,
+      "km2": 51285,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2832950",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "1783 Treaty of paris, Spain exchanges Bahamas for East Florida",
+          "end_event": "Turks and Caicos leaves",
+          "wikipedia": "en:History of the Bahamas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maryland",
+      "cut_by_frame": false,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Jersey",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Michigan Territory",
+      "local": null,
+      "ids": {
+        "newberry": "mi_terr",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693337,
+            "url": "https://www.openhistoricalmap.org/relation/2693337",
+            "name": "Michigan Territory",
+            "start": "1818-12-03",
+            "end": "1834-06-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "1834-06-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 371904,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mi_terr",
+          "version": 3,
+          "change": "The state of Illinois was created from Illinois Territory. Michigan Territory gained the former parts of Illinois and Indiana Territories in present Wisconsin and the Upper Peninsula of present Michigan.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], sec. 7/p. 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Shoshone",
+      "local": null,
+      "ids": {
+        "ohm": 2953509,
+        "wikidata": "Q26774"
+      },
+      "start": "1700-01-01",
+      "end": "1877-04-16",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 182785,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2953509",
+        "license": "CC0 1.0",
+        "wikidata": "Q26774",
+        "notes": {
+          "wikipedia": "en:Shoshone"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693715,
+            "url": "https://www.openhistoricalmap.org/relation/2693715",
+            "name": "Georgia",
+            "start": "1802-04-24",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1802-04-24",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 152353,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 3,
+          "change": "Georgia ceded to the United States much of present Mississippi and Alabama. This area became unorganized federal territory and Georgia Western Lands were eliminated.",
+          "authority": "(Paullin, 83; Van Zandt, 100; Terr. Papers U.S., 5:142-143)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Tamaulipas",
+      "local": null,
+      "ids": {
+        "ohm": 2841303,
+        "wikidata": "Q80007"
+      },
+      "start": "1821-09-27",
+      "end": "1848-02-02",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 130234,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841303",
+        "license": "CC0 1.0",
+        "wikidata": "Q80007",
+        "notes": {
+          "start_event": "Renamed",
+          "end_event": "Mexican Cession",
+          "wikipedia": "en:Tamaulipas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693675,
+            "url": "https://www.openhistoricalmap.org/relation/2693675",
+            "name": "New York",
+            "start": "1783-09-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1855-01-10",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 125723,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 1,
+          "change": "New York became an independent state on 4 July 1776, and Vermont declared its independence from New York on 15 January 1777. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Durango",
+      "local": null,
+      "ids": {
+        "ohm": 2841300,
+        "wikidata": "Q79918"
+      },
+      "start": "1824-05-07",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 123623,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841300",
+        "license": "CC0 1.0",
+        "wikidata": "Q79918",
+        "notes": {
+          "start_event": "New states created",
+          "wikipedia": "en:Durango"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Zacatecas",
+      "local": null,
+      "ids": {
+        "ohm": 2841589,
+        "wikidata": "Q80269"
+      },
+      "start": "1821-09-27",
+      "end": "1856-12-10",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 81097,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841589",
+        "license": "CC0 1.0",
+        "wikidata": "Q80269",
+        "notes": {
+          "start_event": "Mexican independence",
+          "end_event": "Aguascalientes separates",
+          "wikipedia": "en:Zacatecas"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nuevo León",
+      "local": null,
+      "ids": {
+        "ohm": 2841319,
+        "wikidata": "Q15282"
+      },
+      "start": "1776-01-01",
+      "end": "1856-02-19",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 63475,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841319",
+        "license": "CC0 1.0",
+        "wikidata": "Q15282",
+        "notes": {
+          "start_event": "Joins Provincias Internas",
+          "end_event": "Annexes Coahuila",
+          "wikipedia": "en:Nuevo León"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "San Luis Potosí",
+      "local": null,
+      "ids": {
+        "ohm": 2842076,
+        "wikidata": "Q78980"
+      },
+      "start": "1823-12-22",
+      "end": "1853-12-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 61277,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842076",
+        "license": "CC0 1.0",
+        "wikidata": "Q78980",
+        "notes": {
+          "start_event": "Admission to Mexico statehood",
+          "end_event": "Sierra Gorda created from parts of Queretaro, SLP and Guanajuato",
+          "wikipedia": "en:San Luis Potosí"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Sinaloa",
+      "local": null,
+      "ids": {
+        "ohm": 2841238,
+        "wikidata": "Q80252"
+      },
+      "start": "1830-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 57518,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841238",
+        "license": "CC0 1.0",
+        "wikidata": "Q80252",
+        "notes": {
+          "start_event": "State gets split",
+          "wikipedia": "en:Sinaloa"
+        }
+      }
+    },
+    {
+      "layer": "us-mexico-dispute",
+      "name": "Claimed by both Arkansas Territory and Coahuila y Tejas",
+      "local": null,
+      "ids": {
+        "computed": "ar_terr.3~2841297",
+        "newberry": "ar_terr",
+        "newberry_version": 3,
+        "ohm": 2841297
+      },
+      "start": "1828-05-06",
+      "end": "1835-12-14",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 10472,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of a Newberry U.S. polygon and an OpenHistoricalMap Mexican polygon alive on the same days; nothing drawn",
+        "from": [
+          {
+            "newberry": "ar_terr",
+            "version": 3,
+            "name": "Arkansas Territory"
+          },
+          {
+            "ohm": 2841297,
+            "name": "Coahuila y Tejas",
+            "url": "https://www.openhistoricalmap.org/relation/2841297"
+          }
+        ],
+        "ended": [
+          {
+            "day": 18351215,
+            "side": "b",
+            "claimant": "Coahuila y Tejas",
+            "text": "Coahuila y Tejas: State gets split (OpenHistoricalMap)",
+            "record": null
+          }
+        ]
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    },
+    {
+      "layer": "newberry-dispute",
+      "name": "Claimed by both Michigan Territory and Ohio",
+      "local": null,
+      "ids": {
+        "newberry": [
+          "mi_terr",
+          "oh_state"
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "1834-06-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 1329,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of two Newberry polygons; nothing drawn",
+        "from": [
+          {
+            "newberry": "mi_terr",
+            "version": 3,
+            "name": "Michigan Territory"
+          },
+          {
+            "newberry": "oh_state",
+            "version": 1,
+            "name": "Ohio"
+          }
+        ],
+        "ended": {
+          "text": "The state of Michigan was created from Michigan Territory; boundary dispute with Ohio over the strip running from Indiana to Lake Erie was settled in favor of Ohio; Michigan Territory eliminated.",
+          "cite": "(U.S. Stat., vol. 5, ch. 99 [1836], secs. 1-2/p. 49 and ch. 6 [1837]/p. 144; Van Zandt, 127)",
+          "id": "mi_state",
+          "v": 1
+        }
+      }
+    }
+  ],
+  "points": [
+    {
+      "record": "test-ab-gabriel-1800",
+      "asked": "test-ab-gabriel-1800",
+      "label": "Gabriel's conspiracy",
+      "value": "revolt",
+      "where": "Q43421",
+      "lon": -77.4367,
+      "lat": 37.5408,
+      "start": "1800",
+      "end": "1800",
+      "grade": "exact",
+      "certainty": "legal",
+      "source": "PENDING OWNER",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-german-coast-1811",
+      "asked": "test-ab-german-coast-1811",
+      "label": "German Coast uprising",
+      "value": "revolt",
+      "where": "Q507629",
+      "lon": -90.5,
+      "lat": 30.12,
+      "start": "1811",
+      "end": "1811",
+      "grade": "exact",
+      "certainty": "approximate",
+      "source": "PENDING OWNER",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-vesey-1822",
+      "asked": "test-ab-vesey-1822",
+      "label": "Vesey conspiracy",
+      "value": "revolt",
+      "where": "Q47716",
+      "lon": -79.9319,
+      "lat": 32.7833,
+      "start": "1822",
+      "end": "1822",
+      "grade": "exact",
+      "certainty": "legal",
+      "source": "PENDING OWNER",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-turner-1831",
+      "asked": "test-ab-turner-1831",
+      "label": "Nat Turner's rebellion",
+      "value": "revolt",
+      "where": "Q337915",
+      "lon": -77.1606,
+      "lat": 36.7708,
+      "start": "1831",
+      "end": "1831",
+      "grade": "exact",
+      "certainty": "approximate",
+      "source": "PENDING OWNER",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    }
+  ],
+  "routes": [],
+  "rivers": [
+    {
+      "asked": "Mississippi",
+      "name": "Mississippi",
+      "found": true,
+      "drawn_px": 313,
+      "labeled": true,
+      "dropped": null,
+      "source": "Natural Earth 1:10m rivers, North America (public domain)"
+    }
+  ],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1445,
+      "y1": 767
+    },
+    "legend": {
+      "x": 1187,
+      "y": 647,
+      "w": 236,
+      "h": 98,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 617,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "OpenHistoricalMap's own note on Comancheria: Need more details from source map, as well as warping of a higher res version of the source",
+    "Comancheria: OpenHistoricalMap marks its dates as estimated (end 1860-01-01)",
+    "Gabriel's conspiracy (1800) predates the map's date, 21 August 1831",
+    "German Coast uprising (1811) predates the map's date, 21 August 1831: the land it stands on was Orleans Territory on its own day and is drawn as Louisiana",
+    "Vesey conspiracy (1822) predates the map's date, 21 August 1831"
+  ],
+  "alt_text": "Parchment map, 21 August 1831, nations and empires, framed on The South, titled \"Slave revolts and conspiracies, 1800 to 1831\". Marked places: Gabriel's conspiracy (1800), German Coast uprising (1811), Vesey conspiracy (1822) and Nat Turner's rebellion (1831). Rivers named: Mississippi.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; rivers: Natural Earth; places: the Parchment record table, coordinates from Wikidata",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1831-08-21&tracker=nations&frame=south&highlight=none&rivers=Mississippi&places=test-ab-gabriel-1800%2Ctest-ab-german-coast-1811%2Ctest-ab-vesey-1822%2Ctest-ab-turner-1831&title=Slave+revolts+and+conspiracies%2C+1800+to+1831&size=1920x1080&scale=1.3&records=tests%2Fmaps%2Fantebellum-records.csv"
+  }
+}

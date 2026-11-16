@@ -12,6 +12,18 @@
       "Other": { "pattern": "hatch", "label": "Republic, joint or disputed area" }
     }
   },
+  "slavery": {
+    "id": "slavery",
+    "title": "Free and slave states",
+    "_comment": "Each state filled by its status in a table, data/us/slavery-status.csv (src/us/slavery.js): one row per Newberry polygon id per status period, with a source. A territory without a row takes one neutral fill; the District of Columbia and joint or disputed areas stay paper. 'coverage' is the span the rows were entered for (1 January 1820 to 31 December 1860, in which no state changed status): outside it no state is given a status and the legend says so. Rows are TEST ROWS until the owner reviews them (brief of 2026-11-16).",
+    "statuses": {
+      "free": { "fill": "T", "label": "Free state" },
+      "slave": { "fill": "S", "label": "Slave state" }
+    },
+    "territory": { "fill": "E", "label": "Territories" },
+    "coverage": [18200101, 18601231],
+    "uncovered": "Status is entered for 1820 to 1860 only"
+  },
   "cessions": {
     "id": "cessions",
     "title": "Indian land cessions",

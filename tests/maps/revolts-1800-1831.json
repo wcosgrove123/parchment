@@ -1,0 +1,27 @@
+{
+  "_comment": "Map B of the brief 'maps for the Antebellum South lecture' (2026-11-16): four revolts and conspiracies, 1800 to 1831, as point records (tests/maps/antebellum-records.csv, TEST ROWS, sources PENDING OWNER) on the map of 21 August 1831. Two were planned and stopped before they began (Gabriel's, Vesey's): the grammar has no mark for that, so all four are drawn alike and their names say which. Three of the four predate the map's date; the packing slip warns of each.",
+  "page": "us",
+  "date": "1831-08-21",
+  "tracker": "nations",
+  "frame": "south",
+  "highlight": [
+    "none"
+  ],
+  "annotate": {
+    "rivers": [
+      "Mississippi"
+    ],
+    "places": [
+      "test-ab-gabriel-1800",
+      "test-ab-german-coast-1811",
+      "test-ab-vesey-1822",
+      "test-ab-turner-1831"
+    ],
+    "routes": []
+  },
+  "title": "Slave revolts and conspiracies, 1800 to 1831",
+  "size": "1920x1080",
+  "scale": 1.3,
+  "records": "tests/maps/antebellum-records.csv",
+  "out": "out/revolts-1800-1831"
+}

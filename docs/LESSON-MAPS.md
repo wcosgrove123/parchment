@@ -42,7 +42,7 @@ the order.
 | `page` | (the page) | `us`, the North America page; the only one that takes orders for now |
 | `date` | `date=` or `year=` | a day (`1836-06-01`) or a year (`1836`, read as 31 December) |
 | `from` | `from=` | makes a Diff: what changed from this date to `date` |
-| `tracker` | `tracker=` | `nations` (default), `states`, `cessions`, `population`, `electoral` |
+| `tracker` | `tracker=` | `nations` (default), `states`, `slavery` (free and slave states, below), `cessions`, `population`, `electoral` |
 | `frame` | `frame=` | a frame id (below) or a box `W,S,E,N` in degrees; without one, the whole continent |
 | `highlight` | `highlight=` | ids to light; everything else drops to paper (below) |
 | `annotate.rivers` | `rivers=` | rivers to name, as Natural Earth spells them (`Nueces`, `Rio Grande`, `Sabine`) |
@@ -56,7 +56,8 @@ the order.
 | `out`, `svg` | | where to write, and whether to write an SVG too |
 
 **Frames** (`src/focuses.json`, under North America): `texas` (−107, 24.5, −92.5, 37.5), `southwest` (−125, 25, −93, 43),
-`oregon-country` (−126, 40, −108, 56), `east` (−95, 24, −66, 48), `plains` (−105, 35, −89, 46), `border-states`
+`oregon-country` (−126, 40, −108, 56), `east` (−95, 24, −66, 48), `south` (−107, 24, −74, 41: the cotton South, wide
+enough for Texas), `plains` (−105, 35, −89, 46), `border-states`
 (−92, 35, −74, 41.5), and `north-america` (the continent's box). The legend goes in whichever right-hand corner holds
 less land; water names are set where their water shows; Alaska and Hawaii are drawn only on the continent.
 
@@ -64,7 +65,16 @@ less land; water names are set where their water shows; Alaska and Hawaii are dr
 `spain`, `france`, `russia`, `native`), any polygon by its own name (`coahuila-y-tejas`, `texas-republic`,
 `joint-mexico-texas-claim`), or by its id (`ohm:2841297`, `nb:tx_republic`, `Q949898`). A hatched dispute stays when
 the order lights either side of it. Names of what is not lit stay on the map, paler, as context. `npm run search`
-finds ids.
+finds ids. The one word `none` lights nothing: a quiet base of borders and names, for a map whose places carry it.
+
+**Free and slave states** (`tracker: slavery`, 2026-11-16). Each state takes its status from a table,
+`data/us/slavery-status.csv`: one row per Newberry polygon id (`al_state`) per status period, with `status` (`free` or
+`slave`), `start` and `end` (blank: the polygon's own first and last day) and a `source`. The shapes stay the
+Newberry's. Territories take one neutral fill and the label "Territories" until a territory is given a row of its own;
+the District of Columbia and joint or disputed areas stay paper. The key is the same on every date (free, slave,
+territories), so two dates pair side by side. The table is entered for 1820 to 1860 only; outside those years no
+state is given a status and the key says so. The packing slip counts the states by status on the date
+(`resolved.status`) and each polygon carries its row. The rows are TEST ROWS until the owner reviews them.
 
 **Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the
 Republic of Texas has a color of its own and the land Mexico still claimed inside it keeps the hatch; the whole
@@ -76,7 +86,10 @@ Nuevo México lines (the upper Rio Grande claim).
 
 **Places and routes** are records, as everywhere in Parchment: a `point` row with a Wikidata id in `where` and a
 `source`; an `arrow` or `path` row through gazetteer ids. A Wikidata id with no record is not drawn (the slip says
-so). Test rows for the Texas maps: `tests/maps/texas-records.csv` (marked TEST ROW, not reviewed).
+so). A place whose record ended before the map's date gets a warning on the slip, with the name the land under it
+had on its own day when that differs (Louisiana was Orleans Territory in 1811). A revolt or a conspiracy is a point
+with the value `revolt`: the rust diamond of a conflict, with its own line in the key (test rows:
+`tests/maps/antebellum-records.csv`). Test rows for the Texas maps: `tests/maps/texas-records.csv` (marked TEST ROW, not reviewed).
 
 ## The packing slip
 

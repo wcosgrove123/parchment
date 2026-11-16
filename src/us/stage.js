@@ -34,6 +34,7 @@ import { diffUS, byKind } from './diff.js';
 import { electoralLook, electoralLegend, someAbstained, resultFor } from './electoral.js';
 import { aliveDisputes, aliveUSMX } from './disputes.js';
 import { fitElectoralBadges, drawElectoralBadges } from './electoral-draw.js';
+import { slaveryLook, slaveryLegend } from './slavery.js';
 import { censusOn, unitsFor, estimatesOn, densityLabels, areaKm2, fmt, pct } from './native.js';
 
 export { US_FROM, prepareData, powerAt, aliveNB, aliveOHM, nbName } from './model.js';
@@ -289,7 +290,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       it.cat = pw;
       let look = categoryLook(powers, pw);
       if (trackerId !== 'nations' && look.fill) look = { fill: null, label: null };
-      if (trackerId === 'cessions' && look.pattern) look = { fill: null, label: null };
+      if ((trackerId === 'cessions' || trackerId === 'slavery') && look.pattern) look = { fill: null, label: null };
       // (an election map keeps only the Confederacy's cross-hatch, which says why eleven states cast no vote in 1864)
       if (trackerId === 'electoral' && look.pattern && pw !== 'rebellion') look = { fill: null, label: null };
       if (trackerId === 'military' && !look.pattern) look = militaryLook(it, pw);
@@ -303,7 +304,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     for (const it of nbAlive) {
       it.cat = it.p.power;
       it.popUnit = pop?.units.get(it) ?? null;
-      if (trackerId === 'states') {
+      it.status = null;
+      if (trackerId === 'slavery') {
+        const s = slaveryLook(data.slavery, tracker, it, date);
+        it.look = s.look; it.status = s.status; it.statusRow = s.row;
+      } else if (trackerId === 'states') {
         const t = tracker.types[it.p.type] ?? {};
         it.look = t.pattern ? { pattern: t.pattern, label: tracker.types.Other.label } : { fill: t.fill, label: t.label };
       } else if (trackerId === 'cessions') {
@@ -320,7 +325,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // Land two U.S. polygons claimed at once (the Toledo Strip, Greer County...): hatched as a dispute under every
     // tracker but the Electoral College, where a hatch is a fifth candidate (src/us/disputes.js). Which pieces are
     // alive follows from nbAlive, so the cache key already covers them.
-    if (trackerId !== 'electoral') {
+    // ...nor under the slavery-status tracker, whose key is the same on every date so that two maps pair (free, slave,
+    // territories and nothing else: a border dispute between two states says nothing about either's status).
+    if (trackerId !== 'electoral' && trackerId !== 'slavery') {
       for (const it of aliveDisputes(data, date)) { it.look = { pattern: 'hatch', label: 'Disputed or overlapping claims' }; items.push(it); }
       // ...and land a U.S. state and a Mexican state claimed at once (the Nueces Strip and the upper Rio Grande,
       // 1845–1848; scripts/derive-us-disputes.mjs), the same way.
@@ -352,7 +359,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     }
 
     // Native homelands (historical-basemaps, colonial era): under every tracker but the cessions.
-    const natAlive = trackerId === 'cessions' ? [] : aliveNative(data, date);
+    const natAlive = trackerId === 'cessions' || trackerId === 'slavery' ? [] : aliveNative(data, date);
     for (const it of natAlive) { it.cat = 'native'; it.look = categoryLook(powers, 'native'); items.push(it); }
     // An order's highlight (lesson maps): the polygons it names keep their looks; everything else drops to paper.
     const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states' || trackerId === 'military') ? applyHighlight(items) : null;
@@ -1342,6 +1349,8 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     for (const [key, c] of Object.entries(powers.categories)) {
       if (c.fill && present.has(`fill:${c.fill}:${key}`)) rows.push({ swatch: 'fill', key: c.fill, label: labelFor(c, date) });
     }
+  } else if (trackerId === 'slavery') {
+    rows.push(...slaveryLegend(tracker, present, date));
   } else if (trackerId === 'states') {
     const seen = new Set();
     for (const t of Object.values(tracker.types)) {

@@ -282,11 +282,23 @@
     "label": "Mazatlán",
     "fetched": "2026-11-10"
   },
+  "Q43421": {
+    "lon": -77.4367,
+    "lat": 37.5408,
+    "label": "Richmond",
+    "fetched": "2026-11-16"
+  },
   "Q45067": {
     "lon": -82.0244,
     "lat": 34.1469,
     "label": "Siege of Savage's Old Fields",
     "fetched": "2026-11-10"
+  },
+  "Q47716": {
+    "lon": -79.9319,
+    "lat": 32.7833,
+    "label": "Charleston",
+    "fetched": "2026-11-16"
   },
   "Q48365": {
     "lon": -71,
@@ -594,6 +606,12 @@
     "label": "Battle of Bunker Hill",
     "fetched": "2026-11-10"
   },
+  "Q337915": {
+    "lon": -77.1606,
+    "lat": 36.7708,
+    "label": "Southampton County",
+    "fetched": "2026-11-16"
+  },
   "Q374365": {
     "lon": 39.1611,
     "lat": 21.5292,
@@ -659,6 +677,12 @@
     "lat": 34.0617,
     "label": "Socorro",
     "fetched": "2026-11-10"
+  },
+  "Q507629": {
+    "lon": -90.5,
+    "lat": 30.12,
+    "label": "St. John the Baptist Parish",
+    "fetched": "2026-11-16"
   },
   "Q512009": {
     "lon": -17.11,

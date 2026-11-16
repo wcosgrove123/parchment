@@ -1,0 +1,2033 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1820-06-01",
+    "tracker": "slavery",
+    "title": "Slave and free states, 1820",
+    "size": "1440x1620",
+    "scale": 1.8,
+    "frame": "south",
+    "annotate": {
+      "rivers": [
+        "Mississippi"
+      ]
+    }
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1820-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8",
+    "mode": "snapshot",
+    "date": "1820-06-01",
+    "date_text": "1 June 1820",
+    "from": null,
+    "tracker": {
+      "id": "slavery",
+      "title": "Free and slave states"
+    },
+    "election": null,
+    "frame": {
+      "id": "south",
+      "title": "The South",
+      "box": {
+        "west": -107,
+        "south": 24,
+        "east": -74,
+        "north": 41
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        90.5,
+        0
+      ],
+      "parallels": [
+        26.8,
+        38.2
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1440,
+      "height": 1620,
+      "sheet_units": [
+        800,
+        900
+      ],
+      "scale": 1.8
+    },
+    "title": "Slave and free states, 1820",
+    "highlight": null,
+    "inset": null,
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean"
+    ],
+    "records_file": null,
+    "status": {
+      "table": "data/us/slavery-status.csv",
+      "coverage": [
+        "1820-01-01",
+        "1860-12-31"
+      ],
+      "covered": true,
+      "states": 23,
+      "free": 12,
+      "slave": 11,
+      "without_a_row": [],
+      "free_states": [
+        "Connecticut",
+        "Illinois",
+        "Indiana",
+        "Maine",
+        "Massachusetts",
+        "New Hampshire",
+        "New Jersey",
+        "New York",
+        "Ohio",
+        "Pennsylvania",
+        "Rhode Island",
+        "Vermont"
+      ],
+      "slave_states": [
+        "Alabama",
+        "Delaware",
+        "Georgia",
+        "Kentucky",
+        "Louisiana",
+        "Maryland",
+        "Mississippi",
+        "North Carolina",
+        "South Carolina",
+        "Tennessee",
+        "Virginia"
+      ],
+      "note": "counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper"
+    },
+    "war": null
+  },
+  "legend": {
+    "title": "Free and slave states",
+    "rows": [
+      {
+        "label": "Free state",
+        "swatch": "fill",
+        "key": "T",
+        "fill": "#58b4c3",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Slave state",
+        "swatch": "fill",
+        "key": "S",
+        "fill": "#ce976a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Territories",
+        "swatch": "fill",
+        "key": "E",
+        "fill": "#bea160",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Missouri Territory",
+      "local": null,
+      "ids": {
+        "newberry": "mo_terr",
+        "newberry_version": 5,
+        "also_in_ohm": [
+          {
+            "ohm": 2692933,
+            "url": "https://www.openhistoricalmap.org/relation/2692933",
+            "name": "Missouri Territory",
+            "start": "1819-07-04",
+            "end": "1821-08-09",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1819-07-04",
+      "end": "1821-08-09",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "color": "#bea160",
+        "name": "gold"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri Territory",
+      "cut_by_frame": true,
+      "km2": 1876721,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_terr",
+          "version": 5,
+          "change": "The United States created Arkansas Territory from that part of Missouri Territory south of the parallel of 36 degrees, 30 minutes north latitude.",
+          "authority": "(U.S. Stat., vol. 3, ch. 49[1819]/pp. 493-496)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Captaincy General of the Inner Provinces",
+      "local": "Capitanía General de las Provincias Internas",
+      "ids": {
+        "ohm": 2841619,
+        "wikidata": null
+      },
+      "start": "1812-01-01",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "the Inner Provinces",
+      "cut_by_frame": true,
+      "km2": 1827250,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841619",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "start_event": "Nuevo Santander rejoins",
+          "end_event": "Adams Onis Treaty"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nuevo México",
+      "local": null,
+      "ids": {
+        "ohm": 2841310,
+        "wikidata": "Q921283"
+      },
+      "start": "1598-01-01",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nuevo México",
+      "cut_by_frame": false,
+      "km2": 374559,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841310",
+        "license": "CC0 1.0",
+        "wikidata": "Q921283",
+        "notes": {
+          "start_event": "Spanish missions founded",
+          "end_event": "Adams Onis Treaty",
+          "wikipedia": "en:Santa Fe de Nuevo México"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Michigan Territory",
+      "local": null,
+      "ids": {
+        "newberry": "mi_terr",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693337,
+            "url": "https://www.openhistoricalmap.org/relation/2693337",
+            "name": "Michigan Territory",
+            "start": "1818-12-03",
+            "end": "1834-06-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "1834-06-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "color": "#bea160",
+        "name": "gold"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Michigan Territory",
+      "cut_by_frame": false,
+      "km2": 371904,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mi_terr",
+          "version": 3,
+          "change": "The state of Illinois was created from Illinois Territory. Michigan Territory gained the former parts of Illinois and Indiana Territories in present Wisconsin and the Upper Peninsula of present Michigan.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], sec. 7/p. 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ar_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692935,
+            "url": "https://www.openhistoricalmap.org/relation/2692935",
+            "name": "Arkansas Territory",
+            "start": "1819-07-04",
+            "end": "1824-05-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2692977,
+            "url": "https://www.openhistoricalmap.org/relation/2692977",
+            "name": "Arkansas",
+            "start": "1836-06-15",
+            "end": "1840-05-20",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1819-07-04",
+      "end": "1824-05-25",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "color": "#bea160",
+        "name": "gold"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas Territory",
+      "cut_by_frame": false,
+      "km2": 287996,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_terr",
+          "version": 1,
+          "change": "The United States created Arkansas Territory from Missouri Territory. Arkansas Territory included all of present Arkansas and part of present Oklahoma. Boundary between Arkansas Territory and Mexico remained unsettled.",
+          "authority": "(U.S. Stat., vol. 3, ch. 49[1819]/pp. 493-496; Van Zandt, 118-119)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693700,
+            "url": "https://www.openhistoricalmap.org/relation/2693700",
+            "name": "Virginia",
+            "start": "1792-06-01",
+            "end": "1846-09-06",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-06-01",
+      "end": "1846-09-06",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "va_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 166167,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 4,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., vol. 1, ch. 4[1791]/p. 189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693715,
+            "url": "https://www.openhistoricalmap.org/relation/2693715",
+            "name": "Georgia",
+            "start": "1802-04-24",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1802-04-24",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ga_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": false,
+      "km2": 152353,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 3,
+          "change": "Georgia ceded to the United States much of present Mississippi and Alabama. This area became unorganized federal territory and Georgia Western Lands were eliminated.",
+          "authority": "(Paullin, 83; Van Zandt, 100; Terr. Papers U.S., 5:142-143)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Florida Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "fl_uft",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693744,
+            "url": "https://www.openhistoricalmap.org/relation/2693744",
+            "name": "Florida UFT",
+            "start": "1819-02-22",
+            "end": "1822-03-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1819-02-22",
+      "end": "1822-03-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "color": "#bea160",
+        "name": "gold"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Florida Unorg. FT",
+      "cut_by_frame": false,
+      "km2": 146872,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "fl_uft",
+          "version": 1,
+          "change": "Spain ceded East Florida and West Florida (i.e., all territory east of the Perdido River) to the United States. Exchange of ratifications was delayed until 21 February 1821.",
+          "authority": "(Fuller, 307, 323; Parry, 70:1-7; Swindler, 2:309; Van Zandt, 27)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Illinois",
+      "local": null,
+      "ids": {
+        "newberry": "il_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693067,
+            "url": "https://www.openhistoricalmap.org/relation/2693067",
+            "name": "Illinois",
+            "start": "1818-12-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "il_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "IL",
+      "cut_by_frame": false,
+      "km2": 145768,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "il_state",
+          "version": 1,
+          "change": "The state of Illinois was created from Illinois Territory; Illinois Territory eliminated.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], secs. 1-2, 7/pp. 428-429, 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alabama",
+      "local": null,
+      "ids": {
+        "newberry": "al_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693722,
+            "url": "https://www.openhistoricalmap.org/relation/2693722",
+            "name": "Alabama",
+            "start": "1820-05-29",
+            "end": "1820-12-18",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "1820-12-18",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "al_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alabama",
+      "cut_by_frame": false,
+      "km2": 135530,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "al_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River. BALDWIN, MOBILE, and WASHINGTON lost to the state of Mississippi.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "nc_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Mississippi",
+      "local": null,
+      "ids": {
+        "newberry": "ms_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693716,
+            "url": "https://www.openhistoricalmap.org/relation/2693716",
+            "name": "Mississippi",
+            "start": "1820-05-29",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ms_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "MS",
+      "cut_by_frame": false,
+      "km2": 123526,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ms_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "la_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Louisiana",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693673,
+            "url": "https://www.openhistoricalmap.org/relation/2693673",
+            "name": "Pennsylvania",
+            "start": "1792-03-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "pa_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": false,
+      "km2": 117177,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 2,
+          "change": "Pennsylvania purchased from the federal government the Erie Triangle, a small area immediately north of Pennsylvania and west of New York, giving Pennsylvania an outlet to Lake Erie.",
+          "authority": "(Van Zandt, 83-84)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Tennessee",
+      "local": null,
+      "ids": {
+        "newberry": "tn_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693739,
+            "url": "https://www.openhistoricalmap.org/relation/2693739",
+            "name": "Tennessee",
+            "start": "1796-06-01",
+            "end": "1859-11-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1796-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "tn_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tennessee",
+      "cut_by_frame": false,
+      "km2": 109125,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tn_state",
+          "version": 1,
+          "change": "The state of Tennessee was created from the Territory of the United States South of the River Ohio (Southwest Territory); Southwest Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 1, ch. 47[1796], pp. 491-492; Folmsbee, Corlew, and Mitchell 110)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Ohio",
+      "local": null,
+      "ids": {
+        "newberry": "oh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2663622,
+            "url": "https://www.openhistoricalmap.org/relation/2663622",
+            "name": "Ohio",
+            "start": "1803-03-01",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1803-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "oh_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Ohio",
+      "cut_by_frame": false,
+      "km2": 106748,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "oh_state",
+          "version": 1,
+          "change": "The state of Ohio was created from the Northwest Territory and Indiana Territory.",
+          "authority": "(Ind. Terr., Exec. Journal, 114-115; Pence and Armstrong, 218; U.S. Stat., vol. 2, ch. 40 [1802], secs. 1-3/pp. 173-174; Van Zandt, 112)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kentucky",
+      "local": null,
+      "ids": {
+        "newberry": "ky_state",
+        "newberry_version": 1
+      },
+      "start": "1792-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ky_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kentucky",
+      "cut_by_frame": false,
+      "km2": 104608,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ky_state",
+          "version": 1,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., 1:189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indiana",
+      "local": null,
+      "ids": {
+        "newberry": "in_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693335,
+            "url": "https://www.openhistoricalmap.org/relation/2693335",
+            "name": "Indiana",
+            "start": "1816-12-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1816-12-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "in_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indiana",
+      "cut_by_frame": false,
+      "km2": 93616,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "in_state",
+          "version": 1,
+          "change": "The state of Indiana was created from Indiana Territory and small parts of Illinois and Michigan Territories.",
+          "authority": "(U.S. Stat., vol. 3, ch. 57 [1816], secs. 1-2/p. 289 and res. 1 [1816]/p. 399; Van Zandt, 115)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "sc_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "md_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maryland",
+      "cut_by_frame": false,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "nj_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "NJ",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Alta California",
+      "local": null,
+      "ids": {
+        "ohm": 2841225,
+        "wikidata": "Q1422806"
+      },
+      "start": "1804-01-01",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 1274172,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841225",
+        "license": "CC0 1.0",
+        "wikidata": "Q1422806",
+        "notes": {
+          "start_event": "Californias divided",
+          "end_event": "Adams Onis Treaty",
+          "wikipedia": "en:Alta California"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Durango Intendancy",
+      "local": "Intendencia de Durango",
+      "ids": {
+        "ohm": 2964428,
+        "wikidata": "Q5918696"
+      },
+      "start": "1786-12-04",
+      "end": "1822-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 486961,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2964428",
+        "license": "CC0 1.0",
+        "wikidata": "Q5918696",
+        "notes": {
+          "start_event": "Intendancy of Durango created",
+          "end_event": "Becomes a province"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Comancheria",
+      "local": "Nʉmʉnʉʉ Sookobitʉ",
+      "ids": {
+        "ohm": 2692912,
+        "wikidata": "Q648279"
+      },
+      "start": "1790-01-01",
+      "end": "1860-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 485931,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2692912",
+        "license": "CC0 1.0",
+        "wikidata": "Q648279",
+        "notes": {
+          "source": "https://texashistory.unt.edu/ark:/67531/metapth493255/",
+          "source_name": "The Comanche Country and Adjacent Territory, 1860;pub. 1933",
+          "fixme": "Need more details from source map, as well as warping of a higher res version of the source",
+          "estimated": "yes",
+          "wikipedia": "en:Comancheria"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Kingdom of Mexico",
+      "local": "Reino de Mexico",
+      "ids": {
+        "ohm": 2842078,
+        "wikidata": "Q170603"
+      },
+      "start": "1602-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 424537,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842078",
+        "license": "CC0 1.0",
+        "wikidata": "Q170603",
+        "notes": {
+          "start_event": "Michoacan separated from Kingdom of Mexico",
+          "end_event": "Mexican indepndence",
+          "wikipedia": "en:New Spain"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "New Philippines",
+      "local": "Nuevas Filipinas",
+      "ids": {
+        "ohm": 2841306,
+        "wikidata": "Q108544558"
+      },
+      "start": "1722-01-01",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 328586,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841306",
+        "license": "CC0 1.0",
+        "wikidata": "Q108544558",
+        "notes": {
+          "start_event": "Province created from Nueva Extremadura",
+          "end_event": "Adams Onis Treaty",
+          "wikipedia": "en:New Philippines"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "New Navarre",
+      "local": "Nueva Navarre",
+      "ids": {
+        "ohm": 2841242,
+        "wikidata": "Q7010587"
+      },
+      "start": "1565-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 325394,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841242",
+        "license": "CC0 1.0",
+        "wikidata": "Q7010587",
+        "notes": {
+          "end_event": "Dissolved",
+          "wikipedia": "en:New Navarre"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Arizpe Intendancy",
+      "local": "Arizpe",
+      "ids": {
+        "ohm": 2867406,
+        "wikidata": null
+      },
+      "start": "1788-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 325394,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867406",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "end_event": "Dissolved",
+          "source": "https://www.jstor.org/stable/24394970?read-now=1&seq=15#page_scan_tab_contents"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Kingdom of New Galicia",
+      "local": "Reino de Nueva Galicia",
+      "ids": {
+        "ohm": 2841591,
+        "wikidata": "Q2437292"
+      },
+      "start": "1531-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 198873,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841591",
+        "license": "CC0 1.0",
+        "wikidata": "Q2437292",
+        "notes": {
+          "start_event": "Exploration started",
+          "end_event": "Mexican independence",
+          "wikipedia": "en:Nueva Galicia"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Shoshone",
+      "local": null,
+      "ids": {
+        "ohm": 2953509,
+        "wikidata": "Q26774"
+      },
+      "start": "1700-01-01",
+      "end": "1877-04-16",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 182785,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2953509",
+        "license": "CC0 1.0",
+        "wikidata": "Q26774",
+        "notes": {
+          "wikipedia": "en:Shoshone"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nueva Extremadura",
+      "local": null,
+      "ids": {
+        "ohm": 2964429,
+        "wikidata": "Q677487"
+      },
+      "start": "1785-05-21",
+      "end": "1824-05-07",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 176320,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2964429",
+        "license": "CC0 1.0",
+        "wikidata": "Q677487",
+        "notes": {
+          "start_event": "Parras and Saltillo transferred from Nueva Vzacaya to Nueva Extremadura",
+          "end_event": "New states created",
+          "wikipedia": "en:Nueva Extremadura"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "New Santander",
+      "local": "Nuevo Santander",
+      "ids": {
+        "ohm": 2841304,
+        "wikidata": "Q2910242"
+      },
+      "start": "1776-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 133653,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841304",
+        "license": "CC0 1.0",
+        "wikidata": "Q2910242",
+        "notes": {
+          "start_event": "Joins Provincias Internas",
+          "end_event": "Renamed",
+          "wikipedia": "en:Nuevo Santander"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nuevo León",
+      "local": null,
+      "ids": {
+        "ohm": 2841319,
+        "wikidata": "Q15282"
+      },
+      "start": "1776-01-01",
+      "end": "1856-02-19",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 63475,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841319",
+        "license": "CC0 1.0",
+        "wikidata": "Q15282",
+        "notes": {
+          "start_event": "Joins Provincias Internas",
+          "end_event": "Annexes Coahuila",
+          "wikipedia": "en:Nuevo León"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "San Luis Potosí",
+      "local": null,
+      "ids": {
+        "ohm": 2842077,
+        "wikidata": "Q78980"
+      },
+      "start": "1592-01-01",
+      "end": "1823-12-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 61277,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842077",
+        "license": "CC0 1.0",
+        "wikidata": "Q78980",
+        "notes": {
+          "start_event": "State established",
+          "end_event": "Admission to Mexico statehood",
+          "wikipedia": "en:San Luis Potosí"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of the Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2832950,
+        "wikidata": "Q778"
+      },
+      "start": "1783-09-03",
+      "end": "1848-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 51285,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2832950",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "1783 Treaty of paris, Spain exchanges Bahamas for East Florida",
+          "end_event": "Turks and Caicos leaves",
+          "wikipedia": "en:History of the Bahamas"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Louisiana Neutral Ground",
+      "local": null,
+      "ids": {
+        "ohm": 2692832,
+        "wikidata": "Q841667"
+      },
+      "start": "1806-11-05",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "disputed",
+      "power_label": "Disputed or overlapping claims",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 20633,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2692832",
+        "license": "CC0 1.0",
+        "wikidata": "Q841667",
+        "notes": {
+          "start_event": "Territorial disputes between the US and Spain;local agreement",
+          "wikipedia": "en:Neutral Ground (Louisiana)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "de_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [
+    {
+      "asked": "Mississippi",
+      "name": "Mississippi",
+      "found": true,
+      "drawn_px": 319,
+      "labeled": true,
+      "dropped": null,
+      "source": "Natural Earth 1:10m rivers, North America (public domain)"
+    }
+  ],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 768,
+      "y1": 836
+    },
+    "legend": {
+      "x": 510,
+      "y": 672,
+      "w": 236,
+      "h": 142,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 686,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "the status of 16 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER"
+  ],
+  "alt_text": "Parchment map, 1 June 1820, free and slave states, framed on The South, titled \"Slave and free states, 1820\". Shaded: Free state in teal, Slave state in orange and Territories in gold. Named on the map: Missouri Territory, the Inner Provinces, Nuevo México, Michigan Territory, Arkansas Territory, Virginia, Georgia, Florida Unorg. FT, IL, Alabama, North Carolina and MS. Rivers named: Mississippi.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); rivers: Natural Earth",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1440,
+      "height": 1620
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1820-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8"
+  }
+}

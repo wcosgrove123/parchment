@@ -36,6 +36,7 @@
     { "id": "brazil-plata", "title": "Brazil and the Río de la Plata", "level": 4, "parents": ["latin-america", "south-america"], "extent": { "west": -66, "south": -40, "east": -34, "north": 6 }, "label": { "lon": -50, "lat": -12 } },
 
     { "id": "east", "title": "The East", "level": 3, "parents": ["north-america"], "page": "us.html", "extent": { "west": -95, "south": 24, "east": -66, "north": 48 }, "label": { "lon": -80, "lat": 37 } },
+    { "id": "south", "title": "The South", "level": 3, "parents": ["north-america"], "page": "us.html", "extent": { "west": -107, "south": 24, "east": -74, "north": 41 }, "label": { "lon": -88, "lat": 33 } },
     { "id": "southwest", "title": "The Southwest", "level": 3, "parents": ["north-america"], "page": "us.html", "extent": { "west": -125, "south": 25, "east": -93, "north": 43 }, "label": { "lon": -110, "lat": 35 } },
     { "id": "texas", "title": "Texas", "level": 4, "parents": ["north-america", "southwest"], "page": "us.html", "extent": { "west": -107, "south": 24.5, "east": -92.5, "north": 37.5 }, "label": { "lon": -99, "lat": 31 } },
     { "id": "oregon-country", "title": "The Oregon Country", "level": 4, "parents": ["north-america"], "page": "us.html", "extent": { "west": -126, "south": 40, "east": -108, "north": 56 }, "label": { "lon": -120, "lat": 47 } },

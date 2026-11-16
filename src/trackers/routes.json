@@ -13,6 +13,7 @@
     "founding": { "swatch": "shape", "shape": "moss-circle", "label": "Founding" },
     "battle": { "swatch": "shape", "shape": "rust-diamond", "label": "Battle or siege" },
     "siege": { "swatch": "shape", "shape": "rust-diamond", "label": "Battle or siege" },
+    "revolt": { "swatch": "shape", "shape": "rust-diamond", "label": "Revolt or conspiracy" },
     "treaty": { "swatch": "shape", "shape": "navy-triangle", "label": "Treaty" }
   }
 }

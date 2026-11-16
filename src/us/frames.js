@@ -92,9 +92,12 @@ export function itemKeys(it, { power = null, powers = null, twins = null } = {})
 }
 
 // A highlight: the ids an order names, and which of them found something. `has(keys)` → the id it matched, or null.
+// The one word "none" lights nothing: every polygon drops to paper, borders and names only, so that an order's
+// places carry the map (a quiet base; 2026-11-16).
 export function makeHighlight(ids) {
   const want = new Map(parseList(ids).map((id) => [slug(id), id]));
   const found = new Map();
+  if (want.size === 1 && want.has('none')) return { size: 1, ids: ['none'], none: true, has: () => null, unmatched: () => [], reset() {} };
   return {
     size: want.size,
     ids: [...want.values()],
