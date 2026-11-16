@@ -113,7 +113,8 @@
         "siege",
         "founding",
         "treaty",
-        "revolt"
+        "revolt",
+        "market"
       ],
       "point_shapes": {
         "port": "steel-circle",
@@ -121,6 +122,7 @@
         "battle": "rust-diamond",
         "siege": "rust-diamond",
         "revolt": "rust-diamond",
+        "market": "steel-circle",
         "founding": "moss-circle",
         "treaty": "navy-triangle"
       }

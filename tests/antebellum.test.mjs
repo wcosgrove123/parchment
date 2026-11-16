@@ -186,6 +186,7 @@ test('D. slave-trade-1820-1860 renders: three approximate routes keyed as forced
   const labels = s.legend.rows.map((r) => r.label);
   assert.ok(labels.includes('Forced migration: the domestic slave trade'));
   assert.ok(!labels.includes('Migration'), 'never "migration" alone');
+  assert.ok(labels.includes('Slave market') && !labels.includes('Port of call'), 'the six places are keyed as slave markets (owner, 2026-11-16)');
   assert.deepEqual(s.features.filter((f) => f.labeled && f.label.length <= 3).map((f) => f.label), [], 'no state abbreviation beside a place name');
   const river = s.routes.find((r) => r.record === 'test-ab-trade-river');
   assert.deepEqual([river.waypoints[0], river.waypoints.at(-1)].map((w) => w.id ?? w), ['Q23197', 'Q34404'], 'the river line begins on the Cumberland and ends at New Orleans');
