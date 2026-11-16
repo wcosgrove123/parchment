@@ -6,6 +6,7 @@
     "tracker": "slavery",
     "title": "Slave and free states, 1860",
     "size": "1440x1620",
+    "strip": "off",
     "scale": 1.8,
     "frame": "south",
     "annotate": {
@@ -16,7 +17,7 @@
   },
   "resolved": {
     "page": "us.html",
-    "address": "us.html?date=1860-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1860&size=1440x1620&scale=1.8",
+    "address": "us.html?date=1860-06-01&tracker=slavery&strip=off&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1860&size=1440x1620&scale=1.8",
     "mode": "snapshot",
     "date": "1860-06-01",
     "date_text": "1 June 1860",
@@ -148,8 +149,8 @@
       {
         "label": "Territories",
         "swatch": "fill",
-        "key": "E",
-        "fill": "#bea160",
+        "key": "N",
+        "fill": "#9399a0",
         "pattern": null,
         "stroke": null,
         "dash": null,
@@ -226,9 +227,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -312,58 +313,6 @@
     },
     {
       "layer": "newberry",
-      "name": "New Mexico Territory",
-      "local": null,
-      "ids": {
-        "newberry": "nm_terr",
-        "newberry_version": 2,
-        "also_in_ohm": [
-          {
-            "ohm": 2692796,
-            "url": "https://www.openhistoricalmap.org/relation/2692796",
-            "name": "New Mexico Territory",
-            "start": "1854-08-04",
-            "end": "1861-02-27",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          }
-        ]
-      },
-      "start": "1854-08-04",
-      "end": "1861-02-27",
-      "end_is": "last day in force",
-      "certainty": "legal",
-      "power": "us",
-      "power_label": "United States",
-      "look": {
-        "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
-      },
-      "diff_role": null,
-      "status": "territory",
-      "status_row": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": true,
-      "label": "NM Terr",
-      "cut_by_frame": true,
-      "km2": 679765,
-      "source": {
-        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
-        "url": "https://digital.newberry.org/ahcb/",
-        "license": "Newberry terms: any lawful purpose, no fees",
-        "record": {
-          "id": "nm_terr",
-          "version": 2,
-          "change": "The territory acquired by the United States in the Gadsden Purchase was officially added to New Mexico Territory.",
-          "authority": "(U.S. Stat., vol. 10, ch. 245[1854]/p. 575; Van Zandt, 162; Walker and Bufkin, 21-22)"
-        }
-      }
-    },
-    {
-      "layer": "newberry",
       "name": "Utah Territory",
       "local": null,
       "ids": {
@@ -388,9 +337,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -399,7 +348,7 @@
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "UT Terr",
+      "label": "Utah Territory",
       "cut_by_frame": true,
       "km2": 604824,
       "source": {
@@ -440,9 +389,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -467,62 +416,40 @@
       }
     },
     {
-      "layer": "newberry",
-      "name": "Unorganized Federal Territory",
+      "layer": "openhistoricalmap",
+      "name": "Chihuahua",
       "local": null,
       "ids": {
-        "newberry": "uf_terr",
-        "newberry_version": 15,
-        "also_in_ohm": [
-          {
-            "ohm": 2692999,
-            "url": "https://www.openhistoricalmap.org/relation/2692999",
-            "name": "Unattached No Man's Land",
-            "start": "1850-12-13",
-            "end": "1890-05-01",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          },
-          {
-            "ohm": 2800173,
-            "url": "https://www.openhistoricalmap.org/relation/2800173",
-            "name": "Unorganized Federal Territory",
-            "start": "1858-05-11",
-            "end": "1861-03-01",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          }
-        ]
+        "ohm": 2841298,
+        "wikidata": "Q655"
       },
-      "start": "1858-05-11",
-      "end": "1861-01-28",
-      "end_is": "last day in force",
+      "start": "1854-06-08",
+      "end": "1865-03-03",
+      "end_is": "the day it ceased",
       "certainty": "legal",
-      "power": "us",
-      "power_label": "United States",
+      "power": "mexico",
+      "power_label": "Mexico",
       "look": {
-        "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "kind": "paper",
+        "note": "no fill: border and name only"
       },
       "diff_role": null,
-      "status": "territory",
-      "status_row": null,
       "lit": null,
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "UFT",
-      "cut_by_frame": false,
-      "km2": 229798,
+      "label": "Chihuahua",
+      "cut_by_frame": true,
+      "km2": 247793,
       "source": {
-        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
-        "url": "https://digital.newberry.org/ahcb/",
-        "license": "Newberry terms: any lawful purpose, no fees",
-        "record": {
-          "id": "uf_terr",
-          "version": 15,
-          "change": "The state of Minnesota was created from Minnesota Territory; Minnesota Territory eliminated. That part of present North and South Dakota east of the Missouri and White Earth Rivers became unorganized federal territory.",
-          "authority": "(U.S. Stat., vol. 11, ch. 60[1857]/pp. 166-167 and ch. 31[1858]/p. 285; Schell, 72-77; Van Zandt, 133)"
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841298",
+        "license": "CC0 1.0",
+        "wikidata": "Q655",
+        "notes": {
+          "start_event": "Gadsden Purchase",
+          "end_event": "Emperor Maximilian decrees new administrative regions",
+          "wikipedia": "en:Chihuahua (state)"
         }
       }
     },
@@ -648,9 +575,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -1386,7 +1313,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -1712,6 +1639,43 @@
       }
     },
     {
+      "layer": "openhistoricalmap",
+      "name": "Zacatecas",
+      "local": null,
+      "ids": {
+        "ohm": 2841588,
+        "wikidata": "Q80269"
+      },
+      "start": "1856-12-10",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Zacatecas",
+      "cut_by_frame": false,
+      "km2": 75475,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841588",
+        "license": "CC0 1.0",
+        "wikidata": "Q80269",
+        "notes": {
+          "start_event": "Aguascalientes separates",
+          "wikipedia": "en:Zacatecas"
+        }
+      }
+    },
+    {
       "layer": "newberry",
       "name": "Maryland",
       "local": null,
@@ -1830,7 +1794,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -1852,40 +1816,114 @@
       }
     },
     {
-      "layer": "openhistoricalmap",
-      "name": "Chihuahua",
+      "layer": "newberry",
+      "name": "New Mexico Territory",
       "local": null,
       "ids": {
-        "ohm": 2841298,
-        "wikidata": "Q655"
+        "newberry": "nm_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692796,
+            "url": "https://www.openhistoricalmap.org/relation/2692796",
+            "name": "New Mexico Territory",
+            "start": "1854-08-04",
+            "end": "1861-02-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
       },
-      "start": "1854-06-08",
-      "end": "1865-03-03",
-      "end_is": "the day it ceased",
+      "start": "1854-08-04",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
       "certainty": "legal",
-      "power": "mexico",
-      "power_label": "Mexico",
+      "power": "us",
+      "power_label": "United States",
       "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
+      "status": "territory",
+      "status_row": null,
       "lit": null,
       "lit_by": null,
       "lit_as_named": false,
       "labeled": false,
       "label": null,
       "cut_by_frame": true,
-      "km2": 247793,
+      "km2": 679765,
       "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2841298",
-        "license": "CC0 1.0",
-        "wikidata": "Q655",
-        "notes": {
-          "start_event": "Gadsden Purchase",
-          "end_event": "Emperor Maximilian decrees new administrative regions",
-          "wikipedia": "en:Chihuahua (state)"
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_terr",
+          "version": 2,
+          "change": "The territory acquired by the United States in the Gadsden Purchase was officially added to New Mexico Territory.",
+          "authority": "(U.S. Stat., vol. 10, ch. 245[1854]/p. 575; Van Zandt, 162; Walker and Bufkin, 21-22)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 15,
+        "also_in_ohm": [
+          {
+            "ohm": 2692999,
+            "url": "https://www.openhistoricalmap.org/relation/2692999",
+            "name": "Unattached No Man's Land",
+            "start": "1850-12-13",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2800173,
+            "url": "https://www.openhistoricalmap.org/relation/2800173",
+            "name": "Unorganized Federal Territory",
+            "start": "1858-05-11",
+            "end": "1861-03-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1858-05-11",
+      "end": "1861-01-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 229798,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 15,
+          "change": "The state of Minnesota was created from Minnesota Territory; Minnesota Territory eliminated. That part of present North and South Dakota east of the Missouri and White Earth Rivers became unorganized federal territory.",
+          "authority": "(U.S. Stat., vol. 11, ch. 60[1857]/pp. 166-167 and ch. 31[1858]/p. 285; Schell, 72-77; Van Zandt, 133)"
         }
       }
     },
@@ -1959,43 +1997,6 @@
         "notes": {
           "start_event": "Mexican Cession",
           "wikipedia": "en:Tamaulipas"
-        }
-      }
-    },
-    {
-      "layer": "openhistoricalmap",
-      "name": "Zacatecas",
-      "local": null,
-      "ids": {
-        "ohm": 2841588,
-        "wikidata": "Q80269"
-      },
-      "start": "1856-12-10",
-      "end": "present",
-      "end_is": "the day it ceased",
-      "certainty": "legal",
-      "power": "mexico",
-      "power_label": "Mexico",
-      "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
-      },
-      "diff_role": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": false,
-      "label": null,
-      "cut_by_frame": false,
-      "km2": 75475,
-      "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2841588",
-        "license": "CC0 1.0",
-        "wikidata": "Q80269",
-        "notes": {
-          "start_event": "Aguascalientes separates",
-          "wikipedia": "en:Zacatecas"
         }
       }
     },
@@ -2179,11 +2180,11 @@
       "x0": 32,
       "y0": 32,
       "x1": 768,
-      "y1": 836
+      "y1": 868
     },
     "legend": {
       "x": 510,
-      "y": 672,
+      "y": 704,
       "w": 236,
       "h": 142,
       "inside": true,
@@ -2191,7 +2192,7 @@
     },
     "cartouche": {
       "x": 54,
-      "y": 686,
+      "y": 718,
       "w": 380,
       "h": 128,
       "inside": true
@@ -2201,7 +2202,7 @@
   "warnings": [
     "the status of 22 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER"
   ],
-  "alt_text": "Parchment map, 1 June 1860, free and slave states, framed on The South, titled \"Slave and free states, 1860\". Shaded: Free state in teal, Slave state in orange and Territories in gold. Named on the map: Mexico, Nebraska Territory, Texas, NM Terr, UT Terr, Kansas Territory, UFT, Nuevo León, Missouri, Indian Territory, Virginia and Georgia. Rivers named: Mississippi.",
+  "alt_text": "Parchment map, 1 June 1860, free and slave states, framed on The South, titled \"Slave and free states, 1860\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Mexico, Nebraska Territory, Texas, Utah Territory, Kansas Territory, Chihuahua, Nuevo León, Missouri, Indian Territory, Virginia, Georgia and Michigan. Rivers named: Mississippi.",
   "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); rivers: Natural Earth",
   "render": {
     "by": "scripts/map.mjs",
@@ -2212,6 +2213,6 @@
     },
     "blocked_requests": [],
     "page_errors": [],
-    "live_address": "us.html?date=1860-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1860&size=1440x1620&scale=1.8"
+    "live_address": "us.html?date=1860-06-01&tracker=slavery&strip=off&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1860&size=1440x1620&scale=1.8"
   }
 }

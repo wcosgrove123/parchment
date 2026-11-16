@@ -87,7 +87,7 @@ test('A1 and A2. slave-free-1820 and slave-free-1860 pair: one frame, projection
   assert.deepEqual(a.layout.legend, b.layout.legend, 'the key sits in the same place at the same size');
   assert.deepEqual(a.layout.cartouche, b.layout.cartouche);
   const rows = (s) => s.legend.rows.map((r) => [r.label, r.key ?? r.dash]);
-  assert.deepEqual(rows(a), [['Free state', 'T'], ['Slave state', 'S'], ['Territories', 'E'], ['Documented border', 'solid']]);
+  assert.deepEqual(rows(a), [['Free state', 'T'], ['Slave state', 'S'], ['Territories', 'N'], ['Documented border', 'solid']]);
   assert.deepEqual(rows(a), rows(b), 'the same key, in the same order');
   assert.deepEqual([a.resolved.status.states, a.resolved.status.free, a.resolved.status.slave], [23, 12, 11]);
   assert.deepEqual([b.resolved.status.states, b.resolved.status.free, b.resolved.status.slave], [33, 18, 15]);
@@ -98,8 +98,16 @@ test('A1 and A2. slave-free-1820 and slave-free-1860 pair: one frame, projection
   assert.equal(of(b, 'tx_state').cut_by_frame, false, 'Texas is whole on the sheet');
   assert.ok(a.warnings.some((w) => /TEST ROWS/.test(w)));
   assert.match(a.credit, /status of states: the Parchment status table \(test rows\)/);
+  // the owner's fixes of 2026-11-16: Florida spelled out, no abbreviated territory, the Florida warning, no strip
+  assert.equal(of(a, 'fl_uft').label, 'Florida');
+  for (const s of [a, b]) for (const f of s.features.filter((x) => x.labeled && x.layer === 'newberry')) assert.doesNotMatch(f.label, /Terr$|UFT|Unorg/, f.label);
+  assert.equal(of(b, 'ut_terr').label, 'Utah Territory');
+  assert.equal(of(b, 'uf_terr').labeled, false, 'the unorganized territory carries no name');
+  assert.ok(a.warnings.some((w) => /sources disagree on Florida.*La Florida.*held by Spain/.test(w)), 'Florida, 1820: Spain held it until 1821');
+  assert.ok(!b.warnings.some((w) => /sources disagree/.test(w)));
+  assert.equal(a.order.strip, 'off');
   // fills drawn are only the key's three
-  for (const s of [a, b]) assert.deepEqual([...new Set(s.features.filter((f) => f.look.kind === 'fill').map((f) => f.look.key))].sort(), ['E', 'S', 'T']);
+  for (const s of [a, b]) assert.deepEqual([...new Set(s.features.filter((f) => f.look.kind === 'fill').map((f) => f.look.key))].sort(), ['N', 'S', 'T']);
 });
 
 test('B1 and B2. revolts-1800-1831: four pins, four names, their ids and sources, and the warnings of date', { skip, timeout: 120000 }, async () => {
@@ -117,6 +125,9 @@ test('B1 and B2. revolts-1800-1831: four pins, four names, their ids and sources
   assert.equal(before.length, 3, 'Gabriel 1800, the German Coast 1811 and Vesey 1822 predate 21 August 1831');
   assert.ok(before.some((w) => /German Coast.*Orleans Territory.*Louisiana/.test(w)), 'Louisiana was the Territory of Orleans in 1811');
   assert.ok(s.legend.rows.some((r) => r.label === 'Revolt or conspiracy'));
+  assert.ok(!s.legend.title, 'the key of a quiet base has no title');
+  assert.ok(s.points.some((p) => p.label === "Nat Turner's Revolt"));
+  assert.equal(s.resolved.frame.id, 'southeast');
   assert.equal(s.features.filter((f) => f.look.kind === 'fill').length, 0, 'the base is quiet: no fill');
   assert.ok(s.rivers.some((r) => r.name === 'Mississippi' && r.labeled));
 });
@@ -161,5 +172,19 @@ test('E. free-black-1860 renders: ten badges, the key\'s counts, the census on t
   assert.deepEqual(labels.slice(0, 3), ['Free state', 'Slave state', 'Territories']);
   assert.ok(labels.includes('In slave states: 250,787 (51%)') && labels.includes('In free states: 225,224 (46%)'));
   assert.match(s.credit, /counts: U\.S\. Census Bureau/);
-  assert.deepEqual([...new Set(s.features.filter((f) => f.look.kind === 'fill').map((f) => f.look.key))].sort(), ['E', 'S', 'T']);
+  assert.deepEqual([...new Set(s.features.filter((f) => f.look.kind === 'fill').map((f) => f.look.key))].sort(), ['N', 'S', 'T']);
+});
+
+// ---------------------------------------------------------------- Map D: the domestic slave trade
+test('D. slave-trade-1820-1860 renders: three approximate routes keyed as forced migration, six named places', { skip, timeout: 120000 }, async () => {
+  const s = await render('slave-trade-1820-1860');
+  assert.deepEqual(s.render.pixels, { width: 1920, height: 1080 });
+  assert.deepEqual(s.routes.map((r) => r.record).sort(), ['test-ab-trade-overland', 'test-ab-trade-river', 'test-ab-trade-sea']);
+  for (const r of s.routes) { assert.equal(r.class, 'Forced migration: the domestic slave trade'); assert.equal(r.dash, 'dashed'); assert.equal(r.certainty, 'approximate'); assert.match(r.source, /Encyclopedia Virginia.*64 Parishes/); }
+  assert.deepEqual(s.points.map((p) => p.label).sort(), ['Alexandria', 'Baltimore', 'Charleston', 'Natchez', 'New Orleans', 'Richmond']);
+  assert.ok(s.points.every((p) => p.labeled));
+  const labels = s.legend.rows.map((r) => r.label);
+  assert.ok(labels.includes('Forced migration: the domestic slave trade'));
+  assert.ok(!labels.includes('Migration'), 'never "migration" alone');
+  assert.equal(s.resolved.frame.id, 'southeast');
 });

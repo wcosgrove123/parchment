@@ -8,6 +8,8 @@
 .na-fill.k-E path { fill: var(--fill-E); }
 .na-fill.k-C path { fill: var(--fill-C); }
 .na-fill.k-T path { fill: var(--fill-T); }
+.na-fill.k-N path { fill: var(--fill-N); }
+.legend .swatch.fill-N { fill: var(--fill-N); }
 
 /* patterns: hatch = dispute or joint holding; cross-hatch = rebellion; stipple with a soft edge = Native nations ("sphere") */
 .na-pattern { stroke: none; }

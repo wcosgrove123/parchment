@@ -585,8 +585,8 @@
       {
         "label": "Territories",
         "swatch": "fill",
-        "key": "E",
-        "fill": "#bea160",
+        "key": "N",
+        "fill": "#9399a0",
         "pattern": null,
         "stroke": null,
         "dash": null,
@@ -671,6 +671,44 @@
   "features": [
     {
       "layer": "openhistoricalmap",
+      "name": "Rupert's Land",
+      "local": null,
+      "ids": {
+        "ohm": 2831206,
+        "wikidata": "Q738395"
+      },
+      "start": "1819-01-29",
+      "end": "1870-07-15",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Rupert's Land",
+      "cut_by_frame": true,
+      "km2": 4106231,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831206",
+        "license": "CC0 1.0",
+        "wikidata": "Q738395",
+        "notes": {
+          "start_event": "Treaty of 1818, land exchange with USA",
+          "end_event": "Transferred to Canada and converted into NWT",
+          "wikipedia": "en:Rupert's Land"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
       "name": "United Province of Canada",
       "local": null,
       "ids": {
@@ -723,9 +761,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "free_black": {
@@ -847,9 +885,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "free_black": {
@@ -878,73 +916,6 @@
           "version": 1,
           "change": "The United States created Kansas Territory from unorganized federal territory; included all of present Kansas and part of present Colorado.",
           "authority": "(Van Zandt, 138-139)"
-        }
-      }
-    },
-    {
-      "layer": "newberry",
-      "name": "Unorganized Federal Territory",
-      "local": null,
-      "ids": {
-        "newberry": "uf_terr",
-        "newberry_version": 15,
-        "also_in_ohm": [
-          {
-            "ohm": 2692999,
-            "url": "https://www.openhistoricalmap.org/relation/2692999",
-            "name": "Unattached No Man's Land",
-            "start": "1850-12-13",
-            "end": "1890-05-01",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          },
-          {
-            "ohm": 2800173,
-            "url": "https://www.openhistoricalmap.org/relation/2800173",
-            "name": "Unorganized Federal Territory",
-            "start": "1858-05-11",
-            "end": "1861-03-01",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          }
-        ]
-      },
-      "start": "1858-05-11",
-      "end": "1861-01-28",
-      "end_is": "last day in force",
-      "certainty": "legal",
-      "power": "us",
-      "power_label": "United States",
-      "look": {
-        "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
-      },
-      "diff_role": null,
-      "free_black": {
-        "count": 0,
-        "badge": false,
-        "census_rows": [
-          "South Dakota"
-        ]
-      },
-      "status": "territory",
-      "status_row": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": true,
-      "label": "UFT",
-      "cut_by_frame": true,
-      "km2": 229798,
-      "source": {
-        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
-        "url": "https://digital.newberry.org/ahcb/",
-        "license": "Newberry terms: any lawful purpose, no fees",
-        "record": {
-          "id": "uf_terr",
-          "version": 15,
-          "change": "The state of Minnesota was created from Minnesota Territory; Minnesota Territory eliminated. That part of present North and South Dakota east of the Missouri and White Earth Rivers became unorganized federal territory.",
-          "authority": "(U.S. Stat., vol. 11, ch. 60[1857]/pp. 166-167 and ch. 31[1858]/p. 285; Schell, 72-77; Van Zandt, 133)"
         }
       }
     },
@@ -1112,9 +1083,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -2103,6 +2074,71 @@
     },
     {
       "layer": "newberry",
+      "name": "Vermont",
+      "local": null,
+      "ids": {
+        "newberry": "vt_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693680,
+            "url": "https://www.openhistoricalmap.org/relation/2693680",
+            "name": "Vermont",
+            "start": "1791-03-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "free_black": {
+        "count": 709,
+        "badge": false,
+        "census_rows": [
+          "Vermont"
+        ]
+      },
+      "status": "free",
+      "status_row": {
+        "id": "vt_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Vermont",
+      "cut_by_frame": false,
+      "km2": 24852,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "vt_state",
+          "version": 1,
+          "change": "The state of Vermont was admitted to the Union. The boundary with New York was settled by a joint commission before statehood.",
+          "authority": "(Slade, 193; U.S. Stat., vol. 1, ch. 7 [1791]/p. 191)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
       "name": "New Hampshire",
       "local": null,
       "ids": {
@@ -2297,40 +2333,69 @@
       }
     },
     {
-      "layer": "openhistoricalmap",
-      "name": "Rupert's Land",
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
       "local": null,
       "ids": {
-        "ohm": 2831206,
-        "wikidata": "Q738395"
+        "newberry": "uf_terr",
+        "newberry_version": 15,
+        "also_in_ohm": [
+          {
+            "ohm": 2692999,
+            "url": "https://www.openhistoricalmap.org/relation/2692999",
+            "name": "Unattached No Man's Land",
+            "start": "1850-12-13",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2800173,
+            "url": "https://www.openhistoricalmap.org/relation/2800173",
+            "name": "Unorganized Federal Territory",
+            "start": "1858-05-11",
+            "end": "1861-03-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
       },
-      "start": "1819-01-29",
-      "end": "1870-07-15",
-      "end_is": "the day it ceased",
+      "start": "1858-05-11",
+      "end": "1861-01-28",
+      "end_is": "last day in force",
       "certainty": "legal",
-      "power": "britain",
-      "power_label": "British Empire",
+      "power": "us",
+      "power_label": "United States",
       "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
+      "free_black": {
+        "count": 0,
+        "badge": false,
+        "census_rows": [
+          "South Dakota"
+        ]
+      },
+      "status": "territory",
+      "status_row": null,
       "lit": null,
       "lit_by": null,
       "lit_as_named": false,
       "labeled": false,
       "label": null,
       "cut_by_frame": true,
-      "km2": 4106231,
+      "km2": 229798,
       "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2831206",
-        "license": "CC0 1.0",
-        "wikidata": "Q738395",
-        "notes": {
-          "start_event": "Treaty of 1818, land exchange with USA",
-          "end_event": "Transferred to Canada and converted into NWT",
-          "wikipedia": "en:Rupert's Land"
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 15,
+          "change": "The state of Minnesota was created from Minnesota Territory; Minnesota Territory eliminated. That part of present North and South Dakota east of the Missouri and White Earth Rivers became unorganized federal territory.",
+          "authority": "(U.S. Stat., vol. 11, ch. 60[1857]/pp. 166-167 and ch. 31[1858]/p. 285; Schell, 72-77; Van Zandt, 133)"
         }
       }
     },
@@ -2509,7 +2574,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -2639,7 +2704,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -2857,71 +2922,6 @@
     },
     {
       "layer": "newberry",
-      "name": "Vermont",
-      "local": null,
-      "ids": {
-        "newberry": "vt_state",
-        "newberry_version": 1,
-        "also_in_ohm": [
-          {
-            "ohm": 2693680,
-            "url": "https://www.openhistoricalmap.org/relation/2693680",
-            "name": "Vermont",
-            "start": "1791-03-04",
-            "end": "present",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          }
-        ]
-      },
-      "start": "1791-03-04",
-      "end": "present",
-      "end_is": "last day in force",
-      "certainty": "legal",
-      "power": "us",
-      "power_label": "United States",
-      "look": {
-        "kind": "fill",
-        "key": "T",
-        "color": "#58b4c3",
-        "name": "teal"
-      },
-      "diff_role": null,
-      "free_black": {
-        "count": 709,
-        "badge": false,
-        "census_rows": [
-          "Vermont"
-        ]
-      },
-      "status": "free",
-      "status_row": {
-        "id": "vt_state",
-        "start": null,
-        "end": null,
-        "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
-      },
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": false,
-      "label": null,
-      "cut_by_frame": false,
-      "km2": 24852,
-      "source": {
-        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
-        "url": "https://digital.newberry.org/ahcb/",
-        "license": "Newberry terms: any lawful purpose, no fees",
-        "record": {
-          "id": "vt_state",
-          "version": 1,
-          "change": "The state of Vermont was admitted to the Union. The boundary with New York was settled by a joint commission before statehood.",
-          "authority": "(Slade, 193; U.S. Stat., vol. 1, ch. 7 [1791]/p. 191)"
-        }
-      }
-    },
-    {
-      "layer": "newberry",
       "name": "New Jersey",
       "local": null,
       "ids": {
@@ -2988,7 +2988,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -3199,7 +3199,7 @@
   "warnings": [
     "the status of 31 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER"
   ],
-  "alt_text": "Parchment map, 1 June 1860, free black population, framed on The East, titled \"Free Black population, 1860\". Shaded: Free state in teal, Slave state in orange and Territories in gold. Named on the map: United Province of Canada, Nebraska Territory, Texas, Kansas Territory, UFT, Minnesota, Missouri, Indian Territory, Georgia, Michigan, Florida and Illinois.",
+  "alt_text": "Parchment map, 1 June 1860, free black population, framed on The East, titled \"Free Black population, 1860\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Rupert's Land, United Province of Canada, Nebraska Territory, Texas, Kansas Territory, Minnesota, Missouri, Indian Territory, Georgia, Michigan, Florida and Illinois.",
   "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; counts: U.S. Census Bureau; status of states: the Parchment status table (test rows)",
   "render": {
     "by": "scripts/map.mjs",

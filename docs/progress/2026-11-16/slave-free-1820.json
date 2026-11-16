@@ -6,6 +6,7 @@
     "tracker": "slavery",
     "title": "Slave and free states, 1820",
     "size": "1440x1620",
+    "strip": "off",
     "scale": 1.8,
     "frame": "south",
     "annotate": {
@@ -16,7 +17,7 @@
   },
   "resolved": {
     "page": "us.html",
-    "address": "us.html?date=1820-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8",
+    "address": "us.html?date=1820-06-01&tracker=slavery&strip=off&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8",
     "mode": "snapshot",
     "date": "1820-06-01",
     "date_text": "1 June 1820",
@@ -138,8 +139,8 @@
       {
         "label": "Territories",
         "swatch": "fill",
-        "key": "E",
-        "fill": "#bea160",
+        "key": "N",
+        "fill": "#9399a0",
         "pattern": null,
         "stroke": null,
         "dash": null,
@@ -188,9 +189,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -248,6 +249,81 @@
         "notes": {
           "start_event": "Nuevo Santander rejoins",
           "end_event": "Adams Onis Treaty"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Durango Intendancy",
+      "local": "Intendencia de Durango",
+      "ids": {
+        "ohm": 2964428,
+        "wikidata": "Q5918696"
+      },
+      "start": "1786-12-04",
+      "end": "1822-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Durango Intendancy",
+      "cut_by_frame": true,
+      "km2": 486961,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2964428",
+        "license": "CC0 1.0",
+        "wikidata": "Q5918696",
+        "notes": {
+          "start_event": "Intendancy of Durango created",
+          "end_event": "Becomes a province"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Kingdom of Mexico",
+      "local": "Reino de Mexico",
+      "ids": {
+        "ohm": 2842078,
+        "wikidata": "Q170603"
+      },
+      "start": "1602-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kingdom of Mexico",
+      "cut_by_frame": false,
+      "km2": 424537,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842078",
+        "license": "CC0 1.0",
+        "wikidata": "Q170603",
+        "notes": {
+          "start_event": "Michoacan separated from Kingdom of Mexico",
+          "end_event": "Mexican indepndence",
+          "wikipedia": "en:New Spain"
         }
       }
     },
@@ -315,9 +391,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -375,9 +451,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -398,6 +474,44 @@
           "version": 1,
           "change": "The United States created Arkansas Territory from Missouri Territory. Arkansas Territory included all of present Arkansas and part of present Oklahoma. Boundary between Arkansas Territory and Mexico remained unsettled.",
           "authority": "(U.S. Stat., vol. 3, ch. 49[1819]/pp. 493-496; Van Zandt, 118-119)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Kingdom of New Galicia",
+      "local": "Reino de Nueva Galicia",
+      "ids": {
+        "ohm": 2841591,
+        "wikidata": "Q2437292"
+      },
+      "start": "1531-01-01",
+      "end": "1821-09-27",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Galicia",
+      "cut_by_frame": false,
+      "km2": 198873,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841591",
+        "license": "CC0 1.0",
+        "wikidata": "Q2437292",
+        "notes": {
+          "start_event": "Exploration started",
+          "end_event": "Mexican independence",
+          "wikipedia": "en:Nueva Galicia"
         }
       }
     },
@@ -543,9 +657,9 @@
       "power_label": "United States",
       "look": {
         "kind": "fill",
-        "key": "E",
-        "color": "#bea160",
-        "name": "gold"
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
       },
       "diff_role": null,
       "status": "territory",
@@ -554,7 +668,7 @@
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "Florida Unorg. FT",
+      "label": "Florida",
       "cut_by_frame": false,
       "km2": 146872,
       "source": {
@@ -896,7 +1010,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -1340,7 +1454,7 @@
         "start": null,
         "end": null,
         "source": "PENDING OWNER",
-        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
       },
       "lit": null,
       "lit_by": null,
@@ -1401,43 +1515,6 @@
     },
     {
       "layer": "openhistoricalmap",
-      "name": "Durango Intendancy",
-      "local": "Intendencia de Durango",
-      "ids": {
-        "ohm": 2964428,
-        "wikidata": "Q5918696"
-      },
-      "start": "1786-12-04",
-      "end": "1822-01-01",
-      "end_is": "the day it ceased",
-      "certainty": "legal",
-      "power": "spain",
-      "power_label": "Spain",
-      "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
-      },
-      "diff_role": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": false,
-      "label": null,
-      "cut_by_frame": true,
-      "km2": 486961,
-      "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2964428",
-        "license": "CC0 1.0",
-        "wikidata": "Q5918696",
-        "notes": {
-          "start_event": "Intendancy of Durango created",
-          "end_event": "Becomes a province"
-        }
-      }
-    },
-    {
-      "layer": "openhistoricalmap",
       "name": "Comancheria",
       "local": "Nʉmʉnʉʉ Sookobitʉ",
       "ids": {
@@ -1473,44 +1550,6 @@
           "fixme": "Need more details from source map, as well as warping of a higher res version of the source",
           "estimated": "yes",
           "wikipedia": "en:Comancheria"
-        }
-      }
-    },
-    {
-      "layer": "openhistoricalmap",
-      "name": "Kingdom of Mexico",
-      "local": "Reino de Mexico",
-      "ids": {
-        "ohm": 2842078,
-        "wikidata": "Q170603"
-      },
-      "start": "1602-01-01",
-      "end": "1821-09-27",
-      "end_is": "the day it ceased",
-      "certainty": "legal",
-      "power": "spain",
-      "power_label": "Spain",
-      "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
-      },
-      "diff_role": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": false,
-      "label": null,
-      "cut_by_frame": false,
-      "km2": 424537,
-      "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2842078",
-        "license": "CC0 1.0",
-        "wikidata": "Q170603",
-        "notes": {
-          "start_event": "Michoacan separated from Kingdom of Mexico",
-          "end_event": "Mexican indepndence",
-          "wikipedia": "en:New Spain"
         }
       }
     },
@@ -1623,44 +1662,6 @@
         "notes": {
           "end_event": "Dissolved",
           "source": "https://www.jstor.org/stable/24394970?read-now=1&seq=15#page_scan_tab_contents"
-        }
-      }
-    },
-    {
-      "layer": "openhistoricalmap",
-      "name": "Kingdom of New Galicia",
-      "local": "Reino de Nueva Galicia",
-      "ids": {
-        "ohm": 2841591,
-        "wikidata": "Q2437292"
-      },
-      "start": "1531-01-01",
-      "end": "1821-09-27",
-      "end_is": "the day it ceased",
-      "certainty": "legal",
-      "power": "spain",
-      "power_label": "Spain",
-      "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
-      },
-      "diff_role": null,
-      "lit": null,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": false,
-      "label": null,
-      "cut_by_frame": false,
-      "km2": 198873,
-      "source": {
-        "dataset": "OpenHistoricalMap",
-        "url": "https://www.openhistoricalmap.org/relation/2841591",
-        "license": "CC0 1.0",
-        "wikidata": "Q2437292",
-        "notes": {
-          "start_event": "Exploration started",
-          "end_event": "Mexican independence",
-          "wikipedia": "en:Nueva Galicia"
         }
       }
     },
@@ -1995,11 +1996,11 @@
       "x0": 32,
       "y0": 32,
       "x1": 768,
-      "y1": 836
+      "y1": 868
     },
     "legend": {
       "x": 510,
-      "y": 672,
+      "y": 704,
       "w": 236,
       "h": 142,
       "inside": true,
@@ -2007,7 +2008,7 @@
     },
     "cartouche": {
       "x": 54,
-      "y": 686,
+      "y": 718,
       "w": 380,
       "h": 128,
       "inside": true
@@ -2015,9 +2016,10 @@
     "clipped_text": []
   },
   "warnings": [
-    "the status of 16 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER"
+    "the status of 16 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER",
+    "the sources disagree on Florida Unorganized Federal Territory: the Newberry dates it from 22 February 1819 (\"Spain ceded East Florida and West Florida (i.e., all territory east of the Perdido River) to the United States. Exchange of ratifications was delayed until 21 February 1821.\"), and OpenHistoricalMap has La Florida (relation 2744902) held by Spain on this date, until 22 February 1821; the map draws the Newberry's polygon"
   ],
-  "alt_text": "Parchment map, 1 June 1820, free and slave states, framed on The South, titled \"Slave and free states, 1820\". Shaded: Free state in teal, Slave state in orange and Territories in gold. Named on the map: Missouri Territory, the Inner Provinces, Nuevo México, Michigan Territory, Arkansas Territory, Virginia, Georgia, Florida Unorg. FT, IL, Alabama, North Carolina and MS. Rivers named: Mississippi.",
+  "alt_text": "Parchment map, 1 June 1820, free and slave states, framed on The South, titled \"Slave and free states, 1820\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Missouri Territory, the Inner Provinces, Durango Intendancy, Kingdom of Mexico, Nuevo México, Michigan Territory, Arkansas Territory, New Galicia, Virginia, Georgia, Florida and IL. Rivers named: Mississippi.",
   "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); rivers: Natural Earth",
   "render": {
     "by": "scripts/map.mjs",
@@ -2028,6 +2030,6 @@
     },
     "blocked_requests": [],
     "page_errors": [],
-    "live_address": "us.html?date=1820-06-01&tracker=slavery&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8"
+    "live_address": "us.html?date=1820-06-01&tracker=slavery&strip=off&frame=south&rivers=Mississippi&title=Slave+and+free+states%2C+1820&size=1440x1620&scale=1.8"
   }
 }

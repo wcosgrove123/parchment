@@ -20,7 +20,7 @@
       "free": { "fill": "T", "label": "Free state" },
       "slave": { "fill": "S", "label": "Slave state" }
     },
-    "territory": { "fill": "E", "label": "Territories" },
+    "territory": { "fill": "N", "label": "Territories" },
     "coverage": [18200101, 18601231],
     "uncovered": "Status is entered for 1820 to 1860 only"
   },

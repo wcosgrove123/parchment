@@ -53,11 +53,12 @@ the order.
 | `scale` | `scale=` | type scale; by default 1 up to 1920×1080, and a larger picture keeps the 1920×1080 type, drawn finer |
 | `projection` | `projection=` | `auto` (default: the frame's own, src/render/focus.js) or `page` (the page's Albers, re-fitted) |
 | `records` | `records=` | a records CSV in this folder; `npm run map` reads `data/records.csv` when places or routes are named, never the Sheet |
+| `strip` | `strip=` | `off` leaves the timeline strip off the picture (a slide with its own); the map takes its room |
 | `out`, `svg` | | where to write, and whether to write an SVG too |
 
 **Frames** (`src/focuses.json`, under North America): `texas` (−107, 24.5, −92.5, 37.5), `southwest` (−125, 25, −93, 43),
 `oregon-country` (−126, 40, −108, 56), `east` (−95, 24, −66, 48), `south` (−107, 24, −74, 41: the cotton South, wide
-enough for Texas), `plains` (−105, 35, −89, 46), `border-states`
+enough for Texas), `southeast` (−93, 23.5, −74, 41: the old South and the sea road round Florida), `plains` (−105, 35, −89, 46), `border-states`
 (−92, 35, −74, 41.5), and `north-america` (the continent's box). The legend goes in whichever right-hand corner holds
 less land; water names are set where their water shows; Alaska and Hawaii are drawn only on the continent.
 
@@ -70,7 +71,7 @@ finds ids. The one word `none` lights nothing: a quiet base of borders and names
 **Free and slave states** (`tracker: slavery`, 2026-11-16). Each state takes its status from a table,
 `data/us/slavery-status.csv`: one row per Newberry polygon id (`al_state`) per status period, with `status` (`free` or
 `slave`), `start` and `end` (blank: the polygon's own first and last day) and a `source`. The shapes stay the
-Newberry's. Territories take one neutral fill and the label "Territories" until a territory is given a row of its own;
+Newberry's. Territories take the neutral gray (`--fill-N`) and the label "Territories" until a territory is given a row of its own;
 the District of Columbia and joint or disputed areas stay paper. The key is the same on every date (free, slave,
 territories), so two dates pair side by side. The table is entered for 1820 to 1860 only; outside those years no
 state is given a status and the key says so. The packing slip counts the states by status on the date
@@ -98,7 +99,9 @@ Nuevo México lines (the upper Rio Grande claim).
 so). A place whose record ended before the map's date gets a warning on the slip, with the name the land under it
 had on its own day when that differs (Louisiana was Orleans Territory in 1811). A revolt or a conspiracy is a point
 with the value `revolt`: the rust diamond of a conflict, with its own line in the key (test rows:
-`tests/maps/antebellum-records.csv`). Test rows for the Texas maps: `tests/maps/texas-records.csv` (marked TEST ROW, not reviewed).
+`tests/maps/antebellum-records.csv`). The domestic slave trade is an `arrow` with the value `forced-migration`: the
+migration's line, keyed "Forced migration: the domestic slave trade", never "migration" alone. On a quiet base
+(`highlight: none`) the key has no title. Test rows for the Texas maps: `tests/maps/texas-records.csv` (marked TEST ROW, not reviewed).
 
 ## The packing slip
 

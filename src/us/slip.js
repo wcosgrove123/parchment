@@ -6,7 +6,7 @@
 // template, never written by a model; and a one-line credit for the slide. It lets whoever builds the slide check
 // that the map says what the slide says, cite it, and describe it without guessing.
 
-import { geoArea, geoContains } from 'd3';
+import { geoArea, geoContains, geoCentroid } from 'd3';
 import { isoDate, longDate, yearOf, OPEN } from './dates.js';
 import { US_FROM, nbName, cleanLabel, powerAt, aliveNB } from './model.js';
 import { covered, slaveryCount } from './slavery.js';
@@ -16,7 +16,7 @@ import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
 const KM2 = 6371 * 6371;
-const COLOR_NAMES = { In: 'green', S: 'orange', P: 'blue', E: 'gold', C: 'purple', T: 'teal', focus: 'gold',
+const COLOR_NAMES = { In: 'green', S: 'orange', P: 'blue', E: 'gold', C: 'purple', T: 'teal', N: 'gray', focus: 'gold',
   'side-a': 'blue (side A)', 'side-b': 'plum (side B)', 'side-c': 'teal (side C)', 'side-d': 'ochre (side D)', 'side-gray': 'gray', 'side-red': 'red',
   'side-a-dep': 'blue at 40 % (dependent of side A)', 'side-b-dep': 'plum at 40 % (dependent of side B)', 'side-c-dep': 'teal at 40 % (dependent of side C)', 'side-d-dep': 'ochre at 40 % (dependent of side D)' };
 const iso = (d) => (d == null ? null : d >= OPEN ? 'present' : isoDate(d));
@@ -131,7 +131,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   const cur = atlas.current ?? {};
   const tags = (await loadJSON('data/us/ohm-sources.json').catch(() => null))?.relations ?? {};
   const root = getComputedStyle(document.documentElement);
-  const fills = Object.fromEntries(['In', 'S', 'P', 'E', 'C', 'T'].map((k) => [k, root.getPropertyValue(`--fill-${k}`).trim()]));
+  const fills = Object.fromEntries(['In', 'S', 'P', 'E', 'C', 'T', 'N'].map((k) => [k, root.getPropertyValue(`--fill-${k}`).trim()]));
   fills.focus = root.getPropertyValue('--focus').trim();
   for (const k of ['a', 'b', 'c', 'd', 'gray', 'red']) { const v = root.getPropertyValue(`--side-${k}-fill`).trim(); if (v) { fills[`side-${k}`] = v; fills[`side-${k}-dep`] = v; } }
   const date = state.date;
@@ -269,6 +269,33 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     if (rows.length) warnings.push(`the status of ${rows.length} state${rows.length === 1 ? '' : 's'} on this map comes from TEST ROWS (${resolved.status.table}), not yet reviewed${rows.some((f) => /PENDING/.test(f.status_row.source ?? '')) ? '; their sources are PENDING OWNER' : ''}`);
     if (resolved.status.without_a_row.length) warnings.push(`no status row for ${resolved.status.without_a_row.join(', ')} on ${longDate(date)}: drawn as paper`);
     if (!resolved.status.covered) warnings.push(`the status table is entered for ${resolved.status.coverage.join(' to ')} only: no state is given a status on ${longDate(date)}`);
+  }
+  // Where the sources disagree about who held the land: the page draws the Newberry's U.S. polygon and hides
+  // OpenHistoricalMap's polygon of the same land; when OHM has another power holding it on the date, say so (Florida,
+  // 1819–1821: the Newberry dates the territory from the treaty's signing, and Spain held it until 1821).
+  if (frame && !diff && date >= US_FROM) {
+    const FOREIGN = new Set(['spain', 'britain', 'france', 'mexico', 'russia']);
+    // (only a territory or other non-state area, and only an OHM polygon that is not its copy of a Newberry one: the
+    // holders OHM's hidden copies of the states carry are not reliable; the smallest such polygon speaks for the land)
+    const nbShown = shown.filter((it) => it.src === 'newberry' && it.p.type !== 'State');
+    const hits = new Map();
+    for (const o of data.ohm) {
+      const p = o.p;
+      if (!p.us || p.lvl === 'x' || tags[p.rid]?.nb || !(p.s <= date && date < p.e)) continue;
+      const pw = powerAt(p, date);
+      if (!FOREIGN.has(pw)) continue;
+      const c = geoCentroid(o.f);
+      const nbIt = nbShown.find((it) => geoContains(it.f, c));
+      if (!nbIt) continue;
+      const km2 = geoArea(o.f);
+      if (!hits.has(nbIt) || hits.get(nbIt).km2 > km2) hits.set(nbIt, { o, pw, km2 });
+    }
+    for (const [nbIt, { o, pw }] of hits) {
+      const p = o.p;
+      let until = null;
+      for (const [from, x] of p.pw ?? []) if (from > date && x !== pw) { until = from; break; }
+      warnings.push(`the sources disagree on ${nbName(nbIt.p)}: the Newberry dates it from ${longDate(nbIt.p.s)}${nbIt.p.change ? ` ("${nbIt.p.change}")` : ''}, and OpenHistoricalMap has ${cleanLabel(p.name) ?? p.name} (relation ${p.rid}) held by ${powers.categories[pw]?.label ?? pw} on this date${until ? `, until ${longDate(until)}` : ''}; the map draws the Newberry's polygon`);
+    }
   }
   if (date > 20001231) warnings.push("Newberry's record ends on 31 December 2000; its polygons in force that day are held open to the present");
 

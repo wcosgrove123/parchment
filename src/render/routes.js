@@ -14,6 +14,9 @@ export const CLASSES = {
   'land-trade': { color: 'land', heads: 'both', width: 'regular', label: 'Land trade' },
   voyage: { color: 'steel', heads: 'end', width: 'regular', label: 'Voyage' },
   migration: { color: 'rust', heads: 'chevron', width: 'regular', label: 'Migration' },
+  // (owner, 2026-11-16: people sold and moved against their will are never keyed as a "migration" alone; the line is
+  // the migration's, rust with an open chevron, and the key says what it was)
+  'forced-migration': { color: 'rust', heads: 'chevron', width: 'regular', label: 'Forced migration: the domestic slave trade' },
   military: { color: 'rust', heads: 'barb', width: 'regular', label: 'Army' },
   carrier: { color: 'ink', heads: 'none', width: 'thin', label: 'Carrier route' },
 };

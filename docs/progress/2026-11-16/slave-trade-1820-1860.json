@@ -1,0 +1,1442 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1860-06-01",
+    "tracker": "nations",
+    "title": "The domestic slave trade, 1820 to 1860",
+    "size": "1920x1080",
+    "records": "tests/maps/antebellum-records.csv",
+    "strip": "off",
+    "scale": 1.5,
+    "frame": "southeast",
+    "highlight": [
+      "none"
+    ],
+    "annotate": {
+      "places": [
+        "test-ab-market-baltimore",
+        "test-ab-market-alexandria",
+        "test-ab-market-richmond",
+        "test-ab-market-charleston",
+        "test-ab-market-natchez",
+        "test-ab-market-new-orleans"
+      ],
+      "routes": [
+        "test-ab-trade-sea",
+        "test-ab-trade-river",
+        "test-ab-trade-overland"
+      ]
+    }
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1860-06-01&strip=off&frame=southeast&highlight=none&places=test-ab-market-baltimore%2Ctest-ab-market-alexandria%2Ctest-ab-market-richmond%2Ctest-ab-market-charleston%2Ctest-ab-market-natchez%2Ctest-ab-market-new-orleans&routes=test-ab-trade-sea%2Ctest-ab-trade-river%2Ctest-ab-trade-overland&title=The+domestic+slave+trade%2C+1820+to+1860&size=1920x1080&scale=1.5&records=tests%2Fmaps%2Fantebellum-records.csv",
+    "mode": "snapshot",
+    "date": "1860-06-01",
+    "date_text": "1 June 1860",
+    "from": null,
+    "tracker": {
+      "id": "nations",
+      "title": "Nations and empires"
+    },
+    "election": null,
+    "frame": {
+      "id": "southeast",
+      "title": "The Southeast",
+      "box": {
+        "west": -93,
+        "south": 23.5,
+        "east": -74,
+        "north": 41
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        83.5,
+        -32.25
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1280,
+        720
+      ],
+      "scale": 1.5
+    },
+    "title": "The domestic slave trade, 1820 to 1860",
+    "highlight": {
+      "ids": [
+        "none"
+      ],
+      "unmatched": []
+    },
+    "inset": null,
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean",
+      "Gulf of Mexico"
+    ],
+    "records_file": "tests/maps/antebellum-records.csv",
+    "status": null,
+    "war": null
+  },
+  "legend": {
+    "title": "",
+    "rows": [
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      },
+      {
+        "label": "Forced migration: the domestic slave trade",
+        "swatch": "route",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#c8601a",
+        "dash": null,
+        "shape": null,
+        "heads": "chevron",
+        "role": "route"
+      },
+      {
+        "label": "Approximate route",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "dashed",
+        "shape": null,
+        "heads": null,
+        "role": "route certainty"
+      },
+      {
+        "label": "Port of call",
+        "swatch": "shape",
+        "key": null,
+        "fill": "#2e6f9e",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": "steel-circle",
+        "heads": null,
+        "role": "point type"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Missouri",
+      "local": null,
+      "ids": {
+        "newberry": "mo_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2692941,
+            "url": "https://www.openhistoricalmap.org/relation/2692941",
+            "name": "Missouri",
+            "start": "1849-02-13",
+            "end": "1950-08-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1849-02-13",
+      "end": "1950-08-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri",
+      "cut_by_frame": false,
+      "km2": 180419,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_state",
+          "version": 4,
+          "change": "U.S. Supreme Court settled boundary dispute between Iowa and Missouri by rejecting both states' claims, choosing instead the commonly accepted boundary before the dispute arose and the present boundary between the two states.",
+          "authority": "(Landers. 647-648; Thomas 269-270)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693715,
+            "url": "https://www.openhistoricalmap.org/relation/2693715",
+            "name": "Georgia",
+            "start": "1802-04-24",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1802-04-24",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": false,
+      "km2": 152353,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 3,
+          "change": "Georgia ceded to the United States much of present Mississippi and Alabama. This area became unorganized federal territory and Georgia Western Lands were eliminated.",
+          "authority": "(Paullin, 83; Van Zandt, 100; Terr. Papers U.S., 5:142-143)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Florida",
+      "local": null,
+      "ids": {
+        "newberry": "fl_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693743,
+            "url": "https://www.openhistoricalmap.org/relation/2693743",
+            "name": "Florida",
+            "start": "1845-03-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1845-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Florida",
+      "cut_by_frame": false,
+      "km2": 146872,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "fl_state",
+          "version": 1,
+          "change": "The state of Florida was created from Florida Territory, with boundaries the same as those set in 1822; Florida Territory eliminated.",
+          "authority": "(Swindler, 2:332; U.S. Stat., vol. 5, ch. 48 [1845], secs. 1, 5/pp. 742-743)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Illinois",
+      "local": null,
+      "ids": {
+        "newberry": "il_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693067,
+            "url": "https://www.openhistoricalmap.org/relation/2693067",
+            "name": "Illinois",
+            "start": "1818-12-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Illinois",
+      "cut_by_frame": true,
+      "km2": 145768,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "il_state",
+          "version": 1,
+          "change": "The state of Illinois was created from Illinois Territory; Illinois Territory eliminated.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], secs. 1-2, 7/pp. 428-429, 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas",
+      "local": null,
+      "ids": {
+        "newberry": "ar_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693749,
+            "url": "https://www.openhistoricalmap.org/relation/2693749",
+            "name": "Arkansas",
+            "start": "1840-05-21",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1840-05-21",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas",
+      "cut_by_frame": false,
+      "km2": 137745,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_state",
+          "version": 2,
+          "change": "Survey of boundary between the Republic of Texas and the United States began. MILLER (original) officially became extinct and LAFAYETTE was eliminated from Texas when Texas claims to the area were upheld.",
+          "authority": "(U.S. Stat., vol. 5, ch. 75 [1844]/p. 674; Marshall, 235-236)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alabama",
+      "local": null,
+      "ids": {
+        "newberry": "al_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693721,
+            "url": "https://www.openhistoricalmap.org/relation/2693721",
+            "name": "Alabama",
+            "start": "1820-12-19",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-12-19",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alabama",
+      "cut_by_frame": false,
+      "km2": 133863,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "al_state",
+          "version": 3,
+          "change": "MARION's overlap of the state of Mississippi and TUSCALOOSA's overlap of the state of Mississippi ended.",
+          "authority": "(Ala. Acts 1820, 2d sess., secs. 1, 9/pp. 90, 92)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "LA",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693673,
+            "url": "https://www.openhistoricalmap.org/relation/2693673",
+            "name": "Pennsylvania",
+            "start": "1792-03-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": true,
+      "km2": 117177,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 2,
+          "change": "Pennsylvania purchased from the federal government the Erie Triangle, a small area immediately north of Pennsylvania and west of New York, giving Pennsylvania an outlet to Lake Erie.",
+          "authority": "(Van Zandt, 83-84)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Ohio",
+      "local": null,
+      "ids": {
+        "newberry": "oh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2663622,
+            "url": "https://www.openhistoricalmap.org/relation/2663622",
+            "name": "Ohio",
+            "start": "1803-03-01",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1803-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Ohio",
+      "cut_by_frame": true,
+      "km2": 106748,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "oh_state",
+          "version": 1,
+          "change": "The state of Ohio was created from the Northwest Territory and Indiana Territory.",
+          "authority": "(Ind. Terr., Exec. Journal, 114-115; Pence and Armstrong, 218; U.S. Stat., vol. 2, ch. 40 [1802], secs. 1-3/pp. 173-174; Van Zandt, 112)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kentucky",
+      "local": null,
+      "ids": {
+        "newberry": "ky_state",
+        "newberry_version": 2
+      },
+      "start": "1859-11-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kentucky",
+      "cut_by_frame": false,
+      "km2": 104605,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ky_state",
+          "version": 2,
+          "change": "ROBERTSON (Tenn.) and SUMNER (Tenn.) gained from SIMPSON (Ky.) when surveyors re-marking the Kentucky-Tennessee boundary acted without authority and shifted the line around two small parcels.",
+          "authority": "(Sames, 107, 114)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indiana",
+      "local": null,
+      "ids": {
+        "newberry": "in_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693335,
+            "url": "https://www.openhistoricalmap.org/relation/2693335",
+            "name": "Indiana",
+            "start": "1816-12-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1816-12-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indiana",
+      "cut_by_frame": true,
+      "km2": 93616,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "in_state",
+          "version": 1,
+          "change": "The state of Indiana was created from Indiana Territory and small parts of Illinois and Michigan Territories.",
+          "authority": "(U.S. Stat., vol. 3, ch. 57 [1816], secs. 1-2/p. 289 and res. 1 [1816]/p. 399; Van Zandt, 115)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Jersey",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 5,
+        "also_in_ohm": [
+          {
+            "ohm": 2693699,
+            "url": "https://www.openhistoricalmap.org/relation/2693699",
+            "name": "Virginia",
+            "start": "1846-09-07",
+            "end": "1863-06-19",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-09-07",
+      "end": "1863-06-19",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 166249,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 5,
+          "change": "The District of Columbia ceded ALEXANDRIA (now ARLINGTON) to Virginia.",
+          "authority": "(U.S. Stat., vol. 9, ch. 35[1846]/pp. 35-37 and appendix 3/p. 1000)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Iowa",
+      "local": null,
+      "ids": {
+        "newberry": "ia_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692923,
+            "url": "https://www.openhistoricalmap.org/relation/2692923",
+            "name": "Iowa",
+            "start": "1846-12-28",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-12-28",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 145511,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ia_state",
+          "version": 1,
+          "change": "The state of Iowa was created from Iowa Territory; Iowa Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 9, ch. 1[1847]/p. 117)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693674,
+            "url": "https://www.openhistoricalmap.org/relation/2693674",
+            "name": "New York",
+            "start": "1855-01-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1855-01-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 125727,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 2,
+          "change": "New York acquired the southwestern corner of Massachusetts (Boston Corner).",
+          "authority": "(Pratt, 2:223; Van Zandt, 70, 76)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Mississippi",
+      "local": null,
+      "ids": {
+        "newberry": "ms_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693716,
+            "url": "https://www.openhistoricalmap.org/relation/2693716",
+            "name": "Mississippi",
+            "start": "1820-05-29",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 123526,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ms_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Tennessee",
+      "local": null,
+      "ids": {
+        "newberry": "tn_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693709,
+            "url": "https://www.openhistoricalmap.org/relation/2693709",
+            "name": "Tennessee",
+            "start": "1859-11-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1859-11-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 109128,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tn_state",
+          "version": 2,
+          "change": "ROBERTSON (Tenn.) and SUMNER (Tenn.) gained from SIMPSON (Ky.) when surveyors remarking the Kentucky-Tennessee boundary acted without authority and shifted the line around two small parcels.",
+          "authority": "(Sames, 107, 114)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of the Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2834851,
+        "wikidata": "Q778"
+      },
+      "start": "1848-01-01",
+      "end": "1973-07-10",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 47076,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2834851",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "Turks and Caicos leaves",
+          "end_event": "Independence",
+          "wikipedia": "en:History of the Bahamas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    }
+  ],
+  "points": [
+    {
+      "record": "test-ab-market-baltimore",
+      "asked": "test-ab-market-baltimore",
+      "label": "Baltimore",
+      "value": "port",
+      "where": "Q5092",
+      "lon": -76.615,
+      "lat": 39.2864,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-market-alexandria",
+      "asked": "test-ab-market-alexandria",
+      "label": "Alexandria",
+      "value": "port",
+      "where": "Q88",
+      "lon": -77.0472,
+      "lat": 38.8047,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-market-richmond",
+      "asked": "test-ab-market-richmond",
+      "label": "Richmond",
+      "value": "port",
+      "where": "Q43421",
+      "lon": -77.4367,
+      "lat": 37.5408,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-market-charleston",
+      "asked": "test-ab-market-charleston",
+      "label": "Charleston",
+      "value": "port",
+      "where": "Q47716",
+      "lon": -79.9319,
+      "lat": 32.7833,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-market-natchez",
+      "asked": "test-ab-market-natchez",
+      "label": "Natchez",
+      "value": "port",
+      "where": "Q944044",
+      "lon": -91.4032,
+      "lat": 31.5604,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-market-new-orleans",
+      "asked": "test-ab-market-new-orleans",
+      "label": "New Orleans",
+      "value": "port",
+      "where": "Q34404",
+      "lon": -90.0783,
+      "lat": 29.9761,
+      "start": "1820",
+      "end": "1860",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    }
+  ],
+  "routes": [
+    {
+      "record": "test-ab-trade-sea",
+      "label": "By sea",
+      "kind": "arrow",
+      "value": "forced-migration",
+      "class": "Forced migration: the domestic slave trade",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q88",
+        "Q7208079",
+        "Q1640805",
+        "Q978032",
+        "Q863476",
+        "Q907810",
+        "Q1261587",
+        "Q14691651",
+        "Q34404"
+      ],
+      "start": "1820",
+      "end": "1860",
+      "certainty": "approximate",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-trade-river",
+      "label": "By river",
+      "kind": "arrow",
+      "value": "forced-migration",
+      "class": "Forced migration: the domestic slave trade",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q838112",
+        "Q43196",
+        "Q43668",
+        "Q575306",
+        "Q16563",
+        "Q493787",
+        "Q944044",
+        "Q28218",
+        "Q34404"
+      ],
+      "start": "1820",
+      "end": "1860",
+      "certainty": "approximate",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "test-ab-trade-overland",
+      "label": "Overland",
+      "kind": "arrow",
+      "value": "forced-migration",
+      "class": "Forced migration: the domestic slave trade",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q43421",
+        "Q137919",
+        "Q185582",
+        "Q23197",
+        "Q944044"
+      ],
+      "start": "1820",
+      "end": "1860",
+      "certainty": "approximate",
+      "source": "Encyclopedia Virginia, \"Franklin and Armfield\"; 64 Parishes, \"Domestic Slave Trade\" (the owner's citations, 2026-11-16)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    }
+  ],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1248,
+      "y1": 688
+    },
+    "legend": {
+      "x": 876,
+      "y": 548,
+      "w": 350,
+      "h": 118,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 538,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [],
+  "alt_text": "Parchment map, 1 June 1860, nations and empires, framed on The Southeast, titled \"The domestic slave trade, 1820 to 1860\". Marked places: Baltimore (1820 to 1860), Alexandria (1820 to 1860), Richmond (1820 to 1860), Charleston (1820 to 1860), Natchez (1820 to 1860) and New Orleans (1820 to 1860). Routes: By sea, forced migration: the domestic slave trade with arrowheads, By river, forced migration: the domestic slave trade with arrowheads and Overland, forced migration: the domestic slave trade with arrowheads.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; places: the Parchment record table, coordinates from Wikidata",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1860-06-01&tracker=nations&strip=off&frame=southeast&highlight=none&places=test-ab-market-baltimore%2Ctest-ab-market-alexandria%2Ctest-ab-market-richmond%2Ctest-ab-market-charleston%2Ctest-ab-market-natchez%2Ctest-ab-market-new-orleans&routes=test-ab-trade-sea%2Ctest-ab-trade-river%2Ctest-ab-trade-overland&title=The+domestic+slave+trade%2C+1820+to+1860&size=1920x1080&scale=1.5&records=tests%2Fmaps%2Fantebellum-records.csv"
+  }
+}

@@ -52,7 +52,7 @@ function stageGeometry(stage, lesson) {
   const W = lesson?.sheet?.w ?? BASE_W, H = lesson?.sheet?.h ?? BASE_H;
   const framed = !!lesson?.frame;
   const resized = W !== BASE_W || H !== BASE_H;
-  const inner = [[FRAME.left, FRAME.top], [W - FRAME.right, H - FRAME.bottom]];
+  const inner = [[FRAME.left, FRAME.top], [W - FRAME.right, H - (lesson?.noStrip ? FRAME.top : FRAME.bottom)]];
   // A frame re-fits the projection to its box (the projection the frame names, src/us/frames.js); a bare change of
   // size fits the continent to the new shape. Neither touches the 1920×1080 continent.
   const projection = framed ? fitFrame(lesson.frame.projection, lesson.frame.box, inner, lesson.frame.view ?? null)
@@ -234,7 +234,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   const views = [main, ...insets];
 
   drawPaperOverlay(root, W, H);
-  root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}`);
+  root.append('path').attr('class', 'frame').attr('d', `M${x0},${y1}L${x0},${y0}L${x1},${y0}L${x1},${y1}${lesson?.noStrip ? 'Z' : ''}`);
   // The legend sits where the stage says (bottom right, above the Caribbean): the top right stays clear for New
   // England and, in the Diff view, for the change list.
   // (a frame puts it in whichever right-hand corner holds less land: the Gulf of Mexico on the Texas map)
@@ -243,6 +243,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   const cartouche = createCartouche(root, frame, { ...stage, title: lesson?.title ?? stage.title, extent: framed ? lesson.frame.box : stage.extent }, projection);
   const titleOn = (date) => lesson?.title ?? (date >= 17760704 ? stage.title_us : stage.title);
   const strip = createTimeline(root, frame, stage, onYear);
+  if (lesson?.noStrip) root.select('g.na-strip').attr('display', 'none');
   const diffList = createDiffList(root, frame);
 
   // Records an order points at (places, routes) and the rivers it names, in layers above the polity names; laid
@@ -431,7 +432,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const base = trackerId === 'electoral'
         ? (electoral ? electoralLegend(electoral, { abstained: someAbstained(electoral, nbAlive) }) : { title: tracker.title, legend: [{ swatch: 'none', label: 'The first electors voted on 4 February 1789' }] })
         : legendFor(powers, tracker, trackerId, present, date, ohmAlive.length > 0, pop);
-      const shownLegend = shortKey(lessonLegend(base, items, trackerId, hl), milNow);
+      // (a quiet base has no fills to name: the key keeps its lines and loses the tracker's title)
+      const shownLegend = shortKey(lessonLegend(hl?.none ? { ...base, title: '' } : base, items, trackerId, hl), milNow);
       legend.set(shownLegend);
       if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
       recordLayout = layoutRecords(milZones);
@@ -1499,8 +1501,21 @@ function hoverText(it, date) {
 // it overlaps no other label and none of the apparatus. Bigger first; the U.S. before its neighbours. Under an order's
 // highlight the lit names come first and the rest stay, paler, as context; `lines` (an order's routes) are kept clear.
 // → the names placed.
+// A Newberry polygon's names, longest first. On the status maps (owner, 2026-11-16: "labels students can't read") a
+// territory is spelled out or left unnamed, never abbreviated ("UT Terr"); a place held as unorganized federal
+// territory is its place name ("Florida"), and the unorganized territory without one ("UFT") carries no name. States
+// keep their postal abbreviations where the name does not fit.
+function nbTexts(p, trackerId) {
+  if (trackerId !== 'slavery' && trackerId !== 'freeblack') return [nbName(p), p.name, p.abbr];
+  if (p.type === 'State') return [nbName(p), p.name, p.abbr];
+  const full = nbName(p) ?? '';
+  if (/Unorganized Federal Territory|Unorg\. Fed\. Terr|Unorg\. FT/i.test(full)) { const place = full.replace(/\s*(Unorganized Federal Territory|Unorg\. Fed\. Terr\.?|Unorg\. FT)\s*$/i, '').trim(); return place ? [place] : []; }
+  return [full];
+}
+
 function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { covered = () => false, nolabel = [], lines = [] } = {}) {
   const main = v.id === 'main';
+  const statusMap = trackerId === 'slavery' || trackerId === 'freeblack';
   const silent = (name) => nolabel.some((r) => new RegExp(r.match, 'i').test(name) && (!r.from || date >= r.from) && (!r.to || date < r.to));
   const minSize = main ? 10.5 : 8.5, maxSize = main ? 21 : 12;
   const cands = [];
@@ -1510,8 +1525,10 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     const isNB = it.src === 'newberry';
     if (!isNB && it.look.pattern !== 'stipple' && it.cat === 'other' && trackerId === 'nations' && !main) continue;
     if (it.src === 'ohm' && (p.lvl === 'x' || silent(p.name))) continue; // overlaps carry a hatch, not a name
+    if (statusMap && !isNB && (it.cat === 'native' || it.src === 'hb')) continue; // (a status map leaves the homelands, and their names, out)
     // (occupied land prints the name its occupation row gives it: New Mexico, Mexico City)
-    const texts = (it.src === 'usmx' ? [it.look.occName] : [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? [nbName(p), p.name, p.abbr] : [p.name, shortName(p.name)])]).map(cleanLabel);
+    const texts = (it.src === 'usmx' ? [it.look.occName] : [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? nbTexts(p, trackerId) : [p.name, shortName(p.name)])]).map(cleanLabel);
+    if (isNB && !texts.some(Boolean)) continue;
     const poly = largestPolygon(it.f);
     if (!poly) continue;
     const [[bx0, by0], [bx1, by1]] = v.path.bounds(poly);
@@ -1551,9 +1568,12 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     // Under the Military layer a name whose middle is taken (a march runs down the Rio Grande through the middle of
     // New Mexico) tries other places inside its polygon before it is given up (owner's review, 2026-11-10).
     const centers = [[c.cx, c.cy]];
-    if (trackerId === 'military' && c.poly) {
+    if ((trackerId === 'military' || trackerId === 'slavery' || trackerId === 'freeblack') && c.poly) {
       for (const [fx, fy] of [[0.5, 0.3], [0.5, 0.7], [0.3, 0.5], [0.7, 0.5], [0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7], [0.5, 0.15], [0.5, 0.85]]) {
-        const q = [c.x0 + c.w * fx, c.y0 + c.h * fy];
+        // (on a status map the places are taken inside the part of the polygon the sheet shows: a territory the frame cuts keeps its name)
+        const vx0 = statusMap ? Math.max(c.x0, bx) : c.x0, vy0 = statusMap ? Math.max(c.y0, by) : c.y0;
+        const vw = statusMap ? Math.min(c.x0 + c.w, bx + bw) - vx0 : c.w, vh = statusMap ? Math.min(c.y0 + c.h, by + bh) - vy0 : c.h;
+        const q = [vx0 + vw * fx, vy0 + vh * fy];
         const ll = v.proj.invert(q);
         if (ll && d3.geoContains(c.poly, ll)) centers.push(q);
       }

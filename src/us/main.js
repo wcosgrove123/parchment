@@ -151,11 +151,13 @@ async function main() {
       }
     }
     lesson = {
-      key: `${frameParam ?? 'continent'}-${projectionMode}-${SHEET.w}x${SHEET.h}`,
+      key: `${frameParam ?? 'continent'}-${projectionMode}-${SHEET.w}x${SHEET.h}${params.get('strip') === 'off' ? '-nostrip' : ''}`,
       sheet: { w: SHEET.w, h: SHEET.h },
       frame,
       inset,
       title: params.get('title') || null,
+      // (strip=off: a slide with its own timeline leaves the atlas's strip off the picture; the map takes its room)
+      noStrip: params.get('strip') === 'off',
       highlight: params.get('highlight') ? makeHighlight(params.get('highlight')) : null,
       twins,
       rivers: riverNames,

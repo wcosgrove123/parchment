@@ -134,6 +134,8 @@ Set A — theme fills (InSPECT / AP World themes). Tempered for parchment at bui
 | C | Cultural (CDI) | `#8e55d8` |
 | T | Technological (TEC) | `#2aa3b4` |
 
+One neutral beside Set A (owner, 2026-11-16): `--fill-N`, a cool gray (OKLCH L 0.68, C 0.012), for land a map gives no category, such as the territories on the slavery-status map. It counts toward the four fills.
+
 Set B — marks (apparatus): navy `#1F2A44` (borders, labels, legend frame, timeline baseline) · rust `#C8601A` (conflict, armies, migrations) · steel blue `#2E6F9E` (sea routes and voyages, coastlines, lakes, rivers; never ocean) · umber `--route-land` (land trade routes; derived in `scripts/tokens.mjs` from navy's OKLCH lightness, lifted 0.18 so it reads beside navy at line width, toward hue 50) · moss (founding/administration; derive at the same OKLCH L/C as navy and rust) · slate-gold (the single "focus" color) · cream `#F7F5EF` (paper, land at rest).
 
 Set C — the political map (owner, 2026-11-09; kept over a bolder set, 2026-11-10): twelve state colors, six hues (OKLCH 25, 75, 120, 165, 215, 290), each pale (L 0.86, C 0.055) and mid (L 0.77, C 0.07), tempered like Set A and lighter so names and borders read over them; `--pol-0…11` in `src/tokens.css` (`scripts/tokens.mjs`). `scripts/derive-cliopatria.mjs` gives each state its color so that neighbors in force at the same time never share one and a state keeps its color through time. Each color has a deep shade, `--pol-0-deep…11` (the pale set's hues at L 0.56, the mid set's at L 0.46, C 0.10), for the stripes over a state's vassals (§5).

@@ -4,9 +4,16 @@
   "date": "1860-06-01",
   "tracker": "slavery",
   "frame": "south",
-  "annotate": { "rivers": ["Mississippi"], "places": [], "routes": [] },
+  "annotate": {
+    "rivers": [
+      "Mississippi"
+    ],
+    "places": [],
+    "routes": []
+  },
   "title": "Slave and free states, 1860",
   "size": "1440x1620",
   "scale": 1.8,
-  "out": "out/slave-free-1860"
+  "out": "out/slave-free-1860",
+  "strip": "off"
 }

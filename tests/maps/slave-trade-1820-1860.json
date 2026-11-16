@@ -1,0 +1,32 @@
+{
+  "_comment": "Map D of the brief 'maps for the Antebellum South lecture' (2026-11-16): the domestic slave trade as three routes (by sea, by river, overland) and six named places, all TEST ROWS in tests/maps/antebellum-records.csv with the owner's two citations. Every line is approximate: it runs through gazetteer places, never a traced track. The key says 'Forced migration: the domestic slave trade' (owner: never 'migration' alone). Same frame and type as Map B.",
+  "page": "us",
+  "date": "1860-06-01",
+  "tracker": "nations",
+  "frame": "southeast",
+  "highlight": [
+    "none"
+  ],
+  "annotate": {
+    "rivers": [],
+    "places": [
+      "test-ab-market-baltimore",
+      "test-ab-market-alexandria",
+      "test-ab-market-richmond",
+      "test-ab-market-charleston",
+      "test-ab-market-natchez",
+      "test-ab-market-new-orleans"
+    ],
+    "routes": [
+      "test-ab-trade-sea",
+      "test-ab-trade-river",
+      "test-ab-trade-overland"
+    ]
+  },
+  "title": "The domestic slave trade, 1820 to 1860",
+  "size": "1920x1080",
+  "scale": 1.5,
+  "strip": "off",
+  "records": "tests/maps/antebellum-records.csv",
+  "out": "out/slave-trade-1820-1860"
+}

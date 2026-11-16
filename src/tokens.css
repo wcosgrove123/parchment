@@ -7,6 +7,7 @@
   --fill-E:  #bea160;   /* Economic     (seed #d9a400) */
   --fill-C:  #ad98d5;   /* Cultural     (seed #8e55d8) */
   --fill-T:  #58b4c3;   /* Technological(seed #2aa3b4) */
+  --fill-N:  #9399a0;   /* neutral gray: no category given (OKLCH L 0.68, C 0.012) */
 
   /* Set B — marks (apparatus) */
   --navy:  #1F2A44;

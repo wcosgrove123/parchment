@@ -25,8 +25,10 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
   let height = 0;
   function set(tracker) {
     const entries = tracker.legend ?? [];
+    const titled = (tracker.title ?? tracker.id ?? '') !== '';
     title.text(tracker.title ?? tracker.id);
-    const H = PAD * 2 + 26 + entries.length * ROW;
+    rows.attr('transform', `translate(${PAD},${PAD + (titled ? 26 : 2)})`);
+    const H = PAD * 2 + (titled ? 26 : 2) + entries.length * ROW;
     height = H;
     box.attr('height', H);
     g.attr('transform', `translate(${leftX(W)},${topY(H)})`);

@@ -11,6 +11,12 @@
     "label": "Los Angeles",
     "fetched": "2026-11-10"
   },
+  "Q88": {
+    "lon": -77.0472,
+    "lat": 38.8047,
+    "label": "Alexandria",
+    "fetched": "2026-11-16"
+  },
   "Q90": {
     "lon": 2.3522,
     "lat": 48.8567,
@@ -114,6 +120,12 @@
     "label": "Cape of Good Hope",
     "fetched": "2026-11-06"
   },
+  "Q5092": {
+    "lon": -76.615,
+    "lat": 39.2864,
+    "label": "Baltimore",
+    "fetched": "2026-11-16"
+  },
   "Q5468": {
     "lon": 31.025,
     "lat": -29.8583,
@@ -186,6 +198,12 @@
     "label": "Austin",
     "fetched": "2026-11-09"
   },
+  "Q16563": {
+    "lon": -90.0519,
+    "lat": 35.1461,
+    "label": "Memphis",
+    "fetched": "2026-11-16"
+  },
   "Q16635": {
     "lon": 144.8,
     "lat": 13.5,
@@ -216,6 +234,12 @@
     "label": "Bristol",
     "fetched": "2026-11-06"
   },
+  "Q23197": {
+    "lon": -86.7744,
+    "lat": 36.1622,
+    "label": "Nashville",
+    "fetched": "2026-11-16"
+  },
   "Q24826": {
     "lon": -2.9917,
     "lat": 53.4072,
@@ -228,6 +252,12 @@
     "label": "Ciudad Juárez",
     "fetched": "2026-11-09"
   },
+  "Q28218": {
+    "lon": -91.1786,
+    "lat": 30.4475,
+    "label": "Baton Rouge",
+    "fetched": "2026-11-16"
+  },
   "Q32198": {
     "lon": -70.6637,
     "lat": 42.6064,
@@ -239,6 +269,12 @@
     "lat": 39.8114,
     "label": "Battle of Gettysburg",
     "fetched": "2026-11-10"
+  },
+  "Q34404": {
+    "lon": -90.0783,
+    "lat": 29.9761,
+    "label": "New Orleans",
+    "fetched": "2026-11-16"
   },
   "Q34804": {
     "lon": -106.6503,
@@ -282,10 +318,22 @@
     "label": "Mazatlán",
     "fetched": "2026-11-10"
   },
+  "Q43196": {
+    "lon": -84.5125,
+    "lat": 39.1,
+    "label": "Cincinnati",
+    "fetched": "2026-11-16"
+  },
   "Q43421": {
     "lon": -77.4367,
     "lat": 37.5408,
     "label": "Richmond",
+    "fetched": "2026-11-16"
+  },
+  "Q43668": {
+    "lon": -85.7514,
+    "lat": 38.2561,
+    "label": "Louisville",
     "fetched": "2026-11-16"
   },
   "Q45067": {
@@ -420,6 +468,12 @@
     "label": "Aden",
     "fetched": "2026-11-05"
   },
+  "Q137919": {
+    "lon": -81.9756,
+    "lat": 36.7097,
+    "label": "Abingdon",
+    "fetched": "2026-11-16"
+  },
   "Q139242": {
     "lon": -102.5753,
     "lat": 22.7717,
@@ -455,6 +509,12 @@
     "lat": 19.1903,
     "label": "Veracruz",
     "fetched": "2026-11-06"
+  },
+  "Q185582": {
+    "lon": -83.9233,
+    "lat": 35.9617,
+    "label": "Knoxville",
+    "fetched": "2026-11-16"
   },
   "Q198670": {
     "lon": -76.285,
@@ -660,6 +720,12 @@
     "label": "São Nicolau",
     "fetched": "2026-11-06"
   },
+  "Q493787": {
+    "lon": -90.8775,
+    "lat": 32.3525,
+    "label": "Vicksburg",
+    "fetched": "2026-11-16"
+  },
   "Q494318": {
     "lon": -80.6072,
     "lat": 34.2744,
@@ -731,6 +797,12 @@
     "lat": 49.5,
     "label": "Anticosti Island",
     "fetched": "2026-11-06"
+  },
+  "Q575306": {
+    "lon": -89.1803,
+    "lat": 37.0131,
+    "label": "Cairo",
+    "fetched": "2026-11-16"
   },
   "Q590879": {
     "lon": -94.9211,
@@ -930,6 +1002,12 @@
     "label": "Tumbes",
     "fetched": "2026-11-06"
   },
+  "Q838112": {
+    "lon": -80.6986,
+    "lat": 40.0703,
+    "label": "Wheeling",
+    "fetched": "2026-11-16"
+  },
   "Q838916": {
     "lon": -95.3606,
     "lat": 28.9619,
@@ -966,6 +1044,12 @@
     "label": "Battle of Long Island",
     "fetched": "2026-11-10"
   },
+  "Q863476": {
+    "lon": -79.25,
+    "lat": 25.7333,
+    "label": "Bimini",
+    "fetched": "2026-11-16"
+  },
   "Q876315": {
     "lon": -105.5733,
     "lat": 36.4072,
@@ -978,6 +1062,12 @@
     "label": "Battle of Great Bridge",
     "fetched": "2026-11-10"
   },
+  "Q907810": {
+    "lon": -80.0833,
+    "lat": 23.8333,
+    "label": "Cay Sal Bank",
+    "fetched": "2026-11-16"
+  },
   "Q922790": {
     "lon": -73.1386,
     "lat": 43.6953,
@@ -989,6 +1079,12 @@
     "lat": 44.6106,
     "label": "Battle of Valcour Island",
     "fetched": "2026-11-10"
+  },
+  "Q944044": {
+    "lon": -91.4032,
+    "lat": 31.5604,
+    "label": "Natchez",
+    "fetched": "2026-11-16"
   },
   "Q953597": {
     "lon": -77.2363,
@@ -1025,6 +1121,12 @@
     "lat": 28.3058,
     "label": "Refugio",
     "fetched": "2026-11-09"
+  },
+  "Q978032": {
+    "lon": -75.53,
+    "lat": 35.2225,
+    "label": "Cape Hatteras",
+    "fetched": "2026-11-16"
   },
   "Q982494": {
     "lon": -97.3919,
@@ -1164,6 +1266,12 @@
     "label": "Cape Coast Castle",
     "fetched": "2026-11-06"
   },
+  "Q1261587": {
+    "lon": -82.92,
+    "lat": 24.6333,
+    "label": "Dry Tortugas",
+    "fetched": "2026-11-16"
+  },
   "Q1301146": {
     "lon": -100.3787,
     "lat": 28.3084,
@@ -1283,6 +1391,12 @@
     "lat": 40.2589,
     "label": "Battle of Monmouth",
     "fetched": "2026-11-10"
+  },
+  "Q1640805": {
+    "lon": -76.0201,
+    "lat": 36.9248,
+    "label": "Cape Henry",
+    "fetched": "2026-11-16"
   },
   "Q1741475": {
     "lon": 39.5172,
@@ -2310,6 +2424,12 @@
     "label": "Pitzer Woods",
     "fetched": "2026-11-10"
   },
+  "Q7208079": {
+    "lon": -76.3344,
+    "lat": 38.0644,
+    "label": "Point Lookout State Park",
+    "fetched": "2026-11-16"
+  },
   "Q7263080": {
     "lon": -79.4,
     "lat": 36.04,
@@ -2483,6 +2603,12 @@
     "lat": 34.0182,
     "label": "Colbert raid",
     "fetched": "2026-11-10"
+  },
+  "Q14691651": {
+    "lon": -89.254,
+    "lat": 29.157,
+    "label": "Head of Passes",
+    "fetched": "2026-11-16"
   },
   "Q15262498": {
     "lon": -77.2473,
