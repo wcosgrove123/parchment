@@ -10,6 +10,7 @@ import { geoArea, geoContains } from 'd3';
 import { isoDate, longDate, yearOf, OPEN } from './dates.js';
 import { US_FROM, nbName, cleanLabel, powerAt, aliveNB } from './model.js';
 import { covered, slaveryCount } from './slavery.js';
+import { freeOn, SOURCE as FREE_SOURCE } from './freeblack.js';
 import { queryToOrder } from './frames.js';
 import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
@@ -162,7 +163,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     water_names: info.waterLabels,
     records_file: records?.file ?? null,
     // The slavery-status tracker: the table, the span it speaks for, and the count of states by status on the date.
-    status: state.tracker === 'slavery' && data.slavery ? { table: data.slavery.file, coverage: (tracker.coverage ?? []).map((d) => isoDate(d)), covered: covered(tracker, date), ...slaveryCount(data.slavery, tracker, aliveNB(data, date), date), note: 'counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper' } : null,
+    status: (state.tracker === 'slavery' || state.tracker === 'freeblack') && data.slavery ? { table: data.slavery.file, coverage: (tracker.coverage ?? []).map((d) => isoDate(d)), covered: covered(tracker, date), ...slaveryCount(data.slavery, tracker, aliveNB(data, date), date), note: 'counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper' } : null,
     // The Military layer (brief of 2026-11-09 §6): the war, its sides, and each member with its dates and role.
     war: military?.war ? {
       id: military.war.id, names: military.war.names, names_shown: military.names, start: military.war.start, end: military.war.end, source: military.war.source ?? null,
@@ -192,6 +193,20 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
+
+  // The free Black population tracker: the census, the counts by status, and every polygon's count, largest first.
+  const fb = state.tracker === 'freeblack' && data.free ? freeOn(data.free, data.pop?.anchors, aliveNB(data, date), date, { slavery: data.slavery, tracker: trackers.slavery }) : null;
+  if (fb) {
+    resolved.census = {
+      year: fb.census.year, day: isoDate(fb.census.day), table: data.free.file, source: FREE_SOURCE,
+      free_black_people: fb.total, in_slave_states: fb.by.slave, in_free_states: fb.by.free, in_territories_and_dc: fb.by.elsewhere,
+      counts: fb.ranked.map((u) => ({ polygon: u.id, name: u.name, status: u.status, free: u.free, slave: u.slave, badge: !!fb.badgeOf(u.it.p), census_rows: u.rows })),
+      not_placed: fb.outside.map((s) => ({ state: s.state, free: s.free })),
+      note: 'the paper counts each state within its present-day borders; a row is added onto the polygon of the date that holds a point inside that state',
+    };
+    if (fb.census.day !== date) warnings.push(`the counts are the census of ${longDate(fb.census.day)}, the latest taken by the map's date`);
+    for (const s of fb.outside) if (s.free) warnings.push(`${s.state}'s ${s.free.toLocaleString('en-US')} free Black people (${fb.census.year} census) fall in no polygon of the date and are counted with the territories`);
+  }
 
   // ---- the polygons on the map
   const labelOf = new Map((cur.polityLabels ?? []).filter((l) => l.it).map((l) => [l.it, l.text]));
@@ -236,7 +251,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     return {
       layer: layerOf(it), name: cleanLabel(nameOf(it)) ?? nameOf(it), local: it.p.local ?? null, ids, ...datesOf(it),
       certainty: certaintyOf(it, date), power: pw, power_label: pl, look, diff_role: r,
-      ...(state.tracker === 'slavery' && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
+      ...(fb && it.src === 'newberry' && fb.unitOf(it.p) ? { free_black: { count: fb.unitOf(it.p).free, badge: !!fb.badgeOf(it.p), census_rows: fb.unitOf(it.p).rows } } : {}),
+      ...((state.tracker === 'slavery' || state.tracker === 'freeblack') && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
       lit: diff ? null : it.lit ?? null, lit_by: diff ? null : it.litBy ?? null, lit_as_named: !diff && !!(it.lit && it.litBy && !atlas.isPowerKey(it.litBy, pw)), labeled: !!label, label, cut_by_frame: atlas.cutByFrame(it.f),
       km2: Math.round(geoArea(it.f) * KM2), source: sourceOf(it, tags),
     };
@@ -365,6 +381,7 @@ function creditLine(features, points, routes, rivers, trackerId) {
   if (has('land-cession') || has('treaty-land')) parts.push('land cessions: U.S. Forest Service (Royce 1899)');
   if (trackerId === 'electoral') parts.push('votes: National Archives');
   if (trackerId === 'population') parts.push('counts: U.S. Census Bureau');
+  if (trackerId === 'freeblack') parts.push('counts: U.S. Census Bureau', 'status of states: the Parchment status table (test rows)');
   if (trackerId === 'slavery') parts.push('status of states: the Parchment status table (test rows)');
   if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at)) parts.push('rivers: Natural Earth');
   if (points.length || routes.length) parts.push('places: the Parchment record table, coordinates from Wikidata');

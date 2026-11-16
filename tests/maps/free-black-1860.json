@@ -1,0 +1,12 @@
+{
+  "_comment": "Map E of the brief 'maps for the Antebellum South lecture' (2026-11-16): where free Black Americans lived in 1860. The fills are the slavery tracker's (free state, slave state, territories; TEST ROWS); the numbers are the 1860 census's counts of free Black people in the ten states with the most (U.S. Census Bureau, Working Paper No. 56). 1 June 1860 is Census Day.",
+  "page": "us",
+  "date": "1860-06-01",
+  "tracker": "freeblack",
+  "frame": "east",
+  "annotate": { "rivers": [], "places": [], "routes": [] },
+  "title": "Free Black population, 1860",
+  "size": "1920x1080",
+  "scale": 1.3,
+  "out": "out/free-black-1860"
+}

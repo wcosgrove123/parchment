@@ -24,6 +24,11 @@
     "coverage": [18200101, 18601231],
     "uncovered": "Status is entered for 1820 to 1860 only"
   },
+  "freeblack": {
+    "id": "freeblack",
+    "title": "Free Black population",
+    "_comment": "The slavery tracker's fills (free state, slave state, territories; its table and its coverage), with a number badge on each of the ten states where the census on or before the date counted the most free Black people, and the nation's count by where they lived as lines of the key (src/us/freeblack.js). Counts: U.S. Census Bureau, Working Paper No. 56 (data/us/census-free-slave-1790-1860.csv, scripts/census-wp56-free.mjs). Nothing is shaded by amount."
+  },
   "cessions": {
     "id": "cessions",
     "title": "Indian land cessions",

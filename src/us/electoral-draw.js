@@ -37,7 +37,9 @@ function insidePoint(v, poly) {
 }
 
 // Where each badge goes on one view. `resultOf(p)` gives a Newberry polygon's result ({ badge }); `zones` are taken.
-export function fitElectoralBadges(v, nbItems, resultOf, zones, measure) {
+// `fit`: how much of the badge's width the state must hold for the badge to sit inside it (the rest is called out).
+// `nudge`: a badge whose place is taken tries a little higher and lower inside its state before it is called out.
+export function fitElectoralBadges(v, nbItems, resultOf, zones, measure, { fit = 0.9, nudge = false } = {}) {
   const main = v.id === 'main';
   const [bx, by, bw, bh] = v.box;
   const cands = [];
@@ -50,15 +52,19 @@ export function fitElectoralBadges(v, nbItems, resultOf, zones, measure) {
     const [[x0, y0], [x1, y1]] = v.path.bounds(poly);
     const abbr = (it.p.abbr ?? '').replace(/ Terr$/, '');
     const w = measure(r.badge, { size: 13, bold: true }) + (abbr ? measure(abbr, { size: 10 }) + 4 : 0) + 14;
-    cands.push({ x: pt[0], y: pt[1], w, h: H, abbr, text: r.badge, room: [x1 - x0, y1 - y0], area: (x1 - x0) * (y1 - y0) });
+    cands.push({ x: pt[0], y: pt[1], w, h: H, abbr, text: r.badge, room: [x1 - x0, y1 - y0], area: (x1 - x0) * (y1 - y0), poly });
   }
   cands.sort((a, b) => b.area - a.area);
   const placed = [], callouts = [];
   const inView = (b) => b.x >= bx + 2 && b.x + b.w <= bx + bw - 2 && b.y >= by + 2 && b.y + b.h <= by + bh - 2;
   for (const c of cands) {
     const box = { x: c.x - c.w / 2, y: c.y - c.h / 2, w: c.w, h: c.h };
-    const fits = c.room[0] > c.w * 0.9 && c.room[1] > c.h + 2;
-    if (inView(box) && (fits || !main) && ![...zones, ...placed.map((p) => p.box)].some((z) => overlaps(z, box, 2))) placed.push({ ...c, box });
+    const fits = c.room[0] > c.w * fit && c.room[1] > c.h + 2;
+    const free = (b) => inView(b) && ![...zones, ...placed.map((p) => p.box)].some((z) => overlaps(z, b, 2));
+    const inside = (y) => { const ll = v.proj.invert([c.x, y]); return !!ll && d3.geoContains(c.poly, ll); };
+    const other = nudge && fits && !free(box) ? [-1, 1, -2, 2].map((k) => c.y + k * (c.h + 6)).filter(inside).map((y) => ({ ...box, y: y - c.h / 2 })).find(free) : null;
+    if ((fits || !main) && free(box)) placed.push({ ...c, box });
+    else if (other) placed.push({ ...c, box: other });
     else if (main) callouts.push(c);
   }
   if (callouts.length) {

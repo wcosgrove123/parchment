@@ -17,6 +17,7 @@ import { electionAt, electionDays, electionLooks, electoralCard, electionDiff } 
 import { prepareDisputes, prepareUSMX, applyOHMCuts } from './disputes.js';
 import { loadText } from '../data/loader.js';
 import { prepareSlavery } from './slavery.js';
+import { prepareFree } from './freeblack.js';
 import { loadRecordsText } from '../data/source.js';
 import { validateRecords, resolveRecords } from '../data/records.js';
 import { routeLegend } from '../render/routes.js';
@@ -35,7 +36,7 @@ import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSid
 const MANY_EVENTS = 40;
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
-const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, slavery: trackerDefs.slavery, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
+const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, slavery: trackerDefs.slavery, freeblack: trackerDefs.freeblack, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
 const [SPAN_A, SPAN_B] = stage.span;
 const params = new URLSearchParams(location.search);
 const PLAY_MS = 450;
@@ -102,6 +103,9 @@ async function main() {
   // The slavery-status table (data/us/slavery-status.csv): read only when its tracker is asked for.
   data.slavery = null;
   const ensureSlavery = async () => { if (!data.slavery) { data.slavery = prepareSlavery(await loadText('data/us/slavery-status.csv').catch(() => null)); problems.push(...data.slavery.problems); } };
+  // ...and the census's free and slave counts by state, 1790–1860, for the free Black population tracker.
+  data.free = null;
+  const ensureFree = async () => { await ensureSlavery(); if (!data.free) { data.free = prepareFree(await loadText('data/us/census-free-slave-1790-1860.csv').catch(() => null)); problems.push(...data.free.problems); } };
   data.nbx = prepareDisputes(await loadJSON('data/us/nb-disputes.json').catch(() => null));
   // ...and land a U.S. state and a Mexican state claimed at once (data/us/usmx-disputes.json, the same script).
   data.usmx = prepareUSMX(await loadJSON('data/us/usmx-disputes.json').catch(() => null));
@@ -346,6 +350,7 @@ async function main() {
   }
   if (state.tracker === 'military') await ensureMilitary();
   if (state.tracker === 'slavery') await ensureSlavery();
+  if (state.tracker === 'freeblack') await ensureFree();
   let milShown = null;
   // The earlier date when the Diff view opens without one: fifty years back, or the stage's first year.
   // (under the Electoral College: the election before the one shown)
@@ -749,7 +754,7 @@ async function main() {
   // ------------------------------------------------------------ toolbar (chrome; never exported)
   const tb = d3.select('#toolbar').html('');
   const sel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
-    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'slavery') await ensureSlavery(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
+    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'slavery') await ensureSlavery(); if (state.tracker === 'freeblack') await ensureFree(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
   sel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
   // The Military layer's war: shown only while that layer is on (us.css hides it otherwise).
   const warSel = tb.append('select').attr('id', 'war').attr('title', 'The war shown')

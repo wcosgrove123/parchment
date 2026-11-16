@@ -11,6 +11,7 @@ import { renderOrder } from '../scripts/map.mjs';
 import { prepareData, aliveNB } from '../src/us/model.js';
 import { prepareSlavery, slaveryCount, slaveryLook, statusRow } from '../src/us/slavery.js';
 import { resolveFrame, makeHighlight } from '../src/us/frames.js';
+import { prepareFree, freeOn, freeCensusOn } from '../src/us/freeblack.js';
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const json = (p) => JSON.parse(read(p));
@@ -120,3 +121,45 @@ test('B1 and B2. revolts-1800-1831: four pins, four names, their ids and sources
   assert.ok(s.rivers.some((r) => r.name === 'Mississippi' && r.labeled));
 });
 
+
+// ---------------------------------------------------------------- Map E: free Black population, 1860
+const free = prepareFree(read('data/us/census-free-slave-1790-1860.csv'));
+const anchors = json('data/us/native.json').anchors;
+
+test('the census table: each year\'s states add up to the nation\'s own row (1800 apart: a row the paper misprints)', () => {
+  assert.deepEqual(free.problems, []);
+  for (const c of free.census) {
+    const sum = (k) => c.states.reduce((a, s) => a + s[k], 0);
+    if (c.year === 1800) { assert.notEqual(sum('free'), c.us.free, 'New Hampshire 1800 is left out'); continue; }
+    assert.deepEqual([sum('free'), sum('slave')], [c.us.free, c.us.slave], String(c.year));
+    for (const s of c.states) assert.equal(s.black, s.free + s.slave, `${s.state} ${c.year}`);
+  }
+  assert.equal(freeCensusOn(free, 18600601).year, 1860);
+  assert.equal(freeCensusOn(free, 18600531).year, 1850);
+});
+
+test('E. 1 June 1860: 488,070 free Black people; Maryland first; Virginia takes West Virginia\'s row', () => {
+  const fb = freeOn(free, anchors, aliveNB(data, 18600601), 18600601, { slavery: table, tracker });
+  assert.equal(fb.total, 488070);
+  assert.deepEqual(fb.outside, []);
+  assert.equal(fb.by.slave + fb.by.free + fb.by.elsewhere, 488070);
+  assert.deepEqual([fb.by.slave, fb.by.free, fb.by.elsewhere], [250787, 225224, 12059]);
+  assert.deepEqual(fb.ranked.slice(0, 10).map((u) => u.id), ['md_state', 'va_state', 'pa_state', 'ny_state', 'oh_state', 'nc_state', 'nj_state', 'de_state', 'la_state', 'in_state']);
+  const va = fb.ranked.find((u) => u.id === 'va_state');
+  assert.deepEqual([va.free, va.rows.sort()], [58042, ['Virginia', 'West Virginia']]);
+  assert.equal(fb.ranked.find((u) => u.id === 'dc').free, 11131);
+});
+
+test('E. free-black-1860 renders: ten badges, the key\'s counts, the census on the slip', { skip, timeout: 120000 }, async () => {
+  const s = await render('free-black-1860');
+  assert.deepEqual(s.render.pixels, { width: 1920, height: 1080 });
+  assert.equal(s.resolved.census.year, 1860);
+  assert.equal(s.resolved.census.free_black_people, 488070);
+  assert.equal(s.resolved.census.counts.filter((c) => c.badge).length, 10);
+  assert.equal(s.features.filter((f) => f.free_black?.badge).length, 10, 'all ten are on the sheet');
+  const labels = s.legend.rows.map((r) => r.label);
+  assert.deepEqual(labels.slice(0, 3), ['Free state', 'Slave state', 'Territories']);
+  assert.ok(labels.includes('In slave states: 250,787 (51%)') && labels.includes('In free states: 225,224 (46%)'));
+  assert.match(s.credit, /counts: U\.S\. Census Bureau/);
+  assert.deepEqual([...new Set(s.features.filter((f) => f.look.kind === 'fill').map((f) => f.look.key))].sort(), ['E', 'S', 'T']);
+});

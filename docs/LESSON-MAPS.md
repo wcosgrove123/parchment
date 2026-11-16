@@ -42,7 +42,7 @@ the order.
 | `page` | (the page) | `us`, the North America page; the only one that takes orders for now |
 | `date` | `date=` or `year=` | a day (`1836-06-01`) or a year (`1836`, read as 31 December) |
 | `from` | `from=` | makes a Diff: what changed from this date to `date` |
-| `tracker` | `tracker=` | `nations` (default), `states`, `slavery` (free and slave states, below), `cessions`, `population`, `electoral` |
+| `tracker` | `tracker=` | `nations` (default), `states`, `slavery` (free and slave states, below), `freeblack` (free Black population, below), `cessions`, `population`, `electoral` |
 | `frame` | `frame=` | a frame id (below) or a box `W,S,E,N` in degrees; without one, the whole continent |
 | `highlight` | `highlight=` | ids to light; everything else drops to paper (below) |
 | `annotate.rivers` | `rivers=` | rivers to name, as Natural Earth spells them (`Nueces`, `Rio Grande`, `Sabine`) |
@@ -75,6 +75,15 @@ the District of Columbia and joint or disputed areas stay paper. The key is the 
 territories), so two dates pair side by side. The table is entered for 1820 to 1860 only; outside those years no
 state is given a status and the key says so. The packing slip counts the states by status on the date
 (`resolved.status`) and each polygon carries its row. The rows are TEST ROWS until the owner reviews them.
+
+**Free Black population** (`tracker: freeblack`, 2026-11-16). The same three fills, with a number badge ("MD 83,942")
+on each of the ten states where the census on or before the date counted the most free Black people, and the
+nation's count by where they lived as lines of the key ("In slave states: 250,787 (51%)"). Nothing is shaded by
+amount. Counts: the Census Bureau's Working Paper No. 56, censuses of 1790 to 1860
+(`data/us/census-free-slave-1790-1860.csv`, read from the paper by `scripts/census-wp56-free.mjs`). The paper counts
+each state within its present-day borders, so a row is added onto the polygon of the date that holds it (Virginia in
+1860 takes West Virginia's row). The packing slip lists every polygon's count and the census rows behind it
+(`resolved.census`). Test order: `tests/maps/free-black-1860.json`.
 
 **Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the
 Republic of Texas has a color of its own and the land Mexico still claimed inside it keeps the hatch; the whole
