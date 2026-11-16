@@ -603,7 +603,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     zones.push(...ecBadges.map((b) => b.box));
     const named = electoral ? nbItems.filter((it) => !resultFor(electoral, it.p)?.badge) : fb ? nbItems.filter((it) => !ecBadges.some((b) => b.abbr === (it.p.abbr ?? '').replace(/ Terr$/, '') && fb.badgeOf(it.p))) : nbItems;
     // (a battle frame names its hills and roads, not the state it lies in)
-    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines });
+    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines, near: lesson?.highlight?.none && v.id === 'main' ? (recordLayout?.placed ?? []).filter((p) => p.box && p.kind === 'point').map((p) => p.box) : [] });
     drawBadges(lg, badges);
     drawElectoralBadges(lg, ecBadges);
 
@@ -1513,7 +1513,7 @@ function nbTexts(p, trackerId) {
   return [full];
 }
 
-function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { covered = () => false, nolabel = [], lines = [] } = {}) {
+function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { covered = () => false, nolabel = [], lines = [], near = [] } = {}) {
   const main = v.id === 'main';
   const statusMap = trackerId === 'slavery' || trackerId === 'freeblack';
   const silent = (name) => nolabel.some((r) => new RegExp(r.match, 'i').test(name) && (!r.from || date >= r.from) && (!r.to || date < r.to));
@@ -1588,6 +1588,9 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
           const box = { x: ccx - tw / 2, y: ccy - th / 2, w: tw, h: th };
           if (box.x < bx + 4 || box.x + box.w > bx + bw - 4 || box.y < by + 4 || box.y + box.h > by + bh - 4) continue;
           if (placed.some((z) => overlaps(z, box, 2))) continue;
+          // (on a quiet base a state's two letters beside a place's name read as part of it, "Natchez LA": an
+          // abbreviation keeps well clear of the order's places, or is left off)
+          if (near.length && c.isNB && t.length <= 3 && near.some((z) => overlaps(z, box, 14))) continue;
           // (small caps are measured, not set: keep a few pixels more from an order's route lines)
           if (lines.length && lines.some((s) => polylineHitsRect(s, box, 6))) continue;
           pick = { t, s, box };

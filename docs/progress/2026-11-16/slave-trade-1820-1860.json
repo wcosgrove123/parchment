@@ -479,54 +479,6 @@
     },
     {
       "layer": "newberry",
-      "name": "Louisiana",
-      "local": null,
-      "ids": {
-        "newberry": "la_state",
-        "newberry_version": 1,
-        "also_in_ohm": [
-          {
-            "ohm": 2692918,
-            "url": "https://www.openhistoricalmap.org/relation/2692918",
-            "name": "Louisiana",
-            "start": "1812-08-04",
-            "end": "present",
-            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
-          }
-        ]
-      },
-      "start": "1812-04-30",
-      "end": "present",
-      "end_is": "last day in force",
-      "certainty": "legal",
-      "power": "us",
-      "power_label": "United States",
-      "look": {
-        "kind": "paper",
-        "note": "no fill: border and name only"
-      },
-      "diff_role": null,
-      "lit": false,
-      "lit_by": null,
-      "lit_as_named": false,
-      "labeled": true,
-      "label": "LA",
-      "cut_by_frame": false,
-      "km2": 121112,
-      "source": {
-        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
-        "url": "https://digital.newberry.org/ahcb/",
-        "license": "Newberry terms: any lawful purpose, no fees",
-        "record": {
-          "id": "la_state",
-          "version": 1,
-          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
-          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
-        }
-      }
-    },
-    {
-      "layer": "newberry",
       "name": "Pennsylvania",
       "local": null,
       "ids": {
@@ -1045,6 +997,54 @@
     },
     {
       "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
       "name": "Tennessee",
       "local": null,
       "ids": {
@@ -1357,9 +1357,9 @@
       "dash": "dashed",
       "heads": "chevron",
       "waypoints": [
-        "Q838112",
-        "Q43196",
-        "Q43668",
+        "Q23197",
+        "Q328941",
+        "Q3181116",
         "Q575306",
         "Q16563",
         "Q493787",
