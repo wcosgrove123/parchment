@@ -27,7 +27,10 @@ test('the table: every row is valid, and it is what scripts/underground-rows.mjs
   assert.equal(routes.length, ROUTES.length);
   assert.equal(checked.records.length, buildRows().length);
   for (const r of routes) assert.equal(r.value, 'escape');
-  for (const t of towns) assert.equal(t.value, 'station');
+  for (const t of towns) assert.ok(t.value === 'station' || t.value === 'refuge');
+  assert.equal(towns.filter((t) => t.value === 'refuge').length, 3);
+  // a line no source documents place by place is dotted, never solid or dashed
+  for (const r of routes.filter((x) => x.id.startsWith('ugrr-south-'))) assert.deepEqual([r.certainty, r.grade], ['sphere', 'uncertain'], r.id);
 });
 
 test('every route and town cites a source, is marked a test row, and its source keys are spelled out in the doc', () => {
@@ -47,7 +50,7 @@ test('no coordinate is typed: every waypoint is in the gazetteer under the name 
     const g = gazetteer[q];
     assert.ok(g, `${q} (${name}) is in the gazetteer`);
     const a = first(name), b = g.label.toLowerCase().replace(/^st\. /, 'saint ');
-    const known = { Q1439902: 'fountain city', Q2689037: 'key biscayne', Q514070: 'andros', Q738353: 'heroica matamoros', Q60: 'new york city', Q61: 'washington, d.c.' }[q];
+    const known = { Q1439902: 'fountain city', Q2689037: 'key biscayne', Q514070: 'andros', Q738353: 'heroica matamoros', Q659400: 'wilmington', Q60: 'new york city', Q61: 'washington, d.c.' }[q];
     assert.ok(known ? b === known : b.startsWith(a), `${q} is ${name} in the table and "${g.label}" on Wikidata`);
   }
   for (const t of towns) assert.deepEqual([t.lon, t.lat], [gazetteer[t.where].lon, gazetteer[t.where].lat], `${t.id} stands at its gazetteer coordinate`);
@@ -62,7 +65,7 @@ test('trunks: the roads into Philadelphia share one leg on to New York, and the 
   assert.ok(net.legs.length < routes.reduce((n, r) => n + r.waypoints.length - 1, 0), 'shared legs are drawn once');
   // nothing runs both ways along one road, and no sea waypoint carries a town mark
   for (const l of net.legs) assert.ok(!leg(`${l.b}>${l.a}`), `${l.key} is not also drawn backwards`);
-  for (const t of towns) assert.equal(PLACES[t.where][1], 'town');
+  for (const t of towns.filter((x) => x.value === 'station')) assert.equal(PLACES[t.where][1], 'town');
 });
 
 let exe = null;
@@ -71,7 +74,7 @@ const skip = exe ? false : 'no Chromium-family browser found';
 const inPage = (fn, ...args) => `(${fn.toString()})(${args.map((a) => JSON.stringify(a)).join(',')})`;
 const ready = () => new Promise((ok, no) => { const t = Date.now(); (function w() { if (window.parchment && window.parchment.ready && document.body.classList.contains('ready')) window.parchment.ready.then(ok, no); else if (Date.now() - t > 90000) no('timeout'); else setTimeout(w, 80); })(); });
 const settle = () => new Promise((r) => setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(() => r(true))), 600));
-const shown = () => ({ legs: document.querySelectorAll('.route-network path.route').length, heads: document.querySelectorAll('.route-network path.route[marker-end]').length, towns: document.querySelectorAll('.marks .mark.ink-dot').length,
+const shown = () => ({ legs: document.querySelectorAll('.route-network path.route').length, heads: document.querySelectorAll('.route-network path.route[marker-end]').length, towns: document.querySelectorAll('.marks .mark.ink-dot').length, refuges: document.querySelectorAll('.marks .mark.ink-ring').length,
   names: document.querySelectorAll('.record-labels text.mark-label').length, key: [...document.querySelectorAll('.legend text')].some((t) => /Underground Railroad/.test(t.textContent)),
   button: getComputedStyle(document.querySelector('#underground')).display !== 'none', active: document.querySelector('#underground').classList.contains('active'), address: location.search });
 let kit = null;
@@ -89,6 +92,7 @@ test('the page: the switch shows on the slavery tracker, draws the routes of the
   await page.eval(inPage(settle)); await page.eval(inPage(settle));
   const on = await page.eval(inPage(shown));
   assert.deepEqual([on.active, on.key, /underground=on/.test(on.address)], [true, true, true], JSON.stringify(on));
+  assert.equal(on.refuges, 3);
   assert.ok(on.legs > 60 && on.towns > 80, `1860: ${on.legs} legs, ${on.towns} towns`);
   assert.ok(on.heads >= 8 && on.heads < on.legs / 3, 'heads only where a line ends');
   assert.ok(on.names <= 10, 'at most ten towns are named; the rest are dots with their names on hover');

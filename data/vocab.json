@@ -116,7 +116,8 @@
         "treaty",
         "revolt",
         "market",
-        "station"
+        "station",
+        "refuge"
       ],
       "point_shapes": {
         "port": "steel-circle",
@@ -126,6 +127,7 @@
         "revolt": "rust-diamond",
         "market": "steel-circle",
         "station": "ink-dot",
+        "refuge": "ink-ring",
         "founding": "moss-circle",
         "treaty": "navy-triangle"
       }

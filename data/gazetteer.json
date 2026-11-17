@@ -342,6 +342,12 @@
     "label": "Battle of Gettysburg",
     "fetched": "2026-11-10"
   },
+  "Q33405": {
+    "lon": -92.2881,
+    "lat": 34.7444,
+    "label": "Little Rock",
+    "fetched": "2026-11-17"
+  },
   "Q33486": {
     "lon": -72.685,
     "lat": 41.7633,
@@ -438,6 +444,12 @@
     "label": "Topeka",
     "fetched": "2026-11-17"
   },
+  "Q41087": {
+    "lon": -78.64,
+    "lat": 35.78,
+    "label": "Raleigh",
+    "fetched": "2026-11-17"
+  },
   "Q43196": {
     "lon": -84.5125,
     "lat": 39.1,
@@ -514,6 +526,12 @@
     "lon": -76.2853,
     "lat": 36.8469,
     "label": "Norfolk",
+    "fetched": "2026-11-17"
+  },
+  "Q49241": {
+    "lon": -84.4586,
+    "lat": 38.0497,
+    "label": "Lexington",
     "fetched": "2026-11-17"
   },
   "Q49242": {
@@ -924,6 +942,12 @@
     "label": "Siege of Yorktown",
     "fetched": "2026-11-10"
   },
+  "Q478393": {
+    "lon": -83.7758,
+    "lat": 38.6439,
+    "label": "Maysville",
+    "fetched": "2026-11-17"
+  },
   "Q487315": {
     "lon": -121.8947,
     "lat": 36.6002,
@@ -1121,6 +1145,12 @@
     "lat": 10.4236,
     "label": "Cartagena",
     "fetched": "2026-11-06"
+  },
+  "Q659400": {
+    "lon": -77.9122,
+    "lat": 34.2233,
+    "label": "Wilmington",
+    "fetched": "2026-11-17"
   },
   "Q665723": {
     "lon": -100.6444,
@@ -1740,6 +1770,12 @@
     "label": "Battle of Camden",
     "fetched": "2026-11-10"
   },
+  "Q1544257": {
+    "lon": -76.4518,
+    "lat": 36.6409,
+    "label": "Great Dismal Swamp",
+    "fetched": "2026-11-17"
+  },
   "Q1546173": {
     "lon": -73.3881,
     "lat": 43.8414,
@@ -1943,6 +1979,12 @@
     "lat": -2.8333,
     "label": "Puná Island",
     "fetched": "2026-11-06"
+  },
+  "Q2162020": {
+    "lon": -82.321,
+    "lat": 30.6188,
+    "label": "Okefenokee Swamp",
+    "fetched": "2026-11-17"
   },
   "Q2190013": {
     "lon": -75.8189,
@@ -2603,6 +2645,12 @@
     "lat": 33.1967,
     "label": "Battle of Monck's Corner",
     "fetched": "2026-11-10"
+  },
+  "Q4871874": {
+    "lon": -85.0113,
+    "lat": 29.9382,
+    "label": "Negro Fort",
+    "fetched": "2026-11-17"
   },
   "Q4871916": {
     "lon": -73.4095,

@@ -469,7 +469,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     views.forEach((v, i) => swapIn(v, entry.layers[i], fade));
     // (the live page: a network layer switched on over the tracker, the Underground Railroad's, adds its lines to the key)
     const trunkRoutes = records.routes.filter(isTrunk);
-    const shownLegend = trunkRoutes.length ? { ...entry.legend, legend: [...entry.legend.legend, ...routeLegend(trunkRoutes), ...(records.points.some((p) => p.value === 'station') ? [routesTracker.point_legend.station] : [])] } : entry.legend;
+    const shownLegend = trunkRoutes.length ? { ...entry.legend, legend: [...entry.legend.legend, ...routeLegend(trunkRoutes), ...['station', 'refuge'].filter((k) => records.points.some((p) => p.value === k)).map((k) => routesTracker.point_legend[k])] } : entry.legend;
     legend.set(shownLegend);
     if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
     // (the live page: the Military layer's events, or the clearing of them when the layer goes off)

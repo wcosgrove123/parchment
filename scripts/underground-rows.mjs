@@ -37,6 +37,8 @@ export const PLACES = {
   Q493840: ['Lawrence', 'town'], Q41057: ['Topeka', 'town'], Q286025: ['Nebraska City', 'town'], Q2240032: ['Tabor', 'town'], Q1930350: ['Lewis', 'town'],
   Q39709: ['Des Moines', 'town'], Q1903250: ['Grinnell', 'town'], Q487977: ['Iowa City', 'town'], Q7580831: ['Springdale', 'town'], Q2066047: ['West Liberty', 'town'],
   Q2278195: ['Natchitoches', 'town'], Q970482: ['Nacogdoches', 'town'], Q975: ['San Antonio', 'town'], Q16555: ['Houston', 'town'], Q738353: ['Matamoros', 'town'], Q1856408: ['Piedras Negras', 'town'],
+  Q23197: ['Nashville', 'town'], Q16563: ['Memphis', 'town'], Q43668: ['Louisville', 'town'], Q49241: ['Lexington', 'town'], Q478393: ['Maysville', 'town'],
+  Q41087: ['Raleigh', 'town'], Q33405: ['Little Rock', 'town'], Q659400: ['Wilmington, N.C.', 'town'],
   Q47716: ['Charleston', 'town'], Q549331: ['Fort Mose', 'town'], Q2689037: ['Cape Florida (Key Biscayne)', 'town'], Q514070: ['Andros Island', 'town'],
 };
 
@@ -146,6 +148,24 @@ export const ROUTES = [
   ['ugrr-iowa', 'Across Iowa to Chicago (John Brown, 1859)', 'Q2240032>Q1930350>Q39709>Q1903250>Q487977>Q7580831>Q2066047>Q1297', 1859, 1859, 'exact', 'legal',
     'PBS American Experience, "John Brown\'s Missouri raid" (PBS-BROWN); "John Brown and the Underground Railroad", Stories of Iowa (IOWA-SOI)',
     'Tabor (first week of February 1859), Des Moines, Grinnell (25 February), Iowa City, Springdale, West Liberty (9 March, into a boxcar), Chicago. Lewis is from the Iowa school reader\'s list of towns, not from a dated stop.'],
+  ['ugrr-south-tennessee', 'From Tennessee and Kentucky to the Ohio at Louisville', 'Q16563>Q23197>Q43668>Q1762878', 1826, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826).'],
+  ['ugrr-south-kentucky-ripley', 'From the Kentucky Bluegrass to the Ohio at Ripley', 'Q49241>Q478393>Q2666983', 1822, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822).'],
+  ['ugrr-south-kentucky-cincinnati', 'From the Kentucky Bluegrass to Cincinnati', 'Q49241>Q43196', 1830, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830).'],
+  ['ugrr-south-virginia', 'From North Carolina and Virginia north by land', 'Q41087>Q43421>Q61', 1842, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water" toward Pennsylvania, New York and the Boston area; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Washington road it joins (1842).'],
+  ['ugrr-south-arkansas', 'From Arkansas across Missouri', 'Q33405>Q38022', 1850, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people from Arkansas and Texas might cross Missouri and Kansas and bear east to Indiana or Illinois; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the St. Louis road it joins (1850).'],
+  ['ugrr-south-carolina-sea', 'From the Carolina ports north by sea', 'Q47716>Q659400>Q978032', 1834, 1865, 'uncertain', 'sphere',
+    'NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY)',
+    'A general direction, not a road, added at the owner\'s word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water"; Newby-Alexander lists Charleston and Wilmington, North Carolina, among the principal ports of departure and gives no dated case for either; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor\'s choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the sea road from Savannah it joins (1834).'],
   ['ugrr-louisiana-texas', 'Louisiana to Mexican Texas', 'Q2278195>Q970482>Q975', 1822, 1836, 'exact', 'sphere',
     'Baumgartner, "Freedom Seekers on the Southwestern Frontier", NPS handbook (HB-BAUM); Wikipedia, "Underground Railroad" (WP-UGRR)',
     'A direction, not a road. Nearly a hundred people left western Louisiana in the summer of 1822, across the Sabine (then the border) for Nacogdoches and San Antonio de Béxar. Natchitoches as the line\'s start is the editor\'s choice (WP-UGRR mentions a road from there); the escapes the source dates were from parishes farther south. Ends in 1836, when Texas left Mexico.'],
@@ -161,6 +181,20 @@ export const ROUTES = [
   ['ugrr-cape-florida', 'Cape Florida to the Bahamas', 'Q2689037>Q514070', 1821, 1825, 'circa', 'approximate',
     'Wikipedia, "Saltwater Railroad" (WP-SALT); Baram, "Trail toward liberty", Journal of Florida Studies (BARAM)',
     'From Cape Florida on Key Biscayne across the Gulf Stream to Andros Island (the Red Bays settlement): about 300 Black Seminoles in the early 1820s. The crossing is documented; where on Andros they landed is not in what was read. Sources disagree on how long it ran (to the mid-1820s; "1821-1837").'],
+];
+
+// Places people fled to and stayed, inside the South: a mark of their own (owner, 2026-11-17), not a town on a route.
+// [id, label, where, start, end, grade, certainty, source, note]
+export const REFUGES = [
+  ['ugrr-refuge-great-dismal-swamp', 'Great Dismal Swamp', 'Q1544257', 1700, 1865, 'circa', 'approximate',
+    'Pargas, "Southern Maroon Communities", NPS handbook (HB-PARGAS); Wikipedia, "Great Dismal Swamp maroons" (WP-DISMAL)',
+    'A common destination for freedom seekers, on the Virginia and North Carolina line: people lived there from about 1700 to the 1860s (other studies say 1630 to 1865); "about two thousand" (Aptheker, 1939) to "thousands". Also a way to the harbor at Norfolk (HB-NEWBY). The mark stands at the swamp\'s Wikidata coordinate, not at any settlement.'],
+  ['ugrr-refuge-prospect-bluff', 'Prospect Bluff ("Negro Fort")', 'Q4871874', 1814, 1816, 'exact', 'legal',
+    'Wikipedia, "Negro Fort" (WP-NEGROFORT); Baram, "Trail toward liberty" (BARAM)',
+    'A fort on the Apalachicola in Spanish Florida, built from May 1814 and destroyed on 27 July 1816 with about 330 people in it; survivors went to the Suwannee, Tampa Bay and Angola on the Manatee River, some to the Bahamas.'],
+  ['ugrr-refuge-okefenokee', 'Okefenokee Swamp', 'Q2162020', 1700, 1865, 'uncertain', 'sphere',
+    'Pargas (HB-PARGAS); NPS theme study (NPS-THEME); the NPS map\'s own labels (NPS-MAP)',
+    'Named as a maroon refuge by Pargas and on the NPS map; no source read gives it a date or a number. The years are the Great Dismal Swamp\'s, borrowed so the mark can be drawn: uncertain.'],
 ];
 
 // Towns that get a mark: every route waypoint that is a town. A town's years are the earliest start and the latest
@@ -186,6 +220,9 @@ export function buildRows() {
     const slug = PLACES[q][0].toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     rows.push([`ugrr-town-${slug}-${q.toLowerCase()}`, 'apush', 5, '', '', 'MIG', 'routes', 'point', q, '', '', t.start, t.end, 'circa', 'station', t.certain ? 'legal' : 'approximate', PLACES[q][0],
       [...t.sources].join('; '), '', '', `${TEST} A place on ${t.routes.length > 1 ? 'the routes' : 'the route'} ${t.routes.join(', ')}: what the sources say of it is in ${t.routes.length > 1 ? 'their notes' : 'its note'}. Its years are theirs.`]);
+  }
+  for (const [id, label, where, start, end, grade, certainty, source, note] of REFUGES) {
+    rows.push([id, 'apush', 5, '', '', 'MIG', 'routes', 'point', where, '', '', start, end, grade, 'refuge', certainty, label, source, '', '', `${TEST} ${note}`]);
   }
   return rows;
 }

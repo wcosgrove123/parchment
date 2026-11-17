@@ -39,6 +39,14 @@ research on the towns it went through"). This file is the research behind every 
   are documented and the way between is not, or the chain rests on later recollections. Dotted: a direction only (no
   source names any place on the way). Width is the same everywhere: **no source gives numbers by corridor** good enough
   to set widths (Part 3, section C.4), so the map does not use width the way National Geographic's does.
+- **The South (added at the owner's word, 2026-11-17: "why is there nothing in the south?").** Six dotted lines,
+  `ugrr-south-…`, draw the general pattern the NPS study states in words (north by land or water east of the
+  mountains; across the Ohio out of Virginia, Kentucky and Tennessee; from Arkansas across Missouri). They are
+  directions, not documented routes: no source names a place on them, their towns stand for regions, and each comes
+  onto the map with the documented road it joins, having no year of its own. No line starts in Mississippi, Alabama or
+  inland Georgia: the same sources say very few people escaped from there, and most who fled in Georgia and Florida
+  went south. Three open rings mark places people fled to and stayed (the Great Dismal Swamp, the Okefenokee,
+  Prospect Bluff); the Okefenokee's years are borrowed and marked uncertain.
 - **Editor's choices, to check.** Where a source gives a region and not a town, a town stands for it and the row's note
   says so: Natchitoches, Houston and San Antonio (the Mexico lines), Charleston (Carolina), Urbana (the belt of
   settlements north of Cincinnati), Cassopolis (Cass County), and every waypoint at sea.
@@ -278,6 +286,48 @@ research on the towns it went through"). This file is the research behind every 
 - **Source:** PBS American Experience, "John Brown's Missouri raid" (PBS-BROWN); "John Brown and the Underground Railroad", Stories of Iowa (IOWA-SOI)
 - **Note:** Tabor (first week of February 1859), Des Moines, Grinnell (25 February), Iowa City, Springdale, West Liberty (9 March, into a boxcar), Chicago. Lewis is from the Iowa school reader's list of towns, not from a dated stop.
 
+### `ugrr-south-tennessee`: From Tennessee and Kentucky to the Ohio at Louisville
+
+- **Places, in order:** Memphis `Q16563` → Nashville `Q23197` → Louisville `Q43668` → New Albany `Q1762878`
+- **On the map from** 1826; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826).
+
+### `ugrr-south-kentucky-ripley`: From the Kentucky Bluegrass to the Ohio at Ripley
+
+- **Places, in order:** Lexington `Q49241` → Maysville `Q478393` → Ripley `Q2666983`
+- **On the map from** 1822; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822).
+
+### `ugrr-south-kentucky-cincinnati`: From the Kentucky Bluegrass to Cincinnati
+
+- **Places, in order:** Lexington `Q49241` → Cincinnati `Q43196`
+- **On the map from** 1830; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830).
+
+### `ugrr-south-virginia`: From North Carolina and Virginia north by land
+
+- **Places, in order:** Raleigh `Q41087` → Richmond `Q43421` → Washington `Q61`
+- **On the map from** 1842; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water" toward Pennsylvania, New York and the Boston area; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Washington road it joins (1842).
+
+### `ugrr-south-arkansas`: From Arkansas across Missouri
+
+- **Places, in order:** Little Rock `Q33405` → St. Louis `Q38022`
+- **On the map from** 1850; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people from Arkansas and Texas might cross Missouri and Kansas and bear east to Indiana or Illinois; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the St. Louis road it joins (1850).
+
+### `ugrr-south-carolina-sea`: From the Carolina ports north by sea
+
+- **Places, in order:** Charleston `Q47716` → Wilmington, N.C. `Q659400` → Cape Hatteras (sea waypoint, not a stop) `Q978032`
+- **On the map from** 1834; last documented 1865. **Line:** dotted (a direction only).
+- **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY)
+- **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water"; Newby-Alexander lists Charleston and Wilmington, North Carolina, among the principal ports of departure and gives no dated case for either; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the sea road from Savannah it joins (1834).
+
 ### `ugrr-louisiana-texas`: Louisiana to Mexican Texas
 
 - **Places, in order:** Natchitoches `Q2278195` → Nacogdoches `Q970482` → San Antonio `Q975`
@@ -330,8 +380,7 @@ research on the towns it went through"). This file is the research behind every 
 | West Liberty → Tipton → DeWitt → Clinton, Iowa (IOWA-SOI) | An undated list in a school reader. |
 | Schoolcraft and Battle Creek, Michigan | Documented houses (NPS-PLACES, HB-JOHNSON), but no source read puts them in a chain. |
 | Black Seminoles to Coahuila (1849 to 1852); New Orleans → Veracruz by sea (1831) | No gazetteer id found for El Nacimiento; one sea case. |
-| Prospect Bluff ("Negro Fort", 1814 to 1816), Angola, Seminole country | Destinations with no origin named in the sources; a line needs two ends. |
-| The Great Dismal Swamp and other maroon refuges | A destination, not a corridor (HB-PARGAS). It could be a mark of its own; the grammar has none yet. |
+| Angola on the Manatee River, Seminole country, the bayous of southern Louisiana, the Everglades | Refuges with no gazetteer place or no date in what was read. Prospect Bluff, the Great Dismal Swamp and the Okefenokee are on the map as refuge marks (below). |
 | California, the Pacific, Hawaii | The NPS documents events (Archy Lee, 1858), not a route with places and dates. |
 | Flight to Union lines, 1861 to 1865 (Fort Monroe, Port Royal, Corinth and others) | The NPS counts it as part of the Underground Railroad (HB-MANNING). These are places people fled *to* from all around, not routes; they would be marks that appear from 1861. The owner's to ask for. |
 | Haiti, Cuba, Jamaica | The NPS map draws lines there; no source read documents an escape route (what is documented is the emigration of free people to Haiti in the 1820s). |

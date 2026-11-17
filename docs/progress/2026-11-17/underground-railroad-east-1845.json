@@ -107,9 +107,9 @@
     "underground": {
       "table": "data/us/underground-railroad.csv",
       "rule": "a route is drawn from the first year its row documents and stays on the map to the end of 1865 (its last documented year is its end); routes that share a leg are drawn as one line there",
-      "routes_shown": 29,
-      "towns_shown": 64,
-      "routes_in_table": 38,
+      "routes_shown": 34,
+      "towns_shown": 75,
+      "routes_in_table": 44,
       "not_yet_begun": [
         {
           "record": "ugrr-tubman-delmarva",
@@ -150,6 +150,11 @@
           "record": "ugrr-iowa",
           "label": "Across Iowa to Chicago (John Brown, 1859)",
           "start": 1859
+        },
+        {
+          "record": "ugrr-south-arkansas",
+          "label": "From Arkansas across Missouri",
+          "start": 1850
         },
         {
           "record": "ugrr-texas-piedras-negras",
@@ -296,6 +301,18 @@
         "stroke": null,
         "dash": null,
         "shape": "ink-dot",
+        "heads": null,
+        "role": "point type"
+      },
+      {
+        "label": "Maroon refuge: a place people fled to and stayed",
+        "swatch": "shape",
+        "key": null,
+        "fill": "#f7f5ef",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": "ink-ring",
         "heads": null,
         "role": "point type"
       }
@@ -1091,7 +1108,7 @@
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "North Carolina",
+      "label": "NC",
       "cut_by_frame": false,
       "km2": 127916,
       "source": {
@@ -1847,7 +1864,7 @@
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "Maryland",
+      "label": "MD",
       "cut_by_frame": false,
       "km2": 26004,
       "source": {
@@ -2698,6 +2715,23 @@
       "dropped": "ceiling"
     },
     {
+      "record": "ugrr-town-richmond-q43421",
+      "asked": null,
+      "label": "Richmond",
+      "value": "station",
+      "where": "Q43421",
+      "lon": -77.4367,
+      "lat": 37.5408,
+      "start": "1842",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Newby-Alexander (HB-NEWBY); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
       "record": "ugrr-town-new-bedford-q49147",
       "asked": null,
       "label": "New Bedford",
@@ -2757,10 +2791,10 @@
       "lon": -77.0367,
       "lat": 38.895,
       "start": "1842",
-      "end": "1857",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
-      "source": "Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
+      "source": "Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
       "labeled": false,
       "dropped": "ceiling"
@@ -2944,10 +2978,10 @@
       "lon": -83.8411,
       "lat": 38.7394,
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
-      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN)",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
       "labeled": false,
       "dropped": "ceiling"
@@ -3012,10 +3046,10 @@
       "lon": -84.5125,
       "lat": 39.1,
       "start": "1826",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
-      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
       "labeled": true,
       "dropped": null
@@ -3114,10 +3148,10 @@
       "lon": -85.8214,
       "lat": 38.3019,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
-      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
       "labeled": false,
       "dropped": "ceiling"
@@ -3310,6 +3344,142 @@
       "dropped": null
     },
     {
+      "record": "ugrr-town-memphis-q16563",
+      "asked": null,
+      "label": "Memphis",
+      "value": "station",
+      "where": "Q16563",
+      "lon": -90.0519,
+      "lat": 35.1461,
+      "start": "1826",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-nashville-q23197",
+      "asked": null,
+      "label": "Nashville",
+      "value": "station",
+      "where": "Q23197",
+      "lon": -86.7744,
+      "lat": 36.1622,
+      "start": "1826",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-louisville-q43668",
+      "asked": null,
+      "label": "Louisville",
+      "value": "station",
+      "where": "Q43668",
+      "lon": -85.7514,
+      "lat": 38.2561,
+      "start": "1826",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-lexington-q49241",
+      "asked": null,
+      "label": "Lexington",
+      "value": "station",
+      "where": "Q49241",
+      "lon": -84.4586,
+      "lat": 38.0497,
+      "start": "1822",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-maysville-q478393",
+      "asked": null,
+      "label": "Maysville",
+      "value": "station",
+      "where": "Q478393",
+      "lon": -83.7758,
+      "lat": 38.6439,
+      "start": "1822",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-raleigh-q41087",
+      "asked": null,
+      "label": "Raleigh",
+      "value": "station",
+      "where": "Q41087",
+      "lon": -78.64,
+      "lat": 35.78,
+      "start": "1842",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-charleston-q47716",
+      "asked": null,
+      "label": "Charleston",
+      "value": "station",
+      "where": "Q47716",
+      "lon": -79.9319,
+      "lat": 32.7833,
+      "start": "1687",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY); NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-wilmington-n-c-q659400",
+      "asked": null,
+      "label": "Wilmington, N.C.",
+      "value": "station",
+      "where": "Q659400",
+      "lon": -77.9122,
+      "lat": 34.2233,
+      "start": "1834",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
       "record": "ugrr-town-natchitoches-q2278195",
       "asked": null,
       "label": "Natchitoches",
@@ -3395,23 +3565,6 @@
       "dropped": "ceiling"
     },
     {
-      "record": "ugrr-town-charleston-q47716",
-      "asked": null,
-      "label": "Charleston",
-      "value": "station",
-      "where": "Q47716",
-      "lon": -79.9319,
-      "lat": 32.7833,
-      "start": "1687",
-      "end": "1763",
-      "grade": "circa",
-      "certainty": "approximate",
-      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
-      "qc_status": null,
-      "labeled": true,
-      "dropped": null
-    },
-    {
       "record": "ugrr-town-fort-mose-q549331",
       "asked": null,
       "label": "Fort Mose",
@@ -3461,6 +3614,57 @@
       "qc_status": null,
       "labeled": true,
       "dropped": null
+    },
+    {
+      "record": "ugrr-refuge-great-dismal-swamp",
+      "asked": null,
+      "label": "Great Dismal Swamp",
+      "value": "refuge",
+      "where": "Q1544257",
+      "lon": -76.4518,
+      "lat": 36.6409,
+      "start": "1700",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Pargas, \"Southern Maroon Communities\", NPS handbook (HB-PARGAS); Wikipedia, \"Great Dismal Swamp maroons\" (WP-DISMAL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-refuge-prospect-bluff",
+      "asked": null,
+      "label": "Prospect Bluff (\"Negro Fort\")",
+      "value": "refuge",
+      "where": "Q4871874",
+      "lon": -85.0113,
+      "lat": 29.9382,
+      "start": "1814",
+      "end": "1816",
+      "grade": "exact",
+      "certainty": "legal",
+      "source": "Wikipedia, \"Negro Fort\" (WP-NEGROFORT); Baram, \"Trail toward liberty\" (BARAM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-refuge-okefenokee",
+      "asked": null,
+      "label": "Okefenokee Swamp",
+      "value": "refuge",
+      "where": "Q2162020",
+      "lon": -82.321,
+      "lat": 30.6188,
+      "start": "1700",
+      "end": "1865",
+      "grade": "uncertain",
+      "certainty": "sphere",
+      "source": "Pargas (HB-PARGAS); NPS theme study (NPS-THEME); the NPS map's own labels (NPS-MAP)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
     }
   ],
   "routes": [
@@ -4558,6 +4762,206 @@
       ]
     },
     {
+      "record": "ugrr-south-tennessee",
+      "label": "From Tennessee and Kentucky to the Ohio at Louisville",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q16563",
+        "Q23197",
+        "Q43668",
+        "Q1762878"
+      ],
+      "start": "1826",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Memphis",
+        "Nashville",
+        "Louisville",
+        "New Albany"
+      ],
+      "grade": "uncertain",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826). Places, in order: Memphis, Nashville, Louisville, New Albany.",
+      "legs": [
+        {
+          "leg": "Q16563>Q23197",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q23197>Q43668",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q43668>Q1762878",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-south-kentucky-ripley",
+      "label": "From the Kentucky Bluegrass to the Ohio at Ripley",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q49241",
+        "Q478393",
+        "Q2666983"
+      ],
+      "start": "1822",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Lexington",
+        "Maysville",
+        "Ripley"
+      ],
+      "grade": "uncertain",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822). Places, in order: Lexington, Maysville, Ripley.",
+      "legs": [
+        {
+          "leg": "Q49241>Q478393",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q478393>Q2666983",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-south-kentucky-cincinnati",
+      "label": "From the Kentucky Bluegrass to Cincinnati",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q49241",
+        "Q43196"
+      ],
+      "start": "1830",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Lexington",
+        "Cincinnati"
+      ],
+      "grade": "uncertain",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830). Places, in order: Lexington, Cincinnati.",
+      "legs": [
+        {
+          "leg": "Q49241>Q43196",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-south-virginia",
+      "label": "From North Carolina and Virginia north by land",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q41087",
+        "Q43421",
+        "Q61"
+      ],
+      "start": "1842",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Raleigh",
+        "Richmond",
+        "Washington, D.C."
+      ],
+      "grade": "uncertain",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go \"directly north by land or water\" toward Pennsylvania, New York and the Boston area; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Washington road it joins (1842). Places, in order: Raleigh, Richmond, Washington.",
+      "legs": [
+        {
+          "leg": "Q41087>Q43421",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q43421>Q61",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-south-carolina-sea",
+      "label": "From the Carolina ports north by sea",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q47716",
+        "Q659400",
+        "Q978032"
+      ],
+      "start": "1834",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Charleston",
+        "Wilmington",
+        "Cape Hatteras"
+      ],
+      "grade": "uncertain",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go \"directly north by land or water\"; Newby-Alexander lists Charleston and Wilmington, North Carolina, among the principal ports of departure and gives no dated case for either; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the sea road from Savannah it joins (1834). Places, in order: Charleston, Wilmington, N.C., Cape Hatteras.",
+      "legs": [
+        {
+          "leg": "Q47716>Q659400",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q659400>Q978032",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
       "record": "ugrr-louisiana-texas",
       "label": "Louisiana to Mexican Texas",
       "kind": "arrow",
@@ -4707,10 +5111,10 @@
       "y1": 1048
     },
     "legend": {
-      "x": 1526,
-      "y": 774,
-      "w": 340,
-      "h": 252,
+      "x": 1477,
+      "y": 752,
+      "w": 389,
+      "h": 274,
       "inside": true,
       "corner": "bottom-right"
     },
@@ -4730,10 +5134,10 @@
     "Savannah (1834) predates the map's date, 1 June 1845",
     "Natchitoches (1822) predates the map's date, 1 June 1845",
     "Nacogdoches (1822) predates the map's date, 1 June 1845",
-    "Charleston (1687) predates the map's date, 1 June 1845",
     "Fort Mose (1687) predates the map's date, 1 June 1845",
     "Cape Florida (Key Biscayne) (1821) predates the map's date, 1 June 1845: the land it stands on was Florida Unorganized Federal Territory on its own day and is drawn as Florida",
     "Andros Island (1821) predates the map's date, 1 June 1845",
+    "Prospect Bluff (\"Negro Fort\") (1814) predates the map's date, 1 June 1845",
     "place Wilmington (ugrr-town-wilmington-q174224): name dropped (the ten-name limit)",
     "place Philadelphia (ugrr-town-philadelphia-q1345): name dropped (the ten-name limit)",
     "place New York (ugrr-town-new-york-q60): name dropped (the ten-name limit)",
@@ -4752,6 +5156,7 @@
     "place St. Albans (ugrr-town-st-albans-q1787559): name dropped (the ten-name limit)",
     "place Montreal (ugrr-town-montreal-q340): name dropped (the ten-name limit)",
     "place Norfolk (ugrr-town-norfolk-q49231): name dropped (the ten-name limit)",
+    "place Richmond (ugrr-town-richmond-q43421): name dropped (the ten-name limit)",
     "place New Bedford (ugrr-town-new-bedford-q49147): name dropped (the ten-name limit)",
     "place Savannah (ugrr-town-savannah-q83813): name dropped (the ten-name limit)",
     "place Washington (ugrr-town-washington-q61): name dropped (the ten-name limit)",
@@ -4782,14 +5187,24 @@
     "place Galesburg (ugrr-town-galesburg-q782574): name dropped (the ten-name limit)",
     "place Princeton (ugrr-town-princeton-q574878): name dropped (the ten-name limit)",
     "place Ottawa (ugrr-town-ottawa-q576209): name dropped (the ten-name limit)",
+    "place Memphis (ugrr-town-memphis-q16563): name dropped (the ten-name limit)",
+    "place Nashville (ugrr-town-nashville-q23197): name dropped (the ten-name limit)",
+    "place Louisville (ugrr-town-louisville-q43668): name dropped (the ten-name limit)",
+    "place Lexington (ugrr-town-lexington-q49241): name dropped (the ten-name limit)",
+    "place Maysville (ugrr-town-maysville-q478393): name dropped (the ten-name limit)",
+    "place Raleigh (ugrr-town-raleigh-q41087): name dropped (the ten-name limit)",
+    "place Wilmington, N.C. (ugrr-town-wilmington-n-c-q659400): name dropped (the ten-name limit)",
     "place Natchitoches (ugrr-town-natchitoches-q2278195): name dropped (the ten-name limit)",
     "place Nacogdoches (ugrr-town-nacogdoches-q970482): name dropped (the ten-name limit)",
     "place San Antonio (ugrr-town-san-antonio-q975): name dropped (the ten-name limit)",
     "place Houston (ugrr-town-houston-q16555): name dropped (the ten-name limit)",
     "place Matamoros (ugrr-town-matamoros-q738353): name dropped (the ten-name limit)",
-    "place Fort Mose (ugrr-town-fort-mose-q549331): name dropped (the ten-name limit)"
+    "place Fort Mose (ugrr-town-fort-mose-q549331): name dropped (the ten-name limit)",
+    "place Great Dismal Swamp (ugrr-refuge-great-dismal-swamp): name dropped (the ten-name limit)",
+    "place Prospect Bluff (\"Negro Fort\") (ugrr-refuge-prospect-bluff): name dropped (the ten-name limit)",
+    "place Okefenokee Swamp (ugrr-refuge-okefenokee): name dropped (the ten-name limit)"
   ],
-  "alt_text": "Parchment map, 1 June 1845, free and slave states, framed on The East, titled \"The Underground Railroad, to 1845\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Rupert's Land, United Province of Canada, Texas Republic, Iowa Territory, Wisconsin Territory, Missouri, Indian Territory, Virginia, Georgia, Michigan, Florida and Illinois. Marked places: Wilmington (1822 to 1861), Philadelphia (1822 to 1861), New York (1834 to 1861), Albany (1838 to 1861), Syracuse (1842 to 1861), Rochester (1842 to 1861), Buffalo (1842 to 1861), Niagara Falls (1842 to 1861), St. Catharines (1842 to 1861), Hartford (1838 to 1842), Springfield (1838 to 1842), Troy (1838 to 1856), Bennington (1838 to 1856), Rutland (1838 to 1856), Ferrisburgh (1838 to 1856), Burlington (1838 to 1856), St. Albans (1838 to 1856), Montreal (1838 to 1856), Norfolk (1842 to 1857), New Bedford (1842 to 1857), Boston (1842 to 1857), Savannah (1834), Washington (1842 to 1857), Baltimore (1842 to 1857), York (1838 to 1858), Columbia (1838 to 1858), Uniontown (1841 to 1847), Pittsburgh (1841 to 1847), Cleveland (1834 to 1861), Williamstown (1837 to 1847), Marietta (1837 to 1847), Chesterhill (1837 to 1847), Zanesville (1837 to 1847), Ripley (1822 to 1861), Sardinia (1822 to 1861), Urbana (1830 to 1861), Sandusky (1830 to 1861), Cincinnati (1826 to 1861), Lebanon (1830 to 1861), Amherstburg (1834 to 1861), Port Stanley (1834 to 1861), Madison (1826 to 1847), Newport (Fountain City) (1826 to 1847), New Albany (1826 to 1847), Canton (1826 to 1847), Azalia (1826 to 1847), Carthage (1826 to 1847), Cassopolis (1826 to 1847), Detroit (1826 to 1861), Windsor (1833 to 1861), Quincy (1842 to 1859), Galesburg (1842 to 1859), Princeton (1842 to 1859), Ottawa (1842 to 1859), Chicago (1842 to 1859), Natchitoches (1822 to 1836), Nacogdoches (1822 to 1836), San Antonio (1822 to 1865), Houston (1837 to 1865), Matamoros (1837 to 1865), Charleston (1687 to 1763), Fort Mose (1687 to 1763), Cape Florida (Key Biscayne) (1821 to 1825) and Andros Island (1821 to 1825). Routes: Wilmington to Philadelphia (Thomas Garrett), escape route (the underground railroad) with arrowheads, Philadelphia to New York, escape route (the underground railroad) with arrowheads, New York to Canada by Albany, Syracuse and Niagara, escape route (the underground railroad) with arrowheads, New York into New England, escape route (the underground railroad) with arrowheads, Albany to Canada through Vermont, escape route (the underground railroad) with arrowheads, By sea from Norfolk to New Bedford, escape route (the underground railroad) with arrowheads, By sea from Norfolk to Boston, escape route (the underground railroad) with arrowheads, By sea from Savannah to New York, escape route (the underground railroad) with arrowheads, Washington and Baltimore to Philadelphia, escape route (the underground railroad) with arrowheads, Across the Susquehanna at Columbia, escape route (the underground railroad) with arrowheads, The Monongahela valley to Pittsburgh and Lake Erie, escape route (the underground railroad) with arrowheads, Across the Ohio at Marietta, escape route (the underground railroad) with arrowheads, Zanesville to the Western Reserve, escape route (the underground railroad) with arrowheads, Across the Ohio at Ripley, escape route (the underground railroad) with arrowheads, Sardinia to Lake Erie, escape route (the underground railroad) with arrowheads, Cincinnati to Lake Erie, escape route (the underground railroad) with arrowheads, Across Lake Erie from Sandusky, escape route (the underground railroad) with arrowheads, Across Lake Erie from Cleveland, escape route (the underground railroad) with arrowheads, Across the Ohio at Madison, escape route (the underground railroad) with arrowheads, Across the Ohio at New Albany, escape route (the underground railroad) with arrowheads, Cincinnati to Newport, escape route (the underground railroad) with arrowheads, Newport to Michigan, escape route (the underground railroad) with arrowheads, Across the Detroit River, escape route (the underground railroad) with arrowheads, Quincy to Chicago, escape route (the underground railroad) with arrowheads, Chicago to Detroit, escape route (the underground railroad) with arrowheads, Louisiana to Mexican Texas, escape route (the underground railroad) with arrowheads, Texas to Matamoros, escape route (the underground railroad) with arrowheads, Carolina to Spanish Florida, escape route (the underground railroad) with arrowheads and Cape Florida to the Bahamas, escape route (the underground railroad) with arrowheads.",
+  "alt_text": "Parchment map, 1 June 1845, free and slave states, framed on The East, titled \"The Underground Railroad, to 1845\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Rupert's Land, United Province of Canada, Texas Republic, Iowa Territory, Wisconsin Territory, Missouri, Indian Territory, Virginia, Georgia, Michigan, Florida and Illinois. Marked places: Wilmington (1822 to 1861), Philadelphia (1822 to 1861), New York (1834 to 1861), Albany (1838 to 1861), Syracuse (1842 to 1861), Rochester (1842 to 1861), Buffalo (1842 to 1861), Niagara Falls (1842 to 1861), St. Catharines (1842 to 1861), Hartford (1838 to 1842), Springfield (1838 to 1842), Troy (1838 to 1856), Bennington (1838 to 1856), Rutland (1838 to 1856), Ferrisburgh (1838 to 1856), Burlington (1838 to 1856), St. Albans (1838 to 1856), Montreal (1838 to 1856), Norfolk (1842 to 1857), Richmond (1842 to 1865), New Bedford (1842 to 1857), Boston (1842 to 1857), Savannah (1834), Washington (1842 to 1865), Baltimore (1842 to 1857), York (1838 to 1858), Columbia (1838 to 1858), Uniontown (1841 to 1847), Pittsburgh (1841 to 1847), Cleveland (1834 to 1861), Williamstown (1837 to 1847), Marietta (1837 to 1847), Chesterhill (1837 to 1847), Zanesville (1837 to 1847), Ripley (1822 to 1865), Sardinia (1822 to 1861), Urbana (1830 to 1861), Sandusky (1830 to 1861), Cincinnati (1826 to 1865), Lebanon (1830 to 1861), Amherstburg (1834 to 1861), Port Stanley (1834 to 1861), Madison (1826 to 1847), Newport (Fountain City) (1826 to 1847), New Albany (1826 to 1865), Canton (1826 to 1847), Azalia (1826 to 1847), Carthage (1826 to 1847), Cassopolis (1826 to 1847), Detroit (1826 to 1861), Windsor (1833 to 1861), Quincy (1842 to 1859), Galesburg (1842 to 1859), Princeton (1842 to 1859), Ottawa (1842 to 1859), Chicago (1842 to 1859), Memphis (1826 to 1865), Nashville (1826 to 1865), Louisville (1826 to 1865), Lexington (1822 to 1865), Maysville (1822 to 1865), Raleigh (1842 to 1865), Charleston (1687 to 1865), Wilmington, N.C. (1834 to 1865), Natchitoches (1822 to 1836), Nacogdoches (1822 to 1836), San Antonio (1822 to 1865), Houston (1837 to 1865), Matamoros (1837 to 1865), Fort Mose (1687 to 1763), Cape Florida (Key Biscayne) (1821 to 1825), Andros Island (1821 to 1825), Great Dismal Swamp (1700 to 1865), Prospect Bluff (\"Negro Fort\") (1814 to 1816) and Okefenokee Swamp (1700 to 1865). Routes: Wilmington to Philadelphia (Thomas Garrett), escape route (the underground railroad) with arrowheads, Philadelphia to New York, escape route (the underground railroad) with arrowheads, New York to Canada by Albany, Syracuse and Niagara, escape route (the underground railroad) with arrowheads, New York into New England, escape route (the underground railroad) with arrowheads, Albany to Canada through Vermont, escape route (the underground railroad) with arrowheads, By sea from Norfolk to New Bedford, escape route (the underground railroad) with arrowheads, By sea from Norfolk to Boston, escape route (the underground railroad) with arrowheads, By sea from Savannah to New York, escape route (the underground railroad) with arrowheads, Washington and Baltimore to Philadelphia, escape route (the underground railroad) with arrowheads, Across the Susquehanna at Columbia, escape route (the underground railroad) with arrowheads, The Monongahela valley to Pittsburgh and Lake Erie, escape route (the underground railroad) with arrowheads, Across the Ohio at Marietta, escape route (the underground railroad) with arrowheads, Zanesville to the Western Reserve, escape route (the underground railroad) with arrowheads, Across the Ohio at Ripley, escape route (the underground railroad) with arrowheads, Sardinia to Lake Erie, escape route (the underground railroad) with arrowheads, Cincinnati to Lake Erie, escape route (the underground railroad) with arrowheads, Across Lake Erie from Sandusky, escape route (the underground railroad) with arrowheads, Across Lake Erie from Cleveland, escape route (the underground railroad) with arrowheads, Across the Ohio at Madison, escape route (the underground railroad) with arrowheads, Across the Ohio at New Albany, escape route (the underground railroad) with arrowheads, Cincinnati to Newport, escape route (the underground railroad) with arrowheads, Newport to Michigan, escape route (the underground railroad) with arrowheads, Across the Detroit River, escape route (the underground railroad) with arrowheads, Quincy to Chicago, escape route (the underground railroad) with arrowheads, Chicago to Detroit, escape route (the underground railroad) with arrowheads, From Tennessee and Kentucky to the Ohio at Louisville, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to the Ohio at Ripley, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to Cincinnati, escape route (the underground railroad) with arrowheads, From North Carolina and Virginia north by land, escape route (the underground railroad) with arrowheads, From the Carolina ports north by sea, escape route (the underground railroad) with arrowheads, Louisiana to Mexican Texas, escape route (the underground railroad) with arrowheads, Texas to Matamoros, escape route (the underground railroad) with arrowheads, Carolina to Spanish Florida, escape route (the underground railroad) with arrowheads and Cape Florida to the Bahamas, escape route (the underground railroad) with arrowheads.",
   "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); places: the Parchment record table, coordinates from Wikidata",
   "render": {
     "by": "scripts/map.mjs",

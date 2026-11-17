@@ -139,6 +139,8 @@ export const SHAPES = {
   'steel-circle': 'M0,-4.5A4.5,4.5 0 1,1 0,4.5A4.5,4.5 0 1,1 0,-4.5Z',
   // a town on a route (proposed 2026-11-17 for the Underground Railroad; the owner's to confirm): a small ink dot
   'ink-dot': 'M0,-3.2A3.2,3.2 0 1,1 0,3.2A3.2,3.2 0 1,1 0,-3.2Z',
+  // a maroon refuge (owner, 2026-11-17): an open ink ring, a place people fled to and stayed
+  'ink-ring': 'M0,-6A6,6 0 1,1 0,6A6,6 0 1,1 0,-6Z',
   'navy-square': 'M-6,-6H6V6H-6Z',
   'navy-triangle': 'M0,-7L7,6H-7Z',
   circle: 'M0,-6A6,6 0 1,1 0,6A6,6 0 1,1 0,-6Z',

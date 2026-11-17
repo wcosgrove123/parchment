@@ -16,6 +16,7 @@
     "revolt": { "swatch": "shape", "shape": "rust-diamond", "label": "Revolt or conspiracy" },
     "market": { "swatch": "shape", "shape": "steel-circle", "label": "Slave market" },
     "station": { "swatch": "shape", "shape": "ink-dot", "label": "Town on a route" },
+    "refuge": { "swatch": "shape", "shape": "ink-ring", "label": "Maroon refuge: a place people fled to and stayed" },
     "treaty": { "swatch": "shape", "shape": "navy-triangle", "label": "Treaty" }
   }
 }
