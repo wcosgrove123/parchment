@@ -103,6 +103,7 @@
         "voyage",
         "migration",
         "forced-migration",
+        "escape",
         "military",
         "carrier"
       ],
@@ -114,7 +115,8 @@
         "founding",
         "treaty",
         "revolt",
-        "market"
+        "market",
+        "station"
       ],
       "point_shapes": {
         "port": "steel-circle",
@@ -123,6 +125,7 @@
         "siege": "rust-diamond",
         "revolt": "rust-diamond",
         "market": "steel-circle",
+        "station": "ink-dot",
         "founding": "moss-circle",
         "treaty": "navy-triangle"
       }

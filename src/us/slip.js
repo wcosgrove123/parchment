@@ -127,7 +127,7 @@ function toHex(c) {
   return `#${[m[1], m[2], m[3]].map((x) => Number(x).toString(16).padStart(2, '0')).join('')}`;
 }
 
-export async function buildSlip({ atlas, data, state, stage, powers, trackers, params, sheet, frame, projectionMode, lesson, records, problems, loadJSON, ec, military = null }) {
+export async function buildSlip({ atlas, data, state, stage, powers, trackers, params, sheet, frame, projectionMode, lesson, records, problems, loadJSON, ec, military = null, underground = null }) {
   const cur = atlas.current ?? {};
   const tags = (await loadJSON('data/us/ohm-sources.json').catch(() => null))?.relations ?? {};
   const root = getComputedStyle(document.documentElement);
@@ -164,6 +164,10 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     records_file: records?.file ?? null,
     // The slavery-status tracker: the table, the span it speaks for, and the count of states by status on the date.
     status: (state.tracker === 'slavery' || state.tracker === 'freeblack') && data.slavery ? { table: data.slavery.file, coverage: (tracker.coverage ?? []).map((d) => isoDate(d)), covered: covered(tracker, date), ...slaveryCount(data.slavery, tracker, aliveNB(data, date), date), note: 'counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper' } : null,
+    // The Underground Railroad (owner, 2026-11-17): the table, the rule for which routes show, and the routes not on the map of this date.
+    underground: underground ? { table: underground.file, rule: 'a route is drawn from the first year its row documents and stays on the map to the end of 1865 (its last documented year is its end); routes that share a leg are drawn as one line there', routes_shown: underground.routes.length, towns_shown: underground.points.length, routes_in_table: underground.all.length,
+      not_yet_begun: underground.all.filter((r) => r.first > date).map((r) => ({ record: r.id, label: r.label, start: r.start })), last_documented_before_this_date: underground.all.filter((r) => r.last < date).map((r) => ({ record: r.id, label: r.label, end: r.end })),
+      note: 'TEST ROWS until the owner reviews them; the research and every citation are in docs/UNDERGROUND-RAILROAD.md' } : null,
     // The Military layer (brief of 2026-11-09 §6): the war, its sides, and each member with its dates and role.
     war: military?.war ? {
       id: military.war.id, names: military.war.names, names_shown: military.names, start: military.war.start, end: military.war.end, source: military.war.source ?? null,
@@ -323,6 +327,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   const routesOut = [...new Map((rec?.routes ?? []).map((d) => [d.r.id, d])).values()].map((d) => {
     const r = d.r, pl = placedById.get(`route-label-${r.id}`);
     return { record: r.id, label: r.label, kind: r.kind, value: r.value, class: d.style.classLabel, dash: d.style.dash, heads: d.style.heads, waypoints: r.waypoints, start: r.startWhen && formatWhenIso(r.startWhen), end: r.endWhen && formatWhenIso(r.endWhen), certainty: r.certainty, source: r.source, qc_status: r.qc_status || null, labeled: !!pl?.box, dropped: pl?.dropped ?? null,
+      ...(d.style.trunk ? { places: r.placeNames ?? null, grade: r.grade, note: r.qc_note || null, legs: d.legs } : {}),
       ...(r.tracker === 'military' ? { strength: r.strengthN ?? null, width_px: r.strengthN ? Number(d.style.width.toFixed(1)) : null, war: r.war, side: r.side || null, force: r.force || null, color: d.style.color, hollow: !!d.style.hollow, landing: !!d.style.landing, places: r.placeNames ?? null } : {}) };
   });
   for (const r of routesOut) if (r.dropped) warnings.push(`route ${r.label} (${r.record}): name dropped (${r.dropped})`);

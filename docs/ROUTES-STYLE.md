@@ -56,3 +56,24 @@ Not in this piece: a Pacific or world stage (the silver map needs one; separate 
 - Ticks and years at dated ports are not drawn; a port with one date prints the year beside its name instead.
 - Route names try nine stretches of the line (not "the longest free stretch"), reserved zones include the stage's region and water names, and the Manchu map lands on the 1700 snapshot by the calendar rule.
 - Not in this piece, as proposed: a Pacific or Indian Ocean stage (Malindi falls off the Afro-Eurasia sheet), GIF export, volume data.
+
+## 6. Networks: routes that merge and split (2026-11-17, the Underground Railroad)
+
+A route class may be marked `trunk` (`src/render/routes.js`; so far only `escape`, the Underground Railroad's escape
+routes). Routes of a trunk class are not laid side by side. They are drawn as one network (`src/render/network.js`):
+
+- **A shared leg is one line.** A leg is two waypoints in a row, in the direction of travel. Where two or more records
+  name the same leg, it is drawn once; the hover over it lists every record that uses it, with its years and source.
+- **Merging and splitting comes from the rows, never from a hand.** At a waypoint where routes join or part, the line's
+  direction is computed: the mean direction it is reached from plus the mean direction it is left by. Every leg at that
+  waypoint starts or ends along it, so a branch leaves its trunk along the trunk and curves away. Each leg is the cubic
+  curve its two waypoints and those two directions give. To change a line's shape, change its waypoints.
+- **Heads only where a line ends**: at a waypoint no leg carries on from. No head at stops on the way (on a network
+  with dozens of towns a head at each would hide the lines). This differs from §1's rule for a single route.
+- **Certainty per leg**: a shared leg takes the dash of its best-documented record.
+- **A paper casing** (cream, 1.3 px each side) runs under every leg, so the line reads over a state's fill.
+- **No name along the line.** The key names the class; a record's own label is in the hover and on the packing slip.
+- Color, head and width are the class's, as for any route: rust and the open chevron (people moving), middle width.
+
+The packing slip lists every record with its waypoints (ids and names), years, certainty, source and, per leg, which
+other records share it.

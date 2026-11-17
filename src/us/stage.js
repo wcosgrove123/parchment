@@ -18,7 +18,9 @@ import { createDiffList } from '../render/difflist.js';
 import { makeProjection, W as BASE_W, H as BASE_H, FRAME } from '../render/base.js';
 import { buildProjection } from '../render/focus.js';
 import { reliefFor } from '../render/relief-reproject.js';
-import { routeDefs, drawRoutes } from '../render/routes.js';
+import { routeDefs, drawRoutes, isTrunk, routeLegend } from '../render/routes.js';
+import routesTracker from '../trackers/routes.json';
+import { drawNetwork } from '../render/network.js';
 import { drawMarks, MARK_RADIUS } from '../render/marks.js';
 import { polylineHitsRect, APART } from '../render/placement.js';
 import { claimLabel, slug, itemKeys } from './frames.js';
@@ -465,13 +467,16 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     cache.set(key, entry);
     while (cache.size > CACHE_MAX) cache.delete(cache.keys().next().value);
     views.forEach((v, i) => swapIn(v, entry.layers[i], fade));
-    legend.set(entry.legend);
+    // (the live page: a network layer switched on over the tracker, the Underground Railroad's, adds its lines to the key)
+    const trunkRoutes = records.routes.filter(isTrunk);
+    const shownLegend = trunkRoutes.length ? { ...entry.legend, legend: [...entry.legend.legend, ...routeLegend(trunkRoutes), ...(records.points.some((p) => p.value === 'station') ? [routesTracker.point_legend.station] : [])] } : entry.legend;
+    legend.set(shownLegend);
     if (drawMilList) { drawMilList(); milZones.length = 0; if (milListBox) milZones.push(milListBox); }
     // (the live page: the Military layer's events, or the clearing of them when the layer goes off)
     if (milNow?.war || records.points.length || records.routes.length || recordLayout) recordLayout = layoutRecords(milZones);
     currentKey = key;
     // (what is on the sheet, for the packing slip: src/us/slip.js)
-    current = { date, trackerId, mode: 'snapshot', items: [...items, ...cesAlive, ...lands, ...treaty, ...treatyX], polityLabels: entry.layers.flatMap((l) => l.labels ?? []), legend: entry.legend };
+    current = { date, trackerId, mode: 'snapshot', items: [...items, ...cesAlive, ...lands, ...treaty, ...treatyX], polityLabels: entry.layers.flatMap((l) => l.labels ?? []), legend: shownLegend, ...(trunkRoutes.length ? { records: recordLayout } : {}) };
     return { ...counts, redrawn: true };
   }
 
@@ -936,7 +941,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // label pass below); the lines themselves run under the marks, so the boxes are not zones here (a zone trims a
     // line, and at a continental scale a force's label box can cover a whole short march)
     const forceBoxes = milNow?.war ? drawForceMarks(recordLayers.forces, milNow.positions ?? [], projection, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: main.box, compact: milNow.preset === 'classroom', big: !!milNow.battle }) : (recordLayers.forces.selectAll('*').remove(), []);
-    const drawnRoutes = drawRoutes(recordLayers.routes, records.routes, projection, zones, clearance);
+    // (routes of a trunk class, the Underground Railroad's, are one network that merges and splits: src/render/network.js)
+    const netLayer = recordLayers.routes.selectAll('g.route-network').data([0]).join('g').attr('class', 'route-network');
+    const drawnRoutes = [...drawRoutes(recordLayers.routes, records.routes.filter((r) => !isTrunk(r)), projection, zones, clearance),
+      ...drawNetwork(netLayer, records.routes.filter(isTrunk), projection, zones, clearance)];
     drawEdgeTabs(recordLayers.labels, drawnRoutes, main.box);
     // (the Military layer's events beyond the frame, a declaration in Washington on a Texas map, are not drawn;
     // the course list says "off this map" for them)
@@ -960,7 +968,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       const im = drawMarks(v.rec.marks, records.points.filter(inInset), v.proj);
       if (milNow?.war) { decorateMarks(v.rec.marks, im, milNow.war, milNow.icons ?? {}); drawForceMarks(v.rec.forces, milNow.positions ?? [], v.proj, { icons: milNow.icons ?? {}, checks: milNow.checks ?? {}, box: v.box }); }
       const pts = records.points.filter((p) => p.shape && p.lon != null).map((p) => ({ xy: v.proj([p.lon, p.lat]), r: (MARK_RADIUS[p.shape] ?? 6) + 2 })).filter((m) => m.xy && Number.isFinite(m.xy[0]));
-      drawRoutes(v.rec.routes, records.routes, v.proj, [], (qid, coord) => { const xy = coord ? v.proj(coord) : null; const near = xy && pts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6); return near ? near.r : 0; });
+      drawRoutes(v.rec.routes, records.routes.filter((r) => !isTrunk(r)), v.proj, [], (qid, coord) => { const xy = coord ? v.proj(coord) : null; const near = xy && pts.find((m) => Math.hypot(m.xy[0] - xy[0], m.xy[1] - xy[1]) < 6); return near ? near.r : 0; });
     }
     return { marks, routes: drawnRoutes, rivers, placed, zones: [...boxes, ...markBoxes, ...numeralBoxes, ...forceBoxes], lines: drawnRoutes.map((d) => d.samples) };
   }

@@ -17,6 +17,9 @@ export const CLASSES = {
   // (owner, 2026-11-16: people sold and moved against their will are never keyed as a "migration" alone; the line is
   // the migration's, rust with an open chevron, and the key says what it was)
   'forced-migration': { color: 'rust', heads: 'chevron', width: 'regular', label: 'Forced migration: the domestic slave trade' },
+  // The Underground Railroad (owner, 2026-11-17): people moving, so the migration's line; `trunk` routes are drawn as
+  // one network that merges and splits (src/render/network.js), tipped only where a line ends.
+  escape: { color: 'rust', heads: 'chevron', width: 'regular', trunk: true, label: 'Escape route (the Underground Railroad)' },
   military: { color: 'rust', heads: 'barb', width: 'regular', label: 'Army' },
   carrier: { color: 'ink', heads: 'none', width: 'thin', label: 'Carrier route' },
 };
@@ -55,6 +58,9 @@ const MIL_LABELS = { front: 'Line of battle', 'siege-line': 'Siege line', 'forti
 // in strength mode), and always with the legend's three sample widths.
 export const strengthWidth = (n) => Math.max(1.6, Math.min(10, 1.5 + 8.5 * Math.sqrt(Math.max(0, n) / 20000)));
 export const STRENGTH_SAMPLES = [500, 5000, 20000];
+
+// A record of a class drawn as a merged network rather than side by side.
+export const isTrunk = (rec) => rec.tracker === 'routes' && !!CLASSES[rec.value]?.trunk;
 
 // Style for one record: what the renderer and the legend both read.
 export function routeStyle(rec) {

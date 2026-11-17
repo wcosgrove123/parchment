@@ -33,7 +33,7 @@ function withRecordDefaults(order) {
   return o;
 }
 
-const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'play', 'battle', 'phase', 'preset', 'width', 'view', 'out', 'svg', '_comment', 'notes']);
+const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'underground', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'play', 'battle', 'phase', 'preset', 'width', 'view', 'out', 'svg', '_comment', 'notes']);
 
 // Renders one order. → { png, json, svg, slip, address }. Used by this command and by the MCP server (mcp/server.mjs).
 export async function renderOrder(orderIn, { out = null, svg = false, base = process.cwd(), log = () => {}, browser = null } = {}) {

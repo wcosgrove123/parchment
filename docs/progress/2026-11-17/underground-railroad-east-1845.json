@@ -1,0 +1,4805 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1845-06-01",
+    "tracker": "slavery",
+    "title": "The Underground Railroad, to 1845",
+    "size": "1920x1080",
+    "strip": "off",
+    "underground": true,
+    "frame": "east"
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1845-06-01&tracker=slavery&underground=on&strip=off&frame=east&title=The+Underground+Railroad%2C+to+1845&size=1920x1080",
+    "mode": "snapshot",
+    "date": "1845-06-01",
+    "date_text": "1 June 1845",
+    "from": null,
+    "tracker": {
+      "id": "slavery",
+      "title": "Free and slave states"
+    },
+    "election": null,
+    "frame": {
+      "id": "east",
+      "title": "The East",
+      "box": {
+        "west": -95,
+        "south": 24,
+        "east": -66,
+        "north": 48
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        80.5,
+        -36
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The Underground Railroad, to 1845",
+    "highlight": null,
+    "inset": null,
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean",
+      "Gulf of Mexico"
+    ],
+    "records_file": null,
+    "status": {
+      "table": "data/us/slavery-status.csv",
+      "coverage": [
+        "1820-01-01",
+        "1860-12-31"
+      ],
+      "covered": true,
+      "states": 27,
+      "free": 13,
+      "slave": 14,
+      "without_a_row": [],
+      "free_states": [
+        "Connecticut",
+        "Illinois",
+        "Indiana",
+        "Maine",
+        "Massachusetts",
+        "Michigan",
+        "New Hampshire",
+        "New Jersey",
+        "New York",
+        "Ohio",
+        "Pennsylvania",
+        "Rhode Island",
+        "Vermont"
+      ],
+      "slave_states": [
+        "Alabama",
+        "Arkansas",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Kentucky",
+        "Louisiana",
+        "Maryland",
+        "Mississippi",
+        "Missouri",
+        "North Carolina",
+        "South Carolina",
+        "Tennessee",
+        "Virginia"
+      ],
+      "note": "counts are of every state in force on the date, on or off the sheet; territories without a row take one neutral fill; the District of Columbia and joint or disputed areas stay paper"
+    },
+    "underground": {
+      "table": "data/us/underground-railroad.csv",
+      "rule": "a route is drawn from the first year its row documents and stays on the map to the end of 1865 (its last documented year is its end); routes that share a leg are drawn as one line there",
+      "routes_shown": 29,
+      "towns_shown": 64,
+      "routes_in_table": 38,
+      "not_yet_begun": [
+        {
+          "record": "ugrr-tubman-delmarva",
+          "label": "Eastern Shore of Maryland to Wilmington (Harriet Tubman's route)",
+          "start": 1849
+        },
+        {
+          "record": "ugrr-sea-norfolk-philadelphia",
+          "label": "By sea from Norfolk to Philadelphia",
+          "start": 1854
+        },
+        {
+          "record": "ugrr-sea-richmond-norfolk",
+          "label": "By water from Richmond",
+          "start": 1855
+        },
+        {
+          "record": "ugrr-elmira",
+          "label": "Philadelphia to Rochester by Harrisburg and Elmira",
+          "start": 1851
+        },
+        {
+          "record": "ugrr-detroit-amherstburg",
+          "label": "Detroit to Amherstburg",
+          "start": 1850
+        },
+        {
+          "record": "ugrr-st-louis-springfield",
+          "label": "St. Louis to Springfield, Illinois",
+          "start": 1850
+        },
+        {
+          "record": "ugrr-kansas",
+          "label": "Kansas to Iowa",
+          "start": 1857
+        },
+        {
+          "record": "ugrr-iowa",
+          "label": "Across Iowa to Chicago (John Brown, 1859)",
+          "start": 1859
+        },
+        {
+          "record": "ugrr-texas-piedras-negras",
+          "label": "Texas to Piedras Negras",
+          "start": 1850
+        }
+      ],
+      "last_documented_before_this_date": [
+        {
+          "record": "ugrr-new-york-springfield",
+          "label": "New York into New England",
+          "end": 1842
+        },
+        {
+          "record": "ugrr-sea-savannah-new-york",
+          "label": "By sea from Savannah to New York",
+          "end": 1834
+        },
+        {
+          "record": "ugrr-louisiana-texas",
+          "label": "Louisiana to Mexican Texas",
+          "end": 1836
+        },
+        {
+          "record": "ugrr-carolina-florida",
+          "label": "Carolina to Spanish Florida",
+          "end": 1763
+        },
+        {
+          "record": "ugrr-cape-florida",
+          "label": "Cape Florida to the Bahamas",
+          "end": 1825
+        }
+      ],
+      "note": "TEST ROWS until the owner reviews them; the research and every citation are in docs/UNDERGROUND-RAILROAD.md"
+    },
+    "war": null
+  },
+  "legend": {
+    "title": "Free and slave states",
+    "rows": [
+      {
+        "label": "Free state",
+        "swatch": "fill",
+        "key": "T",
+        "fill": "#58b4c3",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Slave state",
+        "swatch": "fill",
+        "key": "S",
+        "fill": "#ce976a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Territories",
+        "swatch": "fill",
+        "key": "N",
+        "fill": "#9399a0",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      },
+      {
+        "label": "Escape route (the Underground Railroad)",
+        "swatch": "route",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#c8601a",
+        "dash": null,
+        "shape": null,
+        "heads": "chevron",
+        "role": "route"
+      },
+      {
+        "label": "Documented route",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "route certainty"
+      },
+      {
+        "label": "Approximate route",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "dashed",
+        "shape": null,
+        "heads": null,
+        "role": "route certainty"
+      },
+      {
+        "label": "Conjectured route",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "dotted",
+        "shape": null,
+        "heads": null,
+        "role": "route certainty"
+      },
+      {
+        "label": "Town on a route",
+        "swatch": "shape",
+        "key": null,
+        "fill": "#1f2a44",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": "ink-dot",
+        "heads": null,
+        "role": "point type"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "openhistoricalmap",
+      "name": "Rupert's Land",
+      "local": null,
+      "ids": {
+        "ohm": 2831206,
+        "wikidata": "Q738395"
+      },
+      "start": "1819-01-29",
+      "end": "1870-07-15",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Rupert's Land",
+      "cut_by_frame": true,
+      "km2": 4106231,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831206",
+        "license": "CC0 1.0",
+        "wikidata": "Q738395",
+        "notes": {
+          "start_event": "Treaty of 1818, land exchange with USA",
+          "end_event": "Transferred to Canada and converted into NWT",
+          "wikipedia": "en:Rupert's Land"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "United Province of Canada",
+      "local": null,
+      "ids": {
+        "ohm": 2831000,
+        "wikidata": "Q1121436"
+      },
+      "start": "1842-08-09",
+      "end": "1867-07-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "United Province of Canada",
+      "cut_by_frame": true,
+      "km2": 1334616,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831000",
+        "license": "CC0 1.0",
+        "wikidata": "Q1121436",
+        "notes": {
+          "start_event": "Maine boundary dispute settled",
+          "end_event": "Dominion of Canada created with Ontario, Quebec, NS, NB",
+          "wikipedia": "en:Province of Canada"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Texas Republic",
+      "local": null,
+      "ids": {
+        "newberry": "tx_republic",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692792,
+            "url": "https://www.openhistoricalmap.org/relation/2692792",
+            "name": "Republic of Texas",
+            "start": "1836-03-02",
+            "end": "1845-12-28",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1836-03-02",
+      "end": "1845-12-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "disputed",
+      "power_label": "Disputed or overlapping claims",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "status": null,
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Texas Republic",
+      "cut_by_frame": false,
+      "km2": 1005486,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tx_republic",
+          "version": 1,
+          "change": "Texas declared its independence from Mexico.",
+          "authority": "(\"Republic of Texas,\" New Handbook of Texas, 5:537-538; Swindler, 9:247, 249)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Iowa Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ia_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692921,
+            "url": "https://www.openhistoricalmap.org/relation/2692921",
+            "name": "Iowa Territory",
+            "start": "1838-07-03",
+            "end": "1846-12-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1838-07-03",
+      "end": "1846-12-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Iowa Territory",
+      "cut_by_frame": true,
+      "km2": 503052,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ia_terr",
+          "version": 1,
+          "change": "The United States created Iowa Territory from Wisconsin Territory.",
+          "authority": "(U.S. Stat., vol. 5, ch. 96[1838]/pp. 235-241)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Wisconsin Territory",
+      "local": null,
+      "ids": {
+        "newberry": "wi_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693062,
+            "url": "https://www.openhistoricalmap.org/relation/2693062",
+            "name": "Wisconsin Territory",
+            "start": "1838-07-03",
+            "end": "1848-05-28",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1838-07-03",
+      "end": "1848-05-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Wisconsin Territory",
+      "cut_by_frame": true,
+      "km2": 220335,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wi_terr",
+          "version": 2,
+          "change": "The United States created Iowa Territory from Wisconsin Territory, encompassing all of Wisconsin Territory west of the Mississippi River.",
+          "authority": "(U.S. Stat., vol. 5, ch. 96 [1838]/pp. 235-241)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Missouri",
+      "local": null,
+      "ids": {
+        "newberry": "mo_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2692940,
+            "url": "https://www.openhistoricalmap.org/relation/2692940",
+            "name": "Missouri",
+            "start": "1838-12-15",
+            "end": "1849-02-12",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1838-12-15",
+      "end": "1849-02-12",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "mo_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri",
+      "cut_by_frame": false,
+      "km2": 180619,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_state",
+          "version": 3,
+          "change": "Missouri legislature extended CLARK's boundary line north of the commonly accepted boundary between Missouri and Iowa Territory (the Indian boundary line established in 1816); the extension overlapped Iowa's VAN BUREN.",
+          "authority": "(Mo. Laws 1838-1839, pub., p. 22)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indian Territory",
+      "local": null,
+      "ids": {
+        "newberry": "it_indianterr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692971,
+            "url": "https://www.openhistoricalmap.org/relation/2692971",
+            "name": "Indian Territory",
+            "start": "1828-05-06",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1828-05-06",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indian Territory",
+      "cut_by_frame": false,
+      "km2": 166256,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "it_indianterr",
+          "version": 2,
+          "change": "Indian Territory gained from Arkansas Territory when the Treaty of Washington between the United States and Choctaw Indians definitively established the eastern line of the Choctaw Cession and affirmed Choctaw control of the area west of the line.",
+          "authority": "(U.S. Stat., vol. 7, p. 311; Gabler, 37-39; Royce, 720-721; Van Zandt, 119)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693700,
+            "url": "https://www.openhistoricalmap.org/relation/2693700",
+            "name": "Virginia",
+            "start": "1792-06-01",
+            "end": "1846-09-06",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-06-01",
+      "end": "1846-09-06",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "va_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 166167,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 4,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., vol. 1, ch. 4[1791]/p. 189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693715,
+            "url": "https://www.openhistoricalmap.org/relation/2693715",
+            "name": "Georgia",
+            "start": "1802-04-24",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1802-04-24",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ga_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": false,
+      "km2": 152353,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 3,
+          "change": "Georgia ceded to the United States much of present Mississippi and Alabama. This area became unorganized federal territory and Georgia Western Lands were eliminated.",
+          "authority": "(Paullin, 83; Van Zandt, 100; Terr. Papers U.S., 5:142-143)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Michigan",
+      "local": null,
+      "ids": {
+        "newberry": "mi_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693355,
+            "url": "https://www.openhistoricalmap.org/relation/2693355",
+            "name": "Michigan",
+            "start": "1837-01-26",
+            "end": "1908-12-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1837-01-26",
+      "end": "1908-12-31",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "mi_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Michigan",
+      "cut_by_frame": false,
+      "km2": 150240,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mi_state",
+          "version": 1,
+          "change": "The state of Michigan was created from Michigan Territory; boundary dispute with Ohio over the strip running from Indiana to Lake Erie was settled in favor of Ohio; Michigan Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 5, ch. 99 [1836], secs. 1-2/p. 49 and ch. 6 [1837]/p. 144; Van Zandt, 127)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Florida",
+      "local": null,
+      "ids": {
+        "newberry": "fl_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693743,
+            "url": "https://www.openhistoricalmap.org/relation/2693743",
+            "name": "Florida",
+            "start": "1845-03-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1845-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "fl_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Florida",
+      "cut_by_frame": false,
+      "km2": 146872,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "fl_state",
+          "version": 1,
+          "change": "The state of Florida was created from Florida Territory, with boundaries the same as those set in 1822; Florida Territory eliminated.",
+          "authority": "(Swindler, 2:332; U.S. Stat., vol. 5, ch. 48 [1845], secs. 1, 5/pp. 742-743)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Illinois",
+      "local": null,
+      "ids": {
+        "newberry": "il_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693067,
+            "url": "https://www.openhistoricalmap.org/relation/2693067",
+            "name": "Illinois",
+            "start": "1818-12-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "il_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Illinois",
+      "cut_by_frame": false,
+      "km2": 145768,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "il_state",
+          "version": 1,
+          "change": "The state of Illinois was created from Illinois Territory; Illinois Territory eliminated.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], secs. 1-2, 7/pp. 428-429, 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas",
+      "local": null,
+      "ids": {
+        "newberry": "ar_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693749,
+            "url": "https://www.openhistoricalmap.org/relation/2693749",
+            "name": "Arkansas",
+            "start": "1840-05-21",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1840-05-21",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ar_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas",
+      "cut_by_frame": false,
+      "km2": 137745,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_state",
+          "version": 2,
+          "change": "Survey of boundary between the Republic of Texas and the United States began. MILLER (original) officially became extinct and LAFAYETTE was eliminated from Texas when Texas claims to the area were upheld.",
+          "authority": "(U.S. Stat., vol. 5, ch. 75 [1844]/p. 674; Marshall, 235-236)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alabama",
+      "local": null,
+      "ids": {
+        "newberry": "al_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693721,
+            "url": "https://www.openhistoricalmap.org/relation/2693721",
+            "name": "Alabama",
+            "start": "1820-12-19",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-12-19",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "al_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alabama",
+      "cut_by_frame": false,
+      "km2": 133863,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "al_state",
+          "version": 3,
+          "change": "MARION's overlap of the state of Mississippi and TUSCALOOSA's overlap of the state of Mississippi ended.",
+          "authority": "(Ala. Acts 1820, 2d sess., secs. 1, 9/pp. 90, 92)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "nc_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693675,
+            "url": "https://www.openhistoricalmap.org/relation/2693675",
+            "name": "New York",
+            "start": "1783-09-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1855-01-10",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "ny_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "NY",
+      "cut_by_frame": false,
+      "km2": 125723,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 1,
+          "change": "New York became an independent state on 4 July 1776, and Vermont declared its independence from New York on 15 January 1777. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Mississippi",
+      "local": null,
+      "ids": {
+        "newberry": "ms_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693716,
+            "url": "https://www.openhistoricalmap.org/relation/2693716",
+            "name": "Mississippi",
+            "start": "1820-05-29",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ms_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mississippi",
+      "cut_by_frame": false,
+      "km2": 123526,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ms_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "la_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Louisiana",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693673,
+            "url": "https://www.openhistoricalmap.org/relation/2693673",
+            "name": "Pennsylvania",
+            "start": "1792-03-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "pa_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": false,
+      "km2": 117177,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 2,
+          "change": "Pennsylvania purchased from the federal government the Erie Triangle, a small area immediately north of Pennsylvania and west of New York, giving Pennsylvania an outlet to Lake Erie.",
+          "authority": "(Van Zandt, 83-84)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Tennessee",
+      "local": null,
+      "ids": {
+        "newberry": "tn_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693739,
+            "url": "https://www.openhistoricalmap.org/relation/2693739",
+            "name": "Tennessee",
+            "start": "1796-06-01",
+            "end": "1859-11-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1796-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "tn_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tennessee",
+      "cut_by_frame": false,
+      "km2": 109125,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tn_state",
+          "version": 1,
+          "change": "The state of Tennessee was created from the Territory of the United States South of the River Ohio (Southwest Territory); Southwest Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 1, ch. 47[1796], pp. 491-492; Folmsbee, Corlew, and Mitchell 110)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Ohio",
+      "local": null,
+      "ids": {
+        "newberry": "oh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2663622,
+            "url": "https://www.openhistoricalmap.org/relation/2663622",
+            "name": "Ohio",
+            "start": "1803-03-01",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1803-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "oh_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "OH",
+      "cut_by_frame": false,
+      "km2": 106748,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "oh_state",
+          "version": 1,
+          "change": "The state of Ohio was created from the Northwest Territory and Indiana Territory.",
+          "authority": "(Ind. Terr., Exec. Journal, 114-115; Pence and Armstrong, 218; U.S. Stat., vol. 2, ch. 40 [1802], secs. 1-3/pp. 173-174; Van Zandt, 112)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kentucky",
+      "local": null,
+      "ids": {
+        "newberry": "ky_state",
+        "newberry_version": 1
+      },
+      "start": "1792-06-01",
+      "end": "1859-11-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "ky_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kentucky",
+      "cut_by_frame": false,
+      "km2": 104608,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ky_state",
+          "version": 1,
+          "change": "The state of Kentucky was created from the Kentucky District of Virginia.",
+          "authority": "(Hening, 11:85; U.S. Stat., 1:189)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indiana",
+      "local": null,
+      "ids": {
+        "newberry": "in_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693335,
+            "url": "https://www.openhistoricalmap.org/relation/2693335",
+            "name": "Indiana",
+            "start": "1816-12-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1816-12-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "in_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "IN",
+      "cut_by_frame": false,
+      "km2": 93616,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "in_state",
+          "version": 1,
+          "change": "The state of Indiana was created from Indiana Territory and small parts of Illinois and Michigan Territories.",
+          "authority": "(U.S. Stat., vol. 3, ch. 57 [1816], secs. 1-2/p. 289 and res. 1 [1816]/p. 399; Van Zandt, 115)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maine",
+      "local": null,
+      "ids": {
+        "newberry": "me_state",
+        "newberry_version": 1
+      },
+      "start": "1820-03-15",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "me_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maine",
+      "cut_by_frame": false,
+      "km2": 83918,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "me_state",
+          "version": 1,
+          "change": "Maine was separated from Massachusetts and admitted to the Union.",
+          "authority": "(U.S. Stat., vol. 3, ch. 19 [1820]/p. 544)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "sc_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of New Brunswick",
+      "local": null,
+      "ids": {
+        "ohm": 2830929,
+        "wikidata": "Q107499350"
+      },
+      "start": "1842-08-09",
+      "end": "1867-07-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Brunswick",
+      "cut_by_frame": false,
+      "km2": 79068,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830929",
+        "license": "CC0 1.0",
+        "wikidata": "Q107499350",
+        "notes": {
+          "start_event": "Webster Ashburton Treaty, loses land to Maine",
+          "end_event": "NB joins Canadian Dominion",
+          "wikipedia": "en:New Brunswick"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of Nova Scotia",
+      "local": null,
+      "ids": {
+        "ohm": 2830921,
+        "wikidata": "Q98931415"
+      },
+      "start": "1820-01-01",
+      "end": "1867-07-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Colony of Nova Scotia",
+      "cut_by_frame": false,
+      "km2": 73238,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830921",
+        "license": "CC0 1.0",
+        "wikidata": "Q98931415",
+        "notes": {
+          "start_event": "Cape Breton joins NS again",
+          "end_event": "Nova Scotia joins Canada",
+          "wikipedia": "en:Nova Scotia"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of the Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2832950,
+        "wikidata": "Q778"
+      },
+      "start": "1783-09-03",
+      "end": "1848-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Bahamas",
+      "cut_by_frame": true,
+      "km2": 51285,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2832950",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "1783 Treaty of paris, Spain exchanges Bahamas for East Florida",
+          "end_event": "Turks and Caicos leaves",
+          "wikipedia": "en:History of the Bahamas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "md_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maryland",
+      "cut_by_frame": false,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Vermont",
+      "local": null,
+      "ids": {
+        "newberry": "vt_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693680,
+            "url": "https://www.openhistoricalmap.org/relation/2693680",
+            "name": "Vermont",
+            "start": "1791-03-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "vt_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "VT",
+      "cut_by_frame": false,
+      "km2": 24852,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "vt_state",
+          "version": 1,
+          "change": "The state of Vermont was admitted to the Union. The boundary with New York was settled by a joint commission before statehood.",
+          "authority": "(Slade, 193; U.S. Stat., vol. 1, ch. 7 [1791]/p. 191)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Hampshire",
+      "local": null,
+      "ids": {
+        "newberry": "nh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693679,
+            "url": "https://www.openhistoricalmap.org/relation/2693679",
+            "name": "New Hampshire",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "nh_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "NH",
+      "cut_by_frame": false,
+      "km2": 23950,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nh_state",
+          "version": 1,
+          "change": "New Hampshire became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "nj_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860. Counted free by the owner's decision (2026-11-16): its gradual-abolition law left some people enslaved here in 1820."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "NJ",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "status": "slave",
+      "status_row": {
+        "id": "de_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "DE",
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 9,
+        "also_in_ohm": [
+          {
+            "ohm": 2693361,
+            "url": "https://www.openhistoricalmap.org/relation/2693361",
+            "name": "Unorganized Federal Territory",
+            "start": "1837-03-28",
+            "end": "1846-12-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1837-03-28",
+      "end": "1846-12-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "N",
+        "color": "#9399a0",
+        "name": "gray"
+      },
+      "diff_role": null,
+      "status": "territory",
+      "status_row": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 1166750,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 9,
+          "change": "MO Non-County Area 28 created from unorganized federal territory, and attached to CLAY \"for civil and military purposes.\" MO Non-County Area 12 gained from unorganized federal territory.",
+          "authority": "(Mo. Laws 1836-1837, pub., p. 49; U.S. Stat., vol. 5, ch. 86[1836]/p. 34, and res. 2, p. 802)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Massachusetts",
+      "local": null,
+      "ids": {
+        "newberry": "ma_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2852582,
+            "url": "https://www.openhistoricalmap.org/relation/2852582",
+            "name": "Massachusetts",
+            "start": "1820-03-15",
+            "end": "1855-01-10",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-03-15",
+      "end": "1855-01-10",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "ma_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 21021,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ma_state",
+          "version": 3,
+          "change": "Maine was separated from Massachusetts and admitted to the Union.",
+          "authority": "(U.S. Stat., vol. 3, ch. 19 [1820]/p. 544)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Connecticut",
+      "local": null,
+      "ids": {
+        "newberry": "ct_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693688,
+            "url": "https://www.openhistoricalmap.org/relation/2693688",
+            "name": "Connecticut",
+            "start": "1804-12-31",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1804-12-31",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "ct_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 12879,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ct_state",
+          "version": 4,
+          "change": "HARTFORD lost part of the town of Southwick (the \"Southwick Jog\") to HAMPSHIRE (Mass.) when the state boundary was adjusted.",
+          "authority": "(Hooker, 25-26; Van Zandt, 69)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Prince Edward Island Colony",
+      "local": null,
+      "ids": {
+        "ohm": 2830904,
+        "wikidata": "Q1978"
+      },
+      "start": "1798-11-29",
+      "end": "1873-07-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "British Empire",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 9568,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830904",
+        "license": "CC0 1.0",
+        "wikidata": "Q1978",
+        "notes": {
+          "start_event": "Named PEI",
+          "end_event": "Joined Canada",
+          "wikipedia": "en:Prince Edward Island"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Rhode Island",
+      "local": null,
+      "ids": {
+        "newberry": "ri_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693687,
+            "url": "https://www.openhistoricalmap.org/relation/2693687",
+            "name": "Rhode Island",
+            "start": "1783-09-03",
+            "end": "1862-02-28",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1862-02-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "status": "free",
+      "status_row": {
+        "id": "ri_state",
+        "start": null,
+        "end": null,
+        "source": "PENDING OWNER",
+        "note": "TEST ROW for the Antebellum South maps (brief of 2026-11-16); not reviewed. Status as the brief counts it: 12 free and 11 slave states on 1 June 1820, 18 and 15 on 1 June 1860."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 2805,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ri_state",
+          "version": 1,
+          "change": "Rhode Island became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    }
+  ],
+  "points": [
+    {
+      "record": "ugrr-town-wilmington-q174224",
+      "asked": null,
+      "label": "Wilmington",
+      "value": "station",
+      "where": "Q174224",
+      "lon": -75.5514,
+      "lat": 39.7483,
+      "start": "1822",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT); NPS, Harriet Tubman Underground Railroad NHP, \"Harriet Tubman\" (NPS-TUB); Wikipedia, \"Harriet Tubman\", citing Larson 2004 and Clinton 2004 (WP-TUB); Newby-Alexander, \"The Atlantic Coastal Freedom Network\", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME); Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-philadelphia-q1345",
+      "asked": null,
+      "label": "Philadelphia",
+      "value": "station",
+      "where": "Q1345",
+      "lon": -75.1636,
+      "lat": 39.9528,
+      "start": "1822",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT); NPS, Harriet Tubman Underground Railroad NHP, \"Harriet Tubman\" (NPS-TUB); Wikipedia, \"Harriet Tubman\", citing Larson 2004 and Clinton 2004 (WP-TUB); Foner, \"Middle Atlantic\" (HB-FONER); NPS handbook timeline (HB-TIME); Newby-Alexander, \"The Atlantic Coastal Freedom Network\", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME); Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD); NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, \"The Underground Railroad: Columbia, Lancaster County\" (PA-SHPO); NPS theme study (NPS-THEME); Wikipedia, \"John W. Jones (ex-slave)\" (WP-JONES)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-new-york-q60",
+      "asked": null,
+      "label": "New York",
+      "value": "station",
+      "where": "Q60",
+      "lon": -74.0061,
+      "lat": 40.7128,
+      "start": "1834",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); NPS handbook timeline (HB-TIME); Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME); Grover, \"The New England Network to Freedom\", NPS handbook (HB-GROVER); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-albany-q24861",
+      "asked": null,
+      "label": "Albany",
+      "value": "station",
+      "where": "Q24861",
+      "lon": -73.7667,
+      "lat": 42.65,
+      "start": "1838",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME); Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-syracuse-q128069",
+      "asked": null,
+      "label": "Syracuse",
+      "value": "station",
+      "where": "Q128069",
+      "lon": -76.1444,
+      "lat": 43.0469,
+      "start": "1842",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-rochester-q49218",
+      "asked": null,
+      "label": "Rochester",
+      "value": "station",
+      "where": "Q49218",
+      "lon": -77.6114,
+      "lat": 43.1656,
+      "start": "1842",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME); NPS theme study (NPS-THEME); Wikipedia, \"John W. Jones (ex-slave)\" (WP-JONES)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-buffalo-q40435",
+      "asked": null,
+      "label": "Buffalo",
+      "value": "station",
+      "where": "Q40435",
+      "lon": -78.8781,
+      "lat": 42.8864,
+      "start": "1842",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-niagara-falls-q128133",
+      "asked": null,
+      "label": "Niagara Falls",
+      "value": "station",
+      "where": "Q128133",
+      "lon": -79.0169,
+      "lat": 43.0939,
+      "start": "1842",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-st-catharines-q126805",
+      "asked": null,
+      "label": "St. Catharines",
+      "value": "station",
+      "where": "Q126805",
+      "lon": -79.2333,
+      "lat": 43.1833,
+      "start": "1842",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-hartford-q33486",
+      "asked": null,
+      "label": "Hartford",
+      "value": "station",
+      "where": "Q33486",
+      "lon": -72.685,
+      "lat": 41.7633,
+      "start": "1838",
+      "end": "1842",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Grover, \"The New England Network to Freedom\", NPS handbook (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-springfield-q49158",
+      "asked": null,
+      "label": "Springfield",
+      "value": "station",
+      "where": "Q49158",
+      "lon": -72.5475,
+      "lat": 42.1124,
+      "start": "1838",
+      "end": "1842",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Grover, \"The New England Network to Freedom\", NPS handbook (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-troy-q600301",
+      "asked": null,
+      "label": "Troy",
+      "value": "station",
+      "where": "Q600301",
+      "lon": -73.6925,
+      "lat": 42.7317,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-bennington-q817921",
+      "asked": null,
+      "label": "Bennington",
+      "value": "station",
+      "where": "Q817921",
+      "lon": -73.2132,
+      "lat": 42.8852,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-rutland-q25893",
+      "asked": null,
+      "label": "Rutland",
+      "value": "station",
+      "where": "Q25893",
+      "lon": -72.9797,
+      "lat": 43.6089,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-ferrisburgh-q1874592",
+      "asked": null,
+      "label": "Ferrisburgh",
+      "value": "station",
+      "where": "Q1874592",
+      "lon": -73.2772,
+      "lat": 44.2064,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-burlington-q31058",
+      "asked": null,
+      "label": "Burlington",
+      "value": "station",
+      "where": "Q31058",
+      "lon": -73.2131,
+      "lat": 44.4761,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-st-albans-q1787559",
+      "asked": null,
+      "label": "St. Albans",
+      "value": "station",
+      "where": "Q1787559",
+      "lon": -73.0872,
+      "lat": 44.8097,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-montreal-q340",
+      "asked": null,
+      "label": "Montreal",
+      "value": "station",
+      "where": "Q340",
+      "lon": -73.5868,
+      "lat": 45.5033,
+      "start": "1838",
+      "end": "1856",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-norfolk-q49231",
+      "asked": null,
+      "label": "Norfolk",
+      "value": "station",
+      "where": "Q49231",
+      "lon": -76.2853,
+      "lat": 36.8469,
+      "start": "1842",
+      "end": "1857",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Newby-Alexander, \"The Atlantic Coastal Freedom Network\", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME); Newby-Alexander (HB-NEWBY); Newby-Alexander (HB-NEWBY); Grover (HB-GROVER); NPS theme study (NPS-THEME); NPS theme study (NPS-THEME); Newby-Alexander (HB-NEWBY)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-new-bedford-q49147",
+      "asked": null,
+      "label": "New Bedford",
+      "value": "station",
+      "where": "Q49147",
+      "lon": -70.9347,
+      "lat": 41.6361,
+      "start": "1842",
+      "end": "1857",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Newby-Alexander (HB-NEWBY); Grover (HB-GROVER); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-boston-q100",
+      "asked": null,
+      "label": "Boston",
+      "value": "station",
+      "where": "Q100",
+      "lon": -71.0578,
+      "lat": 42.3603,
+      "start": "1842",
+      "end": "1857",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "NPS theme study (NPS-THEME); Newby-Alexander (HB-NEWBY)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-savannah-q83813",
+      "asked": null,
+      "label": "Savannah",
+      "value": "station",
+      "where": "Q83813",
+      "lon": -81.1039,
+      "lat": 32.0508,
+      "start": "1834",
+      "end": "1834",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-washington-q61",
+      "asked": null,
+      "label": "Washington",
+      "value": "station",
+      "where": "Q61",
+      "lon": -77.0367,
+      "lat": 38.895,
+      "start": "1842",
+      "end": "1857",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-baltimore-q5092",
+      "asked": null,
+      "label": "Baltimore",
+      "value": "station",
+      "where": "Q5092",
+      "lon": -76.615,
+      "lat": 39.2864,
+      "start": "1842",
+      "end": "1857",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-york-q821105",
+      "asked": null,
+      "label": "York",
+      "value": "station",
+      "where": "Q821105",
+      "lon": -76.7281,
+      "lat": 39.9628,
+      "start": "1838",
+      "end": "1858",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, \"The Underground Railroad: Columbia, Lancaster County\" (PA-SHPO)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-columbia-q1133892",
+      "asked": null,
+      "label": "Columbia",
+      "value": "station",
+      "where": "Q1133892",
+      "lon": -76.4967,
+      "lat": 40.0331,
+      "start": "1838",
+      "end": "1858",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, \"The Underground Railroad: Columbia, Lancaster County\" (PA-SHPO)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-uniontown-q1187047",
+      "asked": null,
+      "label": "Uniontown",
+      "value": "station",
+      "where": "Q1187047",
+      "lon": -79.7244,
+      "lat": 39.9,
+      "start": "1841",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill, \"The Underground Railroad in the Ohio River Valley\", NPS handbook (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-pittsburgh-q1342",
+      "asked": null,
+      "label": "Pittsburgh",
+      "value": "station",
+      "where": "Q1342",
+      "lon": -80,
+      "lat": 40.4417,
+      "start": "1841",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill, \"The Underground Railroad in the Ohio River Valley\", NPS handbook (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-cleveland-q37320",
+      "asked": null,
+      "label": "Cleveland",
+      "value": "station",
+      "where": "Q37320",
+      "lon": -81.6947,
+      "lat": 41.4992,
+      "start": "1834",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill, \"The Underground Railroad in the Ohio River Valley\", NPS handbook (HB-CHURCHILL); Churchill (HB-CHURCHILL); Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-williamstown-q2526491",
+      "asked": null,
+      "label": "Williamstown",
+      "value": "station",
+      "where": "Q2526491",
+      "lon": -81.4506,
+      "lat": 39.3994,
+      "start": "1837",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-marietta-q985482",
+      "asked": null,
+      "label": "Marietta",
+      "value": "station",
+      "where": "Q985482",
+      "lon": -81.4503,
+      "lat": 39.4206,
+      "start": "1837",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-chesterhill-q2669023",
+      "asked": null,
+      "label": "Chesterhill",
+      "value": "station",
+      "where": "Q2669023",
+      "lon": -81.8653,
+      "lat": 39.4892,
+      "start": "1837",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-zanesville-q146811",
+      "asked": null,
+      "label": "Zanesville",
+      "value": "station",
+      "where": "Q146811",
+      "lon": -82.0122,
+      "lat": 39.9461,
+      "start": "1837",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-ripley-q2666983",
+      "asked": null,
+      "label": "Ripley",
+      "value": "station",
+      "where": "Q2666983",
+      "lon": -83.8411,
+      "lat": 38.7394,
+      "start": "1822",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-sardinia-q36879",
+      "asked": null,
+      "label": "Sardinia",
+      "value": "station",
+      "where": "Q36879",
+      "lon": -83.8042,
+      "lat": 39.0086,
+      "start": "1822",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN); Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-urbana-q1762816",
+      "asked": null,
+      "label": "Urbana",
+      "value": "station",
+      "where": "Q1762816",
+      "lon": -83.7514,
+      "lat": 40.1108,
+      "start": "1830",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-sandusky-q608207",
+      "asked": null,
+      "label": "Sandusky",
+      "value": "station",
+      "where": "Q608207",
+      "lon": -82.7092,
+      "lat": 41.4467,
+      "start": "1830",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL); Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-cincinnati-q43196",
+      "asked": null,
+      "label": "Cincinnati",
+      "value": "station",
+      "where": "Q43196",
+      "lon": -84.5125,
+      "lat": 39.1,
+      "start": "1826",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-lebanon-q986776",
+      "asked": null,
+      "label": "Lebanon",
+      "value": "station",
+      "where": "Q986776",
+      "lon": -84.2125,
+      "lat": 39.4267,
+      "start": "1830",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-amherstburg-q385335",
+      "asked": null,
+      "label": "Amherstburg",
+      "value": "station",
+      "where": "Q385335",
+      "lon": -83.0833,
+      "lat": 42.1,
+      "start": "1834",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME); Wikipedia, \"Underground Railroad\" (WP-UGRR); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-port-stanley-q7230953",
+      "asked": null,
+      "label": "Port Stanley",
+      "value": "station",
+      "where": "Q7230953",
+      "lon": -81.2129,
+      "lat": 42.6638,
+      "start": "1834",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-madison-q990883",
+      "asked": null,
+      "label": "Madison",
+      "value": "station",
+      "where": "Q990883",
+      "lon": -85.3953,
+      "lat": 38.75,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-newport-fountain-city-q1439902",
+      "asked": null,
+      "label": "Newport (Fountain City)",
+      "value": "station",
+      "where": "Q1439902",
+      "lon": -84.92,
+      "lat": 39.9544,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN); Wikipedia, \"Levi Coffin\" (WP-COFFIN); Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-new-albany-q1762878",
+      "asked": null,
+      "label": "New Albany",
+      "value": "station",
+      "where": "Q1762878",
+      "lon": -85.8214,
+      "lat": 38.3019,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-canton-q5033862",
+      "asked": null,
+      "label": "Canton",
+      "value": "station",
+      "where": "Q5033862",
+      "lon": -86.0347,
+      "lat": 38.6239,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-azalia-q4832149",
+      "asked": null,
+      "label": "Azalia",
+      "value": "station",
+      "where": "Q4832149",
+      "lon": -85.8472,
+      "lat": 39.0917,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-carthage-q3293425",
+      "asked": null,
+      "label": "Carthage",
+      "value": "station",
+      "where": "Q3293425",
+      "lon": -85.5706,
+      "lat": 39.7392,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-cassopolis-q2373038",
+      "asked": null,
+      "label": "Cassopolis",
+      "value": "station",
+      "where": "Q2373038",
+      "lon": -86.01,
+      "lat": 41.9117,
+      "start": "1826",
+      "end": "1847",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-detroit-q12439",
+      "asked": null,
+      "label": "Detroit",
+      "value": "station",
+      "where": "Q12439",
+      "lon": -83.0475,
+      "lat": 42.3317,
+      "start": "1826",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Barker, \"Reconsidering the Underground Railroad in Canada West\", NPS handbook (HB-BARKER); Johnson, \"Escaping on the Northwestern Frontier\" (HB-JOHNSON); Parks Canada, \"Underground Railroad National Historic Event\" (PC-UGRR); Wikipedia, \"Underground Railroad\" (WP-UGRR); Siebert 1898 (SIEBERT-V); Johnson (HB-JOHNSON); PBS American Experience, \"John Brown's Missouri raid\" (PBS-BROWN)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-windsor-q182625",
+      "asked": null,
+      "label": "Windsor",
+      "value": "station",
+      "where": "Q182625",
+      "lon": -83.0353,
+      "lat": 42.3173,
+      "start": "1833",
+      "end": "1861",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Barker, \"Reconsidering the Underground Railroad in Canada West\", NPS handbook (HB-BARKER); Johnson, \"Escaping on the Northwestern Frontier\" (HB-JOHNSON); Parks Canada, \"Underground Railroad National Historic Event\" (PC-UGRR)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-quincy-q575750",
+      "asked": null,
+      "label": "Quincy",
+      "value": "station",
+      "where": "Q575750",
+      "lon": -91.3886,
+      "lat": 39.9322,
+      "start": "1842",
+      "end": "1859",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-galesburg-q782574",
+      "asked": null,
+      "label": "Galesburg",
+      "value": "station",
+      "where": "Q782574",
+      "lon": -90.3686,
+      "lat": 40.9522,
+      "start": "1842",
+      "end": "1859",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-princeton-q574878",
+      "asked": null,
+      "label": "Princeton",
+      "value": "station",
+      "where": "Q574878",
+      "lon": -89.4669,
+      "lat": 41.3786,
+      "start": "1842",
+      "end": "1859",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-ottawa-q576209",
+      "asked": null,
+      "label": "Ottawa",
+      "value": "station",
+      "where": "Q576209",
+      "lon": -88.8378,
+      "lat": 41.3511,
+      "start": "1842",
+      "end": "1859",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-chicago-q1297",
+      "asked": null,
+      "label": "Chicago",
+      "value": "station",
+      "where": "Q1297",
+      "lon": -87.6278,
+      "lat": 41.8819,
+      "start": "1842",
+      "end": "1859",
+      "grade": "circa",
+      "certainty": "legal",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V); Johnson (HB-JOHNSON); PBS American Experience, \"John Brown's Missouri raid\" (PBS-BROWN); PBS American Experience, \"John Brown's Missouri raid\" (PBS-BROWN); \"John Brown and the Underground Railroad\", Stories of Iowa (IOWA-SOI)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-natchitoches-q2278195",
+      "asked": null,
+      "label": "Natchitoches",
+      "value": "station",
+      "where": "Q2278195",
+      "lon": -93.095,
+      "lat": 31.7431,
+      "start": "1822",
+      "end": "1836",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Baumgartner, \"Freedom Seekers on the Southwestern Frontier\", NPS handbook (HB-BAUM); Wikipedia, \"Underground Railroad\" (WP-UGRR)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-nacogdoches-q970482",
+      "asked": null,
+      "label": "Nacogdoches",
+      "value": "station",
+      "where": "Q970482",
+      "lon": -94.6508,
+      "lat": 31.6089,
+      "start": "1822",
+      "end": "1836",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Baumgartner, \"Freedom Seekers on the Southwestern Frontier\", NPS handbook (HB-BAUM); Wikipedia, \"Underground Railroad\" (WP-UGRR)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-san-antonio-q975",
+      "asked": null,
+      "label": "San Antonio",
+      "value": "station",
+      "where": "Q975",
+      "lon": -98.4939,
+      "lat": 29.425,
+      "start": "1822",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Baumgartner, \"Freedom Seekers on the Southwestern Frontier\", NPS handbook (HB-BAUM); Wikipedia, \"Underground Railroad\" (WP-UGRR); NPS (Audain) (NPS-MEX); Baumgartner (HB-BAUM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-houston-q16555",
+      "asked": null,
+      "label": "Houston",
+      "value": "station",
+      "where": "Q16555",
+      "lon": -95.3831,
+      "lat": 29.7628,
+      "start": "1837",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS (Audain), \"Freedom Seekers in the Antebellum Texas-Mexico Borderlands\" (NPS-MEX); Baumgartner (HB-BAUM); NPS (Audain) (NPS-MEX); Baumgartner (HB-BAUM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-matamoros-q738353",
+      "asked": null,
+      "label": "Matamoros",
+      "value": "station",
+      "where": "Q738353",
+      "lon": -97.5042,
+      "lat": 25.85,
+      "start": "1837",
+      "end": "1865",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS (Audain), \"Freedom Seekers in the Antebellum Texas-Mexico Borderlands\" (NPS-MEX); Baumgartner (HB-BAUM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-charleston-q47716",
+      "asked": null,
+      "label": "Charleston",
+      "value": "station",
+      "where": "Q47716",
+      "lon": -79.9319,
+      "lat": 32.7833,
+      "start": "1687",
+      "end": "1763",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-fort-mose-q549331",
+      "asked": null,
+      "label": "Fort Mose",
+      "value": "station",
+      "where": "Q549331",
+      "lon": -81.3253,
+      "lat": 29.9278,
+      "start": "1687",
+      "end": "1763",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": "ceiling"
+    },
+    {
+      "record": "ugrr-town-cape-florida-key-biscayne-q2689037",
+      "asked": null,
+      "label": "Cape Florida (Key Biscayne)",
+      "value": "station",
+      "where": "Q2689037",
+      "lon": -80.1614,
+      "lat": 25.6982,
+      "start": "1821",
+      "end": "1825",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    },
+    {
+      "record": "ugrr-town-andros-island-q514070",
+      "asked": null,
+      "label": "Andros Island",
+      "value": "station",
+      "where": "Q514070",
+      "lon": -77.9,
+      "lat": 24.45,
+      "start": "1821",
+      "end": "1825",
+      "grade": "circa",
+      "certainty": "approximate",
+      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
+      "qc_status": null,
+      "labeled": true,
+      "dropped": null
+    }
+  ],
+  "routes": [
+    {
+      "record": "ugrr-wilmington-philadelphia",
+      "label": "Wilmington to Philadelphia (Thomas Garrett)",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q174224",
+        "Q1345"
+      ],
+      "start": "1822",
+      "end": "1861",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Wilmington",
+        "Philadelphia"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Garrett worked in Wilmington from 1822 and sent people on to the Philadelphia committee. 1861: J. Miller McKim's remark that the Underground Railroad was in effect over (HB-FONER); the NPS itself runs it to 1865. Places, in order: Wilmington, Philadelphia.",
+      "legs": [
+        {
+          "leg": "Q174224>Q1345",
+          "shared_with": [
+            "ugrr-washington-baltimore"
+          ],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-philadelphia-new-york",
+      "label": "Philadelphia to New York",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q1345",
+        "Q60"
+      ],
+      "start": "1835",
+      "end": "1861",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); NPS handbook timeline (HB-TIME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Philadelphia",
+        "New York City"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. 1835: David Ruggles founds the New York Committee of Vigilance. By train and ferry across New Jersey; no source read names a New Jersey town except Siebert (1898), from recollections. Places, in order: Philadelphia, New York.",
+      "legs": [
+        {
+          "leg": "Q1345>Q60",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-new-york-canada",
+      "label": "New York to Canada by Albany, Syracuse and Niagara",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q60",
+        "Q24861",
+        "Q128069",
+        "Q49218",
+        "Q40435",
+        "Q128133",
+        "Q126805"
+      ],
+      "start": "1842",
+      "end": "1861",
+      "certainty": "legal",
+      "source": "Foner, \"Middle Atlantic\" (HB-FONER); Harrold, \"Washington, Maryland, Virginia\" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "New York City",
+        "Albany",
+        "Syracuse",
+        "Rochester",
+        "Buffalo",
+        "Niagara Falls",
+        "St. Catharines"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Albany (Stephen Myers), Syracuse (Jermain Loguen), Rochester (Frederick Douglass), Buffalo, the Niagara crossing, St. Catharines. 1842: Charles Torrey's party reaches Albany, the earliest dated use of the road north of New York in what was read; Sydney Howard Gay's record of 1855 to 1856 documents Syracuse best. The Albany leg is less fully attested than the Syracuse leg. Places, in order: New York, Albany, Syracuse, Rochester, Buffalo, Niagara Falls, St. Catharines.",
+      "legs": [
+        {
+          "leg": "Q60>Q24861",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q24861>Q128069",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q128069>Q49218",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q49218>Q40435",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q40435>Q128133",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q128133>Q126805",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-new-york-springfield",
+      "label": "New York into New England",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q60",
+        "Q33486",
+        "Q49158"
+      ],
+      "start": "1838",
+      "end": "1842",
+      "certainty": "legal",
+      "source": "Grover, \"The New England Network to Freedom\", NPS handbook (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "New York City",
+        "Hartford",
+        "Springfield"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. James Lindsay Smith's journey of 1838: from Ruggles in New York by Hartford to Springfield, Massachusetts (he settled at Norwich, Connecticut, by 1842). One documented journey; many who reached New England stayed there. Places, in order: New York, Hartford, Springfield.",
+      "legs": [
+        {
+          "leg": "Q60>Q33486",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q33486>Q49158",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-vermont",
+      "label": "Albany to Canada through Vermont",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q24861",
+        "Q600301",
+        "Q817921",
+        "Q25893",
+        "Q1874592",
+        "Q31058",
+        "Q1787559",
+        "Q340"
+      ],
+      "start": "1838",
+      "end": "1856",
+      "certainty": "approximate",
+      "source": "Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Albany",
+        "Troy",
+        "Bennington",
+        "Rutland",
+        "Ferrisburgh",
+        "Burlington",
+        "Saint Albans",
+        "Montreal"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. The town chain (Troy, Bennington, Rutland, Ferrisburgh, St. Albans) and Montreal as its end are Siebert's, gathered from recollections in the 1890s: dashed. Grover documents Ferrisburgh (Rowland T. Robinson, 1838), Burlington (Joshua Young) and St. Albans (people forwarded by train, 1854 and 1856), and warns that Vermont was less safe than tradition says. Places, in order: Albany, Troy, Bennington, Rutland, Ferrisburgh, Burlington, St. Albans, Montreal.",
+      "legs": [
+        {
+          "leg": "Q24861>Q600301",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q600301>Q817921",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q817921>Q25893",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q25893>Q1874592",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1874592>Q31058",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q31058>Q1787559",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1787559>Q340",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-sea-norfolk-new-bedford",
+      "label": "By sea from Norfolk to New Bedford",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q49231",
+        "Q1640805",
+        "Q884674",
+        "Q49147"
+      ],
+      "start": "1842",
+      "end": "1857",
+      "certainty": "legal",
+      "source": "Newby-Alexander (HB-NEWBY); Grover (HB-GROVER); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Norfolk",
+        "Cape Henry",
+        "Block Island",
+        "New Bedford"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Vessels from Norfolk and Portsmouth, Virginia, for New Bedford and Boston. The ports are documented; the line at sea is schematic (by Cape Henry and Block Island). Places, in order: Norfolk, Cape Henry, Block Island, New Bedford.",
+      "legs": [
+        {
+          "leg": "Q49231>Q1640805",
+          "shared_with": [
+            "ugrr-sea-norfolk-boston"
+          ],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q1640805>Q884674",
+          "shared_with": [
+            "ugrr-sea-norfolk-boston"
+          ],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q884674>Q49147",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-sea-norfolk-boston",
+      "label": "By sea from Norfolk to Boston",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q49231",
+        "Q1640805",
+        "Q884674",
+        "Q49149",
+        "Q49154",
+        "Q100"
+      ],
+      "start": "1842",
+      "end": "1857",
+      "certainty": "legal",
+      "source": "NPS theme study (NPS-THEME); Newby-Alexander (HB-NEWBY)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Norfolk",
+        "Cape Henry",
+        "Block Island",
+        "Nantucket",
+        "Provincetown",
+        "Boston"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. George Latimer reached Boston from Norfolk in 1842. The line at sea is schematic (by Cape Henry, Block Island, Nantucket and Provincetown, round Cape Cod). Places, in order: Norfolk, Cape Henry, Block Island, Nantucket, Provincetown, Boston.",
+      "legs": [
+        {
+          "leg": "Q49231>Q1640805",
+          "shared_with": [
+            "ugrr-sea-norfolk-new-bedford"
+          ],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q1640805>Q884674",
+          "shared_with": [
+            "ugrr-sea-norfolk-new-bedford"
+          ],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q884674>Q49149",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q49149>Q49154",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q49154>Q100",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-sea-savannah-new-york",
+      "label": "By sea from Savannah to New York",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q83813",
+        "Q978032",
+        "Q1028611",
+        "Q60"
+      ],
+      "start": "1834",
+      "end": "1834",
+      "certainty": "legal",
+      "source": "Grover (HB-GROVER)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Savannah",
+        "Cape Hatteras",
+        "Sandy Hook",
+        "New York City"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Moses Roper, by schooner, 1834: one documented voyage. Bordewich (NPS handbook) says the few who escaped the Deep South mostly hid on ships. The line at sea is schematic (by Cape Hatteras and Sandy Hook). Places, in order: Savannah, Cape Hatteras, Sandy Hook, New York.",
+      "legs": [
+        {
+          "leg": "Q83813>Q978032",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q978032>Q1028611",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q1028611>Q60",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-washington-baltimore",
+      "label": "Washington and Baltimore to Philadelphia",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q61",
+        "Q5092",
+        "Q174224",
+        "Q1345"
+      ],
+      "start": "1842",
+      "end": "1857",
+      "certainty": "legal",
+      "source": "Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Washington, D.C.",
+        "Baltimore",
+        "Wilmington",
+        "Philadelphia"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Thomas Smallwood and Charles Torrey's network, 1842 to 1846, by Baltimore (Jacob Gibbs) and Wilmington (Garrett backed the wagon trip of 1843); Jacob Bigelow with William Still, 1854 to 1857. The source names no stop between Washington and the Pennsylvania line, and none is drawn. Places, in order: Washington, Baltimore, Wilmington, Philadelphia.",
+      "legs": [
+        {
+          "leg": "Q61>Q5092",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q5092>Q174224",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q174224>Q1345",
+          "shared_with": [
+            "ugrr-wilmington-philadelphia"
+          ],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-columbia",
+      "label": "Across the Susquehanna at Columbia",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q821105",
+        "Q1133892",
+        "Q1345"
+      ],
+      "start": "1838",
+      "end": "1858",
+      "certainty": "approximate",
+      "source": "NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, \"The Underground Railroad: Columbia, Lancaster County\" (PA-SHPO)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "York",
+        "Columbia",
+        "Philadelphia"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. York (William C. Goodridge, \"reputed\"), over the Columbia-Wrightsville bridge (1834), and from Columbia in Stephen Smith and William Whipper's rail cars to Philadelphia, from 1838 to the late 1850s. It rests largely on Whipper's own letter of 1871; the NPS calls Columbia a site of legend. Places, in order: York, Columbia, Philadelphia.",
+      "legs": [
+        {
+          "leg": "Q821105>Q1133892",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1133892>Q1345",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-pittsburgh",
+      "label": "The Monongahela valley to Pittsburgh and Lake Erie",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q1187047",
+        "Q1342",
+        "Q37320"
+      ],
+      "start": "1841",
+      "end": "1847",
+      "certainty": "approximate",
+      "source": "Churchill, \"The Underground Railroad in the Ohio River Valley\", NPS handbook (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Uniontown",
+        "Pittsburgh",
+        "Cleveland"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Uniontown and Pittsburgh are documented (Black crowds rescued people at Pittsburgh four times, 1841 to 1847); from Pittsburgh the source says only \"northwest to Cleveland and the Western Reserve\". Places, in order: Uniontown, Pittsburgh, Cleveland.",
+      "legs": [
+        {
+          "leg": "Q1187047>Q1342",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1342>Q37320",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-marietta",
+      "label": "Across the Ohio at Marietta",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q2526491",
+        "Q985482",
+        "Q2669023",
+        "Q146811"
+      ],
+      "start": "1837",
+      "end": "1847",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Williamstown",
+        "Marietta",
+        "Chesterhill",
+        "Zanesville"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From the Virginia shore at Williamstown to Marietta (David Putnam Jr.), Chesterhill and Zanesville. Dated cases 1837 and 1846 to 1847. Places, in order: Williamstown, Marietta, Chesterhill, Zanesville.",
+      "legs": [
+        {
+          "leg": "Q2526491>Q985482",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q985482>Q2669023",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q2669023>Q146811",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-zanesville-reserve",
+      "label": "Zanesville to the Western Reserve",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q146811",
+        "Q37320"
+      ],
+      "start": "1837",
+      "end": "1847",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Zanesville",
+        "Cleveland"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. The source says Zanesville was \"linked by canal to the Western Reserve\" and names no place on the way. Places, in order: Zanesville, Cleveland.",
+      "legs": [
+        {
+          "leg": "Q146811>Q37320",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-ripley",
+      "label": "Across the Ohio at Ripley",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q2666983",
+        "Q36879"
+      ],
+      "start": "1822",
+      "end": "1861",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Ripley",
+        "Sardinia"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Ripley (John Rankin from 1822, John Parker) to Sardinia. The story of Rankin's lantern appears only in twentieth-century sources. Places, in order: Ripley, Sardinia.",
+      "legs": [
+        {
+          "leg": "Q2666983>Q36879",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-ripley-north",
+      "label": "Sardinia to Lake Erie",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q36879",
+        "Q1762816",
+        "Q608207"
+      ],
+      "start": "1830",
+      "end": "1861",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Sardinia",
+        "Urbana",
+        "Sandusky"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Northwest to join the Cincinnati road in the upper Miami valley, then by the Alum Creek Quaker settlement north of Columbus to Sandusky. The source dates these networks to \"the late 1820s and early 1830s\" and names a belt of settlements, not a list of towns: Urbana stands for the belt. Places, in order: Sardinia, Urbana, Sandusky.",
+      "legs": [
+        {
+          "leg": "Q36879>Q1762816",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1762816>Q608207",
+          "shared_with": [
+            "ugrr-cincinnati-north"
+          ],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-cincinnati-north",
+      "label": "Cincinnati to Lake Erie",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q43196",
+        "Q986776",
+        "Q1762816",
+        "Q608207"
+      ],
+      "start": "1830",
+      "end": "1861",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Cincinnati",
+        "Lebanon",
+        "Urbana",
+        "Sandusky"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. By farmers' wagons through the Quaker and free Black settlements between Lebanon and Urbana, then by Alum Creek to Sandusky and the Western Reserve. In use from about 1830, dense by about 1840; Levi Coffin moved to Cincinnati in 1847. Places, in order: Cincinnati, Lebanon, Urbana, Sandusky.",
+      "legs": [
+        {
+          "leg": "Q43196>Q986776",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q986776>Q1762816",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q1762816>Q608207",
+          "shared_with": [
+            "ugrr-ripley-north"
+          ],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-lake-erie-sandusky",
+      "label": "Across Lake Erie from Sandusky",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q608207",
+        "Q385335"
+      ],
+      "start": "1834",
+      "end": "1861",
+      "certainty": "approximate",
+      "source": "Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Sandusky",
+        "Amherstburg"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Siebert names Sandusky among the lake ports and Amherstburg among the Canadian landings, from recollections. 1834: William Wells Brown begins work on the lake steamers, where he aided people waiting at Cleveland, Detroit and Buffalo. Places, in order: Sandusky, Amherstburg.",
+      "legs": [
+        {
+          "leg": "Q608207>Q385335",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-lake-erie-cleveland",
+      "label": "Across Lake Erie from Cleveland",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q37320",
+        "Q7230953"
+      ],
+      "start": "1834",
+      "end": "1861",
+      "certainty": "approximate",
+      "source": "Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Cleveland",
+        "Port Stanley"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Siebert names Cleveland among the lake ports and Port Stanley among the Canadian landings, from recollections; which port sent to which landing is not recorded. Places, in order: Cleveland, Port Stanley.",
+      "legs": [
+        {
+          "leg": "Q37320>Q7230953",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-madison",
+      "label": "Across the Ohio at Madison",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q990883",
+        "Q1439902"
+      ],
+      "start": "1826",
+      "end": "1847",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Madison",
+        "Fountain City"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Madison (George DeBaptiste, Elijah Anderson) to Levi Coffin at Newport, now Fountain City, where he lived from 1826 to 1847. The source gives the way between by county only. Places, in order: Madison, Newport (Fountain City).",
+      "legs": [
+        {
+          "leg": "Q990883>Q1439902",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-new-albany",
+      "label": "Across the Ohio at New Albany",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q1762878",
+        "Q5033862",
+        "Q4832149",
+        "Q3293425",
+        "Q1439902"
+      ],
+      "start": "1826",
+      "end": "1847",
+      "certainty": "legal",
+      "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "New Albany",
+        "Canton",
+        "Azalia",
+        "Carthage",
+        "Fountain City"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. New Albany and Jeffersonville, Canton, Farmington, Azalia, Carthage, Newport: the stops are the source's. The years are Coffin's at Newport; the source does not date this road itself. Places, in order: New Albany, Canton, Azalia, Carthage, Newport (Fountain City).",
+      "legs": [
+        {
+          "leg": "Q1762878>Q5033862",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q5033862>Q4832149",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q4832149>Q3293425",
+          "shared_with": [],
+          "dash": "solid"
+        },
+        {
+          "leg": "Q3293425>Q1439902",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-cincinnati-newport",
+      "label": "Cincinnati to Newport",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q43196",
+        "Q1439902"
+      ],
+      "start": "1826",
+      "end": "1847",
+      "certainty": "approximate",
+      "source": "Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Cincinnati",
+        "Fountain City"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Three roads met at Coffin's house: from Madison, from New Albany and from Cincinnati. Places, in order: Cincinnati, Newport (Fountain City).",
+      "legs": [
+        {
+          "leg": "Q43196>Q1439902",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-newport-detroit",
+      "label": "Newport to Michigan",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q1439902",
+        "Q2373038",
+        "Q12439"
+      ],
+      "start": "1826",
+      "end": "1847",
+      "certainty": "approximate",
+      "source": "Churchill (HB-CHURCHILL)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Fountain City",
+        "Cassopolis",
+        "Detroit"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From Newport to Detroit, or to the free Black settlements of Cass County, Michigan (Cassopolis is its county seat and stands for them). Places, in order: Newport (Fountain City), Cassopolis, Detroit.",
+      "legs": [
+        {
+          "leg": "Q1439902>Q2373038",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q2373038>Q12439",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-detroit-river",
+      "label": "Across the Detroit River",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "solid",
+      "heads": "chevron",
+      "waypoints": [
+        "Q12439",
+        "Q182625"
+      ],
+      "start": "1833",
+      "end": "1861",
+      "certainty": "legal",
+      "source": "Barker, \"Reconsidering the Underground Railroad in Canada West\", NPS handbook (HB-BARKER); Johnson, \"Escaping on the Northwestern Frontier\" (HB-JOHNSON); Parks Canada, \"Underground Railroad National Historic Event\" (PC-UGRR)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Detroit",
+        "Windsor"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. 1833: the Blackburns are taken across to Windsor, the earliest dated crossing in what was read. John Brown's party crossed on 12 March 1859. Places, in order: Detroit, Windsor.",
+      "legs": [
+        {
+          "leg": "Q12439>Q182625",
+          "shared_with": [],
+          "dash": "solid"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-quincy-chicago",
+      "label": "Quincy to Chicago",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q575750",
+        "Q782574",
+        "Q574878",
+        "Q576209",
+        "Q1297"
+      ],
+      "start": "1842",
+      "end": "1859",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, \"Illinois Underground Railroad\" (ENJOY-IL); Siebert 1898 (SIEBERT-V)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Quincy",
+        "Galesburg",
+        "Princeton",
+        "Ottawa",
+        "Chicago"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Thin. The NPS handbook attests Knox County (Galesburg; 1842), Chicago (1844) and Ottawa (1859); Quincy (Dr. Richard Eells) and Princeton (Owen Lovejoy) are from the state's tourism page; the order of the towns is local tradition descended from Siebert's informants. Places, in order: Quincy, Galesburg, Princeton, Ottawa, Chicago.",
+      "legs": [
+        {
+          "leg": "Q575750>Q782574",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q782574>Q574878",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q574878>Q576209",
+          "shared_with": [],
+          "dash": "dashed"
+        },
+        {
+          "leg": "Q576209>Q1297",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-chicago-detroit",
+      "label": "Chicago to Detroit",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q1297",
+        "Q12439"
+      ],
+      "start": "1843",
+      "end": "1859",
+      "certainty": "approximate",
+      "source": "Johnson (HB-JOHNSON); PBS American Experience, \"John Brown's Missouri raid\" (PBS-BROWN)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Chicago",
+        "Detroit"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Caroline Quarlls crossed Illinois, Indiana and Michigan to Detroit in 1843; John Brown's party went by rail in March 1859. Siebert also has lake vessels from Chicago. The ends are documented, the way between is not. Places, in order: Chicago, Detroit.",
+      "legs": [
+        {
+          "leg": "Q1297>Q12439",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-louisiana-texas",
+      "label": "Louisiana to Mexican Texas",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q2278195",
+        "Q970482",
+        "Q975"
+      ],
+      "start": "1822",
+      "end": "1836",
+      "certainty": "sphere",
+      "source": "Baumgartner, \"Freedom Seekers on the Southwestern Frontier\", NPS handbook (HB-BAUM); Wikipedia, \"Underground Railroad\" (WP-UGRR)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Natchitoches",
+        "Nacogdoches",
+        "San Antonio"
+      ],
+      "grade": "exact",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road. Nearly a hundred people left western Louisiana in the summer of 1822, across the Sabine (then the border) for Nacogdoches and San Antonio de Béxar. Natchitoches as the line's start is the editor's choice (WP-UGRR mentions a road from there); the escapes the source dates were from parishes farther south. Ends in 1836, when Texas left Mexico. Places, in order: Natchitoches, Nacogdoches, San Antonio.",
+      "legs": [
+        {
+          "leg": "Q2278195>Q970482",
+          "shared_with": [],
+          "dash": "dotted"
+        },
+        {
+          "leg": "Q970482>Q975",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-texas-matamoros",
+      "label": "Texas to Matamoros",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q16555",
+        "Q738353"
+      ],
+      "start": "1837",
+      "end": "1865",
+      "certainty": "sphere",
+      "source": "NPS (Audain), \"Freedom Seekers in the Antebellum Texas-Mexico Borderlands\" (NPS-MEX); Baumgartner (HB-BAUM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Houston",
+        "Heroica Matamoros"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road: across the Nueces Strip and the Rio Grande to Matamoros, where people found work. 1837: Mexico's Congress abolishes slavery (5 April). Baumgartner: no organized network, \"only occasional allies\". Houston as the line's start is the editor's choice (one dated case, 1858, began near it). Places, in order: Houston, Matamoros.",
+      "legs": [
+        {
+          "leg": "Q16555>Q738353",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-carolina-florida",
+      "label": "Carolina to Spanish Florida",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dotted",
+      "heads": "chevron",
+      "waypoints": [
+        "Q47716",
+        "Q549331"
+      ],
+      "start": "1687",
+      "end": "1763",
+      "certainty": "sphere",
+      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Charleston",
+        "Fort Mose Historic State Park"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road: no source names a place between Carolina and St. Augustine. First arrivals by canoe in 1687 (Landers, by a search result only; Wikipedia has 1689); Charles II's edict of 1693; Fort Mose founded 1738, evacuated to Cuba in 1763. Charleston stands for Carolina. Places, in order: Charleston, Fort Mose.",
+      "legs": [
+        {
+          "leg": "Q47716>Q549331",
+          "shared_with": [],
+          "dash": "dotted"
+        }
+      ]
+    },
+    {
+      "record": "ugrr-cape-florida",
+      "label": "Cape Florida to the Bahamas",
+      "kind": "arrow",
+      "value": "escape",
+      "class": "Escape route (the Underground Railroad)",
+      "dash": "dashed",
+      "heads": "chevron",
+      "waypoints": [
+        "Q2689037",
+        "Q514070"
+      ],
+      "start": "1821",
+      "end": "1825",
+      "certainty": "approximate",
+      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
+      "qc_status": null,
+      "labeled": false,
+      "dropped": null,
+      "places": [
+        "Key Biscayne",
+        "Andros"
+      ],
+      "grade": "circa",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From Cape Florida on Key Biscayne across the Gulf Stream to Andros Island (the Red Bays settlement): about 300 Black Seminoles in the early 1820s. The crossing is documented; where on Andros they landed is not in what was read. Sources disagree on how long it ran (to the mid-1820s; \"1821-1837\"). Places, in order: Cape Florida (Key Biscayne), Andros Island.",
+      "legs": [
+        {
+          "leg": "Q2689037>Q514070",
+          "shared_with": [],
+          "dash": "dashed"
+        }
+      ]
+    }
+  ],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1048
+    },
+    "legend": {
+      "x": 1526,
+      "y": 774,
+      "w": 340,
+      "h": 252,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 898,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "the status of 27 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER",
+    "Hartford (1838) predates the map's date, 1 June 1845",
+    "Springfield (1838) predates the map's date, 1 June 1845",
+    "Savannah (1834) predates the map's date, 1 June 1845",
+    "Natchitoches (1822) predates the map's date, 1 June 1845",
+    "Nacogdoches (1822) predates the map's date, 1 June 1845",
+    "Charleston (1687) predates the map's date, 1 June 1845",
+    "Fort Mose (1687) predates the map's date, 1 June 1845",
+    "Cape Florida (Key Biscayne) (1821) predates the map's date, 1 June 1845: the land it stands on was Florida Unorganized Federal Territory on its own day and is drawn as Florida",
+    "Andros Island (1821) predates the map's date, 1 June 1845",
+    "place Wilmington (ugrr-town-wilmington-q174224): name dropped (the ten-name limit)",
+    "place Philadelphia (ugrr-town-philadelphia-q1345): name dropped (the ten-name limit)",
+    "place New York (ugrr-town-new-york-q60): name dropped (the ten-name limit)",
+    "place Syracuse (ugrr-town-syracuse-q128069): name dropped (the ten-name limit)",
+    "place Rochester (ugrr-town-rochester-q49218): name dropped (the ten-name limit)",
+    "place Buffalo (ugrr-town-buffalo-q40435): name dropped (the ten-name limit)",
+    "place Niagara Falls (ugrr-town-niagara-falls-q128133): name dropped (the ten-name limit)",
+    "place St. Catharines (ugrr-town-st-catharines-q126805): name dropped (the ten-name limit)",
+    "place Hartford (ugrr-town-hartford-q33486): name dropped (the ten-name limit)",
+    "place Springfield (ugrr-town-springfield-q49158): name dropped (the ten-name limit)",
+    "place Troy (ugrr-town-troy-q600301): name dropped (the ten-name limit)",
+    "place Bennington (ugrr-town-bennington-q817921): name dropped (the ten-name limit)",
+    "place Rutland (ugrr-town-rutland-q25893): name dropped (the ten-name limit)",
+    "place Ferrisburgh (ugrr-town-ferrisburgh-q1874592): name dropped (the ten-name limit)",
+    "place Burlington (ugrr-town-burlington-q31058): name dropped (the ten-name limit)",
+    "place St. Albans (ugrr-town-st-albans-q1787559): name dropped (the ten-name limit)",
+    "place Montreal (ugrr-town-montreal-q340): name dropped (the ten-name limit)",
+    "place Norfolk (ugrr-town-norfolk-q49231): name dropped (the ten-name limit)",
+    "place New Bedford (ugrr-town-new-bedford-q49147): name dropped (the ten-name limit)",
+    "place Savannah (ugrr-town-savannah-q83813): name dropped (the ten-name limit)",
+    "place Washington (ugrr-town-washington-q61): name dropped (the ten-name limit)",
+    "place Baltimore (ugrr-town-baltimore-q5092): name dropped (the ten-name limit)",
+    "place York (ugrr-town-york-q821105): name dropped (the ten-name limit)",
+    "place Columbia (ugrr-town-columbia-q1133892): name dropped (the ten-name limit)",
+    "place Uniontown (ugrr-town-uniontown-q1187047): name dropped (the ten-name limit)",
+    "place Pittsburgh (ugrr-town-pittsburgh-q1342): name dropped (the ten-name limit)",
+    "place Williamstown (ugrr-town-williamstown-q2526491): name dropped (the ten-name limit)",
+    "place Marietta (ugrr-town-marietta-q985482): name dropped (the ten-name limit)",
+    "place Chesterhill (ugrr-town-chesterhill-q2669023): name dropped (the ten-name limit)",
+    "place Zanesville (ugrr-town-zanesville-q146811): name dropped (the ten-name limit)",
+    "place Ripley (ugrr-town-ripley-q2666983): name dropped (the ten-name limit)",
+    "place Sardinia (ugrr-town-sardinia-q36879): name dropped (the ten-name limit)",
+    "place Urbana (ugrr-town-urbana-q1762816): name dropped (the ten-name limit)",
+    "place Sandusky (ugrr-town-sandusky-q608207): name dropped (the ten-name limit)",
+    "place Lebanon (ugrr-town-lebanon-q986776): name dropped (the ten-name limit)",
+    "place Port Stanley (ugrr-town-port-stanley-q7230953): name dropped (the ten-name limit)",
+    "place Madison (ugrr-town-madison-q990883): name dropped (the ten-name limit)",
+    "place Newport (Fountain City) (ugrr-town-newport-fountain-city-q1439902): name dropped (the ten-name limit)",
+    "place New Albany (ugrr-town-new-albany-q1762878): name dropped (the ten-name limit)",
+    "place Canton (ugrr-town-canton-q5033862): name dropped (the ten-name limit)",
+    "place Azalia (ugrr-town-azalia-q4832149): name dropped (the ten-name limit)",
+    "place Carthage (ugrr-town-carthage-q3293425): name dropped (the ten-name limit)",
+    "place Cassopolis (ugrr-town-cassopolis-q2373038): name dropped (the ten-name limit)",
+    "place Windsor (ugrr-town-windsor-q182625): name dropped (the ten-name limit)",
+    "place Quincy (ugrr-town-quincy-q575750): name dropped (the ten-name limit)",
+    "place Galesburg (ugrr-town-galesburg-q782574): name dropped (the ten-name limit)",
+    "place Princeton (ugrr-town-princeton-q574878): name dropped (the ten-name limit)",
+    "place Ottawa (ugrr-town-ottawa-q576209): name dropped (the ten-name limit)",
+    "place Natchitoches (ugrr-town-natchitoches-q2278195): name dropped (the ten-name limit)",
+    "place Nacogdoches (ugrr-town-nacogdoches-q970482): name dropped (the ten-name limit)",
+    "place San Antonio (ugrr-town-san-antonio-q975): name dropped (the ten-name limit)",
+    "place Houston (ugrr-town-houston-q16555): name dropped (the ten-name limit)",
+    "place Matamoros (ugrr-town-matamoros-q738353): name dropped (the ten-name limit)",
+    "place Fort Mose (ugrr-town-fort-mose-q549331): name dropped (the ten-name limit)"
+  ],
+  "alt_text": "Parchment map, 1 June 1845, free and slave states, framed on The East, titled \"The Underground Railroad, to 1845\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Rupert's Land, United Province of Canada, Texas Republic, Iowa Territory, Wisconsin Territory, Missouri, Indian Territory, Virginia, Georgia, Michigan, Florida and Illinois. Marked places: Wilmington (1822 to 1861), Philadelphia (1822 to 1861), New York (1834 to 1861), Albany (1838 to 1861), Syracuse (1842 to 1861), Rochester (1842 to 1861), Buffalo (1842 to 1861), Niagara Falls (1842 to 1861), St. Catharines (1842 to 1861), Hartford (1838 to 1842), Springfield (1838 to 1842), Troy (1838 to 1856), Bennington (1838 to 1856), Rutland (1838 to 1856), Ferrisburgh (1838 to 1856), Burlington (1838 to 1856), St. Albans (1838 to 1856), Montreal (1838 to 1856), Norfolk (1842 to 1857), New Bedford (1842 to 1857), Boston (1842 to 1857), Savannah (1834), Washington (1842 to 1857), Baltimore (1842 to 1857), York (1838 to 1858), Columbia (1838 to 1858), Uniontown (1841 to 1847), Pittsburgh (1841 to 1847), Cleveland (1834 to 1861), Williamstown (1837 to 1847), Marietta (1837 to 1847), Chesterhill (1837 to 1847), Zanesville (1837 to 1847), Ripley (1822 to 1861), Sardinia (1822 to 1861), Urbana (1830 to 1861), Sandusky (1830 to 1861), Cincinnati (1826 to 1861), Lebanon (1830 to 1861), Amherstburg (1834 to 1861), Port Stanley (1834 to 1861), Madison (1826 to 1847), Newport (Fountain City) (1826 to 1847), New Albany (1826 to 1847), Canton (1826 to 1847), Azalia (1826 to 1847), Carthage (1826 to 1847), Cassopolis (1826 to 1847), Detroit (1826 to 1861), Windsor (1833 to 1861), Quincy (1842 to 1859), Galesburg (1842 to 1859), Princeton (1842 to 1859), Ottawa (1842 to 1859), Chicago (1842 to 1859), Natchitoches (1822 to 1836), Nacogdoches (1822 to 1836), San Antonio (1822 to 1865), Houston (1837 to 1865), Matamoros (1837 to 1865), Charleston (1687 to 1763), Fort Mose (1687 to 1763), Cape Florida (Key Biscayne) (1821 to 1825) and Andros Island (1821 to 1825). Routes: Wilmington to Philadelphia (Thomas Garrett), escape route (the underground railroad) with arrowheads, Philadelphia to New York, escape route (the underground railroad) with arrowheads, New York to Canada by Albany, Syracuse and Niagara, escape route (the underground railroad) with arrowheads, New York into New England, escape route (the underground railroad) with arrowheads, Albany to Canada through Vermont, escape route (the underground railroad) with arrowheads, By sea from Norfolk to New Bedford, escape route (the underground railroad) with arrowheads, By sea from Norfolk to Boston, escape route (the underground railroad) with arrowheads, By sea from Savannah to New York, escape route (the underground railroad) with arrowheads, Washington and Baltimore to Philadelphia, escape route (the underground railroad) with arrowheads, Across the Susquehanna at Columbia, escape route (the underground railroad) with arrowheads, The Monongahela valley to Pittsburgh and Lake Erie, escape route (the underground railroad) with arrowheads, Across the Ohio at Marietta, escape route (the underground railroad) with arrowheads, Zanesville to the Western Reserve, escape route (the underground railroad) with arrowheads, Across the Ohio at Ripley, escape route (the underground railroad) with arrowheads, Sardinia to Lake Erie, escape route (the underground railroad) with arrowheads, Cincinnati to Lake Erie, escape route (the underground railroad) with arrowheads, Across Lake Erie from Sandusky, escape route (the underground railroad) with arrowheads, Across Lake Erie from Cleveland, escape route (the underground railroad) with arrowheads, Across the Ohio at Madison, escape route (the underground railroad) with arrowheads, Across the Ohio at New Albany, escape route (the underground railroad) with arrowheads, Cincinnati to Newport, escape route (the underground railroad) with arrowheads, Newport to Michigan, escape route (the underground railroad) with arrowheads, Across the Detroit River, escape route (the underground railroad) with arrowheads, Quincy to Chicago, escape route (the underground railroad) with arrowheads, Chicago to Detroit, escape route (the underground railroad) with arrowheads, Louisiana to Mexican Texas, escape route (the underground railroad) with arrowheads, Texas to Matamoros, escape route (the underground railroad) with arrowheads, Carolina to Spanish Florida, escape route (the underground railroad) with arrowheads and Cape Florida to the Bahamas, escape route (the underground railroad) with arrowheads.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); places: the Parchment record table, coordinates from Wikidata",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1845-06-01&tracker=slavery&underground=on&strip=off&frame=east&title=The+Underground+Railroad%2C+to+1845&size=1920x1080"
+  }
+}

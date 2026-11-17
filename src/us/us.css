@@ -159,6 +159,14 @@ body:not(.mode-diff) #toolbar .diff-only { display: none; }
 .legend .swatch.fill-side-red-dep { fill: var(--side-red-fill); fill-opacity: 0.4; }
 body:not(.tracker-military) #war { display: none; }
 body:not(.tracker-military) #toolbar .mil-only { display: none; }
+/* the Underground Railroad's switch (owner, 2026-11-17): beside the tracker while a slavery tracker is on */
+body:not(.tracker-slavery) #toolbar .slavery-only { display: none; }
+#toolbar #underground.active { background: var(--navy); color: var(--cream); }
+/* a network of routes that merge and split (src/render/network.js): one shape, so the see-through is the group's;
+   a paper casing under every leg keeps the line readable over any fill */
+.routes .route-network { opacity: 0.94; }
+.routes .route-network .route { stroke-opacity: 1; }
+.routes .route-casing { fill: none; stroke: var(--cream); stroke-opacity: 0.85; stroke-linecap: round; stroke-linejoin: round; }
 #toolbar #mil-go { max-width: 9.5em; }
 #toolbar #mil-view { max-width: 13em; }
 @media (max-width: 1500px) {

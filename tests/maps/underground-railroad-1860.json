@@ -1,0 +1,10 @@
+{
+  "_comment": "The Underground Railroad over the map of free and slave states (owner's request of 2026-11-17): every escape route documented by the date, from data/us/underground-railroad.csv (TEST ROWS; research and citations in docs/UNDERGROUND-RAILROAD.md). The whole continent, so the ends in Canada, Mexico and the Bahamas are on the sheet. Routes that share a leg are one line (docs/ROUTES-STYLE.md, section 6).",
+  "page": "us",
+  "date": "1860-06-01",
+  "tracker": "slavery",
+  "underground": true,
+  "title": "The Underground Railroad, to 1860",
+  "size": "1920x1080",
+  "out": "out/underground-railroad-1860"
+}

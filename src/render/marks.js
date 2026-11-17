@@ -7,7 +7,7 @@ import { SHAPES } from './legend.js';
 import { yearLabel } from '../data/records.js';
 
 // Radius of each shape, for the label pass to keep clear of.
-export const MARK_RADIUS = { 'rust-diamond': 7, 'moss-circle': 6, 'steel-circle': 5, 'navy-square': 6, 'navy-triangle': 7, circle: 6 };
+export const MARK_RADIUS = { 'rust-diamond': 7, 'moss-circle': 6, 'steel-circle': 5, 'ink-dot': 4, 'navy-square': 6, 'navy-triangle': 7, circle: 6 };
 
 // records: validated rows with lon/lat; projection: the stage projection. Rows without coordinates are skipped.
 // → [{ r, x, y, radius }] in the order given.

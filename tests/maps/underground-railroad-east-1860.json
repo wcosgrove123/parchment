@@ -1,0 +1,12 @@
+{
+  "_comment": "The same layer on the `east` frame, where the trunk lines of the Ohio valley, Pennsylvania and New York can be told apart (owner's request of 2026-11-17). TEST ROWS: data/us/underground-railroad.csv; research in docs/UNDERGROUND-RAILROAD.md.",
+  "page": "us",
+  "date": "1860-06-01",
+  "tracker": "slavery",
+  "underground": true,
+  "frame": "east",
+  "title": "The Underground Railroad, to 1860",
+  "size": "1920x1080",
+  "strip": "off",
+  "out": "out/underground-railroad-east-1860"
+}

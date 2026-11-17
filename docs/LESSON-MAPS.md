@@ -43,6 +43,7 @@ the order.
 | `date` | `date=` or `year=` | a day (`1836-06-01`) or a year (`1836`, read as 31 December) |
 | `from` | `from=` | makes a Diff: what changed from this date to `date` |
 | `tracker` | `tracker=` | `nations` (default), `states`, `slavery` (free and slave states, below), `freeblack` (free Black population, below), `cessions`, `population`, `electoral` |
+| `underground` | `underground=on` | `true` draws the Underground Railroad's escape routes in use on the date over the map, whatever the tracker (below) |
 | `frame` | `frame=` | a frame id (below) or a box `W,S,E,N` in degrees; without one, the whole continent |
 | `highlight` | `highlight=` | ids to light; everything else drops to paper (below) |
 | `annotate.rivers` | `rivers=` | rivers to name, as Natural Earth spells them (`Nueces`, `Rio Grande`, `Sabine`) |
@@ -85,6 +86,18 @@ amount. Counts: the Census Bureau's Working Paper No. 56, censuses of 1790 to 18
 each state within its present-day borders, so a row is added onto the polygon of the date that holds it (Virginia in
 1860 takes West Virginia's row). The packing slip lists every polygon's count and the census rows behind it
 (`resolved.census`). Test order: `tests/maps/free-black-1860.json`.
+
+**The Underground Railroad** (`underground: true`, 2026-11-17). The escape routes in use on the map's date, from a
+table of their own, `data/us/underground-railroad.csv` (the record table's columns; the research behind every row,
+with its citations, is `docs/UNDERGROUND-RAILROAD.md`). A route is an `arrow` with the value `escape`, on the map
+from its `start` year (the first its sources document) to the end of 1865, `end` being the last year documented; a town is a `point` with the value `station`. Routes that share a leg are
+drawn as one line there and part where their rows part (`docs/ROUTES-STYLE.md` §6): nothing is bent by hand. On the
+page it is the "Underground Railroad" button beside the tracker, shown while Free and slave states (or Free Black
+population) is the tracker. Every town is a dot; at most ten carry names (the ends of lines first), the rest give
+their name, years and source on hover. To name particular towns on a lesson map, list them in `annotate.places` with
+`records` set to the table. The packing slip lists each route's record id, waypoints (ids and names), years,
+certainty and source, and under `resolved.underground` the routes that had not begun on the date and those last documented before it. The
+rows are TEST ROWS until the owner reviews them. Test order: `tests/maps/underground-railroad-1860.json`.
 
 **Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the
 Republic of Texas has a color of its own and the land Mexico still claimed inside it keeps the hatch; the whole

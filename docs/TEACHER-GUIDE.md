@@ -249,5 +249,17 @@ it comes from a dated source, and clicking any area opens a card with that sourc
   `title=` titles the map. On a Texas slide the Republic of Texas (1836–1845) has a color of its own, so the land
   Mexico still claimed inside it shows as a hatch. Export gives the picture at that size. Whoever keeps the site can
   make the same map from an order form, with a list of everything on it and its sources (docs/LESSON-MAPS.md).
+- **The Underground Railroad.** Choose *Free and slave states* in the tracker menu; an **Underground Railroad** button
+  appears beside it. Press it and the map shows every escape route documented by the year in the box; move the year
+  and the map fills in, until by 1865 every route is on it. Press it again to take the routes off. Where several
+  roads share a stretch they are one line, and they part where the roads part. A solid line is a chain of stops the
+  sources document; a dashed line is approximate (its ends are known, the way between is not, or it rests on later
+  recollections); a dotted line is a direction only. Every town is a small dot: hover it, or a line, for its name,
+  years and source. Ten towns at most carry printed names. **The lines are not roads**: the National Park Service's
+  own study says no map of arrows can hold what happened, and that most people fled short distances from the border
+  states, helped mainly by free Black communities or by no one. Use the reading routine's last prompt ("one thing
+  the map cannot support") here. What each line rests on, and what was left off, is in
+  `docs/UNDERGROUND-RAILROAD.md`. To change a route, edit `scripts/underground-rows.mjs` and tell whoever keeps the
+  site; the rows are test rows until reviewed.
 - **Something looks wrong?** Note the year and the area and tell the person who keeps the site. Borders are not
   redrawn here; a wrong one is fixed in its source or set aside with a written reason.

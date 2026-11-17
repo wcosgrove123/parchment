@@ -40,6 +40,8 @@ const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, sla
 const [SPAN_A, SPAN_B] = stage.span;
 const params = new URLSearchParams(location.search);
 const PLAY_MS = 450;
+const UNDERGROUND_FILE = 'data/us/underground-railroad.csv';
+const UNDERGROUND_END = 18651231;
 
 // A lesson map (src/us/frames.js): the address may frame the page on a focus or a box (frame=texas,
 // frame=-107,24.5,-92.5,37.5), size the sheet for a slide (size=1600x1550, scale=1.25), light some polygons and drop
@@ -227,6 +229,8 @@ async function main() {
     playing: null,
     // the Military layer: which war (else the longest one alive on the date), and whose names print (a side's key, or both)
     war: params.get('war') || null,
+    // the Underground Railroad's routes over the map (owner, 2026-11-17): a switch beside the tracker, or underground=on
+    underground: params.get('underground') === 'on',
     names: params.get('names') || 'both',
     // what of the layer to draw (empty: everything built), which events carry numerals, and the strip under the map
     show: parseList(params.get('show')),
@@ -343,16 +347,51 @@ async function main() {
   }
   // The layer's events and movements join the order's places and routes on the sheet; set again only when they
   // change (a new date may add one).
+  // The Underground Railroad (owner, 2026-11-17: "a toggle button for the slavery layer… it shows me all the paths
+  // for the year that i select"). Its routes and towns are records in a table of their own,
+  // data/us/underground-railroad.csv (docs/UNDERGROUND-RAILROAD.md has the research behind every row), read when the
+  // layer is first switched on. A route is on the map from the first year its row documents to the end of 1865; a
+  // town likewise. The switch shows on the slavery trackers; underground=on in the address draws it over any tracker.
+  let ugData = null;
+  async function ensureUnderground() {
+    if (ugData) return ugData;
+    const [vocab, text, gazetteer] = await Promise.all([loadJSON('data/vocab.json'), loadText(UNDERGROUND_FILE).catch(() => null), loadJSON('data/gazetteer.json').catch(() => ({}))]);
+    const checked = text ? validateRecords(text, vocab) : { records: [], problems: [{ line: 1, id: '', message: 'the table could not be read' }] };
+    for (const p of checked.problems) problems.push(`${UNDERGROUND_FILE} line ${p.line}${p.id ? ` (${p.id})` : ''}: ${p.message}`);
+    const { records, waiting } = resolveRecords(checked.records, gazetteer);
+    for (const w of waiting) problems.push(`${UNDERGROUND_FILE}, ${w.id}: no coordinate for ${w.missing.join(', ')} (run npm run geocode -- --file ${UNDERGROUND_FILE}); not drawn`);
+    const first = (w) => (w ? w.year * 10000 + (w.month ?? 1) * 100 + (w.day ?? 1) : 0);
+    const last = (w) => (w ? w.year * 10000 + (w.month ?? 12) * 100 + (w.day ?? 31) : 0);
+    const dated = records.map((r) => ({ ...r, first: first(r.startWhen), last: last(r.endWhen) }));
+    ugData = {
+      file: UNDERGROUND_FILE,
+      routes: dated.filter((r) => (r.kind === 'arrow' || r.kind === 'path') && r.coords).map((r) => ({ ...r, placeNames: r.waypoints.map((q) => gazetteer[q]?.label ?? q) })),
+      points: dated.filter((r) => r.kind === 'point' && r.lon != null && r.lat != null),
+    };
+    return ugData;
+  }
+  const undergroundOn = () => state.underground && (state.tracker === 'slavery' || state.tracker === 'freeblack' || params.get('underground') === 'on');
+  function undergroundFor(date) {
+    if (!ugData || !undergroundOn() || state.mode === 'diff') return null;
+    // (owner: "by 1865, it'll be all the roads": a route comes onto the map in the first year its row documents and
+    // stays to the end of 1865; its own last documented year is in its hover and on the slip)
+    if (date > UNDERGROUND_END) return null;
+    const on = (r) => r.first <= date;
+    return { file: ugData.file, routes: ugData.routes.filter(on), points: ugData.points.filter(on), all: ugData.routes };
+  }
   let recKey = null;
   function placeMilitaryRecords(mil) {
-    const key = mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}|${mil.moves.map((r) => r.id).join(',')}|${mil.positions.map((p) => `${p.force.id}@${p.at.join(',')}:${p.earlier.length}`).join(';')}` : '';
+    const ug = undergroundFor(state.date);
+    const key = (ug ? `ug:${ug.routes.map((r) => r.id).join(',')}:${ug.points.map((r) => r.id).join(',')}|` : '') + (mil ? `${mil.war?.id}|${mil.shown.map((r) => `${r.id}:${r.seq ?? ''}`).join(',')}|${mil.moves.map((r) => r.id).join(',')}|${mil.positions.map((p) => `${p.force.id}@${p.at.join(',')}:${p.earlier.length}`).join(';')}` : '');
     if (key === recKey) return;
     recKey = key;
-    atlas.setRecords(mil ? { points: [...orderRecords.points, ...mil.shown], routes: [...orderRecords.routes, ...mil.moves] } : orderRecords);
+    const base = mil ? { points: [...orderRecords.points, ...mil.shown], routes: [...orderRecords.routes, ...mil.moves] } : orderRecords;
+    atlas.setRecords(ug ? { ...base, points: [...base.points, ...ug.points], routes: [...base.routes, ...ug.routes] } : base);
   }
   if (state.tracker === 'military') await ensureMilitary();
   if (state.tracker === 'slavery') await ensureSlavery();
   if (state.tracker === 'freeblack') await ensureFree();
+  if (state.underground) await ensureUnderground();
   let milShown = null;
   // The earlier date when the Diff view opens without one: fifty years back, or the stage's first year.
   // (under the Electoral College: the election before the one shown)
@@ -427,6 +466,8 @@ async function main() {
       if (state.from != null) d3.select('#from-input').property('value', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       document.body.classList.toggle('mode-diff', state.mode === 'diff');
       document.body.classList.toggle('tracker-military', state.tracker === 'military');
+      document.body.classList.toggle('tracker-slavery', state.tracker === 'slavery' || state.tracker === 'freeblack');
+      d3.select('#underground').classed('active', undergroundOn());
       d3.selectAll('#toolbar [data-mode]').classed('active', function () { return this.dataset.mode === state.mode; });
       if (milShown) d3.select('#war').selectAll('option').property('selected', (w) => w.id === (milShown.war?.id ?? state.war ?? ''));
       filmStatus();
@@ -435,6 +476,7 @@ async function main() {
       if (state.mode === 'diff') q.set('from', state.fromExact ? isoDate(state.from) : yearOf(state.from));
       if (state.exact) q.set('date', isoDate(state.date)); else q.set('year', y);
       if (state.tracker !== 'nations') q.set('tracker', state.tracker);
+      if (undergroundOn()) q.set('underground', 'on');
       if (state.tracker === 'military') {
         if (state.war) q.set('war', state.war);
         if (state.names !== 'both') q.set('names', state.names);
@@ -758,6 +800,10 @@ async function main() {
   const sel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
     .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'slavery') await ensureSlavery(); if (state.tracker === 'freeblack') await ensureFree(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
   sel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
+  // The Underground Railroad's switch: shown while a slavery tracker is on (us.css hides it otherwise).
+  tb.append('button').attr('id', 'underground').attr('class', 'slavery-only').attr('title', 'The Underground Railroad: the escape routes in use in the year shown')
+    .text('Underground Railroad').classed('active', state.underground)
+    .on('click', async () => { state.underground = !undergroundOn(); if (state.underground) await ensureUnderground(); closeInfo(); render(); });
   // The Military layer's war: shown only while that layer is on (us.css hides it otherwise).
   const warSel = tb.append('select').attr('id', 'war').attr('title', 'The war shown')
     .on('change', function () { state.war = this.value || null; milWarned = false; closeInfo(); render(); });
@@ -1035,7 +1081,7 @@ async function main() {
     packingSlip: () => buildSlip({
       atlas, data, state, stage, powers, trackers: TRACKERS, params, sheet: SHEET, frame: lesson?.frame ?? null, projectionMode,
       lesson, records: orderRecords, problems, loadJSON, ec: state.tracker === 'electoral' ? electoralFor(state.date) : null,
-      military: milShown,
+      military: milShown, underground: undergroundFor(state.date),
     }),
     // The order this address is (the inverse of scripts/map.mjs's address).
     order: () => queryToOrder(new URLSearchParams(location.search)),

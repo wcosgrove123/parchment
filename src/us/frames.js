@@ -133,6 +133,8 @@ export function orderToQuery(order) {
   // (the Military layer: "layer": "military" in an order is tracker=military on this page, with its war and whose names print)
   put('tracker', order.layer === 'military' ? 'military' : order.tracker);
   put('war', order.war);
+  // (the Underground Railroad's routes in use on the date, over whatever tracker the order asks for)
+  put('underground', order.underground === true ? 'on' : order.underground === false ? null : order.underground);
   put('names', order.names);
   put('show', order.show);
   put('sequence', Array.isArray(order.sequence) ? order.sequence : order.sequence === false ? 'false' : order.sequence === true ? 'true' : order.sequence);
@@ -164,6 +166,7 @@ export function queryToOrder(q) {
   for (const k of ['from', 'tracker', 'title', 'size', 'projection', 'records']) if (get(k)) order[k] = get(k);
   if (order.tracker === 'military') { delete order.tracker; order.layer = 'military'; }
   for (const k of ['war', 'names', 'strip']) if (get(k)) order[k] = get(k);
+  if (get('underground') === 'on') order.underground = true;
   if (get('forces')) order.forces = parseList(get('forces'));
   if (get('play')) { order.play = get('play'); order.layer = 'military'; delete order.tracker; }
   for (const k of ['preset', 'width', 'view']) if (get(k)) order[k] = get(k);
