@@ -18,6 +18,7 @@ import { prepareDisputes, prepareUSMX, applyOHMCuts } from './disputes.js';
 import { loadText } from '../data/loader.js';
 import { prepareSlavery } from './slavery.js';
 import { prepareFree } from './freeblack.js';
+import { CLASS_TRACKERS, prepareClassTable, preparePieces } from './classify.js';
 import { loadRecordsText } from '../data/source.js';
 import { validateRecords, resolveRecords } from '../data/records.js';
 import { routeLegend } from '../render/routes.js';
@@ -36,7 +37,9 @@ import { eventsOf, eventsUpTo, sequenceFor, movementsOf, movementsSince, withSid
 const MANY_EVENTS = 40;
 
 // The Military layer (brief of 2026-11-09) is a tracker here, off unless asked for: tracker=military&war=id&names=both.
-const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, slavery: trackerDefs.slavery, freeblack: trackerDefs.freeblack, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
+// The statehood deck's three (brief of 2026-11-18, item 5): how each state was admitted, how its land became U.S. land,
+// and which chapter of the deck it is in (src/us/classify.js).
+const TRACKERS = { nations: trackerDefs.nations, states: trackerDefs.states, paths: trackerDefs.paths, pieces: trackerDefs.pieces, chapters: trackerDefs.chapters, slavery: trackerDefs.slavery, freeblack: trackerDefs.freeblack, cessions: trackerDefs.cessions, population: trackerDefs.population, electoral: trackerDefs.electoral, military: trackerDefs.military };
 const [SPAN_A, SPAN_B] = stage.span;
 const params = new URLSearchParams(location.search);
 const PLAY_MS = 450;
@@ -108,6 +111,21 @@ async function main() {
   // ...and the census's free and slave counts by state, 1790–1860, for the free Black population tracker.
   data.free = null;
   const ensureFree = async () => { await ensureSlavery(); if (!data.free) { data.free = prepareFree(await loadText('data/us/census-free-slave-1790-1860.csv').catch(() => null)); problems.push(...data.free.problems); } };
+  // The statehood deck's classification trackers: their tables, and the computed pieces (read when asked for).
+  data.classes = { paths: null, chapters: null };
+  data.pieces = null;
+  const ensureClass = async (id) => {
+    if (id === 'pieces') {
+      if (data.pieces) return;
+      data.pieces = preparePieces(await loadJSON(trackerDefs.pieces.file).catch(() => null));
+      if (!data.pieces) { data.pieces = { items: [], acquisitions: [], shares: null }; problems.push(`${trackerDefs.pieces.file} could not be read (node scripts/derive-pieces.mjs writes it); no pieces are drawn`); }
+      return;
+    }
+    if (!CLASS_TRACKERS.has(id) || data.classes[id]) return;
+    const def = trackerDefs[id];
+    data.classes[id] = prepareClassTable(await loadText(def.table).catch(() => null), { file: def.table, column: id === 'paths' ? 'path' : 'chapter', values: id === 'paths' ? Object.keys(def.classes) : null });
+    problems.push(...data.classes[id].problems);
+  };
   data.nbx = prepareDisputes(await loadJSON('data/us/nb-disputes.json').catch(() => null));
   // ...and land a U.S. state and a Mexican state claimed at once (data/us/usmx-disputes.json, the same script).
   data.usmx = prepareUSMX(await loadJSON('data/us/usmx-disputes.json').catch(() => null));
@@ -394,6 +412,7 @@ async function main() {
   if (state.tracker === 'military') await ensureMilitary();
   if (state.tracker === 'slavery') await ensureSlavery();
   if (state.tracker === 'freeblack') await ensureFree();
+  if (CLASS_TRACKERS.has(state.tracker)) await ensureClass(state.tracker);
   if (state.underground) await ensureUnderground();
   let milShown = null;
   // The earlier date when the Diff view opens without one: fifty years back, or the stage's first year.
@@ -801,7 +820,7 @@ async function main() {
   // ------------------------------------------------------------ toolbar (chrome; never exported)
   const tb = d3.select('#toolbar').html('');
   const sel = tb.append('select').attr('id', 'tracker').attr('title', 'Tracker')
-    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'slavery') await ensureSlavery(); if (state.tracker === 'freeblack') await ensureFree(); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
+    .on('change', async function () { state.tracker = this.value; closeInfo(); if (state.tracker === 'slavery') await ensureSlavery(); if (state.tracker === 'freeblack') await ensureFree(); if (CLASS_TRACKERS.has(state.tracker)) await ensureClass(state.tracker); if (state.tracker === 'military') { await ensureMilitary(); fillWarMenu(); milToolsKey = null; } render(); });
   sel.selectAll('option').data(Object.values(TRACKERS)).join('option').attr('value', (t) => t.id).text((t) => t.title).property('selected', (t) => t.id === state.tracker);
   // The Underground Railroad's switch: shown while a slavery tracker is on (us.css hides it otherwise).
   tb.append('button').attr('id', 'underground').attr('class', 'slavery-only').attr('title', 'The Underground Railroad: the escape routes in use in the year shown')

@@ -1,0 +1,71 @@
+state,sq_mi,piece,taxonomy1_label,share
+Alabama,51656,treaty1783,Won,0.956
+Alabama,51656,westflorida,Claimed,0.044
+Alaska,574916,alaska,Bought,1.000
+Arizona,114015,mexican,Won,0.759
+Arizona,114015,gadsden,Bought,0.241
+Arkansas,53179,louisiana,Bought,1.000
+California,158114,mexican,Won,1.000
+Colorado,104092,louisiana,Bought,0.395
+Colorado,104092,texas,Joined,0.325
+Colorado,104092,mexican,Won,0.260
+Colorado,104092,adamsonis_line,Split,0.021
+Connecticut,4980,treaty1783,Won,1.000
+Delaware,2013,treaty1783,Won,1.000
+District of Columbia,68,treaty1783,Won,1.000
+Florida,56628,florida,Bought,1.000
+Georgia,58789,treaty1783,Won,1.000
+Hawaii,6434,hawaii,Joined,1.000
+Idaho,83569,oregon,Split,1.000
+Illinois,56341,treaty1783,Won,1.000
+Indiana,36183,treaty1783,Won,1.000
+Iowa,56268,louisiana,Bought,1.000
+Kansas,82283,louisiana,Bought,0.915
+Kansas,82283,texas,Joined,0.085
+Kentucky,40408,treaty1783,Won,1.000
+Louisiana,46719,louisiana,Bought,0.899
+Louisiana,46719,westflorida,Claimed,0.101
+Maine,32476,treaty1783,Won,1.000
+Maryland,10048,treaty1783,Won,1.000
+Massachusetts,8122,treaty1783,Won,1.000
+Michigan,58128,treaty1783,Won,1.000
+Minnesota,84381,louisiana,Bought,0.457
+Minnesota,84381,treaty1783,Won,0.346
+Minnesota,84381,redriver,Split,0.197
+Mississippi,47667,treaty1783,Won,0.921
+Mississippi,47667,westflorida,Claimed,0.079
+Missouri,69704,louisiana,Bought,1.000
+Montana,147054,louisiana,Bought,0.829
+Montana,147054,oregon,Split,0.171
+Nebraska,77343,louisiana,Bought,1.000
+Nevada,110558,mexican,Won,1.000
+New Hampshire,9265,treaty1783,Won,1.000
+New Jersey,7546,treaty1783,Won,1.000
+New Mexico,121587,texas,Joined,0.577
+New Mexico,121587,mexican,Won,0.407
+New Mexico,121587,gadsden,Bought,0.016
+New York,48628,treaty1783,Won,1.000
+North Carolina,49391,treaty1783,Won,1.000
+North Dakota,70699,louisiana,Bought,0.586
+North Dakota,70699,redriver,Split,0.414
+Ohio,41262,treaty1783,Won,1.000
+Oklahoma,69902,louisiana,Bought,0.918
+Oklahoma,69902,texas,Joined,0.082
+Oregon,96955,oregon,Split,1.000
+Pennsylvania,45299,treaty1783,Won,1.000
+Rhode Island,1090,treaty1783,Won,1.000
+South Carolina,30953,treaty1783,Won,1.000
+South Dakota,77121,louisiana,Bought,0.988
+South Dakota,77121,redriver,Split,0.012
+Tennessee,42139,treaty1783,Won,1.000
+Texas,264729,texas,Joined,1.000
+Utah,84880,mexican,Won,1.000
+Vermont,9615,treaty1783,Won,1.000
+Virginia,39999,treaty1783,Won,1.000
+Washington,67586,oregon,Split,1.000
+West Virginia,24228,treaty1783,Won,1.000
+Wisconsin,56050,treaty1783,Won,1.000
+Wyoming,97812,louisiana,Bought,0.704
+Wyoming,97812,mexican,Won,0.127
+Wyoming,97812,oregon,Split,0.124
+Wyoming,97812,texas,Joined,0.044

@@ -84,6 +84,8 @@ export function itemKeys(it, { power = null, powers = null, twins = null } = {})
   } else if (it.src === 'newberry') {
     add(`nb:${p.id}`); add(p.id); add(p.name); add(p.full);
     for (const n of twins?.get(p.id) ?? []) add(n);
+    // (under a classification tracker, its class: "chapter-3", "enabled"; src/us/classify.js)
+    for (const k of it.classKeys ?? []) add(k);
   } else if (it.src === 'nbx' || it.src === 'usmx') {
     add('disputes'); add('disputed'); add(p.name); add(p.id);
   } else if (it.src === 'hb') {

@@ -56,6 +56,40 @@
     "title": "Military",
     "_comment": "The Military layer (brief of 2026-11-09; proposal P1, owner's defaults of the same day). Off by default: nothing changes unless tracker=military is asked for. Fills mean the side: each polygon takes its side's fill while its state is a member of the war shown (membership rows in the record table under tracker military; the war and its sides in vocab.json). Non-members are paper. Disputes keep their hatch, Native homelands their stipple. Which war: ?war=id, else the longest war alive on the date."
   },
+  "paths": {
+    "id": "paths",
+    "title": "How a place became a state",
+    "_comment": "The statehood deck's Taxonomy 2 (brief of 2026-11-18, item 5): each state filled by the path it took into the Union, from a table, data/us/statehood-paths.csv (src/us/classify.js): one row per Newberry state id, with its source. Five fills: the owner lifted the four-fill limit for this tracker only (2026-11-18, \"paths get 5\"). A territory, not yet admitted, and the District stay paper. A highlight may name a path (\"enabled\") as well as states. The colors are the session's choice: five of Set A's six, the most widely spaced hues.",
+    "table": "data/us/statehood-paths.csv",
+    "classes": {
+      "founding": { "fill": "P", "label": "Founding" },
+      "carved": { "fill": "T", "label": "Carved" },
+      "direct": { "fill": "S", "label": "Direct" },
+      "enabled": { "fill": "In", "label": "Enabled" },
+      "self-started": { "fill": "C", "label": "Self-started" }
+    }
+  },
+  "chapters": {
+    "id": "chapters",
+    "title": "Statehood chapters",
+    "_comment": "Which chapter of the statehood deck each state is in, from data/us/statehood-chapters.csv (the outline's chapter map). The owner chose one chapter per slide (2026-11-18): an order lights a chapter (\"chapter-3\", or the states' ids) and its states take a fill; up to four chapters lit at once take one fill each, in chapter order, and a fifth is hatched (grammar §5). Without a highlight every state wears the neutral gray.",
+    "table": "data/us/statehood-chapters.csv",
+    "fills": ["P", "In", "S", "C"],
+    "unlit": { "fill": "N", "label": "States" }
+  },
+  "pieces": {
+    "id": "pieces",
+    "title": "How the land became U.S. land",
+    "_comment": "The statehood deck's Taxonomy 1: the land each acquisition brought, credited to its last entry, computed by scripts/derive-pieces.mjs from the Newberry's own polygons and dated (data/us/pieces.topojson), labeled from data/us/acquisitions.csv. Four fills and Claimed hatched (owner, 2026-11-18: \"Hatch Claimed\"; West Florida, which Spain disputed). The states keep their borders and names over the pieces. A highlight of states draws only the pieces inside them. A piece with no label (Missouri Territory's claim south of the Red River, 1819) is paper. The colors are the session's choice.",
+    "file": "data/us/pieces.topojson",
+    "labels": {
+      "won": { "fill": "S", "label": "Won" },
+      "bought": { "fill": "In", "label": "Bought" },
+      "split": { "fill": "T", "label": "Split" },
+      "joined": { "fill": "C", "label": "Joined" },
+      "claimed": { "pattern": "hatch", "label": "Claimed" }
+    }
+  },
   "electoral": {
     "id": "electoral",
     "title": "Electoral College",

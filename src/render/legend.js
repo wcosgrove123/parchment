@@ -118,10 +118,19 @@ export function createLegend(root, { x0, x1, y0, y1 }, { anchor = 'top-right', l
     if (fit) {
       let widest = 0;
       try {
-        widest = title.node().getComputedTextLength() + PAD * 2;
+        // (the title's small capitals are letter-spaced, which its computed length leaves out: its drawn box counts it)
+        widest = Math.max(title.node().getComputedTextLength(), title.node().getBBox().width) + PAD * 2;
         rows.selectAll('g.row text').each(function () { widest = Math.max(widest, this.getComputedTextLength() + 32 + PAD * 2); });
       } catch { /* not laid out */ }
       w = Math.max(W, Math.min(460, Math.ceil(widest + 6)));
+      box.attr('width', w);
+      g.attr('transform', `translate(${leftX(w)},${topY(H)})`);
+    } else {
+      // A fixed legend keeps its 236 px unless its title would run past the edge ("How the land became U.S. land",
+      // 2026-11-18): then it widens to the title. Every title before these fits, so those legends are unchanged.
+      let tw = 0;
+      try { tw = title.node().getBBox().width + PAD * 2; } catch { tw = 0; }
+      w = tw > W ? Math.min(460, Math.ceil(tw + 6)) : W;
       box.attr('width', w);
       g.attr('transform', `translate(${leftX(w)},${topY(H)})`);
     }

@@ -12,6 +12,7 @@ import { US_FROM, nbName, cleanLabel, powerAt, aliveNB } from './model.js';
 import { covered, slaveryCount } from './slavery.js';
 import { freeOn, SOURCE as FREE_SOURCE } from './freeblack.js';
 import { queryToOrder, itemKeys, slug } from './frames.js';
+import { CLASS_TRACKERS } from './classify.js';
 import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
@@ -55,16 +56,24 @@ function sourceOf(it, tags) {
   if (it.src === 'treaty' || it.src === 'treatyX') return { dataset: 'Computed by Parchment (scripts/derive-native.mjs) from the U.S. Forest Service Royce areas; nothing drawn' };
   if (it.src === 'aiannh') return { dataset: 'U.S. Census Bureau, cartographic boundary file, AIANNH 2025', url: 'https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html' };
   if (it.src === 'icc') return { dataset: 'Indian Claims Commission, Indian Land Areas Judicially Established (1978), digitized by the National Park Service' };
+  if (it.src === 'piece') {
+    return {
+      dataset: 'Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library\'s polygons: the land the U.S. polygons gained on the acquisition\'s day, outside the 1783 domain, credited to its last entry and still U.S. land on the map\'s date; nothing drawn',
+      acquisition: { key: p.key, date: p.date ?? null, label: p.label ?? null, name: p.name ?? null, instrument: p.instrument ?? null, from: p.from ?? null, source: p.source ?? null, note: p.note ?? null },
+      ...(it.clipped ? { clipped_to: 'the polygons the order lit' } : {}),
+    };
+  }
   return { dataset: it.src };
 }
 
 function layerOf(it) {
   if (it.src === 'ohm') return it.p.lvl === 'x' ? 'ohm-overlap' : 'openhistoricalmap';
-  return { newberry: 'newberry', nbx: 'newberry-dispute', usmx: 'us-mexico-dispute', hb: 'native-homeland', royce: 'land-cession', treaty: 'treaty-land', treatyX: 'treaty-land-overlap', aiannh: 'native-land-today', icc: 'original-territory' }[it.src] ?? it.src;
+  return { newberry: 'newberry', nbx: 'newberry-dispute', usmx: 'us-mexico-dispute', hb: 'native-homeland', royce: 'land-cession', treaty: 'treaty-land', treatyX: 'treaty-land-overlap', aiannh: 'native-land-today', icc: 'original-territory', piece: 'acquisition-piece' }[it.src] ?? it.src;
 }
 function nameOf(it) {
   const p = it.p;
   if (it.src === 'newberry') return nbName(p);
+  if (it.src === 'piece') return p.name ?? p.key;
   if (it.src === 'nbx' || it.src === 'usmx') return `Claimed by both ${p.an} and ${p.bn}`;
   if (it.src === 'royce') return `Royce area ${p.n}${p.tribe ? ` (${p.tribe})` : ''}`;
   if (it.src === 'icc') return p.tribe;
@@ -75,11 +84,13 @@ function datesOf(it) {
   if (it.src === 'newberry' || it.src === 'nbx' || it.src === 'usmx' || it.src === 'treaty' || it.src === 'treatyX') return { start: iso(p.s), end: iso(p.e), end_is: 'last day in force' };
   if (it.src === 'ohm' || it.src === 'hb') return { start: iso(p.s), end: iso(p.e), end_is: 'the day it ceased' };
   if (it.src === 'royce') return { start: iso(p.d), end: null };
+  if (it.src === 'piece') return { start: iso(p.s), end: iso(p.e), end_is: 'last day of the stretch on which the U.S. land is the same' };
   return { start: null, end: null };
 }
 function idsOf(it) {
   const p = it.p;
   if (it.src === 'newberry') return { newberry: p.id, newberry_version: p.v };
+  if (it.src === 'piece') return { acquisition: p.key };
   if (it.src === 'ohm') return p.lvl === 'x' ? { ohm_overlap: p.rid, ohm: [p.a, p.b] } : { ohm: p.rid, wikidata: p.wd ?? null };
   if (it.src === 'nbx') return { newberry: [p.a, p.b] };
   if (it.src === 'usmx') return { computed: p.id, newberry: p.a, newberry_version: p.av, ohm: p.b };
@@ -95,6 +106,7 @@ function certaintyOf(it, date) {
 function lookOf(it, fills) {
   const l = it.look ?? {};
   if (l.fill) return { kind: 'fill', key: l.fill, color: fills[l.fill] ?? null, name: COLOR_NAMES[l.fill] ?? l.fill };
+  if (l.pattern && l.area) return { kind: 'pattern', pattern: `rust hatch (${l.area})` };
   if (l.pattern) return { kind: 'pattern', pattern: l.pattern === 'hatch' ? 'rust hatch (overlap or dispute)' : l.pattern === 'stipple' ? 'ink stipple, soft edge (approximate homeland)' : l.pattern === 'crosshatch' ? 'rust cross-hatch (in rebellion)' : l.pattern };
   if (l.seq) return { kind: 'sequence', step: l.seq, label: l.label ?? null };
   if (l.pop) return { kind: 'sequence', step: l.pop, label: l.label ?? null };
@@ -198,6 +210,11 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       lines: (military.lines ?? []).map((l) => ({ id: l.id, kind: l.kind, label: l.label, side: l.side ?? null, computed_from: l.kind === 'blockade' ? `the coast of ${l.coast_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}), inside the window given, moved 14 px offshore` : `the edge of ${l.border_of}'s polygons as drawn on ${isoDate(l.on_date)} (${l.polygons} polygon${l.polygons === 1 ? '' : 's'}) where it meets ${l.against}'s land`, on: isoDate(l.on_date), window: l.window ?? null, runs: l.runs.length, length_px: l.length_px, source: l.source ?? null })),
     } : null,
   };
+  // The statehood deck's classification trackers: the table or the computed pieces, and what the date holds.
+  if (CLASS_TRACKERS.has(state.tracker)) {
+    resolved.classification = classificationOf({ state, data, trackers, cur, date, frame, atlas });
+    if (resolved.classification.note) warnings.push(resolved.classification.note);
+  }
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
   // A polygon the order lit that is alive on the date but not on this map (Alaska and Hawaii on a frame: a frame
   // draws no insets, src/us/stage.js). The highlight found it, so it is not "unmatched"; the slip says where it went.
@@ -268,6 +285,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       certainty: certaintyOf(it, date), power: pw, power_label: pl, look, diff_role: r, ...(it.look?.area && !r ? { keyed_as: it.look.area } : {}),
       ...(fb && it.src === 'newberry' && fb.unitOf(it.p) ? { free_black: { count: fb.unitOf(it.p).free, badge: !!fb.badgeOf(it.p), census_rows: fb.unitOf(it.p).rows } } : {}),
       ...((state.tracker === 'slavery' || state.tracker === 'freeblack') && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
+      ...((state.tracker === 'paths' || state.tracker === 'chapters') && it.src === 'newberry' ? { class: it.classRow ? { value: it.classRow.value, title: it.classRow.title, source: it.classRow.source, note: it.classRow.note } : null } : {}),
       lit: diff ? null : it.lit ?? null, lit_by: diff ? null : it.litBy ?? null, lit_as_named: !diff && !!(it.lit && it.litBy && !atlas.isPowerKey(it.litBy, pw)), labeled: !!label, label, cut_by_frame: atlas.cutByFrame(it.f),
       km2: Math.round(geoArea(it.f) * KM2), source: sourceOf(it, tags),
     };
@@ -393,6 +411,44 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   return { parchment: SLIP_VERSION, order, resolved, legend, features, points, routes: routesOut, rivers, changes, layout, warnings: [...new Set(warnings)], alt_text: alt, credit };
 }
 
+// The classification trackers (src/us/classify.js). paths and chapters: the table, and every state in force on the
+// date by its class (on or off the sheet). pieces: the stretch of days the pieces belong to, each acquisition on the
+// sheet, and today's states by piece when the map is of today's states (scripts/derive-pieces.mjs computed them).
+function classificationOf({ state, data, trackers, cur, date, frame, atlas }) {
+  const id = state.tracker;
+  const states = aliveNB(data, date).filter((it) => it.p.type === 'State' || it.p.type === 'District of Columbia');
+  if (id === 'paths' || id === 'chapters') {
+    const table = data.classes?.[id];
+    const by = {};
+    const without = [];
+    for (const it of states) {
+      const r = (table?.byId.get(it.p.id) ?? []).find((x) => (x.s == null || x.s <= date) && (x.e == null || date <= x.e));
+      if (!r) { if (it.p.type === 'State') without.push(nbName(it.p)); continue; }
+      (by[r.value] ??= []).push(nbName(it.p));
+    }
+    for (const k of Object.keys(by)) by[k].sort();
+    const lit = id === 'chapters' ? [...new Set((cur.items ?? []).filter((it) => it.lit && it.classRow).map((it) => Number(it.classRow.value)))].sort((a, b) => a - b) : null;
+    return {
+      tracker: id, table: table?.file ?? trackers[id].table, by_class: by, without_a_row: without.sort(), ...(lit ? { chapters_lit: lit } : {}),
+      note: `the classes on this map come from the statehood deck's outline (${table?.file ?? trackers[id].table}), not yet reviewed by the owner`,
+    };
+  }
+  // pieces
+  const shown = (cur.items ?? []).filter((it) => it.src === 'piece' && (frame ? atlas.inFrame(it.f) || atlas.inInset(it.f) : atlas.shows(it.f)));
+  const all = (data.pieces?.items ?? []).filter((it) => it.p.s <= date && date <= it.p.e);
+  const stretch = all.length ? { from: isoDate(all[0].p.s), to: all[0].p.e >= OPEN ? 'present' : isoDate(all[0].p.e) } : null;
+  const today = data.nb.filter((it) => it.p.e >= 99991231 && it.p.type === 'State');
+  const todays = today.length && date >= Math.max(...today.map((it) => it.p.s));
+  const onSheet = new Set(states.filter((it) => (frame ? atlas.inFrame(it.f) || atlas.inInset(it.f) : atlas.shows(it.f))).map((it) => it.p.id));
+  return {
+    tracker: id, file: trackers.pieces.file, computed_by: 'scripts/derive-pieces.mjs', stretch,
+    acquisitions: [...new Map(shown.map((it) => [it.p.key, { key: it.p.key, name: it.p.name ?? null, date: it.p.date ?? null, label: it.p.label ?? null, km2: it.p.km2 }])).values()].sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')),
+    shares: todays ? (data.pieces?.shares?.states ?? []).filter((s) => !frame || onSheet.has(s.id)).map((s) => ({ ...s, sq_mi: Math.round(s.km2 / 2.589988) })) : null,
+    shares_note: todays ? 'each state\'s land by piece, today\'s states (scripts/derive-pieces.mjs; areas on the sphere)' : 'shares are computed for today\'s states only',
+    note: 'the pieces are computed from the Newberry\'s polygons; their labels (Won, Bought, Split, Joined, Claimed) come from the statehood deck\'s outline (data/us/acquisitions.csv), not yet reviewed by the owner',
+  };
+}
+
 // Land that changed hands (src/us/diff.js handoffsUS): both polygons, their versions, the area and how it was found.
 function handoffSource(h) {
   return {
@@ -496,6 +552,8 @@ function creditLine(features, points, routes, rivers, trackerId) {
   if (trackerId === 'population') parts.push('counts: U.S. Census Bureau');
   if (trackerId === 'freeblack') parts.push('counts: U.S. Census Bureau', 'status of states: the Parchment status table (test rows)');
   if (trackerId === 'slavery') parts.push('status of states: the Parchment status table (test rows)');
+  if (trackerId === 'paths' || trackerId === 'chapters') parts.push('classes: the statehood deck outline');
+  if (trackerId === 'pieces') parts.push('pieces: computed from the Newberry Library polygons, labeled from the statehood deck outline');
   if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at)) parts.push('rivers: Natural Earth');
   if (points.length || routes.length) parts.push('places: the Parchment record table, coordinates from Wikidata');
   return parts.join('; ');
@@ -506,8 +564,11 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
   const list = (xs) => (xs.length <= 1 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
   const s = [];
   const where = frame ? `framed on ${frame.title ?? 'a box of the continent'}` : 'North America';
-  if (changes) s.push(`Parchment map of change, ${changes.from} to ${changes.to}, ${resolved.tracker.title.toLowerCase()}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
-  else s.push(`Parchment map, ${resolved.date_text}, ${resolved.tracker.title.toLowerCase()}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
+  // (the tracker's title in running text: its first word in lower case unless it names a people or a body, the rest
+  // as written: "how the land became U.S. land", "free Black population", "Indian land cessions")
+  const tt = resolved.tracker.title.replace(/^(\S+)/, (w) => (/^(Indian|Native|Electoral)$/.test(w) ? w : w.toLowerCase()));
+  if (changes) s.push(`Parchment map of change, ${changes.from} to ${changes.to}, ${tt}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
+  else s.push(`Parchment map, ${resolved.date_text}, ${tt}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
   const fillRows = legend.rows.filter((r) => (r.role === 'category' || r.role === 'side') && r.key && COLOR_NAMES[r.key]);
   if (fillRows.length) s.push(`Shaded: ${list(fillRows.map((r) => `${r.label} in ${COLOR_NAMES[r.key]}`))}.`);
   const hatch = legend.rows.filter((r) => r.role === 'dispute' || r.role === 'dispute or overlap' || r.role === 'area');

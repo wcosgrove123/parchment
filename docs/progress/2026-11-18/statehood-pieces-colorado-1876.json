@@ -1,0 +1,848 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1876-08-01",
+    "tracker": "pieces",
+    "title": "Colorado, 38th state, August 1, 1876",
+    "frame": "-110.4,35.9,-100.7,42.1",
+    "highlight": [
+      "nb:co_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1876-08-01&tracker=pieces&frame=-110.4%2C35.9%2C-100.7%2C42.1&highlight=nb%3Aco_state&title=Colorado%2C+38th+state%2C+August+1%2C+1876",
+    "mode": "snapshot",
+    "date": "1876-08-01",
+    "date_text": "1 August 1876",
+    "from": null,
+    "tracker": {
+      "id": "pieces",
+      "title": "How the land became U.S. land"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -110.4,
+        "south": 35.9,
+        "east": -100.7,
+        "north": 42.1
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        105.55000000000001,
+        -39
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "Colorado, 38th state, August 1, 1876",
+    "highlight": {
+      "ids": [
+        "nb:co_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null,
+    "classification": {
+      "tracker": "pieces",
+      "file": "data/us/pieces.topojson",
+      "computed_by": "scripts/derive-pieces.mjs",
+      "stretch": {
+        "from": "1867-03-30",
+        "to": "1898-07-06"
+      },
+      "acquisitions": [
+        {
+          "key": "louisiana",
+          "name": "Louisiana Purchase (1803)",
+          "date": "1803-04-30",
+          "label": "bought",
+          "km2": 2136458
+        },
+        {
+          "key": "adamsonis_line",
+          "name": "Adams-Onís boundary line (1819)",
+          "date": "1819-02-22",
+          "label": "split",
+          "km2": 5527
+        },
+        {
+          "key": "texas",
+          "name": "Texas (1845)",
+          "date": "1845-12-29",
+          "label": "joined",
+          "km2": 999322
+        },
+        {
+          "key": "mexican",
+          "name": "Mexican Cession (1848)",
+          "date": "1848-07-04",
+          "label": "won",
+          "km2": 1369610
+        }
+      ],
+      "shares": null,
+      "shares_note": "shares are computed for today's states only",
+      "note": "the pieces are computed from the Newberry's polygons; their labels (Won, Bought, Split, Joined, Claimed) come from the statehood deck's outline (data/us/acquisitions.csv), not yet reviewed by the owner"
+    }
+  },
+  "legend": {
+    "title": "How the land became U.S. land",
+    "rows": [
+      {
+        "label": "Won",
+        "swatch": "fill",
+        "key": "S",
+        "fill": "#ce976a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Bought",
+        "swatch": "fill",
+        "key": "In",
+        "fill": "#78b58a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Split",
+        "swatch": "fill",
+        "key": "T",
+        "fill": "#58b4c3",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Joined",
+        "swatch": "fill",
+        "key": "C",
+        "fill": "#ad98d5",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Colorado",
+      "local": null,
+      "ids": {
+        "newberry": "co_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692881,
+            "url": "https://www.openhistoricalmap.org/relation/2692881",
+            "name": "Colorado",
+            "start": "1876-08-01",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1876-08-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:co_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Colorado",
+      "cut_by_frame": false,
+      "km2": 269375,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "co_state",
+          "version": 1,
+          "change": "The state of Colorado was created from Colorado Territory; Colorado Territory eliminated.",
+          "authority": "(Van Zandt, 141; U.S. Stat., vol. 18, part 3 [1876], p. 474)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Texas",
+      "local": null,
+      "ids": {
+        "newberry": "tx_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692904,
+            "url": "https://www.openhistoricalmap.org/relation/2692904",
+            "name": "Texas",
+            "start": "1850-12-13",
+            "end": "1896-05-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-12-13",
+      "end": "1896-05-03",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Texas",
+      "cut_by_frame": true,
+      "km2": 692360,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tx_state",
+          "version": 2,
+          "change": "State of Texas sold land in present Colorado, Kansas, New Mexico, Oklahoma, and Wyoming to the United States.",
+          "authority": "(U.S. Stat., vol. 9, ch. 49 [1850]/pp. 446-452 and appendix, sec. 10/pp. 1005-1006; Texas Laws 1850, 3d leg., 3d sess., ch. 2/p. 4; Van Zandt, 122)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Mexico Territory",
+      "local": null,
+      "ids": {
+        "newberry": "nm_terr",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2692802,
+            "url": "https://www.openhistoricalmap.org/relation/2692802",
+            "name": "New Mexico Territory",
+            "start": "1863-02-24",
+            "end": "1912-01-05",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1863-02-24",
+      "end": "1912-01-05",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Mexico Territory",
+      "cut_by_frame": true,
+      "km2": 314976,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_terr",
+          "version": 4,
+          "change": "The United States created Arizona Territory from New Mexico Territory.",
+          "authority": "(U.S. Stat., vol. 12, pp. 664-665; Van Zandt, 165)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Wyoming Territory",
+      "local": null,
+      "ids": {
+        "newberry": "wy_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692806,
+            "url": "https://www.openhistoricalmap.org/relation/2692806",
+            "name": "Wyoming Territory",
+            "start": "1868-07-25",
+            "end": "1890-07-09",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1868-07-25",
+      "end": "1890-07-09",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Wyoming Territory",
+      "cut_by_frame": true,
+      "km2": 252891,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wy_terr",
+          "version": 1,
+          "change": "The United States created Wyoming Territory with present boundaries from Dakota, Idaho, and Utah Territories.",
+          "authority": "(Trenholm, 1:83-84; U.S. Stat., vol. 15, ch. 235[1868], secs. 1, 17/pp. 178, 183; Van Zandt, 136, 144)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Utah Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ut_terr",
+        "newberry_version": 6,
+        "also_in_ohm": [
+          {
+            "ohm": 2692789,
+            "url": "https://www.openhistoricalmap.org/relation/2692789",
+            "name": "Utah Territory",
+            "start": "1868-07-25",
+            "end": "1896-01-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2692790,
+            "url": "https://www.openhistoricalmap.org/relation/2692790",
+            "name": "Utah",
+            "start": "1896-01-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1868-07-25",
+      "end": "1896-01-03",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Utah Territory",
+      "cut_by_frame": true,
+      "km2": 219641,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ut_terr",
+          "version": 6,
+          "change": "The United States created Wyoming Territory from Dakota, Idaho, and Utah Territories.",
+          "authority": "(U.S. Stat., vol. 15, ch. 235[1868], secs. 1, 17/pp. 178, 183; Van Zandt, 136, 144)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kansas",
+      "local": null,
+      "ids": {
+        "newberry": "ks_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692902,
+            "url": "https://www.openhistoricalmap.org/relation/2692902",
+            "name": "Kansas",
+            "start": "1861-01-29",
+            "end": "1950-08-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1861-01-29",
+      "end": "1950-08-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kansas",
+      "cut_by_frame": true,
+      "km2": 212955,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ks_state",
+          "version": 1,
+          "change": "The state of Kansas was created from Kansas Territory; Kansas Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 12, ch. 20 [1861]/pp. 126-128; Van Zandt, 138-139)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Nebraska",
+      "local": null,
+      "ids": {
+        "newberry": "ne_state",
+        "newberry_version": 3
+      },
+      "start": "1873-01-08",
+      "end": "1882-05-22",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nebraska",
+      "cut_by_frame": true,
+      "km2": 198360,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ne_state",
+          "version": 3,
+          "change": "TRIPP created by Dakota Territory in present South Dakota from GREGORY, TODD (original, extinct), and Non-County Area (1); TRIPP included a small piece of present Nebraska.",
+          "authority": "(Dak. Terr. Laws 1872, 10th sess., ch. 19, sec. 4/p. 45)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Shoshone",
+      "local": null,
+      "ids": {
+        "ohm": 2953509,
+        "wikidata": "Q26774"
+      },
+      "start": "1700-01-01",
+      "end": "1877-04-16",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Shoshone",
+      "cut_by_frame": true,
+      "km2": 182785,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2953509",
+        "license": "CC0 1.0",
+        "wikidata": "Q26774",
+        "notes": {
+          "wikipedia": "en:Shoshone"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 18
+      },
+      "start": "1861-03-02",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorg. Fed. Terr.",
+      "cut_by_frame": false,
+      "km2": 14779,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 18,
+          "change": "The United States created Dakota Territory from Nebraska Territory and Unorganized Federal Territory.",
+          "authority": "(Dak. Terr. Laws 1862, 1st sess., pp. 21-28; U.S. Stat., vol. 12, ch. 86[1861]/pp. 239-244; Van Zandt, 134, 136-137)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arizona Territory",
+      "local": null,
+      "ids": {
+        "newberry": "az_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692801,
+            "url": "https://www.openhistoricalmap.org/relation/2692801",
+            "name": "Arizona Territory",
+            "start": "1866-05-05",
+            "end": "1912-02-13",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1866-05-05",
+      "end": "1912-02-13",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 295368,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "az_terr",
+          "version": 2,
+          "change": "State of Nevada gained parts of MOHAVE and PAH-UTE (extinct) when the United States transferred the portion of Arizona Territory lying between 37 degrees and 42 degrees of north latitude and west of 114 degrees west longitude to Nevada.",
+          "authority": "(U.S. Stat., vol. 14, ch. 73[1866]/p. 43; Van Zandt, 158, 165; Ariz. Terr. Laws 1867, 3rd assy./ pp. 67-68; Ariz. Terr. Laws 1868, 4th assy./ pp. 68-69)"
+        }
+      }
+    },
+    {
+      "layer": "acquisition-piece",
+      "name": "Louisiana Purchase",
+      "local": null,
+      "ids": {
+        "acquisition": "louisiana"
+      },
+      "start": "1867-03-30",
+      "end": "1898-07-06",
+      "end_is": "last day of the stretch on which the U.S. land is the same",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 106410,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library's polygons: the land the U.S. polygons gained on the acquisition's day, outside the 1783 domain, credited to its last entry and still U.S. land on the map's date; nothing drawn",
+        "acquisition": {
+          "key": "louisiana",
+          "date": "1803-04-30",
+          "label": "bought",
+          "name": "Louisiana Purchase (1803)",
+          "instrument": "Treaty of 30 April 1803",
+          "from": "France",
+          "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 1; Office of the Historian, \"Louisiana Purchase\"",
+          "note": "$15 million. Newberry's la_purchase: \"boundaries were not clearly defined but unquestionably included the western half of the Mississippi drainage basin.\" From the deck outline; not yet reviewed by the owner."
+        },
+        "clipped_to": "the polygons the order lit"
+      }
+    },
+    {
+      "layer": "acquisition-piece",
+      "name": "Texas",
+      "local": null,
+      "ids": {
+        "acquisition": "texas"
+      },
+      "start": "1867-03-30",
+      "end": "1898-07-06",
+      "end_is": "last day of the stretch on which the U.S. land is the same",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 87442,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library's polygons: the land the U.S. polygons gained on the acquisition's day, outside the 1783 domain, credited to its last entry and still U.S. land on the map's date; nothing drawn",
+        "acquisition": {
+          "key": "texas",
+          "date": "1845-12-29",
+          "label": "joined",
+          "name": "Texas (1845)",
+          "instrument": "Joint resolution of 1 March 1845, accepted by the Texas convention 4 July 1845",
+          "from": "Republic of Texas",
+          "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 1; Texas State Library",
+          "note": "With the claims Texas sold in 1850 (9 Stat. 446): in New Mexico, Colorado, Kansas, Oklahoma and Wyoming that land is the Texas piece. From the deck outline; not yet reviewed by the owner."
+        },
+        "clipped_to": "the polygons the order lit"
+      }
+    },
+    {
+      "layer": "acquisition-piece",
+      "name": "Mexican Cession",
+      "local": null,
+      "ids": {
+        "acquisition": "mexican"
+      },
+      "start": "1867-03-30",
+      "end": "1898-07-06",
+      "end_is": "last day of the stretch on which the U.S. land is the same",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 69996,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library's polygons: the land the U.S. polygons gained on the acquisition's day, outside the 1783 domain, credited to its last entry and still U.S. land on the map's date; nothing drawn",
+        "acquisition": {
+          "key": "mexican",
+          "date": "1848-07-04",
+          "label": "won",
+          "name": "Mexican Cession (1848)",
+          "instrument": "Treaty of Guadalupe Hidalgo",
+          "from": "Mexico",
+          "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 1",
+          "note": "The treaty ended a war (the $15 million paid does not make it a purchase under the taxonomy's rule). From the deck outline; not yet reviewed by the owner."
+        },
+        "clipped_to": "the polygons the order lit"
+      }
+    },
+    {
+      "layer": "acquisition-piece",
+      "name": "Adams-Onís boundary line",
+      "local": null,
+      "ids": {
+        "acquisition": "adamsonis_line"
+      },
+      "start": "1867-03-30",
+      "end": "1898-07-06",
+      "end_is": "last day of the stretch on which the U.S. land is the same",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5527,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library's polygons: the land the U.S. polygons gained on the acquisition's day, outside the 1783 domain, credited to its last entry and still U.S. land on the map's date; nothing drawn",
+        "acquisition": {
+          "key": "adamsonis_line",
+          "date": "1819-02-22",
+          "label": "split",
+          "name": "Adams-Onís boundary line (1819)",
+          "instrument": "Adams-Onís Treaty, signed 22 February 1819 (in force 1821)",
+          "from": "Spain",
+          "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 1",
+          "note": "The part of the day's gain inside the Newberry's Missouri Territory (mo_terr v3: area exchanged with Spain along the treaty's line). From the deck outline; not yet reviewed by the owner."
+        },
+        "clipped_to": "the polygons the order lit"
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1555,
+      "y": 830,
+      "w": 311,
+      "h": 164,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "the pieces are computed from the Newberry's polygons; their labels (Won, Bought, Split, Joined, Claimed) come from the statehood deck's outline (data/us/acquisitions.csv), not yet reviewed by the owner"
+  ],
+  "alt_text": "Parchment map, 1 August 1876, how the land became U.S. land, framed on a box of the continent, titled \"Colorado, 38th state, August 1, 1876\". Shaded: Won in orange, Bought in green, Split in teal and Joined in purple. Named on the map: Colorado.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; pieces: computed from the Newberry Library polygons, labeled from the statehood deck outline",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1876-08-01&tracker=pieces&frame=-110.4%2C35.9%2C-100.7%2C42.1&highlight=nb%3Aco_state&title=Colorado%2C+38th+state%2C+August+1%2C+1876"
+  }
+}

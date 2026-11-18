@@ -1,0 +1,6027 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "2026-01-01",
+    "tracker": "paths"
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=2026-01-01&tracker=paths",
+    "mode": "snapshot",
+    "date": "2026-01-01",
+    "date_text": "1 January 2026",
+    "from": null,
+    "tracker": {
+      "id": "paths",
+      "title": "How a place became a state"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": "North America (the whole sheet)",
+      "box": {
+        "west": -127,
+        "south": 18.5,
+        "east": -63,
+        "north": 51
+      },
+      "from": "src/stages/north-america.json"
+    },
+    "projection": {
+      "name": "albers",
+      "parallels": [
+        29.5,
+        45.5
+      ],
+      "rotate": [
+        96,
+        0
+      ],
+      "chosen_by": "the North America stage (src/stages/north-america.json)"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The United States",
+    "highlight": null,
+    "inset": null,
+    "stage_insets": [
+      {
+        "id": "alaska",
+        "title": "Alaska",
+        "at": [
+          54,
+          318,
+          384,
+          290
+        ]
+      },
+      {
+        "id": "hawaii",
+        "title": "Hawaiian Islands",
+        "at": [
+          54,
+          624,
+          300,
+          176
+        ]
+      }
+    ],
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Pacific Ocean",
+      "Atlantic Ocean",
+      "Gulf of Mexico",
+      "Caribbean Sea",
+      "Hudson Bay",
+      "Gulf of California"
+    ],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null,
+    "classification": {
+      "tracker": "paths",
+      "table": "data/us/statehood-paths.csv",
+      "by_class": {
+        "self-started": [
+          "Alaska",
+          "Arkansas",
+          "Florida",
+          "Hawaii",
+          "Idaho",
+          "Iowa",
+          "Kansas",
+          "Michigan",
+          "Oregon",
+          "Tennessee",
+          "Wyoming"
+        ],
+        "enabled": [
+          "Alabama",
+          "Arizona",
+          "Colorado",
+          "Illinois",
+          "Indiana",
+          "Louisiana",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "Nevada",
+          "New Mexico",
+          "North Dakota",
+          "Ohio",
+          "Oklahoma",
+          "South Dakota",
+          "Utah",
+          "Washington",
+          "Wisconsin"
+        ],
+        "direct": [
+          "California",
+          "Texas"
+        ],
+        "founding": [
+          "Connecticut",
+          "Delaware",
+          "Georgia",
+          "Maryland",
+          "Massachusetts",
+          "New Hampshire",
+          "New Jersey",
+          "New York",
+          "North Carolina",
+          "Pennsylvania",
+          "Rhode Island",
+          "South Carolina",
+          "Virginia"
+        ],
+        "carved": [
+          "Kentucky",
+          "Maine",
+          "Vermont",
+          "West Virginia"
+        ]
+      },
+      "without_a_row": [],
+      "note": "the classes on this map come from the statehood deck's outline (data/us/statehood-paths.csv), not yet reviewed by the owner"
+    }
+  },
+  "legend": {
+    "title": "How a place became a state",
+    "rows": [
+      {
+        "label": "Founding",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Carved",
+        "swatch": "fill",
+        "key": "T",
+        "fill": "#58b4c3",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Direct",
+        "swatch": "fill",
+        "key": "S",
+        "fill": "#ce976a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Enabled",
+        "swatch": "fill",
+        "key": "In",
+        "fill": "#78b58a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Self-started",
+        "swatch": "fill",
+        "key": "C",
+        "fill": "#ad98d5",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "openhistoricalmap",
+      "name": "Canada",
+      "local": null,
+      "ids": {
+        "ohm": 2831059,
+        "wikidata": "Q16"
+      },
+      "start": "2023-12-19",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Canada",
+      "cut_by_frame": true,
+      "km2": 12126333,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831059",
+        "license": "CC0 1.0",
+        "wikidata": "Q16",
+        "notes": {
+          "start_event": "Hans Island border dispute settled with Denmark",
+          "wikipedia": "en:Canada"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico",
+      "local": "México",
+      "ids": {
+        "ohm": 2864028,
+        "wikidata": "Q96"
+      },
+      "start": "1970-01-20",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mexico",
+      "cut_by_frame": true,
+      "km2": 2253663,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2864028",
+        "license": "CC0 1.0",
+        "wikidata": "Q96",
+        "notes": {
+          "start_event": "Maritime boundaries 12nm",
+          "wikipedia": "en:Mexico"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nunavut",
+      "local": null,
+      "ids": {
+        "ohm": 2831056,
+        "wikidata": "Q2023"
+      },
+      "start": "2023-12-19",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nunavut",
+      "cut_by_frame": false,
+      "km2": 1999606,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831056",
+        "license": "CC0 1.0",
+        "wikidata": "Q2023",
+        "notes": {
+          "start_event": "Hans Island border dispute settled with Denmark",
+          "wikipedia": "en:Nunavut"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Quebec",
+      "local": null,
+      "ids": {
+        "ohm": 2831063,
+        "wikidata": "Q176"
+      },
+      "start": "1927-03-11",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Quebec",
+      "cut_by_frame": true,
+      "km2": 1593482,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831063",
+        "license": "CC0 1.0",
+        "wikidata": "Q176",
+        "notes": {
+          "start_event": "Quebec loses Labrador dispute",
+          "wikipedia": "en:Quebec"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alaska",
+      "local": null,
+      "ids": {
+        "newberry": "ak_state",
+        "newberry_version": 1
+      },
+      "start": "1959-01-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alaska",
+      "cut_by_frame": false,
+      "km2": 1479698,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ak_state",
+          "version": 1,
+          "change": "The state of Alaska was created from Alaska Territory by Presidential proclamation; Alaska Territory eliminated.",
+          "authority": "(Swindler, 1:208-225; Van Zandt, 165)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Ontario",
+      "local": null,
+      "ids": {
+        "ohm": 2831066,
+        "wikidata": "Q1904"
+      },
+      "start": "1912-05-15",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Ontario",
+      "cut_by_frame": true,
+      "km2": 1085395,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831066",
+        "license": "CC0 1.0",
+        "wikidata": "Q1904",
+        "notes": {
+          "start_event": "NWT cedes land to Ontario",
+          "wikipedia": "en:Ontario"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "British Columbia",
+      "local": null,
+      "ids": {
+        "ohm": 2831075,
+        "wikidata": "Q1973"
+      },
+      "start": "1903-03-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "British Columbia",
+      "cut_by_frame": true,
+      "km2": 981907,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831075",
+        "license": "CC0 1.0",
+        "wikidata": "Q1973",
+        "notes": {
+          "start_event": "BC cedes claim to Alaska",
+          "wikipedia": "en:British Columbia"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Texas",
+      "local": null,
+      "ids": {
+        "newberry": "tx_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2692911,
+            "url": "https://www.openhistoricalmap.org/relation/2692911",
+            "name": "Texas",
+            "start": "1896-05-04",
+            "end": "2000-07-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1896-05-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "direct",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "CRS lists the joint resolution of 1 March 1845; it annexed an independent republic, never a territory: direct. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Texas",
+      "cut_by_frame": false,
+      "km2": 686210,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tx_state",
+          "version": 3,
+          "change": "GREER eliminated from Texas when U.S. Supreme Court ruled that GREER was not within the boundaries of Texas, but was under the jurisdiction of the United States. GREER became a county in Oklahoma Territory on 4 May 1896.",
+          "authority": "(\"United States v. Texas,\" in U.S. Rpts., 162:1-91; U.S. Stat., vol. 29, ch. 155[1896]/pp. 113-114)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Alberta",
+      "local": null,
+      "ids": {
+        "ohm": 2831072,
+        "wikidata": "Q1951"
+      },
+      "start": "1905-09-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alberta",
+      "cut_by_frame": true,
+      "km2": 664051,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831072",
+        "license": "CC0 1.0",
+        "wikidata": "Q1951",
+        "notes": {
+          "start_event": "Alberta created from NWT",
+          "wikipedia": "en:Alberta"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Manitoba",
+      "local": null,
+      "ids": {
+        "ohm": 2831068,
+        "wikidata": "Q1948"
+      },
+      "start": "1912-05-15",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Manitoba",
+      "cut_by_frame": true,
+      "km2": 653373,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831068",
+        "license": "CC0 1.0",
+        "wikidata": "Q1948",
+        "notes": {
+          "start_event": "NWT cedes land to Manitoba",
+          "wikipedia": "en:Manitoba"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Saskatchewan",
+      "local": null,
+      "ids": {
+        "ohm": 2831073,
+        "wikidata": "Q1989"
+      },
+      "start": "1905-09-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Saskatchewan",
+      "cut_by_frame": true,
+      "km2": 649033,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831073",
+        "license": "CC0 1.0",
+        "wikidata": "Q1989",
+        "notes": {
+          "start_event": "Saskatchewan created from NWT",
+          "wikipedia": "en:Saskatchewan"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Yukon",
+      "local": null,
+      "ids": {
+        "ohm": 2831054,
+        "wikidata": "Q2009"
+      },
+      "start": "2003-04-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Yukon",
+      "cut_by_frame": false,
+      "km2": 478156,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831054",
+        "license": "CC0 1.0",
+        "wikidata": "Q2009",
+        "notes": {
+          "start_event": "Yukon renamed",
+          "wikipedia": "en:Yukon"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "California",
+      "local": null,
+      "ids": {
+        "newberry": "ca_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692754,
+            "url": "https://www.openhistoricalmap.org/relation/2692754",
+            "name": "California",
+            "start": "1959-12-31",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1959-12-31",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "S",
+        "color": "#ce976a",
+        "name": "orange"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "direct",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "Military rule, then its own constitution (1849): never an organized territory. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "California",
+      "cut_by_frame": false,
+      "km2": 409345,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ca_state",
+          "version": 2,
+          "change": "Between 1949 and 1959 (precise date unknown) SAN FRANCISCO gained a small area of the Alameda Naval Air Station when landfill expansion extended westward over the county line between SAN FRANCISCO and ALAMEDA in San Francisco Bay.",
+          "authority": "(U.S.G.S., 7.5 Minute Series, Oakland West Quadrangle, \";Edition of 1949\"; and \";Edition of 1959\";)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Montana",
+      "local": null,
+      "ids": {
+        "newberry": "mt_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692845,
+            "url": "https://www.openhistoricalmap.org/relation/2692845",
+            "name": "Montana",
+            "start": "1889-11-08",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1889-11-08",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Montana",
+      "cut_by_frame": false,
+      "km2": 379851,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mt_state",
+          "version": 1,
+          "change": "The state of Montana created from Montana Territory and to the Union by Presidential proclamation; Montana Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 26, pp. 1551-1552 and vol. 25, ch. 180 [1889]/pp. 676-684; Swindler, 6:82-83)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Mexico",
+      "local": null,
+      "ids": {
+        "newberry": "nm_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692819,
+            "url": "https://www.openhistoricalmap.org/relation/2692819",
+            "name": "New Mexico",
+            "start": "1912-01-06",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1912-01-06",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Mexico",
+      "cut_by_frame": false,
+      "km2": 314976,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_state",
+          "version": 1,
+          "change": "The state of New Mexico was created from New Mexico Territory; New Mexico Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 34, Part 1, [ch. 3335 /p. 267])"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "The Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2874699,
+        "wikidata": "Q778"
+      },
+      "start": "1996-01-04",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "The Bahamas",
+      "cut_by_frame": false,
+      "km2": 302216,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874699",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "Archipelagic Waters and Maritime Jurisdiction Act, 1993 (No. 37 of 1993)",
+          "start_date_source": "https://www.state.gov/wp-content/uploads/2020/01/LIS-36.pdf"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arizona",
+      "local": null,
+      "ids": {
+        "newberry": "az_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692820,
+            "url": "https://www.openhistoricalmap.org/relation/2692820",
+            "name": "Arizona",
+            "start": "1912-02-14",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1912-02-14",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arizona",
+      "cut_by_frame": false,
+      "km2": 295368,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "az_state",
+          "version": 1,
+          "change": "The state of Arizona was created from Arizona Territory; Arizona Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 34, pt. 1, ch. 3335[1906]/pp. 267-285; U.S. Stat., vol. 36, pt. 1, ch. 310[1910]/pp. 557-579; U.S. Stat., vol. 37, pt. 1, res. 8[1911]/pp. 39-43; pt. 2[1912]/pp. 1728-1729)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Nevada",
+      "local": null,
+      "ids": {
+        "newberry": "nv_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692781,
+            "url": "https://www.openhistoricalmap.org/relation/2692781",
+            "name": "Nevada",
+            "start": "1866-05-05",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1866-05-05",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nevada",
+      "cut_by_frame": false,
+      "km2": 286086,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nv_state",
+          "version": 2,
+          "change": "Nevada Territory gained from Utah Territory and from Arizona Territory.",
+          "authority": "(U.S. Stat., vol. 14, ch. 73[1866]/p. 43; Van Zandt, 158, 165; Nev. Stats. 1866, 2d sess., ch. 84/p. 183)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Colorado",
+      "local": null,
+      "ids": {
+        "newberry": "co_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692881,
+            "url": "https://www.openhistoricalmap.org/relation/2692881",
+            "name": "Colorado",
+            "start": "1876-08-01",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1876-08-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Colorado",
+      "cut_by_frame": false,
+      "km2": 269375,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "co_state",
+          "version": 1,
+          "change": "The state of Colorado was created from Colorado Territory; Colorado Territory eliminated.",
+          "authority": "(Van Zandt, 141; U.S. Stat., vol. 18, part 3 [1876], p. 474)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Wyoming",
+      "local": null,
+      "ids": {
+        "newberry": "wy_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692817,
+            "url": "https://www.openhistoricalmap.org/relation/2692817",
+            "name": "Wyoming",
+            "start": "1890-07-10",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1890-07-10",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Wyoming",
+      "cut_by_frame": false,
+      "km2": 252891,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wy_state",
+          "version": 1,
+          "change": "The state of Wyoming was created from Wyoming Territory; Wyoming Territory eliminated.",
+          "authority": "(Wyoming Constitution 1889, art. 12 in Swindler, 10:493; U.S. Stat., vol. 26, ch. 664[1890]/pp. 222-226; Van Zandt, 145)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Oregon",
+      "local": null,
+      "ids": {
+        "newberry": "or_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692775,
+            "url": "https://www.openhistoricalmap.org/relation/2692775",
+            "name": "Oregon",
+            "start": "1859-02-14",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1859-02-14",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Oregon",
+      "cut_by_frame": false,
+      "km2": 250618,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "or_state",
+          "version": 1,
+          "change": "The state of Oregon was created from Oregon Territory; Oregon Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 11, ch. 33[1859], secs. 1-2/pp. 383-384; Ore. Laws 1860, 1st reg. sess., pp. 28-30)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Chihuahua",
+      "local": null,
+      "ids": {
+        "ohm": 2964397,
+        "wikidata": "Q655"
+      },
+      "start": "1867-07-15",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Chihuahua",
+      "cut_by_frame": false,
+      "km2": 247793,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2964397",
+        "license": "CC0 1.0",
+        "wikidata": "Q655",
+        "notes": {
+          "start_event": "President Benito Juárez restores the republic",
+          "wikipedia": "en:Chihuahua (state)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Cuba",
+      "local": null,
+      "ids": {
+        "ohm": 2871299,
+        "wikidata": "Q241"
+      },
+      "start": "1978-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Cuba",
+      "cut_by_frame": false,
+      "km2": 233420,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2871299",
+        "license": "CC0 1.0",
+        "wikidata": "Q241",
+        "notes": {
+          "start_event": "Ratification of 12nm boundary",
+          "start_date_source": "https://www.state.gov/wp-content/uploads/2019/12/LIS-110.pdf",
+          "wikipedia": "en:Cuba"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Utah",
+      "local": null,
+      "ids": {
+        "newberry": "ut_state",
+        "newberry_version": 1
+      },
+      "start": "1896-01-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Utah",
+      "cut_by_frame": false,
+      "km2": 219641,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ut_state",
+          "version": 1,
+          "change": "The state of Utah was created from Utah Territory; Utah Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 28, ch. 138 [1894]/pp. 107-112; U.S. Stat., vol. 29, procl. no. 9, [1896]/pp. 876-877; Van Zandt, 159)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Minnesota",
+      "local": null,
+      "ids": {
+        "newberry": "mn_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692938,
+            "url": "https://www.openhistoricalmap.org/relation/2692938",
+            "name": "Minnesota",
+            "start": "1858-05-11",
+            "end": "1947-04-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2796665,
+            "url": "https://www.openhistoricalmap.org/relation/2796665",
+            "name": "Minnesota",
+            "start": "1947-04-26",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1858-05-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Minnesota",
+      "cut_by_frame": false,
+      "km2": 217997,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mn_state",
+          "version": 1,
+          "change": "The state of Minnesota was created from Minnesota Territory;  Minnesota Territory eliminated. The remainder of Minnesota Territory (west of the present state boundary) became unorganized federal territory.",
+          "authority": "(Schell, 72-77; U.S. Stat., vol. 11, ch. 60 [1857]/pp. 166-167 and ch. 31 [1858]/p. 285)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Idaho",
+      "local": null,
+      "ids": {
+        "newberry": "id_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692816,
+            "url": "https://www.openhistoricalmap.org/relation/2692816",
+            "name": "Idaho",
+            "start": "1890-07-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1890-07-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Idaho",
+      "cut_by_frame": false,
+      "km2": 215996,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "id_state",
+          "version": 1,
+          "change": "The state of Idaho was created from Idaho Territory; Idaho Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 26, ch. 656 [1890]/pp. 215-219; Van Zandt, 156)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kansas",
+      "local": null,
+      "ids": {
+        "newberry": "ks_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2799994,
+            "url": "https://www.openhistoricalmap.org/relation/2799994",
+            "name": "Kansas",
+            "start": "1950-08-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1950-08-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kansas",
+      "cut_by_frame": false,
+      "km2": 212964,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ks_state",
+          "version": 2,
+          "change": "Missouri and Kansas exchanged territory along the Missouri River from 40 degrees north latitude to the Kansas River. The change was made to accommodate shifts in the course of the Missouri River following the 1944 flood.",
+          "authority": "(U.S. Stat., vol. 64, ch. 519 [1950]/p. 397; Mo. Laws 1949, S.B. 141, p. 311; Kans. Laws 1949, 53d leg., chs. 196, 510/pp. 293-294, 837-838)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Nebraska",
+      "local": null,
+      "ids": {
+        "newberry": "ne_state",
+        "newberry_version": 5
+      },
+      "start": "1902-11-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nebraska",
+      "cut_by_frame": false,
+      "km2": 200034,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ne_state",
+          "version": 5,
+          "change": "CLAY (S.D.) officially gained an island in the Missouri River from DIXON (Neb.); voters approved the gain 1006 to 25.",
+          "authority": "(Schell, History of Clay County, 102-104; S. Dak. Laws 1901, 7th sess., ch. 85/p. 109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Dakota",
+      "local": null,
+      "ids": {
+        "newberry": "sd_state",
+        "newberry_version": 2
+      },
+      "start": "1902-11-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Dakota",
+      "cut_by_frame": false,
+      "km2": 199328,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sd_state",
+          "version": 2,
+          "change": "CLAY (S.D.) officially gained an island in the Missouri River from DIXON (Neb.); voters approved the gain 1006 to 25.",
+          "authority": "(Schell, History of Clay County, 102-104; S. Dak. Laws 1901, 7th sess., ch. 85/p. 109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Dakota",
+      "local": null,
+      "ids": {
+        "newberry": "nd_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692854,
+            "url": "https://www.openhistoricalmap.org/relation/2692854",
+            "name": "North Dakota",
+            "start": "1889-11-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1889-11-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Dakota",
+      "cut_by_frame": false,
+      "km2": 182597,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nd_state",
+          "version": 1,
+          "change": "The state of North Dakota was created from the Dakota Territory; Dakota Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 25, ch. 180[1889]/pp. 676-684 and vol. 26, no. 5/pp. 1548-1549; Swindler, 7:526-527; Van Zandt, 134)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Oklahoma",
+      "local": null,
+      "ids": {
+        "newberry": "ok_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692976,
+            "url": "https://www.openhistoricalmap.org/relation/2692976",
+            "name": "Oklahoma",
+            "start": "1907-11-16",
+            "end": "2000-07-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1907-11-16",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Oklahoma",
+      "cut_by_frame": false,
+      "km2": 181036,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ok_state",
+          "version": 1,
+          "change": "The state of Oklahoma was created from Oklahoma Territory and Indian Territory; Oklahoma Territory and Indian Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 34, ch. 3335 [1906]/pp. 267-268 and vol. 35, pp. 2160-2161; Van Zandt, 140-141)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Sonora",
+      "local": null,
+      "ids": {
+        "ohm": 2867393,
+        "wikidata": "Q46422"
+      },
+      "start": "1944-12-29",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Sonora",
+      "cut_by_frame": false,
+      "km2": 180780,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867393",
+        "license": "CC0 1.0",
+        "wikidata": "Q46422",
+        "notes": {
+          "start_event": "Border change westward because of Colorado River rerouted",
+          "start_date_source": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463909262.pdf",
+          "wikipedia": "en:Sonora"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Missouri",
+      "local": null,
+      "ids": {
+        "newberry": "mo_state",
+        "newberry_version": 5,
+        "also_in_ohm": [
+          {
+            "ohm": 2692942,
+            "url": "https://www.openhistoricalmap.org/relation/2692942",
+            "name": "Missouri",
+            "start": "1950-08-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1950-08-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri",
+      "cut_by_frame": false,
+      "km2": 180410,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_state",
+          "version": 5,
+          "change": "Missouri and Kansas exchanged territory along the Missouri River from 40 degrees north latitude to the Kansas River. The change was made to accommodate shifts in the course of the Missouri River following the 1944 flood.",
+          "authority": "(U.S. Stat., vol. 64, ch. 519 [1950]/p. 397; Mo. Laws 1949, S.B. 141, p. 311; Kans. Laws 1949, 53d leg., chs. 196, 510/pp. 293-294, 837-838)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Washington",
+      "local": null,
+      "ids": {
+        "newberry": "wa_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692780,
+            "url": "https://www.openhistoricalmap.org/relation/2692780",
+            "name": "Washington",
+            "start": "1889-11-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1889-11-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Washington",
+      "cut_by_frame": false,
+      "km2": 174570,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wa_state",
+          "version": 1,
+          "change": "The state of Washington was created from Washington Territory; Washington Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 25, ch. 180[1889], p. 676; U.S. Stat. pres. proc., vol. 26[1889], p. 10; Van Zandt, 155-156)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Russia",
+      "local": "Россия",
+      "ids": {
+        "ohm": 2890065,
+        "wikidata": "Q159"
+      },
+      "start": "2018-08-12",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "russia",
+      "power_label": "Russia",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Russia",
+      "cut_by_frame": false,
+      "km2": 168209,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2890065",
+        "license": "CC0 1.0",
+        "wikidata": "Q159",
+        "notes": {
+          "start_event": "Convention on the Legal Status of the Caspian Sea",
+          "start_date_source": "http://en.kremlin.ru/supplement/5328"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693715,
+            "url": "https://www.openhistoricalmap.org/relation/2693715",
+            "name": "Georgia",
+            "start": "1802-04-24",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1802-04-24",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": false,
+      "km2": 152353,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 3,
+          "change": "Georgia ceded to the United States much of present Mississippi and Alabama. This area became unorganized federal territory and Georgia Western Lands were eliminated.",
+          "authority": "(Paullin, 83; Van Zandt, 100; Terr. Papers U.S., 5:142-143)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Coahuila",
+      "local": null,
+      "ids": {
+        "ohm": 2867299,
+        "wikidata": "Q53079"
+      },
+      "start": "1892-12-13",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Coahuila",
+      "cut_by_frame": false,
+      "km2": 151835,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867299",
+        "license": "CC0 1.0",
+        "wikidata": "Q53079",
+        "notes": {
+          "start_event": "El estado de Coahuila cede al estado de Nuevo León el fundo de la Pita con todos sus terrenos sobre el Río Bravo.",
+          "wikipedia": "en:Coahuila"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Michigan",
+      "local": null,
+      "ids": {
+        "newberry": "mi_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693360,
+            "url": "https://www.openhistoricalmap.org/relation/2693360",
+            "name": "Michigan",
+            "start": "1926-03-01",
+            "end": "1947-10-10",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1926-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "CRS counts an enabling act (15 June 1836); it came after Michigan's 1835 constitution and added the Toledo condition, so under this taxonomy's test (Congress authorized the constitution before it was written) Michigan is self-started. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Michigan",
+      "cut_by_frame": false,
+      "km2": 150240,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mi_state",
+          "version": 4,
+          "change": "The United States Supreme Court decided the dispute between Michigan and Wisconsin entirely in favor of Wisconsin; implicit overlaps of Wisconsin by DELTA, GOGEBIC, and IRON ended.",
+          "authority": "(Martin, \"Michigan-Wisconsin,\" 141-143)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Florida",
+      "local": null,
+      "ids": {
+        "newberry": "fl_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693743,
+            "url": "https://www.openhistoricalmap.org/relation/2693743",
+            "name": "Florida",
+            "start": "1845-03-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1845-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Florida",
+      "cut_by_frame": false,
+      "km2": 146872,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "fl_state",
+          "version": 1,
+          "change": "The state of Florida was created from Florida Territory, with boundaries the same as those set in 1822; Florida Territory eliminated.",
+          "authority": "(Swindler, 2:332; U.S. Stat., vol. 5, ch. 48 [1845], secs. 1, 5/pp. 742-743)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Illinois",
+      "local": null,
+      "ids": {
+        "newberry": "il_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693067,
+            "url": "https://www.openhistoricalmap.org/relation/2693067",
+            "name": "Illinois",
+            "start": "1818-12-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1818-12-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Illinois",
+      "cut_by_frame": false,
+      "km2": 145768,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "il_state",
+          "version": 1,
+          "change": "The state of Illinois was created from Illinois Territory; Illinois Territory eliminated.",
+          "authority": "(Terr. Papers U.S., 10:803; U.S. Stat., vol. 3, ch. 67 [1818], secs. 1-2, 7/pp. 428-429, 431, and res. 1 [1818]/p. 536)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Iowa",
+      "local": null,
+      "ids": {
+        "newberry": "ia_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692923,
+            "url": "https://www.openhistoricalmap.org/relation/2692923",
+            "name": "Iowa",
+            "start": "1846-12-28",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-12-28",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Iowa",
+      "cut_by_frame": false,
+      "km2": 145511,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ia_state",
+          "version": 1,
+          "change": "The state of Iowa was created from Iowa Territory; Iowa Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 9, ch. 1[1847]/p. 117)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Wisconsin",
+      "local": null,
+      "ids": {
+        "newberry": "wi_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693063,
+            "url": "https://www.openhistoricalmap.org/relation/2693063",
+            "name": "Wisconsin",
+            "start": "1936-03-16",
+            "end": "1947-06-08",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1936-03-16",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Wisconsin",
+      "cut_by_frame": false,
+      "km2": 144860,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wi_state",
+          "version": 3,
+          "change": "Dispute between Michigan and Wisconsin ended when the U.S. Supreme Court decreed the precise course of the revised Michigan-Wisconsin boundary through Green Bay and Lake Michigan.",
+          "authority": "(Martin, \"Second Wisconsin-Michigan,\" 86, 118-121)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas",
+      "local": null,
+      "ids": {
+        "newberry": "ar_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693749,
+            "url": "https://www.openhistoricalmap.org/relation/2693749",
+            "name": "Arkansas",
+            "start": "1840-05-21",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1840-05-21",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas",
+      "cut_by_frame": false,
+      "km2": 137745,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_state",
+          "version": 2,
+          "change": "Survey of boundary between the Republic of Texas and the United States began. MILLER (original) officially became extinct and LAFAYETTE was eliminated from Texas when Texas claims to the area were upheld.",
+          "authority": "(U.S. Stat., vol. 5, ch. 75 [1844]/p. 674; Marshall, 235-236)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Alabama",
+      "local": null,
+      "ids": {
+        "newberry": "al_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693721,
+            "url": "https://www.openhistoricalmap.org/relation/2693721",
+            "name": "Alabama",
+            "start": "1820-12-19",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-12-19",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alabama",
+      "cut_by_frame": false,
+      "km2": 133863,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "al_state",
+          "version": 3,
+          "change": "MARION's overlap of the state of Mississippi and TUSCALOOSA's overlap of the state of Mississippi ended.",
+          "authority": "(Ala. Acts 1820, 2d sess., secs. 1, 9/pp. 90, 92)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693674,
+            "url": "https://www.openhistoricalmap.org/relation/2693674",
+            "name": "New York",
+            "start": "1855-01-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1855-01-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New York",
+      "cut_by_frame": false,
+      "km2": 125727,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 2,
+          "change": "New York acquired the southwestern corner of Massachusetts (Boston Corner).",
+          "authority": "(Pratt, 2:223; Van Zandt, 70, 76)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Mississippi",
+      "local": null,
+      "ids": {
+        "newberry": "ms_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693716,
+            "url": "https://www.openhistoricalmap.org/relation/2693716",
+            "name": "Mississippi",
+            "start": "1820-05-29",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1820-05-29",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "MS",
+      "cut_by_frame": false,
+      "km2": 123526,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ms_state",
+          "version": 2,
+          "change": "Surveyors demarcated the southern segment of the Alabama-Mississippi line, fixing the end point ten miles east of the mouth of the Pascagoula River.",
+          "authority": "(Van Zandt, 108-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Louisiana",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693673,
+            "url": "https://www.openhistoricalmap.org/relation/2693673",
+            "name": "Pennsylvania",
+            "start": "1792-03-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1792-03-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": false,
+      "km2": 117177,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 2,
+          "change": "Pennsylvania purchased from the federal government the Erie Triangle, a small area immediately north of Pennsylvania and west of New York, giving Pennsylvania an outlet to Lake Erie.",
+          "authority": "(Van Zandt, 83-84)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Tennessee",
+      "local": null,
+      "ids": {
+        "newberry": "tn_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693709,
+            "url": "https://www.openhistoricalmap.org/relation/2693709",
+            "name": "Tennessee",
+            "start": "1859-11-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1859-11-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tennessee",
+      "cut_by_frame": false,
+      "km2": 109128,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tn_state",
+          "version": 2,
+          "change": "ROBERTSON (Tenn.) and SUMNER (Tenn.) gained from SIMPSON (Ky.) when surveyors remarking the Kentucky-Tennessee boundary acted without authority and shifted the line around two small parcels.",
+          "authority": "(Sames, 107, 114)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Ohio",
+      "local": null,
+      "ids": {
+        "newberry": "oh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2663622,
+            "url": "https://www.openhistoricalmap.org/relation/2663622",
+            "name": "Ohio",
+            "start": "1803-03-01",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1803-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Ohio",
+      "cut_by_frame": false,
+      "km2": 106748,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "oh_state",
+          "version": 1,
+          "change": "The state of Ohio was created from the Northwest Territory and Indiana Territory.",
+          "authority": "(Ind. Terr., Exec. Journal, 114-115; Pence and Armstrong, 218; U.S. Stat., vol. 2, ch. 40 [1802], secs. 1-3/pp. 173-174; Van Zandt, 112)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kentucky",
+      "local": null,
+      "ids": {
+        "newberry": "ky_state",
+        "newberry_version": 2
+      },
+      "start": "1859-11-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "carved",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "Carved from Virginia, with Virginia's consent. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Kentucky",
+      "cut_by_frame": false,
+      "km2": 104605,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ky_state",
+          "version": 2,
+          "change": "ROBERTSON (Tenn.) and SUMNER (Tenn.) gained from SIMPSON (Ky.) when surveyors re-marking the Kentucky-Tennessee boundary acted without authority and shifted the line around two small parcels.",
+          "authority": "(Sames, 107, 114)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 8,
+        "also_in_ohm": [
+          {
+            "ohm": 2693701,
+            "url": "https://www.openhistoricalmap.org/relation/2693701",
+            "name": "Virginia",
+            "start": "1863-11-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1863-11-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 103545,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 8,
+          "change": "The state of Virginia lost JEFFERSON (W.Va.) to West Virginia.",
+          "authority": "(U.S. Rpts., 78:39 [Wallace, vol. 11]; U.S. Stat., vol. 14, res. 12[1866]/p. 350; W.Va. Acts 1863, 1st sess., ch. 90, sec. 1/pp. 103-105)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indiana",
+      "local": null,
+      "ids": {
+        "newberry": "in_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693335,
+            "url": "https://www.openhistoricalmap.org/relation/2693335",
+            "name": "Indiana",
+            "start": "1816-12-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1816-12-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "enabled",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indiana",
+      "cut_by_frame": false,
+      "km2": 93616,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "in_state",
+          "version": 1,
+          "change": "The state of Indiana was created from Indiana Territory and small parts of Illinois and Michigan Territories.",
+          "authority": "(U.S. Stat., vol. 3, ch. 57 [1816], secs. 1-2/p. 289 and res. 1 [1816]/p. 399; Van Zandt, 115)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maine",
+      "local": null,
+      "ids": {
+        "newberry": "me_state",
+        "newberry_version": 1
+      },
+      "start": "1820-03-15",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "carved",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "Carved from Massachusetts, with Massachusetts's consent. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maine",
+      "cut_by_frame": false,
+      "km2": 83918,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "me_state",
+          "version": 1,
+          "change": "Maine was separated from Massachusetts and admitted to the Union.",
+          "authority": "(U.S. Stat., vol. 3, ch. 19 [1820]/p. 544)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Tamaulipas",
+      "local": null,
+      "ids": {
+        "ohm": 2841302,
+        "wikidata": "Q80007"
+      },
+      "start": "1848-02-02",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tamaulipas",
+      "cut_by_frame": false,
+      "km2": 80421,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841302",
+        "license": "CC0 1.0",
+        "wikidata": "Q80007",
+        "notes": {
+          "start_event": "Mexican Cession",
+          "wikipedia": "en:Tamaulipas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "New Brunswick",
+      "local": null,
+      "ids": {
+        "ohm": 2831011,
+        "wikidata": "Q1965"
+      },
+      "start": "1910-08-20",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Brunswick",
+      "cut_by_frame": false,
+      "km2": 79068,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831011",
+        "license": "CC0 1.0",
+        "wikidata": "Q1965",
+        "notes": {
+          "start_event": "Popes Folly Island transferred to USA",
+          "wikipedia": "en:New Brunswick"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Jalisco",
+      "local": null,
+      "ids": {
+        "ohm": 2841582,
+        "wikidata": "Q13160"
+      },
+      "start": "1865-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Jalisco",
+      "cut_by_frame": false,
+      "km2": 78819,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841582",
+        "license": "CC0 1.0",
+        "wikidata": "Q13160",
+        "notes": {
+          "start_event": "Aguascalientes separates",
+          "wikipedia": "en:Jalisco"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Zacatecas",
+      "local": null,
+      "ids": {
+        "ohm": 2841588,
+        "wikidata": "Q80269"
+      },
+      "start": "1856-12-10",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Zacatecas",
+      "cut_by_frame": false,
+      "km2": 75475,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841588",
+        "license": "CC0 1.0",
+        "wikidata": "Q80269",
+        "notes": {
+          "start_event": "Aguascalientes separates",
+          "wikipedia": "en:Zacatecas"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nova Scotia",
+      "local": null,
+      "ids": {
+        "ohm": 2830920,
+        "wikidata": "Q1952"
+      },
+      "start": "1867-07-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nova Scotia",
+      "cut_by_frame": false,
+      "km2": 73238,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830920",
+        "license": "CC0 1.0",
+        "wikidata": "Q1952",
+        "notes": {
+          "start_event": "Nova Scotia joins Canada",
+          "wikipedia": "en:Nova Scotia"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Veracruz",
+      "local": null,
+      "ids": {
+        "ohm": 2842061,
+        "wikidata": "Q60130"
+      },
+      "start": "1853-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Veracruz",
+      "cut_by_frame": true,
+      "km2": 72060,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842061",
+        "license": "CC0 1.0",
+        "wikidata": "Q60130",
+        "notes": {
+          "start_event": "Annexed Tuxpan and Chicontepec from Puebla",
+          "wikipedia": "en:Veracruz"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "West Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "wv_state",
+        "newberry_version": 3,
+        "also_in_ohm": [
+          {
+            "ohm": 2693706,
+            "url": "https://www.openhistoricalmap.org/relation/2693706",
+            "name": "West Virginia",
+            "start": "1863-11-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1863-11-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "carved",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "Carved from Virginia, with the consent of Virginia's Unionist (Restored) government. From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "West Virginia",
+      "cut_by_frame": false,
+      "km2": 62704,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wv_state",
+          "version": 3,
+          "change": "JEFFERSON was separated from Virginia and became a county in the state of West Virginia.",
+          "authority": "(U.S. Rpts., 78:39 [Wallace, vol. 11]; U.S. Stat., vol. 14, res. 12 [1866]/ p. 350; W.Va. Acts 1863, 1st sess., ch. 90, sec. 1/pp. 103-105)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "San Luis Potosí",
+      "local": null,
+      "ids": {
+        "ohm": 2940401,
+        "wikidata": "Q78980"
+      },
+      "start": "1857-02-05",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "San Luis Potosí",
+      "cut_by_frame": false,
+      "km2": 61277,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2940401",
+        "license": "CC0 1.0",
+        "wikidata": "Q78980",
+        "notes": {
+          "start_event": "Sierra Gorda dissolved",
+          "wikipedia": "en:San Luis Potosí"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Sinaloa",
+      "local": null,
+      "ids": {
+        "ohm": 2841238,
+        "wikidata": "Q80252"
+      },
+      "start": "1830-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Sinaloa",
+      "cut_by_frame": false,
+      "km2": 57518,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841238",
+        "license": "CC0 1.0",
+        "wikidata": "Q80252",
+        "notes": {
+          "start_event": "State gets split",
+          "wikipedia": "en:Sinaloa"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Haiti",
+      "local": null,
+      "ids": {
+        "ohm": 2874739,
+        "wikidata": "Q790"
+      },
+      "start": "1977-04-08",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Haiti",
+      "cut_by_frame": false,
+      "km2": 55151,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874739",
+        "license": "CC0 1.0",
+        "wikidata": "Q790",
+        "notes": {
+          "start_event": "Decree No. 38: 3nm-12nm territorial seas",
+          "start_date_source": "https://www.state.gov/wp-content/uploads/2020/01/LIS-36.pdf",
+          "wikipedia": "en:Haiti"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Yucatán",
+      "local": null,
+      "ids": {
+        "ohm": 2842098,
+        "wikidata": "Q60176"
+      },
+      "start": "1915-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Yucatán",
+      "cut_by_frame": false,
+      "km2": 39600,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842098",
+        "license": "CC0 1.0",
+        "wikidata": "Q60176",
+        "notes": {
+          "start_event": "Q Roo separates again",
+          "wikipedia": "en:Yucatán"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Maryland",
+      "cut_by_frame": false,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Hampshire",
+      "local": null,
+      "ids": {
+        "newberry": "nh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693679,
+            "url": "https://www.openhistoricalmap.org/relation/2693679",
+            "name": "New Hampshire",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Hampshire",
+      "cut_by_frame": false,
+      "km2": 23950,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nh_state",
+          "version": 1,
+          "change": "New Hampshire became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Massachusetts",
+      "local": null,
+      "ids": {
+        "newberry": "ma_state",
+        "newberry_version": 5,
+        "also_in_ohm": [
+          {
+            "ohm": 2693682,
+            "url": "https://www.openhistoricalmap.org/relation/2693682",
+            "name": "Massachusetts",
+            "start": "1862-03-01",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1862-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "MA",
+      "cut_by_frame": false,
+      "km2": 21002,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ma_state",
+          "version": 5,
+          "change": "BRISTOL gained from NEWPORT (R.I.) and lost to PROVIDENCE (R.I.) when Massachusetts and Rhode Island implemented the U.S. Supreme Court settlement (31 December 1861) of their boundary to the Atlantic Ocean.",
+          "authority": "(Bayles, Providence, 1:29; R.I. Acts 1861, ch. 379/pp. 4-6; Ullman, 83-84; Van Zandt, 68)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "NJ",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Hawaii",
+      "local": null,
+      "ids": {
+        "newberry": "hi_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693750,
+            "url": "https://www.openhistoricalmap.org/relation/2693750",
+            "name": "Hawaii",
+            "start": "1959-08-21",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1959-08-21",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "C",
+        "color": "#ad98d5",
+        "name": "purple"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "self-started",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Hawaii",
+      "cut_by_frame": false,
+      "km2": 16711,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "hi_state",
+          "version": 1,
+          "change": "The state of Hawaii was created from Hawaii Territory; Hawaii Territory eliminated.",
+          "authority": "(Swindler, 120-133; Van Zandt, 166)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Granma",
+      "local": null,
+      "ids": {
+        "ohm": 2902795,
+        "wikidata": "Q115046"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Granma",
+      "cut_by_frame": false,
+      "km2": 15835,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902795",
+        "license": "CC0 1.0",
+        "wikidata": "Q115046",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Holguín",
+      "local": null,
+      "ids": {
+        "ohm": 2902794,
+        "wikidata": "Q115302"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Holguín",
+      "cut_by_frame": false,
+      "km2": 15502,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902794",
+        "license": "CC0 1.0",
+        "wikidata": "Q115302",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Connecticut",
+      "local": null,
+      "ids": {
+        "newberry": "ct_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2693688,
+            "url": "https://www.openhistoricalmap.org/relation/2693688",
+            "name": "Connecticut",
+            "start": "1804-12-31",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1804-12-31",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Connecticut",
+      "cut_by_frame": false,
+      "km2": 12879,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ct_state",
+          "version": 4,
+          "change": "HARTFORD lost part of the town of Southwick (the \"Southwick Jog\") to HAMPSHIRE (Mass.) when the state boundary was adjusted.",
+          "authority": "(Hooker, 25-26; Van Zandt, 69)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Northwest Territories",
+      "local": null,
+      "ids": {
+        "ohm": 2831055,
+        "wikidata": "Q2007"
+      },
+      "start": "1999-04-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 1329112,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831055",
+        "license": "CC0 1.0",
+        "wikidata": "Q2007",
+        "notes": {
+          "start_event": "Nunavut split from NWT",
+          "wikipedia": "en:Northwest Territories"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Newfoundland and Labrador",
+      "local": null,
+      "ids": {
+        "ohm": 2831078,
+        "wikidata": "Q2003"
+      },
+      "start": "2001-12-06",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 464086,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831078",
+        "license": "CC0 1.0",
+        "wikidata": "Q2003",
+        "notes": {
+          "start_event": "Name change",
+          "wikipedia": "en:Newfoundland and Labrador"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Durango",
+      "local": null,
+      "ids": {
+        "ohm": 2841300,
+        "wikidata": "Q79918"
+      },
+      "start": "1824-05-07",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 123623,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841300",
+        "license": "CC0 1.0",
+        "wikidata": "Q79918",
+        "notes": {
+          "start_event": "New states created",
+          "wikipedia": "en:Durango"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Dominican Republic",
+      "local": "República Dominicana",
+      "ids": {
+        "ohm": 2874754,
+        "wikidata": "Q786"
+      },
+      "start": "2007-05-22",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 122951,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874754",
+        "license": "CC0 1.0",
+        "wikidata": "Q786",
+        "notes": {
+          "start_event": "Act 66-07, 22 May 2007: 6nm-12nm territorial seas",
+          "start_date_source": "https://www.un.org/depts/los/LEGISLATIONANDTREATIES/PDFFILES/DOM_2007_Act_frombulletin65.pdf",
+          "wikipedia": "en:Dominican Republic"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Oaxaca",
+      "local": null,
+      "ids": {
+        "ohm": 2867516,
+        "wikidata": "Q34110"
+      },
+      "start": "1857-02-05",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 94146,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867516",
+        "license": "CC0 1.0",
+        "wikidata": "Q34110",
+        "notes": {
+          "start_event": "Istmo annexed again",
+          "start_date_source": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463912163.pdf",
+          "wikipedia": "en:Oaxaca"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Baja California Sur",
+      "local": null,
+      "ids": {
+        "ohm": 2841231,
+        "wikidata": "Q46508"
+      },
+      "start": "1974-10-08",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 74762,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841231",
+        "license": "CC0 1.0",
+        "wikidata": "Q46508",
+        "notes": {
+          "start_event": "Baja California divided",
+          "wikipedia": "en:Baja California Sur"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Baja California",
+      "local": null,
+      "ids": {
+        "ohm": 2841232,
+        "wikidata": "Q58731"
+      },
+      "start": "1974-10-08",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 73094,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841232",
+        "license": "CC0 1.0",
+        "wikidata": "Q58731",
+        "notes": {
+          "start_event": "Baja California divided",
+          "wikipedia": "en:Baja California"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nuevo León",
+      "local": null,
+      "ids": {
+        "ohm": 2867298,
+        "wikidata": "Q15282"
+      },
+      "start": "1892-12-13",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 64283,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867298",
+        "license": "CC0 1.0",
+        "wikidata": "Q15282",
+        "notes": {
+          "start_event": "El estado de Coahuila cede al estado de Nuevo León el fundo de la Pita con todos sus terrenos sobre el Río Bravo.",
+          "wikipedia": "en:Nuevo León"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Guerrero",
+      "local": null,
+      "ids": {
+        "ohm": 2842063,
+        "wikidata": "Q60158"
+      },
+      "start": "1849-10-27",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 63797,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842063",
+        "license": "CC0 1.0",
+        "wikidata": "Q60158",
+        "notes": {
+          "start_event": "Acapulco, Chilapa and Taxco from the State of Mexico, Tlapa from Puebla and the municipality of Coyuca from the state of Michoacán",
+          "wikipedia": "en:Guerrero"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Michoacán State",
+      "local": "Michoacán",
+      "ids": {
+        "ohm": 2842071,
+        "wikidata": "Q79861"
+      },
+      "start": "1849-10-27",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 58813,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842071",
+        "license": "CC0 1.0",
+        "wikidata": "Q79861",
+        "notes": {
+          "start_event": "Coyuca split off as part of Guerrero",
+          "wikipedia": "en:Michoacán"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Campeche",
+      "local": null,
+      "ids": {
+        "ohm": 2842106,
+        "wikidata": "Q80908"
+      },
+      "start": "1997-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 57668,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842106",
+        "license": "CC0 1.0",
+        "wikidata": "Q80908",
+        "notes": {
+          "start_event": "Campeche annexes a piece of land from Q Roo",
+          "wikipedia": "en:Campeche"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Jamaica",
+      "local": null,
+      "ids": {
+        "ohm": 2874740,
+        "wikidata": "Q766"
+      },
+      "start": "1971-07-19",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 51126,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874740",
+        "license": "CC0 1.0",
+        "wikidata": "Q766",
+        "notes": {
+          "start_event": "Act No. 14: 3nm-12nm territorial seas",
+          "start_date_source": "https://www.state.gov/wp-content/uploads/2020/01/LIS-36.pdf",
+          "wikipedia": "en:Jamaica"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Quintana Roo",
+      "local": null,
+      "ids": {
+        "ohm": 2828289,
+        "wikidata": "Q80245"
+      },
+      "start": "1997-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 43555,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2828289",
+        "license": "CC0 1.0",
+        "wikidata": "Q80245",
+        "notes": {
+          "start_event": "Campeche annexes a piece of land from Q Roo",
+          "wikipedia": "en:Quintana Roo"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Belize",
+      "local": null,
+      "ids": {
+        "ohm": 2874708,
+        "wikidata": "Q242"
+      },
+      "start": "2019-05-22",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 41793,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874708",
+        "license": "CC0 1.0",
+        "wikidata": "Q242",
+        "notes": {
+          "start_date_source": "https://www.nationalassembly.gov.bz/wp-content/uploads/2019/05/Act-No.-7-of-2019-Maritime-Areas-Amendment-Act-2019.pdf"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Puebla",
+      "local": null,
+      "ids": {
+        "ohm": 2842088,
+        "wikidata": "Q79923"
+      },
+      "start": "1853-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 34431,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842088",
+        "license": "CC0 1.0",
+        "wikidata": "Q79923",
+        "notes": {
+          "start_event": "Veracruz annexes Tuxpan and Chicontepec",
+          "wikipedia": "en:Puebla"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Guanajuato",
+      "local": null,
+      "ids": {
+        "ohm": 2940403,
+        "wikidata": "Q46475"
+      },
+      "start": "1857-02-05",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 30671,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2940403",
+        "license": "CC0 1.0",
+        "wikidata": "Q46475",
+        "notes": {
+          "start_event": "Sierra Gorda dissolved",
+          "wikipedia": "en:Guanajuato"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Camagüey",
+      "local": null,
+      "ids": {
+        "ohm": 2902797,
+        "wikidata": "Q215147"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 29405,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902797",
+        "license": "CC0 1.0",
+        "wikidata": "Q215147",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nayarit",
+      "local": null,
+      "ids": {
+        "ohm": 2841581,
+        "wikidata": "Q79920"
+      },
+      "start": "1865-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 28168,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841581",
+        "license": "CC0 1.0",
+        "wikidata": "Q79920",
+        "notes": {
+          "start_event": "Separation from Jalisco",
+          "wikipedia": "en:Nayarit"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Pinar del Río",
+      "local": null,
+      "ids": {
+        "ohm": 2903140,
+        "wikidata": "Q115497"
+      },
+      "start": "2011-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 25913,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2903140",
+        "license": "CC0 1.0",
+        "wikidata": "Q115497",
+        "notes": {
+          "start_event": "Artemisia Province created"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Vermont",
+      "local": null,
+      "ids": {
+        "newberry": "vt_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693680,
+            "url": "https://www.openhistoricalmap.org/relation/2693680",
+            "name": "Vermont",
+            "start": "1791-03-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "T",
+        "color": "#58b4c3",
+        "name": "teal"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "carved",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "Carved from New York's claim, with New York's consent (1790). From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 24852,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "vt_state",
+          "version": 1,
+          "change": "The state of Vermont was admitted to the Union. The boundary with New York was settled by a joint commission before statehood.",
+          "authority": "(Slade, 193; U.S. Stat., vol. 1, ch. 7 [1791]/p. 191)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Tabasco State",
+      "local": "Tabasco",
+      "ids": {
+        "ohm": 2939962,
+        "wikidata": "Q80914"
+      },
+      "start": "1857-09-16",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 24841,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2939962",
+        "license": "CC0 1.0",
+        "wikidata": "Q80914",
+        "notes": {
+          "start_event": "Isla del Carmen split reverted",
+          "wikipedia": "en:Tabasco"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Matanzas",
+      "local": null,
+      "ids": {
+        "ohm": 2902800,
+        "wikidata": "Q115438"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 23269,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902800",
+        "license": "CC0 1.0",
+        "wikidata": "Q115438",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico State",
+      "local": "Mexico",
+      "ids": {
+        "ohm": 2842065,
+        "wikidata": "Q82112"
+      },
+      "start": "1869-04-17",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 22422,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842065",
+        "license": "CC0 1.0",
+        "wikidata": "Q82112",
+        "notes": {
+          "start_event": "Morelos split off",
+          "wikipedia": "en:State of Mexico"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Isla de la Juventud",
+      "local": null,
+      "ids": {
+        "ohm": 2902791,
+        "wikidata": "Q115027"
+      },
+      "start": "1978-08-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 21154,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902791",
+        "license": "CC0 1.0",
+        "wikidata": "Q115027",
+        "notes": {
+          "start_event": "renamed"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Hidalgo",
+      "local": null,
+      "ids": {
+        "ohm": 2842070,
+        "wikidata": "Q80903"
+      },
+      "start": "1869-01-16",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 20869,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842070",
+        "license": "CC0 1.0",
+        "wikidata": "Q80903",
+        "notes": {
+          "start_event": "Splits off from Mexico State",
+          "wikipedia": "en:Hidalgo (state)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Turks and Caicos Islands",
+      "local": null,
+      "ids": {
+        "ohm": 2834853,
+        "wikidata": "Q18221"
+      },
+      "start": "2002-02-26",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 17283,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2834853",
+        "license": "CC0 1.0",
+        "wikidata": "Q18221",
+        "notes": {
+          "start_event": "Joins the British Overseas Territories",
+          "wikipedia": "en:History of Turks and Caicos Islands"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Villa Clara",
+      "local": null,
+      "ids": {
+        "ohm": 2852891,
+        "wikidata": "Q115434"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 16626,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2852891",
+        "license": "CC0 1.0",
+        "wikidata": "Q115434",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "source_url": "https://www.ecured.cu/Villa_Clara",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Ciego de Ávila",
+      "local": null,
+      "ids": {
+        "ohm": 2902798,
+        "wikidata": "Q220692"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 16288,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902798",
+        "license": "CC0 1.0",
+        "wikidata": "Q220692",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Belize",
+      "local": null,
+      "ids": {
+        "ohm": 2859220,
+        "wikidata": null
+      },
+      "start": "1992-01-24",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 15864,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2859220",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "start_event": "Territorial waters officially extended from 3nm to 12nm",
+          "source_url": "https://stanncreekvalley.weebly.com/geography.html",
+          "start_date_source": "https://www.oas.org/sap/peacefund/belizeandguatemala/timelinedocuments/1992-April3-StatementbyMinisterofForeignAffairsofBelizeSaidMusa.pdf"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Puerto Rico",
+      "local": null,
+      "ids": {
+        "ohm": 2854024,
+        "wikidata": "Q1183"
+      },
+      "start": "1900-04-12",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 13750,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2854024",
+        "license": "CC0 1.0",
+        "wikidata": "Q1183",
+        "notes": {
+          "start_event": "Foraker Act (1900)",
+          "wikipedia": "en:Puerto Rico"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Guantánamo",
+      "local": null,
+      "ids": {
+        "ohm": 2902792,
+        "wikidata": "Q115319"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 12505,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902792",
+        "license": "CC0 1.0",
+        "wikidata": "Q115319",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Sancti Spiritus",
+      "local": null,
+      "ids": {
+        "ohm": 2902799,
+        "wikidata": "Q115441"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 12351,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902799",
+        "license": "CC0 1.0",
+        "wikidata": "Q115441",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Querétaro",
+      "local": null,
+      "ids": {
+        "ohm": 2940404,
+        "wikidata": "Q79754"
+      },
+      "start": "1857-02-05",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 11728,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2940404",
+        "license": "CC0 1.0",
+        "wikidata": "Q79754",
+        "notes": {
+          "start_event": "Sierra Gorda dissolved",
+          "wikipedia": "en:Querétaro"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Santiago de Cuba",
+      "local": null,
+      "ids": {
+        "ohm": 2902793,
+        "wikidata": "Q234200"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 10312,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902793",
+        "license": "CC0 1.0",
+        "wikidata": "Q234200",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Las Tunas",
+      "local": null,
+      "ids": {
+        "ohm": 2902796,
+        "wikidata": "Q115334"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 9891,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902796",
+        "license": "CC0 1.0",
+        "wikidata": "Q115334",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Prince Edward Island",
+      "local": null,
+      "ids": {
+        "ohm": 2830903,
+        "wikidata": "Q1978"
+      },
+      "start": "1873-07-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 9568,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830903",
+        "license": "CC0 1.0",
+        "wikidata": "Q1978",
+        "notes": {
+          "start_event": "Joined Canada",
+          "wikipedia": "en:Prince Edward Island"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Artemisa",
+      "local": null,
+      "ids": {
+        "ohm": 2902790,
+        "wikidata": "Q115325"
+      },
+      "start": "2011-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 8382,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902790",
+        "license": "CC0 1.0",
+        "wikidata": "Q115325",
+        "notes": {
+          "start_event": "Created"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Cayman Islands",
+      "local": null,
+      "ids": {
+        "ohm": 2831969,
+        "wikidata": "Q5785"
+      },
+      "start": "2002-02-26",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 7355,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831969",
+        "license": "CC0 1.0",
+        "wikidata": "Q5785",
+        "notes": {
+          "start_event": "Joins British Overseas Territories",
+          "wikipedia": "en:Cayman Islands"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Cienfuegos",
+      "local": null,
+      "ids": {
+        "ohm": 2854605,
+        "wikidata": "Q115444"
+      },
+      "start": "1976-07-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 7243,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2854605",
+        "license": "CC0 1.0",
+        "wikidata": "Q115444",
+        "notes": {
+          "start_event": "Cuban Law Number 1304 of July 3, 1976",
+          "start_date_source": "https://en.wikipedia.org/wiki/Provinces_of_Cuba#/media/File:Cuban_provinces_(December_1976).png"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mayabeque",
+      "local": null,
+      "ids": {
+        "ohm": 2902787,
+        "wikidata": "Q115310"
+      },
+      "start": "2011-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 6792,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902787",
+        "license": "CC0 1.0",
+        "wikidata": "Q115310",
+        "notes": {
+          "start_event": "Created"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colima",
+      "local": null,
+      "ids": {
+        "ohm": 2841584,
+        "wikidata": "Q61309"
+      },
+      "start": "1861-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5774,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841584",
+        "license": "CC0 1.0",
+        "wikidata": "Q61309",
+        "notes": {
+          "start_event": "Revillagigedo Islands added",
+          "wikipedia": "en:Colima"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Aguascalientes",
+      "local": null,
+      "ids": {
+        "ohm": 2841590,
+        "wikidata": "Q79952"
+      },
+      "start": "1856-12-10",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5622,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841590",
+        "license": "CC0 1.0",
+        "wikidata": "Q79952",
+        "notes": {
+          "start_event": "Separation from Zacatecas",
+          "wikipedia": "en:Aguascalientes"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "British Virgin Islands",
+      "local": null,
+      "ids": {
+        "ohm": 2874703,
+        "wikidata": "Q25305"
+      },
+      "start": "2007-08-15",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 5205,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2874703",
+        "license": "CC0 1.0",
+        "wikidata": "Q25305",
+        "notes": {
+          "start_event": "Virgin Islands (Territorial Sea) Order 2007",
+          "start_date_source": "https://www.legislation.gov.uk/uksi/2007/2141/article/1/made"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Morelos",
+      "local": null,
+      "ids": {
+        "ohm": 2842064,
+        "wikidata": "Q66117"
+      },
+      "start": "1869-04-17",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 4884,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842064",
+        "license": "CC0 1.0",
+        "wikidata": "Q66117",
+        "notes": {
+          "start_event": "Separated from Mexico State",
+          "wikipedia": "en:Morelos"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Orange Walk",
+      "local": null,
+      "ids": {
+        "ohm": 2847529,
+        "wikidata": null
+      },
+      "start": "1960-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 4680,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2847529",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {}
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Tlaxcala",
+      "local": null,
+      "ids": {
+        "ohm": 2842086,
+        "wikidata": "Q82681"
+      },
+      "start": "1856-12-09",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 4014,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2842086",
+        "license": "CC0 1.0",
+        "wikidata": "Q82681",
+        "notes": {
+          "start_event": "Tlaxcala admitted to statehood",
+          "wikipedia": "en:Tlaxcala"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Saint Pierre and Miquelon",
+      "local": "Saint-Pierre-et-Miquelon",
+      "ids": {
+        "ohm": 2890164,
+        "wikidata": "Q34617"
+      },
+      "start": "2003-03-28",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 3595,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2890164",
+        "license": "CC0 1.0",
+        "wikidata": "Q34617",
+        "notes": {
+          "start_event": "Becomes a collectivity"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Saint Pierre and Miquelon",
+      "local": "Saint-Pierre et Miquelon",
+      "ids": {
+        "ohm": 2903441,
+        "wikidata": "Q34617"
+      },
+      "start": "1971-12-14",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 3595,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2903441",
+        "license": "CC0 1.0",
+        "wikidata": "Q34617",
+        "notes": {
+          "start_event": "Law No. 71-1060 - Delimitation of territorial waters",
+          "end_date_source": "https://www.un.org/depts/los/LEGISLATIONANDTREATIES/PDFFILES/FRA_1971_Law.pdf",
+          "wikipedia": "en:Saint Pierre and Miquelon"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Bermuda",
+      "local": null,
+      "ids": {
+        "ohm": 2831963,
+        "wikidata": "Q23635"
+      },
+      "start": "2002-02-26",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 2982,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831963",
+        "license": "CC0 1.0",
+        "wikidata": "Q23635",
+        "notes": {
+          "start_event": "Joins British Overseas Territories",
+          "wikipedia": "en:Bermuda"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Rhode Island",
+      "local": null,
+      "ids": {
+        "newberry": "ri_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693686,
+            "url": "https://www.openhistoricalmap.org/relation/2693686",
+            "name": "Rhode Island",
+            "start": "1862-03-01",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1862-03-01",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "class": {
+        "value": "founding",
+        "title": null,
+        "source": "Statehood Campaigns: Deck Outline (2026-11-18), Taxonomy 2, from CRS R47747, Admission of States to the Union (updated 2026-01-06), Tables 1-5",
+        "note": "From the deck outline; not yet reviewed by the owner."
+      },
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 2820,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ri_state",
+          "version": 2,
+          "change": "NEWPORT lost to BRISTOL (Mass.) and PROVIDENCE gained from BRISTOL (Mass.) when Massachusetts and Rhode Island implemented the U. S. Supreme Court settlement (31 December 1861) of their boundary to the Atlantic Ocean.",
+          "authority": "(Bayles, Providence, 1:29; R.I. Acts and Resolves, 1861, ch. 379, sec. 2/p. 4; Ullman, 83-84; Van Zandt, 68)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Corozal",
+      "local": null,
+      "ids": {
+        "ohm": 2859217,
+        "wikidata": null
+      },
+      "start": "1992-01-24",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 2433,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2859217",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "start_event": "Maritime Areas Act 1992",
+          "start_date_source": "https://www.oas.org/sap/peacefund/belizeandguatemala/timelinedocuments/1992-April3-StatementbyMinisterofForeignAffairsofBelizeSaidMusa.pdf"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "La Habana",
+      "local": null,
+      "ids": {
+        "ohm": 2902786,
+        "wikidata": "Q12588"
+      },
+      "start": "2011-01-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 1951,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2902786",
+        "license": "CC0 1.0",
+        "wikidata": "Q12588",
+        "notes": {
+          "start_event": "renamed back to Habana"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "United States Virgin Islands",
+      "local": null,
+      "ids": {
+        "ohm": 2696414,
+        "wikidata": "Q11703"
+      },
+      "start": "1917-03-31",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 1878,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2696414",
+        "license": "CC0 1.0",
+        "wikidata": "Q11703",
+        "notes": {
+          "wikipedia": "en:United States Virgin Islands"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico City",
+      "local": "Ciudad de Mexico",
+      "ids": {
+        "ohm": 2853402,
+        "wikidata": null
+      },
+      "start": "2016-01-29",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 1500,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2853402",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "start_event": "Federal district disabanded but state not formed thus made into city status",
+          "wikipedia": "en:Mexico City"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1591,
+      "y": 682,
+      "w": 275,
+      "h": 186,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "the classes on this map come from the statehood deck's outline (data/us/statehood-paths.csv), not yet reviewed by the owner",
+    "Newberry's record ends on 31 December 2000; its polygons in force that day are held open to the present"
+  ],
+  "alt_text": "Parchment map, 1 January 2026, how a place became a state, North America, titled \"The United States\". Shaded: Founding in blue, Carved in teal, Direct in orange, Enabled in green and Self-started in purple. Named on the map: Canada, Mexico, Nunavut, Quebec, Alaska, Ontario, British Columbia, Texas, Alberta, Manitoba, Saskatchewan and Yukon.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; classes: the statehood deck outline",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=2026-01-01&tracker=paths"
+  }
+}

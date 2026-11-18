@@ -37,6 +37,7 @@ import { electoralLook, electoralLegend, someAbstained, resultFor } from './elec
 import { aliveDisputes, aliveUSMX } from './disputes.js';
 import { fitElectoralBadges, drawElectoralBadges } from './electoral-draw.js';
 import { slaveryLook, slaveryLegend } from './slavery.js';
+import { CLASS_TRACKERS, pathLook, chapterLook, chapterFills, chapterLabel, piecesOn, pieceLook, clipPieces } from './classify.js';
 import { freeOn, freeLegend } from './freeblack.js';
 import { censusOn, unitsFor, estimatesOn, densityLabels, areaKm2, fmt, pct } from './native.js';
 
@@ -285,7 +286,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // (the free Black population tracker wears the slavery tracker's fills, table and coverage: `byStatus`)
     const byStatus = trackerId === 'slavery' || trackerId === 'freeblack';
     fbNow = trackerId === 'freeblack' ? freeOn(data.free, data.pop?.anchors, nbAlive, date, { slavery: data.slavery, tracker: trackers.slavery }) : null;
-    const tracker = trackerId === 'military' ? { ...trackers.military, mil: military } : trackerId === 'freeblack' ? { ...trackers.slavery, ...trackers.freeblack, fb: fbNow } : trackers[trackerId];
+    // (the statehood deck's classification trackers, src/us/classify.js: a class per state from a table, or the pieces)
+    const classMap = CLASS_TRACKERS.has(trackerId);
+    const tracker = trackerId === 'military' ? { ...trackers.military, mil: military } : trackerId === 'freeblack' ? { ...trackers.slavery, ...trackers.freeblack, fb: fbNow }
+      : trackerId === 'chapters' ? { ...trackers.chapters, titles: Object.fromEntries((data.classes?.chapters?.rows ?? []).map((r) => [r.value, r.title])) } : trackers[trackerId];
     const ohmAlive = aliveOHM(data, date);
     const cesAlive = trackerId === 'cessions' ? data.ces.filter((c) => c.p.d <= date) : [];
     const present = new Set();
@@ -303,7 +307,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       it.cat = pw;
       let look = categoryLook(powers, pw);
       if (trackerId !== 'nations' && look.fill) look = { fill: null, label: null };
-      if ((trackerId === 'cessions' || byStatus) && look.pattern) look = { fill: null, label: null };
+      if ((trackerId === 'cessions' || byStatus || classMap) && look.pattern) look = { fill: null, label: null };
       // (an election map keeps only the Confederacy's cross-hatch, which says why eleven states cast no vote in 1864)
       if (trackerId === 'electoral' && look.pattern && pw !== 'rebellion') look = { fill: null, label: null };
       if (trackerId === 'military' && !look.pattern) look = militaryLook(it, pw);
@@ -318,9 +322,15 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       it.cat = it.p.power;
       it.popUnit = pop?.units.get(it) ?? null;
       it.status = null;
+      it.classRow = null; it.classKeys = null;
       if (byStatus) {
         const s = slaveryLook(data.slavery, tracker, it, date);
         it.look = s.look; it.status = s.status; it.statusRow = s.row;
+      } else if (trackerId === 'paths' || trackerId === 'chapters') {
+        const c = (trackerId === 'paths' ? pathLook : chapterLook)(data.classes?.[trackerId], tracker, it, date);
+        it.look = c.look; it.classRow = c.row; it.classKeys = c.keys;
+      } else if (trackerId === 'pieces') {
+        it.look = { fill: null, label: null }; // (the pieces carry the fills; the states keep their borders and names)
       } else if (trackerId === 'states') {
         const t = tracker.types[it.p.type] ?? {};
         // (an "Other" area the tracker names for what it was: Deseret a proposed state, the Vermont and Texas republics)
@@ -342,7 +352,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // alive follows from nbAlive, so the cache key already covers them.
     // ...nor under the slavery-status tracker, whose key is the same on every date so that two maps pair (free, slave,
     // territories and nothing else: a border dispute between two states says nothing about either's status).
-    if (trackerId !== 'electoral' && !byStatus) {
+    // ...nor under the classification trackers, whose hatch means their own fifth class (Claimed; a fifth chapter).
+    if (trackerId !== 'electoral' && !byStatus && !classMap) {
       for (const it of aliveDisputes(data, date)) { it.look = { pattern: 'hatch', label: 'Disputed or overlapping claims' }; items.push(it); }
       // ...and land a U.S. state and a Mexican state claimed at once (the Nueces Strip and the upper Rio Grande,
       // 1845–1848; scripts/derive-us-disputes.mjs), the same way.
@@ -374,11 +385,21 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     }
 
     // Native homelands (historical-basemaps, colonial era): under every tracker but the cessions.
-    const natAlive = trackerId === 'cessions' || byStatus ? [] : aliveNative(data, date);
+    const natAlive = trackerId === 'cessions' || byStatus || classMap ? [] : aliveNative(data, date);
     for (const it of natAlive) { it.cat = 'native'; it.look = categoryLook(powers, 'native'); items.push(it); }
     // An order's highlight (lesson maps): the polygons it names keep their looks; everything else drops to paper.
-    const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states' || trackerId === 'military') ? applyHighlight(items) : null;
+    const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states' || trackerId === 'military' || classMap) ? applyHighlight(items) : null;
     if (!hl) for (const it of items) { it.lit = null; it.litBy = null; }
+    // (chapters: each chapter the order lit takes a fill of its own)
+    if (trackerId === 'chapters' && hl && !hl.none) chapterFills(items, tracker);
+    // The pieces of land (Taxonomy 1) alive on the date, under the states; under a highlight, only inside the lit states.
+    let pieceItems = [];
+    if (trackerId === 'pieces') {
+      pieceItems = piecesOn(data.pieces, date);
+      if (hl) pieceItems = hl.none ? [] : clipPieces(pieceItems, items.filter((it) => it.src === 'newberry' && it.lit));
+      for (const it of pieceItems) { it.look = pieceLook(tracker, it.p); it.lit = null; it.litBy = null; }
+      items.push(...pieceItems);
+    }
     // A Newberry "Other" area the owner gave a fill of its own (the Republic of Texas, 2026-11-09) takes it where the
     // map has room once the highlight has dropped the rest to paper: at most four fills with it, and no other power on
     // the map in its colour; elsewhere it keeps the hatch (grammar §5). The whole continent in 1836–1845 has five already.
@@ -389,6 +410,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const key = [fingerprint(trackerId, date, nbAlive, ohmAlive, cesAlive.length, natAlive), pop?.census?.year ?? '',
       (pop?.estimates.placed ?? []).concat(pop?.estimates.national ?? []).map((e) => e.id).join(','), lands.length, icc.length, electoral?.election.year ?? '',
       treaty.map((it) => `${it.p.nation}${it.p.s}`).join(','), treatyX.length, fbNow ? `fb:${fbNow.census.year}` : '', ...(lesson ? [items.filter((it) => it.src === 'usmx').map((it) => it.p.id).join(',')] : []),
+      pieceItems.map((it) => `${it.p.key}.${it.p.s}${it.clipped ? 'c' : ''}`).join(','),
       military?.war ? `mil:${military.war.id}:${military.members.filter((m) => memberAlive(m, date)).map((m) => m.id).join(',')}` : ''].join('|');
     const counts = { nb: nbAlive.length, ohm: ohmAlive.length, cessions: cesAlive.length };
     const before = current;
@@ -529,6 +551,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // 1. OHM fills, masked by the U.S.
     for (const [key, list] of byKey(ohmItems)) {
       ohmFill.append('g').attr('class', `na-fill k-${key}`)
+        .selectAll('path').data(list).join('path').attr('d', (it) => v.d(it.f));
+    }
+    // 1b. The pieces of land and how each became U.S. land (the pieces tracker), under the states' borders and names.
+    for (const [key, list] of byKey(items.filter((it) => it.src === 'piece'))) {
+      tint.append('g').attr('class', `na-fill na-pieces k-${key}`)
         .selectAll('path').data(list).join('path').attr('d', (it) => v.d(it.f));
     }
     // 2. Newberry fills.
@@ -863,7 +890,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const litNB = new Set(), litOHM = new Set();
     let mexicoLit = false;
     for (const it of items) {
-      if (sided(it)) continue;
+      if (sided(it) || it.src === 'piece') continue; // (the pieces follow the lit states: show, clipPieces)
       const by = hl.has(itemKeys(it, { power: it.cat, powers, twins: lesson.twins }));
       it.lit = !!by; it.litBy = by;
       if (!by) { it.look = { fill: null, label: null }; continue; }
@@ -890,7 +917,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   function lessonLegend(base, items, trackerId, hl) {
     let rows = [...base.legend];
     const shown = items.filter((it) => it.look && views.some((v) => v.shows(it.f)));
-    if (hl) {
+    // (a classification tracker's key keeps its classes' names: a lit state is shown for its path or its chapter)
+    if (hl && !CLASS_TRACKERS.has(trackerId)) {
       rows = rows.map((r) => {
         if (r.swatch !== 'fill' || !r.key || r.key === 'hatch' || r.key === 'stipple' || r.key === 'crosshatch') return r;
         const lit = shown.filter((it) => it.lit && it.look.fill === r.key);
@@ -1419,6 +1447,23 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
     }
     // Newberry's "Other" areas named for what they were (trackers.json other_areas), hatched, a line each
     for (const label of new Set(Object.values(tracker.other_areas ?? {}).map((a) => a.label))) if (present.has(`area:${label}`)) rows.push({ swatch: 'fill', key: 'hatch', label, role: 'area' });
+  } else if (trackerId === 'paths') {
+    // the five paths in the outline's order, those on the sheet (src/us/classify.js)
+    for (const [k, c] of Object.entries(tracker.classes)) if (present.has(`fill:${c.fill}:path-${k}`)) rows.push({ swatch: 'fill', key: c.fill, label: c.label });
+  } else if (trackerId === 'chapters') {
+    // the lit chapters in chapter order (a fifth hatched), else the one neutral line
+    for (const n of Object.keys(tracker.titles ?? {}).map(Number).sort((a, b) => a - b)) {
+      const label = chapterLabel(n, tracker.titles[n]);
+      for (const f of tracker.fills) if (present.has(`fill:${f}:chapter-${n}`)) rows.push({ swatch: 'fill', key: f, label });
+      if (present.has(`area:${label}`)) rows.push({ swatch: 'fill', key: 'hatch', label, role: 'area' });
+    }
+    if (present.has(`fill:${tracker.unlit.fill}:unlit-chapter`)) rows.push({ swatch: 'fill', key: tracker.unlit.fill, label: tracker.unlit.label });
+  } else if (trackerId === 'pieces') {
+    // Won, Bought, Split, Joined as fills, Claimed hatched (owner, 2026-11-18), in the outline's order
+    for (const [k, c] of Object.entries(tracker.labels)) {
+      if (c.fill && present.has(`fill:${c.fill}:${k}`)) rows.push({ swatch: 'fill', key: c.fill, label: c.label });
+      if (c.pattern && present.has(`area:${c.label}`)) rows.push({ swatch: 'fill', key: 'hatch', label: c.label, role: 'area' });
+    }
   } else if (trackerId === 'cessions') {
     tracker.periods.forEach(([, , label], i) => { if (present.has(`seq:${i + 1}`)) rows.push({ swatch: 'fill', key: `seq-${i + 1}`, label: `Ceded ${label}` }); });
     if (!rows.length) rows.push({ swatch: 'fill', key: 'seq-1', label: 'No cession yet (first: 1784)' });

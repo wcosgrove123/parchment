@@ -10,6 +10,8 @@ import { join } from 'node:path';
 import { prepareData } from '../src/us/model.js';
 import { diffUS, handoffsUS } from '../src/us/diff.js';
 import { insetsNamed } from '../src/us/frames.js';
+import { prepareClassTable, preparePieces, piecesOn } from '../src/us/classify.js';
+import { parseCSV } from '../src/data/records.js';
 import { findBrowser } from '../scripts/browser.mjs';
 import { renderOrder } from '../scripts/map.mjs';
 
@@ -59,6 +61,59 @@ test('the states tracker names three of Newberry\'s "Other" areas for what they 
   assert.equal(areas.tx_republic.label, 'Independent republic');
   const nb = data.nb.filter((it) => it.p.type === 'Other').map((it) => it.p.id);
   for (const id of Object.keys(areas)) assert.ok(nb.includes(id), `${id} is a Newberry "Other" polygon`);
+});
+
+// ---------------------------------------------------------------- item 5: the classification trackers, no browser
+const text = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
+const oracle = (() => {
+  const rows = parseCSV(text('tests/maps/statehood/pieces-oracle.csv'));
+  const h = Object.fromEntries(rows[0].map((x, i) => [x.trim(), i]));
+  const m = new Map();
+  for (const r of rows.slice(1)) if (r[h.state]) { const s = m.get(r[h.state]) ?? new Map(); s.set(r[h.piece], Number(r[h.share])); m.set(r[h.state], s); }
+  return m;
+})();
+
+test('paths: one row for each of the fifty states, the outline\'s counts (13, 4, 2, 20, 11), nothing skipped', () => {
+  const t = prepareClassTable(text('data/us/statehood-paths.csv'), { file: 'data/us/statehood-paths.csv', column: 'path', values: Object.keys(trackers.paths.classes) });
+  assert.deepEqual(t.problems, []);
+  const by = {};
+  for (const r of t.rows) by[r.value] = (by[r.value] ?? 0) + 1;
+  assert.deepEqual(by, { founding: 13, carved: 4, direct: 2, enabled: 20, 'self-started': 11 });
+  const states = new Set(data.nb.filter((it) => it.p.type === 'State').map((it) => it.p.id));
+  assert.equal(states.size, 50);
+  for (const id of states) assert.ok(t.byId.has(id), `${id} has a path`);
+  assert.equal(t.byId.get('mi_state')[0].value, 'self-started', 'Michigan: the act came after its constitution');
+  assert.equal(t.byId.get('tx_state')[0].value, 'direct');
+});
+
+test('chapters: every state and the District in one chapter, the outline\'s counts', () => {
+  const t = prepareClassTable(text('data/us/statehood-chapters.csv'), { file: 'data/us/statehood-chapters.csv', column: 'chapter' });
+  assert.deepEqual(t.problems, []);
+  const by = {};
+  for (const r of t.rows) by[r.value] = (by[r.value] ?? 0) + 1;
+  assert.deepEqual(by, { 1: 13, 2: 4, 3: 5, 4: 4, 5: 5, 6: 1, 7: 2, 8: 3, 9: 2, 10: 8, 11: 1, 12: 2, 13: 1 });
+  assert.equal(t.byId.get('dc')[0].value, '13');
+});
+
+test('pieces: every acquisition the outline lists is a day the Newberry\'s U.S. land grows, and today has all twelve', () => {
+  const pieces = preparePieces(read('data/us/pieces.topojson'));
+  const today = piecesOn(pieces, 20260101).map((it) => it.p.key).sort();
+  assert.deepEqual(today, ['adamsonis_line', 'alaska', 'florida', 'gadsden', 'hawaii', 'hempstead', 'louisiana', 'mexican', 'oregon', 'redriver', 'texas', 'treaty1783', 'westflorida']);
+  assert.deepEqual(piecesOn(pieces, 18200101).map((it) => it.p.key).sort(), ['adamsonis_line', 'florida', 'hempstead', 'louisiana', 'redriver', 'treaty1783', 'westflorida'], 'a map of 1820 has its own pieces');
+  for (const it of piecesOn(pieces, 20260101)) assert.equal(it.p.label, { hempstead: null, treaty1783: 'won', mexican: 'won', louisiana: 'bought', florida: 'bought', gadsden: 'bought', alaska: 'bought', redriver: 'split', adamsonis_line: 'split', oregon: 'split', texas: 'joined', hawaii: 'joined', westflorida: 'claimed' }[it.p.key] ?? null, it.p.key);
+});
+
+test('7 (model). every state\'s shares are within half a point of the deck\'s table', () => {
+  const shares = read('data/us/pieces.topojson').shares.states;
+  assert.equal(shares.length, 51, 'fifty states and the District');
+  for (const s of shares) {
+    const want = oracle.get(s.name);
+    assert.ok(want, `${s.name} is in the deck's table`);
+    for (const k of new Set([...want.keys(), ...s.pieces.map((p) => p.key)])) {
+      const got = s.pieces.find((p) => p.key === k)?.share ?? 0;
+      assert.ok(Math.abs(got - (want.get(k) ?? 0)) <= 0.005, `${s.name} ${k}: ${got} against ${want.get(k) ?? 0}`);
+    }
+  }
 });
 
 // ---------------------------------------------------------------- the renders
@@ -138,6 +193,39 @@ test('5. the thirteen on the east frame: Delaware and Rhode Island carry their a
   assert.equal(byId('ri_state').label, 'RI');
   assert.equal(s.features.filter((f) => f.lit && f.layer === 'newberry' && f.labeled).length, 13, 'every lit state is named');
   assert.ok(!s.warnings.some((w) => /carries no name/.test(w)));
+});
+
+test('7. how the land became U.S. land, 1 January 2026: four fills, Claimed hatched, every state\'s shares on the slip', { skip, timeout: 120000 }, async () => {
+  const s = await render('pieces-2026');
+  assert.deepEqual(s.legend.rows.map((r) => r.label), ['Won', 'Bought', 'Split', 'Joined', 'Claimed', 'Documented border']);
+  assert.equal(s.legend.rows.find((r) => r.label === 'Claimed').pattern, 'hatch-rust', 'Claimed hatched (owner, 2026-11-18)');
+  const c = s.resolved.classification;
+  assert.equal(c.shares.length, 51);
+  for (const st of c.shares) {
+    const want = oracle.get(st.name);
+    for (const k of new Set([...want.keys(), ...st.pieces.map((p) => p.key)])) assert.ok(Math.abs((st.pieces.find((p) => p.key === k)?.share ?? 0) - (want.get(k) ?? 0)) <= 0.005, `${st.name} ${k}`);
+  }
+  assert.ok(s.features.some((f) => f.layer === 'acquisition-piece' && f.source.acquisition.key === 'westflorida' && /hatch/.test(f.look.pattern)));
+});
+
+test('paths, 1 January 2026: five fills in the outline\'s order (owner: "paths get 5")', { skip, timeout: 120000 }, async () => {
+  const s = await render('paths-2026');
+  assert.deepEqual(s.legend.rows.map((r) => r.label), ['Founding', 'Carved', 'Direct', 'Enabled', 'Self-started', 'Documented border']);
+  assert.deepEqual(Object.fromEntries(Object.entries(s.resolved.classification.by_class).map(([k, v]) => [k, v.length])), { founding: 13, carved: 4, direct: 2, enabled: 20, 'self-started': 11 });
+  assert.equal(s.features.find((f) => f.ids.newberry === 'mi_state').class.value, 'self-started');
+});
+
+test('chapters: Chapter 3 lit by its id, its five states named, one key line', { skip, timeout: 120000 }, async () => {
+  const s = await render('chapters-3-1959');
+  assert.deepEqual(s.legend.rows.map((r) => r.label), ['Chapter 3 · The Northwest Ordinance', 'Documented border']);
+  assert.deepEqual(s.features.filter((f) => f.lit).map((f) => f.ids.newberry).sort(), ['il_state', 'in_state', 'mi_state', 'oh_state', 'wi_state']);
+  assert.deepEqual(s.resolved.classification.chapters_lit, [3]);
+});
+
+test('Colorado on its admission day with the pieces: the four inside it, nothing outside', { skip, timeout: 120000 }, async () => {
+  const s = await render('pieces-colorado-1876');
+  assert.deepEqual(s.resolved.classification.acquisitions.map((a) => a.key), ['louisiana', 'adamsonis_line', 'texas', 'mexican']);
+  assert.ok(s.features.filter((f) => f.layer === 'acquisition-piece').every((f) => f.source.clipped_to));
 });
 
 test('6. Deseret, 1 June 1850: keyed as a proposed state, still hatched', { skip, timeout: 120000 }, async () => {
