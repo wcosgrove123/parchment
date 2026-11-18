@@ -191,7 +191,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   // inside the frame clear of the cartouche and legend, or left off (src/us/stage.js, frameWaterLabels).
   const land1 = framed ? rasterLand(projection, land, W, H) : null;
   const legendSpec = framed ? { anchor: lesson.frame.legend ?? quieterCorner(land1, frame), lift: 22 } : stage.legend;
-  const stageLabelList = framed ? frameWaterLabels([...stage.labels, ...(lesson.frame.water ?? [])], projection, frame, land1, legendSpec, makeMeasure(), { near: lesson.frame.view ? 3 : null }) : stage.labels;
+  // Alaska and Hawaii on a frame, when the order names them (owner, 2026-11-18): their boxes, stacked above the cartouche
+  const frameInsets = framed ? frameInsetBoxes(lesson?.stageInsets ?? [], frame) : [];
+  const stageLabelList = framed ? frameWaterLabels([...stage.labels, ...(lesson.frame.water ?? [])], projection, frame, land1, legendSpec, makeMeasure(), { near: lesson.frame.view ? 3 : null, avoid: frameInsets.map((s) => s.box) }) : stage.labels;
   drawStageLabels(main.stageLabels, defs, { ...stage, labels: stageLabelList }, main.path);
   // Water names change too: a stage label may list later names with the day each took effect (the Gulf of Mexico
   // is the Gulf of America in U.S. federal use from 7 February 2025). The sheet shows the name in force on its date.
@@ -208,10 +210,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     if (changed) stageBoxes = null; // their reserved boxes are measured again
   }
 
-  // Alaska and Hawaii belong to the continent: a frame has none. On a sheet of another size they keep their place
-  // relative to the cartouche below them.
-  const insets = (framed ? [] : stage.insets ?? []).map((s0) => {
-    const s = resized ? { ...s0, box: [s0.box[0], s0.box[1] + (H - BASE_H), s0.box[2], s0.box[3]] } : s0;
+  // Alaska and Hawaii belong to the continent: a frame has them only when the order names a polygon in one (above).
+  // On a sheet of another size they keep their place relative to the cartouche below them.
+  const insets = (framed ? frameInsets : stage.insets ?? []).map((s0) => {
+    const s = resized && !framed ? { ...s0, box: [s0.box[0], s0.box[1] + (H - BASE_H), s0.box[2], s0.box[3]] } : s0;
     const [bx, by, bw, bh] = s.box;
     const proj = d3.geoConicEqualArea().parallels(s.parallels).rotate(s.rotate);
     proj.fitExtent([[bx + 8, by + 8], [bx + bw - 8, by + bh - 8]], extentPolygon(s.extent));
@@ -265,6 +267,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   let milNow = null, milListBox = null; // the Military layer as shown: its war and events, and the course list's box
 
   const measure = makeMeasure();
+  // Open water on the main view (Natural Earth's land, as a coarse mask made once): where a lit state's abbreviation
+  // may sit beside a coast too small to hold it (statehood brief, item 3).
+  const waterAt = (x, y) => !(landMask ??= land1 ?? rasterLand(projection, land, W, H, 3)).isLand(x, y);
   let current = null;
   let currentKey = null;
   let fbNow = null; // the free Black population picture of the date shown (src/us/freeblack.js), or null
@@ -318,7 +323,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         it.look = s.look; it.status = s.status; it.statusRow = s.row;
       } else if (trackerId === 'states') {
         const t = tracker.types[it.p.type] ?? {};
-        it.look = t.pattern ? { pattern: t.pattern, label: tracker.types.Other.label } : { fill: t.fill, label: t.label };
+        // (an "Other" area the tracker names for what it was: Deseret a proposed state, the Vermont and Texas republics)
+        const area = t.pattern ? tracker.other_areas?.[it.p.id] : null;
+        it.look = t.pattern ? { pattern: t.pattern, label: area?.label ?? tracker.types.Other.label, ...(area ? { area: area.label } : {}) } : { fill: t.fill, label: t.label };
       } else if (trackerId === 'cessions') {
         it.look = { fill: null, label: null };
       } else if (trackerId === 'electoral') {
@@ -608,7 +615,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     zones.push(...ecBadges.map((b) => b.box));
     const named = electoral ? nbItems.filter((it) => !resultFor(electoral, it.p)?.badge) : fb ? nbItems.filter((it) => !ecBadges.some((b) => b.abbr === (it.p.abbr ?? '').replace(/ Terr$/, '') && fb.badgeOf(it.p))) : nbItems;
     // (a battle frame names its hills and roads, not the state it lies in)
-    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines, near: lesson?.highlight?.none && v.id === 'main' ? (recordLayout?.placed ?? []).filter((p) => p.box && p.kind === 'point').map((p) => p.box) : [] });
+    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines, near: lesson?.highlight?.none && v.id === 'main' ? (recordLayout?.placed ?? []).filter((p) => p.box && p.kind === 'point').map((p) => p.box) : [],
+      water: v.id === 'main' && lesson?.highlight?.size ? waterAt : null });
     drawBadges(lg, badges);
     drawElectoralBadges(lg, ecBadges);
 
@@ -735,7 +743,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       // A lesson map's Diff lists only what changed inside its frame, and only what its highlight names.
       const litF = lesson?.highlight?.size ? litFeature(data, a, b) : null;
       const visible = lesson ? (f) => seen(f) && inFrame(f) && (!litF || litF(f)) : seen;
-      const diff = electoralDiff ?? diffUS(data, a, b, trackerId, { powers, visible, minKm2 });
+      // (land that changed hands, states tracker: inside the frame, and named by the highlight on either side)
+      const visiblePiece = (h) => seen(h.f) && (!lesson || (inFrame(h.f) && (!litF || litF(h.from.f) || litF(h.fromB.f) || litF(h.to.f))));
+      const diff = electoralDiff ?? diffUS(data, a, b, trackerId, { powers, visible, minKm2, visiblePiece });
       entry = { diff, sections: listSections(diff, trackerId), legend: diffLegendFor(diff, trackerId, { natB: natB.length > 0, anyOHM: ohmB.length > 0 }), layers: null };
       if (lesson) entry.legend = lessonLegend(entry.legend, [], trackerId, null);
     }
@@ -768,6 +778,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const tint = fills.append('g').attr('class', 'na-tint').attr('opacity', FILL_OPACITY);
     tint.append('g').attr('class', 'na-fill k-focus').selectAll('path')
       .data(gold.filter((u) => !soft(u)).flatMap((u) => u.b)).join('path').attr('d', (it) => v.d(it.f));
+    // Land that changed hands between two polygons that both survive (the states tracker: src/us/diff.js handoffsUS),
+    // in the same focus color: what is new on the later date, whether a new polygon or land that moved into an old one.
+    const handed = diff.handoffs ?? [];
+    if (handed.length) tint.append('g').attr('class', 'na-fill k-focus na-handoffs').selectAll('path').data(handed).join('path').attr('d', (h) => v.d(h.f));
     // The United States' growth or loss, from its polygons on both dates: one date's land painted through a mask
     // of the other's (the mask's edge widened a hair so the shared border leaves no seam). Nothing is computed.
     const us = diff.changed.find((u) => u.key === 'us');
@@ -808,10 +822,13 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     if (trackerId !== 'cessions') {
       const wrap = (u, it, cls) => ({ src: it.src, p: it.p, f: it.f, cat: u.power, look: soft(u) ? { pattern: 'stipple' } : { fill: 'focus' }, diffCls: cls });
       const named = (list, side, cls) => list.filter((u) => !u.within && u.key !== 'us').flatMap((u) => u[side].map((it) => wrap(u, it, cls)));
+      // a piece that changed hands carries the name of the polygon that now holds it ("Virginia"), unless that
+      // polygon is itself new on the map and named already (New Mexico Territory: the larger shape keeps the name)
+      const pieces = handed.map((h) => ({ src: 'newberry', p: h.to.p, f: h.f, cat: h.to.p.power, look: { fill: 'focus' }, diffCls: 'appeared', handoff: h }));
       const zones = [...reservedZones(v), ...extraZones];
       const box = v.id === 'main' && diffList.box();
       if (box) zones.push(box);
-      const labels = placePolityLabels(lg, v, [...named(gold, 'b', 'appeared'), ...named(gone, 'a', 'vanished')], zones, measure, b, trackerId, { lines });
+      const labels = placePolityLabels(lg, v, [...named(gold, 'b', 'appeared'), ...pieces, ...named(gone, 'a', 'vanished')], zones, measure, b, trackerId, { lines });
       return { g, lg, labels: labels.map((c) => ({ ...c, view: v.id })) };
     }
     return { g, lg };
@@ -882,8 +899,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         return { ...r, label: names.length > 2 ? `${names.slice(0, 2).join(', ')} and ${names.length - 2} more` : names.join(' and ') };
       });
     }
-    const hatched = shown.filter((it) => it.look.pattern === 'hatch');
-    if (hatched.length && rows.some((r) => r.key === 'hatch')) {
+    // (an "Other" area named for what it was keeps its own line: only the general dispute line is named by its sides)
+    const hatched = shown.filter((it) => it.look.pattern === 'hatch' && !it.look.area);
+    if (hatched.length && rows.some((r) => r.key === 'hatch' && r.role !== 'area')) {
       const groups = new Map();
       let unknown = false;
       for (const it of hatched) {
@@ -895,7 +913,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       if (groups.size && groups.size <= 3) {
         const claimRows = [...groups.values()].map((ps) => ({ swatch: 'fill', key: 'hatch', label: claimLabel(ps), role: 'dispute' }));
         if (unknown) claimRows.push({ swatch: 'fill', key: 'hatch', label: 'Other disputed or overlapping claims', role: 'dispute' });
-        const at = rows.findIndex((r) => r.key === 'hatch');
+        const at = rows.findIndex((r) => r.key === 'hatch' && r.role !== 'area');
         rows.splice(at, 1, ...claimRows);
       }
     }
@@ -1161,6 +1179,9 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     inFrame,
     cutByFrame,
     shows: (f) => views.some((v) => v.shows(f)),
+    // (in the Alaska or Hawaii inset: on the continent always, on a frame when the order named them)
+    inInset: (f) => insets.some((v) => !v.lessonInset && v.shows(f)),
+    stageInsets: insets.filter((v) => !v.lessonInset).map((v) => ({ id: v.inset.id, title: v.inset.title, box: v.box })),
     partiesOf,
     isPowerKey,
   };
@@ -1217,6 +1238,24 @@ function rasterLand(proj, land, w, h, k = 4) {
     },
   };
 }
+// The stage's insets on a frame (owner, 2026-11-18, "Insets when lit"): at four fifths of their size on the continent,
+// stacked up the left edge from just above the cartouche, the last (Hawaii) lowest; smaller still if the sheet is short.
+function frameInsetBoxes(insets, { x0, y0, y1 }) {
+  if (!insets.length) return [];
+  const GAP = 14, k0 = 0.8;
+  const bottom = y1 - 22 - 128 - 22;
+  const need = insets.reduce((s, i) => s + i.box[3] * k0, 0) + GAP * (insets.length - 1);
+  const k = Math.min(k0, k0 * Math.max(0.3, (bottom - (y0 + 22)) / need));
+  let y = bottom;
+  const out = [];
+  for (const s of [...insets].reverse()) {
+    const w = Math.round(s.box[2] * k), h = Math.round(s.box[3] * k);
+    y -= h;
+    out.unshift({ ...s, box: [x0 + 22, Math.round(y), w, h] });
+    y -= GAP;
+  }
+  return out;
+}
 // The legend's corner in a frame: whichever right-hand corner holds less land (open water is where a key belongs).
 function quieterCorner(mask, { x1, y0, y1 }) {
   const w = 236, h = 260;
@@ -1227,11 +1266,13 @@ function quieterCorner(mask, { x1, y0, y1 }) {
 // clear of the cartouche and the legend's corner; left off where no stretch is long enough for the name.
 // near (a free view, pan and zoom): the open stretch must reach within that many degrees of the name's own place,
 // or the name is left off (the Atlantic's name, slid west along its parallel, would land in the Gulf of Mexico).
-function frameWaterLabels(labels, proj, { x0, y0, x1, y1 }, mask, legendSpec, measure, { near = null } = {}) {
+function frameWaterLabels(labels, proj, { x0, y0, x1, y1 }, mask, legendSpec, measure, { near = null, avoid = [] } = {}) {
   const keep = [
     { x: x0, y: y1 - 22 - 150, w: 22 + 380 + 20, h: 150 + 22 }, // the cartouche
     // (a lesson map's legend widens to its longest line, up to 340 px: src/render/legend.js)
     legendSpec.anchor === 'top-right' ? { x: x1 - 22 - 340 - 16, y: y0, w: 340 + 38, h: 300 } : { x: x1 - 22 - 340 - 16, y: y1 - 22 - 300, w: 340 + 38, h: 322 },
+    // (and the Alaska and Hawaii insets a frame may draw: [x, y, w, h])
+    ...avoid.map(([x, y, w, h]) => ({ x: x - 8, y, w: w + 16, h })),
   ];
   const blocked = (p) => keep.some((r) => p[0] >= r.x && p[0] <= r.x + r.w && p[1] >= r.y - 10 && p[1] <= r.y + r.h + 10);
   const out = [], seen = new Set();
@@ -1339,7 +1380,8 @@ function shortKey(leg, mil) {
   return { ...leg, legend: leg.legend.filter(keep) };
 }
 // (an occupied polygon is present twice: as its owner's fill, and as the occupier's hatch)
-const addPresent = (present, l) => { present.add(lookKey(l)); if (l.occ) present.add(`occ:side-${l.occ}:${l.occBy}`); };
+// (an "Other" area named for what it was, under the states tracker, has a key line of its own, not the dispute's)
+const addPresent = (present, l) => { present.add(l.area ? `area:${l.area}` : lookKey(l)); if (l.occ) present.add(`occ:side-${l.occ}:${l.occBy}`); };
 const lookKey = (l) => (l.seq ? `seq:${l.seq}` : l.pop ? `pop:${l.pop}` : l.land ? `land:${l.land}` : l.pattern ? `pat:${l.pattern}` : l.fill ? `fill:${l.fill}:${l.cat ?? l.label}` : 'none');
 
 function labelFor(cat, date) {
@@ -1375,6 +1417,8 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
       if (!t.fill || seen.has(t.label)) continue;
       if (present.has(`fill:${t.fill}:${t.label}`)) { rows.push({ swatch: 'fill', key: t.fill, label: t.label }); seen.add(t.label); }
     }
+    // Newberry's "Other" areas named for what they were (trackers.json other_areas), hatched, a line each
+    for (const label of new Set(Object.values(tracker.other_areas ?? {}).map((a) => a.label))) if (present.has(`area:${label}`)) rows.push({ swatch: 'fill', key: 'hatch', label, role: 'area' });
   } else if (trackerId === 'cessions') {
     tracker.periods.forEach(([, , label], i) => { if (present.has(`seq:${i + 1}`)) rows.push({ swatch: 'fill', key: `seq-${i + 1}`, label: `Ceded ${label}` }); });
     if (!rows.length) rows.push({ swatch: 'fill', key: 'seq-1', label: 'No cession yet (first: 1784)' });
@@ -1411,7 +1455,7 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
   for (const [key, c] of Object.entries(powers.categories)) {
     if (c.pattern && present.has(`pat:${c.pattern}`)) rows.push({ swatch: 'fill', key: c.pattern, label: c.label });
   }
-  if (present.has('pat:hatch') && trackerId === 'states' && !rows.some((r) => r.key === 'hatch')) rows.push({ swatch: 'fill', key: 'hatch', label: tracker.types.Other.label });
+  if (present.has('pat:hatch') && trackerId === 'states' && !rows.some((r) => r.key === 'hatch' && r.role !== 'area')) rows.push({ swatch: 'fill', key: 'hatch', label: tracker.types.Other.label });
   if (date >= US_FROM) rows.push({ swatch: 'line', style: 'solid', label: 'Documented border' });
   if (anyOHM && date < US_FROM) rows.push({ swatch: 'line', style: 'dashed', label: 'Approximate border' });
   return { title: trackerId === 'military' ? 'Sides' : tracker.title, legend: rows };
@@ -1429,7 +1473,9 @@ function diffLegendFor(diff, trackerId, { natB, anyOHM }) {
     rows.push({ swatch: 'none', label: 'Unshaded: the same party' });
     return { title: `Elections ${ya} → ${yb}`, legend: rows };
   } else {
-    rows.push({ swatch: 'fill', key: 'focus', label: trackerId === 'nations' ? 'Appeared or changed hands' : 'Appeared' });
+    // (states: land that changed hands between surviving polygons takes the focus color too, and the line says so)
+    const handed = (diff.handoffs ?? []).length > 0;
+    rows.push({ swatch: 'fill', key: 'focus', label: trackerId === 'nations' ? 'Appeared or changed hands' : handed ? (diff.appeared.length ? 'Appeared or changed hands' : 'Changed hands') : 'Appeared' });
     rows.push({ swatch: 'fill', key: 'hatch', label: 'Vanished' });
   }
   if (natB) rows.push({ swatch: 'fill', key: 'stipple', label: 'Native nations (approximate)' });
@@ -1455,6 +1501,13 @@ function listSections(diff, trackerId) {
     flow('States admitted', 'appeared', k.state, (u) => yr(u.since));
     flow('Territories created', 'appeared', k.territory, (u) => yr(u.since));
     flow('Other areas', 'appeared', k.other, (u) => yr(u.since));
+    // land that moved from one polygon to another, largest first: "Texas → Unorganized Federal Territory"
+    const hand = diff.handoffs ?? [];
+    if (hand.length) {
+      sec.push({ title: 'Changed hands', cls: 'appeared', max: 5, items: hand.map((h) => ({
+        text: [`${nbName(h.from.p)} → ${nbName(h.to.p)}`, `${h.from.p.name} → ${h.to.p.name}`, `${h.from.p.abbr ?? h.from.p.name} → ${h.to.p.abbr ?? h.to.p.name}`],
+      })) });
+    }
     flow('Vanished', 'vanished', [...diff.vanished].sort((p, q) => (p.until ?? 0) - (q.until ?? 0)), (u) => yr(u.until));
     const reshaped = diff.persisted.filter((u) => u.reshaped).length;
     if (diff.persisted.length) sec.push({ title: 'Persisted', cls: 'persisted', flow: true, note: reshaped ? `${reshaped} with new borders` : '', items: diff.persisted.map((u) => ({ text: names(u) })), maxLines: 4 });
@@ -1521,7 +1574,15 @@ function nbTexts(p, trackerId) {
   return [full];
 }
 
-function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { covered = () => false, nolabel = [], lines = [], near = [] } = {}) {
+// A lit state's postal abbreviation, for when its name finds no room (statehood brief, 2026-11-18, item 3). On the
+// status maps a territory is never abbreviated (owner, 2026-11-16), so it has none there.
+function abbrFor(p, trackerId) {
+  if (!p?.abbr) return null;
+  if ((trackerId === 'slavery' || trackerId === 'freeblack') && p.type !== 'State') return null;
+  return cleanLabel(p.abbr);
+}
+
+function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { covered = () => false, nolabel = [], lines = [], near = [], water = null } = {}) {
   const main = v.id === 'main';
   const statusMap = trackerId === 'slavery' || trackerId === 'freeblack';
   const silent = (name) => nolabel.some((r) => new RegExp(r.match, 'i').test(name) && (!r.from || date >= r.from) && (!r.to || date < r.to));
@@ -1541,7 +1602,11 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     if (!poly) continue;
     const [[bx0, by0], [bx1, by1]] = v.path.bounds(poly);
     const w = bx1 - bx0, h = by1 - by0;
-    if (!(w > 18 && h > 9)) continue;
+    // (a state the order lit keeps its abbreviation, however small it is on the sheet: Delaware and Rhode Island on
+    // the east frame are some 17 px across, below the size at which other names are tried)
+    const abbr = isNB && it.lit ? abbrFor(p, trackerId) : null;
+    const tiny = !(w > 18 && h > 9);
+    if (tiny && !(abbr && w > 0 && h > 0)) continue;
     let [cx, cy] = v.path.centroid(poly);
     if (!Number.isFinite(cx)) continue;
     // (occupied land keeps its name even where a U.S. claim lies over it: New Mexico east of the Rio Grande, which Texas claimed)
@@ -1560,7 +1625,7 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     // a nation's name, in italic (a Native nation an order did not light keeps its italic name, without the stipple)
     const native = it.look.pattern === 'stipple' || it.src === 'treaty' || (it.lit === false && (it.cat === 'native' || it.src === 'hb'));
     const rank = it.src === 'treaty' ? -1 : isNB ? 0 : native ? 2 : p.lvl === 2 ? 1 : 3;
-    seen.set(key, { key, texts: [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank: it.look?.occName ? 0.5 : rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false, poly, x0: bx0, y0: by0, occ: !!it.look?.occName });
+    seen.set(key, { key, texts: tiny ? [abbr] : [...new Set(texts.filter(Boolean))], cx, cy, w, h, area, rank: it.look?.occName ? 0.5 : rank, native, isNB, cls: it.diffCls, it, lit: it.lit ? 1 : 0, unlit: it.lit === false, poly, x0: bx0, y0: by0, occ: !!it.look?.occName, abbr, tiny });
   }
   for (const c of seen.values()) cands.push(c);
   cands.sort((a, b) => b.lit - a.lit || a.rank - b.rank || b.area - a.area);
@@ -1570,6 +1635,34 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
   const placed = [...zones];
   const out = [];
   const [bx, by, bw, bh] = v.box;
+  const clear = (box) => box.x >= bx + 4 && box.x + box.w <= bx + bw - 4 && box.y >= by + 4 && box.y + box.h <= by + bh - 4
+    && !placed.some((z) => overlaps(z, box, 2)) && !(lines.length && lines.some((s) => polylineHitsRect(s, box, 6)))
+    && !(near.length && near.some((z) => overlaps(z, box, 14)));
+  // A lit state whose name found no room (statehood brief, item 3): its abbreviation at the smallest size, at other
+  // points inside it, then just beside it on open water (never over another state's land), before it goes unnamed.
+  function placeAbbr(c) {
+    const t = c.abbr, s = minSize;
+    const tw = textWidth(measure, t, s, false), th = s * 1.05;
+    const at = (x, y) => ({ x: x - tw / 2, y: y - th / 2, w: tw, h: th });
+    const vx0 = Math.max(c.x0, bx), vy0 = Math.max(c.y0, by), vw = Math.min(c.x0 + c.w, bx + bw) - vx0, vh = Math.min(c.y0 + c.h, by + bh) - vy0;
+    for (const fy of [0.5, 0.3, 0.7, 0.15, 0.85]) for (const fx of [0.5, 0.3, 0.7, 0.15, 0.85]) {
+      const q = [vx0 + vw * fx, vy0 + vh * fy];
+      const ll = v.proj.invert(q);
+      if (!ll || !d3.geoContains(c.poly, ll)) continue;
+      const box = at(q[0], q[1]);
+      if (clear(box)) return { t, s, box, x: q[0], y: q[1] };
+    }
+    if (!water) return null;
+    const g = 4, x0 = c.x0, y0 = c.y0, x1 = c.x0 + c.w, y1 = c.y0 + c.h, mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+    const spots = [[x1 + g + tw / 2, my], [mx, y1 + g + th / 2], [x0 - g - tw / 2, my], [mx, y0 - g - th / 2],
+      [x1 + g + tw / 2, y1 + g + th / 2], [x1 + g + tw / 2, y0 - g - th / 2], [x0 - g - tw / 2, y1 + g + th / 2], [x0 - g - tw / 2, y0 - g - th / 2]];
+    for (const [x, y] of spots) {
+      const box = at(x, y);
+      const wet = [[box.x, box.y], [box.x + box.w, box.y], [box.x, box.y + box.h], [box.x + box.w, box.y + box.h], [x, y]].every(([px, py]) => water(px, py));
+      if (wet && clear(box)) return { t, s, box, x, y, beside: true };
+    }
+    return null;
+  }
   for (const c of cands) {
     let size = Math.max(minSize, Math.min(maxSize, Math.sqrt(c.area) / (main ? 14 : 10)));
     let pick = null;
@@ -1592,7 +1685,7 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
       for (const t of c.texts) {
         for (let s = size; s >= minSize; s -= 1.5) {
           const tw = textWidth(measure, t, s, c.native), th = s * 1.05;
-          if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24) && !c.occ) continue;
+          if (tw > c.w * 1.05 && !(c.isNB && tw < 120 && c.w > 24) && !c.occ && !c.tiny) continue;
           const box = { x: ccx - tw / 2, y: ccy - th / 2, w: tw, h: th };
           if (box.x < bx + 4 || box.x + box.w > bx + bw - 4 || box.y < by + 4 || box.y + box.h > by + bh - 4) continue;
           if (placed.some((z) => overlaps(z, box, 2))) continue;
@@ -1607,6 +1700,10 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
         if (pick) break;
       }
       if (pick) { c.cx = ccx; c.cy = ccy; break; }
+    }
+    if (!pick && c.abbr) {
+      pick = placeAbbr(c);
+      if (pick) { c.cx = pick.x; c.cy = pick.y; c.beside = !!pick.beside; }
     }
     if (!pick) continue;
     if (c.native && ++natives > NATIVE_MAX) continue;

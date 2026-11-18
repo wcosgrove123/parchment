@@ -11,7 +11,8 @@
 // Native homelands from historical-basemaps are never compared: its snapshots take their names from different
 // sources (the 1492 map from Native Land Digital), so a "change" between them could be a change of source.
 
-import { geoArea, geoBounds, geoCentroid, geoContains } from 'd3';
+import { geoArea, geoBounds, geoCentroid, geoContains, geoLength } from 'd3';
+import polygonClipping from 'polygon-clipping';
 import { aliveNB, aliveOHM, powerAt, nbName, cleanLabel, US_FROM } from './model.js';
 
 const KM2_PER_SR = 6371 * 6371;
@@ -89,8 +90,9 @@ const powerLabel = (powers, key, date) => {
 
 // The comparison. Lists are sorted largest first; units smaller than minKm2 (or off the sheet) are counted in
 // `small` and neither listed nor drawn. `us` carries the United States' polygons on both dates when it is one
-// unit that persisted (nations), for the renderer's growth mask.
-export function diffUS(data, a, b, trackerId, { powers = null, visible = () => true, minKm2 = 0 } = {}) {
+// unit that persisted (nations), for the renderer's growth mask. `handoffs` (states): land that changed hands
+// between polygons, each piece kept when visiblePiece(piece) says it is on the sheet.
+export function diffUS(data, a, b, trackerId, { powers = null, visible = () => true, minKm2 = 0, visiblePiece = (h) => visible(h.f) } = {}) {
   const A = group(unitsAt(data, a, trackerId, { powers }), visible);
   const B = group(unitsAt(data, b, trackerId, { powers }), visible);
   // A unit of the same name and level on both dates is one unit, even under two Wikidata items (OHM files Mexico's
@@ -156,6 +158,71 @@ export function diffUS(data, a, b, trackerId, { powers = null, visible = () => t
   for (const k of ['appeared', 'vanished', 'persisted', 'changed']) out[k].sort((p, q) => (q.key === 'us') - (p.key === 'us') || q.area - p.area);
   if (trackerId === 'nations') for (const k of ['appeared', 'vanished', 'persisted', 'changed']) fold(out[k]);
   out.beforeRecord = trackerId === 'states' && Math.max(a, b) < US_FROM;
+  // Under the states tracker, land that moved between polygons the comparison names "persisted" (or into one it names
+  // "appeared"): the Texas sale, the District's retrocession. A piece shows when either polygon's does.
+  out.handoffs = trackerId === 'states' ? handoffsUS(data, a, b).filter((h) => visiblePiece(h)) : [];
+  return out;
+}
+
+// ---------------------------------------------------------------- land that changed hands
+// Between two dates, the land a Newberry polygon held on the earlier day and no longer holds on the later one, while
+// the polygon itself is still alive (a new version of the same id), inside a polygon of the later day that did not
+// already hold it on the earlier day. Texas, 12 → 13 December 1850: Texas → New Mexico Territory and → Unorganized
+// Federal Territory (the land Utah Territory and Deseret already claimed is not counted: their claims did not change).
+// The District of Columbia, 6 → 7 September 1846: the District → Virginia. Computed from the downloaded polygons
+// (their difference and intersection, as scripts/derive-us-disputes.mjs computes overlaps); nothing is drawn by hand.
+// A part smaller than HANDOFF_MIN_KM2 or thinner than HANDOFF_MIN_KM (area over perimeter) is a seam between two
+// versions of one border, not land that moved, and is dropped.
+export const HANDOFF_MIN_KM2 = 5, HANDOFF_MIN_KM = 0.2;
+const pcRings = (f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates);
+// polygon-clipping returns exterior rings counter-clockwise; d3-geo wants them clockwise (smaller than a hemisphere)
+const forD3 = (mp) => mp.map((poly) => poly.map((r) => [...r].reverse()));
+function flatBox(mp) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const poly of mp) for (const [x, y] of poly[0]) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  return [x0, y0, x1, y1];
+}
+const boxCache = new WeakMap();
+const boxOf = (f) => { let b = boxCache.get(f); if (!b) { b = flatBox(pcRings(f)); boxCache.set(f, b); } return b; };
+const meets = (p, q) => p[0] <= q[2] && q[0] <= p[2] && p[1] <= q[3] && q[1] <= p[3];
+const handoffCache = new WeakMap();
+export function handoffsUS(data, a, b) {
+  let byData = handoffCache.get(data);
+  if (!byData) { byData = new Map(); handoffCache.set(data, byData); }
+  const key = `${a}|${b}`;
+  if (byData.has(key)) return byData.get(key);
+  // (A is the `from` date and B the shown one, as for the units: a Diff run backwards runs the pieces backwards too)
+  const A = aliveNB(data, a), B = aliveNB(data, b);
+  const inB = new Map(B.map((it) => [it.p.id, it])), inA = new Map(A.map((it) => [it.p.id, it]));
+  const out = [];
+  for (const x of A) {
+    const xb = inB.get(x.p.id);
+    if (!xb || xb.p.v === x.p.v) continue; // vanished (its land is drawn as vanished), or the same shape
+    let lost;
+    try { lost = polygonClipping.difference(pcRings(x.f), pcRings(xb.f)); } catch { continue; }
+    if (!lost.length) continue;
+    const lostBox = flatBox(lost);
+    for (const y of B) {
+      if (y.p.id === x.p.id || !meets(lostBox, boxOf(y.f))) continue;
+      let piece;
+      try {
+        piece = polygonClipping.intersection(lost, pcRings(y.f));
+        const ya = inA.get(y.p.id);
+        if (piece.length && ya && meets(flatBox(piece), boxOf(ya.f))) piece = polygonClipping.difference(piece, pcRings(ya.f));
+      } catch { continue; }
+      const parts = forD3(piece).filter((poly) => {
+        const g = { type: 'Polygon', coordinates: poly };
+        const km2 = geoArea(g) * KM2_PER_SR;
+        return km2 >= HANDOFF_MIN_KM2 && km2 < 2 * Math.PI * KM2_PER_SR && km2 / (geoLength(g) * 6371) >= HANDOFF_MIN_KM;
+      });
+      if (!parts.length) continue;
+      const f = { type: 'Feature', properties: { handoff: true, from: x.p.id, to: y.p.id }, geometry: { type: 'MultiPolygon', coordinates: parts } };
+      const km2 = geoArea(f) * KM2_PER_SR;
+      out.push({ key: `${x.p.id}>${y.p.id}`, from: x, fromB: xb, to: y, appeared: !inA.has(y.p.id), f, area: km2 / KM2_PER_SR, km2: Math.round(km2), sqmi: Math.round(km2 / 2.589988) });
+    }
+  }
+  out.sort((p, q) => q.km2 - p.km2);
+  byData.set(key, out);
   return out;
 }
 

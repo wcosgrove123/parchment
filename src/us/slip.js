@@ -11,7 +11,7 @@ import { isoDate, longDate, yearOf, OPEN } from './dates.js';
 import { US_FROM, nbName, cleanLabel, powerAt, aliveNB } from './model.js';
 import { covered, slaveryCount } from './slavery.js';
 import { freeOn, SOURCE as FREE_SOURCE } from './freeblack.js';
-import { queryToOrder } from './frames.js';
+import { queryToOrder, itemKeys, slug } from './frames.js';
 import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
@@ -159,6 +159,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     title: titleShown,
     highlight: lesson?.highlight ? { ids: lesson.highlight.ids, unmatched: lesson.highlight.unmatched() } : null,
     inset: lesson?.inset ? { id: lesson.inset.id, title: lesson.inset.title, box: lesson.inset.box, at: lesson.inset.at, projection: lesson.inset.projection?.projection ?? null } : null,
+    // the stage's own insets on the sheet: Alaska and the Hawaiian Islands on the continent; on a frame, those the order named
+    stage_insets: (atlas.stageInsets ?? []).map((s) => ({ id: s.id, title: s.title, at: s.box })),
     legend_corner: info.legend?.anchor ?? null,
     water_names: info.waterLabels,
     records_file: records?.file ?? null,
@@ -197,6 +199,14 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     } : null,
   };
   for (const id of resolved.highlight?.unmatched ?? []) warnings.push(`highlight "${id}" lit nothing alive on ${longDate(date)}`);
+  // A polygon the order lit that is alive on the date but not on this map (Alaska and Hawaii on a frame: a frame
+  // draws no insets, src/us/stage.js). The highlight found it, so it is not "unmatched"; the slip says where it went.
+  if (resolved.highlight) {
+    resolved.highlight.off_frame = offFrame({ atlas, data, state, cur, frame, lesson, powers, stage });
+    for (const o of resolved.highlight.off_frame) warnings.push(o.inset
+      ? `${o.name} (${o.id}) is lit but not on this map: a frame draws no ${o.inset} inset, so ${o.name} is shown only on the whole continent (an order with no frame)`
+      : `${o.name} (${o.id}) is lit but lies outside this ${frame ? 'frame' : 'map'}`);
+  }
 
   // The free Black population tracker: the census, the counts by status, and every polygon's count, largest first.
   const fb = state.tracker === 'freeblack' && data.free ? freeOn(data.free, data.pop?.anchors, aliveNB(data, date), date, { slavery: data.slavery, tracker: trackers.slavery }) : null;
@@ -226,7 +236,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   }
   // (labels in a Diff are placed on copies of the units' polygons; match them back by polygon)
   const labelByF = new Map((cur.polityLabels ?? []).filter((l) => l.it?.f).map((l) => [l.it.f, l.text]));
-  const shown = pool.filter((it) => it.f && (frame ? atlas.inFrame(it.f) : atlas.shows(it.f)));
+  // (on a frame: inside it, or in the Alaska or Hawaii inset the order asked for)
+  const shown = pool.filter((it) => it.f && (frame ? atlas.inFrame(it.f) || atlas.inInset(it.f) : atlas.shows(it.f)));
   // OpenHistoricalMap's copies of Newberry polygons (hidden on the page, which draws Newberry's own): listed with the
   // Newberry polygon they copy, so either id finds it (the Republic of Texas is Newberry tx_republic and OHM 2692792).
   const ohmById = new Map(data.ohm.map((it) => [it.p.rid, it]));
@@ -254,13 +265,26 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     const label = labelOf.get(it) ?? labelByF.get(it.f) ?? null;
     return {
       layer: layerOf(it), name: cleanLabel(nameOf(it)) ?? nameOf(it), local: it.p.local ?? null, ids, ...datesOf(it),
-      certainty: certaintyOf(it, date), power: pw, power_label: pl, look, diff_role: r,
+      certainty: certaintyOf(it, date), power: pw, power_label: pl, look, diff_role: r, ...(it.look?.area && !r ? { keyed_as: it.look.area } : {}),
       ...(fb && it.src === 'newberry' && fb.unitOf(it.p) ? { free_black: { count: fb.unitOf(it.p).free, badge: !!fb.badgeOf(it.p), census_rows: fb.unitOf(it.p).rows } } : {}),
       ...((state.tracker === 'slavery' || state.tracker === 'freeblack') && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
       lit: diff ? null : it.lit ?? null, lit_by: diff ? null : it.litBy ?? null, lit_as_named: !diff && !!(it.lit && it.litBy && !atlas.isPowerKey(it.litBy, pw)), labeled: !!label, label, cut_by_frame: atlas.cutByFrame(it.f),
       km2: Math.round(geoArea(it.f) * KM2), source: sourceOf(it, tags),
     };
   }).sort((a, b) => (b.lit === true) - (a.lit === true) || b.labeled - a.labeled || b.km2 - a.km2);
+  // A Diff's land that changed hands (states tracker): each piece is on the map in the focus color, with its source.
+  if (diff && cur.diff?.handoffs?.length) {
+    for (const h of cur.diff.handoffs) {
+      const label = labelByF.get(h.f) ?? null;
+      features.push({
+        layer: 'changed-hands', name: `${nbName(h.from.p)} → ${nbName(h.to.p)}`, local: null,
+        ids: { newberry: [h.from.p.id, h.to.p.id] }, start: isoDate(cur.diff.a), end: isoDate(cur.diff.b), end_is: 'the two dates compared',
+        certainty: 'legal', power: 'us', power_label: powers.categories.us?.label ?? null, look: { kind: 'fill', key: 'focus', color: fills.focus, name: 'gold' }, diff_role: 'changed hands',
+        lit: null, lit_by: null, lit_as_named: false, labeled: !!label, label, cut_by_frame: atlas.cutByFrame(h.f), km2: h.km2,
+        source: handoffSource(h),
+      });
+    }
+  }
   for (const f of features) {
     // (a polygon the order named by its own name; one lit only because its power was named need not carry a name)
     if (f.lit_as_named && !f.labeled && f.layer !== 'us-mexico-dispute' && f.layer !== 'newberry-dispute' && f.layer !== 'ohm-overlap') warnings.push(`${f.name} is lit but carries no name (no room for it)`);
@@ -350,7 +374,8 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     const usUnit = cur.diff.changed.find((x) => x.key === 'us');
     changes = {
       from: isoDate(cur.diff.a), to: isoDate(cur.diff.b), tracker: state.tracker, scope: frame ? `inside the ${frame.title ?? 'framed'} box only` : 'the whole sheet',
-      appeared: cur.diff.appeared.map(u), vanished: cur.diff.vanished.map(u), changed_hands: cur.diff.changed.filter((x) => x.key !== 'us').map(u),
+      // (nations: a whole unit under a new power; states: land that moved from one polygon to another, src/us/diff.js)
+      appeared: cur.diff.appeared.map(u), vanished: cur.diff.vanished.map(u), changed_hands: [...cur.diff.changed.filter((x) => x.key !== 'us').map(u), ...(cur.diff.handoffs ?? []).map(handoffEntry)],
       united_states: usUnit ? { grew: !!usUnit.grew, shrank: !!usUnit.shrank } : null,
       persisted: cur.diff.persisted.length, smaller_not_listed: cur.diff.small,
       as_listed: (cur.sections ?? []).map((s) => ({ title: s.title, items: (s.items ?? []).map((i) => ({ text: Array.isArray(i.text) ? i.text[0] : i.text, year: i.year ?? null, note: i.note ?? null })), count: s.count ?? null })),
@@ -366,6 +391,53 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
   if (resolved.war?.forces?.length) credit += '; force frames: milsymbol (MIT)';
   const alt = altText({ resolved, legend, features, points, routes: routesOut, rivers, changes, frame, titleShown });
   return { parchment: SLIP_VERSION, order, resolved, legend, features, points, routes: routesOut, rivers, changes, layout, warnings: [...new Set(warnings)], alt_text: alt, credit };
+}
+
+// Land that changed hands (src/us/diff.js handoffsUS): both polygons, their versions, the area and how it was found.
+function handoffSource(h) {
+  return {
+    dataset: 'Computed by Parchment (src/us/diff.js): the land the first polygon held on the earlier date and no longer held on the later one, inside the second polygon on the later date and not held by it before; from the Newberry polygons, nothing drawn',
+    from: [{ newberry: h.from.p.id, version: h.from.p.v, version_after: h.fromB.p.v, name: nbName(h.from.p) }, { newberry: h.to.p.id, version: h.to.p.v, name: nbName(h.to.p), new_on_this_date: h.appeared }],
+    record: { id: h.fromB.p.id, version: h.fromB.p.v, change: h.fromB.p.change ?? null, authority: h.fromB.p.cite ?? null },
+  };
+}
+function handoffEntry(h) {
+  return {
+    name: `${nbName(h.from.p)} → ${nbName(h.to.p)}`, kind: 'land', key: h.key,
+    from: { newberry: h.from.p.id, version: h.from.p.v, version_after: h.fromB.p.v, name: nbName(h.from.p) },
+    to: { newberry: h.to.p.id, version: h.to.p.v, name: nbName(h.to.p), new_on_this_date: h.appeared },
+    km2: h.km2, sq_mi: h.sqmi, note: h.fromB.p.change ?? null,
+  };
+}
+
+// The polygons an order lit by their own name or id (not by a power: "mexico" lights provinces far off any frame) that
+// are alive on the map's date, or on either date of a Diff, and are not on the sheet. `inset`: the stage's inset that
+// would hold it on the whole continent (Alaska, Hawaiian Islands), when it is one of those.
+function offFrame({ atlas, data, state, cur, frame, lesson, powers, stage }) {
+  const hl = lesson?.highlight;
+  if (!hl || hl.none) return [];
+  const on = (f) => (frame ? atlas.inFrame(f) || atlas.inInset(f) : atlas.shows(f));
+  const found = [];
+  if (state.mode === 'diff') {
+    const want = new Map(hl.ids.map((id) => [slug(id), id]));
+    for (const d of [state.from, state.date]) for (const it of aliveNB(data, d)) {
+      const k = [...itemKeys(it, { powers, twins: lesson.twins })].find((x) => want.has(x));
+      if (k && !atlas.isPowerKey(want.get(k), it.p.power)) found.push(it);
+    }
+  } else {
+    // (an id the order itself named: a dispute lit only because one of its sides is, "(a side is lit)", does not count)
+    for (const it of cur.items ?? []) if (it.lit && it.f && hl.ids.includes(it.litBy) && !atlas.isPowerKey(it.litBy, it.cat ?? it.p?.power)) found.push(it);
+  }
+  const out = new Map();
+  for (const it of found) {
+    if (on(it.f)) continue;
+    const id = it.src === 'newberry' ? `nb:${it.p.id}` : it.src === 'ohm' ? `ohm:${it.p.rid}` : nameOf(it);
+    if (out.has(id)) continue;
+    const [x, y] = geoCentroid(it.f);
+    const inset = (stage.insets ?? []).find(({ extent: e }) => x >= e.west && x <= e.east && y >= e.south && y <= e.north);
+    out.set(id, { id, name: cleanLabel(nameOf(it)) ?? nameOf(it), inset: frame && inset ? inset.title : null });
+  }
+  return [...out.values()];
 }
 
 // Where the apparatus sits and whether any name on the map runs past the frame's edge, measured on the sheet as
@@ -386,6 +458,15 @@ function layoutCheck(atlas, info) {
     if (!text) continue;
     const layer = t.closest('g.snap-labels, g.snap');
     if (layer && Number(getComputedStyle(layer).opacity) === 0) continue;
+    // (a water name whose guide lies wholly off the sheet, Hudson Bay on the continent, has an empty path and draws
+    // nothing; the box the browser gives it sits at the sheet's corner and means nothing)
+    const tp = t.querySelector('textPath');
+    if (tp) {
+      const ref = (tp.getAttribute('href') ?? tp.getAttribute('xlink:href') ?? '').replace(/^#/, '');
+      let len = 0;
+      try { len = ref ? document.getElementById(ref)?.getTotalLength?.() ?? 0 : 0; } catch { len = 0; }
+      if (!(len > 0)) continue;
+    }
     const r = t.getBoundingClientRect();
     if (!r.width) continue;
     const b = toSheet(r);
@@ -429,7 +510,7 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
   else s.push(`Parchment map, ${resolved.date_text}, ${resolved.tracker.title.toLowerCase()}, ${where}${titleShown ? `, titled "${titleShown}"` : ''}.`);
   const fillRows = legend.rows.filter((r) => (r.role === 'category' || r.role === 'side') && r.key && COLOR_NAMES[r.key]);
   if (fillRows.length) s.push(`Shaded: ${list(fillRows.map((r) => `${r.label} in ${COLOR_NAMES[r.key]}`))}.`);
-  const hatch = legend.rows.filter((r) => r.role === 'dispute' || r.role === 'dispute or overlap');
+  const hatch = legend.rows.filter((r) => r.role === 'dispute' || r.role === 'dispute or overlap' || r.role === 'area');
   if (hatch.length) s.push(`Hatched in rust: ${list(hatch.map((r) => r.label.charAt(0).toLowerCase() + r.label.slice(1)))}.`);
   const native = features.filter((f) => f.layer === 'native-homeland' || (f.look.kind === 'pattern' && /stipple/.test(f.look.pattern))).map((f) => f.name);
   if (native.length) s.push(`Stippled, with soft edges: ${list([...new Set(native)].slice(0, 6))} (Native homelands, approximate).`);
@@ -452,5 +533,6 @@ function altText({ resolved, legend, features, points, routes, rivers, changes, 
   if (routes.length) s.push(`Routes: ${list(routes.map((r) => `${r.label}, ${r.class.toLowerCase()}${r.heads && r.heads !== 'none' ? ' with arrowheads' : ''}`))}.`);
   const rv = rivers.filter((r) => r.labeled).map((r) => r.name);
   if (rv.length) s.push(`Rivers named: ${list(rv)}.`);
-  return s.join(' ');
+  // (a sentence whose last name ends in a period, "Unorg. Fed. Terr.", takes no second one)
+  return s.map((x) => x.replace(/\.\.$/, '.')).join(' ');
 }

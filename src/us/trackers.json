@@ -10,6 +10,12 @@
       "Territory": { "fill": "In", "label": "Organized territory" },
       "Unorganized Territory": { "fill": "E", "label": "Unorganized territory" },
       "Other": { "pattern": "hatch", "label": "Republic, joint or disputed area" }
+    },
+    "_other_areas": "Newberry's 'Other' polygons this tracker names for what they were, by Newberry id (statehood deck brief, 2026-11-18, item 4): each keeps the hatch (each overlapped or was disputed by another claim) and takes a key line of its own in place of 'Disputed or overlapping claims'. Oregon Country and the Uncertain Boundary Area are joint or disputed areas and keep their claim lines ('Claimed by the United States and Britain'). Under the nations tracker nothing changes: there the republics are keyed by their sides (owner, 2026-11-09).",
+    "other_areas": {
+      "ds_deseret": { "label": "Proposed state (not recognized)", "_why": "Newberry's own record: 'The General Assembly of the newly proposed state of Deseret met on 2 Jul 1849 ... but proposal never gained support in U.S. Congress.' It overlapped the Mexican Cession, then Utah, New Mexico and Oregon Territories and California." },
+      "vt_republic": { "label": "Independent republic", "_why": "Newberry's own record: 'Vermont functioned as an independent republic until statehood in 1791', its independence from New York not recognized by the Continental Congress." },
+      "tx_republic": { "label": "Independent republic", "_why": "Newberry's own record: 'Texas declared its independence from Mexico'; Mexico did not recognize it before annexation (the land both claimed is OpenHistoricalMap's Joint Mexico-Texas Claim, hatched in its own right)." }
     }
   },
   "slavery": {

@@ -23,7 +23,7 @@ import { validateRecords, resolveRecords } from '../data/records.js';
 import { routeLegend } from '../render/routes.js';
 import routesTracker from '../trackers/routes.json';
 import focusTable from '../focuses.json';
-import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder } from './frames.js';
+import { parseSize, sheetFor, resolveFrame, frameProjection, parseList, makeHighlight, slug, ORDER_PARAMS, queryToOrder, insetsNamed } from './frames.js';
 import { buildSlip } from './slip.js';
 import { warById, warsOn, warTitle, membersOf } from '../military/wars.js';
 import { filmById, chapterOn, frameAt, secondsAt, frameList, describeFilm } from '../military/play.js';
@@ -162,6 +162,9 @@ async function main() {
       noStrip: params.get('strip') === 'off',
       highlight: params.get('highlight') ? makeHighlight(params.get('highlight')) : null,
       twins,
+      // Alaska and Hawaii on a frame (owner, 2026-11-18, "Insets when lit"): the stage's insets in which the order
+      // names a polygon by its own name or id; the continent draws both as always
+      stageInsets: frame && params.get('highlight') ? insetsNamed(stage.insets, data.nb, params.get('highlight'), twins) : [],
       rivers: riverNames,
       // which of the 1:10m rivers a frame draws: finer frames show smaller rivers (Natural Earth's scalerank, 0 = largest)
       riverRank: frame ? riverRankFor(frame.box) : 0,

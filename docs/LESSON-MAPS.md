@@ -61,13 +61,25 @@ the order.
 `oregon-country` (−126, 40, −108, 56), `east` (−95, 24, −66, 48), `south` (−107, 24, −74, 41: the cotton South, wide
 enough for Texas), `southeast` (−93, 23.5, −74, 41: the old South and the sea road round Florida), `plains` (−105, 35, −89, 46), `border-states`
 (−92, 35, −74, 41.5), and `north-america` (the continent's box). The legend goes in whichever right-hand corner holds
-less land; water names are set where their water shows; Alaska and Hawaii are drawn only on the continent.
+less land; water names are set where their water shows. Alaska and Hawaii are drawn on the continent; a frame draws
+their insets only when the order names a polygon in one of them by its own name or id (`nb:ak_state`, `hawaii`; owner,
+2026-11-18), stacked up the left edge above the cartouche.
 
 **Highlight ids** are compared without case, accents or punctuation: a power (`mexico`, `united-states`, `britain`,
 `spain`, `france`, `russia`, `native`), any polygon by its own name (`coahuila-y-tejas`, `texas-republic`,
 `joint-mexico-texas-claim`), or by its id (`ohm:2841297`, `nb:tx_republic`, `Q949898`). A hatched dispute stays when
-the order lights either side of it. Names of what is not lit stay on the map, paler, as context. `npm run search`
+the order lights either side of it. Names of what is not lit stay on the map, paler, as context. A lit state too small
+for its name carries its postal abbreviation (DE, RI), inside it where there is room, else just off its coast on open
+water. A polygon lit by its own name or id that is alive on the date but not on the map (California on the `east`
+frame) is listed on the slip under `resolved.highlight.off_frame`, with a warning. `npm run search`
 finds ids. The one word `none` lights nothing: a quiet base of borders and names, for a map whose places carry it.
+
+**States and territories** (`tracker: states`, the default for the statehood deck). Fills are Newberry's own kinds:
+state, organized territory, unorganized territory. Newberry's "Other" areas are hatched; three are keyed for what they
+were (2026-11-18): Deseret "Proposed state (not recognized)", the Vermont and Texas republics "Independent republic"
+(`src/us/trackers.json` `other_areas`). In a Diff, land that moved from one polygon to another while both survive
+(the Texas sale of 1850, the District's retrocession of 1846) is drawn in the focus color with the name of the polygon
+that now holds it, keyed "Changed hands", and listed with both names and its area.
 
 **Free and slave states** (`tracker: slavery`, 2026-11-16). Each state takes its status from a table,
 `data/us/slavery-status.csv`: one row per Newberry polygon id (`al_state`) per status period, with `status` (`free` or
@@ -128,9 +140,13 @@ Every render writes one, beside the picture:
   version, and OHM's copies of a Newberry polygon), start and end, certainty, holder, look, whether it is lit,
   labeled, or cut by the frame's edge, its area, and its source with a URL and the source's own notes.
 - `points`, `routes`, `rivers`: what was drawn and named, with each record's `source`.
-- `changes` (a Diff): appeared, vanished, changed hands, and the list as printed on the map.
+- `changes` (a Diff): appeared, vanished, changed hands, and the list as printed on the map. Under the nations tracker
+  a unit that changed hands is a whole polygon under a new power; under the states tracker it is a piece of land
+  (`kind: "land"`): the polygon that gave it and the one that took it, their Newberry versions, the area in km² and
+  square miles, and the Newberry record of the change. Each piece is also among the `features` (layer `changed-hands`).
 - `layout`: where the legend and cartouche sit, and any name that runs past the edge (none, or a warning).
-- `warnings`: names dropped for room or the ten-name limit, ids that found nothing on the date, the sources' own notes
+- `warnings`: names dropped for room or the ten-name limit, ids that found nothing on the date, polygons lit but not on
+  the map (off the frame), the sources' own notes
   of doubt (an OHM `fixme`, estimated dates), requests refused.
 - `alt_text`: a draft built by a fixed template from the above. `credit`: one line for the slide
   ("Parchment; boundaries: Newberry Library, OpenHistoricalMap; rivers: Natural Earth; …").
@@ -153,6 +169,17 @@ npm run search -- Nueces
 in the frame and the records alive that day. `changes` lists every border change inside the frame, dated, in the
 sources' own words ("1835-12-15: Coahuila y Tejas became Texas and Coahuila"). `search` finds polygons, computed
 disputes, rivers, records, gazetteer places and frames by name. Add `--json` for machine-readable output.
+
+## Checking that a change leaves the maps as they were
+
+```bash
+npm run compare
+```
+
+renders every order in `tests/maps/` and the 1844 continent from the last commit (a temporary git worktree) and from
+the folder as it stands, and reports for each whether the picture is identical and whether the packing slip's key,
+names, lit polygons and warnings are the same. `npm run compare -- --ref 7b54a00 tests/maps/statehood/dc-1846.json`
+compares other orders against another commit.
 
 ## Running it anywhere
 

@@ -1,0 +1,1547 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1790-05-29",
+    "tracker": "states",
+    "frame": "east",
+    "highlight": [
+      "nb:de_state",
+      "nb:pa_state",
+      "nb:nj_state",
+      "nb:ga_state",
+      "nb:ct_state",
+      "nb:ma_state",
+      "nb:md_state",
+      "nb:sc_state",
+      "nb:nh_state",
+      "nb:va_state",
+      "nb:ny_state",
+      "nb:nc_state",
+      "nb:ri_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1790-05-29&tracker=states&frame=east&highlight=nb%3Ade_state%2Cnb%3Apa_state%2Cnb%3Anj_state%2Cnb%3Aga_state%2Cnb%3Act_state%2Cnb%3Ama_state%2Cnb%3Amd_state%2Cnb%3Asc_state%2Cnb%3Anh_state%2Cnb%3Ava_state%2Cnb%3Any_state%2Cnb%3Anc_state%2Cnb%3Ari_state",
+    "mode": "snapshot",
+    "date": "1790-05-29",
+    "date_text": "29 May 1790",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": "east",
+      "title": "The East",
+      "box": {
+        "west": -95,
+        "south": 24,
+        "east": -66,
+        "north": 48
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        80.5,
+        -36
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The United States",
+    "highlight": {
+      "ids": [
+        "nb:de_state",
+        "nb:pa_state",
+        "nb:nj_state",
+        "nb:ga_state",
+        "nb:ct_state",
+        "nb:ma_state",
+        "nb:md_state",
+        "nb:sc_state",
+        "nb:nh_state",
+        "nb:va_state",
+        "nb:ny_state",
+        "nb:nc_state",
+        "nb:ri_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean",
+      "Gulf of Mexico"
+    ],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "Connecticut, Delaware and 11 more",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Claimed by Connecticut and Northwest Territory",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "dispute"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693713,
+            "url": "https://www.openhistoricalmap.org/relation/2693713",
+            "name": "Georgia",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918616,
+            "url": "https://www.openhistoricalmap.org/relation/2918616",
+            "name": "Georgia",
+            "start": "1788-01-02",
+            "end": "1798-04-07",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918619,
+            "url": "https://www.openhistoricalmap.org/relation/2918619",
+            "name": "Georgia",
+            "start": "1787-01-01",
+            "end": "1788-01-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1798-04-06",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ga_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": false,
+      "km2": 394127,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 1,
+          "change": "Georgia became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693697,
+            "url": "https://www.openhistoricalmap.org/relation/2693697",
+            "name": "Virginia",
+            "start": "1784-03-01",
+            "end": "1788-06-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2919243,
+            "url": "https://www.openhistoricalmap.org/relation/2919243",
+            "name": "Virginia",
+            "start": "1788-06-25",
+            "end": "1791-03-30",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1791-03-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:va_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 270857,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 2,
+          "change": "Virginia ceded to the United States its 1609 charter claims to territory \"northwestward of the river Ohio,\" thereby setting the north bank of the Ohio River as the northern and northwestern limit for present Kentucky and West Virginia.",
+          "authority": "(Hening, 11:571-575)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693690,
+            "url": "https://www.openhistoricalmap.org/relation/2693690",
+            "name": "North Carolina",
+            "start": "1790-04-02",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-04-02",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:nc_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 127916,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 2,
+          "change": "Congress accepted North Carolina's cession of its western lands (i.e. present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:13-17; U.S. Stat., vol. 1, ch. 6[1790], pp. 106-109)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693675,
+            "url": "https://www.openhistoricalmap.org/relation/2693675",
+            "name": "New York",
+            "start": "1783-09-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1855-01-10",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ny_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "New York",
+      "cut_by_frame": false,
+      "km2": 125723,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 1,
+          "change": "New York became an independent state on 4 July 1776, and Vermont declared its independence from New York on 15 January 1777. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2685031,
+            "url": "https://www.openhistoricalmap.org/relation/2685031",
+            "name": "Pennsylvania",
+            "start": "1783-09-03",
+            "end": "1792-03-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1792-03-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:pa_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": false,
+      "km2": 116340,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 1,
+          "change": "Pennsylvania became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Massachusetts",
+      "local": null,
+      "ids": {
+        "newberry": "ma_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693681,
+            "url": "https://www.openhistoricalmap.org/relation/2693681",
+            "name": "Massachusetts",
+            "start": "1783-09-03",
+            "end": "1804-12-30",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1804-12-30",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ma_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Massachusetts",
+      "cut_by_frame": false,
+      "km2": 104920,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ma_state",
+          "version": 1,
+          "change": "Massachusetts, including the area of Maine, became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:sc_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": false,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Connecticut",
+      "local": null,
+      "ids": {
+        "newberry": "ct_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2663623,
+            "url": "https://www.openhistoricalmap.org/relation/2663623",
+            "name": "Connecticut Western Reserve",
+            "start": "1786-09-14",
+            "end": "1800-04-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2799565,
+            "url": "https://www.openhistoricalmap.org/relation/2799565",
+            "name": "Connecticut",
+            "start": "1786-09-14",
+            "end": "1800-04-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1786-09-14",
+      "end": "1800-04-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ct_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Connecticut",
+      "cut_by_frame": false,
+      "km2": 26666,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ct_state",
+          "version": 2,
+          "change": "Connecticut ceded to the United States its claim to lands north and west of Pennsylvania and the Ohio River, except for a tract, lying in the northeast corner of present Ohio, known as the Connecticut Western Reserve.",
+          "authority": "(Terr. Papers U.S., 2:24 n.62)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693705,
+            "url": "https://www.openhistoricalmap.org/relation/2693705",
+            "name": "Maryland",
+            "start": "1783-09-03",
+            "end": "1791-03-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1791-03-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:md_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Maryland",
+      "cut_by_frame": false,
+      "km2": 26180,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 1,
+          "change": "Maryland became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Hampshire",
+      "local": null,
+      "ids": {
+        "newberry": "nh_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693679,
+            "url": "https://www.openhistoricalmap.org/relation/2693679",
+            "name": "New Hampshire",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:nh_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "New Hampshire",
+      "cut_by_frame": false,
+      "km2": 23950,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nh_state",
+          "version": 1,
+          "change": "New Hampshire became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Jersey",
+      "local": null,
+      "ids": {
+        "newberry": "nj_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693693,
+            "url": "https://www.openhistoricalmap.org/relation/2693693",
+            "name": "New Jersey",
+            "start": "1783-09-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795394,
+            "url": "https://www.openhistoricalmap.org/relation/2795394",
+            "name": "New Jersey Province",
+            "start": "1664-08-28",
+            "end": "1674-07-29",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795395,
+            "url": "https://www.openhistoricalmap.org/relation/2795395",
+            "name": "New Jersey Colony",
+            "start": "1702-04-15",
+            "end": "1773-08-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2795396,
+            "url": "https://www.openhistoricalmap.org/relation/2795396",
+            "name": "New Jersey Colony",
+            "start": "1773-08-31",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:nj_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "New Jersey",
+      "cut_by_frame": false,
+      "km2": 19524,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nj_state",
+          "version": 1,
+          "change": "New Jersey became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Delaware",
+      "local": null,
+      "ids": {
+        "newberry": "de_state",
+        "newberry_version": 1
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:de_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "DE",
+      "cut_by_frame": false,
+      "km2": 5209,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "de_state",
+          "version": 1,
+          "change": "The three Lower Counties, of KENT, NEW CASTLE, and SUSSEX became an independent state on 4 July 1776. The name Delaware was formally adopted on 20 September 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence; Swindler, 2:197)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Rhode Island",
+      "local": null,
+      "ids": {
+        "newberry": "ri_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693687,
+            "url": "https://www.openhistoricalmap.org/relation/2693687",
+            "name": "Rhode Island",
+            "start": "1783-09-03",
+            "end": "1862-02-28",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1862-02-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ri_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "RI",
+      "cut_by_frame": false,
+      "km2": 2805,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ri_state",
+          "version": 1,
+          "change": "Rhode Island became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry-dispute",
+      "name": "Claimed by both Connecticut and Northwest Territory",
+      "local": null,
+      "ids": {
+        "newberry": [
+          "ct_state",
+          "nw_terr"
+        ]
+      },
+      "start": "1788-07-27",
+      "end": "1796-08-14",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (overlap or dispute)"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "(a side is lit)",
+      "lit_as_named": true,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 8346,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of two Newberry polygons; nothing drawn",
+        "from": [
+          {
+            "newberry": "ct_state",
+            "version": 2,
+            "name": "Connecticut"
+          },
+          {
+            "newberry": "nw_terr",
+            "version": 2,
+            "name": "Northwest Territory"
+          }
+        ],
+        "ended": {
+          "text": "Connecticut ceded the Western Reserve in present Ohio to the United States, and the area was incorporated into the Northwest Territory.",
+          "cite": "(Terr. Papers U.S., 3:84-86; U.S. Stat., vol. 2, ch. 38 [1800]/pp. 56-57)",
+          "id": "ct_state",
+          "v": 3
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Rupert's Land",
+      "local": null,
+      "ids": {
+        "ohm": 2861322,
+        "wikidata": "Q738395"
+      },
+      "start": "1763-02-10",
+      "end": "1819-01-29",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Rupert's Land",
+      "cut_by_frame": true,
+      "km2": 4210047,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2861322",
+        "license": "CC0 1.0",
+        "wikidata": "Q738395",
+        "notes": {
+          "start_event": "Treaty of Paris",
+          "end_event": "Treaty of 1818, land exchange with USA",
+          "wikipedia": "en:Rupert's Land"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Captaincy General of Cuba",
+      "local": "Capitanía General de Cuba",
+      "ids": {
+        "ohm": 2841673,
+        "wikidata": "Q2039931"
+      },
+      "start": "1784-05-12",
+      "end": "1795-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Captaincy General of Cuba",
+      "cut_by_frame": true,
+      "km2": 2935566,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841673",
+        "license": "CC0 1.0",
+        "wikidata": "Q2039931",
+        "notes": {
+          "start_event": "Treaty of Paris, gains East and West Florida",
+          "end_event": "Cedes part of West Florida to the US",
+          "wikipedia": "en:Captaincy General of Cuba"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Spanish Louisiana",
+      "local": "Provincia de La Luisiana",
+      "ids": {
+        "ohm": 2807216,
+        "wikidata": null
+      },
+      "start": "1762-11-23",
+      "end": "1801-03-21",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Spanish Louisiana",
+      "cut_by_frame": true,
+      "km2": 2490104,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2807216",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "wikipedia": "en:Louisiana (New Spain)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Province of Quebec",
+      "local": null,
+      "ids": {
+        "ohm": 2830936,
+        "wikidata": "Q251668"
+      },
+      "start": "1783-09-03",
+      "end": "1791-12-26",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Province of Quebec",
+      "cut_by_frame": true,
+      "km2": 1326100,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830936",
+        "license": "CC0 1.0",
+        "wikidata": "Q251668",
+        "notes": {
+          "start_event": "Cedes south of Great Lakes to USA",
+          "end_event": "Divided into Upper and Lower Canada",
+          "wikipedia": "en:Province of Quebec (1763–1791)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Northwest Territory",
+      "local": null,
+      "ids": {
+        "newberry": "nw_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693306,
+            "url": "https://www.openhistoricalmap.org/relation/2693306",
+            "name": "Northwest Territory",
+            "start": "1788-07-27",
+            "end": "1796-08-14",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1788-07-27",
+      "end": "1796-08-14",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Northwest Territory",
+      "cut_by_frame": true,
+      "km2": 711286,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nw_terr",
+          "version": 2,
+          "change": "WASHINGTON created by the Northwest Territory from non-county area and part of the Western Reserve. This implicit challenge to Connecticut's authority in the Western Reserve went unanswered.",
+          "authority": "(Terr. Papers U.S., 3:278-279; Chase, 3:ch. 330/p. 2096; Cappon, Petchenik, and Long, 92)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Captaincy General of the Eastern Inner Provinces",
+      "local": "Capitanía General de las Provincias Internas de Oriente",
+      "ids": {
+        "ohm": 2867411,
+        "wikidata": null
+      },
+      "start": "1787-12-03",
+      "end": "1790-11-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Captaincy General of the Eastern Inner Provinces",
+      "cut_by_frame": true,
+      "km2": 704163,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867411",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "start_event": "Provincias Internas divided",
+          "end_event": "Provinces reunited"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "New Philippines",
+      "local": "Nuevas Filipinas",
+      "ids": {
+        "ohm": 2841306,
+        "wikidata": "Q108544558"
+      },
+      "start": "1722-01-01",
+      "end": "1821-02-22",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Philippines",
+      "cut_by_frame": false,
+      "km2": 328586,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841306",
+        "license": "CC0 1.0",
+        "wikidata": "Q108544558",
+        "notes": {
+          "start_event": "Province created from Nueva Extremadura",
+          "end_event": "Adams Onis Treaty",
+          "wikipedia": "en:New Philippines"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Spanish Florida",
+      "local": "La Florida",
+      "ids": {
+        "ohm": 2744901,
+        "wikidata": "Q555528"
+      },
+      "start": "1784-05-12",
+      "end": "1810-09-23",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Spanish Florida",
+      "cut_by_frame": false,
+      "km2": 201860,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2744901",
+        "license": "CC0 1.0",
+        "wikidata": "Q555528",
+        "notes": {
+          "wikipedia": "es:Florida española"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Southwest Territory",
+      "local": null,
+      "ids": {
+        "newberry": "sw_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693741,
+            "url": "https://www.openhistoricalmap.org/relation/2693741",
+            "name": "Southwest Territory",
+            "start": "1790-05-26",
+            "end": "1796-05-31",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1790-05-26",
+      "end": "1796-05-31",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Southwest Territory",
+      "cut_by_frame": false,
+      "km2": 109125,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sw_terr",
+          "version": 1,
+          "change": "The United States created the Territory of the United States South of the River Ohio (Southwest Territory), covering the territory ceded in April 1790 by North Carolina (area of present Tennessee).",
+          "authority": "(Terr. Papers U.S., 4:18-19; U.S. Stat., vol. 1, ch. 14[1790], p. 123)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of New Brunswick",
+      "local": null,
+      "ids": {
+        "ohm": 2830930,
+        "wikidata": "Q107499350"
+      },
+      "start": "1784-06-18",
+      "end": "1842-08-09",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Brunswick",
+      "cut_by_frame": false,
+      "km2": 99849,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830930",
+        "license": "CC0 1.0",
+        "wikidata": "Q107499350",
+        "notes": {
+          "start_event": "Separated from NS and became it's own colony",
+          "end_event": "Webster Ashburton Treaty, loses land to Maine",
+          "wikipedia": "en:New Brunswick"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of Nova Scotia",
+      "local": null,
+      "ids": {
+        "ohm": 2830922,
+        "wikidata": "Q98931415"
+      },
+      "start": "1784-06-18",
+      "end": "1820-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nova Scotia",
+      "cut_by_frame": false,
+      "km2": 56894,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830922",
+        "license": "CC0 1.0",
+        "wikidata": "Q98931415",
+        "notes": {
+          "start_event": "New Brunswick separates from Nova Scotia",
+          "end_event": "Cape Breton joins NS again",
+          "wikipedia": "en:Nova Scotia"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of the Bahamas",
+      "local": null,
+      "ids": {
+        "ohm": 2832950,
+        "wikidata": "Q778"
+      },
+      "start": "1783-09-03",
+      "end": "1848-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Bahamas",
+      "cut_by_frame": true,
+      "km2": 51285,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2832950",
+        "license": "CC0 1.0",
+        "wikidata": "Q778",
+        "notes": {
+          "start_event": "1783 Treaty of paris, Spain exchanges Bahamas for East Florida",
+          "end_event": "Turks and Caicos leaves",
+          "wikipedia": "en:History of the Bahamas"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Vermont Republic",
+      "local": null,
+      "ids": {
+        "newberry": "vt_republic",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2800216,
+            "url": "https://www.openhistoricalmap.org/relation/2800216",
+            "name": "Vermont Republic",
+            "start": "1783-09-03",
+            "end": "1791-03-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1791-03-03",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "disputed",
+      "power_label": "Disputed or overlapping claims",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 24852,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "vt_republic",
+          "version": 1,
+          "change": "Vermont declared its independence from New York in 1777. Although not recognized as a separate state by the Continental Congress, Vermont functioned as an independent republic until statehood in 1791. Map depicts Vermont boundaries as of 3 Sep 1783.",
+          "authority": "(Slade, 70-73; Van Zandt, 64; Williamson, C., 82-84, map facing 95, 100-102, 112-113)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Colony of Cape Breton",
+      "local": null,
+      "ids": {
+        "ohm": 2830912,
+        "wikidata": "Q107457458"
+      },
+      "start": "1784-01-01",
+      "end": "1820-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 15633,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830912",
+        "license": "CC0 1.0",
+        "wikidata": "Q107457458",
+        "notes": {
+          "start_event": "Cape Breton separates from NS",
+          "end_event": "Cape Breton joins NS again",
+          "wikipedia": "en:Cape Breton Island"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "St. John's Island Colony",
+      "local": null,
+      "ids": {
+        "ohm": 2830905,
+        "wikidata": "Q1978"
+      },
+      "start": "1769-01-01",
+      "end": "1798-11-29",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 9568,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830905",
+        "license": "CC0 1.0",
+        "wikidata": "Q1978",
+        "notes": {
+          "start_event": "Split from Nova Scotia",
+          "end_event": "Named PEI",
+          "wikipedia": "en:Prince Edward Island"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1472,
+      "y": 874,
+      "w": 394,
+      "h": 120,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [],
+  "alt_text": "Parchment map, 29 May 1790, states and territories, framed on The East, titled \"The United States\". Shaded: Connecticut, Delaware and 11 more in blue. Hatched in rust: claimed by Connecticut and Northwest Territory. Named on the map: Georgia, Virginia, North Carolina, New York, Pennsylvania, Massachusetts, South Carolina, Connecticut, Maryland, New Hampshire, New Jersey and DE.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1790-05-29&tracker=states&frame=east&highlight=nb%3Ade_state%2Cnb%3Apa_state%2Cnb%3Anj_state%2Cnb%3Aga_state%2Cnb%3Act_state%2Cnb%3Ama_state%2Cnb%3Amd_state%2Cnb%3Asc_state%2Cnb%3Anh_state%2Cnb%3Ava_state%2Cnb%3Any_state%2Cnb%3Anc_state%2Cnb%3Ari_state"
+  }
+}

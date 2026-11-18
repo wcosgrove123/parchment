@@ -1,0 +1,416 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1846-09-07",
+    "from": "1846-09-06",
+    "tracker": "states",
+    "frame": "-77.2,38.75,-76.85,39.05"
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?from=1846-09-06&date=1846-09-07&tracker=states&frame=-77.2%2C38.75%2C-76.85%2C39.05",
+    "mode": "diff",
+    "date": "1846-09-07",
+    "date_text": "7 September 1846",
+    "from": "1846-09-06",
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -77.2,
+        "south": 38.75,
+        "east": -76.85,
+        "north": 39.05
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        77.02499999999998,
+        -38.9
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The United States",
+    "highlight": null,
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "Change 1846 → 1846",
+    "rows": [
+      {
+        "label": "Changed hands",
+        "swatch": "fill",
+        "key": "focus",
+        "fill": "#b28b45",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Vanished",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "dispute or overlap"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 5,
+        "also_in_ohm": [
+          {
+            "ohm": 2693699,
+            "url": "https://www.openhistoricalmap.org/relation/2693699",
+            "name": "Virginia",
+            "start": "1846-09-07",
+            "end": "1863-06-19",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-09-07",
+      "end": "1863-06-19",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "persisted: border only"
+      },
+      "diff_role": "persisted",
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 166249,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 5,
+          "change": "The District of Columbia ceded ALEXANDRIA (now ARLINGTON) to Virginia.",
+          "authority": "(U.S. Stat., vol. 9, ch. 35[1846]/pp. 35-37 and appendix 3/p. 1000)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Maryland",
+      "local": null,
+      "ids": {
+        "newberry": "md_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693704,
+            "url": "https://www.openhistoricalmap.org/relation/2693704",
+            "name": "Maryland",
+            "start": "1791-03-30",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1791-03-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "persisted: border only"
+      },
+      "diff_role": "persisted",
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 26004,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "md_state",
+          "version": 2,
+          "change": "The United States created an unnamed district from land ceded by Maryland and Virginia to be the seat of national government.",
+          "authority": "(Richardson, 1:102; Van Zandt, 90)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "District of Columbia",
+      "local": null,
+      "ids": {
+        "newberry": "dc",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693759,
+            "url": "https://www.openhistoricalmap.org/relation/2693759",
+            "name": "District of Columbia",
+            "start": "1846-09-07",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-09-07",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "persisted: border only"
+      },
+      "diff_role": "persisted",
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 176,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "dc",
+          "version": 2,
+          "change": "The federal government retroceded to Virginia all of the District of Columbia west of the Potomac River, including all of ALEXANDRIA (now ARLINGTON, Va.). ALEXANDRIA eliminated from the District of Columbia.",
+          "authority": "(U.S. Stat., vol. 9, ch. 35 [1846]/pp. 35-37, and appendix 3/p. 1000)"
+        }
+      }
+    },
+    {
+      "layer": "changed-hands",
+      "name": "District of Columbia → Virginia",
+      "local": null,
+      "ids": {
+        "newberry": [
+          "dc",
+          "va_state"
+        ]
+      },
+      "start": "1846-09-06",
+      "end": "1846-09-07",
+      "end_is": "the two dates compared",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "focus",
+        "color": "#b28b45",
+        "name": "gold"
+      },
+      "diff_role": "changed hands",
+      "lit": null,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 83,
+      "source": {
+        "dataset": "Computed by Parchment (src/us/diff.js): the land the first polygon held on the earlier date and no longer held on the later one, inside the second polygon on the later date and not held by it before; from the Newberry polygons, nothing drawn",
+        "from": [
+          {
+            "newberry": "dc",
+            "version": 1,
+            "version_after": 2,
+            "name": "District of Columbia"
+          },
+          {
+            "newberry": "va_state",
+            "version": 5,
+            "name": "Virginia",
+            "new_on_this_date": false
+          }
+        ],
+        "record": {
+          "id": "dc",
+          "version": 2,
+          "change": "The federal government retroceded to Virginia all of the District of Columbia west of the Potomac River, including all of ALEXANDRIA (now ARLINGTON, Va.). ALEXANDRIA eliminated from the District of Columbia.",
+          "authority": "(U.S. Stat., vol. 9, ch. 35 [1846]/pp. 35-37, and appendix 3/p. 1000)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": {
+    "from": "1846-09-06",
+    "to": "1846-09-07",
+    "tracker": "states",
+    "scope": "inside the framed box only",
+    "appeared": [],
+    "vanished": [],
+    "changed_hands": [
+      {
+        "name": "District of Columbia → Virginia",
+        "kind": "land",
+        "key": "dc>va_state",
+        "from": {
+          "newberry": "dc",
+          "version": 1,
+          "version_after": 2,
+          "name": "District of Columbia"
+        },
+        "to": {
+          "newberry": "va_state",
+          "version": 5,
+          "name": "Virginia",
+          "new_on_this_date": false
+        },
+        "km2": 83,
+        "sq_mi": 32,
+        "note": "The federal government retroceded to Virginia all of the District of Columbia west of the Potomac River, including all of ALEXANDRIA (now ARLINGTON, Va.). ALEXANDRIA eliminated from the District of Columbia."
+      }
+    ],
+    "united_states": null,
+    "persisted": 3,
+    "smaller_not_listed": {
+      "appeared": 0,
+      "vanished": 0,
+      "persisted": 0,
+      "changed": 0
+    },
+    "as_listed": [
+      {
+        "title": "Changed hands",
+        "items": [
+          {
+            "text": "District of Columbia → Virginia",
+            "year": null,
+            "note": null
+          }
+        ],
+        "count": null
+      },
+      {
+        "title": "Persisted",
+        "items": [
+          {
+            "text": "Virginia",
+            "year": null,
+            "note": null
+          },
+          {
+            "text": "Maryland",
+            "year": null,
+            "note": null
+          },
+          {
+            "text": "District of Columbia",
+            "year": null,
+            "note": null
+          }
+        ],
+        "count": null
+      }
+    ]
+  },
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1630,
+      "y": 874,
+      "w": 236,
+      "h": 120,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [],
+  "alt_text": "Parchment map of change, 1846-09-06 to 1846-09-07, states and territories, framed on a box of the continent, titled \"The United States\". Shaded: Changed hands in gold. Hatched in rust: vanished. Named on the map: Virginia. Changed hands: District of Columbia → Virginia.",
+  "credit": "Parchment; boundaries: Newberry Library",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1846-09-07&from=1846-09-06&tracker=states&frame=-77.2%2C38.75%2C-76.85%2C39.05"
+  }
+}

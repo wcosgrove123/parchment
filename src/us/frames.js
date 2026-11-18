@@ -3,6 +3,7 @@
 // places, routes). Every option is a URL parameter, so an order form (scripts/map.mjs) and an address are the same
 // map. Pure functions, no DOM: the tests and the command-line tools load this alone.
 
+import { geoCentroid } from 'd3';
 import { chooseProjection, normBox } from '../render/focus.js';
 
 export const SHEET = { w: 1920, h: 1080 };
@@ -111,6 +112,17 @@ export function makeHighlight(ids) {
     unmatched: () => [...want].filter(([k]) => !found.has(k)).map(([, id]) => id),
     reset() { found.clear(); },
   };
+}
+
+// The stage's insets (Alaska, the Hawaiian Islands) in which the order's highlight names a polygon by that polygon's
+// own names or ids (nb:ak_state, hawaii): a frame draws only these (owner, 2026-11-18, "Insets when lit"). A power
+// ("united-states") names none of them, so a frame lit by power stays as it was. `nb`: the Newberry items, any date.
+export function insetsNamed(insets, nb, ids, twins = null) {
+  const want = new Set(parseList(ids).map(slug));
+  if (!want.size || want.has('none')) return [];
+  const own = (p) => [`nb:${p.id}`, p.id, p.name, p.full, ...(twins?.get(p.id) ?? [])].filter(Boolean).map(slug);
+  const named = nb.filter((it) => own(it.p).some((k) => want.has(k))).map((it) => geoCentroid(it.f));
+  return (insets ?? []).filter(({ extent: e }) => named.some(([x, y]) => x >= e.west && x <= e.east && y >= e.south && y <= e.north));
 }
 
 // The sides of a dispute, for the legend ("Claimed by Texas and Mexico"): two names, in the order given, without
