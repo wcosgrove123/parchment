@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ROUTES, PLACES } from './underground-rows.mjs';
+import { ROUTES, PLACES, CLOSED, LAST_YEAR } from './underground-rows.mjs';
 
 const FILE = join(resolve(dirname(fileURLToPath(import.meta.url)), '..'), 'docs', 'UNDERGROUND-RAILROAD.md');
 const A = '<!-- routes:start (written by scripts/underground-doc.mjs) -->', B = '<!-- routes:end -->';
@@ -15,7 +15,7 @@ const line = { legal: 'solid (documented stops)', approximate: 'dashed (approxim
 const table = ROUTES.map(([id, label, where, start, end, grade, cert, source, note]) => [
   `### \`${id}\`: ${label}`, '',
   `- **Places, in order:** ${where.split('>').map((q) => `${PLACES[q][0]}${PLACES[q][1] === 'sea' ? ' (sea waypoint, not a stop)' : ''} \`${q}\``).join(' → ')}`,
-  `- **On the map from** ${grade === 'circa' ? 'about ' : ''}${start}; last documented ${end}. **Line:** ${line[cert]}.`,
+  `- **On the map from** ${grade === 'circa' ? 'about ' : ''}${start} ${CLOSED[id] ? `to ${end}: ${CLOSED[id]}` : `to ${LAST_YEAR} (last documented ${end}; no source records an end)`}. **Line:** ${line[cert]}.`,
   `- **Source:** ${source}`,
   `- **Note:** ${note}`, '',
 ].join('\n')).join('\n');

@@ -42,7 +42,7 @@ the order.
 | `page` | (the page) | `us`, the North America page; the only one that takes orders for now |
 | `date` | `date=` or `year=` | a day (`1836-06-01`) or a year (`1836`, read as 31 December) |
 | `from` | `from=` | makes a Diff: what changed from this date to `date` |
-| `tracker` | `tracker=` | `nations` (default), `states`, `slavery` (free and slave states, below), `freeblack` (free Black population, below), `cessions`, `population`, `electoral` |
+| `tracker` | `tracker=` | `nations` (default), `states`, `paths`, `pieces`, `chapters` (the statehood deck's, below), `slavery` (free and slave states, below), `freeblack` (free Black population, below), `cessions`, `population`, `electoral` |
 | `underground` | `underground=on` | `true` draws the Underground Railroad's escape routes in use on the date over the map, whatever the tracker (below) |
 | `frame` | `frame=` | a frame id (below) or a box `W,S,E,N` in degrees; without one, the whole continent |
 | `highlight` | `highlight=` | ids to light; everything else drops to paper (below) |
@@ -81,6 +81,17 @@ were (2026-11-18): Deseret "Proposed state (not recognized)", the Vermont and Te
 (the Texas sale of 1850, the District's retrocession of 1846) is drawn in the focus color with the name of the polygon
 that now holds it, keyed "Changed hands", and listed with both names and its area.
 
+**The statehood deck's classifications** (2026-11-18, `src/us/classify.js`; the owner chose the fills). `paths`: how
+each state was admitted (Founding, Carved, Direct, Enabled, Self-started), five fills, from
+`data/us/statehood-paths.csv`. `pieces`: how the land became U.S. land (Won, Bought, Split, Joined as fills, Claimed
+hatched), the pieces computed from the Newberry's own polygons by `scripts/derive-pieces.mjs` (`data/us/pieces.topojson`,
+named and labeled in `data/us/acquisitions.csv`), dated so that any date shows its own; the slip gives today's states'
+shares (`resolved.classification.shares`), and a highlight of states draws only the pieces inside them. `chapters`:
+which chapter of the deck each state is in (`data/us/statehood-chapters.csv`); the order lights a chapter
+(`"highlight": ["chapter-3"]`) and its states take a fill, one per chapter lit, up to four. A highlight may also name a
+path (`enabled`). The rows come from the deck's outline and are not yet reviewed by the owner (the slip says so). Test
+orders: `tests/maps/statehood/`.
+
 **Free and slave states** (`tracker: slavery`, 2026-11-16). Each state takes its status from a table,
 `data/us/slavery-status.csv`: one row per Newberry polygon id (`al_state`) per status period, with `status` (`free` or
 `slave`), `start` and `end` (blank: the polygon's own first and last day) and a `source`. The shapes stay the
@@ -102,13 +113,14 @@ each state within its present-day borders, so a row is added onto the polygon of
 **The Underground Railroad** (`underground: true`, 2026-11-17). The escape routes in use on the map's date, from a
 table of their own, `data/us/underground-railroad.csv` (the record table's columns; the research behind every row,
 with its citations, is `docs/UNDERGROUND-RAILROAD.md`). A route is an `arrow` with the value `escape`, on the map
-from its `start` year (the first its sources document) to the end of 1865, `end` being the last year documented; a town is a `point` with the value `station`. Routes that share a leg are
+in the years it was in use: from its `start` (the first year its sources document) to its `end` (the year a source
+says it stopped, or 1865 where none records an end); a town is a `point` with the value `station`. Routes that share a leg are
 drawn as one line there and part where their rows part (`docs/ROUTES-STYLE.md` §6): nothing is bent by hand. On the
 page it is the "Underground Railroad" button beside the tracker, shown while Free and slave states (or Free Black
 population) is the tracker. Every town is a dot; at most ten carry names (the ends of lines first), the rest give
 their name, years and source on hover. To name particular towns on a lesson map, list them in `annotate.places` with
 `records` set to the table. The packing slip lists each route's record id, waypoints (ids and names), years,
-certainty and source, and under `resolved.underground` the routes that had not begun on the date and those last documented before it. The
+certainty and source, and under `resolved.underground` the routes that had not begun on the date and those no longer in use. The
 rows are TEST ROWS until the owner reviews them. Test order: `tests/maps/underground-railroad-1860.json`.
 
 **Texas, 1836–1848** (owner, 2026-11-09). Where the map has room for a fourth fill (a Texas or Southwest frame), the

@@ -197,6 +197,18 @@ export const REFUGES = [
     'Named as a maroon refuge by Pargas and on the NPS map; no source read gives it a date or a number. The years are the Great Dismal Swamp\'s, borrowed so the mark can be drawn: uncertain.'],
 ];
 
+// In use (owner, 2026-11-18: "Only routes in use"): a route is on the map from its first documented year until a
+// source says it stopped. These are the routes a source gives an end for, with the reason; their `end` above is that
+// year. Every other route has no recorded end: its `end` above is only the last year a source documents, and its row
+// holds it open to 1865, the National Park Service's end for the Underground Railroad (NPS-WHAT, NPS-FAQ).
+export const CLOSED = {
+  'ugrr-carolina-florida': 'Spain gave up Florida in 1763 and the people of Fort Mose left for Cuba',
+  'ugrr-louisiana-texas': 'Texas left Mexico in 1836 and slavery was lawful there again',
+  'ugrr-cape-florida': 'the crossing is documented for the early 1820s; a lighthouse was begun at the cape in 1825 (one source carries it to 1837)',
+};
+export const LAST_YEAR = 1865;
+export const inUseEnd = (id, end) => (CLOSED[id] ? end : LAST_YEAR);
+
 // Towns that get a mark: every route waypoint that is a town. A town's years are the earliest start and the latest
 // end of the routes through it; its source is theirs.
 const esc = (s) => (/[",\n\r]/.test(String(s)) ? `"${String(s).replace(/"/g, '""')}"` : String(s));
@@ -205,10 +217,13 @@ const HEAD = 'id,course,unit,topic,kc,theme,tracker,kind,where,lon,lat,start,end
 export function buildRows() {
   const rows = [];
   const towns = new Map();
-  for (const [id, label, where, start, end, grade, certainty, source, note] of ROUTES) {
+  for (let [id, label, where, start, end, grade, certainty, source, note] of ROUTES) {
     const ids = where.split('>');
     for (const q of ids) if (!PLACES[q]) throw new Error(`${id}: ${q} is not in PLACES`);
-    rows.push([id, 'apush', 5, '', '', 'MIG', 'routes', 'arrow', where, '', '', start, end, grade, 'escape', certainty, label, source, '', '', `${TEST} ${note} Places, in order: ${ids.map((q) => PLACES[q][0]).join(', ')}.`]);
+    const last = end;
+    end = inUseEnd(id, last);
+    const span = CLOSED[id] ? `Off the map after ${last}: ${CLOSED[id]}.` : `Last documented ${last}; no source records an end, so the row holds it open to ${LAST_YEAR}, the NPS's end for the Underground Railroad.`;
+    rows.push([id, 'apush', 5, '', '', 'MIG', 'routes', 'arrow', where, '', '', start, end, grade, 'escape', certainty, label, source, '', '', `${TEST} ${note} ${span} Places, in order: ${ids.map((q) => PLACES[q][0]).join(', ')}.`]);
     for (const q of ids) {
       if (PLACES[q][1] !== 'town') continue;
       const t = towns.get(q) ?? { start, end, routes: [], sources: new Set(), certain: false };

@@ -54,6 +54,7 @@
     "title": "The Underground Railroad, to 1830",
     "highlight": null,
     "inset": null,
+    "stage_insets": [],
     "legend_corner": "bottom-right",
     "water_names": [
       "Atlantic Ocean",
@@ -103,9 +104,9 @@
     },
     "underground": {
       "table": "data/us/underground-railroad.csv",
-      "rule": "a route is drawn from the first year its row documents and stays on the map to the end of 1865 (its last documented year is its end); routes that share a leg are drawn as one line there",
-      "routes_shown": 14,
-      "towns_shown": 31,
+      "rule": "a route is drawn in the years its row gives, the years it was in use: from the first year a source documents it to the year a source says it stopped, or to 1865 where no source records an end (each note gives the last documented year); routes that share a leg are drawn as one line there",
+      "routes_shown": 12,
+      "towns_shown": 27,
       "routes_in_table": 44,
       "not_yet_begun": [
         {
@@ -259,7 +260,7 @@
           "start": 1850
         }
       ],
-      "last_documented_before_this_date": [
+      "no_longer_in_use": [
         {
           "record": "ugrr-carolina-florida",
           "label": "Carolina to Spanish Florida",
@@ -2144,7 +2145,7 @@
       "lit_by": null,
       "lit_as_named": false,
       "labeled": true,
-      "label": "New Jersey",
+      "label": "NJ",
       "cut_by_frame": false,
       "km2": 19524,
       "source": {
@@ -2424,7 +2425,7 @@
       "lon": -75.5514,
       "lat": 39.7483,
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT); NPS, Harriet Tubman Underground Railroad NHP, \"Harriet Tubman\" (NPS-TUB); Wikipedia, \"Harriet Tubman\", citing Larson 2004 and Clinton 2004 (WP-TUB); Newby-Alexander, \"The Atlantic Coastal Freedom Network\", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME); Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD)",
@@ -2441,13 +2442,13 @@
       "lon": -75.1636,
       "lat": 39.9528,
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT); NPS, Harriet Tubman Underground Railroad NHP, \"Harriet Tubman\" (NPS-TUB); Wikipedia, \"Harriet Tubman\", citing Larson 2004 and Clinton 2004 (WP-TUB); Foner, \"Middle Atlantic\" (HB-FONER); NPS handbook timeline (HB-TIME); Newby-Alexander, \"The Atlantic Coastal Freedom Network\", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME); Harrold, \"Escaping in and around Washington, D.C., Maryland, Virginia\", NPS handbook (HB-HARROLD); NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, \"The Underground Railroad: Columbia, Lancaster County\" (PA-SHPO); NPS theme study (NPS-THEME); Wikipedia, \"John W. Jones (ex-slave)\" (WP-JONES)",
       "qc_status": null,
-      "labeled": false,
-      "dropped": "ceiling"
+      "labeled": true,
+      "dropped": null
     },
     {
       "record": "ugrr-town-ripley-q2666983",
@@ -2463,8 +2464,8 @@
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
-      "labeled": false,
-      "dropped": "ceiling"
+      "labeled": true,
+      "dropped": null
     },
     {
       "record": "ugrr-town-sardinia-q36879",
@@ -2475,7 +2476,7 @@
       "lon": -83.8042,
       "lat": 39.0086,
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN); Churchill (HB-CHURCHILL)",
@@ -2492,7 +2493,7 @@
       "lon": -83.7514,
       "lat": 40.1108,
       "start": "1830",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
@@ -2509,7 +2510,7 @@
       "lon": -82.7092,
       "lat": 41.4467,
       "start": "1830",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL); Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)",
@@ -2543,7 +2544,7 @@
       "lon": -84.2125,
       "lat": 39.4267,
       "start": "1830",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
@@ -2560,7 +2561,7 @@
       "lon": -85.3953,
       "lat": 38.75,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
@@ -2577,13 +2578,13 @@
       "lon": -84.92,
       "lat": 39.9544,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN); Wikipedia, \"Levi Coffin\" (WP-COFFIN); Churchill (HB-CHURCHILL)",
       "qc_status": null,
       "labeled": false,
-      "dropped": "ceiling"
+      "dropped": "no-room"
     },
     {
       "record": "ugrr-town-new-albany-q1762878",
@@ -2599,8 +2600,8 @@
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN); NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME)",
       "qc_status": null,
-      "labeled": false,
-      "dropped": "ceiling"
+      "labeled": true,
+      "dropped": null
     },
     {
       "record": "ugrr-town-canton-q5033862",
@@ -2611,7 +2612,7 @@
       "lon": -86.0347,
       "lat": 38.6239,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
@@ -2628,7 +2629,7 @@
       "lon": -85.8472,
       "lat": 39.0917,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
@@ -2645,7 +2646,7 @@
       "lon": -85.5706,
       "lat": 39.7392,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
@@ -2662,7 +2663,7 @@
       "lon": -86.01,
       "lat": 41.9117,
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "grade": "circa",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
@@ -2679,7 +2680,7 @@
       "lon": -83.0475,
       "lat": 42.3317,
       "start": "1826",
-      "end": "1861",
+      "end": "1865",
       "grade": "circa",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Barker, \"Reconsidering the Underground Railroad in Canada West\", NPS handbook (HB-BARKER); Johnson, \"Escaping on the Northwestern Frontier\" (HB-JOHNSON); Parks Canada, \"Underground Railroad National Historic Event\" (PC-UGRR); Wikipedia, \"Underground Railroad\" (WP-UGRR); Siebert 1898 (SIEBERT-V); Johnson (HB-JOHNSON); PBS American Experience, \"John Brown's Missouri raid\" (PBS-BROWN)",
@@ -2786,8 +2787,8 @@
       "certainty": "approximate",
       "source": "NPS, \"Underground Railroad Resources in the U.S. Theme Study\", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY); NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
       "qc_status": null,
-      "labeled": true,
-      "dropped": null
+      "labeled": false,
+      "dropped": "ceiling"
     },
     {
       "record": "ugrr-town-natchitoches-q2278195",
@@ -2837,57 +2838,6 @@
       "certainty": "approximate",
       "source": "Baumgartner, \"Freedom Seekers on the Southwestern Frontier\", NPS handbook (HB-BAUM); Wikipedia, \"Underground Railroad\" (WP-UGRR); NPS (Audain) (NPS-MEX); Baumgartner (HB-BAUM)",
       "qc_status": null,
-      "labeled": false,
-      "dropped": "ceiling"
-    },
-    {
-      "record": "ugrr-town-fort-mose-q549331",
-      "asked": null,
-      "label": "Fort Mose",
-      "value": "station",
-      "where": "Q549331",
-      "lon": -81.3253,
-      "lat": 29.9278,
-      "start": "1687",
-      "end": "1763",
-      "grade": "circa",
-      "certainty": "approximate",
-      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
-      "qc_status": null,
-      "labeled": true,
-      "dropped": null
-    },
-    {
-      "record": "ugrr-town-cape-florida-key-biscayne-q2689037",
-      "asked": null,
-      "label": "Cape Florida (Key Biscayne)",
-      "value": "station",
-      "where": "Q2689037",
-      "lon": -80.1614,
-      "lat": 25.6982,
-      "start": "1821",
-      "end": "1825",
-      "grade": "circa",
-      "certainty": "approximate",
-      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
-      "qc_status": null,
-      "labeled": true,
-      "dropped": null
-    },
-    {
-      "record": "ugrr-town-andros-island-q514070",
-      "asked": null,
-      "label": "Andros Island",
-      "value": "station",
-      "where": "Q514070",
-      "lon": -77.9,
-      "lat": 24.45,
-      "start": "1821",
-      "end": "1825",
-      "grade": "circa",
-      "certainty": "approximate",
-      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
-      "qc_status": null,
       "labeled": true,
       "dropped": null
     },
@@ -2904,23 +2854,6 @@
       "grade": "circa",
       "certainty": "approximate",
       "source": "Pargas, \"Southern Maroon Communities\", NPS handbook (HB-PARGAS); Wikipedia, \"Great Dismal Swamp maroons\" (WP-DISMAL)",
-      "qc_status": null,
-      "labeled": false,
-      "dropped": "ceiling"
-    },
-    {
-      "record": "ugrr-refuge-prospect-bluff",
-      "asked": null,
-      "label": "Prospect Bluff (\"Negro Fort\")",
-      "value": "refuge",
-      "where": "Q4871874",
-      "lon": -85.0113,
-      "lat": 29.9382,
-      "start": "1814",
-      "end": "1816",
-      "grade": "exact",
-      "certainty": "legal",
-      "source": "Wikipedia, \"Negro Fort\" (WP-NEGROFORT); Baram, \"Trail toward liberty\" (BARAM)",
       "qc_status": null,
       "labeled": false,
       "dropped": "ceiling"
@@ -2957,7 +2890,7 @@
         "Q1345"
       ],
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "certainty": "legal",
       "source": "Foner, \"Middle Atlantic\", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, \"Thomas Garrett\" (WP-GARRETT)",
       "qc_status": null,
@@ -2968,7 +2901,7 @@
         "Philadelphia"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Garrett worked in Wilmington from 1822 and sent people on to the Philadelphia committee. 1861: J. Miller McKim's remark that the Underground Railroad was in effect over (HB-FONER); the NPS itself runs it to 1865. Places, in order: Wilmington, Philadelphia.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Garrett worked in Wilmington from 1822 and sent people on to the Philadelphia committee. 1861: J. Miller McKim's remark that the Underground Railroad was in effect over (HB-FONER); the NPS itself runs it to 1865. Last documented 1861; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Wilmington, Philadelphia.",
       "legs": [
         {
           "leg": "Q174224>Q1345",
@@ -2990,7 +2923,7 @@
         "Q36879"
       ],
       "start": "1822",
-      "end": "1861",
+      "end": "1865",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"John Rankin (abolitionist)\" (WP-RANKIN)",
       "qc_status": null,
@@ -3001,7 +2934,7 @@
         "Sardinia"
       ],
       "grade": "exact",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Ripley (John Rankin from 1822, John Parker) to Sardinia. The story of Rankin's lantern appears only in twentieth-century sources. Places, in order: Ripley, Sardinia.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Ripley (John Rankin from 1822, John Parker) to Sardinia. The story of Rankin's lantern appears only in twentieth-century sources. Last documented 1861; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Ripley, Sardinia.",
       "legs": [
         {
           "leg": "Q2666983>Q36879",
@@ -3024,7 +2957,7 @@
         "Q608207"
       ],
       "start": "1830",
-      "end": "1861",
+      "end": "1865",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
       "qc_status": null,
@@ -3036,7 +2969,7 @@
         "Sandusky"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Northwest to join the Cincinnati road in the upper Miami valley, then by the Alum Creek Quaker settlement north of Columbus to Sandusky. The source dates these networks to \"the late 1820s and early 1830s\" and names a belt of settlements, not a list of towns: Urbana stands for the belt. Places, in order: Sardinia, Urbana, Sandusky.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Northwest to join the Cincinnati road in the upper Miami valley, then by the Alum Creek Quaker settlement north of Columbus to Sandusky. The source dates these networks to \"the late 1820s and early 1830s\" and names a belt of settlements, not a list of towns: Urbana stands for the belt. Last documented 1861; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Sardinia, Urbana, Sandusky.",
       "legs": [
         {
           "leg": "Q36879>Q1762816",
@@ -3067,7 +3000,7 @@
         "Q608207"
       ],
       "start": "1830",
-      "end": "1861",
+      "end": "1865",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
       "qc_status": null,
@@ -3080,7 +3013,7 @@
         "Sandusky"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. By farmers' wagons through the Quaker and free Black settlements between Lebanon and Urbana, then by Alum Creek to Sandusky and the Western Reserve. In use from about 1830, dense by about 1840; Levi Coffin moved to Cincinnati in 1847. Places, in order: Cincinnati, Lebanon, Urbana, Sandusky.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. By farmers' wagons through the Quaker and free Black settlements between Lebanon and Urbana, then by Alum Creek to Sandusky and the Western Reserve. In use from about 1830, dense by about 1840; Levi Coffin moved to Cincinnati in 1847. Last documented 1861; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Cincinnati, Lebanon, Urbana, Sandusky.",
       "legs": [
         {
           "leg": "Q43196>Q986776",
@@ -3114,7 +3047,7 @@
         "Q1439902"
       ],
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
       "qc_status": null,
@@ -3125,7 +3058,7 @@
         "Fountain City"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Madison (George DeBaptiste, Elijah Anderson) to Levi Coffin at Newport, now Fountain City, where he lived from 1826 to 1847. The source gives the way between by county only. Places, in order: Madison, Newport (Fountain City).",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Madison (George DeBaptiste, Elijah Anderson) to Levi Coffin at Newport, now Fountain City, where he lived from 1826 to 1847. The source gives the way between by county only. Last documented 1847; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Madison, Newport (Fountain City).",
       "legs": [
         {
           "leg": "Q990883>Q1439902",
@@ -3150,7 +3083,7 @@
         "Q1439902"
       ],
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "certainty": "legal",
       "source": "Churchill (HB-CHURCHILL); Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
       "qc_status": null,
@@ -3164,7 +3097,7 @@
         "Fountain City"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. New Albany and Jeffersonville, Canton, Farmington, Azalia, Carthage, Newport: the stops are the source's. The years are Coffin's at Newport; the source does not date this road itself. Places, in order: New Albany, Canton, Azalia, Carthage, Newport (Fountain City).",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. New Albany and Jeffersonville, Canton, Farmington, Azalia, Carthage, Newport: the stops are the source's. The years are Coffin's at Newport; the source does not date this road itself. Last documented 1847; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: New Albany, Canton, Azalia, Carthage, Newport (Fountain City).",
       "legs": [
         {
           "leg": "Q1762878>Q5033862",
@@ -3201,7 +3134,7 @@
         "Q1439902"
       ],
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "certainty": "approximate",
       "source": "Wikipedia, \"Levi Coffin\" (WP-COFFIN)",
       "qc_status": null,
@@ -3212,7 +3145,7 @@
         "Fountain City"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Three roads met at Coffin's house: from Madison, from New Albany and from Cincinnati. Places, in order: Cincinnati, Newport (Fountain City).",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. Three roads met at Coffin's house: from Madison, from New Albany and from Cincinnati. Last documented 1847; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Cincinnati, Newport (Fountain City).",
       "legs": [
         {
           "leg": "Q43196>Q1439902",
@@ -3235,7 +3168,7 @@
         "Q12439"
       ],
       "start": "1826",
-      "end": "1847",
+      "end": "1865",
       "certainty": "approximate",
       "source": "Churchill (HB-CHURCHILL)",
       "qc_status": null,
@@ -3247,7 +3180,7 @@
         "Detroit"
       ],
       "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From Newport to Detroit, or to the free Black settlements of Cass County, Michigan (Cassopolis is its county seat and stands for them). Places, in order: Newport (Fountain City), Cassopolis, Detroit.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From Newport to Detroit, or to the free Black settlements of Cass County, Michigan (Cassopolis is its county seat and stands for them). Last documented 1847; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Newport (Fountain City), Cassopolis, Detroit.",
       "legs": [
         {
           "leg": "Q1439902>Q2373038",
@@ -3289,7 +3222,7 @@
         "New Albany"
       ],
       "grade": "uncertain",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826). Places, in order: Memphis, Nashville, Louisville, New Albany.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826). Last documented 1865; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Memphis, Nashville, Louisville, New Albany.",
       "legs": [
         {
           "leg": "Q16563>Q23197",
@@ -3334,7 +3267,7 @@
         "Ripley"
       ],
       "grade": "uncertain",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822). Places, in order: Lexington, Maysville, Ripley.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822). Last documented 1865; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Lexington, Maysville, Ripley.",
       "legs": [
         {
           "leg": "Q49241>Q478393",
@@ -3372,7 +3305,7 @@
         "Cincinnati"
       ],
       "grade": "uncertain",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830). Places, in order: Lexington, Cincinnati.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes \"will generally remain unclear\". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830). Last documented 1865; no source records an end, so the row holds it open to 1865, the NPS's end for the Underground Railroad. Places, in order: Lexington, Cincinnati.",
       "legs": [
         {
           "leg": "Q49241>Q43196",
@@ -3407,7 +3340,7 @@
         "San Antonio"
       ],
       "grade": "exact",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road. Nearly a hundred people left western Louisiana in the summer of 1822, across the Sabine (then the border) for Nacogdoches and San Antonio de Béxar. Natchitoches as the line's start is the editor's choice (WP-UGRR mentions a road from there); the escapes the source dates were from parishes farther south. Ends in 1836, when Texas left Mexico. Places, in order: Natchitoches, Nacogdoches, San Antonio.",
+      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road. Nearly a hundred people left western Louisiana in the summer of 1822, across the Sabine (then the border) for Nacogdoches and San Antonio de Béxar. Natchitoches as the line's start is the editor's choice (WP-UGRR mentions a road from there); the escapes the source dates were from parishes farther south. Ends in 1836, when Texas left Mexico. Off the map after 1836: Texas left Mexico in 1836 and slavery was lawful there again. Places, in order: Natchitoches, Nacogdoches, San Antonio.",
       "legs": [
         {
           "leg": "Q2278195>Q970482",
@@ -3418,72 +3351,6 @@
           "leg": "Q970482>Q975",
           "shared_with": [],
           "dash": "dotted"
-        }
-      ]
-    },
-    {
-      "record": "ugrr-carolina-florida",
-      "label": "Carolina to Spanish Florida",
-      "kind": "arrow",
-      "value": "escape",
-      "class": "Escape route (the Underground Railroad)",
-      "dash": "dotted",
-      "heads": "chevron",
-      "waypoints": [
-        "Q47716",
-        "Q549331"
-      ],
-      "start": "1687",
-      "end": "1763",
-      "certainty": "sphere",
-      "source": "NPS, \"Fort Mose\" (NPS-MOSE); Florida Museum, \"Fort Mose\" (FLMNH); Wikipedia, \"Fort Mose\" (WP-MOSE)",
-      "qc_status": null,
-      "labeled": false,
-      "dropped": null,
-      "places": [
-        "Charleston",
-        "Fort Mose Historic State Park"
-      ],
-      "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. A direction, not a road: no source names a place between Carolina and St. Augustine. First arrivals by canoe in 1687 (Landers, by a search result only; Wikipedia has 1689); Charles II's edict of 1693; Fort Mose founded 1738, evacuated to Cuba in 1763. Charleston stands for Carolina. Places, in order: Charleston, Fort Mose.",
-      "legs": [
-        {
-          "leg": "Q47716>Q549331",
-          "shared_with": [],
-          "dash": "dotted"
-        }
-      ]
-    },
-    {
-      "record": "ugrr-cape-florida",
-      "label": "Cape Florida to the Bahamas",
-      "kind": "arrow",
-      "value": "escape",
-      "class": "Escape route (the Underground Railroad)",
-      "dash": "dashed",
-      "heads": "chevron",
-      "waypoints": [
-        "Q2689037",
-        "Q514070"
-      ],
-      "start": "1821",
-      "end": "1825",
-      "certainty": "approximate",
-      "source": "Wikipedia, \"Saltwater Railroad\" (WP-SALT); Baram, \"Trail toward liberty\", Journal of Florida Studies (BARAM)",
-      "qc_status": null,
-      "labeled": false,
-      "dropped": null,
-      "places": [
-        "Key Biscayne",
-        "Andros"
-      ],
-      "grade": "circa",
-      "note": "TEST ROW for the Underground Railroad layer (owner's request of 2026-11-17); not reviewed. Research and full citations: docs/UNDERGROUND-RAILROAD.md. From Cape Florida on Key Biscayne across the Gulf Stream to Andros Island (the Red Bays settlement): about 300 Black Seminoles in the early 1820s. The crossing is documented; where on Andros they landed is not in what was read. Sources disagree on how long it ran (to the mid-1820s; \"1821-1837\"). Places, in order: Cape Florida (Key Biscayne), Andros Island.",
-      "legs": [
-        {
-          "leg": "Q2689037>Q514070",
-          "shared_with": [],
-          "dash": "dashed"
         }
       ]
     }
@@ -3516,19 +3383,12 @@
   },
   "warnings": [
     "the status of 24 states on this map comes from TEST ROWS (data/us/slavery-status.csv), not yet reviewed; their sources are PENDING OWNER",
-    "Fort Mose (1687) predates the map's date, 1 June 1830",
-    "Cape Florida (Key Biscayne) (1821) predates the map's date, 1 June 1830: the land it stands on was Florida Unorganized Federal Territory on its own day and is drawn as Florida Territory",
-    "Andros Island (1821) predates the map's date, 1 June 1830",
-    "Prospect Bluff (\"Negro Fort\") (1814) predates the map's date, 1 June 1830",
     "place Wilmington (ugrr-town-wilmington-q174224): name dropped (the ten-name limit)",
-    "place Philadelphia (ugrr-town-philadelphia-q1345): name dropped (the ten-name limit)",
-    "place Ripley (ugrr-town-ripley-q2666983): name dropped (the ten-name limit)",
     "place Sardinia (ugrr-town-sardinia-q36879): name dropped (the ten-name limit)",
     "place Urbana (ugrr-town-urbana-q1762816): name dropped (the ten-name limit)",
     "place Sandusky (ugrr-town-sandusky-q608207): name dropped (the ten-name limit)",
     "place Lebanon (ugrr-town-lebanon-q986776): name dropped (the ten-name limit)",
-    "place Newport (Fountain City) (ugrr-town-newport-fountain-city-q1439902): name dropped (the ten-name limit)",
-    "place New Albany (ugrr-town-new-albany-q1762878): name dropped (the ten-name limit)",
+    "place Newport (Fountain City) (ugrr-town-newport-fountain-city-q1439902): name dropped (no room)",
     "place Canton (ugrr-town-canton-q5033862): name dropped (the ten-name limit)",
     "place Azalia (ugrr-town-azalia-q4832149): name dropped (the ten-name limit)",
     "place Carthage (ugrr-town-carthage-q3293425): name dropped (the ten-name limit)",
@@ -3536,13 +3396,12 @@
     "place Nashville (ugrr-town-nashville-q23197): name dropped (the ten-name limit)",
     "place Louisville (ugrr-town-louisville-q43668): name dropped (the ten-name limit)",
     "place Maysville (ugrr-town-maysville-q478393): name dropped (the ten-name limit)",
+    "place Charleston (ugrr-town-charleston-q47716): name dropped (the ten-name limit)",
     "place Nacogdoches (ugrr-town-nacogdoches-q970482): name dropped (the ten-name limit)",
-    "place San Antonio (ugrr-town-san-antonio-q975): name dropped (the ten-name limit)",
     "place Great Dismal Swamp (ugrr-refuge-great-dismal-swamp): name dropped (the ten-name limit)",
-    "place Prospect Bluff (\"Negro Fort\") (ugrr-refuge-prospect-bluff): name dropped (the ten-name limit)",
     "place Okefenokee Swamp (ugrr-refuge-okefenokee): name dropped (the ten-name limit)"
   ],
-  "alt_text": "Parchment map, 1 June 1830, free and slave states, framed on The East, titled \"The Underground Railroad, to 1830\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Mexico, Rupert's Land, Province of Lower Canada, Coahuila y Tejas, Province of Upper Canada, Michigan Territory, Missouri, Indian Territory, Virginia, Georgia, Arkansas Territory and Florida Territory. Marked places: Wilmington (1822 to 1861), Philadelphia (1822 to 1861), Ripley (1822 to 1865), Sardinia (1822 to 1861), Urbana (1830 to 1861), Sandusky (1830 to 1861), Cincinnati (1826 to 1865), Lebanon (1830 to 1861), Madison (1826 to 1847), Newport (Fountain City) (1826 to 1847), New Albany (1826 to 1865), Canton (1826 to 1847), Azalia (1826 to 1847), Carthage (1826 to 1847), Cassopolis (1826 to 1847), Detroit (1826 to 1861), Memphis (1826 to 1865), Nashville (1826 to 1865), Louisville (1826 to 1865), Lexington (1822 to 1865), Maysville (1822 to 1865), Charleston (1687 to 1865), Natchitoches (1822 to 1836), Nacogdoches (1822 to 1836), San Antonio (1822 to 1865), Fort Mose (1687 to 1763), Cape Florida (Key Biscayne) (1821 to 1825), Andros Island (1821 to 1825), Great Dismal Swamp (1700 to 1865), Prospect Bluff (\"Negro Fort\") (1814 to 1816) and Okefenokee Swamp (1700 to 1865). Routes: Wilmington to Philadelphia (Thomas Garrett), escape route (the underground railroad) with arrowheads, Across the Ohio at Ripley, escape route (the underground railroad) with arrowheads, Sardinia to Lake Erie, escape route (the underground railroad) with arrowheads, Cincinnati to Lake Erie, escape route (the underground railroad) with arrowheads, Across the Ohio at Madison, escape route (the underground railroad) with arrowheads, Across the Ohio at New Albany, escape route (the underground railroad) with arrowheads, Cincinnati to Newport, escape route (the underground railroad) with arrowheads, Newport to Michigan, escape route (the underground railroad) with arrowheads, From Tennessee and Kentucky to the Ohio at Louisville, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to the Ohio at Ripley, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to Cincinnati, escape route (the underground railroad) with arrowheads, Louisiana to Mexican Texas, escape route (the underground railroad) with arrowheads, Carolina to Spanish Florida, escape route (the underground railroad) with arrowheads and Cape Florida to the Bahamas, escape route (the underground railroad) with arrowheads.",
+  "alt_text": "Parchment map, 1 June 1830, free and slave states, framed on The East, titled \"The Underground Railroad, to 1830\". Shaded: Free state in teal, Slave state in orange and Territories in gray. Named on the map: Mexico, Rupert's Land, Province of Lower Canada, Coahuila y Tejas, Province of Upper Canada, Michigan Territory, Missouri, Indian Territory, Virginia, Georgia, Arkansas Territory and Florida Territory. Marked places: Wilmington (1822 to 1865), Philadelphia (1822 to 1865), Ripley (1822 to 1865), Sardinia (1822 to 1865), Urbana (1830 to 1865), Sandusky (1830 to 1865), Cincinnati (1826 to 1865), Lebanon (1830 to 1865), Madison (1826 to 1865), Newport (Fountain City) (1826 to 1865), New Albany (1826 to 1865), Canton (1826 to 1865), Azalia (1826 to 1865), Carthage (1826 to 1865), Cassopolis (1826 to 1865), Detroit (1826 to 1865), Memphis (1826 to 1865), Nashville (1826 to 1865), Louisville (1826 to 1865), Lexington (1822 to 1865), Maysville (1822 to 1865), Charleston (1687 to 1865), Natchitoches (1822 to 1836), Nacogdoches (1822 to 1836), San Antonio (1822 to 1865), Great Dismal Swamp (1700 to 1865) and Okefenokee Swamp (1700 to 1865). Routes: Wilmington to Philadelphia (Thomas Garrett), escape route (the underground railroad) with arrowheads, Across the Ohio at Ripley, escape route (the underground railroad) with arrowheads, Sardinia to Lake Erie, escape route (the underground railroad) with arrowheads, Cincinnati to Lake Erie, escape route (the underground railroad) with arrowheads, Across the Ohio at Madison, escape route (the underground railroad) with arrowheads, Across the Ohio at New Albany, escape route (the underground railroad) with arrowheads, Cincinnati to Newport, escape route (the underground railroad) with arrowheads, Newport to Michigan, escape route (the underground railroad) with arrowheads, From Tennessee and Kentucky to the Ohio at Louisville, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to the Ohio at Ripley, escape route (the underground railroad) with arrowheads, From the Kentucky Bluegrass to Cincinnati, escape route (the underground railroad) with arrowheads and Louisiana to Mexican Texas, escape route (the underground railroad) with arrowheads.",
   "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; status of states: the Parchment status table (test rows); places: the Parchment record table, coordinates from Wikidata",
   "render": {
     "by": "scripts/map.mjs",

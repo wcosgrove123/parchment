@@ -353,8 +353,8 @@ async function main() {
   // The Underground Railroad (owner, 2026-11-17: "a toggle button for the slavery layer… it shows me all the paths
   // for the year that i select"). Its routes and towns are records in a table of their own,
   // data/us/underground-railroad.csv (docs/UNDERGROUND-RAILROAD.md has the research behind every row), read when the
-  // layer is first switched on. A route is on the map from the first year its row documents to the end of 1865; a
-  // town likewise. The switch shows on the slavery trackers; underground=on in the address draws it over any tracker.
+  // layer is first switched on. A route is on the map in the years of its row (the years it was in use); a town
+  // likewise. The switch shows on the slavery trackers; underground=on in the address draws it over any tracker.
   let ugData = null;
   async function ensureUnderground() {
     if (ugData) return ugData;
@@ -376,10 +376,10 @@ async function main() {
   const undergroundOn = () => state.underground && (state.tracker === 'slavery' || state.tracker === 'freeblack' || params.get('underground') === 'on');
   function undergroundFor(date) {
     if (!ugData || !undergroundOn() || state.mode === 'diff') return null;
-    // (owner: "by 1865, it'll be all the roads": a route comes onto the map in the first year its row documents and
-    // stays to the end of 1865; its own last documented year is in its hover and on the slip)
+    // (owner, 2026-11-18: "Only routes in use": a route is on the map from its row's first year to its last; a row
+    // whose sources record no end is held open to 1865 in the table itself, scripts/underground-rows.mjs)
     if (date > UNDERGROUND_END) return null;
-    const on = (r) => r.first <= date;
+    const on = (r) => r.first <= date && date <= r.last;
     return { file: ugData.file, routes: ugData.routes.filter(on), points: ugData.points.filter(on), all: ugData.routes };
   }
   let recKey = null;

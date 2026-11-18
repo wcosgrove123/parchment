@@ -63,8 +63,8 @@ behind it.
   Commission's 1978 map, and treaty land computed from Royce. How each is used: `docs/DECISIONS.md`, 2026-11-05 and
   2026-11-06.
 - **The Underground Railroad** (2026-11-17). Choose *Free and slave states* in the tracker menu and press
-  **Underground Railroad** beside it (or add `underground=on` to the address): the escape routes documented by the
-  year shown, filling in year by year to 1865. Roads that share a stretch are drawn as one line and part where they
+  **Underground Railroad** beside it (or add `underground=on` to the address): the escape routes in use in the
+  year shown, from the first year a source documents each to 1865 (or to the year a source says it stopped). Roads that share a stretch are drawn as one line and part where they
   part. Every town is a dot; hover a line or a dot for its years and source. The rows are in
   `data/us/underground-railroad.csv` (test rows until reviewed); the research behind each, with what was left off the
   map and why, is `docs/UNDERGROUND-RAILROAD.md`. Lines are schematic: they join places the sources name.

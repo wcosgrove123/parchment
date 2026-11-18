@@ -11,7 +11,7 @@ import { serve, bundle } from '../scripts/serve.mjs';
 import { renderOrder } from '../scripts/map.mjs';
 import { validateRecords, resolveRecords } from '../src/data/records.js';
 import { buildNetwork } from '../src/render/network.js';
-import { PLACES, ROUTES, buildRows } from '../scripts/underground-rows.mjs';
+import { PLACES, ROUTES, CLOSED, buildRows } from '../scripts/underground-rows.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => readFileSync(join(ROOT, p), 'utf8');
@@ -92,13 +92,15 @@ test('the page: the switch shows on the slavery tracker, draws the routes of the
   await page.eval(inPage(settle)); await page.eval(inPage(settle));
   const on = await page.eval(inPage(shown));
   assert.deepEqual([on.active, on.key, /underground=on/.test(on.address)], [true, true, true], JSON.stringify(on));
-  assert.equal(on.refuges, 3);
+  assert.equal(on.refuges, 2); // (Prospect Bluff stood 1814 to 1816)
   assert.ok(on.legs > 60 && on.towns > 80, `1860: ${on.legs} legs, ${on.towns} towns`);
   assert.ok(on.heads >= 8 && on.heads < on.legs / 3, 'heads only where a line ends');
   assert.ok(on.names <= 10, 'at most ten towns are named; the rest are dots with their names on hover');
   const y1830 = await at(1830), y1845 = await at(1845), y1865 = await at(1865), y1866 = await at(1866);
   assert.ok(y1830.legs > 0 && y1830.legs < y1845.legs && y1845.legs < on.legs, `the map fills in: ${y1830.legs} < ${y1845.legs} < ${on.legs}`);
-  assert.equal(y1865.legs, on.legs, 'by 1865 every route is on the map');
+  assert.equal(y1865.legs, on.legs, 'every route with no recorded end is still on the map in 1865');
+  const y1750 = await at(1750), y1800 = await at(1800);
+  assert.deepEqual([y1750.legs, y1800.legs], [1, 0], 'in use only: the road to Spanish Florida is on the map of 1750 and off it after 1763');
   assert.equal(y1866.legs, 0, 'and none after it');
   await at(1860);
   await page.eval(`document.querySelector('#underground').click()`);
@@ -113,9 +115,11 @@ test('an order: underground: true draws the layer and the slip lists each route 
   try {
     const order = JSON.parse(read('tests/maps/underground-railroad-1860.json'));
     const { slip } = await renderOrder(order, { out: join(dir, 'ug'), base: ROOT, browser: exe });
-    assert.equal(slip.resolved.underground.routes_shown, ROUTES.length);
+    const open = ROUTES.length - Object.keys(CLOSED).length;
+    assert.equal(slip.resolved.underground.routes_shown, open);
+    assert.deepEqual(slip.resolved.underground.no_longer_in_use.map((r) => r.record).sort(), Object.keys(CLOSED).sort());
     assert.equal(slip.resolved.underground.table, 'data/us/underground-railroad.csv');
-    assert.equal(slip.routes.length, ROUTES.length);
+    assert.equal(slip.routes.length, open);
     for (const r of slip.routes) {
       assert.ok(r.record.startsWith('ugrr-') && r.source && r.waypoints.length >= 2 && r.places.length === r.waypoints.length, `${r.record} lists its waypoints, their names and its source`);
       assert.match(r.class, /Underground Railroad/);
@@ -126,6 +130,7 @@ test('an order: underground: true draws the layer and the slip lists each route 
     const early = await renderOrder({ ...order, date: '1830' }, { out: join(dir, 'ug30'), base: ROOT, browser: exe });
     const u = early.slip.resolved.underground;
     assert.ok(u.routes_shown < ROUTES.length && u.not_yet_begun.some((r) => r.record === 'ugrr-tubman-delmarva'));
-    assert.ok(early.slip.routes.every((r) => Number(r.start.slice(0, 4)) <= 1830));
+    assert.ok(early.slip.routes.every((r) => Number(r.start.slice(0, 4)) <= 1830 && Number(r.end.slice(0, 4)) >= 1830));
+    assert.ok(early.slip.routes.some((r) => r.record === 'ugrr-louisiana-texas'), 'the road to Mexican Texas is in use in 1830');
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

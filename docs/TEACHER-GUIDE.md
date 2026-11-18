@@ -250,8 +250,9 @@ it comes from a dated source, and clicking any area opens a card with that sourc
   Mexico still claimed inside it shows as a hatch. Export gives the picture at that size. Whoever keeps the site can
   make the same map from an order form, with a list of everything on it and its sources (docs/LESSON-MAPS.md).
 - **The Underground Railroad.** Choose *Free and slave states* in the tracker menu; an **Underground Railroad** button
-  appears beside it. Press it and the map shows every escape route documented by the year in the box; move the year
-  and the map fills in, until by 1865 every route is on it. Press it again to take the routes off. Where several
+  appears beside it. Press it and the map shows the escape routes in use in the year in the box; move the year
+  and the map fills in. A route leaves the map only where a source says it stopped (the road to Spanish Florida
+  after 1763, the road to Mexican Texas after 1836, the crossing from Cape Florida after 1825). Press it again to take the routes off. Where several
   roads share a stretch they are one line, and they part where the roads part. A solid line is a chain of stops the
   sources document; a dashed line is approximate (its ends are known, the way between is not, or it rests on later
   recollections); a dotted line is a direction only. Every town is a small dot: hover it, or a line, for its name,

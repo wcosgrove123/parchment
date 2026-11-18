@@ -30,11 +30,13 @@ research on the towns it went through"). This file is the research behind every 
   article were read as text). **The books themselves (Foner, Baumgartner, Larson, Still, Coffin, Siebert in full) were
   not read**: they appear through their authors' essays in the NPS handbook and through reference pages. Short quoted
   phrases should be checked against the page before they are printed anywhere. This is the owner's review to make.
-- **Years.** A route comes onto the map in the first year a source documents it (a founding, a dated escape) and stays
-  to the end of 1865, as the owner asked ("by 1865, it'll be all the roads"). That first year is the first *documented*
-  use, not the first use: people fled along most of these ways earlier than any record. Each row also keeps its last
-  documented year; the Spanish Florida line, for one, was last used in 1763 and is still on the 1860 map under this
-  rule. The NPS runs the Underground Railroad to the end of the Civil War (NPS-WHAT, NPS-FAQ).
+- **Years: only routes in use (owner, 2026-11-18).** A route comes onto the map in the first year a source documents
+  it (a founding, a dated escape). That is the first *documented* use, not the first use: people fled along most of
+  these ways earlier than any record. It leaves the map only where a source says it stopped: the road to Spanish
+  Florida after 1763, the road to Mexican Texas after 1836, the crossing from Cape Florida after 1825. For every other
+  route the sources simply fall silent (a ledger ends, a single journey is recorded), which is not the same as the
+  road closing; those rows are held open to 1865 and each note gives the last year a source documents. So a line on
+  the 1863 map means "no source says this had stopped", not "a source shows it in use in 1863". The NPS runs the Underground Railroad to the end of the Civil War (NPS-WHAT, NPS-FAQ).
 - **Line style.** Solid: a chain of stops documented by the NPS handbook's essays or by dated cases. Dashed: the ends
   are documented and the way between is not, or the chain rests on later recollections. Dotted: a direction only (no
   source names any place on the way). Width is the same everywhere: **no source gives numbers by corridor** good enough
@@ -58,308 +60,308 @@ research on the towns it went through"). This file is the research behind every 
 ### `ugrr-wilmington-philadelphia`: Wilmington to Philadelphia (Thomas Garrett)
 
 - **Places, in order:** Wilmington `Q174224` → Philadelphia `Q1345`
-- **On the map from** about 1822; last documented 1861. **Line:** solid (documented stops).
+- **On the map from** about 1822 to 1865 (last documented 1861; no source records an end). **Line:** solid (documented stops).
 - **Source:** Foner, "Middle Atlantic", NPS Underground Railroad Handbook (Dickinson, HB-FONER); Wikipedia, "Thomas Garrett" (WP-GARRETT)
 - **Note:** Garrett worked in Wilmington from 1822 and sent people on to the Philadelphia committee. 1861: J. Miller McKim's remark that the Underground Railroad was in effect over (HB-FONER); the NPS itself runs it to 1865.
 
 ### `ugrr-tubman-delmarva`: Eastern Shore of Maryland to Wilmington (Harriet Tubman's route)
 
 - **Places, in order:** Preston `Q611879` → Sandtown `Q7416983` → Camden `Q754342` → Dover `Q33518` → Smyrna `Q755736` → New Castle `Q755393` → Wilmington `Q174224` → Philadelphia `Q1345`
-- **On the map from** 1849; last documented 1860. **Line:** solid (documented stops).
+- **On the map from** 1849 to 1865 (last documented 1860; no source records an end). **Line:** solid (documented stops).
 - **Source:** NPS, Harriet Tubman Underground Railroad NHP, "Harriet Tubman" (NPS-TUB); Wikipedia, "Harriet Tubman", citing Larson 2004 and Clinton 2004 (WP-TUB)
 - **Note:** Poplar Neck near Preston, then Sandtown, Camden (the Brinkleys and Abraham Gibbs), past Dover and Smyrna, New Castle, Wilmington (Garrett), Philadelphia (William Still). Her own escape, autumn 1849; return trips 1850 to 1860. This is the chain of her later trips as Larson reconstructs it: the way of her first escape is not known. East New Market (Sam Green) and Willow Grove are on the chain in the source and left off the line, which is too short to show them apart.
 
 ### `ugrr-philadelphia-new-york`: Philadelphia to New York
 
 - **Places, in order:** Philadelphia `Q1345` → New York `Q60`
-- **On the map from** 1835; last documented 1861. **Line:** solid (documented stops).
+- **On the map from** 1835 to 1865 (last documented 1861; no source records an end). **Line:** solid (documented stops).
 - **Source:** Foner, "Middle Atlantic" (HB-FONER); NPS handbook timeline (HB-TIME)
 - **Note:** 1835: David Ruggles founds the New York Committee of Vigilance. By train and ferry across New Jersey; no source read names a New Jersey town except Siebert (1898), from recollections.
 
 ### `ugrr-new-york-canada`: New York to Canada by Albany, Syracuse and Niagara
 
 - **Places, in order:** New York `Q60` → Albany `Q24861` → Syracuse `Q128069` → Rochester `Q49218` → Buffalo `Q40435` → Niagara Falls `Q128133` → St. Catharines `Q126805`
-- **On the map from** about 1842; last documented 1861. **Line:** solid (documented stops).
+- **On the map from** about 1842 to 1865 (last documented 1861; no source records an end). **Line:** solid (documented stops).
 - **Source:** Foner, "Middle Atlantic" (HB-FONER); Harrold, "Washington, Maryland, Virginia" (HB-HARROLD); NPS theme study, 2000 (NPS-THEME)
 - **Note:** Albany (Stephen Myers), Syracuse (Jermain Loguen), Rochester (Frederick Douglass), Buffalo, the Niagara crossing, St. Catharines. 1842: Charles Torrey's party reaches Albany, the earliest dated use of the road north of New York in what was read; Sydney Howard Gay's record of 1855 to 1856 documents Syracuse best. The Albany leg is less fully attested than the Syracuse leg.
 
 ### `ugrr-new-york-springfield`: New York into New England
 
 - **Places, in order:** New York `Q60` → Hartford `Q33486` → Springfield `Q49158`
-- **On the map from** 1838; last documented 1842. **Line:** solid (documented stops).
+- **On the map from** 1838 to 1865 (last documented 1842; no source records an end). **Line:** solid (documented stops).
 - **Source:** Grover, "The New England Network to Freedom", NPS handbook (HB-GROVER)
 - **Note:** James Lindsay Smith's journey of 1838: from Ruggles in New York by Hartford to Springfield, Massachusetts (he settled at Norwich, Connecticut, by 1842). One documented journey; many who reached New England stayed there.
 
 ### `ugrr-vermont`: Albany to Canada through Vermont
 
 - **Places, in order:** Albany `Q24861` → Troy `Q600301` → Bennington `Q817921` → Rutland `Q25893` → Ferrisburgh `Q1874592` → Burlington `Q31058` → St. Albans `Q1787559` → Montreal `Q340`
-- **On the map from** about 1838; last documented 1856. **Line:** dashed (approximate).
+- **On the map from** about 1838 to 1865 (last documented 1856; no source records an end). **Line:** dashed (approximate).
 - **Source:** Siebert, The Underground Railroad from Slavery to Freedom (1898), ch. V (SIEBERT-V); Grover (HB-GROVER)
 - **Note:** The town chain (Troy, Bennington, Rutland, Ferrisburgh, St. Albans) and Montreal as its end are Siebert's, gathered from recollections in the 1890s: dashed. Grover documents Ferrisburgh (Rowland T. Robinson, 1838), Burlington (Joshua Young) and St. Albans (people forwarded by train, 1854 and 1856), and warns that Vermont was less safe than tradition says.
 
 ### `ugrr-sea-norfolk-philadelphia`: By sea from Norfolk to Philadelphia
 
 - **Places, in order:** Norfolk `Q49231` → Cape Henry (sea waypoint, not a stop) `Q1640805` → Cape Henlopen (sea waypoint, not a stop) `Q2903487` → Wilmington `Q174224` → Philadelphia `Q1345`
-- **On the map from** 1854; last documented 1857. **Line:** solid (documented stops).
+- **On the map from** 1854 to 1865 (last documented 1857; no source records an end). **Line:** solid (documented stops).
 - **Source:** Newby-Alexander, "The Atlantic Coastal Freedom Network", NPS handbook (HB-NEWBY); Foner (HB-FONER); NPS theme study (NPS-THEME)
 - **Note:** Dated cases 1854 to 1857 (John Atkinson, 1854; Captain Fountain's vessel, which often called at Wilmington, 1855 to 1856). The ports are documented; the line at sea is schematic, run by Cape Henry and Cape Henlopen to keep it off the land.
 
 ### `ugrr-sea-richmond-norfolk`: By water from Richmond
 
 - **Places, in order:** Richmond `Q43421` → Norfolk `Q49231`
-- **On the map from** about 1855; last documented 1857. **Line:** dashed (approximate).
+- **On the map from** about 1855 to 1865 (last documented 1857; no source records an end). **Line:** dashed (approximate).
 - **Source:** Newby-Alexander (HB-NEWBY)
 - **Note:** Captain Albert Fountain's packet took people aboard at Richmond as well as Norfolk. The line stands for the James River; it does not follow it.
 
 ### `ugrr-sea-norfolk-new-bedford`: By sea from Norfolk to New Bedford
 
 - **Places, in order:** Norfolk `Q49231` → Cape Henry (sea waypoint, not a stop) `Q1640805` → Block Island (sea waypoint, not a stop) `Q884674` → New Bedford `Q49147`
-- **On the map from** about 1842; last documented 1857. **Line:** solid (documented stops).
+- **On the map from** about 1842 to 1865 (last documented 1857; no source records an end). **Line:** solid (documented stops).
 - **Source:** Newby-Alexander (HB-NEWBY); Grover (HB-GROVER); NPS theme study (NPS-THEME)
 - **Note:** Vessels from Norfolk and Portsmouth, Virginia, for New Bedford and Boston. The ports are documented; the line at sea is schematic (by Cape Henry and Block Island).
 
 ### `ugrr-sea-norfolk-boston`: By sea from Norfolk to Boston
 
 - **Places, in order:** Norfolk `Q49231` → Cape Henry (sea waypoint, not a stop) `Q1640805` → Block Island (sea waypoint, not a stop) `Q884674` → Nantucket (sea waypoint, not a stop) `Q49149` → Provincetown (sea waypoint, not a stop) `Q49154` → Boston `Q100`
-- **On the map from** 1842; last documented 1857. **Line:** solid (documented stops).
+- **On the map from** 1842 to 1865 (last documented 1857; no source records an end). **Line:** solid (documented stops).
 - **Source:** NPS theme study (NPS-THEME); Newby-Alexander (HB-NEWBY)
 - **Note:** George Latimer reached Boston from Norfolk in 1842. The line at sea is schematic (by Cape Henry, Block Island, Nantucket and Provincetown, round Cape Cod).
 
 ### `ugrr-sea-savannah-new-york`: By sea from Savannah to New York
 
 - **Places, in order:** Savannah `Q83813` → Cape Hatteras (sea waypoint, not a stop) `Q978032` → Sandy Hook (sea waypoint, not a stop) `Q1028611` → New York `Q60`
-- **On the map from** 1834; last documented 1834. **Line:** solid (documented stops).
+- **On the map from** 1834 to 1865 (last documented 1834; no source records an end). **Line:** solid (documented stops).
 - **Source:** Grover (HB-GROVER)
 - **Note:** Moses Roper, by schooner, 1834: one documented voyage. Bordewich (NPS handbook) says the few who escaped the Deep South mostly hid on ships. The line at sea is schematic (by Cape Hatteras and Sandy Hook).
 
 ### `ugrr-washington-baltimore`: Washington and Baltimore to Philadelphia
 
 - **Places, in order:** Washington `Q61` → Baltimore `Q5092` → Wilmington `Q174224` → Philadelphia `Q1345`
-- **On the map from** 1842; last documented 1857. **Line:** solid (documented stops).
+- **On the map from** 1842 to 1865 (last documented 1857; no source records an end). **Line:** solid (documented stops).
 - **Source:** Harrold, "Escaping in and around Washington, D.C., Maryland, Virginia", NPS handbook (HB-HARROLD)
 - **Note:** Thomas Smallwood and Charles Torrey's network, 1842 to 1846, by Baltimore (Jacob Gibbs) and Wilmington (Garrett backed the wagon trip of 1843); Jacob Bigelow with William Still, 1854 to 1857. The source names no stop between Washington and the Pennsylvania line, and none is drawn.
 
 ### `ugrr-columbia`: Across the Susquehanna at Columbia
 
 - **Places, in order:** York `Q821105` → Columbia `Q1133892` → Philadelphia `Q1345`
-- **On the map from** about 1838; last documented 1858. **Line:** dashed (approximate).
+- **On the map from** about 1838 to 1865 (last documented 1858; no source records an end). **Line:** dashed (approximate).
 - **Source:** NPS theme study (NPS-THEME); Pennsylvania State Historic Preservation Office, "The Underground Railroad: Columbia, Lancaster County" (PA-SHPO)
 - **Note:** York (William C. Goodridge, "reputed"), over the Columbia-Wrightsville bridge (1834), and from Columbia in Stephen Smith and William Whipper's rail cars to Philadelphia, from 1838 to the late 1850s. It rests largely on Whipper's own letter of 1871; the NPS calls Columbia a site of legend.
 
 ### `ugrr-elmira`: Philadelphia to Rochester by Harrisburg and Elmira
 
 - **Places, in order:** Philadelphia `Q1345` → Harrisburg `Q25280` → Williamsport `Q1016159` → Elmira `Q934135` → Watkins Glen `Q2738851` → Canandaigua `Q1363104` → Rochester `Q49218`
-- **On the map from** about 1851; last documented 1860. **Line:** dashed (approximate).
+- **On the map from** about 1851 to 1865 (last documented 1860; no source records an end). **Line:** dashed (approximate).
 - **Source:** NPS theme study (NPS-THEME); Wikipedia, "John W. Jones (ex-slave)" (WP-JONES)
 - **Note:** Harrisburg, Williamsport, Elmira (John W. Jones), Watkins Glen, Canandaigua, Rochester: the NPS gives the chain as "reputed to have been" and does not date it. Wikipedia has Jones an active agent from 1851 (its lead says from his arrival in 1844) and, after the Williamsport to Elmira track was finished in 1854, sending people on in a baggage car of the Northern Central Railway; it cites no source for that section.
 
 ### `ugrr-pittsburgh`: The Monongahela valley to Pittsburgh and Lake Erie
 
 - **Places, in order:** Uniontown `Q1187047` → Pittsburgh `Q1342` → Cleveland `Q37320`
-- **On the map from** about 1841; last documented 1847. **Line:** dashed (approximate).
+- **On the map from** about 1841 to 1865 (last documented 1847; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill, "The Underground Railroad in the Ohio River Valley", NPS handbook (HB-CHURCHILL)
 - **Note:** Uniontown and Pittsburgh are documented (Black crowds rescued people at Pittsburgh four times, 1841 to 1847); from Pittsburgh the source says only "northwest to Cleveland and the Western Reserve".
 
 ### `ugrr-marietta`: Across the Ohio at Marietta
 
 - **Places, in order:** Williamstown `Q2526491` → Marietta `Q985482` → Chesterhill `Q2669023` → Zanesville `Q146811`
-- **On the map from** 1837; last documented 1847. **Line:** solid (documented stops).
+- **On the map from** 1837 to 1865 (last documented 1847; no source records an end). **Line:** solid (documented stops).
 - **Source:** Churchill (HB-CHURCHILL)
 - **Note:** From the Virginia shore at Williamstown to Marietta (David Putnam Jr.), Chesterhill and Zanesville. Dated cases 1837 and 1846 to 1847.
 
 ### `ugrr-zanesville-reserve`: Zanesville to the Western Reserve
 
 - **Places, in order:** Zanesville `Q146811` → Cleveland `Q37320`
-- **On the map from** about 1837; last documented 1847. **Line:** dashed (approximate).
+- **On the map from** about 1837 to 1865 (last documented 1847; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill (HB-CHURCHILL)
 - **Note:** The source says Zanesville was "linked by canal to the Western Reserve" and names no place on the way.
 
 ### `ugrr-ripley`: Across the Ohio at Ripley
 
 - **Places, in order:** Ripley `Q2666983` → Sardinia `Q36879`
-- **On the map from** 1822; last documented 1861. **Line:** solid (documented stops).
+- **On the map from** 1822 to 1865 (last documented 1861; no source records an end). **Line:** solid (documented stops).
 - **Source:** Churchill (HB-CHURCHILL); Wikipedia, "John Rankin (abolitionist)" (WP-RANKIN)
 - **Note:** Ripley (John Rankin from 1822, John Parker) to Sardinia. The story of Rankin's lantern appears only in twentieth-century sources.
 
 ### `ugrr-ripley-north`: Sardinia to Lake Erie
 
 - **Places, in order:** Sardinia `Q36879` → Urbana `Q1762816` → Sandusky `Q608207`
-- **On the map from** about 1830; last documented 1861. **Line:** dashed (approximate).
+- **On the map from** about 1830 to 1865 (last documented 1861; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill (HB-CHURCHILL)
 - **Note:** Northwest to join the Cincinnati road in the upper Miami valley, then by the Alum Creek Quaker settlement north of Columbus to Sandusky. The source dates these networks to "the late 1820s and early 1830s" and names a belt of settlements, not a list of towns: Urbana stands for the belt.
 
 ### `ugrr-cincinnati-north`: Cincinnati to Lake Erie
 
 - **Places, in order:** Cincinnati `Q43196` → Lebanon `Q986776` → Urbana `Q1762816` → Sandusky `Q608207`
-- **On the map from** about 1830; last documented 1861. **Line:** dashed (approximate).
+- **On the map from** about 1830 to 1865 (last documented 1861; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill (HB-CHURCHILL)
 - **Note:** By farmers' wagons through the Quaker and free Black settlements between Lebanon and Urbana, then by Alum Creek to Sandusky and the Western Reserve. In use from about 1830, dense by about 1840; Levi Coffin moved to Cincinnati in 1847.
 
 ### `ugrr-lake-erie-sandusky`: Across Lake Erie from Sandusky
 
 - **Places, in order:** Sandusky `Q608207` → Amherstburg `Q385335`
-- **On the map from** about 1834; last documented 1861. **Line:** dashed (approximate).
+- **On the map from** about 1834 to 1865 (last documented 1861; no source records an end). **Line:** dashed (approximate).
 - **Source:** Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)
 - **Note:** Siebert names Sandusky among the lake ports and Amherstburg among the Canadian landings, from recollections. 1834: William Wells Brown begins work on the lake steamers, where he aided people waiting at Cleveland, Detroit and Buffalo.
 
 ### `ugrr-lake-erie-cleveland`: Across Lake Erie from Cleveland
 
 - **Places, in order:** Cleveland `Q37320` → Port Stanley `Q7230953`
-- **On the map from** about 1834; last documented 1861. **Line:** dashed (approximate).
+- **On the map from** about 1834 to 1865 (last documented 1861; no source records an end). **Line:** dashed (approximate).
 - **Source:** Siebert 1898, ch. V (SIEBERT-V); NPS theme study (NPS-THEME)
 - **Note:** Siebert names Cleveland among the lake ports and Port Stanley among the Canadian landings, from recollections; which port sent to which landing is not recorded.
 
 ### `ugrr-madison`: Across the Ohio at Madison
 
 - **Places, in order:** Madison `Q990883` → Newport (Fountain City) `Q1439902`
-- **On the map from** about 1826; last documented 1847. **Line:** dashed (approximate).
+- **On the map from** about 1826 to 1865 (last documented 1847; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill (HB-CHURCHILL); Wikipedia, "Levi Coffin" (WP-COFFIN)
 - **Note:** Madison (George DeBaptiste, Elijah Anderson) to Levi Coffin at Newport, now Fountain City, where he lived from 1826 to 1847. The source gives the way between by county only.
 
 ### `ugrr-new-albany`: Across the Ohio at New Albany
 
 - **Places, in order:** New Albany `Q1762878` → Canton `Q5033862` → Azalia `Q4832149` → Carthage `Q3293425` → Newport (Fountain City) `Q1439902`
-- **On the map from** about 1826; last documented 1847. **Line:** solid (documented stops).
+- **On the map from** about 1826 to 1865 (last documented 1847; no source records an end). **Line:** solid (documented stops).
 - **Source:** Churchill (HB-CHURCHILL); Wikipedia, "Levi Coffin" (WP-COFFIN)
 - **Note:** New Albany and Jeffersonville, Canton, Farmington, Azalia, Carthage, Newport: the stops are the source's. The years are Coffin's at Newport; the source does not date this road itself.
 
 ### `ugrr-cincinnati-newport`: Cincinnati to Newport
 
 - **Places, in order:** Cincinnati `Q43196` → Newport (Fountain City) `Q1439902`
-- **On the map from** about 1826; last documented 1847. **Line:** dashed (approximate).
+- **On the map from** about 1826 to 1865 (last documented 1847; no source records an end). **Line:** dashed (approximate).
 - **Source:** Wikipedia, "Levi Coffin" (WP-COFFIN)
 - **Note:** Three roads met at Coffin's house: from Madison, from New Albany and from Cincinnati.
 
 ### `ugrr-newport-detroit`: Newport to Michigan
 
 - **Places, in order:** Newport (Fountain City) `Q1439902` → Cassopolis `Q2373038` → Detroit `Q12439`
-- **On the map from** about 1826; last documented 1847. **Line:** dashed (approximate).
+- **On the map from** about 1826 to 1865 (last documented 1847; no source records an end). **Line:** dashed (approximate).
 - **Source:** Churchill (HB-CHURCHILL)
 - **Note:** From Newport to Detroit, or to the free Black settlements of Cass County, Michigan (Cassopolis is its county seat and stands for them).
 
 ### `ugrr-detroit-river`: Across the Detroit River
 
 - **Places, in order:** Detroit `Q12439` → Windsor `Q182625`
-- **On the map from** 1833; last documented 1861. **Line:** solid (documented stops).
+- **On the map from** 1833 to 1865 (last documented 1861; no source records an end). **Line:** solid (documented stops).
 - **Source:** Barker, "Reconsidering the Underground Railroad in Canada West", NPS handbook (HB-BARKER); Johnson, "Escaping on the Northwestern Frontier" (HB-JOHNSON); Parks Canada, "Underground Railroad National Historic Event" (PC-UGRR)
 - **Note:** 1833: the Blackburns are taken across to Windsor, the earliest dated crossing in what was read. John Brown's party crossed on 12 March 1859.
 
 ### `ugrr-detroit-amherstburg`: Detroit to Amherstburg
 
 - **Places, in order:** Detroit `Q12439` → Amherstburg `Q385335`
-- **On the map from** about 1850; last documented 1861. **Line:** dashed (approximate).
+- **On the map from** about 1850 to 1865 (last documented 1861; no source records an end). **Line:** dashed (approximate).
 - **Source:** Wikipedia, "Underground Railroad" (WP-UGRR); Siebert 1898 (SIEBERT-V)
 - **Note:** Amherstburg (Fort Malden) is called the chief place of entry after 1850; the NPS handbook's essay on Canada West does not name it.
 
 ### `ugrr-st-louis-springfield`: St. Louis to Springfield, Illinois
 
 - **Places, in order:** St. Louis `Q38022` → Springfield `Q28515`
-- **On the map from** 1850; last documented 1850. **Line:** solid (documented stops).
+- **On the map from** 1850 to 1865 (last documented 1850; no source records an end). **Line:** solid (documented stops).
 - **Source:** Johnson (HB-JOHNSON)
 - **Note:** The "stampede" of about a dozen people from St. Louis, January 1850: Jameson Jenkins at Springfield gave them their first help. The source does not say which way they went on, so the line ends there.
 
 ### `ugrr-quincy-chicago`: Quincy to Chicago
 
 - **Places, in order:** Quincy `Q575750` → Galesburg `Q782574` → Princeton `Q574878` → Ottawa `Q576209` → Chicago `Q1297`
-- **On the map from** about 1842; last documented 1859. **Line:** dashed (approximate).
+- **On the map from** about 1842 to 1865 (last documented 1859; no source records an end). **Line:** dashed (approximate).
 - **Source:** Johnson (HB-JOHNSON); NPS handbook timeline (HB-TIME); Illinois Office of Tourism, "Illinois Underground Railroad" (ENJOY-IL); Siebert 1898 (SIEBERT-V)
 - **Note:** Thin. The NPS handbook attests Knox County (Galesburg; 1842), Chicago (1844) and Ottawa (1859); Quincy (Dr. Richard Eells) and Princeton (Owen Lovejoy) are from the state's tourism page; the order of the towns is local tradition descended from Siebert's informants.
 
 ### `ugrr-chicago-detroit`: Chicago to Detroit
 
 - **Places, in order:** Chicago `Q1297` → Detroit `Q12439`
-- **On the map from** 1843; last documented 1859. **Line:** dashed (approximate).
+- **On the map from** 1843 to 1865 (last documented 1859; no source records an end). **Line:** dashed (approximate).
 - **Source:** Johnson (HB-JOHNSON); PBS American Experience, "John Brown's Missouri raid" (PBS-BROWN)
 - **Note:** Caroline Quarlls crossed Illinois, Indiana and Michigan to Detroit in 1843; John Brown's party went by rail in March 1859. Siebert also has lake vessels from Chicago. The ends are documented, the way between is not.
 
 ### `ugrr-kansas`: Kansas to Iowa
 
 - **Places, in order:** Lawrence `Q493840` → Topeka `Q41057` → Nebraska City `Q286025` → Tabor `Q2240032`
-- **On the map from** about 1857; last documented 1859. **Line:** dashed (approximate).
+- **On the map from** about 1857 to 1865 (last documented 1859; no source records an end). **Line:** dashed (approximate).
 - **Source:** Mount Mitchell Prairie Guards, "The Lane Trail" (LANE); Johnson (HB-JOHNSON); PBS (PBS-BROWN)
 - **Note:** Thin for Kansas and Nebraska: a local heritage page has freedom seekers on a branch of the Lane Trail from Lawrence, "escalated in 1857"; John Brown's party crossed Kansas from 20 January 1859 and the Missouri River at Nebraska City to reach Tabor.
 
 ### `ugrr-iowa`: Across Iowa to Chicago (John Brown, 1859)
 
 - **Places, in order:** Tabor `Q2240032` → Lewis `Q1930350` → Des Moines `Q39709` → Grinnell `Q1903250` → Iowa City `Q487977` → Springdale `Q7580831` → West Liberty `Q2066047` → Chicago `Q1297`
-- **On the map from** 1859; last documented 1859. **Line:** solid (documented stops).
+- **On the map from** 1859 to 1865 (last documented 1859; no source records an end). **Line:** solid (documented stops).
 - **Source:** PBS American Experience, "John Brown's Missouri raid" (PBS-BROWN); "John Brown and the Underground Railroad", Stories of Iowa (IOWA-SOI)
 - **Note:** Tabor (first week of February 1859), Des Moines, Grinnell (25 February), Iowa City, Springdale, West Liberty (9 March, into a boxcar), Chicago. Lewis is from the Iowa school reader's list of towns, not from a dated stop.
 
 ### `ugrr-south-tennessee`: From Tennessee and Kentucky to the Ohio at Louisville
 
 - **Places, in order:** Memphis `Q16563` → Nashville `Q23197` → Louisville `Q43668` → New Albany `Q1762878`
-- **On the map from** 1826; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1826 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the New Albany road it joins (1826).
 
 ### `ugrr-south-kentucky-ripley`: From the Kentucky Bluegrass to the Ohio at Ripley
 
 - **Places, in order:** Lexington `Q49241` → Maysville `Q478393` → Ripley `Q2666983`
-- **On the map from** 1822; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1822 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Ripley road it joins (1822).
 
 ### `ugrr-south-kentucky-cincinnati`: From the Kentucky Bluegrass to Cincinnati
 
 - **Places, in order:** Lexington `Q49241` → Cincinnati `Q43196`
-- **On the map from** 1830; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1830 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people west of the mountains had to cross the Ohio River out of Virginia, Kentucky or Tennessee; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Cincinnati road it joins (about 1830).
 
 ### `ugrr-south-virginia`: From North Carolina and Virginia north by land
 
 - **Places, in order:** Raleigh `Q41087` → Richmond `Q43421` → Washington `Q61`
-- **On the map from** 1842; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1842 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water" toward Pennsylvania, New York and the Boston area; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the Washington road it joins (1842).
 
 ### `ugrr-south-arkansas`: From Arkansas across Missouri
 
 - **Places, in order:** Little Rock `Q33405` → St. Louis `Q38022`
-- **On the map from** 1850; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1850 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people from Arkansas and Texas might cross Missouri and Kansas and bear east to Indiana or Illinois; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the St. Louis road it joins (1850).
 
 ### `ugrr-south-carolina-sea`: From the Carolina ports north by sea
 
 - **Places, in order:** Charleston `Q47716` → Wilmington, N.C. `Q659400` → Cape Hatteras (sea waypoint, not a stop) `Q978032`
-- **On the map from** 1834; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** 1834 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS, "Underground Railroad Resources in the U.S. Theme Study", 2000 (NPS-THEME); Newby-Alexander (HB-NEWBY)
 - **Note:** A general direction, not a road, added at the owner's word (2026-11-17) so the map does not read as if no one fled the South. The NPS study gives the pattern in words: people east of the Appalachians tended to go "directly north by land or water"; Newby-Alexander lists Charleston and Wilmington, North Carolina, among the principal ports of departure and gives no dated case for either; it warns that this is only suggestive and that routes "will generally remain unclear". No source names a place on this line: the towns stand for their regions and are the editor's choice. The same study and Bordewich say very few people escaped from the Deep South, which is why no line starts in Mississippi, Alabama or inland Georgia. The line has no year of its own: it comes onto the map with the sea road from Savannah it joins (1834).
 
 ### `ugrr-louisiana-texas`: Louisiana to Mexican Texas
 
 - **Places, in order:** Natchitoches `Q2278195` → Nacogdoches `Q970482` → San Antonio `Q975`
-- **On the map from** 1822; last documented 1836. **Line:** dotted (a direction only).
+- **On the map from** 1822 to 1836: Texas left Mexico in 1836 and slavery was lawful there again. **Line:** dotted (a direction only).
 - **Source:** Baumgartner, "Freedom Seekers on the Southwestern Frontier", NPS handbook (HB-BAUM); Wikipedia, "Underground Railroad" (WP-UGRR)
 - **Note:** A direction, not a road. Nearly a hundred people left western Louisiana in the summer of 1822, across the Sabine (then the border) for Nacogdoches and San Antonio de Béxar. Natchitoches as the line's start is the editor's choice (WP-UGRR mentions a road from there); the escapes the source dates were from parishes farther south. Ends in 1836, when Texas left Mexico.
 
 ### `ugrr-texas-matamoros`: Texas to Matamoros
 
 - **Places, in order:** Houston `Q16555` → Matamoros `Q738353`
-- **On the map from** about 1837; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** about 1837 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS (Audain), "Freedom Seekers in the Antebellum Texas-Mexico Borderlands" (NPS-MEX); Baumgartner (HB-BAUM)
 - **Note:** A direction, not a road: across the Nueces Strip and the Rio Grande to Matamoros, where people found work. 1837: Mexico's Congress abolishes slavery (5 April). Baumgartner: no organized network, "only occasional allies". Houston as the line's start is the editor's choice (one dated case, 1858, began near it).
 
 ### `ugrr-texas-piedras-negras`: Texas to Piedras Negras
 
 - **Places, in order:** Houston `Q16555` → San Antonio `Q975` → Piedras Negras `Q1856408`
-- **On the map from** about 1850; last documented 1865. **Line:** dotted (a direction only).
+- **On the map from** about 1850 to 1865 (last documented 1865; no source records an end). **Line:** dotted (a direction only).
 - **Source:** NPS (Audain) (NPS-MEX); Baumgartner (HB-BAUM)
 - **Note:** A direction, not a road: Piedras Negras, Coahuila, was "frequently" reached in the early 1850s. The way across Texas is not recorded; Houston and San Antonio are the editor's choices.
 
 ### `ugrr-carolina-florida`: Carolina to Spanish Florida
 
 - **Places, in order:** Charleston `Q47716` → Fort Mose `Q549331`
-- **On the map from** about 1687; last documented 1763. **Line:** dotted (a direction only).
+- **On the map from** about 1687 to 1763: Spain gave up Florida in 1763 and the people of Fort Mose left for Cuba. **Line:** dotted (a direction only).
 - **Source:** NPS, "Fort Mose" (NPS-MOSE); Florida Museum, "Fort Mose" (FLMNH); Wikipedia, "Fort Mose" (WP-MOSE)
 - **Note:** A direction, not a road: no source names a place between Carolina and St. Augustine. First arrivals by canoe in 1687 (Landers, by a search result only; Wikipedia has 1689); Charles II's edict of 1693; Fort Mose founded 1738, evacuated to Cuba in 1763. Charleston stands for Carolina.
 
 ### `ugrr-cape-florida`: Cape Florida to the Bahamas
 
 - **Places, in order:** Cape Florida (Key Biscayne) `Q2689037` → Andros Island `Q514070`
-- **On the map from** about 1821; last documented 1825. **Line:** dashed (approximate).
+- **On the map from** about 1821 to 1825: the crossing is documented for the early 1820s; a lighthouse was begun at the cape in 1825 (one source carries it to 1837). **Line:** dashed (approximate).
 - **Source:** Wikipedia, "Saltwater Railroad" (WP-SALT); Baram, "Trail toward liberty", Journal of Florida Studies (BARAM)
 - **Note:** From Cape Florida on Key Biscayne across the Gulf Stream to Andros Island (the Red Bays settlement): about 300 Black Seminoles in the early 1820s. The crossing is documented; where on Andros they landed is not in what was read. Sources disagree on how long it ran (to the mid-1820s; "1821-1837").
 
