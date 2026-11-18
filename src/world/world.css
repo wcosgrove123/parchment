@@ -1,0 +1,19 @@
+/* Parchment — world.html, the world page's lesson maps (statehood brief, 2026-11-18). */
+
+/* The U.S. island territories: each hold's fill, its edge stroked in the same color so that an atoll a few hundred
+   meters across still shows as a mark of its own shape on a sheet of half an ocean (src/world/stage.js). */
+.ia-piece { fill-opacity: 0.85; stroke-opacity: 0.95; stroke-width: 2.4px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ia-piece.k-In { fill: var(--fill-In); stroke: var(--fill-In); }
+.ia-piece.k-T { fill: var(--fill-T); stroke: var(--fill-T); }
+.ia-piece.k-E { fill: var(--fill-E); stroke: var(--fill-E); }
+/* claimed and disputed: the rust hatch, edged in rust */
+.ia-piece.p-hatch { fill: url(#hatch-rust); fill-opacity: 1; stroke: var(--rust); stroke-width: 1.6px; }
+/* not lit by the order: an outline only */
+.ia-piece.unlit { fill: none; stroke: var(--navy); stroke-width: 0.9px; stroke-opacity: 0.7; }
+/* a date known only to the month or year (grammar §5: dash is certainty): the edge dashed, in the hold's own color
+   (a navy dash would turn an atoll navy) */
+.ia-piece.dashed { stroke-dasharray: 4 3; }
+
+.label.polity.state-name.unlit { fill-opacity: 0.5; }
+/* the key's hatch swatch (the North America page has it in us.css, which this page does not load) */
+.legend .swatch.fill-hatch { fill: url(#hatch-rust); fill-opacity: 1; stroke: var(--rust); }

@@ -1,0 +1,741 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "page": "world",
+  "order": {
+    "page": "world",
+    "date": "1975-01-01",
+    "frame": "caribbean"
+  },
+  "resolved": {
+    "page": "world.html",
+    "address": "world.html?date=1975-01-01&frame=caribbean",
+    "date": "1975-01-01",
+    "date_text": "1 January 1975",
+    "tracker": {
+      "id": "insular",
+      "title": "U.S. island territories"
+    },
+    "states_year": {
+      "asked": 1975,
+      "drawn": 1975,
+      "note": null
+    },
+    "frame": {
+      "id": "caribbean",
+      "title": "The Caribbean",
+      "box": {
+        "west": -88,
+        "south": 9,
+        "east": -59,
+        "north": 27
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        73.5,
+        -18
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the frame"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The Caribbean",
+    "highlight": null,
+    "islands_file": "data/world/insular.topojson (scripts/derive-insular.mjs, from data/world/insular-areas.csv)"
+  },
+  "legend": {
+    "title": "U.S. island territories",
+    "rows": [
+      {
+        "label": "U.S. territory",
+        "swatch": "fill",
+        "key": "In",
+        "style": null,
+        "role": "category"
+      },
+      {
+        "label": "Run by the United States under a treaty",
+        "swatch": "fill",
+        "key": "E",
+        "style": null,
+        "role": "category"
+      },
+      {
+        "label": "Claimed by the United States, and disputed",
+        "swatch": "fill",
+        "key": "hatch",
+        "style": null,
+        "role": "dispute or claim"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "style": "solid",
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "island-territory",
+      "id": "ia-pr",
+      "keys": [
+        "ia:pr"
+      ],
+      "name": "Puerto Rico",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1898-12-10",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Puerto Rico",
+      "km2": 8956.3,
+      "occupied": null,
+      "source": {
+        "shape": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000): Puerto Rico (STATEFP 72)",
+        "islands": [],
+        "dates": "Treaty of Paris, signed 10 December 1898 (Statehood Campaigns outline, Ch. 13 and Taxonomy 1)",
+        "note": "Dated from the treaty's signing, as the Newberry dates the Adams-Onís and Gadsden treaties; the exchange of ratifications came in 1899. From the deck outline; not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-vi",
+      "keys": [
+        "ia:vi"
+      ],
+      "name": "U.S. Virgin Islands",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1917-03-31",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "U.S. Virgin Islands",
+      "km2": 348,
+      "occupied": null,
+      "source": {
+        "shape": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000): United States Virgin Islands (STATEFP 78)",
+        "islands": [],
+        "dates": "FRUS 1917; Statehood Campaigns outline, Ch. 13: the convention of 4 August 1916, the transfer on 31 March 1917",
+        "note": "Dated from the transfer. From the deck outline; not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-um-navassa",
+      "keys": [
+        "ia:um",
+        "ia:um_navassa"
+      ],
+      "name": "Navassa Island",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1858-10-31",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Navassa Island",
+      "km2": 4.8,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m countries: U.S. Minor Outlying Is. (UMI)",
+        "islands": [
+          "Q25359"
+        ],
+        "dates": "U.S. Department of the Interior, \"Acquisition Process of Insular Areas\": date of bonding, October 31, 1858",
+        "note": "Haiti also claims it (the outline). Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-um-bajo-nuevo",
+      "keys": [
+        "ia:um",
+        "ia:um_bajo_nuevo"
+      ],
+      "name": "Bajo Nuevo Bank",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1869-11-22",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Bajo Nuevo Bank",
+      "km2": 0,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m countries: Bajo Nuevo Bank (BJN)",
+        "islands": [],
+        "dates": "U.S. Department of the Interior, \"Acquisition Process of Insular Areas\": date of bonding, November 22, 1869",
+        "note": "Colombia, Jamaica and Nicaragua also claim it. Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-um-serranilla",
+      "keys": [
+        "ia:um",
+        "ia:um_serranilla"
+      ],
+      "name": "Serranilla Bank",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1879-09-08",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Serranilla Bank",
+      "km2": 0.1,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m countries: Serranilla Bank (SER)",
+        "islands": [],
+        "dates": "U.S. Department of the Interior, \"Acquisition Process of Insular Areas\": bonded September 8, 1879, and September 13, 1880",
+        "note": "Colombia and Nicaragua also claim it. Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-canal-zone",
+      "keys": [
+        "ia:canal_zone"
+      ],
+      "name": "Panama Canal Zone",
+      "hold": "administered",
+      "hold_label": "Run by the United States under a treaty",
+      "start": "1903-11-18",
+      "end": "1979-09-30",
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "name": "gold",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Panama Canal Zone",
+      "km2": 1276.3,
+      "occupied": null,
+      "source": {
+        "shape": "Cliopatria (Seshat), United States of America, its row of 1905–1907, inside Natural Earth 1:10m Panama",
+        "islands": [],
+        "dates": "Office of the Historian, \"The Panama Canal and the Torrijos-Carter Treaties\": the Hay-Bunau-Varilla Treaty, November 18, 1903; the Panama Canal Treaty \"stated that the Panama Canal Zone would cease to exist on October 1, 1979\"",
+        "note": "Rights the treaty gave \"as if\" sovereign, never sovereignty (the outline): keyed as administered under a treaty. The shape is Cliopatria's, the only downloadable one reachable from this laptop. Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-given-up-colombia",
+      "keys": [
+        "ia:given_up",
+        "ia:given_up_colombia"
+      ],
+      "name": "Quita Sueño Bank, Roncador Cay and Serrana Bank",
+      "hold": "claim",
+      "hold_label": "Claimed by the United States, and disputed",
+      "start": "1972-09-08",
+      "end": "1981-09-16",
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (claimed, disputed)",
+        "dashed": false
+      },
+      "lit": null,
+      "labeled": true,
+      "label": "Roncador Cay",
+      "km2": 0,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m countries: Colombia (COL)",
+        "islands": [
+          "Q559484",
+          "Q950869",
+          "Q1814365"
+        ],
+        "dates": "U.S. Department of the Interior, \"Disputed Islands\": the treaty with Colombia, signed September 8, 1972, \"entered into force on September 17, 1981\"",
+        "note": "Drawn from the treaty's signing only: the U.S. claims are older, and no source read gives their first days. Not yet reviewed by the owner. Not drawn, for want of a shape (no part of the downloaded one within 25 km of the point): Quita Sueño Bank (Q559484) and Serrana Bank (Q1814365).",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "United States of America",
+      "years": [
+        1967,
+        2005
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "united-states-of-america",
+        "wikidata": "Q30"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "French Fifth Republic",
+      "years": [
+        1961,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "french-fifth-republic",
+        "wikidata": "Q200686"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Mexico",
+      "years": [
+        1922,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Mexico",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "mexico",
+        "wikidata": "Q5062192"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Colombia",
+      "years": [
+        1928,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Republic of Colombia",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-colombia",
+        "wikidata": "Q739"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Venezuela",
+      "years": [
+        1900,
+        1986
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Venezuela",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "venezuela",
+        "wikidata": "Q717"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Guyana",
+      "years": [
+        1967,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "guyana",
+        "wikidata": "Q734"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Netherlands Antilles",
+      "years": [
+        1877,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "netherlands-antilles",
+        "wikidata": "Q25227"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "British Colonial Empire",
+      "years": [
+        1969,
+        1995
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "british-colonial-empire",
+        "wikidata": "Q8680"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Nicaragua",
+      "years": [
+        1898,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Republic of Nicaragua",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-nicaragua",
+        "wikidata": "Q811"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Communist Cuba",
+      "years": [
+        1960,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Communist Cuba",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "communist-cuba",
+        "wikidata": "Q241"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Honduras",
+      "years": [
+        1895,
+        1978
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Honduras",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "honduras",
+        "wikidata": "Q783"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Guatemala",
+      "years": [
+        1920,
+        1978
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Guatemala",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "guatemala",
+        "wikidata": "Q774"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Panama",
+      "years": [
+        1905,
+        1999
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-panama",
+        "wikidata": "Q804"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Costa Rica",
+      "years": [
+        1905,
+        1999
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-costa-rica",
+        "wikidata": "Q800"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Dominican Republic",
+      "years": [
+        1924,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Dominican Republic",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "dominican-republic",
+        "wikidata": "Q786"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Haiti",
+      "years": [
+        1936,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-haiti",
+        "wikidata": "Q790"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of El Salvador",
+      "years": [
+        1840,
+        1978
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-el-salvador",
+        "wikidata": "Q792"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Commonwealth of The Bahamas",
+      "years": [
+        1973,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "commonwealth-of-the-bahamas",
+        "wikidata": "Q778"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Jamaica",
+      "years": [
+        1963,
+        2023
+      ],
+      "lit": null,
+      "labeled": true,
+      "label": "Jamaica",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "jamaica",
+        "wikidata": "Q766"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Trinidad and Tobago",
+      "years": [
+        1963,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-trinidad-and-tobago",
+        "wikidata": "Q754"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Barbados",
+      "years": [
+        1967,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "barbados",
+        "wikidata": "Q244"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Antigua and Barbuda",
+      "years": [
+        1967,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "antigua-and-barbuda",
+        "wikidata": "Q781"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Saint Vincent",
+      "years": [
+        1969,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "saint-vincent",
+        "wikidata": "Q757"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Saint Kitts",
+      "years": [
+        1967,
+        2023
+      ],
+      "lit": null,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "saint-kitts",
+        "wikidata": "Q204989"
+      }
+    }
+  ],
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1513,
+      "y": 852,
+      "w": 353,
+      "h": 142,
+      "inside": true
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "Quita Sueño Bank, Roncador Cay and Serrana Bank: Not drawn, for want of a shape (no part of the downloaded one within 25 km of the point): Quita Sueño Bank (Q559484) and Serrana Bank (Q1814365)."
+  ],
+  "alt_text": "Parchment map, 1 January 1975, U.S. island territories, framed on The Caribbean, titled \"The Caribbean\". Shaded: U.S. territory in green and Run by the United States under a treaty in gold. Hatched in rust: claimed by the United States, and disputed. Named on the map: Puerto Rico, U.S. Virgin Islands, Navassa Island, Bajo Nuevo Bank, Serranilla Bank, Panama Canal Zone, Roncador Cay, Mexico, Republic of Colombia, Venezuela, Republic of Nicaragua and Communist Cuba.",
+  "credit": "Parchment; islands: U.S. Census Bureau, Natural Earth, Cliopatria (Seshat); states: Cliopatria (Seshat); coast and relief: Natural Earth",
+  "islands_source": "Computed by scripts/derive-insular.mjs from the U.S. Census Bureau's 2025 cartographic boundary file (public domain), Natural Earth 1:10m (public domain), Cliopatria (Seshat, CC BY 4.0) and Wikidata coordinates (CC0), dated by data/world/insular-areas.csv. Nothing drawn.",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "world.html?date=1975-01-01&frame=caribbean"
+  }
+}

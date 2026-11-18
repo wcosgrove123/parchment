@@ -8,6 +8,8 @@
 //     "annotate": { "rivers": ["Nueces", "Rio Grande"], "places": ["Q…"], "routes": ["record-id"] },
 //     "title": "The Texas Revolution, 1836", "size": "1600x1550", "out": "out/texas-1836" }
 // Every field is also a parameter of us.html, so the same map opens live (the command prints its address).
+// "page": "world" makes it on the world page instead (world.html: the U.S. island territories over Cliopatria's states;
+// date, tracker, frame, highlight, title, size, scale and strip; docs/LESSON-MAPS.md, "Orders on the world page").
 // Writes <out>.png, <out>.json (the packing slip: what is on the map, with dates and sources) and, with --svg or
 // "svg": true, <out>.svg. Runs from a fresh clone on Linux or Windows: the page is served from this folder on
 // 127.0.0.1, the browser is found by scripts/browser.mjs, and every request off this machine is refused.
@@ -33,6 +35,12 @@ function withRecordDefaults(order) {
   return o;
 }
 
+// The pages that take orders: the page, its bundle's entry, the address the page loads it from, the default out name.
+const PAGES = {
+  us: { html: 'us.html', entry: join('src', 'us', 'main.js'), js: '/us.js', whole: 'north-america' },
+  world: { html: 'world.html', entry: join('src', 'world', 'main.js'), js: '/world.js', whole: 'world' },
+};
+
 const FIELDS = new Set(['page', 'date', 'year', 'from', 'tracker', 'layer', 'underground', 'war', 'names', 'show', 'sequence', 'strip', 'inset', 'forces', 'frame', 'highlight', 'annotate', 'title', 'size', 'scale', 'projection', 'records', 'play', 'battle', 'phase', 'preset', 'width', 'view', 'out', 'svg', '_comment', 'notes']);
 
 // Renders one order. → { png, json, svg, slip, address }. Used by this command and by the MCP server (mcp/server.mjs).
@@ -41,7 +49,8 @@ export async function renderOrder(orderIn, { out = null, svg = false, base = pro
   const warnings = [];
   for (const k of Object.keys(order)) if (!FIELDS.has(k)) warnings.push(`the order's field "${k}" is not one Parchment reads`);
   for (const k of Object.keys(order.annotate ?? {})) if (!['rivers', 'places', 'routes'].includes(k)) warnings.push(`annotate.${k} is not one Parchment reads (rivers, places, routes)`);
-  if ((order.page ?? 'us') !== 'us') throw new Error(`page "${order.page}": lesson maps are made on the North America page ("us") for now`);
+  const pg = PAGES[order.page ?? 'us'];
+  if (!pg) throw new Error(`page "${order.page}": lesson maps are made on the North America page ("us") or the world page ("world")`);
   const size = order.size ? parseSize(order.size) : { width: 1920, height: 1080 };
   if (!size) throw new Error(`size "${order.size}" must be WIDTHxHEIGHT, 800 to 3840 pixels wide`);
   const sheet = sheetFor(size, order.scale ?? (order.preset === 'classroom' ? 1.35 : null));
@@ -49,21 +58,21 @@ export async function renderOrder(orderIn, { out = null, svg = false, base = pro
   const a = order.annotate ?? {};
   const o = { ...order, records: order.records ?? ((a.places?.length || a.routes?.length) ? 'data/records.csv' : undefined) };
   const query = orderToQuery(o);
-  const address = `us.html?${query}`;
+  const address = `${pg.html}?${query}`;
   query.set('shot', '1');
 
-  const target = resolve(base, out ?? order.out ?? join('out', `parchment-${order.frame ?? 'north-america'}-${order.date ?? order.year ?? 'map'}`));
+  const target = resolve(base, out ?? order.out ?? join('out', `parchment-${order.frame ?? pg.whole}-${order.date ?? order.year ?? 'map'}`));
   mkdirSync(dirname(target), { recursive: true });
 
-  const js = await bundle(ROOT).catch((err) => { warnings.push(`the page was not rebuilt from src/ (${err.message}); the committed us.js was used`); return null; });
-  const server = await serve(ROOT, { files: js ? { '/us.js': js } : {} });
+  const js = await bundle(ROOT, pg.entry).catch((err) => { warnings.push(`the page was not rebuilt from src/ (${err.message}); the committed ${pg.js.slice(1)} was used`); return null; });
+  const server = await serve(ROOT, { files: js ? { [pg.js]: js } : {} });
   const found = browser ?? findBrowser();
   if (!found) { await server.close(); throw new Error(NO_BROWSER); }
   log(`browser: ${found.path ?? found} (${found.from ?? 'given'})`);
   const b = await launch({ browser: found });
   try {
     const page = await b.newPage({ width: sheet.w, height: sheet.h, scale: sheet.scale, origin: server.origin });
-    await page.goto(`${server.origin}/${address.replace(/^us\.html\?.*$/, `us.html?${query}`)}`);
+    await page.goto(`${server.origin}/${pg.html}?${query}`);
     try {
       await page.eval(`new Promise((resolve, reject) => {
         const t0 = Date.now();

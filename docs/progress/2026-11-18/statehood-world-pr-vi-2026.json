@@ -1,0 +1,203 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "page": "world",
+  "order": {
+    "page": "world",
+    "date": "2026-01-01",
+    "title": "Puerto Rico and the Virgin Islands",
+    "frame": "-68.1,17.6,-64.4,18.6",
+    "highlight": [
+      "ia:pr",
+      "ia:vi"
+    ]
+  },
+  "resolved": {
+    "page": "world.html",
+    "address": "world.html?date=2026-01-01&frame=-68.1%2C17.6%2C-64.4%2C18.6&highlight=ia%3Apr%2Cia%3Avi&title=Puerto+Rico+and+the+Virgin+Islands",
+    "date": "2026-01-01",
+    "date_text": "1 January 2026",
+    "tracker": {
+      "id": "insular",
+      "title": "U.S. island territories"
+    },
+    "states_year": {
+      "asked": 2026,
+      "drawn": 2023,
+      "note": "Cliopatria's states end in 2023: the ground is drawn as it stands in 2023"
+    },
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -68.1,
+        "south": 17.6,
+        "east": -64.4,
+        "north": 18.6
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        66.25,
+        0
+      ],
+      "parallels": [
+        17.8,
+        18.4
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the frame"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "Puerto Rico and the Virgin Islands",
+    "highlight": {
+      "ids": [
+        "ia:pr",
+        "ia:vi"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "islands_file": "data/world/insular.topojson (scripts/derive-insular.mjs, from data/world/insular-areas.csv)"
+  },
+  "legend": {
+    "title": "U.S. island territories",
+    "rows": [
+      {
+        "label": "U.S. territory",
+        "swatch": "fill",
+        "key": "In",
+        "style": null,
+        "role": "category"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "island-territory",
+      "id": "ia-pr",
+      "keys": [
+        "ia:pr"
+      ],
+      "name": "Puerto Rico",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1898-12-10",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": true,
+      "labeled": true,
+      "label": "Puerto Rico",
+      "km2": 8956.3,
+      "occupied": null,
+      "source": {
+        "shape": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000): Puerto Rico (STATEFP 72)",
+        "islands": [],
+        "dates": "Treaty of Paris, signed 10 December 1898 (Statehood Campaigns outline, Ch. 13 and Taxonomy 1)",
+        "note": "Dated from the treaty's signing, as the Newberry dates the Adams-Onís and Gadsden treaties; the exchange of ratifications came in 1899. From the deck outline; not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-vi",
+      "keys": [
+        "ia:vi"
+      ],
+      "name": "U.S. Virgin Islands",
+      "hold": "territory",
+      "hold_label": "U.S. territory",
+      "start": "1917-03-31",
+      "end": null,
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "name": "green",
+        "dashed": false
+      },
+      "lit": true,
+      "labeled": true,
+      "label": "U.S. Virgin Islands",
+      "km2": 348,
+      "occupied": null,
+      "source": {
+        "shape": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000): United States Virgin Islands (STATEFP 78)",
+        "islands": [],
+        "dates": "FRUS 1917; Statehood Campaigns outline, Ch. 13: the convention of 4 August 1916, the transfer on 31 March 1917",
+        "note": "Dated from the transfer. From the deck outline; not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Saint Kitts",
+      "years": [
+        1967,
+        2023
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "saint-kitts",
+        "wikidata": "Q204989"
+      }
+    }
+  ],
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1629,
+      "y": 918,
+      "w": 237,
+      "h": 76,
+      "inside": true
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "Cliopatria's states end in 2023: the ground is drawn as it stands in 2023"
+  ],
+  "alt_text": "Parchment map, 1 January 2026, U.S. island territories, framed on 68.1°W–64.4°W, 17.6°N–18.6°N, titled \"Puerto Rico and the Virgin Islands\". Shaded: U.S. territory in green. Named on the map: Puerto Rico and U.S. Virgin Islands.",
+  "credit": "Parchment; islands: U.S. Census Bureau; states: Cliopatria (Seshat); coast and relief: Natural Earth",
+  "islands_source": "Computed by scripts/derive-insular.mjs from the U.S. Census Bureau's 2025 cartographic boundary file (public domain), Natural Earth 1:10m (public domain), Cliopatria (Seshat, CC BY 4.0) and Wikidata coordinates (CC0), dated by data/world/insular-areas.csv. Nothing drawn.",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "world.html?date=2026-01-01&frame=-68.1%2C17.6%2C-64.4%2C18.6&highlight=ia%3Apr%2Cia%3Avi&title=Puerto+Rico+and+the+Virgin+Islands"
+  }
+}

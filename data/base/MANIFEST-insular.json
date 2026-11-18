@@ -1,0 +1,432 @@
+{
+  "generated": "2026-11-18T20:35:13.842Z",
+  "stage": "world (island territories)",
+  "note": "Written by scripts/fetch-insular.mjs. Raw downloads live in data/base/raw/insular/ (not committed). scripts/derive-insular.mjs writes data/world/insular.topojson.",
+  "entries": [
+    {
+      "source": "census-cartographic-boundary",
+      "license": "public domain (U.S. government work)",
+      "attribution": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000)",
+      "layer": "states, territories and the District",
+      "url": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_state_500k.zip",
+      "file": "data/base/raw/insular/cb_2025_us_state_500k.zip",
+      "bytes": 3245373,
+      "sha256": "9cbfe171dad1555e11770c981d8f4db9e687a65c86f5bdae684eeb487e2e9b80",
+      "retrieved": "2026-11-18T20:20:39.106Z",
+      "cached": true
+    },
+    {
+      "source": "natural-earth",
+      "license": "public domain",
+      "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com (from its repository, github.com/nvkelso/natural-earth-vector)",
+      "layer": "admin 0 countries, 1:10m",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson",
+      "file": "data/base/raw/insular/ne_10m_admin_0_countries.geojson",
+      "bytes": 13287234,
+      "sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "retrieved": "2026-11-18T20:20:40.737Z",
+      "cached": true
+    },
+    {
+      "source": "natural-earth",
+      "license": "public domain",
+      "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com (from its repository, github.com/nvkelso/natural-earth-vector)",
+      "layer": "admin 1 states and provinces, 1:10m",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "data/base/raw/insular/ne_10m_admin_1_states_provinces.geojson",
+      "bytes": 40726851,
+      "sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "retrieved": "2026-11-18T20:20:44.308Z",
+      "cached": true
+    },
+    {
+      "source": "natural-earth",
+      "license": "public domain",
+      "attribution": "Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com (from its repository, github.com/nvkelso/natural-earth-vector)",
+      "layer": "minor islands, 1:10m",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_minor_islands.geojson",
+      "file": "data/base/raw/insular/ne_10m_minor_islands.geojson",
+      "bytes": 1320514,
+      "sha256": "8c933ca7a4760256bdc46408355706e39764b0fa01c160c28888b90b4faec29f",
+      "retrieved": "2026-11-18T20:20:44.534Z",
+      "cached": true
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q269205.json",
+      "layer": "coordinate (P625)",
+      "id": "Q269205",
+      "retrieved": "2026-11-18T20:35:14.823Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q773919.json",
+      "layer": "coordinate (P625)",
+      "id": "Q773919",
+      "retrieved": "2026-11-18T20:35:15.641Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q21847427.json",
+      "layer": "coordinate (P625)",
+      "id": "Q21847427",
+      "retrieved": "2026-11-18T20:35:16.428Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q3881068.json",
+      "layer": "coordinate (P625)",
+      "id": "Q3881068",
+      "retrieved": "2026-11-18T20:35:17.268Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q21847144.json",
+      "layer": "coordinate (P625)",
+      "id": "Q21847144",
+      "retrieved": "2026-11-18T20:35:18.085Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1128488.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1128488",
+      "retrieved": "2026-11-18T20:35:18.912Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q46879.json",
+      "layer": "coordinate (P625)",
+      "id": "Q46879",
+      "retrieved": "2026-11-18T20:35:19.658Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q131305.json",
+      "layer": "coordinate (P625)",
+      "id": "Q131305",
+      "retrieved": "2026-11-18T20:35:20.422Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q62218.json",
+      "layer": "coordinate (P625)",
+      "id": "Q62218",
+      "retrieved": "2026-11-18T20:35:21.192Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q131008.json",
+      "layer": "coordinate (P625)",
+      "id": "Q131008",
+      "retrieved": "2026-11-18T20:35:21.946Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q130895.json",
+      "layer": "coordinate (P625)",
+      "id": "Q130895",
+      "retrieved": "2026-11-18T20:35:22.708Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q47863.json",
+      "layer": "coordinate (P625)",
+      "id": "Q47863",
+      "retrieved": "2026-11-18T20:35:23.465Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q25359.json",
+      "layer": "coordinate (P625)",
+      "id": "Q25359",
+      "retrieved": "2026-11-18T20:35:24.217Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q123076.json",
+      "layer": "coordinate (P625)",
+      "id": "Q123076",
+      "retrieved": "2026-11-18T20:35:24.940Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q43296.json",
+      "layer": "coordinate (P625)",
+      "id": "Q43296",
+      "retrieved": "2026-11-18T20:35:25.682Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1072125.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1072125",
+      "retrieved": "2026-11-18T20:35:26.431Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q473472.json",
+      "layer": "coordinate (P625)",
+      "id": "Q473472",
+      "retrieved": "2026-11-18T20:35:27.170Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1414691.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1414691",
+      "retrieved": "2026-11-18T20:35:27.919Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1547671.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1547671",
+      "retrieved": "2026-11-18T20:35:28.646Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q559484.json",
+      "layer": "coordinate (P625)",
+      "id": "Q559484",
+      "retrieved": "2026-11-18T20:35:29.380Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q950869.json",
+      "layer": "coordinate (P625)",
+      "id": "Q950869",
+      "retrieved": "2026-11-18T20:35:30.083Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1814365.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1814365",
+      "retrieved": "2026-11-18T20:35:30.837Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q30895.json",
+      "layer": "coordinate (P625)",
+      "id": "Q30895",
+      "retrieved": "2026-11-18T20:35:31.611Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q30638.json",
+      "layer": "coordinate (P625)",
+      "id": "Q30638",
+      "retrieved": "2026-11-18T20:35:32.354Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1050883.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1050883",
+      "retrieved": "2026-11-18T20:35:33.099Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q45295.json",
+      "layer": "coordinate (P625)",
+      "id": "Q45295",
+      "retrieved": "2026-11-18T20:35:33.825Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1050891.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1050891",
+      "retrieved": "2026-11-18T20:35:34.556Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1059295.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1059295",
+      "retrieved": "2026-11-18T20:35:35.472Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q48478.json",
+      "layer": "coordinate (P625)",
+      "id": "Q48478",
+      "retrieved": "2026-11-18T20:35:36.219Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1050899.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1050899",
+      "retrieved": "2026-11-18T20:35:36.968Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q193331.json",
+      "layer": "coordinate (P625)",
+      "id": "Q193331",
+      "retrieved": "2026-11-18T20:35:37.698Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q822151.json",
+      "layer": "coordinate (P625)",
+      "id": "Q822151",
+      "retrieved": "2026-11-18T20:35:38.405Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q911028.json",
+      "layer": "coordinate (P625)",
+      "id": "Q911028",
+      "retrieved": "2026-11-18T20:35:39.124Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q532590.json",
+      "layer": "coordinate (P625)",
+      "id": "Q532590",
+      "retrieved": "2026-11-18T20:35:39.864Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q741650.json",
+      "layer": "coordinate (P625)",
+      "id": "Q741650",
+      "retrieved": "2026-11-18T20:35:40.612Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q976570.json",
+      "layer": "coordinate (P625)",
+      "id": "Q976570",
+      "retrieved": "2026-11-18T20:35:41.446Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q34126.json",
+      "layer": "coordinate (P625)",
+      "id": "Q34126",
+      "retrieved": "2026-11-18T20:35:42.205Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q745924.json",
+      "layer": "coordinate (P625)",
+      "id": "Q745924",
+      "retrieved": "2026-11-18T20:35:42.929Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q128654.json",
+      "layer": "coordinate (P625)",
+      "id": "Q128654",
+      "retrieved": "2026-11-18T20:35:43.664Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q632489.json",
+      "layer": "coordinate (P625)",
+      "id": "Q632489",
+      "retrieved": "2026-11-18T20:35:44.387Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1130629.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1130629",
+      "retrieved": "2026-11-18T20:35:45.117Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q967796.json",
+      "layer": "coordinate (P625)",
+      "id": "Q967796",
+      "retrieved": "2026-11-18T20:35:45.905Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q950725.json",
+      "layer": "coordinate (P625)",
+      "id": "Q950725",
+      "retrieved": "2026-11-18T20:35:46.611Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q1345121.json",
+      "layer": "coordinate (P625)",
+      "id": "Q1345121",
+      "retrieved": "2026-11-18T20:35:47.357Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q642787.json",
+      "layer": "coordinate (P625)",
+      "id": "Q642787",
+      "retrieved": "2026-11-18T20:35:48.073Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q650847.json",
+      "layer": "coordinate (P625)",
+      "id": "Q650847",
+      "retrieved": "2026-11-18T20:35:48.799Z"
+    },
+    {
+      "source": "wikidata",
+      "license": "CC0",
+      "url": "https://www.wikidata.org/wiki/Special:EntityData/Q656709.json",
+      "layer": "coordinate (P625)",
+      "id": "Q656709",
+      "retrieved": "2026-11-18T20:35:49.557Z"
+    }
+  ],
+  "failures": []
+}

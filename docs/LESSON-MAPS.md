@@ -1,6 +1,7 @@
 # Lesson maps on order
 
-A lesson map is a picture of the North America page made for one slide: framed on a region, sized for the slide, with
+A lesson map is a picture of the North America page (or, since 2026-11-18, of the world page: "Orders on the world
+page" below) made for one slide: framed on a region, sized for the slide, with
 the polygons the lesson is about lit and the rest dropped to paper, and the rivers, places and routes the lesson points
 at. You (or a co-teacher, or Claude in a cloud session) fill in an **order form**; Parchment returns the picture and a
 **packing slip**, a JSON file that says what is on the map, with dates and sources.
@@ -162,6 +163,46 @@ Every render writes one, beside the picture:
   of doubt (an OHM `fixme`, estimated dates), requests refused.
 - `alt_text`: a draft built by a fixed template from the above. `credit`: one line for the slide
   ("Parchment; boundaries: Newberry Library, OpenHistoricalMap; rivers: Natural Earth; …").
+
+## Orders on the world page
+
+```json
+{ "page": "world", "date": "2026-01-01", "frame": "-68.1,17.6,-64.4,18.6", "highlight": ["ia:pr", "ia:vi"],
+  "title": "Puerto Rico and the Virgin Islands" }
+```
+
+`"page": "world"` makes the map on the world page, `world.html` (statehood brief of 2026-11-18, items 6 and 7; test
+orders `tests/maps/statehood/world-*.json`). It reads `date` or `year`, `tracker`, `frame`, `highlight`, `title`,
+`size`, `scale` and `strip`; the rest of the fields are the North America page's.
+
+- `tracker`: `insular` (the default) draws the U.S. island territories held on the day over the states of that year
+  (Cliopatria) as quiet ground, with their borders and names; `states` is the political map, each state in its own
+  color, with an island piece only where the order lights it.
+- `frame`: a focus of `src/focuses.json` (`caribbean`, `pacific`, `oceania`, `southeast-asia`, `east-asia`, …) or a box
+  `W,S,E,N`; the projection follows the frame. With no frame, the whole world.
+- `highlight`: an island piece by its key: `ia:pr`, `ia:vi`, `ia:gu`, `ia:mp`, `ia:as` (`ia:as_swains`), `ia:um` (all
+  the minor islands) or one of them (`ia:um_wake`, `ia:um_navassa`, …), `ia:ph`, `ia:canal_zone`, `ia:ttpi`,
+  `ia:ryukyu`, `ia:bonin`, `ia:given_up` (or `ia:given_up_colombia`, `_kiribati`, `_tuvalu`, `_cook`, `_tokelau`,
+  `_swan`); or a state by its Cliopatria name. The rest drop to an outline (islands) or paper (states).
+- Dates: Cliopatria's states run to 2023; a later date draws the ground as it stands in 2023 and the slip says so.
+
+The island layer is `data/world/insular-areas.csv`, one row per piece and stretch: its keys, name and printed `label`,
+how the United States held it (`hold`), `start` and `end` (a day, a month or a year, as precise as the source), the
+downloaded `shape` it is cut from and the Wikidata ids of the `islands` kept, the `source` of its dates, a `note`, and
+`occupied` (`FROM/TO|BY`) where another power held it by force. `node scripts/derive-insular.mjs` rebuilds
+`data/world/insular.topojson` from it (after `node scripts/fetch-insular.mjs` has downloaded the shapes once).
+
+| hold | look | key line |
+| --- | --- | --- |
+| `territory` | green | U.S. territory |
+| `trust` | teal | Held in trust for the United Nations |
+| `administered` | gold | Run by the United States under a treaty |
+| `claim` | rust hatch | Claimed by the United States, and disputed |
+
+A start or end known only to the month or year is drawn through the whole stretch with a dashed edge, and the slip
+warns. On a date inside `occupied` (Guam 1941–1944, the Philippines 1942–1945) the map draws the sovereignty and the
+slip warns. The world page's slip has the same parts as the North America page's; its `features` are the island pieces
+(layer `island-territory`, with hold, dates, look and sources) and the states on the sheet (layer `cliopatria`).
 
 ## What's here?
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Parchment — build.mjs
-// Bundles src/main.js into app.js, src/admin.js into admin.js and src/us/main.js into us.js (North America stage) (no runtime CDN) for GitHub Pages and local use.
+// Bundles src/main.js into app.js, src/admin.js into admin.js, src/us/main.js into us.js (North America stage) and
+// src/world/main.js into world.js (the world page's lesson maps, world.html) (no runtime CDN) for GitHub Pages and local use.
 //   node scripts/build.mjs           production bundles → app.js, admin.js
 //   node scripts/build.mjs --serve   rebuild on change and serve the folder at http://localhost:8321/
 
@@ -16,7 +17,7 @@ const port = Number(process.env.PORT ?? 8321);
 
 const options = {
   absWorkingDir: ROOT,
-  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }, { in: join(ROOT, 'src', 'us', 'main.js'), out: 'us' }].filter((e) => !only || only.has(e.out)),
+  entryPoints: [{ in: join(ROOT, 'src', 'main.js'), out: 'app' }, { in: join(ROOT, 'src', 'admin.js'), out: 'admin' }, { in: join(ROOT, 'src', 'us', 'main.js'), out: 'us' }, { in: join(ROOT, 'src', 'world', 'main.js'), out: 'world' }].filter((e) => !only || only.has(e.out)),
   outdir: ROOT,
   bundle: true,
   format: 'iife',

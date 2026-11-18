@@ -30,10 +30,10 @@ const ORDER_SCHEMA = {
   type: 'object',
   description: 'An order form (docs/LESSON-MAPS.md). Every field is also a parameter of us.html.',
   properties: {
-    page: { type: 'string', enum: ['us'], description: 'The North America page (the only one that takes orders for now).' },
+    page: { type: 'string', enum: ['us', 'world'], description: 'us: the North America page (the default); world: the world page, the U.S. island territories over the states of the year (docs/LESSON-MAPS.md, "Orders on the world page").' },
     date: { type: 'string', description: 'A year (1836) or a day (1836-06-01).' },
     from: { type: 'string', description: 'For a Diff (what changed between two dates): the earlier date.' },
-    tracker: { type: 'string', enum: ['nations', 'states', 'cessions', 'population', 'electoral'] },
+    tracker: { type: 'string', enum: ['nations', 'states', 'cessions', 'population', 'electoral', 'insular'], description: 'On the world page: insular (the default) or states.' },
     frame: { type: 'string', description: 'A frame id (list_frames) or a box "W,S,E,N" in degrees.' },
     highlight: { type: 'array', items: { type: 'string' }, description: 'Ids to light: a power (mexico, united-states), a polygon by its name (coahuila-y-tejas, texas-republic) or its id (ohm:2841297, nb:tx_republic). Everything else drops to paper.' },
     annotate: {

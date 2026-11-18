@@ -1,0 +1,537 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "page": "world",
+  "order": {
+    "page": "world",
+    "date": "1951-09-15",
+    "frame": "east-asia",
+    "highlight": [
+      "ia:ryukyu",
+      "ia:bonin"
+    ]
+  },
+  "resolved": {
+    "page": "world.html",
+    "address": "world.html?date=1951-09-15&frame=east-asia&highlight=ia%3Aryukyu%2Cia%3Abonin",
+    "date": "1951-09-15",
+    "date_text": "15 September 1951",
+    "tracker": {
+      "id": "insular",
+      "title": "U.S. island territories"
+    },
+    "states_year": {
+      "asked": 1951,
+      "drawn": 1951,
+      "note": null
+    },
+    "frame": {
+      "id": "east-asia",
+      "title": "East Asia",
+      "box": {
+        "west": 95,
+        "south": 18,
+        "east": 146,
+        "north": 54
+      },
+      "from": "src/focuses.json"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        -120.5,
+        -36
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the frame"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "East Asia",
+    "highlight": {
+      "ids": [
+        "ia:ryukyu",
+        "ia:bonin"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "islands_file": "data/world/insular.topojson (scripts/derive-insular.mjs, from data/world/insular-areas.csv)"
+  },
+  "legend": {
+    "title": "U.S. island territories",
+    "rows": [
+      {
+        "label": "Run by the United States under a treaty",
+        "swatch": "fill",
+        "key": "E",
+        "style": null,
+        "role": "category"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "style": "solid",
+        "role": "border certainty"
+      },
+      {
+        "label": "Held: the date known only to the month or year",
+        "swatch": "line",
+        "key": null,
+        "style": "dashed",
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "island-territory",
+      "id": "ia-ttpi-nmi",
+      "keys": [
+        "ia:ttpi"
+      ],
+      "name": "Trust Territory of the Pacific Islands (Northern Mariana Islands)",
+      "hold": "trust",
+      "hold_label": "Held in trust for the United Nations",
+      "start": "1947-07-18",
+      "end": "1975-12-31",
+      "date_known_to_the_day_today": true,
+      "look": {
+        "kind": "paper",
+        "note": "outline only: not lit"
+      },
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "km2": 470.3,
+      "occupied": null,
+      "source": {
+        "shape": "U.S. Census Bureau, cartographic boundary file, States, 2025 (1:500,000): Commonwealth of the Northern Mariana Islands (STATEFP 69)",
+        "islands": [],
+        "dates": "U.S. Department of the Interior, \"Definitions of Insular Area Political Organizations\": the Trust Territory \"from July 18, 1947, until October 1, 1994\"",
+        "note": "The Northern Marianas until the Covenant (next row). Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-ryukyu",
+      "keys": [
+        "ia:ryukyu"
+      ],
+      "name": "Ryukyu Islands (Okinawa)",
+      "hold": "administered",
+      "hold_label": "Run by the United States under a treaty",
+      "start": "1951-09",
+      "end": "1972-05-14",
+      "date_known_to_the_day_today": false,
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "name": "gold",
+        "dashed": true
+      },
+      "lit": true,
+      "labeled": true,
+      "label": "Ryukyu Islands",
+      "km2": 3302.5,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m states and provinces: Okinawa (Japan)",
+        "islands": [],
+        "dates": "Treaty of Peace with Japan, art. 3 (Office of the Historian: signed \"in September of 1951\"); Statehood Campaigns outline, Ch. 14: Okinawa returned on May 15, 1972",
+        "note": "Administered under the peace treaty, not annexed. The treaty's day is not in the sources read: dashed through September 1951. The Amami Islands (returned 1953) are part of Kagoshima and are not drawn. Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "island-territory",
+      "id": "ia-bonin",
+      "keys": [
+        "ia:bonin"
+      ],
+      "name": "Bonin Islands (Ogasawara)",
+      "hold": "administered",
+      "hold_label": "Run by the United States under a treaty",
+      "start": "1951-09",
+      "end": "1968",
+      "date_known_to_the_day_today": false,
+      "look": {
+        "kind": "fill",
+        "key": "E",
+        "name": "gold",
+        "dashed": true
+      },
+      "lit": true,
+      "labeled": true,
+      "label": "Bonin Islands",
+      "km2": 70.8,
+      "occupied": null,
+      "source": {
+        "shape": "Natural Earth 1:10m states and provinces: Tokyo (Japan)",
+        "islands": [
+          "Q1072125",
+          "Q473472",
+          "Q1414691"
+        ],
+        "dates": "Treaty of Peace with Japan, art. 3 (Office of the Historian: signed \"in September of 1951\"); Statehood Campaigns outline, Ch. 14: the Bonins (Ogasawara) went back to Japan in 1968",
+        "note": "The Chichijima, Hahajima and Mukojima groups, picked from Natural Earth's Tokyo by their Wikidata points. The Volcano Islands, Marcus Island and Parece Vela are not drawn: no source read names them (the treaty's text could not be read from this laptop). Neither day is in the sources read: dashed through September 1951 and through 1968. Not yet reviewed by the owner.",
+        "computed_by": "scripts/derive-insular.mjs"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Union of Soviet Socialist Republics",
+      "years": [
+        1950,
+        1952
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Union of Soviet Socialist Republics",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "union-of-soviet-socialist-republics",
+        "wikidata": "Q15180"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "United States of America",
+      "years": [
+        1947,
+        1966
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "united-states-of-america",
+        "wikidata": "Q30"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "People's Republic of China",
+      "years": [
+        1950,
+        1952
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "People's Republic of China",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "people-s-republic-of-china",
+        "wikidata": "Q148"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of India",
+      "years": [
+        1948,
+        1952
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-india",
+        "wikidata": "Q668"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Estado Novo",
+      "years": [
+        1949,
+        1957
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "estado-novo",
+        "wikidata": "Q824489"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Mongolian People's Republic",
+      "years": [
+        1950,
+        1990
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Mongolian People's Republic",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "mongolian-people-s-republic",
+        "wikidata": "Q212056"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "British Colonial Empire",
+      "years": [
+        1947,
+        1957
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "british-colonial-empire",
+        "wikidata": "Q8680"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Islamic Republic of Pakistan",
+      "years": [
+        1948,
+        1962
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "islamic-republic-of-pakistan",
+        "wikidata": "Q843"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Tibet",
+      "years": [
+        1950,
+        1952
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Tibet",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "tibet",
+        "wikidata": "Q521263"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "French Indochina",
+      "years": [
+        1950,
+        1952
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "French Indochina",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "french-indochina",
+        "wikidata": "Q185682"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Burma",
+      "years": [
+        1948,
+        1986
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Burma",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "burma",
+        "wikidata": "Q836"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Kingdom of Afghanistan",
+      "years": [
+        1948,
+        1968
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "kingdom-of-afghanistan",
+        "wikidata": "Q1138904"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Kingdom of Thailand",
+      "years": [
+        1932,
+        1955
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "kingdom-of-thailand",
+        "wikidata": "Q869"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of the Philippines",
+      "years": [
+        1947,
+        2023
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-the-philippines",
+        "wikidata": "Q928"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Nepal",
+      "years": [
+        1890,
+        2023
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Nepal",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "nepal",
+        "wikidata": "Q837"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Democratic People's Republic of Korea",
+      "years": [
+        1948,
+        1952
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "democratic-people-s-republic-of-korea",
+        "wikidata": "Q423"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of Korea",
+      "years": [
+        1948,
+        1952
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-korea",
+        "wikidata": "Q423"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Republic of China",
+      "years": [
+        1950,
+        2023
+      ],
+      "lit": false,
+      "labeled": false,
+      "label": null,
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "republic-of-china",
+        "wikidata": "Q148"
+      }
+    },
+    {
+      "layer": "cliopatria",
+      "name": "Kingdom of Bhutan",
+      "years": [
+        1948,
+        1952
+      ],
+      "lit": false,
+      "labeled": true,
+      "label": "Kingdom of Bhutan",
+      "source": {
+        "dataset": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0)",
+        "id": "kingdom-of-bhutan",
+        "wikidata": "Q917"
+      }
+    }
+  ],
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1483,
+      "y": 874,
+      "w": 383,
+      "h": 120,
+      "inside": true
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "Ryukyu Islands (Okinawa): on this date its record is known only to the month (1951-09–1972-05-14); drawn dashed",
+    "Ryukyu Islands (Okinawa): The Amami Islands (returned 1953) are part of Kagoshima and are not drawn.",
+    "Bonin Islands (Ogasawara): on this date its record is known only to the month (1951-09–1968); drawn dashed",
+    "Bonin Islands (Ogasawara): The Volcano Islands, Marcus Island and Parece Vela are not drawn: no source read names them (the treaty's text could not be read from this laptop)."
+  ],
+  "alt_text": "Parchment map, 15 September 1951, U.S. island territories, framed on East Asia, titled \"East Asia\". Shaded: Run by the United States under a treaty in gold. Named on the map: Ryukyu Islands and Bonin Islands.",
+  "credit": "Parchment; islands: U.S. Census Bureau, Natural Earth; states: Cliopatria (Seshat); coast and relief: Natural Earth",
+  "islands_source": "Computed by scripts/derive-insular.mjs from the U.S. Census Bureau's 2025 cartographic boundary file (public domain), Natural Earth 1:10m (public domain), Cliopatria (Seshat, CC BY 4.0) and Wikidata coordinates (CC0), dated by data/world/insular-areas.csv. Nothing drawn.",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "world.html?date=1951-09-15&frame=east-asia&highlight=ia%3Aryukyu%2Cia%3Abonin"
+  }
+}
