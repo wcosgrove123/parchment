@@ -13,6 +13,7 @@ import { covered, slaveryCount } from './slavery.js';
 import { freeOn, SOURCE as FREE_SOURCE } from './freeblack.js';
 import { queryToOrder, itemKeys, slug } from './frames.js';
 import { CLASS_TRACKERS } from './classify.js';
+import { wbFuzzy, wbFuzzyUnit } from './wouldbe.js';
 import { courseList, outcomeText, EVENT_ICONS } from '../military/events.js';
 
 export const SLIP_VERSION = 'parchment-packing-slip/1';
@@ -56,6 +57,13 @@ function sourceOf(it, tags) {
   if (it.src === 'treaty' || it.src === 'treatyX') return { dataset: 'Computed by Parchment (scripts/derive-native.mjs) from the U.S. Forest Service Royce areas; nothing drawn' };
   if (it.src === 'aiannh') return { dataset: 'U.S. Census Bureau, cartographic boundary file, AIANNH 2025', url: 'https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html' };
   if (it.src === 'icc') return { dataset: 'Indian Claims Commission, Indian Land Areas Judicially Established (1978), digitized by the National Park Service' };
+  if (it.src === 'wouldbe') {
+    return {
+      dataset: 'Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state\'s own document drew; nothing drawn',
+      base: p.base, counties: p.counties?.length ? p.counties : null, cut: p.cut || null, shapes_of: iso(p.on), cut_from: p.from ?? [],
+      record: { id: p.id, kind: p.kind, start: p.start, end: p.end, source: p.source, note: p.note }, table: 'data/us/wouldbe-states.csv',
+    };
+  }
   if (it.src === 'piece') {
     return {
       dataset: 'Computed by Parchment (scripts/derive-pieces.mjs) from the Newberry Library\'s polygons: the land the U.S. polygons gained on the acquisition\'s day, outside the 1783 domain, credited to its last entry and still U.S. land on the map\'s date; nothing drawn',
@@ -68,7 +76,7 @@ function sourceOf(it, tags) {
 
 function layerOf(it) {
   if (it.src === 'ohm') return it.p.lvl === 'x' ? 'ohm-overlap' : 'openhistoricalmap';
-  return { newberry: 'newberry', nbx: 'newberry-dispute', usmx: 'us-mexico-dispute', hb: 'native-homeland', royce: 'land-cession', treaty: 'treaty-land', treatyX: 'treaty-land-overlap', aiannh: 'native-land-today', icc: 'original-territory', piece: 'acquisition-piece' }[it.src] ?? it.src;
+  return { newberry: 'newberry', nbx: 'newberry-dispute', usmx: 'us-mexico-dispute', hb: 'native-homeland', royce: 'land-cession', treaty: 'treaty-land', treatyX: 'treaty-land-overlap', aiannh: 'native-land-today', icc: 'original-territory', piece: 'acquisition-piece', wouldbe: 'would-be-state' }[it.src] ?? it.src;
 }
 function nameOf(it) {
   const p = it.p;
@@ -85,12 +93,14 @@ function datesOf(it) {
   if (it.src === 'ohm' || it.src === 'hb') return { start: iso(p.s), end: iso(p.e), end_is: 'the day it ceased' };
   if (it.src === 'royce') return { start: iso(p.d), end: null };
   if (it.src === 'piece') return { start: iso(p.s), end: iso(p.e), end_is: 'last day of the stretch on which the U.S. land is the same' };
+  if (it.src === 'wouldbe') return { start: iso(p.s), end: iso(p.e), end_is: 'last day; a month or a year where the source gives no day', dated_as: { start: p.start, end: p.end } };
   return { start: null, end: null };
 }
 function idsOf(it) {
   const p = it.p;
   if (it.src === 'newberry') return { newberry: p.id, newberry_version: p.v };
   if (it.src === 'piece') return { acquisition: p.key };
+  if (it.src === 'wouldbe') return { would_be: p.id, keys: p.keys ?? [] };
   if (it.src === 'ohm') return p.lvl === 'x' ? { ohm_overlap: p.rid, ohm: [p.a, p.b] } : { ohm: p.rid, wikidata: p.wd ?? null };
   if (it.src === 'nbx') return { newberry: [p.a, p.b] };
   if (it.src === 'usmx') return { computed: p.id, newberry: p.a, newberry_version: p.av, ohm: p.b };
@@ -286,6 +296,7 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
       ...(fb && it.src === 'newberry' && fb.unitOf(it.p) ? { free_black: { count: fb.unitOf(it.p).free, badge: !!fb.badgeOf(it.p), census_rows: fb.unitOf(it.p).rows } } : {}),
       ...((state.tracker === 'slavery' || state.tracker === 'freeblack') && it.src === 'newberry' ? { status: it.status ?? null, status_row: it.statusRow ? { id: it.statusRow.id, start: it.statusRow.start, end: it.statusRow.end, source: it.statusRow.source, note: it.statusRow.note } : null } : {}),
       ...((state.tracker === 'paths' || state.tracker === 'chapters') && it.src === 'newberry' ? { class: it.classRow ? { value: it.classRow.value, title: it.classRow.title, source: it.classRow.source, note: it.classRow.note } : null } : {}),
+      ...(it.src === 'wouldbe' ? { would_be: { kind: it.p.kind, date_known_to_the_day_today: !wbFuzzy(it, date), known_to: wbFuzzyUnit(it, date) ?? 'day', edge: it.look?.dashed ? 'dashed' : 'solid' } } : {}),
       lit: diff ? null : it.lit ?? null, lit_by: diff ? null : it.litBy ?? null, lit_as_named: !diff && !!(it.lit && it.litBy && !atlas.isPowerKey(it.litBy, pw)), labeled: !!label, label, cut_by_frame: atlas.cutByFrame(it.f),
       km2: Math.round(geoArea(it.f) * KM2), source: sourceOf(it, tags),
     };
@@ -309,6 +320,13 @@ export async function buildSlip({ atlas, data, state, stage, powers, trackers, p
     const n = f.source?.notes;
     if (n?.fixme && (f.lit || f.labeled)) warnings.push(`OpenHistoricalMap's own note on ${f.name}: ${n.fixme}`);
     if (n?.estimated === 'yes' && (f.lit || f.labeled)) warnings.push(`${f.name}: OpenHistoricalMap marks its dates as estimated${f.end ? ` (end ${f.end})` : ''}`);
+    // a would-be state: a date known only to the month or year, and its record's caveats (what is not drawn, what a
+    // bound rests on, what the source leaves open)
+    if (f.would_be && f.lit) {
+      const rec = f.source.record;
+      if (!f.would_be.date_known_to_the_day_today) warnings.push(`${f.name}: on this date its record is known only to the ${f.would_be.known_to} (${rec.start}–${rec.end ?? 'present'}); its edge is dashed`);
+      for (const s of String(rec.note ?? '').split(/(?<!U\.S)(?<=\.)\s+(?=[A-Z])/)) if (/not drawn|rests on|does not say|never fixed/i.test(s)) warnings.push(`${f.name}: ${s}`);
+    }
   }
   if (resolved.status) {
     const rows = features.filter((f) => f.status_row);
@@ -554,7 +572,13 @@ function creditLine(features, points, routes, rivers, trackerId) {
   if (trackerId === 'slavery') parts.push('status of states: the Parchment status table (test rows)');
   if (trackerId === 'paths' || trackerId === 'chapters') parts.push('classes: the statehood deck outline');
   if (trackerId === 'pieces') parts.push('pieces: computed from the Newberry Library polygons, labeled from the statehood deck outline');
-  if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at)) parts.push('rivers: Natural Earth');
+  // (a would-be state cut from the Newberry's counties, the Census Bureau's, or along a river: src/us/wouldbe.js)
+  const wb = features.filter((f) => f.layer === 'would-be-state');
+  if (wb.length) {
+    const from = [...new Set(wb.flatMap((f) => [/^nb/.test(f.source?.base ?? '') ? 'Newberry Library' : null, /^census/.test(f.source?.base ?? '') ? 'U.S. Census Bureau' : null]).filter(Boolean))];
+    parts.push(`would-be states: computed${from.length ? ` from the ${from.join(' and the ')}` : ''} along their documents' lines`);
+  }
+  if (rivers.some((r) => r.found) || features.some((f) => f.source?.cut_at) || wb.some((f) => /river:/.test(f.source?.cut ?? ''))) parts.push('rivers: Natural Earth');
   if (points.length || routes.length) parts.push('places: the Parchment record table, coordinates from Wikidata');
   return parts.join('; ');
 }

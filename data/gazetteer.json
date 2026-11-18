@@ -3653,5 +3653,23 @@
     "lat": -9.1683333333333,
     "label": "Nukunonu",
     "fetched": "2026-11-18"
+  },
+  "Q1169": {
+    "lon": -86.756451,
+    "lat": 44.007874,
+    "label": "Lake Michigan",
+    "fetched": "2026-11-18"
+  },
+  "Q3064799": {
+    "lon": -85.7654,
+    "lat": 38.2766,
+    "label": "Falls of the Ohio National Wildlife Conservation Area",
+    "fetched": "2026-11-18"
+  },
+  "Q14714352": {
+    "lon": -82.1408,
+    "lat": 38.8392,
+    "label": "Tu-Endie-Wei State Park",
+    "fetched": "2026-11-18"
   }
 }

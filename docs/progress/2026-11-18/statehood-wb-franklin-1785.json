@@ -1,0 +1,613 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1785-06-01",
+    "tracker": "states",
+    "title": "The State of Franklin, 1785",
+    "frame": "-90.5,33.6,-75.3,37.4",
+    "highlight": [
+      "wb:franklin",
+      "nb:nc_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1785-06-01&tracker=states&frame=-90.5%2C33.6%2C-75.3%2C37.4&highlight=wb%3Afranklin%2Cnb%3Anc_state&title=The+State+of+Franklin%2C+1785",
+    "mode": "snapshot",
+    "date": "1785-06-01",
+    "date_text": "1 June 1785",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -90.5,
+        "south": 33.6,
+        "east": -75.3,
+        "north": 37.4
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        82.89999999999998,
+        0
+      ],
+      "parallels": [
+        34.2,
+        36.8
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The State of Franklin, 1785",
+    "highlight": {
+      "ids": [
+        "wb:franklin",
+        "nb:nc_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Atlantic Ocean"
+    ],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "North Carolina",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Proposed state (not recognized)",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693692,
+            "url": "https://www.openhistoricalmap.org/relation/2693692",
+            "name": "North Carolina",
+            "start": "1783-09-03",
+            "end": "1790-04-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1790-04-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:nc_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "North Carolina",
+      "cut_by_frame": false,
+      "km2": 237041,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 1,
+          "change": "North Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "State of Franklin",
+      "local": null,
+      "ids": {
+        "would_be": "wb-franklin",
+        "keys": [
+          "wb:franklin"
+        ]
+      },
+      "start": "1784-12-14",
+      "end": "1789-12-31",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-12-14",
+        "end": "1789"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Proposed state (not recognized))"
+      },
+      "diff_role": null,
+      "keyed_as": "Proposed state (not recognized)",
+      "would_be": {
+        "kind": "Proposed state (not recognized)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:franklin",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Franklin",
+      "cut_by_frame": false,
+      "km2": 81877,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb-counties:TN",
+        "counties": [
+          "Washington",
+          "Sullivan",
+          "Greene"
+        ],
+        "cut": null,
+        "shapes_of": "1784-12-14",
+        "cut_from": [
+          {
+            "id": "tns_sullivan",
+            "v": 1,
+            "name": "SULLIVAN (TN)",
+            "start": 17791110,
+            "end": 17870105
+          },
+          {
+            "id": "tns_washington",
+            "v": 3,
+            "name": "WASHINGTON (TN)",
+            "start": 17830517,
+            "end": 17881205
+          },
+          {
+            "id": "tns_greene",
+            "v": 1,
+            "name": "GREENE (TN)",
+            "start": 17830517,
+            "end": 17870105
+          }
+        ],
+        "record": {
+          "id": "wb-franklin",
+          "kind": "Proposed state (not recognized)",
+          "start": "1784-12-14",
+          "end": "1789",
+          "source": "Declared at Jonesborough, 14 December 1784 (Statehood Campaigns outline, Appendix A; Tennessee Encyclopedia, \"State of Franklin\"); its counties: S. C. Williams, History of the Lost State of Franklin (1924), the three North Carolina counties of Washington, Sullivan and Greene",
+          "note": "Drawn as those three counties on the day it was declared, from the Newberry's county lines. North Carolina never fixed Greene County's western limit (the Newberry), so the shape runs west to the Mississippi, round Davidson County (the Cumberland settlements): wider than the East Tennessee Franklin governed. Franklin's own counties of 1785 (Spencer, Caswell, Sevier, Wayne, Blount) had no legal lines and are not drawn. Over by early 1789: the end is known to the year, drawn dashed. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Captaincy General of Cuba",
+      "local": "Capitanía General de Cuba",
+      "ids": {
+        "ohm": 2841673,
+        "wikidata": "Q2039931"
+      },
+      "start": "1784-05-12",
+      "end": "1795-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Captaincy General of Cuba",
+      "cut_by_frame": true,
+      "km2": 2935566,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841673",
+        "license": "CC0 1.0",
+        "wikidata": "Q2039931",
+        "notes": {
+          "start_event": "Treaty of Paris, gains East and West Florida",
+          "end_event": "Cedes part of West Florida to the US",
+          "wikipedia": "en:Captaincy General of Cuba"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Spanish Louisiana",
+      "local": "Provincia de La Luisiana",
+      "ids": {
+        "ohm": 2807216,
+        "wikidata": null
+      },
+      "start": "1762-11-23",
+      "end": "1801-03-21",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Spanish Louisiana",
+      "cut_by_frame": true,
+      "km2": 2490104,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2807216",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "wikipedia": "en:Louisiana (New Spain)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2800175,
+            "url": "https://www.openhistoricalmap.org/relation/2800175",
+            "name": "Unorganized Federal Territory",
+            "start": "1784-03-01",
+            "end": "1786-09-13",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1786-09-13",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorganized Federal Territory",
+      "cut_by_frame": true,
+      "km2": 716707,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 1,
+          "change": "All of present Illinois became unorganized federal territory when Virginia ceded its charter claims to the area to the United States. Other claims by Connecticut, Massachusetts, and New York to the area west of Pennsylvania were eliminated by 1786.",
+          "authority": "(Cappon, Petchenik, and Long, 62, 130-131; Hening, 11:571-575)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Georgia",
+      "local": null,
+      "ids": {
+        "newberry": "ga_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693713,
+            "url": "https://www.openhistoricalmap.org/relation/2693713",
+            "name": "Georgia",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918616,
+            "url": "https://www.openhistoricalmap.org/relation/2918616",
+            "name": "Georgia",
+            "start": "1788-01-02",
+            "end": "1798-04-07",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918619,
+            "url": "https://www.openhistoricalmap.org/relation/2918619",
+            "name": "Georgia",
+            "start": "1787-01-01",
+            "end": "1788-01-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1798-04-06",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Georgia",
+      "cut_by_frame": true,
+      "km2": 394127,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ga_state",
+          "version": 1,
+          "change": "Georgia became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693697,
+            "url": "https://www.openhistoricalmap.org/relation/2693697",
+            "name": "Virginia",
+            "start": "1784-03-01",
+            "end": "1788-06-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2919243,
+            "url": "https://www.openhistoricalmap.org/relation/2919243",
+            "name": "Virginia",
+            "start": "1788-06-25",
+            "end": "1791-03-30",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1791-03-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": true,
+      "km2": 270857,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 2,
+          "change": "Virginia ceded to the United States its 1609 charter claims to territory \"northwestward of the river Ohio,\" thereby setting the north bank of the Ohio River as the northern and northwestern limit for present Kentucky and West Virginia.",
+          "authority": "(Hening, 11:571-575)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "South Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "sc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693712,
+            "url": "https://www.openhistoricalmap.org/relation/2693712",
+            "name": "South Carolina",
+            "start": "1783-09-03",
+            "end": "1787-01-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918614,
+            "url": "https://www.openhistoricalmap.org/relation/2918614",
+            "name": "South Carolina",
+            "start": "1776-07-04",
+            "end": "1783-09-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918618,
+            "url": "https://www.openhistoricalmap.org/relation/2918618",
+            "name": "South Carolina",
+            "start": "1787-01-01",
+            "end": "1788-05-23",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2918623,
+            "url": "https://www.openhistoricalmap.org/relation/2918623",
+            "name": "South Carolina",
+            "start": "1788-05-23",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "South Carolina",
+      "cut_by_frame": true,
+      "km2": 80192,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "sc_state",
+          "version": 1,
+          "change": "South Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1591,
+      "y": 874,
+      "w": 275,
+      "h": 120,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "State of Franklin: North Carolina never fixed Greene County's western limit (the Newberry), so the shape runs west to the Mississippi, round Davidson County (the Cumberland settlements): wider than the East Tennessee Franklin governed.",
+    "State of Franklin: Franklin's own counties of 1785 (Spencer, Caswell, Sevier, Wayne, Blount) had no legal lines and are not drawn."
+  ],
+  "alt_text": "Parchment map, 1 June 1785, states and territories, framed on a box of the continent, titled \"The State of Franklin, 1785\". Shaded: North Carolina in blue. Hatched in rust: proposed state (not recognized). Named on the map: North Carolina and Franklin.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the Newberry Library along their documents' lines",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1785-06-01&tracker=states&frame=-90.5%2C33.6%2C-75.3%2C37.4&highlight=wb%3Afranklin%2Cnb%3Anc_state&title=The+State+of+Franklin%2C+1785"
+  }
+}

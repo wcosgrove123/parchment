@@ -35,6 +35,7 @@ import { US_FROM, powerAt, aliveNB, aliveOHM, aliveNative, aliveTreaty, aliveTre
 import { diffUS, byKind } from './diff.js';
 import { electoralLook, electoralLegend, someAbstained, resultFor } from './electoral.js';
 import { aliveDisputes, aliveUSMX } from './disputes.js';
+import { wouldbeOn, wbFuzzy } from './wouldbe.js';
 import { fitElectoralBadges, drawElectoralBadges } from './electoral-draw.js';
 import { slaveryLook, slaveryLegend } from './slavery.js';
 import { CLASS_TRACKERS, pathLook, chapterLook, chapterFills, chapterLabel, piecesOn, pieceLook, clipPieces } from './classify.js';
@@ -374,6 +375,10 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         items.push(it);
       }
     }
+    // Would-be states (statehood brief, item 8; src/us/wouldbe.js): only where an order's highlight names one, hatched
+    // over the land it would have taken and keyed for what it was; the unlit are taken off again after the highlight.
+    const wbItems = lesson?.highlight?.size && !lesson.highlight.none && (trackerId === 'states' || trackerId === 'nations') ? wouldbeOn(data.wouldbe, date) : [];
+    for (const it of wbItems) { it.look = { pattern: 'hatch', label: it.p.kind, area: it.p.kind, dashed: wbFuzzy(it, date) }; items.push(it); }
     // Native lands under the cessions tracker: today's held land from 2020 (Census 2025 boundaries), and the lands the
     // Indian Claims Commission later found to be each nation's original territory, outlined from 1784 to its 1978 map.
     const lands = trackerId === 'cessions' ? aliveLands(data, date) : [];
@@ -395,6 +400,8 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     // An order's highlight (lesson maps): the polygons it names keep their looks; everything else drops to paper.
     const hl = lesson?.highlight?.size && (trackerId === 'nations' || trackerId === 'states' || trackerId === 'military' || classMap) ? applyHighlight(items) : null;
     if (!hl) for (const it of items) { it.lit = null; it.litBy = null; }
+    // (a would-be state the order did not name is not drawn at all, not even as paper)
+    if (wbItems.length) for (let i = items.length - 1; i >= 0; i--) if (items[i].src === 'wouldbe' && !items[i].lit) items.splice(i, 1);
     // (chapters: each chapter the order lit takes a fill of its own)
     if (trackerId === 'chapters' && hl && !hl.none) chapterFills(items, tracker);
     // The pieces of land (Taxonomy 1) alive on the date, under the states; under a highlight, only inside the lit states.
@@ -416,6 +423,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       (pop?.estimates.placed ?? []).concat(pop?.estimates.national ?? []).map((e) => e.id).join(','), lands.length, icc.length, electoral?.election.year ?? '',
       treaty.map((it) => `${it.p.nation}${it.p.s}`).join(','), treatyX.length, fbNow ? `fb:${fbNow.census.year}` : '', ...(lesson ? [items.filter((it) => it.src === 'usmx').map((it) => it.p.id).join(',')] : []),
       pieceItems.map((it) => `${it.p.key}.${it.p.s}${it.clipped ? 'c' : ''}`).join(','),
+      items.filter((it) => it.src === 'wouldbe').map((it) => `${it.p.id}${it.look.dashed ? 'd' : ''}`).join(','),
       military?.war ? `mil:${military.war.id}:${military.members.filter((m) => memberAlive(m, date)).map((m) => m.id).join(',')}` : ''].join('|');
     const counts = { nb: nbAlive.length, ohm: ohmAlive.length, cessions: cesAlive.length };
     const before = current;
@@ -462,6 +470,12 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
       for (const it of [...items, ...cesAlive, ...lands, ...treaty]) {
         if (!(it.look && (it.look.fill || it.look.pattern || it.look.seq || it.look.pop || it.look.land || it.look.occ))) continue;
         if (views.some((v) => v.shows(it.f))) addPresent(present, it.look);
+      }
+      // (a would-be state's key line, and the dashed edge's, when one is on the sheet: legendFor)
+      for (const it of items) {
+        if (it.src !== 'wouldbe' || !views.some((v) => v.shows(it.f))) continue;
+        present.add(`wbk:${it.p.kind}`);
+        if (it.look.dashed) present.add('wbk-dashed');
       }
       if (icc.length) present.add('icc');
       if (treatyX.some((it) => views.some((v) => v.shows(it.f)))) present.add('treatyX');
@@ -624,6 +638,17 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const disputes = items.filter((it) => (it.src === 'nbx' || it.src === 'usmx') && it.look.pattern);
     g.append('g').attr('class', 'nb-disputes').attr('clip-path', `url(#land-${v.id})`)
       .selectAll('path').data(disputes).join('path').attr('class', 'na-pattern p-hatch nb-dispute').attr('d', (it) => v.d(it.f));
+    // 6b. A would-be state's edge (its hatch is among the patterns, under the borders), over the borders: rust, dashed
+    // while its date is known only to the month or year (grammar §5: dash is certainty).
+    // (styled inline, not in us.css: a rule added to the page's stylesheet, even one that matches nothing on a map,
+    // shifts Chrome's rasterizing of every map by a shade, and the existing maps are to stay as they were)
+    const wb = items.filter((it) => it.src === 'wouldbe');
+    if (wb.length) {
+      g.append('g').attr('class', 'wb-edges').attr('clip-path', `url(#land-${v.id})`)
+        .selectAll('path').data(wb).join('path').attr('class', (it) => `wb-edge${it.look.dashed ? ' dashed' : ''}`).attr('d', (it) => v.d(it.f))
+        .style('fill', 'none').style('stroke', 'var(--rust)').style('stroke-width', '1.8px').style('stroke-opacity', 0.9)
+        .style('stroke-linejoin', 'round').style('vector-effect', 'non-scaling-stroke').style('stroke-dasharray', (it) => (it.look.dashed ? '7 4' : null));
+    }
 
     // Hit areas: every alive polygon, topmost last, so a click finds the most specific thing under it.
     const hits = g.append('g').attr('class', 'na-hits');
@@ -647,7 +672,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     zones.push(...ecBadges.map((b) => b.box));
     const named = electoral ? nbItems.filter((it) => !resultFor(electoral, it.p)?.badge) : fb ? nbItems.filter((it) => !ecBadges.some((b) => b.abbr === (it.p.abbr ?? '').replace(/ Terr$/, '') && fb.badgeOf(it.p))) : nbItems;
     // (a battle frame names its hills and roads, not the state it lies in)
-    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines, near: lesson?.highlight?.none && v.id === 'main' ? (recordLayout?.placed ?? []).filter((p) => p.box && p.kind === 'point').map((p) => p.box) : [],
+    const labels = milNow?.battle ? [] : placePolityLabels(lg, v, [...items.filter((it) => it.src === 'wouldbe'), ...treaty, ...named, ...ohmItems, ...items.filter((it) => it.src === 'usmx' && it.look.occName), ...stip.filter((it) => it.src === 'hb')], zones, measure, date, trackerId, { covered, nolabel: powers.nolabel ?? [], lines, near: lesson?.highlight?.none && v.id === 'main' ? (recordLayout?.placed ?? []).filter((p) => p.box && p.kind === 'point').map((p) => p.box) : [],
       water: v.id === 'main' && lesson?.highlight?.size ? waterAt : null });
     drawBadges(lg, badges);
     drawElectoralBadges(lg, ecBadges);
@@ -1563,6 +1588,12 @@ function legendFor(powers, tracker, trackerId, present, date, anyOHM, pop = null
       else rows.push({ swatch: 'line', style: l.kind === 'ghost' ? 'ghost' : 'treaty', label: l.label, role: 'line' });
     }
   }
+  // the would-be states on the sheet, a hatched line for each kind (Deseret's line, the same words, is not repeated),
+  // and their dashed edge while a date is known only to the month or year (src/us/wouldbe.js)
+  for (const k of present) {
+    if (k.startsWith('wbk:') && !rows.some((r) => r.key === 'hatch' && r.label === k.slice(4))) rows.push({ swatch: 'fill', key: 'hatch', label: k.slice(4), role: 'area' });
+  }
+  if (present.has('wbk-dashed')) rows.push({ swatch: 'line', style: 'dashed', label: 'Its date known only to the month or year' });
   for (const [key, c] of Object.entries(powers.categories)) {
     if (c.pattern && present.has(`pat:${c.pattern}`)) rows.push({ swatch: 'fill', key: c.pattern, label: c.label });
   }
@@ -1663,6 +1694,7 @@ function hoverText(it, date) {
   if (it.src === 'icc') return `${p.tribe} · original territory as established before the Indian Claims Commission (map of 1978)`;
   if (it.src === 'treaty') return `${p.name} · land held under U.S. treaty, ${longDate(p.s)} – ${longDate(p.e)}`;
   if (it.src === 'treatyX') return `Claimed by two nations (${p.a}, ${p.b}): the United States bought this land from both`;
+  if (it.src === 'wouldbe') return `${p.name} · ${p.kind} · ${p.start}–${p.end ?? 'present'}`;
   if (it.src === 'newberry' && it.popUnit) return `${nbName(p)} · ${fmt(it.popUnit.aian)} American Indians counted in ${it.popUnit.year} (${pct(it.popUnit.share)} of the U.S.)`;
   if (it.src === 'newberry') return `${nbName(p)} (${p.type}) · ${longDate(p.s)} – ${longDate(p.e)}`;
   return `${p.name}${p.local ? ` (${p.local})` : ''} · ${p.start_raw ?? ''}${p.end_raw ? ` – ${p.end_raw}` : ''}`;
@@ -1707,7 +1739,8 @@ function placePolityLabels(layer, v, items, zones, measure, date, trackerId, { c
     if (it.src === 'ohm' && (p.lvl === 'x' || silent(p.name))) continue; // overlaps carry a hatch, not a name
     if (statusMap && !isNB && (it.cat === 'native' || it.src === 'hb')) continue; // (a status map leaves the homelands, and their names, out)
     // (occupied land prints the name its occupation row gives it: New Mexico, Mexico City)
-    const texts = (it.src === 'usmx' ? [it.look.occName] : [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? nbTexts(p, trackerId) : [p.name, shortName(p.name)])]).map(cleanLabel);
+    // (a would-be state prints its short name: "Franklin", "Jefferson Territory"; src/us/wouldbe.js)
+    const texts = (it.src === 'usmx' ? [it.look.occName] : it.src === 'wouldbe' ? [p.label, p.name] : [...(it.look?.occName ? [it.look.occName] : []), ...(isNB ? nbTexts(p, trackerId) : [p.name, shortName(p.name)])]).map(cleanLabel);
     if (isNB && !texts.some(Boolean)) continue;
     const poly = largestPolygon(it.f);
     if (!poly) continue;

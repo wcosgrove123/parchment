@@ -1,0 +1,1240 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1784-03-01",
+    "tracker": "states",
+    "title": "Jefferson's ten states, 1784",
+    "frame": "-95.5,36.4,-79.8,49.6",
+    "highlight": [
+      "wb:jefferson_1784"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1784-03-01&tracker=states&frame=-95.5%2C36.4%2C-79.8%2C49.6&highlight=wb%3Ajefferson_1784&title=Jefferson%27s+ten+states%2C+1784",
+    "mode": "snapshot",
+    "date": "1784-03-01",
+    "date_text": "1 March 1784",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -95.5,
+        "south": 36.4,
+        "east": -79.8,
+        "north": 49.6
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        87.64999999999998,
+        -43
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "Jefferson's ten states, 1784",
+    "highlight": {
+      "ids": [
+        "wb:jefferson_1784"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "Planned state (Jefferson's report, 1784)",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "would-be-state",
+      "name": "Sylvania",
+      "local": null,
+      "ids": {
+        "would_be": "wb-sylvania",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:sylvania"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Sylvania",
+      "cut_by_frame": false,
+      "km2": 186398,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:45..",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 185203
+          }
+        ],
+        "record": {
+          "id": "wb-sylvania",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "North of the 45th parallel, with the land north of the 47th that the report joins to it. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Illinoia",
+      "local": null,
+      "ids": {
+        "would_be": "wb-illinoia",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:illinoia"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Illinoia",
+      "cut_by_frame": false,
+      "km2": 102625,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:39..41; lon:..Q3064799 (..-85.7654)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 102740
+          }
+        ],
+        "record": {
+          "id": "wb-illinoia",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 39th and 41st parallels west of the meridian of the rapids of the Ohio. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Assenisipia",
+      "local": null,
+      "ids": {
+        "would_be": "wb-assenisipia",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:assenisipia"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Assenisipia",
+      "cut_by_frame": false,
+      "km2": 73326,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:41..43; lon:..Q3064799 (..-85.7654)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 72615
+          }
+        ],
+        "record": {
+          "id": "wb-assenisipia",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 41st and 43rd parallels west of the meridian of the rapids of the Ohio. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Michigania",
+      "local": null,
+      "ids": {
+        "would_be": "wb-michigania",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:michigania"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Michigania",
+      "cut_by_frame": false,
+      "km2": 72825,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:43..45; parts-west-of:Q1169 (Lake Michigan, -86.7565)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 73746
+          }
+        ],
+        "record": {
+          "id": "wb-michigania",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 43rd and 45th parallels west of Lake Michigan (Wikidata Q1169 for the lake). The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Saratoga",
+      "local": null,
+      "ids": {
+        "would_be": "wb-saratoga",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:saratoga"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Saratoga",
+      "cut_by_frame": false,
+      "km2": 68166,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:39..41; lon:Q3064799..Q14714352 (-85.7654..-82.1408)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 68415
+          }
+        ],
+        "record": {
+          "id": "wb-saratoga",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 39th and 41st parallels, between the two meridians. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Cherronesus",
+      "local": null,
+      "ids": {
+        "would_be": "wb-cherronesus",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:cherronesus"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Cherronesus",
+      "cut_by_frame": false,
+      "km2": 57526,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:43..45; parts-east-of:Q1169 (Lake Michigan, -86.7565)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 57213
+          }
+        ],
+        "record": {
+          "id": "wb-cherronesus",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 43rd and 45th parallels east of Lake Michigan. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Polypotamia",
+      "local": null,
+      "ids": {
+        "would_be": "wb-polypotamia",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:polypotamia"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Polypotamia",
+      "cut_by_frame": false,
+      "km2": 56290,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:..39; lon:..Q3064799 (..-85.7654)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 57106
+          }
+        ],
+        "record": {
+          "id": "wb-polypotamia",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "South of the 39th parallel west of the meridian of the rapids of the Ohio, with the point of land below the 37th. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Metropotamia",
+      "local": null,
+      "ids": {
+        "would_be": "wb-metropotamia",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:metropotamia"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Metropotamia",
+      "cut_by_frame": false,
+      "km2": 54771,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:41..43; lon:Q3064799..Q14714352 (-85.7654..-82.1408)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 54696
+          }
+        ],
+        "record": {
+          "id": "wb-metropotamia",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "Between the 41st and 43rd parallels, between the two meridians. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Washington",
+      "local": null,
+      "ids": {
+        "would_be": "wb-washington-1784",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:washington"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Washington",
+      "cut_by_frame": false,
+      "km2": 34103,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lon:Q14714352.. (-82.1408..)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 34099
+          }
+        ],
+        "record": {
+          "id": "wb-washington-1784",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "East of the meridian of the Kanhaway's mouth, between the Ohio, Lake Erie and Pennsylvania. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Pelisipia",
+      "local": null,
+      "ids": {
+        "would_be": "wb-pelisipia",
+        "keys": [
+          "wb:jefferson_1784",
+          "wb:pelisipia"
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1784-04-22",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1784-03-01",
+        "end": "1784-04-22"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Planned state (Jefferson's report, 1784))"
+      },
+      "diff_role": null,
+      "keyed_as": "Planned state (Jefferson's report, 1784)",
+      "would_be": {
+        "kind": "Planned state (Jefferson's report, 1784)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_1784",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Pelisipia",
+      "cut_by_frame": false,
+      "km2": 10681,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:uf_terr",
+        "counties": null,
+        "cut": "lat:..39; lon:Q3064799..Q14714352 (-85.7654..-82.1408)",
+        "shapes_of": "1784-03-01",
+        "cut_from": [
+          {
+            "id": "uf_terr",
+            "v": 1,
+            "name": "Unorganized Federal Territory",
+            "km2": 10759
+          }
+        ],
+        "record": {
+          "id": "wb-pelisipia",
+          "kind": "Planned state (Jefferson's report, 1784)",
+          "start": "1784-03-01",
+          "end": "1784-04-22",
+          "source": "Report of the committee on a plan for the temporary government of the western territory, 1 March 1784 (the Avalon Project, Yale Law School): states two degrees of latitude apart, divided by the meridians of the lowest point of the rapids of the Ohio and of the western cape of the mouth of the Great Kanhaway, the land east of that meridian one state; and the ten names (Statehood Campaigns outline, Appendix A)",
+          "note": "South of the 39th parallel between the two meridians: the ceded land north of the Ohio only. The meridians pass through Wikidata's points for the Falls of the Ohio National Wildlife Conservation Area (Q3064799) and Tu-Endie-Wei State Park at the Kanawha's mouth (Q14714352): the report gives no degrees. Drawn on the federal territory the Newberry dates from Virginia's cession, 1 March 1784; the Ordinance of 23 April 1784 kept the lines and dropped the names. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Rupert's Land",
+      "local": null,
+      "ids": {
+        "ohm": 2861322,
+        "wikidata": "Q738395"
+      },
+      "start": "1763-02-10",
+      "end": "1819-01-29",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Rupert's Land",
+      "cut_by_frame": true,
+      "km2": 4210047,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2861322",
+        "license": "CC0 1.0",
+        "wikidata": "Q738395",
+        "notes": {
+          "start_event": "Treaty of Paris",
+          "end_event": "Treaty of 1818, land exchange with USA",
+          "wikipedia": "en:Rupert's Land"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Spanish Louisiana",
+      "local": "Provincia de La Luisiana",
+      "ids": {
+        "ohm": 2807216,
+        "wikidata": null
+      },
+      "start": "1762-11-23",
+      "end": "1801-03-21",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Spanish Louisiana",
+      "cut_by_frame": true,
+      "km2": 2490104,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2807216",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {
+          "wikipedia": "en:Louisiana (New Spain)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Province of Quebec",
+      "local": null,
+      "ids": {
+        "ohm": 2830936,
+        "wikidata": "Q251668"
+      },
+      "start": "1783-09-03",
+      "end": "1791-12-26",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Great Britain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Province of Quebec",
+      "cut_by_frame": true,
+      "km2": 1326100,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2830936",
+        "license": "CC0 1.0",
+        "wikidata": "Q251668",
+        "notes": {
+          "start_event": "Cedes south of Great Lakes to USA",
+          "end_event": "Divided into Upper and Lower Canada",
+          "wikipedia": "en:Province of Quebec (1763–1791)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2800175,
+            "url": "https://www.openhistoricalmap.org/relation/2800175",
+            "name": "Unorganized Federal Territory",
+            "start": "1784-03-01",
+            "end": "1786-09-13",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1786-09-13",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorganized Federal Territory",
+      "cut_by_frame": false,
+      "km2": 716707,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 1,
+          "change": "All of present Illinois became unorganized federal territory when Virginia ceded its charter claims to the area to the United States. Other claims by Connecticut, Massachusetts, and New York to the area west of Pennsylvania were eliminated by 1786.",
+          "authority": "(Cappon, Petchenik, and Long, 62, 130-131; Hening, 11:571-575)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Virginia",
+      "local": null,
+      "ids": {
+        "newberry": "va_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693697,
+            "url": "https://www.openhistoricalmap.org/relation/2693697",
+            "name": "Virginia",
+            "start": "1784-03-01",
+            "end": "1788-06-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2919243,
+            "url": "https://www.openhistoricalmap.org/relation/2919243",
+            "name": "Virginia",
+            "start": "1788-06-25",
+            "end": "1791-03-30",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1784-03-01",
+      "end": "1791-03-29",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Virginia",
+      "cut_by_frame": false,
+      "km2": 270857,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "va_state",
+          "version": 2,
+          "change": "Virginia ceded to the United States its 1609 charter claims to territory \"northwestward of the river Ohio,\" thereby setting the north bank of the Ohio River as the northern and northwestern limit for present Kentucky and West Virginia.",
+          "authority": "(Hening, 11:571-575)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New York",
+      "local": null,
+      "ids": {
+        "newberry": "ny_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693675,
+            "url": "https://www.openhistoricalmap.org/relation/2693675",
+            "name": "New York",
+            "start": "1783-09-03",
+            "end": "1822-06-17",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1855-01-10",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New York",
+      "cut_by_frame": false,
+      "km2": 125723,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ny_state",
+          "version": 1,
+          "change": "New York became an independent state on 4 July 1776, and Vermont declared its independence from New York on 15 January 1777. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Pennsylvania",
+      "local": null,
+      "ids": {
+        "newberry": "pa_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2685031,
+            "url": "https://www.openhistoricalmap.org/relation/2685031",
+            "name": "Pennsylvania",
+            "start": "1783-09-03",
+            "end": "1792-03-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1792-03-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Pennsylvania",
+      "cut_by_frame": false,
+      "km2": 116340,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "pa_state",
+          "version": 1,
+          "change": "Pennsylvania became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Erie Triangle Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "er_triangleuft",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692744,
+            "url": "https://www.openhistoricalmap.org/relation/2692744",
+            "name": "Erie Triangle UFT",
+            "start": "1783-09-03",
+            "end": "1792-03-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1792-03-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Erie Tri UFT",
+      "cut_by_frame": false,
+      "km2": 837,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "er_triangleuft",
+          "version": 1,
+          "change": "On 29 Oct 1782 New York ceded to the US any claim to territory west of the meridian of the western end of Lake Ontario, thereby defining its western boundary; the Erie Triangle in present Penn. is part of this cession. Map depicts area as of 3 Sep 1783.",
+          "authority": "(Cappon, Petchenik, and Long, 130; Van Zandt, 75)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Captaincy General of Cuba",
+      "local": "Capitanía General de Cuba",
+      "ids": {
+        "ohm": 2841674,
+        "wikidata": "Q2039931"
+      },
+      "start": "1763-02-10",
+      "end": "1784-05-12",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "spain",
+      "power_label": "Spain",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 2642274,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841674",
+        "license": "CC0 1.0",
+        "wikidata": "Q2039931",
+        "notes": {
+          "start_event": "Treaty of Paris, Spain gets West Cuba back and loses Florida",
+          "end_event": "Treaty of Paris, gains East and West Florida",
+          "wikipedia": "en:Captaincy General of Cuba"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "North Carolina",
+      "local": null,
+      "ids": {
+        "newberry": "nc_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2693692,
+            "url": "https://www.openhistoricalmap.org/relation/2693692",
+            "name": "North Carolina",
+            "start": "1783-09-03",
+            "end": "1790-04-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1783-09-03",
+      "end": "1790-04-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 237041,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nc_state",
+          "version": 1,
+          "change": "North Carolina became an independent state on 4 July 1776. The map depicts state boundaries as of 3 September 1783.",
+          "authority": "(Declaration of Independence)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1549,
+      "y": 896,
+      "w": 317,
+      "h": 98,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [],
+  "alt_text": "Parchment map, 1 March 1784, states and territories, framed on a box of the continent, titled \"Jefferson's ten states, 1784\". Hatched in rust: planned state (Jefferson's report, 1784). Named on the map: Sylvania, Illinoia, Assenisipia, Michigania, Saratoga, Cherronesus, Polypotamia, Metropotamia, Washington and Pelisipia.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the Newberry Library along their documents' lines",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1784-03-01&tracker=states&frame=-95.5%2C36.4%2C-79.8%2C49.6&highlight=wb%3Ajefferson_1784&title=Jefferson%27s+ten+states%2C+1784"
+  }
+}

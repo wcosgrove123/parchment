@@ -90,6 +90,10 @@ export function itemKeys(it, { power = null, powers = null, twins = null } = {})
     add('disputes'); add('disputed'); add(p.name); add(p.id);
   } else if (it.src === 'hb') {
     add(p.name); add('native');
+  } else if (it.src === 'wouldbe') {
+    // (a would-be state: its wb: keys, its id, its names; src/us/wouldbe.js)
+    for (const k of p.keys ?? []) add(k);
+    add(p.id); add(p.name); add(p.label);
   } else if (p.name) add(p.name);
   return keys;
 }

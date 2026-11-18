@@ -19,6 +19,7 @@ import { loadText } from '../data/loader.js';
 import { prepareSlavery } from './slavery.js';
 import { prepareFree } from './freeblack.js';
 import { CLASS_TRACKERS, prepareClassTable, preparePieces } from './classify.js';
+import { prepareWouldbe, namesWouldbe } from './wouldbe.js';
 import { loadRecordsText } from '../data/source.js';
 import { validateRecords, resolveRecords } from '../data/records.js';
 import { routeLegend } from '../render/routes.js';
@@ -132,6 +133,13 @@ async function main() {
   // ...and the OpenHistoricalMap polygons the owner had cut at a river (data/us/ohm-cuts.json: the 1836–1845 joint
   // claim ends at the Nueces, as the 1846 strip does).
   applyOHMCuts(data, await loadJSON('data/us/ohm-cuts.json').catch(() => null));
+  // The would-be states (statehood brief, item 8; data/us/wouldbe.topojson, scripts/derive-wouldbe.mjs): read only when
+  // an order's highlight names one by its wb: id, the only way they are drawn (src/us/wouldbe.js).
+  data.wouldbe = null;
+  if (namesWouldbe(params.get('highlight'))) {
+    data.wouldbe = prepareWouldbe(await loadJSON('data/us/wouldbe.topojson').catch(() => null));
+    if (!data.wouldbe) problems.push('data/us/wouldbe.topojson could not be read (node scripts/derive-wouldbe.mjs writes it); no would-be state is drawn');
+  }
   // A lesson map reads a little more: OpenHistoricalMap's own notes on each polygon (to find a Newberry polygon by the
   // name OHM's copy of it carries: the Republic of Texas is Newberry's tx_republic), and the 1:10m rivers of North
   // America (the Nueces is not in the 1:50m set).

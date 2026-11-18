@@ -1,0 +1,574 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1859-06-01",
+    "tracker": "states",
+    "title": "The Pico Act, 1859",
+    "frame": "-124.6,32.3,-113.8,38.6",
+    "highlight": [
+      "wb:pico_colorado",
+      "nb:ca_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1859-06-01&tracker=states&frame=-124.6%2C32.3%2C-113.8%2C38.6&highlight=wb%3Apico_colorado%2Cnb%3Aca_state&title=The+Pico+Act%2C+1859",
+    "mode": "snapshot",
+    "date": "1859-06-01",
+    "date_text": "1 June 1859",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -124.6,
+        "south": 32.3,
+        "east": -113.8,
+        "north": 38.6
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        119.19999999999999,
+        0
+      ],
+      "parallels": [
+        33.3,
+        37.6
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The Pico Act, 1859",
+    "highlight": {
+      "ids": [
+        "wb:pico_colorado",
+        "nb:ca_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "California",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Proposed territory (not recognized)",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Its date known only to the month or year",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "dashed",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "California",
+      "local": null,
+      "ids": {
+        "newberry": "ca_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692755,
+            "url": "https://www.openhistoricalmap.org/relation/2692755",
+            "name": "California",
+            "start": "1850-09-09",
+            "end": "1959-12-30",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-09-09",
+      "end": "1959-12-30",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ca_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "California",
+      "cut_by_frame": true,
+      "km2": 409345,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ca_state",
+          "version": 1,
+          "change": "The state of California was admitted to the Union.",
+          "authority": "(U.S. Stat., vol. 9, ch. 50[1850], pp. 452-453; Van Zandt, 151)"
+        }
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Territory of Colorado (the Pico Act)",
+      "local": null,
+      "ids": {
+        "would_be": "wb-pico-colorado",
+        "keys": [
+          "wb:pico_colorado",
+          "wb:territory_of_colorado"
+        ]
+      },
+      "start": "1859-04-18",
+      "end": "1859-12-31",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1859-04-18",
+        "end": "1859"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Proposed territory (not recognized))"
+      },
+      "diff_role": null,
+      "keyed_as": "Proposed territory (not recognized)",
+      "would_be": {
+        "kind": "Proposed territory (not recognized)",
+        "date_known_to_the_day_today": false,
+        "known_to": "year",
+        "edge": "dashed"
+      },
+      "lit": true,
+      "lit_by": "wb:pico_colorado",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Territory of Colorado",
+      "cut_by_frame": false,
+      "km2": 147437,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb-counties:CA",
+        "counties": [
+          "San Luis Obispo",
+          "Santa Barbara",
+          "Los Angeles",
+          "San Diego",
+          "San Bernardino"
+        ],
+        "cut": null,
+        "shapes_of": "1859-04-18",
+        "cut_from": [
+          {
+            "id": "cas_sandiego",
+            "v": 2,
+            "name": "SAN DIEGO (CA)",
+            "start": 18510425,
+            "end": 18721231
+          },
+          {
+            "id": "cas_losangeles",
+            "v": 3,
+            "name": "LOS ANGELES (CA)",
+            "start": 18530426,
+            "end": 18660401
+          },
+          {
+            "id": "cas_sanbernardino",
+            "v": 1,
+            "name": "SAN BERNARDINO (CA)",
+            "start": 18530426,
+            "end": 18721231
+          },
+          {
+            "id": "cas_sanluisobispo",
+            "v": 4,
+            "name": "SAN LUIS OBISPO (CA)",
+            "start": 18540513,
+            "end": 18610512
+          },
+          {
+            "id": "cas_santabarbara",
+            "v": 4,
+            "name": "SANTA BARBARA (CA)",
+            "start": 18540513,
+            "end": 18721231
+          }
+        ],
+        "record": {
+          "id": "wb-pico-colorado",
+          "kind": "Proposed territory (not recognized)",
+          "start": "1859-04-18",
+          "end": "1859",
+          "source": "Statutes of California, 1859, chapter 288, approved 18 April 1859: \"including the counties of San Luis Obispo, Santa Barbara, Los Angeles, San Diego, San Bernardino, and a part of Buena Vista\"; approved by the voters of those counties on 7 September 1859 (J. M. Guinn, 1905; Statehood Campaigns outline, Appendix A)",
+          "note": "Drawn as the five counties the act names, on the day it was approved, from the Newberry's county lines. The act's line follows survey lines (the sixth and seventh standard parallels south of the Mount Diablo meridian) and takes in part of Buena Vista County, never organized and then part of Tulare: that part is not drawn. Congress never acted; the outline dates it to 1859, so the end is known to the year, drawn dashed. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico",
+      "local": "México",
+      "ids": {
+        "ohm": 2862373,
+        "wikidata": "Q7443295"
+      },
+      "start": "1859-04-30",
+      "end": "1863-07-10",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mexico",
+      "cut_by_frame": true,
+      "km2": 2053126,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2862373",
+        "license": "CC0 1.0",
+        "wikidata": "Q7443295",
+        "notes": {
+          "start_event": "Wyke-Aycinena Treaty, cedes territory to Br. Honduras",
+          "end_event": "Second Mexican Empire begins",
+          "wikipedia": "en:Second Federal Republic of Mexico"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Mexico Territory",
+      "local": null,
+      "ids": {
+        "newberry": "nm_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692796,
+            "url": "https://www.openhistoricalmap.org/relation/2692796",
+            "name": "New Mexico Territory",
+            "start": "1854-08-04",
+            "end": "1861-02-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1854-08-04",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Mexico Territory",
+      "cut_by_frame": true,
+      "km2": 679765,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_terr",
+          "version": 2,
+          "change": "The territory acquired by the United States in the Gadsden Purchase was officially added to New Mexico Territory.",
+          "authority": "(U.S. Stat., vol. 10, ch. 245[1854]/p. 575; Van Zandt, 162; Walker and Bufkin, 21-22)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Utah Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ut_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692785,
+            "url": "https://www.openhistoricalmap.org/relation/2692785",
+            "name": "Utah Territory",
+            "start": "1850-09-09",
+            "end": "1861-02-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-09-09",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Utah Territory",
+      "cut_by_frame": true,
+      "km2": 604824,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ut_terr",
+          "version": 1,
+          "change": "The United States created Utah Territory from the territory ceded by Mexico in the Treaty of Guadalupe-Hidalgo (1848), from territory to be purchased from the state of Texas in December 1850, and from unorganized federal territory.",
+          "authority": "(U.S. Stat., vol. 9, ch. 49[1850]/pp. 446-452 and ch. 51[1850]/pp. 453-458; Van Zandt, 159)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Sonora",
+      "local": null,
+      "ids": {
+        "ohm": 2841239,
+        "wikidata": "Q46422"
+      },
+      "start": "1854-06-08",
+      "end": "1865-03-03",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 180447,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841239",
+        "license": "CC0 1.0",
+        "wikidata": "Q46422",
+        "notes": {
+          "start_event": "Gadsden purchase",
+          "end_event": "Emperor Maximilian decrees new administrative regions",
+          "wikipedia": "en:Sonora"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Viceroyalty of New Spain",
+      "local": "Nueva España",
+      "ids": {
+        "ohm": 2861473,
+        "wikidata": "Q170603"
+      },
+      "start": "1854-01-01",
+      "end": "1861-03-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "other",
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 170331,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2861473",
+        "license": "CC0 1.0",
+        "wikidata": "Q170603",
+        "notes": {
+          "start_event": "Puerto Rico annexes Vieques",
+          "end_event": "Spain annexes Dominican Rep",
+          "wikipedia": "en:New Spain"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Baja California",
+      "local": null,
+      "ids": {
+        "ohm": 2867215,
+        "wikidata": "Q58731"
+      },
+      "start": "1824-10-04",
+      "end": "1865-03-03",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 148188,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2867215",
+        "license": "CC0 1.0",
+        "wikidata": "Q58731",
+        "notes": {
+          "start_event": "Californias divided",
+          "end_event": "Emperor Maximilian decrees new administrative regions",
+          "wikipedia": "en:Baja California"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1528,
+      "y": 852,
+      "w": 338,
+      "h": 142,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "Territory of Colorado (the Pico Act): on this date its record is known only to the year (1859-04-18–1859); its edge is dashed",
+    "Territory of Colorado (the Pico Act): The act's line follows survey lines (the sixth and seventh standard parallels south of the Mount Diablo meridian) and takes in part of Buena Vista County, never organized and then part of Tulare: that part is not drawn."
+  ],
+  "alt_text": "Parchment map, 1 June 1859, states and territories, framed on a box of the continent, titled \"The Pico Act, 1859\". Shaded: California in blue. Hatched in rust: proposed territory (not recognized). Named on the map: California and Territory of Colorado.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the Newberry Library along their documents' lines",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1859-06-01&tracker=states&frame=-124.6%2C32.3%2C-113.8%2C38.6&highlight=wb%3Apico_colorado%2Cnb%3Aca_state&title=The+Pico+Act%2C+1859"
+  }
+}

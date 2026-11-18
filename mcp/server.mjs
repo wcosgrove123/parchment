@@ -35,7 +35,7 @@ const ORDER_SCHEMA = {
     from: { type: 'string', description: 'For a Diff (what changed between two dates): the earlier date.' },
     tracker: { type: 'string', enum: ['nations', 'states', 'cessions', 'population', 'electoral', 'insular'], description: 'On the world page: insular (the default) or states.' },
     frame: { type: 'string', description: 'A frame id (list_frames) or a box "W,S,E,N" in degrees.' },
-    highlight: { type: 'array', items: { type: 'string' }, description: 'Ids to light: a power (mexico, united-states), a polygon by its name (coahuila-y-tejas, texas-republic) or its id (ohm:2841297, nb:tx_republic). Everything else drops to paper.' },
+    highlight: { type: 'array', items: { type: 'string' }, description: 'Ids to light: a power (mexico, united-states), a polygon by its name (coahuila-y-tejas, texas-republic) or its id (ohm:2841297, nb:tx_republic), a would-be state by its wb: key (wb:franklin, wb:jefferson_1784; docs/LESSON-MAPS.md), or on the world page an island territory by its ia: key (ia:pr, ia:ttpi). Everything else drops to paper.' },
     annotate: {
       type: 'object',
       properties: {

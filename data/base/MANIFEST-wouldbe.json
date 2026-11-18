@@ -1,0 +1,68 @@
+{
+  "generated": "2026-11-18T22:57:01.746Z",
+  "stage": "north america (would-be states)",
+  "note": "Written by scripts/fetch-wouldbe.mjs. Raw downloads live in data/base/raw/wouldbe/ (not committed). scripts/derive-wouldbe.mjs writes data/us/wouldbe.topojson.",
+  "entries": [
+    {
+      "source": "newberry-ahcb-counties",
+      "license": "Newberry Library terms: any lawful purpose, commercial or non-commercial, no fees (https://www.newberry.org/rights-and-reproductions); files also carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored",
+      "attribution": "Atlas of Historical County Boundaries, ed. John H. Long. Chicago: The Newberry Library. https://publications.newberry.org/ahcb/",
+      "layer": "NC historical counties",
+      "url": "https://publications.newberry.org/ahcb/downloads/gis/NC_AtlasHCB.zip",
+      "file": "data/base/raw/wouldbe/NC_AtlasHCB.zip",
+      "bytes": 17119639,
+      "sha256": "0abe048852ee1b8a5344b905dc3bedca7612025dacc8df57be4236f3400b0a0b",
+      "retrieved": "2026-11-18T22:40:38.681Z",
+      "cached": true
+    },
+    {
+      "source": "newberry-ahcb-counties",
+      "license": "Newberry Library terms: any lawful purpose, commercial or non-commercial, no fees (https://www.newberry.org/rights-and-reproductions); files also carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored",
+      "attribution": "Atlas of Historical County Boundaries, ed. John H. Long. Chicago: The Newberry Library. https://publications.newberry.org/ahcb/",
+      "layer": "TN historical counties",
+      "url": "https://publications.newberry.org/ahcb/downloads/gis/TN_AtlasHCB.zip",
+      "file": "data/base/raw/wouldbe/TN_AtlasHCB.zip",
+      "bytes": 11615722,
+      "sha256": "f7e9786f889506cddffceb0f08a3efc44c9c9e9b41a603a6634424f08f637c59",
+      "retrieved": "2026-11-18T22:40:39.345Z",
+      "cached": true
+    },
+    {
+      "source": "newberry-ahcb-counties",
+      "license": "Newberry Library terms: any lawful purpose, commercial or non-commercial, no fees (https://www.newberry.org/rights-and-reproductions); files also carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored",
+      "attribution": "Atlas of Historical County Boundaries, ed. John H. Long. Chicago: The Newberry Library. https://publications.newberry.org/ahcb/",
+      "layer": "CA historical counties",
+      "url": "https://publications.newberry.org/ahcb/downloads/gis/CA_AtlasHCB.zip",
+      "file": "data/base/raw/wouldbe/CA_AtlasHCB.zip",
+      "bytes": 10624147,
+      "sha256": "34792986f27154b575cc5170a56a19ded010f09f4136959bfe843baa449d977e",
+      "retrieved": "2026-11-18T22:40:39.749Z",
+      "cached": true
+    },
+    {
+      "source": "newberry-ahcb-counties",
+      "license": "Newberry Library terms: any lawful purpose, commercial or non-commercial, no fees (https://www.newberry.org/rights-and-reproductions); files also carry the original CC BY-NC-SA 2.5 deed, which the Library says may be ignored",
+      "attribution": "Atlas of Historical County Boundaries, ed. John H. Long. Chicago: The Newberry Library. https://publications.newberry.org/ahcb/",
+      "layer": "OR historical counties",
+      "url": "https://publications.newberry.org/ahcb/downloads/gis/OR_AtlasHCB.zip",
+      "file": "data/base/raw/wouldbe/OR_AtlasHCB.zip",
+      "bytes": 17350148,
+      "sha256": "3588045370b1f243ff386aaa28eb0bbe361387c1d65ed90c259d9564407eb97b",
+      "retrieved": "2026-11-18T22:40:40.689Z",
+      "cached": true
+    },
+    {
+      "source": "census-cartographic-boundary",
+      "license": "public domain (U.S. government work)",
+      "attribution": "U.S. Census Bureau, cartographic boundary file, Counties, 2025 (1:500,000)",
+      "layer": "counties",
+      "url": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip",
+      "file": "data/base/raw/wouldbe/cb_2025_us_county_500k.zip",
+      "bytes": 11758981,
+      "sha256": "aa976c00b181939755d0da757f4c7c2dc0103c3b3b4530fb2a91c2bb62fc777c",
+      "retrieved": "2026-11-18T22:40:42.760Z",
+      "cached": true
+    }
+  ],
+  "failures": []
+}

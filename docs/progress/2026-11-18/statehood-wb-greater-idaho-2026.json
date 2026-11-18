@@ -1,0 +1,810 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "2026-06-01",
+    "tracker": "states",
+    "title": "Greater Idaho, 2026",
+    "frame": "-125,41.6,-110.8,49.3",
+    "highlight": [
+      "wb:greater_idaho",
+      "nb:or_state",
+      "nb:id_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=2026-06-01&tracker=states&frame=-125%2C41.6%2C-110.8%2C49.3&highlight=wb%3Agreater_idaho%2Cnb%3Aor_state%2Cnb%3Aid_state&title=Greater+Idaho%2C+2026",
+    "mode": "snapshot",
+    "date": "2026-06-01",
+    "date_text": "1 June 2026",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -125,
+        "south": 41.6,
+        "east": -110.8,
+        "north": 49.3
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        117.89999999999998,
+        0
+      ],
+      "parallels": [
+        42.9,
+        48
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "Greater Idaho, 2026",
+    "highlight": {
+      "ids": [
+        "wb:greater_idaho",
+        "nb:or_state",
+        "nb:id_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "Idaho and Oregon",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Counties that voted to join Idaho",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Oregon",
+      "local": null,
+      "ids": {
+        "newberry": "or_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692775,
+            "url": "https://www.openhistoricalmap.org/relation/2692775",
+            "name": "Oregon",
+            "start": "1859-02-14",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1859-02-14",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:or_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Oregon",
+      "cut_by_frame": false,
+      "km2": 250618,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "or_state",
+          "version": 1,
+          "change": "The state of Oregon was created from Oregon Territory; Oregon Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 11, ch. 33[1859], secs. 1-2/pp. 383-384; Ore. Laws 1860, 1st reg. sess., pp. 28-30)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Idaho",
+      "local": null,
+      "ids": {
+        "newberry": "id_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692816,
+            "url": "https://www.openhistoricalmap.org/relation/2692816",
+            "name": "Idaho",
+            "start": "1890-07-03",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1890-07-03",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:id_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Idaho",
+      "cut_by_frame": false,
+      "km2": 215996,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "id_state",
+          "version": 1,
+          "change": "The state of Idaho was created from Idaho Territory; Idaho Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 26, ch. 656 [1890]/pp. 215-219; Van Zandt, 156)"
+        }
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Greater Idaho",
+      "local": null,
+      "ids": {
+        "would_be": "wb-greater-idaho-2026-05-19",
+        "keys": [
+          "wb:greater_idaho"
+        ]
+      },
+      "start": "2026-05-19",
+      "end": "present",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "2026-05-19",
+        "end": null
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Counties that voted to join Idaho)"
+      },
+      "diff_role": null,
+      "keyed_as": "Counties that voted to join Idaho",
+      "would_be": {
+        "kind": "Counties that voted to join Idaho",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:greater_idaho",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Greater Idaho",
+      "cut_by_frame": false,
+      "km2": 138774,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "census-counties:41",
+        "counties": [
+          "Jefferson",
+          "Union",
+          "Baker",
+          "Grant",
+          "Lake",
+          "Malheur",
+          "Sherman",
+          "Harney",
+          "Klamath",
+          "Morrow",
+          "Wheeler",
+          "Crook"
+        ],
+        "cut": null,
+        "shapes_of": "2026-05-19",
+        "cut_from": [
+          {
+            "id": "41035",
+            "name": "Klamath County (OR)"
+          },
+          {
+            "id": "41055",
+            "name": "Sherman County (OR)"
+          },
+          {
+            "id": "41023",
+            "name": "Grant County (OR)"
+          },
+          {
+            "id": "41045",
+            "name": "Malheur County (OR)"
+          },
+          {
+            "id": "41031",
+            "name": "Jefferson County (OR)"
+          },
+          {
+            "id": "41001",
+            "name": "Baker County (OR)"
+          },
+          {
+            "id": "41061",
+            "name": "Union County (OR)"
+          },
+          {
+            "id": "41025",
+            "name": "Harney County (OR)"
+          },
+          {
+            "id": "41037",
+            "name": "Lake County (OR)"
+          },
+          {
+            "id": "41049",
+            "name": "Morrow County (OR)"
+          },
+          {
+            "id": "41069",
+            "name": "Wheeler County (OR)"
+          },
+          {
+            "id": "41013",
+            "name": "Crook County (OR)"
+          }
+        ],
+        "record": {
+          "id": "wb-greater-idaho-2026-05-19",
+          "kind": "Counties that voted to join Idaho",
+          "start": "2026-05-19",
+          "end": null,
+          "source": "Greater Idaho countywide ballot measures, 2020–2024 (Ballotpedia); OPB, 17 May and 9 November 2022; JPR, 19 May 2021; The Oregonian, 20 May 2026 (Wallowa's repeal)",
+          "note": "Each county from the day its voters approved a Greater Idaho measure: Jefferson and Union, 3 November 2020; Baker, Grant, Lake, Malheur and Sherman, 18 May 2021; Harney, 2 November 2021; Klamath, 17 May 2022; Morrow and Wheeler, 8 November 2022; Wallowa, 16 May 2023 (1,752 to 1,745), repealed 19 May 2026; Crook, 21 May 2024. Today's county lines (the Census Bureau, 2025). A boundary change, not a new state. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Canada",
+      "local": null,
+      "ids": {
+        "ohm": 2831059,
+        "wikidata": "Q16"
+      },
+      "start": "2023-12-19",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Canada",
+      "cut_by_frame": true,
+      "km2": 12126333,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831059",
+        "license": "CC0 1.0",
+        "wikidata": "Q16",
+        "notes": {
+          "start_event": "Hans Island border dispute settled with Denmark",
+          "wikipedia": "en:Canada"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "British Columbia",
+      "local": null,
+      "ids": {
+        "ohm": 2831075,
+        "wikidata": "Q1973"
+      },
+      "start": "1903-03-03",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "British Columbia",
+      "cut_by_frame": true,
+      "km2": 981907,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831075",
+        "license": "CC0 1.0",
+        "wikidata": "Q1973",
+        "notes": {
+          "start_event": "BC cedes claim to Alaska",
+          "wikipedia": "en:British Columbia"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Alberta",
+      "local": null,
+      "ids": {
+        "ohm": 2831072,
+        "wikidata": "Q1951"
+      },
+      "start": "1905-09-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Alberta",
+      "cut_by_frame": true,
+      "km2": 664051,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831072",
+        "license": "CC0 1.0",
+        "wikidata": "Q1951",
+        "notes": {
+          "start_event": "Alberta created from NWT",
+          "wikipedia": "en:Alberta"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Saskatchewan",
+      "local": null,
+      "ids": {
+        "ohm": 2831073,
+        "wikidata": "Q1989"
+      },
+      "start": "1905-09-01",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "britain",
+      "power_label": "Canada and British colonies",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Saskatchewan",
+      "cut_by_frame": true,
+      "km2": 649033,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2831073",
+        "license": "CC0 1.0",
+        "wikidata": "Q1989",
+        "notes": {
+          "start_event": "Saskatchewan created from NWT",
+          "wikipedia": "en:Saskatchewan"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "California",
+      "local": null,
+      "ids": {
+        "newberry": "ca_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692754,
+            "url": "https://www.openhistoricalmap.org/relation/2692754",
+            "name": "California",
+            "start": "1959-12-31",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1959-12-31",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "California",
+      "cut_by_frame": true,
+      "km2": 409345,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ca_state",
+          "version": 2,
+          "change": "Between 1949 and 1959 (precise date unknown) SAN FRANCISCO gained a small area of the Alameda Naval Air Station when landfill expansion extended westward over the county line between SAN FRANCISCO and ALAMEDA in San Francisco Bay.",
+          "authority": "(U.S.G.S., 7.5 Minute Series, Oakland West Quadrangle, \";Edition of 1949\"; and \";Edition of 1959\";)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Montana",
+      "local": null,
+      "ids": {
+        "newberry": "mt_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692845,
+            "url": "https://www.openhistoricalmap.org/relation/2692845",
+            "name": "Montana",
+            "start": "1889-11-08",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1889-11-08",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Montana",
+      "cut_by_frame": true,
+      "km2": 379851,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mt_state",
+          "version": 1,
+          "change": "The state of Montana created from Montana Territory and to the Union by Presidential proclamation; Montana Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 26, pp. 1551-1552 and vol. 25, ch. 180 [1889]/pp. 676-684; Swindler, 6:82-83)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Nevada",
+      "local": null,
+      "ids": {
+        "newberry": "nv_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692781,
+            "url": "https://www.openhistoricalmap.org/relation/2692781",
+            "name": "Nevada",
+            "start": "1866-05-05",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1866-05-05",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nevada",
+      "cut_by_frame": true,
+      "km2": 286086,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nv_state",
+          "version": 2,
+          "change": "Nevada Territory gained from Utah Territory and from Arizona Territory.",
+          "authority": "(U.S. Stat., vol. 14, ch. 73[1866]/p. 43; Van Zandt, 158, 165; Nev. Stats. 1866, 2d sess., ch. 84/p. 183)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Wyoming",
+      "local": null,
+      "ids": {
+        "newberry": "wy_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692817,
+            "url": "https://www.openhistoricalmap.org/relation/2692817",
+            "name": "Wyoming",
+            "start": "1890-07-10",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1890-07-10",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Wyoming",
+      "cut_by_frame": true,
+      "km2": 252891,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wy_state",
+          "version": 1,
+          "change": "The state of Wyoming was created from Wyoming Territory; Wyoming Territory eliminated.",
+          "authority": "(Wyoming Constitution 1889, art. 12 in Swindler, 10:493; U.S. Stat., vol. 26, ch. 664[1890]/pp. 222-226; Van Zandt, 145)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Utah",
+      "local": null,
+      "ids": {
+        "newberry": "ut_state",
+        "newberry_version": 1
+      },
+      "start": "1896-01-04",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Utah",
+      "cut_by_frame": true,
+      "km2": 219641,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ut_state",
+          "version": 1,
+          "change": "The state of Utah was created from Utah Territory; Utah Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 28, ch. 138 [1894]/pp. 107-112; U.S. Stat., vol. 29, procl. no. 9, [1896]/pp. 876-877; Van Zandt, 159)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Washington",
+      "local": null,
+      "ids": {
+        "newberry": "wa_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692780,
+            "url": "https://www.openhistoricalmap.org/relation/2692780",
+            "name": "Washington",
+            "start": "1889-11-11",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1889-11-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Washington",
+      "cut_by_frame": false,
+      "km2": 174570,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wa_state",
+          "version": 1,
+          "change": "The state of Washington was created from Washington Territory; Washington Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 25, ch. 180[1889], p. 676; U.S. Stat. pres. proc., vol. 26[1889], p. 10; Van Zandt, 155-156)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1581,
+      "y": 874,
+      "w": 285,
+      "h": 120,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "Newberry's record ends on 31 December 2000; its polygons in force that day are held open to the present"
+  ],
+  "alt_text": "Parchment map, 1 June 2026, states and territories, framed on a box of the continent, titled \"Greater Idaho, 2026\". Shaded: Idaho and Oregon in blue. Hatched in rust: counties that voted to join Idaho. Named on the map: Oregon, Idaho and Greater Idaho.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the U.S. Census Bureau along their documents' lines",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=2026-06-01&tracker=states&frame=-125%2C41.6%2C-110.8%2C49.3&highlight=wb%3Agreater_idaho%2Cnb%3Aor_state%2Cnb%3Aid_state&title=Greater+Idaho%2C+2026"
+  }
+}

@@ -1,0 +1,878 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1860-01-01",
+    "tracker": "states",
+    "title": "Jefferson Territory, 1860",
+    "frame": "-114,35.2,-97.5,45",
+    "highlight": [
+      "wb:jefferson_territory",
+      "nb:ks_terr",
+      "nb:ne_terr",
+      "nb:ut_terr",
+      "nb:nm_terr"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1860-01-01&tracker=states&frame=-114%2C35.2%2C-97.5%2C45&highlight=wb%3Ajefferson_territory%2Cnb%3Aks_terr%2Cnb%3Ane_terr%2Cnb%3Aut_terr%2Cnb%3Anm_terr&title=Jefferson+Territory%2C+1860",
+    "mode": "snapshot",
+    "date": "1860-01-01",
+    "date_text": "1 January 1860",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -114,
+        "south": 35.2,
+        "east": -97.5,
+        "north": 45
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "conicEqualArea",
+      "rotate": [
+        105.75,
+        0
+      ],
+      "parallels": [
+        36.8,
+        43.4
+      ],
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "Jefferson Territory, 1860",
+    "highlight": {
+      "ids": [
+        "wb:jefferson_territory",
+        "nb:ks_terr",
+        "nb:ne_terr",
+        "nb:ut_terr",
+        "nb:nm_terr"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "Kansas Territory, Nebraska Territory and 2 more",
+        "swatch": "fill",
+        "key": "In",
+        "fill": "#78b58a",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Proposed territory (not recognized)",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Nebraska Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ne_terr",
+        "newberry_version": 1
+      },
+      "start": "1854-05-30",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ne_terr",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Nebraska Territory",
+      "cut_by_frame": true,
+      "km2": 913468,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ne_terr",
+          "version": 1,
+          "change": "The United States created Nebraska Territory from unorganized federal territory. Nebraska Territory included all of present Nebraska and parts of present Colorado, Montana, North Dakota, South Dakota, and Wyoming.",
+          "authority": "(U.S. Stat., vol. 10, ch. 59[1854]/p. 277; Van Zandt, 136-137)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Mexico Territory",
+      "local": null,
+      "ids": {
+        "newberry": "nm_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692796,
+            "url": "https://www.openhistoricalmap.org/relation/2692796",
+            "name": "New Mexico Territory",
+            "start": "1854-08-04",
+            "end": "1861-02-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1854-08-04",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:nm_terr",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "New Mexico Territory",
+      "cut_by_frame": true,
+      "km2": 679765,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_terr",
+          "version": 2,
+          "change": "The territory acquired by the United States in the Gadsden Purchase was officially added to New Mexico Territory.",
+          "authority": "(U.S. Stat., vol. 10, ch. 245[1854]/p. 575; Van Zandt, 162; Walker and Bufkin, 21-22)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Utah Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ut_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692785,
+            "url": "https://www.openhistoricalmap.org/relation/2692785",
+            "name": "Utah Territory",
+            "start": "1850-09-09",
+            "end": "1861-02-27",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-09-09",
+      "end": "1861-02-27",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ut_terr",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Utah Territory",
+      "cut_by_frame": true,
+      "km2": 604824,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ut_terr",
+          "version": 1,
+          "change": "The United States created Utah Territory from the territory ceded by Mexico in the Treaty of Guadalupe-Hidalgo (1848), from territory to be purchased from the state of Texas in December 1850, and from unorganized federal territory.",
+          "authority": "(U.S. Stat., vol. 9, ch. 49[1850]/pp. 446-452 and ch. 51[1850]/pp. 453-458; Van Zandt, 159)"
+        }
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "Territory of Jefferson",
+      "local": null,
+      "ids": {
+        "would_be": "wb-jefferson-territory",
+        "keys": [
+          "wb:jefferson_territory",
+          "wb:jefferson_1859"
+        ]
+      },
+      "start": "1859-10-24",
+      "end": "1861-02-27",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1859-10-24",
+        "end": "1861-02-27"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Proposed territory (not recognized))"
+      },
+      "diff_role": null,
+      "keyed_as": "Proposed territory (not recognized)",
+      "would_be": {
+        "kind": "Proposed territory (not recognized)",
+        "date_known_to_the_day_today": true,
+        "known_to": "day",
+        "edge": "solid"
+      },
+      "lit": true,
+      "lit_by": "wb:jefferson_territory",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Jefferson Territory",
+      "cut_by_frame": false,
+      "km2": 454412,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb-us",
+        "counties": null,
+        "cut": "lat:37..43; lon:-110..-102 (-110.0000..-102.0000)",
+        "shapes_of": "1859-10-24",
+        "cut_from": [
+          {
+            "id": "ks_terr",
+            "v": 1,
+            "name": "Kansas Territory",
+            "km2": 91934
+          },
+          {
+            "id": "ne_terr",
+            "v": 1,
+            "name": "Nebraska Territory",
+            "km2": 161687
+          },
+          {
+            "id": "nm_terr",
+            "v": 2,
+            "name": "New Mexico Territory",
+            "km2": 510102922
+          },
+          {
+            "id": "uf_terr",
+            "v": 15,
+            "name": "Unorganized Federal Territory",
+            "km2": 1
+          },
+          {
+            "id": "ut_terr",
+            "v": 1,
+            "name": "Utah Territory",
+            "km2": 156246
+          },
+          {
+            "id": "wa_terr",
+            "v": 2,
+            "name": "Washington Territory",
+            "km2": 8431
+          }
+        ],
+        "record": {
+          "id": "wb-jefferson-territory",
+          "kind": "Proposed territory (not recognized)",
+          "start": "1859-10-24",
+          "end": "1861-02-27",
+          "source": "Resolution of the Auraria convention, 15 April 1859, printed in the Cherry Creek Pioneer, 23 April 1859: from the 43rd parallel at the 102nd meridian west to the 110th, south to the 37th parallel, east to the 102nd; the organic act ratified on 24 October 1859 kept those bounds (J. C. Smiley, Semi-centennial History of the State of Colorado, 1913); Colorado Territory from 28 February 1861 (the Newberry)",
+          "note": "The convention's text reckons the meridians \"from Washington city\"; every later text, and this map, reads them from Greenwich. The organic act's own text was not found: its bounds rest on Smiley. Not yet reviewed by the owner."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Kansas Territory",
+      "local": null,
+      "ids": {
+        "newberry": "ks_terr",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692903,
+            "url": "https://www.openhistoricalmap.org/relation/2692903",
+            "name": "Kansas Territory",
+            "start": "1854-05-30",
+            "end": "1861-01-28",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1854-05-30",
+      "end": "1861-01-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "In",
+        "color": "#78b58a",
+        "name": "green"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:ks_terr",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Kansas Territory",
+      "cut_by_frame": false,
+      "km2": 303609,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ks_terr",
+          "version": 1,
+          "change": "The United States created Kansas Territory from unorganized federal territory; included all of present Kansas and part of present Colorado.",
+          "authority": "(Van Zandt, 138-139)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Texas",
+      "local": null,
+      "ids": {
+        "newberry": "tx_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692904,
+            "url": "https://www.openhistoricalmap.org/relation/2692904",
+            "name": "Texas",
+            "start": "1850-12-13",
+            "end": "1896-05-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-12-13",
+      "end": "1896-05-03",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Texas",
+      "cut_by_frame": true,
+      "km2": 692360,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tx_state",
+          "version": 2,
+          "change": "State of Texas sold land in present Colorado, Kansas, New Mexico, Oklahoma, and Wyoming to the United States.",
+          "authority": "(U.S. Stat., vol. 9, ch. 49 [1850]/pp. 446-452 and appendix, sec. 10/pp. 1005-1006; Texas Laws 1850, 3d leg., 3d sess., ch. 2/p. 4; Van Zandt, 122)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Washington Territory",
+      "local": null,
+      "ids": {
+        "newberry": "wa_terr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692777,
+            "url": "https://www.openhistoricalmap.org/relation/2692777",
+            "name": "Washington Territory",
+            "start": "1859-02-14",
+            "end": "1861-03-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1859-02-14",
+      "end": "1861-03-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Washington Territory",
+      "cut_by_frame": true,
+      "km2": 486983,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "wa_terr",
+          "version": 2,
+          "change": "Washington Territory gained non-county area when the state of Oregon was created from Oregon Territory. Non-County Area 2 included parts of present Idaho, Montana, and Wyoming.",
+          "authority": "(Ore. Laws 1860, 1st reg. sess., pp. 28-30; Van Zandt, p. 155)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 15,
+        "also_in_ohm": [
+          {
+            "ohm": 2692999,
+            "url": "https://www.openhistoricalmap.org/relation/2692999",
+            "name": "Unattached No Man's Land",
+            "start": "1850-12-13",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2800173,
+            "url": "https://www.openhistoricalmap.org/relation/2800173",
+            "name": "Unorganized Federal Territory",
+            "start": "1858-05-11",
+            "end": "1861-03-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1858-05-11",
+      "end": "1861-01-28",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorganized Federal Territory",
+      "cut_by_frame": true,
+      "km2": 229798,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 15,
+          "change": "The state of Minnesota was created from Minnesota Territory; Minnesota Territory eliminated. That part of present North and South Dakota east of the Missouri and White Earth Rivers became unorganized federal territory.",
+          "authority": "(U.S. Stat., vol. 11, ch. 60[1857]/pp. 166-167 and ch. 31[1858]/p. 285; Schell, 72-77; Van Zandt, 133)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Minnesota",
+      "local": null,
+      "ids": {
+        "newberry": "mn_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692938,
+            "url": "https://www.openhistoricalmap.org/relation/2692938",
+            "name": "Minnesota",
+            "start": "1858-05-11",
+            "end": "1947-04-25",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          },
+          {
+            "ohm": 2796665,
+            "url": "https://www.openhistoricalmap.org/relation/2796665",
+            "name": "Minnesota",
+            "start": "1947-04-26",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1858-05-11",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Minnesota",
+      "cut_by_frame": true,
+      "km2": 217997,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mn_state",
+          "version": 1,
+          "change": "The state of Minnesota was created from Minnesota Territory;  Minnesota Territory eliminated. The remainder of Minnesota Territory (west of the present state boundary) became unorganized federal territory.",
+          "authority": "(Schell, 72-77; U.S. Stat., vol. 11, ch. 60 [1857]/pp. 166-167 and ch. 31 [1858]/p. 285)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Shoshone",
+      "local": null,
+      "ids": {
+        "ohm": 2953509,
+        "wikidata": "Q26774"
+      },
+      "start": "1700-01-01",
+      "end": "1877-04-16",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Shoshone",
+      "cut_by_frame": false,
+      "km2": 182785,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2953509",
+        "license": "CC0 1.0",
+        "wikidata": "Q26774",
+        "notes": {
+          "wikipedia": "en:Shoshone"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Iowa",
+      "local": null,
+      "ids": {
+        "newberry": "ia_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692923,
+            "url": "https://www.openhistoricalmap.org/relation/2692923",
+            "name": "Iowa",
+            "start": "1846-12-28",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1846-12-28",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Iowa",
+      "cut_by_frame": true,
+      "km2": 145511,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ia_state",
+          "version": 1,
+          "change": "The state of Iowa was created from Iowa Territory; Iowa Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 9, ch. 1[1847]/p. 117)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Apsáalooke people",
+      "local": null,
+      "ids": {
+        "ohm": 2956042,
+        "wikidata": null
+      },
+      "start": "1851-01-01",
+      "end": "1868-01-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "native",
+      "power_label": "Native nations (approximate)",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Apsáalooke people",
+      "cut_by_frame": true,
+      "km2": 121819,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2956042",
+        "license": "CC0 1.0",
+        "wikidata": null,
+        "notes": {}
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indian Territory",
+      "local": null,
+      "ids": {
+        "newberry": "it_indianterr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692971,
+            "url": "https://www.openhistoricalmap.org/relation/2692971",
+            "name": "Indian Territory",
+            "start": "1828-05-06",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1828-05-06",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 166256,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "it_indianterr",
+          "version": 2,
+          "change": "Indian Territory gained from Arkansas Territory when the Treaty of Washington between the United States and Choctaw Indians definitively established the eastern line of the Choctaw Cession and affirmed Choctaw control of the area west of the line.",
+          "authority": "(U.S. Stat., vol. 7, p. 311; Gabler, 37-39; Royce, 720-721; Van Zandt, 119)"
+        }
+      }
+    },
+    {
+      "layer": "newberry-dispute",
+      "name": "Claimed by both Indian Territory and Texas",
+      "local": null,
+      "ids": {
+        "newberry": [
+          "it_indianterr",
+          "tx_state"
+        ]
+      },
+      "start": "1850-12-13",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": true,
+      "km2": 6150,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of two Newberry polygons; nothing drawn",
+        "from": [
+          {
+            "newberry": "it_indianterr",
+            "version": 2,
+            "name": "Indian Territory"
+          },
+          {
+            "newberry": "tx_state",
+            "version": 2,
+            "name": "Texas"
+          }
+        ],
+        "ended": {
+          "text": "The United States created Oklahoma Territory from Indian Territory and unorganized federal territory (the Oklahoma panhandle or Public Land Strip).",
+          "cite": "(\"Proclamation,\" Weekly Oklahoma State Capital [newspaper], 7 June 1890; U.S. Stat., vol. 26, ch. 182[1890], sec. 4/p. 83; Morris, 116-118; Van Zandt, 139-140)",
+          "id": "it_indianterr",
+          "v": 3
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1477,
+      "y": 874,
+      "w": 389,
+      "h": 120,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "the sources disagree on Washington Territory: the Newberry dates it from 14 February 1859 (\"Washington Territory gained non-county area when the state of Oregon was created from Oregon Territory. Non-County Area 2 included parts of present Idaho, Montana, and Wyoming.\"), and OpenHistoricalMap has San Juan Boundary Dispute (relation 2888729) held by British Empire on this date, until 1 November 1866; the map draws the Newberry's polygon"
+  ],
+  "alt_text": "Parchment map, 1 January 1860, states and territories, framed on a box of the continent, titled \"Jefferson Territory, 1860\". Shaded: Kansas Territory, Nebraska Territory and 2 more in green. Hatched in rust: proposed territory (not recognized). Named on the map: Nebraska Territory, New Mexico Territory, Utah Territory, Jefferson Territory and Kansas Territory.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the Newberry Library along their documents' lines",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1860-01-01&tracker=states&frame=-114%2C35.2%2C-97.5%2C45&highlight=wb%3Ajefferson_territory%2Cnb%3Aks_terr%2Cnb%3Ane_terr%2Cnb%3Aut_terr%2Cnb%3Anm_terr&title=Jefferson+Territory%2C+1860"
+  }
+}

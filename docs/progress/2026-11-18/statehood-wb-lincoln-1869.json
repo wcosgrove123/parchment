@@ -1,0 +1,854 @@
+{
+  "parchment": "parchment-packing-slip/1",
+  "order": {
+    "page": "us",
+    "date": "1869-06-01",
+    "tracker": "states",
+    "title": "The State of Lincoln, 1869",
+    "frame": "-107,25.5,-93.3,36.7",
+    "highlight": [
+      "wb:lincoln",
+      "nb:tx_state"
+    ]
+  },
+  "resolved": {
+    "page": "us.html",
+    "address": "us.html?date=1869-06-01&tracker=states&frame=-107%2C25.5%2C-93.3%2C36.7&highlight=wb%3Alincoln%2Cnb%3Atx_state&title=The+State+of+Lincoln%2C+1869",
+    "mode": "snapshot",
+    "date": "1869-06-01",
+    "date_text": "1 June 1869",
+    "from": null,
+    "tracker": {
+      "id": "states",
+      "title": "States and territories"
+    },
+    "election": null,
+    "frame": {
+      "id": null,
+      "title": null,
+      "box": {
+        "west": -107,
+        "south": 25.5,
+        "east": -93.3,
+        "north": 36.7
+      },
+      "from": "the order (a raw box)"
+    },
+    "projection": {
+      "name": "lambertAzimuthalEqualArea",
+      "rotate": [
+        100.14999999999998,
+        -31.1
+      ],
+      "parallels": null,
+      "chosen_by": "chooseProjection (src/render/focus.js): projection follows the focus"
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080,
+      "sheet_units": [
+        1920,
+        1080
+      ],
+      "scale": 1
+    },
+    "title": "The State of Lincoln, 1869",
+    "highlight": {
+      "ids": [
+        "wb:lincoln",
+        "nb:tx_state"
+      ],
+      "unmatched": [],
+      "off_frame": []
+    },
+    "inset": null,
+    "stage_insets": [],
+    "legend_corner": "bottom-right",
+    "water_names": [
+      "Gulf of Mexico"
+    ],
+    "records_file": null,
+    "status": null,
+    "underground": null,
+    "war": null
+  },
+  "legend": {
+    "title": "States and territories",
+    "rows": [
+      {
+        "label": "Texas",
+        "swatch": "fill",
+        "key": "P",
+        "fill": "#81a6dd",
+        "pattern": null,
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "category"
+      },
+      {
+        "label": "Proposed state (not recognized)",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "area"
+      },
+      {
+        "label": "Its date known only to the month or year",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "dashed",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      },
+      {
+        "label": "Claimed by Indian Territory and Texas",
+        "swatch": "fill",
+        "key": "hatch",
+        "fill": null,
+        "pattern": "hatch-rust",
+        "stroke": null,
+        "dash": null,
+        "shape": null,
+        "heads": null,
+        "role": "dispute"
+      },
+      {
+        "label": "Documented border",
+        "swatch": "line",
+        "key": null,
+        "fill": null,
+        "pattern": null,
+        "stroke": "#1f2a44",
+        "dash": "solid",
+        "shape": null,
+        "heads": null,
+        "role": "border certainty"
+      }
+    ]
+  },
+  "features": [
+    {
+      "layer": "newberry",
+      "name": "Texas",
+      "local": null,
+      "ids": {
+        "newberry": "tx_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692904,
+            "url": "https://www.openhistoricalmap.org/relation/2692904",
+            "name": "Texas",
+            "start": "1850-12-13",
+            "end": "1896-05-03",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1850-12-13",
+      "end": "1896-05-03",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "fill",
+        "key": "P",
+        "color": "#81a6dd",
+        "name": "blue"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "nb:tx_state",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Texas",
+      "cut_by_frame": false,
+      "km2": 692360,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "tx_state",
+          "version": 2,
+          "change": "State of Texas sold land in present Colorado, Kansas, New Mexico, Oklahoma, and Wyoming to the United States.",
+          "authority": "(U.S. Stat., vol. 9, ch. 49 [1850]/pp. 446-452 and appendix, sec. 10/pp. 1005-1006; Texas Laws 1850, 3d leg., 3d sess., ch. 2/p. 4; Van Zandt, 122)"
+        }
+      }
+    },
+    {
+      "layer": "would-be-state",
+      "name": "State of Lincoln",
+      "local": null,
+      "ids": {
+        "would_be": "wb-lincoln",
+        "keys": [
+          "wb:lincoln"
+        ]
+      },
+      "start": "1869-01-01",
+      "end": "1869-12-31",
+      "end_is": "last day; a month or a year where the source gives no day",
+      "dated_as": {
+        "start": "1869",
+        "end": "1869"
+      },
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (Proposed state (not recognized))"
+      },
+      "diff_role": null,
+      "keyed_as": "Proposed state (not recognized)",
+      "would_be": {
+        "kind": "Proposed state (not recognized)",
+        "date_known_to_the_day_today": false,
+        "known_to": "year",
+        "edge": "dashed"
+      },
+      "lit": true,
+      "lit_by": "wb:lincoln",
+      "lit_as_named": true,
+      "labeled": true,
+      "label": "Lincoln",
+      "cut_by_frame": false,
+      "km2": 320153,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-wouldbe.mjs) from downloaded shapes, along the line the would-be state's own document drew; nothing drawn",
+        "base": "nb:tx_state",
+        "counties": null,
+        "cut": "river:Colorado@-104,28,-95.5,34:left (Natural Earth's Colorado, 1211 km from its mouth to its head, 8 pieces)",
+        "shapes_of": "1869-01-01",
+        "cut_from": [
+          {
+            "id": "tx_state",
+            "v": 2,
+            "name": "Texas",
+            "km2": 320152
+          }
+        ],
+        "record": {
+          "id": "wb-lincoln",
+          "kind": "Proposed state (not recognized)",
+          "start": "1869",
+          "end": "1869",
+          "source": "Handbook of Texas, \"Division of Texas\" (Claude Elliott): an 1869 proposal in Congress to divide Texas along the Colorado River, \"the part south and west to be designated the state of Lincoln\"; it never left committee (Statehood Campaigns outline, Appendix A)",
+          "note": "Cut at Natural Earth's Colorado River of Texas, as the Nueces cut was made (the owner, 2026-11-18). The source does not say where the line runs beyond the river's head. Known to the year only: drawn dashed. Not yet reviewed by the owner. Natural Earth's Colorado stops short of the land's edge: its mouth carried 0.5 km to the edge, its head carried 2.0 km to the edge, straight to the nearest point."
+        },
+        "table": "data/us/wouldbe-states.csv"
+      }
+    },
+    {
+      "layer": "newberry-dispute",
+      "name": "Claimed by both Indian Territory and Texas",
+      "local": null,
+      "ids": {
+        "newberry": [
+          "it_indianterr",
+          "tx_state"
+        ]
+      },
+      "start": "1850-12-13",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": null,
+      "power_label": null,
+      "look": {
+        "kind": "pattern",
+        "pattern": "rust hatch (overlap or dispute)"
+      },
+      "diff_role": null,
+      "lit": true,
+      "lit_by": "(a side is lit)",
+      "lit_as_named": true,
+      "labeled": false,
+      "label": null,
+      "cut_by_frame": false,
+      "km2": 6150,
+      "source": {
+        "dataset": "Computed by Parchment (scripts/derive-us-disputes.mjs): the overlap of two Newberry polygons; nothing drawn",
+        "from": [
+          {
+            "newberry": "it_indianterr",
+            "version": 2,
+            "name": "Indian Territory"
+          },
+          {
+            "newberry": "tx_state",
+            "version": 2,
+            "name": "Texas"
+          }
+        ],
+        "ended": {
+          "text": "The United States created Oklahoma Territory from Indian Territory and unorganized federal territory (the Oklahoma panhandle or Public Land Strip).",
+          "cite": "(\"Proclamation,\" Weekly Oklahoma State Capital [newspaper], 7 June 1890; U.S. Stat., vol. 26, ch. 182[1890], sec. 4/p. 83; Morris, 116-118; Van Zandt, 139-140)",
+          "id": "it_indianterr",
+          "v": 3
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Mexico",
+      "local": "México",
+      "ids": {
+        "ohm": 2841217,
+        "wikidata": "Q5788450"
+      },
+      "start": "1867-06-19",
+      "end": "1883-05-01",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Mexico",
+      "cut_by_frame": true,
+      "km2": 2032455,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841217",
+        "license": "CC0 1.0",
+        "wikidata": "Q5788450",
+        "notes": {
+          "start_event": "Second empire ends",
+          "end_event": "Ratification of 1882 Herrera-Mariscal Treaty",
+          "wikipedia": "en:Restored Republic"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "New Mexico Territory",
+      "local": null,
+      "ids": {
+        "newberry": "nm_terr",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2692802,
+            "url": "https://www.openhistoricalmap.org/relation/2692802",
+            "name": "New Mexico Territory",
+            "start": "1863-02-24",
+            "end": "1912-01-05",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1863-02-24",
+      "end": "1912-01-05",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "New Mexico Territory",
+      "cut_by_frame": true,
+      "km2": 314976,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "nm_terr",
+          "version": 4,
+          "change": "The United States created Arizona Territory from New Mexico Territory.",
+          "authority": "(U.S. Stat., vol. 12, pp. 664-665; Van Zandt, 165)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Chihuahua",
+      "local": null,
+      "ids": {
+        "ohm": 2964397,
+        "wikidata": "Q655"
+      },
+      "start": "1867-07-15",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Chihuahua",
+      "cut_by_frame": false,
+      "km2": 247793,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2964397",
+        "license": "CC0 1.0",
+        "wikidata": "Q655",
+        "notes": {
+          "start_event": "President Benito Juárez restores the republic",
+          "wikipedia": "en:Chihuahua (state)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Missouri",
+      "local": null,
+      "ids": {
+        "newberry": "mo_state",
+        "newberry_version": 4,
+        "also_in_ohm": [
+          {
+            "ohm": 2692941,
+            "url": "https://www.openhistoricalmap.org/relation/2692941",
+            "name": "Missouri",
+            "start": "1849-02-13",
+            "end": "1950-08-02",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1849-02-13",
+      "end": "1950-08-02",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Missouri",
+      "cut_by_frame": true,
+      "km2": 180419,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "mo_state",
+          "version": 4,
+          "change": "U.S. Supreme Court settled boundary dispute between Iowa and Missouri by rejecting both states' claims, choosing instead the commonly accepted boundary before the dispute arose and the present boundary between the two states.",
+          "authority": "(Landers. 647-648; Thomas 269-270)"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Indian Territory",
+      "local": null,
+      "ids": {
+        "newberry": "it_indianterr",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2692971,
+            "url": "https://www.openhistoricalmap.org/relation/2692971",
+            "name": "Indian Territory",
+            "start": "1828-05-06",
+            "end": "1890-05-01",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1828-05-06",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Indian Territory",
+      "cut_by_frame": true,
+      "km2": 166256,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "it_indianterr",
+          "version": 2,
+          "change": "Indian Territory gained from Arkansas Territory when the Treaty of Washington between the United States and Choctaw Indians definitively established the eastern line of the Choctaw Cession and affirmed Choctaw control of the area west of the line.",
+          "authority": "(U.S. Stat., vol. 7, p. 311; Gabler, 37-39; Royce, 720-721; Van Zandt, 119)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Coahuila",
+      "local": null,
+      "ids": {
+        "ohm": 2841294,
+        "wikidata": "Q53079"
+      },
+      "start": "1868-01-01",
+      "end": "1892-12-13",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Coahuila",
+      "cut_by_frame": true,
+      "km2": 151728,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841294",
+        "license": "CC0 1.0",
+        "wikidata": "Q53079",
+        "notes": {
+          "start_event": "Coahuila regains statehood",
+          "end_event": "El estado de Coahuila cede al estado de Nuevo León el fundo de la Pita con todos sus terrenos sobre el Río Bravo.",
+          "wikipedia": "en:Coahuila"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Arkansas",
+      "local": null,
+      "ids": {
+        "newberry": "ar_state",
+        "newberry_version": 2,
+        "also_in_ohm": [
+          {
+            "ohm": 2693749,
+            "url": "https://www.openhistoricalmap.org/relation/2693749",
+            "name": "Arkansas",
+            "start": "1840-05-21",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1840-05-21",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Arkansas",
+      "cut_by_frame": false,
+      "km2": 137745,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "ar_state",
+          "version": 2,
+          "change": "Survey of boundary between the Republic of Texas and the United States began. MILLER (original) officially became extinct and LAFAYETTE was eliminated from Texas when Texas claims to the area were upheld.",
+          "authority": "(U.S. Stat., vol. 5, ch. 75 [1844]/p. 674; Marshall, 235-236)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Durango",
+      "local": null,
+      "ids": {
+        "ohm": 2841300,
+        "wikidata": "Q79918"
+      },
+      "start": "1824-05-07",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Durango",
+      "cut_by_frame": true,
+      "km2": 123623,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841300",
+        "license": "CC0 1.0",
+        "wikidata": "Q79918",
+        "notes": {
+          "start_event": "New states created",
+          "wikipedia": "en:Durango"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Louisiana",
+      "local": null,
+      "ids": {
+        "newberry": "la_state",
+        "newberry_version": 1,
+        "also_in_ohm": [
+          {
+            "ohm": 2692918,
+            "url": "https://www.openhistoricalmap.org/relation/2692918",
+            "name": "Louisiana",
+            "start": "1812-08-04",
+            "end": "present",
+            "note": "OpenHistoricalMap's copy of this Newberry polygon (hidden on the page, which draws Newberry's own)"
+          }
+        ]
+      },
+      "start": "1812-04-30",
+      "end": "present",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Louisiana",
+      "cut_by_frame": false,
+      "km2": 121112,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "la_state",
+          "version": 1,
+          "change": "The State of Louisiana was created from Orleans Territory; Orleans Territory eliminated.",
+          "authority": "(U.S. Stat., vol. 2, ch. 50 [1812]/pp. 701-704; Van Zandt, 107)"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Tamaulipas",
+      "local": null,
+      "ids": {
+        "ohm": 2841302,
+        "wikidata": "Q80007"
+      },
+      "start": "1848-02-02",
+      "end": "present",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Tamaulipas",
+      "cut_by_frame": true,
+      "km2": 80421,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841302",
+        "license": "CC0 1.0",
+        "wikidata": "Q80007",
+        "notes": {
+          "start_event": "Mexican Cession",
+          "wikipedia": "en:Tamaulipas"
+        }
+      }
+    },
+    {
+      "layer": "openhistoricalmap",
+      "name": "Nuevo León",
+      "local": null,
+      "ids": {
+        "ohm": 2841317,
+        "wikidata": "Q15282"
+      },
+      "start": "1868-01-01",
+      "end": "1892-12-13",
+      "end_is": "the day it ceased",
+      "certainty": "legal",
+      "power": "mexico",
+      "power_label": "Mexico",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Nuevo León",
+      "cut_by_frame": true,
+      "km2": 64390,
+      "source": {
+        "dataset": "OpenHistoricalMap",
+        "url": "https://www.openhistoricalmap.org/relation/2841317",
+        "license": "CC0 1.0",
+        "wikidata": "Q15282",
+        "notes": {
+          "start_event": "Coahuila regains statehood",
+          "end_event": "El estado de Coahuila cede al estado de Nuevo León el fundo de la Pita con todos sus terrenos sobre el Río Bravo.",
+          "wikipedia": "en:Nuevo León"
+        }
+      }
+    },
+    {
+      "layer": "newberry",
+      "name": "Unorganized Federal Territory",
+      "local": null,
+      "ids": {
+        "newberry": "uf_terr",
+        "newberry_version": 18
+      },
+      "start": "1861-03-02",
+      "end": "1890-05-01",
+      "end_is": "last day in force",
+      "certainty": "legal",
+      "power": "us",
+      "power_label": "United States",
+      "look": {
+        "kind": "paper",
+        "note": "no fill: border and name only"
+      },
+      "diff_role": null,
+      "lit": false,
+      "lit_by": null,
+      "lit_as_named": false,
+      "labeled": true,
+      "label": "Unorg. Fed. Terr.",
+      "cut_by_frame": false,
+      "km2": 14779,
+      "source": {
+        "dataset": "Atlas of Historical County Boundaries (U.S. Historical States and Territories), The Newberry Library",
+        "url": "https://digital.newberry.org/ahcb/",
+        "license": "Newberry terms: any lawful purpose, no fees",
+        "record": {
+          "id": "uf_terr",
+          "version": 18,
+          "change": "The United States created Dakota Territory from Nebraska Territory and Unorganized Federal Territory.",
+          "authority": "(Dak. Terr. Laws 1862, 1st sess., pp. 21-28; U.S. Stat., vol. 12, ch. 86[1861]/pp. 239-244; Van Zandt, 134, 136-137)"
+        }
+      }
+    }
+  ],
+  "points": [],
+  "routes": [],
+  "rivers": [],
+  "changes": null,
+  "layout": {
+    "frame": {
+      "x0": 32,
+      "y0": 32,
+      "x1": 1888,
+      "y1": 1016
+    },
+    "legend": {
+      "x": 1528,
+      "y": 830,
+      "w": 338,
+      "h": 164,
+      "inside": true,
+      "corner": "bottom-right"
+    },
+    "cartouche": {
+      "x": 54,
+      "y": 866,
+      "w": 380,
+      "h": 128,
+      "inside": true
+    },
+    "clipped_text": []
+  },
+  "warnings": [
+    "State of Lincoln: on this date its record is known only to the year (1869–1869); its edge is dashed",
+    "State of Lincoln: The source does not say where the line runs beyond the river's head."
+  ],
+  "alt_text": "Parchment map, 1 June 1869, states and territories, framed on a box of the continent, titled \"The State of Lincoln, 1869\". Shaded: Texas in blue. Hatched in rust: proposed state (not recognized) and claimed by Indian Territory and Texas. Named on the map: Texas and Lincoln.",
+  "credit": "Parchment; boundaries: Newberry Library, OpenHistoricalMap; would-be states: computed from the Newberry Library along their documents' lines; rivers: Natural Earth",
+  "render": {
+    "by": "scripts/map.mjs",
+    "browser": "chromium-1243/chrome-win64/chrome.exe",
+    "pixels": {
+      "width": 1920,
+      "height": 1080
+    },
+    "blocked_requests": [],
+    "page_errors": [],
+    "live_address": "us.html?date=1869-06-01&tracker=states&frame=-107%2C25.5%2C-93.3%2C36.7&highlight=wb%3Alincoln%2Cnb%3Atx_state&title=The+State+of+Lincoln%2C+1869"
+  }
+}

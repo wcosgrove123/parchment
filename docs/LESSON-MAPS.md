@@ -164,6 +164,40 @@ Every render writes one, beside the picture:
 - `alt_text`: a draft built by a fixed template from the above. `credit`: one line for the slide
   ("Parchment; boundaries: Newberry Library, OpenHistoricalMap; rivers: Natural Earth; …").
 
+## Would-be states (North America page)
+
+```json
+{ "page": "us", "date": "1785-06-01", "tracker": "states", "frame": "-90.5,33.6,-75.3,37.4",
+  "highlight": ["wb:franklin", "nb:nc_state"], "title": "The State of Franklin, 1785" }
+```
+
+A would-be state is drawn only where the order's highlight names it by its `wb:` key, under the `states` or `nations`
+tracker: hatched over the land it would have taken, its edge rust (dashed while its date is known only to the month or
+year), keyed for what it was, and named. Light the state it would have come from too (`nb:nc_state`) to show both.
+Test orders: `tests/maps/statehood/wb-*.json`.
+
+| key | would-be state | on |
+| --- | --- | --- |
+| `wb:jefferson_1784` (or one: `wb:sylvania`, `wb:michigania`, `wb:cherronesus`, `wb:assenisipia`, `wb:metropotamia`, `wb:illinoia`, `wb:saratoga`, `wb:washington`, `wb:polypotamia`, `wb:pelisipia`) | Jefferson's ten states | 1 March to 22 April 1784 |
+| `wb:franklin` | the State of Franklin | 14 December 1784 to 1789 |
+| `wb:pico_colorado` | the Territory of Colorado of the Pico Act | 18 April 1859, through 1859 |
+| `wb:jefferson_territory` | the Territory of Jefferson | 24 October 1859 to 27 February 1861 |
+| `wb:confederate_arizona` | Confederate Arizona | 1 August 1861 to July 1862 |
+| `wb:lincoln` | the State of Lincoln | 1869 |
+| `wb:jefferson_1941` | the State of Jefferson | 27 November 1941 to December 1941 |
+| `wb:greater_idaho` | Greater Idaho, county by county as each voted | from 3 November 2020 |
+
+Already on the page under their own ids: Deseret `nb:ds_deseret`, Sequoyah `nb:it_indianterr` (on 1905-11-07), the
+Vermont and Texas republics `nb:vt_republic` and `nb:tx_republic`, Indian Stream `ohm:2698236`, the Republic of West
+Florida `ohm:2747197`, Transylvania `ohm:2832024`. Not drawn: Absaroka (no source lists its counties), Vandalia,
+Westsylvania, the Delaware-led state of 1778.
+
+Each row of `data/us/wouldbe-states.csv` names the land it starts from (`base`: Newberry polygons, the Newberry's
+historical counties or the Census Bureau's) and the line its document drew (`cut`: parallels, meridians through a
+Wikidata point, a river), with its dates and sources; `node scripts/derive-wouldbe.mjs` rebuilds
+`data/us/wouldbe.topojson` (after `node scripts/fetch-wouldbe.mjs`). The slip lists each with its record, the shapes it
+was cut from, and its caveats as warnings.
+
 ## Orders on the world page
 
 ```json
