@@ -60,7 +60,8 @@ test('a view by its center and width: the stage is rebuilt on it, north up at th
     const svg = document.getElementById('map'), r = svg.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
     for (let i = 0; i < 3; i++) { document.elementFromPoint(x, y).dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, clientX: x, clientY: y, deltaY: -100 })); await new Promise((res) => requestAnimationFrame(res)); }
   }));
-  await pause(1500);
+  // (the view is rebuilt once the wheel has rested 300 ms, src/us/main.js SETTLE_MS, then drawn)
+  await pause(2500);
   const wheeled = await page.eval(inPage(view));
   assert.ok(wheeled.km < before * 0.8, `the wheel zoomed in (${Math.round(before)} → ${Math.round(wheeled.km)} km)`);
   const rest = await page.eval(inPage(() => ({ shown: document.querySelector('.view-main').style.display !== 'none', transform: document.querySelector('.view-main').getAttribute('transform'), zooming: !!document.querySelector('.stage.zooming') })));

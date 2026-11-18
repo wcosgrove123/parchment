@@ -118,15 +118,13 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   drawPaper(root, W, H);
 
   const ne = layers.ne;
-  const land = feature(ne, ne.objects.land);
-  const lakes = feature(ne, ne.objects.lakes);
-  const rivers = feature(ne, ne.objects.rivers).features.filter((f) => (f.properties.scalerank ?? 0) <= 8);
-  const coast = feature(ne, ne.objects.coastline);
-  const bathy = feature(layers.bathy, layers.bathy.objects.bathymetry);
+  // (decoded once per file, not at every rebuild of a pan or a zoom; their bounds are kept with them: baseFeatures)
+  const { land, lakes, rivers, coast } = baseFeatures(ne);
+  const bathy = baseBathymetry(layers.bathy);
   // A frame draws Natural Earth's 1:10m North American rivers (the Nueces and the Sabine are not in the 1:50m set);
   // which of them depends on the frame's scale (scripts/derive-rivers.mjs). Rivers an order names are drawn a little
   // stronger and labelled.
-  const fine = framed && layers.riversNA ? feature(layers.riversNA, layers.riversNA.objects.rivers).features : null;
+  const fine = framed && layers.riversNA ? baseFineRivers(layers.riversNA) : null;
   const named = new Set((lesson?.rivers ?? []).map(slug));
   const riverNames = (f) => [f.properties.name, f.properties.name_en, f.properties.name_alt].filter(Boolean).map(slug);
   const isNamed = (f) => named.size > 0 && riverNames(f).some((n) => named.has(n));
@@ -143,15 +141,22 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const bcache = new WeakMap();
     const bounds = (f) => { let b = bcache.get(f); if (b === undefined) { b = path.bounds(f); bcache.set(f, b); } return b; };
     const [bx, by, bw, bh] = box;
+    // Only the base shapes that reach the part of the globe this view shows are projected (2026-11-18: pan and zoom
+    // were laggy, every rebuild projecting every contour and coast of the world). A shape wholly off the sheet draws
+    // nothing, so the map is the same. (No box when an edge of the sheet is off the globe: everything, as before.)
+    const vb = visibleBox(proj, box);
+    const near = vb ? (f) => meetsBox(f, vb) : () => true;
+    const only = (fc) => (vb ? { type: 'FeatureCollection', features: fc.features.filter(near) } : fc);
+    const landV = only(land), lakesV = only(lakes), coastV = only(coast);
     defs.append('clipPath').attr('id', `clip-${id}`).append('rect').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
-    defs.append('clipPath').attr('id', `land-${id}`).append('path').attr('d', d(land));
+    defs.append('clipPath').attr('id', `land-${id}`).append('path').attr('d', d(landV));
     // (the clip sits on an outer group, so a pan or a zoom can slide the map under it: src/us/main.js)
     const clipG = root.append('g').attr('class', `view-clip view-clip-${id}`).attr('clip-path', `url(#clip-${id})`);
     clipG.append('rect').attr('class', 'view-bg').attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh);
     const g = clipG.append('g').attr('class', `view view-${id}`);
     g.append('path').attr('class', 'ocean').attr('d', d({ type: 'Sphere' }));
-    if (bathymetry) g.append('g').attr('class', 'bathymetry').selectAll('path').data(bathy.features).join('path').attr('d', d);
-    g.append('path').attr('class', 'land').attr('d', d(land));
+    if (bathymetry) g.append('g').attr('class', 'bathymetry').selectAll('path').data(bathy.features.filter(near)).join('path').attr('d', d);
+    g.append('path').attr('class', 'land').attr('d', d(landV));
     let reliefImg = null;
     if (relief) {
       g.append('image').attr('class', 'relief').attr('clip-path', `url(#land-${id})`)
@@ -163,11 +168,11 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
         .attr('x', bx).attr('y', by).attr('width', bw).attr('height', bh).attr('preserveAspectRatio', 'none');
     }
     const snapshots = g.append('g').attr('class', id === 'main' ? 'snapshots' : 'inset-snapshots');
-    const waterLines = id === 'main' && fine ? fine.filter((f) => isNamed(f) || f.properties.scalerank <= lesson.riverRank) : rivers;
+    const waterLines = (id === 'main' && fine ? fine.filter((f) => isNamed(f) || f.properties.scalerank <= lesson.riverRank) : rivers).filter(near);
     g.append('g').attr('class', 'rivers').selectAll('path').data(waterLines).join('path').attr('d', d)
       .classed('named', named.size ? isNamed : false);
-    g.append('path').attr('class', 'lakes').attr('d', d(lakes));
-    g.append('path').attr('class', 'coastline').attr('d', d(coast));
+    g.append('path').attr('class', 'lakes').attr('d', d(lakesV));
+    g.append('path').attr('class', 'coastline').attr('d', d(coastV));
     if (graticule) g.append('path').attr('class', 'graticule').attr('d', d(d3.geoGraticule10()));
     const stageLabels = g.append('g').attr('class', 'stage-labels');
     const labels = g.append('g').attr('class', id === 'main' ? 'polity-labels' : 'inset-labels');
@@ -178,7 +183,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     const area = (f) => { let a = acache.get(f); if (a === undefined) { a = path.area(f); acache.set(f, a); } return a; };
     const reaches = (f) => { const [[a, b], [c, e]] = bounds(f); return Number.isFinite(a) && c > vx && a < vx + vw && e > vy && b < vy + vh; };
     const shows = (f) => reaches(f) && area(f) >= 40;
-    return { id, proj, path, d, box, g, snapshots, labels, stageLabels, shows, reaches, area, reliefImg };
+    return { id, proj, path, d, box, g, snapshots, labels, stageLabels, shows, reaches, area, reliefImg, land: landV };
   }
 
   // The stage's pre-rendered relief fits only the 1920×1080 continent; any other framing is reshaded in the browser
@@ -190,7 +195,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
     : Promise.resolve();
   // In a frame the water names are placed where their water shows: along their parallel, on the longest open stretch
   // inside the frame clear of the cartouche and legend, or left off (src/us/stage.js, frameWaterLabels).
-  const land1 = framed ? rasterLand(projection, land, W, H) : null;
+  const land1 = framed ? rasterLand(projection, main.land, W, H) : null;
   const legendSpec = framed ? { anchor: lesson.frame.legend ?? quieterCorner(land1, frame), lift: 22 } : stage.legend;
   // Alaska and Hawaii on a frame, when the order names them (owner, 2026-11-18): their boxes, stacked above the cartouche
   const frameInsets = framed ? frameInsetBoxes(lesson?.stageInsets ?? [], frame) : [];
@@ -270,7 +275,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   const measure = makeMeasure();
   // Open water on the main view (Natural Earth's land, as a coarse mask made once): where a lit state's abbreviation
   // may sit beside a coast too small to hold it (statehood brief, item 3).
-  const waterAt = (x, y) => !(landMask ??= land1 ?? rasterLand(projection, land, W, H, 3)).isLand(x, y);
+  const waterAt = (x, y) => !(landMask ??= land1 ?? rasterLand(projection, main.land, W, H, 3)).isLand(x, y);
   let current = null;
   let currentKey = null;
   let fbNow = null; // the free Black population picture of the date shown (src/us/freeblack.js), or null
@@ -1046,7 +1051,7 @@ export function createUSStage(svg, stage, layers, { powers, trackers, onPick, on
   function computeLines(mil, date, dataRef) {
     const specs = linesOn(mil.war, date);
     if (!specs.length) return [];
-    landMask ??= land1 ?? rasterLand(projection, land, W, H, 3);
+    landMask ??= land1 ?? rasterLand(projection, main.land, W, H, 3);
     const out = [];
     for (const spec of specs) {
       const on = spec.on ? warInt(spec.on) : date;
@@ -1245,6 +1250,67 @@ function fitContinent(stage, inner) {
   const [tx, ty] = p.translate();
   p.translate([tx + dx, ty]);
   return p;
+}
+// Natural Earth's base layers, decoded once per file (a pan or a zoom builds the stage again; the shapes are the same).
+const baseCache = new WeakMap();
+function baseFeatures(ne) {
+  let b = baseCache.get(ne);
+  if (!b) {
+    b = { land: feature(ne, ne.objects.land), lakes: feature(ne, ne.objects.lakes), coast: feature(ne, ne.objects.coastline),
+      rivers: feature(ne, ne.objects.rivers).features.filter((f) => (f.properties.scalerank ?? 0) <= 8) };
+    baseCache.set(ne, b);
+  }
+  return b;
+}
+function baseBathymetry(topo) {
+  let b = baseCache.get(topo);
+  if (!b) { b = feature(topo, topo.objects.bathymetry); baseCache.set(topo, b); }
+  return b;
+}
+function baseFineRivers(topo) {
+  let b = baseCache.get(topo);
+  if (!b) { b = feature(topo, topo.objects.rivers).features; baseCache.set(topo, b); }
+  return b;
+}
+// The part of the globe a view shows: its sheet's edges carried back through the projection, with a margin of a tenth
+// either way (and half a degree), as { west, south, east, north } with longitudes about the view's middle. null when
+// an edge does not come back to where it was (it lies off the globe): then nothing is left out.
+function visibleBox(proj, [bx, by, bw, bh]) {
+  const c = proj.invert([bx + bw / 2, by + bh / 2]);
+  if (!c || !c.every(Number.isFinite)) return null;
+  let west = Infinity, east = -Infinity, south = Infinity, north = -Infinity;
+  const N = 32;
+  for (let i = 0; i <= N; i++) {
+    const t = i / N;
+    for (const q of [[bx + bw * t, by], [bx + bw * t, by + bh], [bx, by + bh * t], [bx + bw, by + bh * t]]) {
+      const ll = proj.invert(q);
+      if (!ll || !Number.isFinite(ll[0]) || !Number.isFinite(ll[1])) return null;
+      const back = proj(ll);
+      if (!back || Math.abs(back[0] - q[0]) > 1 || Math.abs(back[1] - q[1]) > 1) return null;
+      let lon = ll[0];
+      while (lon - c[0] > 180) lon -= 360;
+      while (lon - c[0] < -180) lon += 360;
+      west = Math.min(west, lon); east = Math.max(east, lon); south = Math.min(south, ll[1]); north = Math.max(north, ll[1]);
+    }
+  }
+  // (a pole on the sheet: every longitude is there)
+  const onSheet = (p) => p && p[0] >= bx && p[0] <= bx + bw && p[1] >= by && p[1] <= by + bh;
+  if (onSheet(proj([c[0], 90]))) { north = 90; west = c[0] - 180; east = c[0] + 180; }
+  if (onSheet(proj([c[0], -90]))) { south = -90; west = c[0] - 180; east = c[0] + 180; }
+  const mx = (east - west) * 0.1 + 0.5, my = (north - south) * 0.1 + 0.5;
+  return { west: west - mx, east: east + mx, south: Math.max(-90, south - my), north: Math.min(90, north + my) };
+}
+// Does a shape's box of longitude and latitude meet the view's? (a shape across the antimeridian has west > east)
+const geoBoxCache = new WeakMap();
+function meetsBox(f, vb) {
+  let b = geoBoxCache.get(f);
+  if (!b) { b = d3.geoBounds(f); geoBoxCache.set(f, b); }
+  const [[w, s], [e, n]] = b;
+  if (!Number.isFinite(w) || !Number.isFinite(e)) return true;
+  if (n < vb.south || s > vb.north) return false;
+  const e2 = e < w ? e + 360 : e;
+  for (const k of [-360, 0, 360]) if (w + k <= vb.east && e2 + k >= vb.west) return true;
+  return false;
 }
 // Land on the sheet as a coarse mask (one cell per 4 px), for choosing where the legend and the water names go.
 function rasterLand(proj, land, w, h, k = 4) {

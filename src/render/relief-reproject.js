@@ -47,9 +47,13 @@ function sampleBox(src, b, ll) {
   const edge = Math.min(fx / src.w, 1 - fx / src.w, fy / src.h, 1 - fy / src.h);
   return { v, weight: Math.max(0, Math.min(1, edge / 0.1)) };
 }
+// The page is answered while a relief is made (2026-11-18, the owner: the map was "super laggy to drag or pan or
+// zoom"): the rows are worked in slices of about 30 ms with a yield between them, and the picture is packed as a PNG
+// off the page's thread (toBlob), where toDataURL packed it on the page's thread. The pixels are the same.
+const yieldToPage = () => (globalThis.scheduler?.yield ? globalThis.scheduler.yield() : new Promise((r) => setTimeout(r, 0)));
 export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale = 0.5, bounds = null, over = [], trust = false } = {}) {
   if (made.has(key)) return made.get(key);
-  const job = Promise.all([loadSource(url), ...over.map((o) => loadSource(o.url).catch(() => null))]).then(([{ w, h, g }, ...tops]) => {
+  const job = Promise.all([loadSource(url), ...over.map((o) => loadSource(o.url).catch(() => null))]).then(async ([{ w, h, g }, ...tops]) => {
     const fine = over.map((o, i) => (tops[i] ? { ...tops[i], b: o.bounds } : null)).filter(Boolean);
     const ow = Math.round((x1 - x0) * scale), oh = Math.round((y1 - y0) * scale);
     const canvas = document.createElement('canvas');
@@ -57,7 +61,9 @@ export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale 
     const ctx = canvas.getContext('2d');
     const out = ctx.createImageData(ow, oh);
     const d = out.data;
+    let slice = performance.now();
     for (let py = 0; py < oh; py++) {
+      if (performance.now() - slice > 30) { await yieldToPage(); slice = performance.now(); }
       const sy = y0 + (py + 0.5) / scale;
       for (let px = 0; px < ow; px++) {
         const sx = x0 + (px + 0.5) / scale;
@@ -94,9 +100,15 @@ export async function reliefFor(key, url, projection, [x0, y0, x1, y1], { scale 
       }
     }
     ctx.putImageData(out, 0, 0);
-    return canvas.toDataURL('image/png');
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+    return blob ? URL.createObjectURL(blob) : canvas.toDataURL('image/png');
   });
   made.set(key, job);
-  while (made.size > KEEP) made.delete(made.keys().next().value);
+  // (a picture dropped from the cache gives its memory back, a minute later: by then no sheet shows it)
+  while (made.size > KEEP) {
+    const [k, old] = made.entries().next().value;
+    made.delete(k);
+    old.then((u) => { if (typeof u === 'string' && u.startsWith('blob:')) setTimeout(() => URL.revokeObjectURL(u), 60000); }).catch(() => {});
+  }
   return job;
 }

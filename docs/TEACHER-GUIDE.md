@@ -82,6 +82,8 @@ A row with a mistake is skipped and listed. The rest of the map draws as before.
 The site works in any browser. For the classroom computer there is also `Parchment.exe`, a Windows app with its own
 window and icon that needs no browser and works without a network. Copy the one file anywhere and double-click it;
 `F11` fills the screen. It reads the Sheet live when the computer is online and shows the saved copy when it is not.
+The one file unpacks itself every time it opens, which takes about half a minute; the folder `dist/desktop/app` is the
+same app already unpacked, and opens in a few seconds (copy the whole folder and double-click `Parchment.exe` inside).
 
 ## Any year, every state
 

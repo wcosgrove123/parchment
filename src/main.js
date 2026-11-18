@@ -377,6 +377,9 @@ async function main() {
 
   if (START_FROM && state.tracker !== 'explorers') state.mode = 'diff'; // under Explorers, from is the range's start
   await render();
+  // (the first map is painted, then the stage's deferred layer goes in under it: src/render/base.js drawDeferred)
+  await new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
+  atlas.drawDeferred();
   document.body.classList.add('ready');
 }
 

@@ -726,8 +726,15 @@ async function main() {
       .attr('x', ax).attr('y', ay).attr('width', bx - ax).attr('height', by - ay).attr('preserveAspectRatio', 'none').attr('href', url).node();
     proxy = { url, node, stamp };
   }
+  // (a gesture that pauses is not over: a trackpad's flicks and a wheel's notches come in bursts, each ending in a
+  // pause. The map is built again once the reader has rested SETTLE_MS, not at every pause, and a new gesture in that
+  // time cancels it, so a zoom made of several flicks rebuilds once; 2026-11-18, the owner: "super laggy to drag or pan
+  // or zoom")
+  const SETTLE_MS = 300;
+  let settleTimer = null;
   const zoomer = d3.zoom()
     .filter((ev) => !ev.button && (!ev.ctrlKey || ev.type === 'wheel') && !!ev.target.closest?.('.view-clip-main'))
+    .on('start', () => { clearTimeout(settleTimer); })
     .on('zoom', (ev) => {
       if (resetting) return;
       zoomT = ev.transform;
@@ -741,7 +748,7 @@ async function main() {
       }
       sliding.setAttribute('transform', zoomT.toString());
     })
-    .on('end', () => { if (!resetting) settle(); });
+    .on('end', () => { if (!resetting) { clearTimeout(settleTimer); settleTimer = setTimeout(settle, SETTLE_MS); } });
   // (a gesture that ended where it began: the drawing as it was)
   function restView() {
     if (sliding) { sliding.removeAttribute('transform'); atlas.geo.node.style.display = ''; sliding = null; }

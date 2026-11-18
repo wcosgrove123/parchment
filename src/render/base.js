@@ -106,10 +106,14 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
   // The ocean is the globe itself; anything beyond its edge stays paper.
   map.append('path').attr('class', 'ocean').attr('d', d({ type: 'Sphere' }));
 
-  // Bathymetry: hairline contours in the ocean tone.
-  const bathy = feature(layers.bathy, layers.bathy.objects.bathymetry);
-  map.append('g').attr('class', 'bathymetry')
-    .selectAll('path').data(bathy.features).join('path').attr('d', d);
+  // Bathymetry: hairline contours in the ocean tone. Projecting all of them is most of the time this stage takes to
+  // build (some 0.8 s), so they are drawn into their place under the land just after the first map is on the sheet
+  // (drawDeferred; 2026-11-18, the owner: the app was slow to open). The finished map is the same.
+  const bathyG = map.append('g').attr('class', 'bathymetry');
+  const drawDeferred = () => {
+    if (!bathyG.selectAll('path').empty()) return;
+    bathyG.selectAll('path').data(feature(layers.bathy, layers.bathy.objects.bathymetry).features).join('path').attr('d', d);
+  };
 
   // Land at rest (cream), then relief (pre-rendered for this stage, when present), masked to land.
   const ne = layers.ne;
@@ -358,5 +362,5 @@ export function createStage(svg, stage, layers, { tracker, years = [], onYear } 
     strip.setRange(from, to);
   }
 
-  return { projection, path, d, frame, showSnapshot, showStates, showDiff, showMarks, showRecords, setTracker, setYear, setRange, setSpan, legend, cartouche, get year() { return currentYear; } };
+  return { projection, path, d, frame, showSnapshot, showStates, showDiff, showMarks, showRecords, setTracker, setYear, setRange, setSpan, legend, cartouche, drawDeferred, get year() { return currentYear; } };
 }

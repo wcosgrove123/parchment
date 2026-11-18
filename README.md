@@ -8,9 +8,10 @@ Parchment is designed and directed by Wil Cosgrove.
 ## Run it
 
 - Online: https://wcosgrove123.github.io/parchment/
-- As a Windows app: `Parchment.exe` (built by `npm run app:build` into `dist/desktop/`), one file to copy to any Windows
-  computer. Its own window and icon, no browser, works offline; reads the Google Sheet when there is a network. The
-  Desktop shortcut **Parchment** opens it. `F11` is full screen.
+- As a Windows app: its own window and icon, no browser, works offline; reads the Google Sheet when there is a network.
+  `npm run app:sync` builds it into `dist/desktop/`: `app/Parchment.exe`, the app as a folder, which the Desktop
+  shortcut **Parchment** opens and which starts in a few seconds; and `Parchment.exe`, the same app as one file to copy
+  to another Windows computer, which unpacks itself every time it opens (about half a minute). `F11` is full screen.
 - Offline in a browser: open `dist/parchment-offline.html` in Chrome or Edge. No network needed.
 - For working on it: `scripts/start-parchment.cmd` starts the dev server at http://127.0.0.1:8321 and opens a browser.
 - Keys: `←` `→` step through the suggested years (the year box takes any other); `space` plays; `D` toggles the Diff view; `E` exports a PNG (`Shift+E` at 4K).
@@ -107,6 +108,7 @@ npm run shot         # docs/progress/<date>-<year>.png  (-- --year 1700 --focus 
 npm run offline      # dist/parchment-offline.html, one file that needs no network
 npm run app          # open the desktop window from this folder (-- --shot out.png saves a picture and quits)
 npm run app:build    # dist/desktop/Parchment.exe, the Windows app as one file
+npm run app:sync     # build it and put both copies in place (dist/desktop/app/ for the Desktop shortcut); app closed
 npm run check        # list rows in data/records.csv that would be skipped, and why
 npm run geocode      # fill blank lon/lat from Wikidata for rows whose `where` is a QID
 npm run sheet        # dist/parchment-records.xlsx + data/places.csv; -- --lite makes the 12 KB version whose places tab imports itself
